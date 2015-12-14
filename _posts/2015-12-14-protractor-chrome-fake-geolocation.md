@@ -16,7 +16,7 @@ On the Selenium website they describe a way to change the preferences passed to 
 Happy testing!
 
 protractor.conf.js:
-```javascript
+{% highlight javascript %}
 exports.config = {
   capabilities: {
     browserName: "chrome",
@@ -27,6 +27,6 @@ exports.config = {
     }
   },
   // ... rest of your configuration
-```
+{% endhighlight %}
 
 Oh, and now I found there is an issue about this topic with the same answer [here](https://github.com/angular/protractor/issues/2626).
