@@ -30,3 +30,8 @@ exports.config = {
 {% endhighlight %}
 
 Oh, and now I found there is an issue about this topic with the same answer [here](https://github.com/angular/protractor/issues/2626).
+
+#### UPDATE
+Ok, the reason why the mocked version of stackoverflow.com (see above) didn't work for me was the timing. My app immediately tries to get the location, right after page load. The execution of browser.executeScript() just takes too long to have any effect, the geolocation has already been processed. After inserting a manual setTimeout(..., 1000) it worked. BUT: I do not want to have any artificial delay just to get my tests right. Ummm...have to think about that...
+
+At some point there will be a locate-me-now-button, so I will probably make my tests click that button after executeScript(fakeGps). It is not exactly what happens at user's end, but I think it will be good enough for the test. :|
