@@ -9,7 +9,7 @@ I am currently developing a hybrid app using Ionic.
 For end-to-end tests, they recommend Protractor. [http://www.protractortest.org](http://www.protractortest.org)  
 Furthermore, I use a [Selenium docker container](https://github.com/SeleniumHQ/docker-selenium).
 
-As many other apps, I make use of geolocation to receive the users position.
+As many other apps, I make use of geolocation to receive the user's position.
 However, when I tried to run a test with geolocation, it failed. I then used VNC to see if there is any error message, and I discovered Google Chrome prompts the user to allow or disallow geolocation. I searched the internet for answers, but couldn't find any. [This](http://stackoverflow.com/questions/23431059/how-to-mock-call-to-navigator-geolocation-in-protractor-tests) didn't work for me.
 
 On the Selenium website they describe a way to change the preferences passed to the GoogleDriver using the ChromeOptions. After some more experimenting I found there is an option "**profile.default_content_setting_values.geolocation**". If this is set to 1, the browser will no longer ask the user for permission.  
