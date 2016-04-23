@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "111 Stars on Github for WhatsApp Viewer"
-date:   2015-11-23 22:00:00
+date:   2015-11-23 22:00:00 +01:00
 tags:
 ---
 ![Screenshot]({{ site.baseurl }}/images/whatsapp-viewer_111_stars-2015-11-23.png)

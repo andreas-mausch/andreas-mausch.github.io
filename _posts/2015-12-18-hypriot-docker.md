@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hypriot Docker"
-date:   2015-12-18 20:00:00
+date:   2015-12-18 20:00:00 +01:00
 tags:
 ---
 Hypriot offers an Raspberry Pi image to run docker.  

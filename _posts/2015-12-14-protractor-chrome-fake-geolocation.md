@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Protractor: Geolocation in Google Chrome"
-date:   2015-12-14 06:00:00
+date:   2015-12-14 06:00:00 +01:00
 tags:
 ---
 I am currently developing a hybrid app using Ionic.
