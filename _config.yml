@@ -2,11 +2,11 @@
 title: Andreas Mausch
 email: andreas.mausch@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  
+
 baseurl: ""
-url: "http://andreas-mausch.github.io"
-twitter_username: 
-github_username:  
+url: "http://andreas-mausch.de"
+twitter_username:
+github_username:
 
 # Build settings
 markdown: kramdown
