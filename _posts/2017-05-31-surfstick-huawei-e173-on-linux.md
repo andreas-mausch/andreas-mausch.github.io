@@ -66,3 +66,5 @@ I:  If#= 6 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
 
 I am then asked for my PIN again and the device is visible in mmcli and Modem Manager GUI.
 Sometimes it takes a while to build up a connection but in the end it worked 10/10.
+
+![]({{ site.baseurl }}/images/2017-05-31-huawei-e173-speedtest.jpg)
