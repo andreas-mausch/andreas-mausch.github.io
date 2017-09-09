@@ -25,7 +25,7 @@ I love open-source, automated testing, automated deployments, automation in gene
 ![WhatsApp Viewer]({{ site.baseurl }}/images/whatsapp.png){:height="120px" width="120px"}  
 Small tool to display chats from the Android msgstore.db database (crypt12)  
 [github.com](https://github.com/andreas-mausch/whatsapp-viewer/releases)  
-[Homepage](http://andreas-mausch.de/whatsapp-viewer/)
+[Homepage]({{ site.baseurl }}/whatsapp-viewer/)
 
 ### Saam
 
