@@ -4,7 +4,7 @@ title: andreas-mausch.de
 permalink: /
 ---
 
-Hello, my name is Andreas Mausch, I am a freelancing software developer from Germany, Hamburg.
+Hello, my name is Andreas Mausch, I am a freelancing software developer from Hamburg, Germany.
 
 ![Screenshot]({{ site.baseurl }}/images/me.jpg){:height="180px" width="180px"}
 
