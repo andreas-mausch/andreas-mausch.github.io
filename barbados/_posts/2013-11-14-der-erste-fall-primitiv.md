@@ -19,7 +19,7 @@ Hässliche Ananasse in Mannheim
 ![]({{ site.url }}/images/barbados/84536c4db380748bbf3765eeed8b5acc77b60ff6c46d36d7c39548906162a92c.jpg)  
 Elitemenschen vor Eliteuni
 
-![]({{ site.url }}/images/barbados/ef2274dd2f14d65dc974751be7d8cf3b8400dbd1584514af38f874eda2623c75.jpg)  
+![]({{ site.url }}/images/barbados/ef2274dd2f14d65dc974751be7d8cf3b8400dbd1584514af38f874eda2623c75.png)  
 NumberPoker (schreib ich später noch was zu..)
 
 ![]({{ site.url }}/images/barbados/e0baf0df744e92cf7349171db23477a58e83c43038340c5fca5f4bdd1262ebd2.jpg)  
