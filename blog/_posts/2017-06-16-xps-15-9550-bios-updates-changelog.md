@@ -9,6 +9,24 @@ I tried to find a changelog of the BIOS updates for the XPS 15. I failed. So I'v
 
 There is a well-hidden overview on the official Dell website. Click [here](http://downloads.dell.com/published/pages/xps-15-9550-laptop.html) for details. Note: There have been some updates released, which are not available for download anymore.
 
+- **1.4.0**  
+2017-09-15
+  1. Fixes system defense with wireless parameter will cause ME failure
+  2. System stability enhancements
+  3. To prevent user update ME Firmware to blacklist 11.6 ME firmware
+  4. Correct error message in Excalibur
+  5. Fix Bitlocker issue on Win7 ultimate/enterprise
+- **1.3.0**  
+2017-08-28
+  1. Enhance dock's audio performance
+- **1.2.29**  
+2017-08-01
+  1. Fixed a potential security issue with Bootguard code integrity chaining enforcement"
+  2. Fixed a potential security issue with the Support Assist PreBoot feature
+  3. Updated processor microcode
+  4. Update Computrace 957
+  5. Support Win10 RS2 Enterprise
+  6. Enchance NVME support and reduce noise
 - **1.2.25**  
 2017-05-12
   1. Updated Intel ME Firmware to address security advisory CVE-2017-5689 / INTEL-SA-00075
