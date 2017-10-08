@@ -1,0 +1,149 @@
+---
+layout: default
+title: About me
+permalink: /me/
+---
+<div class="home">
+  <div id="games"></div>
+  <div id="movies"></div>
+  <div id="music"></div>
+  <script src="{{ "/assets/js/coverflow.js" | prepend: site.baseurl }}"></script>
+  <script>
+  var games = [{
+    "title": "Commander Keen 4",
+    "image": "{{ "/images/thingsilike/games/commander-keen-4.png" | prepend: site.baseurl }}"
+  }, {
+    "title": "Commandos",
+    "image": "{{ "/images/thingsilike/games/commandos.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Counter-Strike",
+    "image": "{{ "/images/thingsilike/games/counter-strike.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Mafia",
+    "image": "{{ "/images/thingsilike/games/mafia.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Max Payne",
+    "image": "{{ "/images/thingsilike/games/max-payne.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Mirror's Edge",
+    "image": "{{ "/images/thingsilike/games/mirrors-edge.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Need for Speed II SE",
+    "image": "{{ "/images/thingsilike/games/need-for-speed-ii-se.png" | prepend: site.baseurl }}"
+  }, {
+    "title": "Oni",
+    "image": "{{ "/images/thingsilike/games/oni.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Portal",
+    "image": "{{ "/images/thingsilike/games/portal.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Command & Conquer: Tiberian Sun",
+    "image": "{{ "/images/thingsilike/games/tiberian-sun.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Tron 2.0",
+    "image": "{{ "/images/thingsilike/games/tron-2.0.jpg" | prepend: site.baseurl }}"
+  }];
+  var movies = [{
+    "title": "A Beautiful Mind",
+    "image": "{{ "/images/thingsilike/movies/a-beautiful-mind.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Coraline",
+    "image": "{{ "/images/thingsilike/movies/coraline.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "La vita è bella",
+    "image": "{{ "/images/thingsilike/movies/das-leben-ist-schoen.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Les Choristes",
+    "image": "{{ "/images/thingsilike/movies/die-kinder-des-monsieur-mathieu.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Sin City",
+    "image": "{{ "/images/thingsilike/movies/sin-city.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Fight Club",
+    "image": "{{ "/images/thingsilike/movies/fight-club.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Léon",
+    "image": "{{ "/images/thingsilike/movies/leon-der-profi.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "The Matrix",
+    "image": "{{ "/images/thingsilike/movies/matrix.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Ocean's Eleven",
+    "image": "{{ "/images/thingsilike/movies/oceans-eleven.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "The Lion King",
+    "image": "{{ "/images/thingsilike/movies/koenig-der-loewen.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Training Day",
+    "image": "{{ "/images/thingsilike/movies/training-day.jpg" | prepend: site.baseurl }}"
+  }];
+  var music = [{
+    "title": "The Streets - A Grand Don't Come for Free",
+    "image": "{{ "/images/thingsilike/music/a-grand-dont-come-for-free.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Haftbefehl - Azzlack Stereotyp",
+    "image": "{{ "/images/thingsilike/music/azzlack-stereotyp.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Kollegah - Boss der Bosse",
+    "image": "{{ "/images/thingsilike/music/boss-der-bosse.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Dizzee Rascal - Boy In Da Corner",
+    "image": "{{ "/images/thingsilike/music/boy-in-da-corner.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Kendrick Lamar - Section.80",
+    "image": "{{ "/images/thingsilike/music/section.80.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Bushido - Vom Bordstein Bis Zur Skyline",
+    "image": "{{ "/images/thingsilike/music/vom-bordstein-bis-zur-skyline.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Stromae - Cheese",
+    "image": "{{ "/images/thingsilike/music/cheese.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Dynamite Deluxe - Deluxe Soundsystem",
+    "image": "{{ "/images/thingsilike/music/deluxe-soundsystem.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Eminem - The Eminem Show",
+    "image": "{{ "/images/thingsilike/music/eminem-show.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Westberlin Maskulin - Hoes, Flows, Moneytoes",
+    "image": "{{ "/images/thingsilike/music/hoes-flows-moneytoes.jpg" | prepend: site.baseurl }}"
+  }, {
+    "title": "Angel Haze - Reservation",
+    "image": "{{ "/images/thingsilike/music/reservation.jpg" | prepend: site.baseurl }}"
+  }];
+
+      coverflow('games').setup({
+        playlist: games,
+        backgroundcolor: "ffffff",
+        backgroundopacity: 0,
+        textstyle: ".coverflow-text{color:#000000;text-align:center;font-family:Arial Rounded MT Bold,Arial;} .coverflow-text h1{font-size:14px;font-weight:normal;line-height:21px;} .coverflow-text h1{font-size:11px;font-weight:normal;} .coverflow-text a{color:#0000EE;}",
+        width: "100%",
+        item: 4,
+        coverwidth: 400,
+        coverheight: 200,
+        textoffset: 30
+      });
+      coverflow('movies').setup({
+        playlist: movies,
+        backgroundcolor: "ffffff",
+        backgroundopacity: 0,
+        textstyle: ".coverflow-text{color:#000000;text-align:center;font-family:Arial Rounded MT Bold,Arial;} .coverflow-text h1{font-size:14px;font-weight:normal;line-height:21px;} .coverflow-text h1{font-size:11px;font-weight:normal;} .coverflow-text a{color:#0000EE;}",
+        width: "100%",
+        item: 5,
+        coverwidth: 400,
+        coverheight: 200,
+        textoffset: 30
+      });
+      coverflow('music').setup({
+        playlist: music,
+        backgroundcolor: "ffffff",
+        backgroundopacity: 0,
+        textstyle: ".coverflow-text{color:#000000;text-align:center;font-family:Arial Rounded MT Bold,Arial;} .coverflow-text h1{font-size:14px;font-weight:normal;line-height:21px;} .coverflow-text h1{font-size:11px;font-weight:normal;} .coverflow-text a{color:#0000EE;}",
+        width: "100%",
+        item: 4,
+        coverwidth: 400,
+        coverheight: 200,
+        textoffset: 30
+      });
+  </script>
+</div>
