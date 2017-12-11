@@ -35,7 +35,7 @@ That's the reason why I regulary look for alternatives. I took a look at Rust, w
 imo, and at Electron with vue.js for a [rewrite of WhatsApp Viewer](https://github.com/andreas-mausch/whatsapp-viewer/tree/electron).
 It was great to use, but comes with a big downside: It ends up in a 150 MB binary which needs to be distributed to customers.
 
-So bottom line: I still development with C++ with all the downsides for Desktop applications to provide no-installation, double-click-and-run, 3 MB executables.
+So bottom line: I still develop with C++ and all the downsides for Desktop applications to provide no-installation, double-click-and-run, 3 MB executables.
 
 # Kotlin Native
 
