@@ -9,6 +9,23 @@ I tried to find a changelog of the BIOS updates for the XPS 15. I failed. So I'v
 
 There is a well-hidden overview on the official Dell website. Click [here](http://downloads.dell.com/published/pages/xps-15-9550-laptop.html) for details. Note: There have been some updates released, which are not available for download anymore.
 
+- **1.6.1**  
+2017-12-23
+  1. Updated to the latest INTEL CPU microcodes.
+  2. Updated Intel ME Firmware to address security advisories INTEL-SA-00086 (CVE-2017-5705, CVE-2017-5708, CVE-2017-5711 & CVE-2017-5712) & INTEL-SA-00101(CVE-2017-13077, CVE-2017-13078 & CVE-2017-13080).
+- **1.5.1**  
+2017-11-14
+  1. Enhance audio quality when the brightness is adjusted
+  2. Extending battery support
+  3. Allows Dell Command Configure to implement the required Thunderbolt Sec Level settings without the need to access the BIOS.
+  4. Fixed a Bitlocker recovery issue when Dell Thunderbolt Dock is connected to the system, and PCR1 is selected in the Bitlocker Group Policy  
+  Updated Dell Dock Port Type Classification in SMBIOS Table
+  5. Fixed a Bitlocker recovery issue when Dell Type C Dock or Dongle is connected to the system, and PCR2 is selected in the Bitlocker Group Policy  
+    Improved PCR2 measurement consistency when a Dell Type C Dock or Dongle is connected.
+  6. Updated the handling of pre-boot authentication information by firmware.  
+    Updated UEFI variable input validation.  
+    Updated the handling of 3rd party Option ROM loading.  
+    Updated SPI flash command configuration settings.
 - **1.4.0**  
 2017-09-15
   1. Fixes system defense with wireless parameter will cause ME failure
