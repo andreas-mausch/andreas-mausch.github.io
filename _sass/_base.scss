@@ -17,7 +17,7 @@ body {
     font-family: $base-font-family;
     font-size: $base-font-size;
     line-height: $base-line-height;
-    font-weight: 300;
+    font-weight: 400;
     color: $text-color;
     background-color: $background-color;
     -webkit-text-size-adjust: 100%;
@@ -80,7 +80,7 @@ li {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 300;
+    font-weight: 400;
 }
 
 
@@ -192,4 +192,48 @@ pre {
             fill: $grey-color;
         }
     }
+}
+
+.social-links {
+  margin-bottom: 30px;
+}
+
+.social-links .column {
+  text-align: center;
+}
+
+.values .column {
+  text-align: center;
+}
+
+.values .column img {
+  margin-left: 20%;
+  margin-right: 20%;
+  max-height: 100px;
+  fill: blue;
+}
+
+.values .column p {
+  text-align: left;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.me {
+  text-align: center;
+}
+
+.me img {
+  max-height: 180px;
+  border-radius: 30px;
+}
+
+.me .image {
+  margin-bottom: 30px;
 }

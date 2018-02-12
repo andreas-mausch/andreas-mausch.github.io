@@ -4,6 +4,8 @@ title: WhatsApp Viewer
 permalink: /whatsapp-viewer/
 ---
 
+# WhatsApp Viewer
+
 Small tool to display chats from the Android msgstore.db.  
 Supported versions are crypt5, crypt7, crypt8 and crypt12.
 
