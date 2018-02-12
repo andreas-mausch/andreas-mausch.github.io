@@ -5,7 +5,7 @@ date:   2017-12-11 02:00:00 +01:00
 tags:
 ---
 
-I did some investigations into [Mesh Networks]({{ site.baseurl }}{% post_url 2017-07-20-mesh-networks-on-android %}) few weeks ago, in which I set up an Ad-Hoc WiFi network on my Samsung S4 phone.  
+I did some investigations into [Mesh Networks]({{ site.baseurl }}{% post_url blog/2017-07-20-mesh-networks-on-android %}) few weeks ago, in which I set up an Ad-Hoc WiFi network on my Samsung S4 phone.  
 However, I used CyanogenMod 11, which is a little outdated.
 
 I've received an e-mail from Andrew Hunter <andrew.hunter@utexas.edu> from Texas, who tried to run an Ad-Hoc network on the current LineageOS, 14.1.  

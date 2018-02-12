@@ -41,7 +41,7 @@ So bottom line: I still develop with C++ and all the downsides for Desktop appli
 
 # Kotlin Native
 
-Now a colleague of mine started to experiment with Kotlin, as I've written in a [previous post]({{ site.baseurl }}{% post_url 2017-05-14-compass-app-in-kotlin %}).
+Now a colleague of mine started to experiment with Kotlin, as I've written in a [previous post]({{ site.baseurl }}{% post_url blog/2017-05-14-compass-app-in-kotlin %}).
 So for Kotlin, there is also *Kotlin Native*, which looks extremely interesting to me.
 You can write code in a modern and great language, and it still compiles to small bytecode by using LLVM.
 
