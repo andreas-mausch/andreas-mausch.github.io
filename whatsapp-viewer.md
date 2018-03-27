@@ -2,6 +2,7 @@
 layout: page
 title: WhatsApp Viewer
 permalink: /whatsapp-viewer/
+navigation_weight: 1
 ---
 
 # WhatsApp Viewer

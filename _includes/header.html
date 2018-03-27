@@ -14,12 +14,10 @@
       </a>
 
       <div class="trigger">
-        {% for page in site.pages %}
-          {% if page.title == 'WhatsApp Viewer' %}
-            <a class="page-link" href="{{ page.url }}">{{ page.title }}</a>
-          {% endif %}
+        {% assign navigation_pages = site.pages | where_exp: "item", "item.navigation_weight" | sort: 'navigation_weight' %}
+        {% for page in navigation_pages %}
+          <a class="page-link" href="{{ page.url }}">{% if page.navigation_title %}{{ page.navigation_title }}{% else %}{{ page.title }}{% endif %}</a>
         {% endfor %}
-        <a class="page-link" href="/blog/">Blog</a>
       </div>
     </nav>
 
