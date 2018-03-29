@@ -1,0 +1,604 @@
+DOS Header
+    Magic number:                    0x5a4d (MZ)
+    Bytes in last page:              144
+    Pages in file:                   3
+    Relocations:                     0
+    Size of header in paragraphs:    4
+    Minimum extra paragraphs:        0
+    Maximum extra paragraphs:        65535
+    Initial (relative) SS value:     0
+    Initial SP value:                0xb8
+    Initial IP value:                0
+    Initial (relative) CS value:     0
+    Address of relocation table:     0x40
+    Overlay number:                  0
+    OEM identifier:                  0
+    OEM information:                 0
+    PE header offset:                0x110
+COFF/File header
+    Machine:                         0x14c IMAGE_FILE_MACHINE_I386
+    Number of sections:              5
+    Date/time stamp:                 1522297663 (Thu, 29 Mar 2018 04:27:43 UTC)
+    Symbol Table offset:             0
+    Number of symbols:               0
+    Size of optional header:         0xe0
+    Characteristics:                 0x102
+    Characteristics names
+                                         IMAGE_FILE_EXECUTABLE_IMAGE
+                                         IMAGE_FILE_32BIT_MACHINE
+Optional/Image header
+    Magic number:                    0x10b (PE32)
+    Linker major version:            14
+    Linker minor version:            13
+    Size of .text section:           0xd2a00
+    Size of .data section:           0x179e00
+    Size of .bss section:            0
+    Entrypoint:                      0xade55
+    Address of .text section:        0x1000
+    Address of .data section:        0xd4000
+    ImageBase:                       0x400000
+    Alignment of sections:           0x1000
+    Alignment factor:                0x200
+    Major version of required OS:    5
+    Minor version of required OS:    1
+    Major version of image:          0
+    Minor version of image:          0
+    Major version of subsystem:      5
+    Minor version of subsystem:      1
+    Size of image:                   0x24f000
+    Size of headers:                 0x400
+    Checksum:                        0
+    Subsystem required:              0x2 (IMAGE_SUBSYSTEM_WINDOWS_GUI)
+    DLL characteristics:             0x8140
+    DLL characteristics names
+                                         IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE
+                                         IMAGE_DLLCHARACTERISTICS_NX_COMPAT
+                                         IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE
+    Size of stack to reserve:        0x100000
+    Size of stack to commit:         0x1000
+    Size of heap space to reserve:   0x100000
+    Size of heap space to commit:    0x1000
+Data directories
+    Directory
+        IMAGE_DIRECTORY_ENTRY_IMPORT:    0xf8768 (240 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_RESOURCE:  0x105000 (1316584 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_BASERELOC: 0x247000 (31512 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_DEBUG:     0xf17a0 (112 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG: 0xf1810 (64 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_IAT:       0xd4000 (920 bytes)
+Imported functions
+    Library
+        Name:                            COMCTL32.dll
+        Functions
+            Function
+                Name:                            InitCommonControlsEx
+    Library
+        Name:                            WindowsCodecs.dll
+        Functions
+            Function
+                Name:                            WICConvertBitmapSource
+    Library
+        Name:                            MSIMG32.dll
+        Functions
+            Function
+                Name:                            AlphaBlend
+    Library
+        Name:                            VERSION.dll
+        Functions
+            Function
+                Name:                            VerQueryValueW
+    Library
+        Name:                            KERNEL32.dll
+        Functions
+            Function
+                Name:                            SetFilePointer
+            Function
+                Name:                            GetFullPathNameA
+            Function
+                Name:                            SetEndOfFile
+            Function
+                Name:                            UnlockFileEx
+            Function
+                Name:                            GetTempPathW
+            Function
+                Name:                            CreateMutexW
+            Function
+                Name:                            WaitForSingleObject
+            Function
+                Name:                            CreateFileW
+            Function
+                Name:                            GetFileAttributesW
+            Function
+                Name:                            GetVersionExW
+            Function
+                Name:                            UnmapViewOfFile
+            Function
+                Name:                            HeapValidate
+            Function
+                Name:                            HeapSize
+            Function
+                Name:                            MultiByteToWideChar
+            Function
+                Name:                            Sleep
+            Function
+                Name:                            GetTempPathA
+            Function
+                Name:                            FormatMessageW
+            Function
+                Name:                            GetDiskFreeSpaceA
+            Function
+                Name:                            GetLastError
+            Function
+                Name:                            GetFileAttributesA
+            Function
+                Name:                            GetFileAttributesExW
+            Function
+                Name:                            OutputDebugStringW
+            Function
+                Name:                            CreateFileA
+            Function
+                Name:                            LoadLibraryA
+            Function
+                Name:                            GetVersionExA
+            Function
+                Name:                            DeleteFileA
+            Function
+                Name:                            DeleteFileW
+            Function
+                Name:                            HeapReAlloc
+            Function
+                Name:                            CloseHandle
+            Function
+                Name:                            GetSystemInfo
+            Function
+                Name:                            HeapAlloc
+            Function
+                Name:                            HeapCompact
+            Function
+                Name:                            HeapDestroy
+            Function
+                Name:                            UnlockFile
+            Function
+                Name:                            CreateFileMappingA
+            Function
+                Name:                            LocalFree
+            Function
+                Name:                            LockFileEx
+            Function
+                Name:                            GetFileSize
+            Function
+                Name:                            DeleteCriticalSection
+            Function
+                Name:                            GetCurrentProcessId
+            Function
+                Name:                            GetProcessHeap
+            Function
+                Name:                            SystemTimeToFileTime
+            Function
+                Name:                            WideCharToMultiByte
+            Function
+                Name:                            GetSystemTimeAsFileTime
+            Function
+                Name:                            GetSystemTime
+            Function
+                Name:                            FormatMessageA
+            Function
+                Name:                            CreateFileMappingW
+            Function
+                Name:                            MapViewOfFile
+            Function
+                Name:                            QueryPerformanceCounter
+            Function
+                Name:                            GetTickCount
+            Function
+                Name:                            FlushFileBuffers
+            Function
+                Name:                            TryEnterCriticalSection
+            Function
+                Name:                            GetCommandLineW
+            Function
+                Name:                            SizeofResource
+            Function
+                Name:                            LockResource
+            Function
+                Name:                            LoadResource
+            Function
+                Name:                            FindResourceW
+            Function
+                Name:                            GetModuleHandleW
+            Function
+                Name:                            InitializeCriticalSection
+            Function
+                Name:                            CreateThread
+            Function
+                Name:                            GetOEMCP
+            Function
+                Name:                            IsValidCodePage
+            Function
+                Name:                            FindNextFileA
+            Function
+                Name:                            FindFirstFileExA
+            Function
+                Name:                            FindClose
+            Function
+                Name:                            SetStdHandle
+            Function
+                Name:                            GetTimeZoneInformation
+            Function
+                Name:                            EnumSystemLocalesW
+            Function
+                Name:                            GetUserDefaultLCID
+            Function
+                Name:                            IsValidLocale
+            Function
+                Name:                            GetTimeFormatW
+            Function
+                Name:                            GetDateFormatW
+            Function
+                Name:                            GetConsoleCP
+            Function
+                Name:                            ReadConsoleW
+            Function
+                Name:                            GetConsoleMode
+            Function
+                Name:                            GetACP
+            Function
+                Name:                            GetModuleFileNameA
+            Function
+                Name:                            GetFileType
+            Function
+                Name:                            SetFilePointerEx
+            Function
+                Name:                            GetModuleHandleExW
+            Function
+                Name:                            ExitProcess
+            Function
+                Name:                            LoadLibraryExW
+            Function
+                Name:                            RaiseException
+            Function
+                Name:                            WriteConsoleW
+            Function
+                Name:                            RtlUnwind
+            Function
+                Name:                            InitializeSListHead
+            Function
+                Name:                            GetCurrentThreadId
+            Function
+                Name:                            GetStartupInfoW
+            Function
+                Name:                            IsDebuggerPresent
+            Function
+                Name:                            IsProcessorFeaturePresent
+            Function
+                Name:                            TerminateProcess
+            Function
+                Name:                            SetUnhandledExceptionFilter
+            Function
+                Name:                            UnhandledExceptionFilter
+            Function
+                Name:                            GetCPInfo
+            Function
+                Name:                            GetStringTypeW
+            Function
+                Name:                            GetLocaleInfoW
+            Function
+                Name:                            LCMapStringW
+            Function
+                Name:                            CompareStringW
+            Function
+                Name:                            DecodePointer
+            Function
+                Name:                            EncodePointer
+            Function
+                Name:                            TlsFree
+            Function
+                Name:                            TlsSetValue
+            Function
+                Name:                            TlsGetValue
+            Function
+                Name:                            TlsAlloc
+            Function
+                Name:                            InitializeCriticalSectionAndSpinCount
+            Function
+                Name:                            SetLastError
+            Function
+                Name:                            LeaveCriticalSection
+            Function
+                Name:                            LockFile
+            Function
+                Name:                            OutputDebugStringA
+            Function
+                Name:                            GetDiskFreeSpaceW
+            Function
+                Name:                            InterlockedCompareExchange
+            Function
+                Name:                            WriteFile
+            Function
+                Name:                            GetFullPathNameW
+            Function
+                Name:                            EnterCriticalSection
+            Function
+                Name:                            HeapFree
+            Function
+                Name:                            HeapCreate
+            Function
+                Name:                            ReadFile
+            Function
+                Name:                            AreFileApisANSI
+            Function
+                Name:                            FreeLibrary
+            Function
+                Name:                            GetProcAddress
+            Function
+                Name:                            LoadLibraryW
+            Function
+                Name:                            GetCurrentProcess
+            Function
+                Name:                            GetStdHandle
+            Function
+                Name:                            GetEnvironmentStringsW
+            Function
+                Name:                            FreeEnvironmentStringsW
+            Function
+                Name:                            SetEnvironmentVariableA
+            Function
+                Name:                            GetCommandLineA
+            Function
+                Name:                            GetTempFileNameW
+    Library
+        Name:                            USER32.dll
+        Functions
+            Function
+                Name:                            MessageBoxW
+            Function
+                Name:                            EndPaint
+            Function
+                Name:                            DestroyIcon
+            Function
+                Name:                            LoadImageW
+            Function
+                Name:                            LoadAcceleratorsW
+            Function
+                Name:                            GetParent
+            Function
+                Name:                            GetWindowTextW
+            Function
+                Name:                            CallWindowProcW
+            Function
+                Name:                            IsWindowVisible
+            Function
+                Name:                            GetPropW
+            Function
+                Name:                            GetCapture
+            Function
+                Name:                            SetPropW
+            Function
+                Name:                            SetCapture
+            Function
+                Name:                            PtInRect
+            Function
+                Name:                            ReleaseCapture
+            Function
+                Name:                            GetSysColor
+            Function
+                Name:                            GetMessageW
+            Function
+                Name:                            DestroyWindow
+            Function
+                Name:                            SetWindowPos
+            Function
+                Name:                            CreateWindowExW
+            Function
+                Name:                            DispatchMessageW
+            Function
+                Name:                            IsDialogMessageW
+            Function
+                Name:                            TranslateAcceleratorW
+            Function
+                Name:                            TranslateMessage
+            Function
+                Name:                            GetDlgItem
+            Function
+                Name:                            PostQuitMessage
+            Function
+                Name:                            EnableWindow
+            Function
+                Name:                            DrawTextW
+            Function
+                Name:                            CreateDialogParamW
+            Function
+                Name:                            EndDialog
+            Function
+                Name:                            DialogBoxParamW
+            Function
+                Name:                            GetDlgItemTextW
+            Function
+                Name:                            SetWindowTextW
+            Function
+                Name:                            GetWindowLongW
+            Function
+                Name:                            SetScrollInfo
+            Function
+                Name:                            DefWindowProcW
+            Function
+                Name:                            ShowScrollBar
+            Function
+                Name:                            PostMessageW
+            Function
+                Name:                            GetDC
+            Function
+                Name:                            FillRect
+            Function
+                Name:                            GetScrollInfo
+            Function
+                Name:                            RegisterClassExW
+            Function
+                Name:                            GetScrollPos
+            Function
+                Name:                            SetFocus
+            Function
+                Name:                            LoadCursorW
+            Function
+                Name:                            SetWindowLongW
+            Function
+                Name:                            UpdateWindow
+            Function
+                Name:                            InvalidateRect
+            Function
+                Name:                            ReleaseDC
+            Function
+                Name:                            SendMessageW
+            Function
+                Name:                            ShowWindow
+            Function
+                Name:                            SetDlgItemTextW
+            Function
+                Name:                            SendDlgItemMessageW
+            Function
+                Name:                            GetClientRect
+            Function
+                Name:                            DrawIconEx
+            Function
+                Name:                            BeginPaint
+            Function
+                Name:                            LoadIconW
+    Library
+        Name:                            GDI32.dll
+        Functions
+            Function
+                Name:                            CreateBitmap
+            Function
+                Name:                            GetObjectW
+            Function
+                Name:                            SetBkMode
+            Function
+                Name:                            BitBlt
+            Function
+                Name:                            CreateCompatibleBitmap
+            Function
+                Name:                            SelectObject
+            Function
+                Name:                            CreateCompatibleDC
+            Function
+                Name:                            GetStockObject
+            Function
+                Name:                            DeleteDC
+            Function
+                Name:                            SetTextColor
+            Function
+                Name:                            LineTo
+            Function
+                Name:                            MoveToEx
+            Function
+                Name:                            SetBkColor
+            Function
+                Name:                            DeleteObject
+            Function
+                Name:                            CreateSolidBrush
+            Function
+                Name:                            CreateFontW
+    Library
+        Name:                            COMDLG32.dll
+        Functions
+            Function
+                Name:                            GetOpenFileNameW
+            Function
+                Name:                            GetSaveFileNameW
+    Library
+        Name:                            ADVAPI32.dll
+        Functions
+            Function
+                Name:                            RegCloseKey
+            Function
+                Name:                            RegCreateKeyExW
+            Function
+                Name:                            RegSetValueExW
+            Function
+                Name:                            RegOpenKeyExW
+            Function
+                Name:                            RegQueryValueExW
+    Library
+        Name:                            SHELL32.dll
+        Functions
+            Function
+                Name:                            DragFinish
+            Function
+                Name:                            DragAcceptFiles
+            Function
+                Name:                            DragQueryFileW
+            Function
+                Name:                            CommandLineToArgvW
+    Library
+        Name:                            ole32.dll
+        Functions
+            Function
+                Name:                            CoCreateInstance
+            Function
+                Name:                            CoInitialize
+            Function
+                Name:                            CoUninitialize
+Sections
+    Section
+        Name:                            .text
+        Virtual Address:                 0x1000
+        Physical Address:                0xd28e8
+        Size:                            0xd2a00 (862720 bytes)
+        Pointer To Data:                 0x400
+        Relocations:                     0
+        Characteristics:                 0x60000020
+        Characteristic Names
+                                             IMAGE_SCN_CNT_CODE
+                                             IMAGE_SCN_MEM_EXECUTE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            .rdata
+        Virtual Address:                 0xd4000
+        Physical Address:                0x25b64
+        Size:                            0x25c00 (154624 bytes)
+        Pointer To Data:                 0xd2e00
+        Relocations:                     0
+        Characteristics:                 0x40000040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            .data
+        Virtual Address:                 0xfa000
+        Physical Address:                0xac44
+        Size:                            0x5600 (22016 bytes)
+        Pointer To Data:                 0xf8a00
+        Relocations:                     0
+        Characteristics:                 0xc0000040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+                                             IMAGE_SCN_MEM_WRITE
+    Section
+        Name:                            .rsrc
+        Virtual Address:                 0x105000
+        Physical Address:                0x1416e8
+        Size:                            0x141800 (1316864 bytes)
+        Pointer To Data:                 0xfe000
+        Relocations:                     0
+        Characteristics:                 0x40000040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            .reloc
+        Virtual Address:                 0x247000
+        Physical Address:                0x7b18
+        Size:                            0x7c00 (31744 bytes)
+        Pointer To Data:                 0x23f800
+        Relocations:                     0
+        Characteristics:                 0x42000040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ

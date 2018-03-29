@@ -12,7 +12,7 @@ Hier die Sammlung der King-Niche-Texte.
 
 **[LINK ZUM PDF](https://drive.google.com/file/d/0Bx_otlCB_AwBaENGTFh5NzBjbEk/edit?usp=sharing)**
 
-[Download]({{ site.url }}/downloads/king_niche_compilation.pdf)
+[Download]({{ site.url }}/files/king_niche_compilation.pdf)
 
 Niche ist ein Pokerspieler, der einst über 100.000 US-Dollar im Internet erspielt hat, welche er allerdings durch eine Verkettung ungünstiger Umstände wieder an die anderen Spieler abtreten musste. Das Geld ist zwar verloren, nicht jedoch sein unbedingter Wille es wieder zurück auf die höchsten Stakes zu schaffen.  
 Für Leute mit Pokerhintergrund sehr lesenswert, emotional und witzig geschrieben.
