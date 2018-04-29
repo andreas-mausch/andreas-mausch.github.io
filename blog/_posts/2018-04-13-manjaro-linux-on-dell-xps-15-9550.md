@@ -44,6 +44,7 @@ installed version is not compatible.
 ## HiDPI
 
 Linux is still a big pain when it comes to out-of-the-box support for HiDPI displays, which are too common nowadays to not care about them.
+Linux is lacking behind in this regard and I don't understand why I have to run any of the commands below manually. :(
 
 ### Grub
 
@@ -65,6 +66,15 @@ GRUB_FONT=/boot/grub/fonts/DroidSansMono32.pf2
 
 Open Settings Manager → Appearance → Fonts (in German it's Einstellungen → Erscheinungsbild → Schriften) and overwrite the DPI value (I set mine to 192).
 
+### Gnome, GTK+
+
+Add to ~/.profile:
+
+```
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+```
+
 ### TTY
 
 You can open the Linux console if you press CTRL+ALT+F2 (go back to graphical UI: CTRL+ALT+F7). To make fonts bigger here as well, make sure you have the font inside */usr/share/kbd/consolefonts/* and edit or create the file */etc/vconsole.conf*:
@@ -81,6 +91,17 @@ FONT_MAP=8859-2
 
 By default, Manjaro has this weird collapsible terminal. I don't like it too much, so I've decided to change it back to classic mode.
 Therefore, I've rebound the CTRL+ALT+T shortcut to *xfce4-terminal*.
+
+Unfortunately, the old xfce4-terminal works poorly with GDK_SCALE and GDK_DPI_SCALE.
+Fonts looks blurred, and I hate it. I've managed to work around that by creating a file at ~/terminal.sh:
+
+```
+GDK_SCALE=1 GDK_DPI_SCALE=1 xfce4-terminal
+```
+
+`chmod +x ~/terminal.sh` and bind the shortcut to the terminal.sh.
+This way, the GDK variables are set for all other programs but xfce4-terminal.
+It's super-ugly, but it works well for me.
 
 ### Fish Shell
 
