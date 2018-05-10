@@ -7,7 +7,7 @@ tags:
 
 # Double-click & run
 
-I like to develop small native desktop apps like [WhatsApp Viewer](http://andreas-mausch.de/whatsapp-viewer/) or [CS:GO Demoviewer](https://github.com/andreas-mausch/csgo-demohighlights).
+I like to develop small native desktop apps like [WhatsApp Viewer](https://andreas-mausch.de/whatsapp-viewer/) or [CS:GO Demoviewer](https://github.com/andreas-mausch/csgo-demohighlights).
 
 However, whenever I want to create an application like this, I struggle to decide on the technology to use.
 Most of the time I (still) end up using C++, because I know it is able to produce a binary which runs on
