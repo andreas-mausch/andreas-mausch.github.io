@@ -26,15 +26,15 @@ However, this results in an error message:
 
 For some reason we need a special firmware for the WiFi chip.
 
-Andrew had this problem and asked me if I know any details on how to fix it.  
-Well, I didn't. But after several trails and errors he made great progress and got it running!
+Andrew had this problem and asked me if I knew any details on how to fix it.  
+Well, I didn't. But after several trials and errors he made great progress and got it running!
 
 > If you don't load the IBSS firmware, the join command will fail. Also, if you try to set the frequency in IBSS mode without the IBSS firmware loaded, it might crash the device, and restart.  
 In /sys/module/dhd/parameters/ are the files firmware_path and nvram_path. These two are empty by default and, I believe, are cleared whenever wifi is brought down. If you populate these before bringing the interface backup, you cause the firmware and driver to assume certain settings. The folder /system/etc/wifi has a variety of firmware and nvram settings you can select.  
 It may be that populating path variables for module loading is a standard paradigm, but I was not aware of it; I merely guessed based on module loading commands I had seen years ago. As I said, I expected to be using insmod and rmmod to set such things, but these aren't available here.  
 This isn't hard once you know it, but I'm rather surprised I couldn't find any discussion of this.
 
-Luckily, it is part of the LineageOS image and already on the phone.
+Luckily, the IBSS firmware is part of the LineageOS image and already on the phone.
 In order to load it, open up a shell on your rooted phone:
 
 ```
@@ -73,7 +73,7 @@ The new WiFi with the SSID should now show up on other devices when you scan for
 
 thinktube.com created patches for CM 11 and 12.
 These patches included a GUI to select/create a WiFi Ad-Hoc network, but also [patched the bcmdhd driver](http://www.thinktube.com/files/android-ibss/patches/kernel-samsung-tuna-0001-bcmdhd-Enable-Ad-Hoc-IBSS-mode.patch).
-Please check there page here for details:
+Please check their page here for details:
 
 [http://www.thinktube.com/android-tech/46-android-wifi-ibss](http://www.thinktube.com/android-tech/46-android-wifi-ibss)
 
