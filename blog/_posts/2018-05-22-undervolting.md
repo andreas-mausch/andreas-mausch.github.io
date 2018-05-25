@@ -21,7 +21,11 @@ sudo ./undervolt.py --gpu -50 --core -130 --cache -100 --uncore -130 --analogio 
 
 ![]({{ site.baseurl }}/images/2018-05-22-undervolting/cmd.jpg)
 
-I've executed `stress --cpu 8` and temperates dropped from 97 degrees to 84, and power consumption from 60 W to 48 W.
+I've executed `stress --cpu 8` and temperates dropped from 97 degrees to 83, and power consumption from 60 W to 48 W.
 This is quite significant.
+
+![]({{ site.baseurl }}/images/2018-05-22-undervolting/glances.jpg)
+
+(The tool shown here is [glances](https://nicolargo.github.io/glances/), a great alternative to top)
 
 For throttling, for the newer XPS this [YouTube video](https://www.youtube.com/watch?v=nobnPDtMs-E) shows you can get ~12% better performance with undervolting, because the CPU doesn't need to reduce it's frequency due to hitting the temperature limit.
