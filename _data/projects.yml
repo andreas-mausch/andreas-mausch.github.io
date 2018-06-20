@@ -1,0 +1,133 @@
+- project:
+  name: get-a-way.com
+  role: Backend Developer
+  from: 2016-07-01
+  to: 2018-07-31
+  location: Berlin, Germany
+  technologies:
+  - Pair programming
+  - Test-driven development
+  - Java EE
+  - Spock
+  - Gitlab CI
+  - Amazon AWS (Elastic Beanstalk, CloudWatch, S3, EC2, CloudFront, Elastic Container Service, Lambda)
+  - Jersey, JAX-RS
+  - MongoDB (Mongo Cloud / Atlas)
+  - EclipseLink
+  - Kibana
+  - Groovy
+  - Webjars
+  - Docker
+  - REST API
+  - Server-Sent Events
+  text: |
+    GETAWAY is a startup in Berlin which provides a peer-to-peer car sharing service.
+
+    - Developed the API for the app, MongoDB database
+    - Admin webapp for operations and customer care
+    - Built the CI and server infrastructure (on AWS) from scratch
+    - Zero downtime 1-click deployments, multiple times a day
+    - Human-readable tests by using Spock
+  image: getaway.png
+  link: https://get-a-way.com
+- project:
+  name: blau Mobilfunk GmbH
+  role: Backend Developer
+  from: 2014-07-01
+  to: 2016-06-30
+  location: Hamburg, Germany
+  technologies:
+  - Pair programming
+  - Test-driven development
+  - Clean code
+  - Spring
+  - Hibernate
+  - REST and SOAP webservices
+  - Selenium
+  - CasperJS
+  - Bamboo
+  - Jira
+  - Apache Tomcat
+  - Oracle SQL
+  - "Legacy system: Java EE, EJB 2, JBoss"
+  text: |
+    Mobile service provider (later part of Telefónica). Developed the IT platform for postpaid and prepaid customers.
+
+    Software development in a team using Scrum for order management, customer care, contract management, billing, business process modeling and connecting third-party services.
+    Specification and architectural design, implementation, continuous integration, quality assurance via tests, supported operations, optimization.
+  image: blau.png
+  link: https://www.blau.de
+- project:
+  name: Springer
+  role: Full Stack Developer
+  from: 2011-10-01
+  to: 2012-10-31
+  location: London, England
+  technologies:
+  - Agile software development
+  - Kanban
+  - Scala
+  - Ruby
+  - Sinatra
+  - Scalatra
+  - OpenAM
+  - Jade templates
+  - Git
+  - Simple Build Tool (SBT)
+  - Go (CI)
+  - Mingle
+  - Chef
+  - Capistrano
+  - SAP, MPS
+  - REST web services
+  - SAML
+  - Shibboleth
+  - Pair programming
+  - Test-driven development
+  text: |
+    Relaunch. Worked in a team of ~30 people from eight different countries, most of them from ThoughtWorks.
+    At first, my goal was to integrate OpenAM into their platform to let people authenticate by Username/Password, IP address or via Shibboleth (SAML 2.0).
+
+    Later, I've joined the Scala development team. The website offers thousands of scientific books, which can be searched, previewed, bought and downloaded.
+    Strictly test-driven. Weekly, automated releases.
+  image: springer.png
+  link: https://rd.springer.com
+# - project:
+#   name: saam
+#   role: Full Stack Developer
+#   from: 2016-03-01
+#   to: 2016-06-30
+#   technologies:
+#   - Android
+#   - Ionic, Cordova
+#   - AngularJS
+#   - JavaScript
+#   - MongoDB
+#   - Gulp
+#   - BDD
+#   - Yadda
+#   - Mocha
+#   - CasperJS
+#   - OAuth 2.0
+#   - Continuous Delivery
+#   - HTML, SCSS
+#   text: |
+#     ...
+
+#     [PlayStore](https://play.google.com/store/apps/details?id=com.saam)
+#   image: saam.png
+# - project:
+#   name: WhatsApp Viewer
+#   from: 2014-03-01
+#   to: 2014-06-30
+#   technologies:
+#   - C++
+#   - SQLite
+#   - AES
+#   - HTML
+#   - Win32 API
+#   - CLI
+#   - Electron
+#   text: |
+#     ...
+#   image: whatsapp-viewer.png

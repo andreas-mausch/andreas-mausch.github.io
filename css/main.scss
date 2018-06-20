@@ -14,7 +14,7 @@ $base-line-height: 1.5;
 $spacing-unit:     30px;
 
 $text-color:       #111;
-$background-color: #fdfdfd;
+$background-color: #ececec;
 $brand-color:      #2a7ae2;
 
 $grey-color:       #828282;
@@ -27,6 +27,7 @@ $content-width:    920px;
 $on-palm:          600px;
 $on-laptop:        800px;
 
+$keyskill-width:   100px;
 
 
 // Using media queries with like this:
@@ -51,4 +52,8 @@ $on-laptop:        800px;
 
 @media only screen and (min-width: 481px) {
   @import "large";
+}
+
+@media only print {
+  @import "print";
 }

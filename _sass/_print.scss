@@ -1,0 +1,19 @@
+@page {
+  size: A4;
+  margin: 30px;
+}
+
+html, body {
+  width: 210mm;
+  height: 297mm;
+  background-color: transparent;
+}
+
+.site-header, .site-footer {
+  display: none;
+}
+
+.post, .home {
+  padding: 0;
+  background-color: transparent;
+}
