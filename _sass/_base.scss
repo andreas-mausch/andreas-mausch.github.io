@@ -300,16 +300,19 @@ h1 {
     margin: 24px 0;
 }
 
-.key-skills li {
-    list-style-type: none;
-}
-
 .centered {
     margin: 0 auto;
+}
+
+.key-skills > li {
+    list-style-type: none;
+    text-align: center;
+}
+
+.key-skills > li .fixed {
     width: $keyskill-width;
     height: $keyskill-width;
 }
-
 .key-skill {
     display: inline-block;
     background-color: $background-color;
@@ -321,6 +324,15 @@ h1 {
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
+}
+
+.sub-key-skills {
+    display: inline-block;
+    margin: 30px 0 0 0;
+}
+
+.sub-key-skills > li {
+    list-style-type: none;
 }
 
 .section {
