@@ -307,19 +307,33 @@ h1 {
 .key-skills > li {
     list-style-type: none;
     text-align: center;
+    width: 30.6666666667%;
 }
 
 .key-skills > li .fixed {
-    width: $keyskill-width;
-    height: $keyskill-width;
+    position: relative;
+    width: 90px;
+    padding-top: 90px;
 }
+
+.key-skill:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
 .key-skill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     display: inline-block;
     background-color: $background-color;
     border: 3px solid $brand-color;
     height: calc(100% - 6px);
     width: calc(100% - 6px);
-    line-height: $keyskill-width;
     border-radius: 50%;
     text-align: center;
     vertical-align: middle;
