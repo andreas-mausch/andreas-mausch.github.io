@@ -37,7 +37,7 @@ permalink: /resume/
           <div class="key-skill">Full Stack</div>
         </div>
         <ul class="sub-key-skills">
-          <li>Webapps</li>
+          <li>Web apps</li>
           <li>API</li>
           <li>Mobile apps</li>
         </ul>
@@ -47,7 +47,7 @@ permalink: /resume/
 
   <section class="section projects-section">
       <h2 class="section-title"><i class="fa fa-rocket"></i>Notable projects</h2>
-      
+
       {% for project in site.data.projects %}
       <div class="item project row">
           <div class="three columns">
@@ -65,7 +65,7 @@ permalink: /resume/
               <img src="{{ site.baseurl }}/images/resume/{{ project.image }}" alt="{{ project.name }}"/>
             </div>
           </div>
-  
+
           <div class="nine columns">
             <div class="text">
               {{ project.text | markdownify }}
@@ -74,7 +74,7 @@ permalink: /resume/
             <div class="link">
               <a href="{{ project.link }}">{{ project.link }}</a>
             </div>
-  
+
             <ul class="technologies">
               {% for technology in project.technologies %}
                 <li>{{ technology }}</li>
@@ -97,7 +97,7 @@ permalink: /resume/
         {% endfor %}
       </div>
     </section>
-  
+
     <section class="section experiences-section">
     <h2 class="section-title"><i class="fa fa-tasks"></i>Experiences</h2>
 
@@ -124,7 +124,7 @@ permalink: /resume/
 
   <section class="section educations-section">
     <h2 class="section-title"><i class="fa fa-graduation-cap"></i>Educations</h2>
-    
+
     {% for education in site.data.educations %}
     <div class="item education row">
         <div class="three columns image">
