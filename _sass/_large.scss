@@ -26,3 +26,17 @@
   width: 110px;
   padding-top: 110px;
 }
+
+.project .image,
+.experience .image,
+.education .image {
+    margin-bottom: 0;
+}
+
+.other-customer {
+  width: 150px;
+}
+
+.other-customer img {
+  max-width: 150px;
+}

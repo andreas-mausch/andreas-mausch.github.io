@@ -266,6 +266,7 @@ h1 {
 .education .image {
     text-align: center;
     margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 .project .image img,
@@ -385,14 +386,15 @@ h1 {
 
 .other-customer {
     display: inline-block;
-    width: 150px;
+    width: 100px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 12px;
     text-align: center;
 }
 
 .other-customer img {
-    max-width: 150px;
+    max-width: 100px;
     max-height: 75px;
     height: auto;
 }
