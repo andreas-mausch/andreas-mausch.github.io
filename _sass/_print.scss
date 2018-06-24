@@ -1,6 +1,6 @@
 @page {
   size: A4;
-  margin: 30px;
+  margin: 64px 30px;
 }
 
 html, body {
@@ -14,7 +14,7 @@ html, body {
 }
 
 .post, .home {
-  padding: 0;
+  padding: 0 34px;
   background-color: transparent;
 }
 
