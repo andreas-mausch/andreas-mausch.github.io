@@ -308,6 +308,11 @@ h1 {
     list-style-type: none;
     text-align: center;
     width: 30.6666666667%;
+    margin-left: 4%;
+}
+
+.key-skills > li:first-child {
+    margin-left: 0;
 }
 
 .key-skills > li .fixed {
