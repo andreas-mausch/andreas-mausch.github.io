@@ -194,7 +194,7 @@ WantedBy=suspend.target
 I personally like i3lock-color, called with these settings:
 
 ```
-i3lock --clock --blur=15 --radius=400 --timesize=100 --datesize=100 --timepos="w/2:h/2+70" --datepos="w/2:h/2-80" --datestr="%Y-%M-%d" --datecolor=ffffffff --timecolor=ffffffff --ring-width=20 -i /home/neonew/i3lock/lockscreen.png -t -n
+i3lock --clock --blur=6 --radius=400 --timesize=100 --datesize=100 --timepos="w/2:h/2+70" --datepos="w/2:h/2-80" --datestr="%Y-%m-%d" --datecolor=ffffffff --timecolor=ffffffff --ring-width=20 -i /home/neonew/i3lock/lockscreen.png -t -n
 ```
 
 *lockscreen.png* is just a one-pixel file, which has the alpha value set to 0.75 (to darken the screen).
@@ -225,6 +225,35 @@ $ systemd-analyze
 Startup finished in 7.796s (firmware) + 3.584s (loader) + 1.312s (kernel) + 2.324s (userspace) = 15.017s
 graphical.target reached after 2.140s in userspace
 ```
+
+## Terminal font
+
+I use `Source Code Pro Regular` in 11pt.
+
+## Conky
+
+![]({{ site.baseurl }}/images/2018-04-13-manjaro-linux-on-dell-xps-15-9550/conky.jpg)
+
+[config file]({{ site.baseurl }}/files/2018-04-13-manjaro-linux-on-dell-xps-15-9550/conkyrc.txt)
+
+For Autostart, create a file `~/.config/autostart/conky.desktop`:
+
+```
+[Desktop Entry]
+Type=Application
+Name=conky
+Exec=conky --daemonize --pause=5
+StartupNotify=false
+Terminal=false
+```
+
+## Package manager for AUR
+
+I like to use [yay](https://github.com/Jguer/yay).
+
+## Favorite editor
+
+I like to use [Microsoft Code](https://aur.archlinux.org/packages/code-git/), in the open-source variant.
 
 # Links
 
