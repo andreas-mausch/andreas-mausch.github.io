@@ -255,6 +255,28 @@ I like to use [yay](https://github.com/Jguer/yay).
 
 I like to use [Microsoft Code](https://aur.archlinux.org/packages/code-git/), in the open-source variant.
 
+## Chromium
+
+Chromium keeps asking me for the password of the default keyring.
+I've never set it up and don't really know about it.
+The bad thing is, every time Chromium gets updated, it loses all of my stored passwords
+if I don't enter the keyring password.
+
+Therefore, I've decided to store them in *plaintext* in my user directory.
+This might not be recommended, but I prefer to not be annoyed on every update.
+
+I also use multiple profiles, and Chromium remembers the last used profile.
+So when you boot your system and start the first Chromium instance,
+the last used profile is loaded automatically.
+I like to use my personal profile on every fresh Chromium instead.
+
+`~/.config/chromium-flags.conf`
+
+```
+--password-store=basic
+--profile-directory=Default
+```
+
 # Links
 
 [archlinux.org]: https://wiki.archlinux.org/index.php/Dell_XPS_15_(9550)
