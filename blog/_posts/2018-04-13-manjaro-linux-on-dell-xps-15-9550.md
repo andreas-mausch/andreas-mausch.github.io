@@ -251,6 +251,9 @@ Terminal=false
 
 I like to use [yay](https://github.com/Jguer/yay).
 
+One adjustment: In `/etc/makepkg.conf` I've set `PKGEXT='.pkg.tar'` to improve the build speed.
+Otherwise it tends to spend a lot of time in the "Compressing..." step.
+
 ## Favorite editor
 
 I like to use [Microsoft Code](https://aur.archlinux.org/packages/code-git/), in the open-source variant.
