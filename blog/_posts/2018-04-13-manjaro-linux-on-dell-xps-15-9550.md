@@ -236,6 +236,8 @@ I use `Source Code Pro Regular` in 11pt.
 
 [config file]({{ site.baseurl }}/files/2018-04-13-manjaro-linux-on-dell-xps-15-9550/conkyrc.txt)
 
+Most of it was created by [Mervyn McCreight](https://github.com/mervyn-mccreight]), thanks dude.
+
 For Autostart, create a file `~/.config/autostart/conky.desktop`:
 
 ```
