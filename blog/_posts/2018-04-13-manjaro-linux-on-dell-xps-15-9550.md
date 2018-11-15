@@ -62,6 +62,22 @@ Then, edit or create an entry in */etc/default/grub*:
 GRUB_FONT=/boot/grub/fonts/DroidSansMono32.pf2
 ```
 
+#### Spectre, Meltdown..
+
+Maybe controversial, but I like to disable all hacky tries to fix something in software
+which is actually broken in hardware. More and more vulnerabilities come up. All of them
+slow the CPU down. No widespread attacks are happening.
+
+I don't see a reason to drop 30% in performance when the worst attack case is
+someone's leeching my memory at 5 kbit/s..
+I'm not a data center, so I think it is very unlikely I'm gonna suffer from these attacks.
+
+That's why I have these options in my */etc/default/grub*
+
+```
+GRUB_CMDLINE_LINUX="pti=off spectre_v2=off spec_store_bypass_disable=off nospec noibrs noibpb"
+```
+
 ### Manjaro
 
 Open Settings Manager → Appearance → Fonts (in German it's Einstellungen → Erscheinungsbild → Schriften) and overwrite the DPI value (I set mine to 192).
@@ -208,24 +224,6 @@ Don't really know what it is, but Visual Studio Code and IntelliJ needs this val
 *       hard    nofile  380180
 ```
 
-# Measures
-
-## Power consumption
-
-When the laptop was idling, I had a power consumption of ~13 W.  
-(According to */sys/class/power_supply/BAT0/current_now*)
-
-With the Nvidia GPU disabled, it was reduced to 6.5 W.  
-(In both cases connected to WiFi, lowest brightness).
-
-## Boot time
-
-```
-$ systemd-analyze
-Startup finished in 7.796s (firmware) + 3.584s (loader) + 1.312s (kernel) + 2.324s (userspace) = 15.017s
-graphical.target reached after 2.140s in userspace
-```
-
 ## Terminal font
 
 I use `Source Code Pro Regular` in 11pt.
@@ -238,7 +236,7 @@ I use `Source Code Pro Regular` in 11pt.
 
 Most of it was created by [Mervyn McCreight](https://github.com/mervyn-mccreight), thanks dude.
 
-For Autostart, create a file `~/.config/autostart/conky.desktop`:
+For Autostart, create a file *~/.config/autostart/conky.desktop*
 
 ```
 [Desktop Entry]
@@ -253,7 +251,7 @@ Terminal=false
 
 I like to use [yay](https://github.com/Jguer/yay).
 
-One adjustment: In `/etc/makepkg.conf` I've set `PKGEXT='.pkg.tar'` to improve the build speed.
+One adjustment: In */etc/makepkg.conf* I've set `PKGEXT='.pkg.tar'` to improve the build speed.
 Otherwise it tends to spend a lot of time in the "Compressing..." step.
 
 ## Favorite editor
@@ -275,11 +273,29 @@ So when you boot your system and start the first Chromium instance,
 the last used profile is loaded automatically.
 I like to use my personal profile on every fresh Chromium instead.
 
-`~/.config/chromium-flags.conf`
+*~/.config/chromium-flags.conf*
 
 ```
 --password-store=basic
 --profile-directory=Default
+```
+
+# Measures
+
+## Power consumption
+
+When the laptop was idling, I had a power consumption of ~13 W.  
+(According to */sys/class/power_supply/BAT0/current_now*)
+
+With the Nvidia GPU disabled, it was reduced to 6.5 W.  
+(In both cases connected to WiFi, lowest brightness).
+
+## Boot time
+
+```
+$ systemd-analyze
+Startup finished in 7.796s (firmware) + 3.584s (loader) + 1.312s (kernel) + 2.324s (userspace) = 15.017s
+graphical.target reached after 2.140s in userspace
 ```
 
 # Links
