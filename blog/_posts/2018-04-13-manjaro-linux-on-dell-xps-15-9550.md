@@ -280,6 +280,18 @@ I like to use my personal profile on every fresh Chromium instead.
 --profile-directory=Default
 ```
 
+Also, I like to use [ungoogled-chromium](https://github.com/Eloston/ungoogled-chromium), which has some google-specific code disabled
+and some sensible privacy-settings enabled by default.
+For Manjaro you can find the binary in [AUR](https://aur.archlinux.org/packages/ungoogled-chromium-bin/).
+
+For blocking ads I use [uBlock Origin](https://github.com/gorhill/uBlock).
+
+This not only gives you a faster browsing experience, because ads are not loaded, but additionally has the feature to block
+the pointless "This website uses cookies" EU messages.
+I use the "Ultimate" (lol, marketing) list from [fanboy.co.nz](https://fanboy.co.nz/filters.html).
+
+I prefer to pay or donate to services I like.
+
 # Measures
 
 ## Power consumption
