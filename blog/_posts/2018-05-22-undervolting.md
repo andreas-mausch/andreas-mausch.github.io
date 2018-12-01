@@ -29,3 +29,10 @@ This is quite significant.
 (The tool shown here is [glances](https://nicolargo.github.io/glances/), a great alternative to top)
 
 For throttling, for the newer XPS this [YouTube video](https://www.youtube.com/watch?v=nobnPDtMs-E) shows you can get ~12% better performance with undervolting, because the CPU doesn't need to reduce it's frequency due to hitting the temperature limit.
+
+Update: I've got myself a XPS 13 9370, and in order to do the same procedure there I've googled this topic again.
+The ArchWiki refers to [lenovo-throttling-fix](https://github.com/erpalma/lenovo-throttling-fix), which works also on different kind of laptops.
+It's super easy to set up, and also provides an easy way to undervolt. It also cares about settings the registers again after reboot and sleep.
+
+All I did was installation (yay and systemctl) and changing the UNDERVOLT section in `/etc/lenovo_fix.conf` according to the readme.
+I've double-checked via `sudo undervolt --read` and boom it worked out-of-the-box.
