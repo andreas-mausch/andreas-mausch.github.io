@@ -259,9 +259,34 @@ I like to use [yay](https://github.com/Jguer/yay).
 One adjustment: In */etc/makepkg.conf* I've set `PKGEXT='.pkg.tar'` to improve the build speed.
 Otherwise it tends to spend a lot of time in the "Compressing..." step.
 
-## Favorite editor
+## Favorite apps
+
+### Editor
 
 I like to use [Microsoft Code](https://aur.archlinux.org/packages/code-git/), in the open-source variant.
+
+### Video player
+
+[MPV!](https://mpv.io/)
+
+[Shortcut list](https://www.cheatography.com/someone/cheat-sheets/mpv-media-player/)
+
+My favorite shortcuts:
+
+- q: Quit
+- m: Mute
+- #: Cycle audio streams
+- s: Screenshot
+- f: Fullscreen
+- [ / ]: Increase/decrease speed
+- , / .: Next/Previous frame
+- Ctrl+H: Toggle hardware acceleration
+
+Hardware acceleration: The mpv team thinks it's "usually a bad idea unless absolutely needed", but if you ask me, it saves CPU power and battery, so it is important to me.
+
+Add `hwdec=vaapi` to `~/.config/mpv/mpv.conf`. [(source)](https://wiki.archlinux.org/index.php/mpv#Hardware_decoding)
+
+The only thing it's missing is a nice overlay to see all possible shortcuts. See this [issue](https://github.com/mpv-player/mpv/issues/2590) (they think it's low prio, well..).
 
 ## Chromium
 
