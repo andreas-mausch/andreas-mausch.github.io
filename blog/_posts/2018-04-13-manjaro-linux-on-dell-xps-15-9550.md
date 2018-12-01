@@ -224,6 +224,11 @@ Don't really know what it is, but Visual Studio Code and IntelliJ needs this val
 *       hard    nofile  380180
 ```
 
+## XFCE
+
+Disable grouping in the panel:
+Right-click empty space in the panel, Panel > Panel Preferences > Items > select "Window Buttons" > Edit the currently selected item (a button on the right side) > Behaviour > Window grouping: Never [(source)](https://forum.xfce.org/viewtopic.php?id=7529)
+
 ## Terminal font
 
 I use `Source Code Pro Regular` in 11pt.
