@@ -284,11 +284,11 @@ My favorite shortcuts:
 
 Hardware acceleration: The mpv team thinks it's "usually a bad idea unless absolutely needed", but if you ask me, it saves CPU power and battery, so it is important to me.
 
-Add `hwdec=vaapi` to `~/.config/mpv/mpv.conf`. [(source)](https://wiki.archlinux.org/index.php/mpv#Hardware_decoding)
+Add `hwdec=vaapi` to *~/.config/mpv/mpv.conf*. [(source)](https://wiki.archlinux.org/index.php/mpv#Hardware_decoding)
 
 The only thing it's missing is a nice overlay to see all possible shortcuts. See this [issue](https://github.com/mpv-player/mpv/issues/2590) (they think it's low prio, well..).
 
-## Chromium
+### Chromium
 
 Chromium keeps asking me for the password of the default keyring.
 I've never set it up and don't really know about it.
@@ -321,6 +321,19 @@ the pointless "This website uses cookies" EU messages.
 I use the "Ultimate" (lol, marketing) list from [fanboy.co.nz](https://fanboy.co.nz/filters.html).
 
 I prefer to pay or donate to services I like.
+
+### Git
+
+Quick tip to make `git gui` and `gitk` work:
+
+I got the error message `/usr/lib/git-core/git-gui: Zeile 10: exec: wish: Nicht gefunden.`
+This is caused by the missing program wish, which is part of the package tk.
+
+Then it starts, but complains about a missing spelling check file. This can be fixed by installing aspell-de (change accordingly for your language).
+
+```
+sudo pacman -S tk aspell-de
+```
 
 # Measures
 
