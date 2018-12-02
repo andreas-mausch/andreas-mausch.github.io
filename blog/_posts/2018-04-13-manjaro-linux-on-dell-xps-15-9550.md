@@ -229,9 +229,11 @@ Don't really know what it is, but Visual Studio Code and IntelliJ needs this val
 Disable grouping in the panel:
 Right-click empty space in the panel, Panel > Panel Preferences > Items > select "Window Buttons" > Edit the currently selected item (a button on the right side) > Behaviour > Window grouping: Never [(source)](https://forum.xfce.org/viewtopic.php?id=7529)
 
-## Terminal font
+## Terminal
 
-I use `Source Code Pro Regular` in 11pt.
+I use the font `Source Code Pro Regular` in 11pt.
+
+I use the [orangish color scheme]({{ site.baseurl }}/files/2018-04-13-manjaro-linux-on-dell-xps-15-9550/orangish.theme). Put it in *~/.local/share/xfce4/terminal/colorschemes/*.
 
 ## Conky
 
