@@ -344,6 +344,10 @@ sudo pacman -S tk aspell-de
 - s-tui
 - glances
 
+### Graphics
+
+- gThumb
+
 # Measures
 
 ## Power consumption
