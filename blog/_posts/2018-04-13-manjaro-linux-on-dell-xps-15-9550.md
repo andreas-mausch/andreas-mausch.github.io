@@ -341,7 +341,8 @@ sudo pacman -S tk aspell-de
 
 ### Monitoring
 
-s-tui
+- s-tui
+- glances
 
 # Measures
 
