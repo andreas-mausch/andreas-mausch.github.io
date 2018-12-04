@@ -339,6 +339,10 @@ Then it starts, but complains about a missing spelling check file. This can be f
 sudo pacman -S tk aspell-de
 ```
 
+### Monitoring
+
+s-tui
+
 # Measures
 
 ## Power consumption
