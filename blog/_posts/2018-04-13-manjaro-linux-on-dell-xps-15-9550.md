@@ -62,6 +62,8 @@ Then, edit or create an entry in */etc/default/grub*:
 GRUB_FONT=/boot/grub/fonts/DroidSansMono32.pf2
 ```
 
+Then run `grub-mkconfig -o /boot/grub/grub.cfg`.
+
 #### Spectre, Meltdown..
 
 Maybe controversial, but I like to disable all hacky tries to fix something in software
