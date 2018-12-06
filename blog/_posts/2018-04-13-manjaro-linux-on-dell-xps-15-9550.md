@@ -62,7 +62,24 @@ Then, edit or create an entry in */etc/default/grub*:
 GRUB_FONT=/boot/grub/fonts/DroidSansMono32.pf2
 ```
 
-Then run `grub-mkconfig -o /boot/grub/grub.cfg`.
+Theme: I use [ooxxvv/basil-tw](https://github.com/ooxxvv/basil-tw)
+
+To install it, extract all files into */usr/share/grub/themes/basil-tw* and change the line:
+
+```
+GRUB_THEME="/usr/share/grub/themes/basil-tw/theme.txt"
+```
+
+If all configuration is done, run `grub-mkconfig -o /boot/grub/grub.cfg`.
+
+### LightDM Login Screen
+
+I've changed the following two lines in */etc/lightdm/lightdm-gtk-greeter.conf*:
+
+```
+background = /usr/share/grub/themes/basil-tw/background.png
+theme-name = Adwaita-dark
+```
 
 #### Spectre, Meltdown..
 
