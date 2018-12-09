@@ -356,6 +356,14 @@ Then it starts, but complains about a missing spelling check file. This can be f
 sudo pacman -S tk aspell-de
 ```
 
+Favorite logging:
+
+```
+git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
+```
+
+[source](https://stackoverflow.com/questions/1441010/the-shortest-possible-output-from-git-log-containing-author-and-date)
+
 ### Monitoring
 
 - s-tui
