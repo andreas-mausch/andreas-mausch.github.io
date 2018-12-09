@@ -364,14 +364,16 @@ git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --d
 
 [source](https://stackoverflow.com/questions/1441010/the-shortest-possible-output-from-git-log-containing-author-and-date)
 
-### Monitoring
+### Other tools
 
 - s-tui
 - glances
-
-### Graphics
-
 - gThumb
+- WeeChat
+- httpie
+- youtube-dl
+- Wireshark
+- Audacity
 
 # Measures
 
