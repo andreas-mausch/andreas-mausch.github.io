@@ -374,6 +374,7 @@ git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --d
 - youtube-dl
 - Wireshark
 - Audacity
+- inxi -F
 
 # Measures
 
