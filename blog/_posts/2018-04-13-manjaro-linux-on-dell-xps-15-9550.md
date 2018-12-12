@@ -364,6 +364,14 @@ git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --d
 
 [source](https://stackoverflow.com/questions/1441010/the-shortest-possible-output-from-git-log-containing-author-and-date)
 
+### Thunderbird
+
+- View > Message Body as > Simple HTML
+- View > Uncheck *Display Attachments Inline*
+- Preferences > Account Settings > Composition & Addressing > Uncheck *Compose messages in HTML format*
+- Preferences > Preferences > Advanced > Offline... > Send unsent: *No* and Download messages: *Yes*
+- Preferences > Preferences > Privacy > Uncheck *Accept cookies from sites* and *Allow remote content in messages*
+
 ### Other tools
 
 - s-tui
