@@ -82,4 +82,11 @@ permalink: /likes/
     </div>
     {% endfor %}
 
+    <h4>Others</h4>
+    {% for like in site.data.likes.other %}
+    <div>
+        {% include like.html title=like.title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
 </div>

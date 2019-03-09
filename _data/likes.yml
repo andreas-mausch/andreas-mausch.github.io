@@ -10,9 +10,15 @@ music:
       - movie: Interstellar
         title: Coward
         youtube: https://www.youtube.com/watch?v=SoP44KNu0IQ
+      - movie: "Léon: The Professional"
+        title: She is Dead
+        youtube: https://www.youtube.com/watch?v=S7uz_fzHMFo
       - movie: Les Choristes
         title: Les partitions
         youtube: https://www.youtube.com/watch?v=8x3dEQlfMq0
+      - movie: Requiem for a Dream
+        title: Main Theme
+        youtube: https://www.youtube.com/watch?v=2LhaXf3iTHo
     games:
       - game: Assassin's Creed 2
         title: Ezio's Family
@@ -26,6 +32,9 @@ music:
       - game: Crysis 2
         title: Main Theme
         youtube: https://www.youtube.com/watch?v=Iy4iQvJo24U
+      - game: "Detroit: Become Human"
+        title: Kara's Theme
+        youtube: https://www.youtube.com/watch?v=2YNOJ3l8iEY
       - game: GTA 4
         title: Intro
         youtube: https://www.youtube.com/watch?v=jqE8M2ZnFL8
@@ -52,15 +61,24 @@ music:
       - artist: Animus
         title: Schatten der Gesellschaft (feat. Manuellsen)
         youtube: https://www.youtube.com/watch?v=u7grCa0E9XY
+      - artist: Azad
+        title: Rap (feat. MoTrip)
+        youtube: https://www.youtube.com/watch?v=WG-KtnIMJY8
+      - artist: B-Tight
+        title: Ich bin's
+        youtube: https://www.youtube.com/watch?v=LePPt654LEE
       - artist: Bushido
         title: Bei Nacht
         youtube: https://www.youtube.com/watch?v=KxsYoIRsylU
-      - artist: Bushido
-        title: Berlin/Paris
-        youtube: https://www.youtube.com/watch?v=J02DxTCCUOE
+      - artist: Celo & Abdi
+        title: Auf der Jagd
+        youtube: https://www.youtube.com/watch?v=-w2J4qLAF3U
       - artist: Cr7z
         title: D-Generation
         youtube: https://www.youtube.com/watch?v=T5Aun8nhdDg
+      - artist: DCVDNS
+        title: Struggle (feat. Tamas)
+        youtube: https://www.youtube.com/watch?v=X6yaQHabAGs
       - artist: Degenhardt
         title: Weissrusse
         youtube: https://www.youtube.com/watch?v=T39N3fdeYPE
@@ -70,15 +88,27 @@ music:
       - artist: Dynamite Deluxe
         title: "?!?"
         youtube: https://www.youtube.com/watch?v=Nm0Gssf_Lno
+      - artist: Dynamite Deluxe
+        title: Weg vom Set
+        youtube: https://www.youtube.com/watch?v=xryIsWGREy4
       - artist: Elif
         title: Auf halber Strecke
         youtube: https://www.youtube.com/watch?v=KBmrF84lJPA
       - artist: Frauenarzt
         title: 31er (feat. Taktlo$$, Nura SXTN)
         youtube: https://www.youtube.com/watch?v=Xxdcj_WBMEE
+      - artist: Genetikk
+        title: König der Lügner
+        youtube: https://www.youtube.com/watch?v=L7NQmssdvkA
+      - artist: Godsilla
+        title: Blockchef
+        youtube: https://www.youtube.com/watch?v=JI7sO81V3fM
       - artist: Gzuz
         title: Kein Problem (feat. Hanybal)
         youtube: https://www.youtube.com/watch?v=tKvpf7CtRok
+      - artist: Haftbefehl
+        title: Alles dreht sich
+        youtube: https://www.youtube.com/watch?v=eXrWBlloeh8
       - artist: Haftbefehl
         title: Azzlacks Sterben Jung
         youtube: https://www.youtube.com/watch?v=C0zLsFXD5OI
@@ -109,6 +139,15 @@ music:
       - artist: Karate Andi
         title: Wodka und Speed
         youtube: https://www.youtube.com/watch?v=RgXcsWfrlsQ
+      - artist: KC Rebell
+        title: 600 Benz (feat. Summer Cem)
+        youtube: https://www.youtube.com/watch?v=EPP10dRJBKY
+      - artist: K.I.Z.
+        title: Freiwild
+        youtube: https://www.youtube.com/watch?v=0luFFKk2CFE
+      - artist: K.I.Z.
+        title: Urlaub fürs Gehirn
+        youtube: https://www.youtube.com/watch?v=6pe3_gCkHHk
       - artist: Kollegah
         title: Hoodtales III
         youtube: https://www.youtube.com/watch?v=HV_RAolbQXA
@@ -121,12 +160,30 @@ music:
       - artist: Kontra K
         title: Stadtrundfahrt
         youtube: https://www.youtube.com/watch?v=18DEUgBAYc4
+      - artist: Kool Savas
+        title: Blasen
+        youtube: https://www.youtube.com/watch?v=zaPpZGdMZyo
+      - artist: Kool Savas
+        title: Der beste Tag meines Lebens
+        youtube: https://www.youtube.com/watch?v=4qhwJtSCAT8
+      - artist: Marteria
+        title: Amys Weinhaus
+        youtube: https://www.youtube.com/watch?v=iakaCWWRjxE
       - artist: MC Bomber
         title: Gebüsch
         youtube: https://www.youtube.com/watch?v=YArWZk5Xo7A
       - artist: MC Bomber
         title: Taubensohn (feat. Shacke One)
         youtube: https://www.youtube.com/watch?v=TxuOfyscg6w
+      - artist: MoTrip
+        title: Was mein Auto angeht
+        youtube: https://www.youtube.com/watch?v=mmq4jgke4TI
+      - artist: Music Instructor
+        title: Super Sonic
+        youtube: https://www.youtube.com/watch?v=h3ySBAcIoxo
+      - artist: Prezident
+        title: Du hast mich schon verstanden
+        youtube: https://www.youtube.com/watch?v=syox4ox5rRs
       - artist: Prinz Porno
         title: 20.000 Meilen Untergrund
         youtube: https://www.youtube.com/watch?v=_5H6Ordr3A0
@@ -136,15 +193,24 @@ music:
       - artist: Private Paul
         title: Statusbericht 2016
         youtube: https://www.youtube.com/watch?v=ElrrRZBZTG0
+      - artist: Samy Deluxe
+        title: Is nich wahr
+        youtube: https://www.youtube.com/watch?v=z4laywgyyAI
       - artist: Shacke One
         title: Boss der Panke
         youtube: https://www.youtube.com/watch?v=zhQbjM-iX-M
+      - artist: Sido
+        title: Halt Dein Maul
+        youtube: https://www.youtube.com/watch?v=L5c9XSyWeUY
       - artist: Sido
         title: Immer immer mehr (feat. Bushido, Shindy)
         youtube: https://www.youtube.com/watch?v=entCAguNzS4
       - artist: Sido
         title: Relax
         youtube: https://www.youtube.com/watch?v=o9zm7jc28zM
+      - artist: Sido
+        title: Steh wieder auf (feat. Harris)
+        youtube: https://www.youtube.com/watch?v=J63bFasPUqk
       - artist: Sopor Aeternus
         title: Sieh mein Geliebter, Hier hab ich Gift
         youtube: https://www.youtube.com/watch?v=grQwjSyHgJ8
@@ -154,22 +220,13 @@ music:
       - artist: Westberlin Maskulin
         title: Bass
         youtube: https://www.youtube.com/watch?v=HeoLPi1VXOI
-      - artist: Artist
-        title: Title
-        youtube: Link
-      - artist: Artist
-        title: Title
-        youtube: Link
-      - artist: Artist
-        title: Title
-        youtube: Link
-      - artist: Artist
-        title: Title
-        youtube: Link
     international:
       - artist: Angel Haze
         title: Castle on a Cloud
         youtube: https://www.youtube.com/watch?v=7PJ7j5y5z44
+      - artist: Angel Haze
+        title: Deep Sea Diver
+        youtube: https://www.youtube.com/watch?v=zriJACIjx-M
       - artist: Angel Haze
         title: Shit I don't Like
         youtube: https://www.youtube.com/watch?v=OugJdsQOs9Q
@@ -182,9 +239,15 @@ music:
       - artist: Ängie
         title: Smoke Weed Eat Pussy
         youtube: https://www.youtube.com/watch?v=di3vhELi6P0
+      - artist: A$AP Rocky
+        title: Praise the Lord (feat. Skepta)
+        youtube: https://www.youtube.com/watch?v=Kbj2Zss-5GY
       - artist: A$AP Twelvyy
         title: Glock Rivers
         youtube: https://www.youtube.com/watch?v=XY7WFUq4EKU
+      - artist: Aphex Twin
+        title: Stone In Focus
+        youtube: https://www.youtube.com/watch?v=goDd02TTxBA
       - artist: Azealia Banks
         title: Chi Chi
         youtube: https://www.youtube.com/watch?v=0QTQ2YtciB4
@@ -192,14 +255,29 @@ music:
         title: Heavy Metal and Reflective
         youtube: https://www.youtube.com/watch?v=nQOD8M6Okoc
       - artist: Baby Soulja
+        title: Leave me Alone
+        youtube: https://www.youtube.com/watch?v=rt0T-iqsCFQ
+      - artist: Baby Soulja
         title: Lost Myself
         youtube: https://www.youtube.com/watch?v=6gN4xf8xfjk
       - artist: Baby Soulja
         title: Turnt Up (feat. Miss Barbie)
         youtube: https://www.youtube.com/watch?v=R6CY-RLka0I
+      - artist: Bishop Briggs
+        title: Hi-Lo (Hollow)
+        youtube: https://www.youtube.com/watch?v=zHLD-aFahh8
+      - artist: Buraka Som Sistema
+        title: IC19
+        youtube: https://www.youtube.com/watch?v=voOSqm7KFz4
+      - artist: Chinese Man
+        title: Escape
+        youtube: https://www.youtube.com/watch?v=_YdmMVrAdCw
       - artist: Clear Soul Forces
         title: Get No Better
         youtube: https://www.youtube.com/watch?v=BWKLuwR_bFw
+      - artist: Cunninlynguists
+        title: Lynguistics
+        youtube: https://www.youtube.com/watch?v=GK9EmWZNPpo
       - artist: Cyne
         title: Running Water
         youtube: https://www.youtube.com/watch?v=IZROFPUlfqY
@@ -215,6 +293,9 @@ music:
       - artist: Dizzee Rascal
         title: Hold Ya Mouf
         youtube: https://www.youtube.com/watch?v=pMqj3_JCPz4
+      - artist: Dizzee Rascal
+        title: Sirens
+        youtube: https://www.youtube.com/watch?v=IPpxxrl0xhM
       - artist: Dr. Dre
         title: Fist Full of Dollars
         youtube: https://www.youtube.com/watch?v=UFdn-3lmX5A
@@ -236,9 +317,18 @@ music:
       - artist: Eminem
         title: Till Hell Freezes Over
         youtube: https://www.youtube.com/watch?v=Nb3hjBEgprA
-      - artist: Gangstarr
-        title: Right were you stand
-        youtube: https://www.youtube.com/watch?v=PhV-gTwXNLA&t=0s
+      - artist: Fatboy Slim
+        title: Right here, right now
+        youtube: https://www.youtube.com/watch?v=l7ZlSHGFfdc
+      - artist: Forest Swords
+        title: Crow
+        youtube: https://www.youtube.com/watch?v=lan-Pjv99Xk
+      - artist: Gang Starr
+        title: All 4 tha Cash
+        youtube: https://www.youtube.com/watch?v=6OVR9f8xWd0
+      - artist: Ghostpoet
+        title: Survive It
+        youtube: https://www.youtube.com/watch?v=usksH8B07do
       - artist: Gold Soul Theory
         title: The Underachievers
         youtube: https://www.youtube.com/watch?v=HsmzpigZimA
@@ -251,12 +341,18 @@ music:
       - artist: Ivan Torrent
         title: Icarus (feat. Julie Elven)
         youtube: https://www.youtube.com/watch?v=AbZHwt-wCuM
+      - artist: J. Cole
+        title: False Prophets
+        youtube: https://www.youtube.com/watch?v=wvFDXV0VBg4
       - artist: Jay-Z
         title: Brooklyn We Go Hard
         youtube: https://www.youtube.com/watch?v=U2UneYEaY-s
       - artist: Jay-Z
         title: I'm Ill (feat. Fabolous & Red Cafe)
         youtube: https://www.youtube.com/watch?v=kv5wrD_LAEQ
+      - artist: Jay-Z
+        title: The Story of O.J.
+        youtube: https://www.youtube.com/watch?v=RM7lw0Ovzq0
       - artist: Jay Rock
         title: Vice City
         youtube: https://www.youtube.com/watch?v=Jug2HZ3dkoc
@@ -273,6 +369,9 @@ music:
         title: Cartoons & Cereal (feat. Gunplay)
         youtube: https://www.youtube.com/watch?v=qbbQb9bEcDQ
       - artist: Kendrick Lamar
+        title: I'm Dying of Thirst
+        youtube: https://www.youtube.com/watch?v=tM6seEs7wgs
+      - artist: Kendrick Lamar
         title: Look out for Detox
         youtube: https://www.youtube.com/watch?v=B5eT6TaEtPI
       - artist: Kendrick Lamar
@@ -285,8 +384,26 @@ music:
         title: The Art Of Peer Pressure
         youtube: https://www.youtube.com/watch?v=nmV_HEIwXGs
       - artist: Kendrick Lamar
+        title: The Blacker the Berry
+        youtube: https://www.youtube.com/watch?v=VdPtVZDspIY
+      - artist: Kendrick Lamar
         title: The Relevant
         youtube: https://www.youtube.com/watch?v=BuJ4AfA2o2M
+      - artist: Kiesza
+        title: Hideaway
+        youtube: https://www.youtube.com/watch?v=Vnoz5uBEWOA
+      - artist: Lil Wayne
+        title: Carter II
+        youtube: https://www.youtube.com/watch?v=Ep__S6Vv1Eg
+      - artist: Lil Wayne
+        title: Pistol on my Side
+        youtube: https://www.youtube.com/watch?v=5A7oA3bVcwI
+      - artist: Lil Wayne
+        title: Playing with Fire
+        youtube: https://www.youtube.com/watch?v=ScB2J0gt9LE
+      - artist: Lil Wayne
+        title: Uproar
+        youtube: https://www.youtube.com/watch?v=GQ2juiyXk-s
       - artist: Logic
         title: Young Sinatra III
         youtube: https://www.youtube.com/watch?v=T3JgUT-fa3A
@@ -299,15 +416,24 @@ music:
       - artist: Max Normal
         title: Total Fuck Up
         youtube: https://www.youtube.com/watch?v=pecHKtUXPy8
+      - artist: Mire.
+        title: Bury
+        youtube: https://www.youtube.com/watch?v=JBnLhPIcqGM
       - artist: M.I.A.
         title: Borders
         youtube: https://www.youtube.com/watch?v=r-Nw7HbaeWY
+      - artist: Mogwai
+        title: Hungry Face
+        youtube: https://www.youtube.com/watch?v=BYSdLYmfQG4
       - artist: Nicky Minaj
         title: Dirty Money
         youtube: https://www.youtube.com/watch?v=w56UQK7QpBw
       - artist: Night Lovell
         title: Deira City Centre
         youtube: https://www.youtube.com/watch?v=8IpNy1ULrsA
+      - artist: Nine
+        title: Make or Take (feat. Smooth Da Hustler)
+        youtube: https://www.youtube.com/watch?v=SYVcaQ1Bzu8
       - artist: N'to
         title: Trauma
         youtube: https://www.youtube.com/watch?v=lPVBrRd9wCo
@@ -318,14 +444,35 @@ music:
         title: Credo Revolution
         youtube: https://www.youtube.com/watch?v=uSjaEHoi1_c
       - artist: Sohn
+        title: Artifice
+        youtube: https://www.youtube.com/watch?v=9btsq496hkQ
+      - artist: Sohn
         title: The Wheel
         youtube: https://www.youtube.com/watch?v=AslPYSm7jfg
+      - artist: Stromae
+        title: Alors On Danse
+        youtube: https://www.youtube.com/watch?v=VHoT4N43jK8
+      - artist: Stromae
+        title: Lesson 1 "Up Saw Liz"
+        youtube: https://www.youtube.com/watch?v=QcwqgDsiyvI
+      - artist: Stromae
+        title: Minimalistyle
+        youtube: https://www.youtube.com/watch?v=syqZB-Eid7c
       - artist: Stormzy
         title: Shut Up
         youtube: https://www.youtube.com/watch?v=RqQGUJK7Na4
+      - artist: The Streets
+        title: Blinded by the Lights
+        youtube: https://www.youtube.com/watch?v=QJD8mpcGykE
+      - artist: The Streets
+        title: Geezers Need Excitement
+        youtube: https://www.youtube.com/watch?v=8MpiyqpAu-Q
       - artist: The XX
         title: Intro
         youtube: https://www.youtube.com/watch?v=WOIFQCOeso4
+      - artist: T.I.
+        title: Go Get It
+        youtube: https://www.youtube.com/watch?v=xvM3YwmDfwE
       - artist: Tyga
         title: Nann Nigga (feat. Honey Cocaine)
         youtube: https://www.youtube.com/watch?v=Mlvl162RnsE
@@ -335,25 +482,28 @@ music:
       - artist: Wilz
         title: Get Outta my Face
         youtube: https://www.youtube.com/watch?v=1RKvqCITai4
-      - artist: Artist
-        title: Title
-        youtube: Link
-      - artist: Artist
-        title: Title
-        youtube: Link
-      - artist: Artist
-        title: Title
-        youtube: Link
-      - artist: Artist
-        title: Title
-        youtube: Link
     instrumentals:
+      - artist: Abaz
+        title: Dann bist du Azzlack
+        youtube: https://www.youtube.com/watch?v=tFk7R-CkMRs
+      - artist: Bushido
+        title: Berlin/Paris
+        youtube: https://www.youtube.com/watch?v=b90ud8wkoe8
+      - artist: Bushido
+        title: Nie ein Rapper
+        youtube: https://www.youtube.com/watch?v=rIYWCsFCJE0
+      - artist: Bushido
+        title: Yo peace man
+        youtube: https://www.youtube.com/watch?v=0pDibvko2uk
+      - artist: Bushido
+        title: Vom Bordstein bis zur Skyline
+        youtube: https://www.youtube.com/watch?v=hYXmxphebNM
+      - artist: Gang Starr
+        title: Right were you stand
+        youtube: https://www.youtube.com/watch?v=PhV-gTwXNLA
       - artist: MC Solaar
         title: Solaar Pleure
         youtube: https://www.youtube.com/watch?v=n4eRJNYQvFA
-      - artist: Artist
-        title: Title
-        youtube: Link
 demoscene:
   - artist: Andromeda Software Development
     title: Rupture
@@ -370,73 +520,108 @@ demoscene:
   - artist: Elude
     title: We Come in Peace
     youtube: https://www.youtube.com/watch?v=k_2P31K9mRs
+  - artist: Eos
+    title: Oscar's Chair
+    youtube: https://www.youtube.com/watch?v=o0qh4lX6slM
   - artist: Fairlight
     title: Agenda Circling Forth
     youtube: https://www.youtube.com/watch?v=GJruj0YkDsg
   - artist: Fairlight
     title: Ceasefire
     youtube: https://www.youtube.com/watch?v=Grqb1aIa_4s
+  - artist: Fairlight & CNCD
+    title: Number One / Another One
+    youtube: https://www.youtube.com/watch?v=LyXwmt0EZig
+  - artist: farbrausch
+    title: "fr-08: .the .product"
+    youtube: https://www.youtube.com/watch?v=Y3n3c_8Nn2Y
   - artist: Haujobb
     title: YouShould
     youtube: https://www.youtube.com/watch?v=fc9SEvCKck8
+  - artist: Quite
+    title: ino
+    youtube: https://www.youtube.com/watch?v=2pBqwsqPfUo
+  - artist: Quite & orange
+    title: cdak
+    youtube: https://www.youtube.com/watch?v=RCh3Q08HMfs
+  - artist: Razer1911
+    title: The Scene is Dead
+    youtube: https://www.youtube.com/watch?v=IFXIGHOElrE
   - artist: Supervenience
     title: Z Brothers
     youtube: https://www.youtube.com/watch?v=h8jNTwx04p0
   - artist: The Timeless
     title: Mercury
     youtube: https://www.youtube.com/watch?v=ie4u2i_5OdE
-  - artist: farbrausch
-    title: "fr-08: .the .product"
-    youtube: https://www.youtube.com/watch?v=Y3n3c_8Nn2Y
 games:
   - title: Alley Cat
     youtube: https://www.youtube.com/watch?v=uZDG4dlU5uY
+  - title: "Ambient Worlds: Alan Wake"
+    youtube: https://www.youtube.com/watch?v=GuKYfRr1qwU
   - title: Atari 2600 Emulator in Minecraft
     youtube: https://www.youtube.com/watch?v=5nViIUfDMJg
+  - title: "Detroit: Become Human - Behind the Scenes"
+    youtube: https://www.youtube.com/watch?v=9T1rxI1AlmM
+  - title: "Detroit: Become Human - Kara"
+    youtube: https://www.youtube.com/watch?v=j-pF56-ZYkY
   - title: "Hellblade: Senua Sacrifice - Behind the Scenes"
     youtube: https://www.youtube.com/watch?v=uuTy2iHSODs
-  - title: "Horizon Zero Dawn: Beauty"
-    youtube: https://www.youtube.com/watch?v=czMIP79Xr9o
   - title: "Horizon Zero Dawn: Animation Reel"
     youtube: https://www.youtube.com/watch?v=HiRw_bI-8fQ
+  - title: "Horizon Zero Dawn: Beauty"
+    youtube: https://www.youtube.com/watch?v=czMIP79Xr9o
+  - title: "Horizon Zero Dawn: Making Of"
+    youtube: https://www.youtube.com/watch?v=h9tLcD1r-6w
   - title: "Max Payne: First Nightmare"
     youtube: https://www.youtube.com/watch?v=G_Z2E6SYQnk
   - title: MS-DOS Games
     youtube: https://www.youtube.com/watch?v=VdObXjDdiO0
+  - title: "Other Places: Alan Wake"
+    youtube: https://www.youtube.com/watch?v=BI8PCpbu4x8
+  - title: "Other Places: Alien: Isolation"
+    youtube: https://www.youtube.com/watch?v=ZlFEWbrDjG4
+  - title: "Other Places: Dishonored"
+    youtube: https://www.youtube.com/watch?v=M_tTlv44sV0
+  - title: "Other Places: Mirror's Edge"
+    youtube: https://www.youtube.com/watch?v=RfUwQsCzkgs&
+  - title: "Quake III: Amazing Rocket Jumps"
+    youtube: https://www.youtube.com/watch?v=cMEQp5BZHO8
+  - title: "Red Dead Redemption 2: Timelapse"
+    youtube: https://www.youtube.com/watch?v=aQy8XfkfkUA
+  - title: "Serious Sam: Making Of"
+    youtube: https://www.youtube.com/watch?v=kXh1JJ_Jtew
+  - title: "StarCraft II: DeepMind"
+    youtube: https://www.youtube.com/watch?v=cUTMhmVh1qs
 ads:
+  - title: Joga Bonito - Brazil
+    youtube: https://www.youtube.com/watch?v=fRHtq2DTdhk
   - title: Nike - Take it to the next Level
-    youtube: https://www.youtube.com/watch?v=lZA-57h64kE&t=0s
+    youtube: https://www.youtube.com/watch?v=lZA-57h64kE
   - title: Philips - Robot skin
     youtube: https://www.youtube.com/watch?v=b0SVIA5SaLg
 documentations:
   - title: Bobby Fischer Against the World
     youtube: https://www.youtube.com/watch?v=V14gXuzRdp4
-  - title: Mark Ferrari - 8 Bit Graphics
-    youtube: https://www.youtube.com/watch?v=aMcJ1Jvtef0
-  - title: American Fotoplayer
-    youtube: https://www.youtube.com/watch?v=wAJ66ZSQ4b4
-  - title: Climbing Shanghai Tower 650m
-    youtube: https://www.youtube.com/watch?v=gLDYtH1RH-U
-  - title: Climbing Westham Stadium
-    youtube: https://www.youtube.com/watch?v=5Q5lvhwpHDw
-  - title: "Eminem: Rhymes with Orange"
-    youtube: https://www.youtube.com/watch?v=lPcR5RVXHMg
-  - title: How to Uninstall McAfee Antivirus
-    youtube: https://www.youtube.com/watch?v=bKgf5PaBzyg
+  - title: C64 Doku deutsch Commodore in deutschen Zimmern
+    youtube: https://www.youtube.com/watch?v=uqYxf9mkAII
+  - title: Kasparov vs. Karpov 1990
+    youtube: https://www.youtube.com/watch?v=Rxy1wYFN29M
   - title: Kendrick Lamar at School Class
-    youtube: https://www.youtube.com/watch?v=O4bep_G-88g&t=0s
+    youtube: https://www.youtube.com/watch?v=O4bep_G-88g
   - title: "Liv Boeree: The Science behind Poker"
     youtube: https://www.youtube.com/watch?v=iw2PcomuYGU
+  - title: Mark Ferrari - 8 Bit Graphics
+    youtube: https://www.youtube.com/watch?v=aMcJ1Jvtef0
   - title: "Moleman 2: Demoscene"
     youtube: https://www.youtube.com/watch?v=iRkZcTg1JWU
   - title: "Stu Ungar: One of a Kind"
     youtube: https://www.youtube.com/watch?v=0pt2AOIz1wk
   - title: The Legend of Isildur1
     youtube: https://www.youtube.com/watch?v=uFq9sJMmbEg
-  - title: "The Matrix: Previz Fights"
-    youtube: https://www.youtube.com/watch?v=0jreg4e-lXY
   - title: "Tupac Shakur: Interview 1988"
     youtube: https://www.youtube.com/watch?v=v_XT9-C5Qu8
+  - title: The last Chess Shop in New York City
+    youtube: https://www.youtube.com/watch?v=eh8U6SLvNgs
   - title: Unmögliches Interview mit Taktlo$$
     youtube: https://www.youtube.com/watch?v=hvxlcC_nGSM
 security:
@@ -444,6 +629,8 @@ security:
     youtube: https://www.youtube.com/watch?v=TDk2RId8LFo
   - title: Eternalblue
     youtube: https://www.youtube.com/watch?v=vmWeJJ0TLi0
+  - title: First Stack Buffer Overflow to modify Variable - bin 0x0C
+    youtube: https://www.youtube.com/watch?v=T03idxny9jE&
   - title: GPS Spoofing
     youtube: https://www.youtube.com/watch?v=VAmbWwAPZZo
   - title: PS4 fail0verflow
@@ -454,3 +641,26 @@ security:
     youtube: https://www.youtube.com/watch?v=TOl4Q4lyJTI
   - title: X86 Memory Sinkhole
     youtube: https://www.youtube.com/watch?v=lR0nh-TdpVg
+other:
+  - title: 1UP Graffiti Olympics
+    youtube: https://www.youtube.com/watch?v=HyjZ-zHzXN0
+  - title: American Fotoplayer
+    youtube: https://www.youtube.com/watch?v=wAJ66ZSQ4b4
+  - title: Climbing Shanghai Tower 650m
+    youtube: https://www.youtube.com/watch?v=gLDYtH1RH-U
+  - title: Climbing Westham Stadium
+    youtube: https://www.youtube.com/watch?v=5Q5lvhwpHDw
+  - title: "Eminem: Rhymes with Orange"
+    youtube: https://www.youtube.com/watch?v=lPcR5RVXHMg
+  - title: Fourier Transform
+    youtube: https://www.youtube.com/watch?v=spUNpyF58BY
+  - title: How Earth Moves
+    youtube: https://www.youtube.com/watch?v=IJhgZBn-LHg
+  - title: How to Uninstall McAfee Antivirus
+    youtube: https://www.youtube.com/watch?v=bKgf5PaBzyg
+  - title: Magnus Carlsen enjoys Lichess Titled Arena 10 with friends
+    youtube: https://www.youtube.com/watch?v=TNdGX0gszi8
+  - title: Usain Bolt's Bio Mechanics explained by Michael Johnson
+    youtube: https://www.youtube.com/watch?v=Wdm7xwT-vEQ
+  - title: "The Matrix: Previz Fights"
+    youtube: https://www.youtube.com/watch?v=0jreg4e-lXY
