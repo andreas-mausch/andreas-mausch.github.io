@@ -1,0 +1,85 @@
+---
+layout: default
+title: andreas-mausch.de What I Like
+permalink: /likes/
+---
+
+<div class="home">
+
+    <h4>Soundtrack - Movies</h4>
+    {% for like in site.data.likes.music.soundtrack.movies %}
+    <div>
+        {% capture title %}{{ like.movie }}: {{ like.title }}{% endcapture %}
+        {% include like.html title=title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Soundtrack - Games</h4>
+    {% for like in site.data.likes.music.soundtrack.games %}
+    <div>
+        {% capture title %}{{ like.game }}: {{ like.title }}{% endcapture %}
+        {% include like.html title=title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Songs - German</h4>
+    {% for like in site.data.likes.music.songs.german %}
+    <div>
+        {% capture title %}{{ like.artist }}: {{ like.title }}{% endcapture %}
+        {% include like.html title=title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Songs - International</h4>
+    {% for like in site.data.likes.music.songs.international %}
+    <div>
+        {% capture title %}{{ like.artist }}: {{ like.title }}{% endcapture %}
+        {% include like.html title=title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Songs - Instrumentals</h4>
+    {% for like in site.data.likes.music.songs.instrumentals %}
+    <div>
+        {% capture title %}{{ like.artist }}: {{ like.title }}{% endcapture %}
+        {% include like.html title=title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Demoscene</h4>
+    {% for like in site.data.likes.demoscene %}
+    <div>
+        {% capture title %}{{ like.artist }}: {{ like.title }}{% endcapture %}
+        {% include like.html title=title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Games</h4>
+    {% for like in site.data.likes.games %}
+    <div>
+        {% include like.html title=like.title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Ads</h4>
+    {% for like in site.data.likes.ads %}
+    <div>
+        {% include like.html title=like.title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Documentations</h4>
+    {% for like in site.data.likes.documentations %}
+    <div>
+        {% include like.html title=like.title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+    <h4>Security</h4>
+    {% for like in site.data.likes.security %}
+    <div>
+        {% include like.html title=like.title youtube=like.youtube %}
+    </div>
+    {% endfor %}
+
+</div>
