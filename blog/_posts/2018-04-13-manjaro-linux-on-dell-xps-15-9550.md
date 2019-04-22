@@ -383,6 +383,7 @@ git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --d
 - Wireshark
 - Audacity
 - inxi -F
+- meld (for directory diff)
 
 # Measures
 
