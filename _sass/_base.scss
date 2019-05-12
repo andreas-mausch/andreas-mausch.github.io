@@ -247,6 +247,10 @@ h1 {
     font-weight: bold;
 }
 
+.contact-email, .contact-phone {
+    white-space: nowrap;
+}
+
 .project,
 .experience,
 .education {
