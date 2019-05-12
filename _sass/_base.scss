@@ -227,6 +227,7 @@ h1 {
 
 .me {
   text-align: center;
+  margin-bottom: 60px;
 }
 
 .me img {
@@ -240,6 +241,10 @@ h1 {
 
 .location {
   white-space: nowrap;
+}
+
+.availability {
+    font-weight: bold;
 }
 
 .project,
