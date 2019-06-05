@@ -94,8 +94,10 @@ I'm not a data center, so I think it is very unlikely I'm gonna suffer from thes
 That's why I have these options in my */etc/default/grub*
 
 ```
-GRUB_CMDLINE_LINUX="pti=off spectre_v2=off spec_store_bypass_disable=off nospec noibrs noibpb"
+GRUB_CMDLINE_LINUX="noibrs noibpb nopti nospectre_v2 nospectre_v1 l1tf=off nospec_store_bypass_disable no_stf_barrier mds=off mitigations=off"
 ```
+
+Update: There is now a website which provides the best kernel parameters to speed things up: [make-linux-fast-again.com](https://make-linux-fast-again.com). Notice the new `mitigations=off` parameter, which was introduced in Kernel 5.2 and should disable all "security fixes".
 
 ### Manjaro
 
