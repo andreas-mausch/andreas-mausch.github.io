@@ -365,11 +365,11 @@ h1 {
 }
 
 .section {
-    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
-.key-skills-section {
-    margin-top: 0;
+.section:last-of-type {
+    margin-bottom: 0;
 }
 
 .section-title {
