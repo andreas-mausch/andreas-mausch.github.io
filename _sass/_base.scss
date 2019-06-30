@@ -379,6 +379,7 @@ section:last-of-type {
 .resume-title {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .resume-title .image, .resume-title .summary {
@@ -392,8 +393,6 @@ section:last-of-type {
 
 .resume-title .summary {
     margin-left: 30px;
-    margin-top: 30px;
-    margin-bottom: 30px;
     font-size: 80%;
 }
 
