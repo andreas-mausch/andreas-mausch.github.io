@@ -37,11 +37,14 @@ html, body {
 }
 
 .key-skills-section {
-  display: block;
   page-break-after: always;
 }
 
 .key-skills-section h2 {
   text-align: center;
   margin-bottom: 40px;
+}
+
+.experiences-section {
+  page-break-before: always;
 }
