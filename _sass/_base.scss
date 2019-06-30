@@ -376,6 +376,15 @@ section:last-of-type {
     display: none;
 }
 
+.resume-title-section .image {
+    text-align: center;
+}
+
+.resume-title-section .image img {
+    max-height: 300px;
+    border-radius: 30px;
+}
+
 .section-title {
     font-size: 24px;
     font-weight: 500;
