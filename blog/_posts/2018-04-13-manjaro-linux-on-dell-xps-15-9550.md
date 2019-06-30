@@ -386,6 +386,8 @@ git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --d
 - Audacity
 - inxi -F
 - meld (for directory diff)
+- HandBrake
+- Avidemux
 
 # Measures
 
