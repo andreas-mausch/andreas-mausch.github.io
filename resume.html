@@ -9,8 +9,28 @@ permalink: /resume/
 <div class="home">
 
   <section class="resume-title-section">
-    <div class="image">
-      <img src="../images/me.jpg">
+    <div class="resume-title">
+      <div class="image">
+        <img src="../images/me.jpg">
+      </div>
+      <div class="summary">
+        <dl>
+          <dt>Name</dt>
+          <dd>Andreas Mausch</dd>
+          <dt>E-Mail</dt>
+          <dd>andreas.mausch@gmail.com</dd>
+          <dt>Phone</dt>
+          <dd>+4915757575577</dd>
+        </dl>
+        <dl>
+          <dt>Job</dt>
+          <dd>Software Developer</dd>
+          <dt>Location</dt>
+          <dd>Hamburg</dd>
+          <dt>Availability</dt>
+          <dd>September 2019</dd>
+        </dl>
+      </div>
     </div>
   </section>
   <section class="key-skills-section">
@@ -51,78 +71,78 @@ permalink: /resume/
   </section>
 
   <section class="projects-section">
-      <h2 class="section-title"><i class="fas fa-rocket"></i>Notable projects</h2>
+    <h2 class="section-title"><i class="fas fa-rocket"></i>Notable projects</h2>
 
-      {% for project in site.data.projects %}
-      <div class="item project row">
-          <div class="three columns">
-            <h3 class="project-name">{{ project.name }}</h3>
-            <div class="role">
-              {{ project.role }}
-            </div>
-            <div class="time">
-                {{ project.from | date: '%b %Y' }} - {{ project.to | date: '%b %Y' }}
-              </div>
-            <div class="location">
-                {{ project.location }}
-            </div>
-            <div class="image">
-              <img src="{{ site.baseurl }}/images/resume/{{ project.image }}" alt="{{ project.name }}"/>
-            </div>
-          </div>
-
-          <div class="nine columns">
-            <div class="text">
-              {{ project.text | markdownify }}
-            </div>
-
-            <div class="link">
-              <a href="{{ project.link }}">{{ project.link }}</a>
-            </div>
-
-            <ul class="technologies">
-              {% for technology in project.technologies %}
-                <li>{{ technology }}</li>
-              {% endfor %}
-            </ul>
-          </div>
+    {% for project in site.data.projects %}
+    <div class="item project row">
+      <div class="three columns">
+        <h3 class="project-name">{{ project.name }}</h3>
+        <div class="role">
+          {{ project.role }}
+        </div>
+        <div class="time">
+          {{ project.from | date: '%b %Y' }} - {{ project.to | date: '%b %Y' }}
+        </div>
+        <div class="location">
+          {{ project.location }}
+        </div>
+        <div class="image">
+          <img src="{{ site.baseurl }}/images/resume/{{ project.image }}" alt="{{ project.name }}" />
+        </div>
       </div>
+
+      <div class="nine columns">
+        <div class="text">
+          {{ project.text | markdownify }}
+        </div>
+
+        <div class="link">
+          <a href="{{ project.link }}">{{ project.link }}</a>
+        </div>
+
+        <ul class="technologies">
+          {% for technology in project.technologies %}
+          <li>{{ technology }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="projects-section">
+    <h2 class="section-title"><i class="fas fa-users"></i>Other clients</h2>
+    <div class="other-customers">
+      {% for image in site.static_files %}
+      {% if image.path contains 'images/resume/other-customers' %}
+      <div class="other-customer">
+        <img src="{{ site.baseurl }}{{ image.path }}" alt="Other customer">
+      </div>
+      {% endif %}
       {% endfor %}
-    </section>
+    </div>
+  </section>
 
-    <section class="projects-section">
-      <h2 class="section-title"><i class="fas fa-users"></i>Other clients</h2>
-      <div class="other-customers">
-        {% for image in site.static_files %}
-          {% if image.path contains 'images/resume/other-customers' %}
-            <div class="other-customer">
-              <img src="{{ site.baseurl }}{{ image.path }}" alt="Other customer">
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </section>
-
-    <section class="experiences-section">
+  <section class="experiences-section">
     <h2 class="section-title"><i class="fas fa-list"></i>Experiences</h2>
 
     {% for experience in site.data.experiences %}
     <div class="item experience row">
-        <div class="three columns image">
-          <img src="{{ site.baseurl }}/images/resume/{{ experience.image }}" alt="{{ experience.role }}"/>
+      <div class="three columns image">
+        <img src="{{ site.baseurl }}/images/resume/{{ experience.image }}" alt="{{ experience.role }}" />
+      </div>
+      <div class="nine columns text">
+        <h3 class="job-role">{{ experience.role }}</h3>
+        <div class="company">
+          {{ experience.company }}
         </div>
-        <div class="nine columns text">
-          <h3 class="job-role">{{ experience.role }}</h3>
-          <div class="company">
-            {{ experience.company }}
-          </div>
-          <div class="time">
-            {{ experience.from | date: '%b %Y' }} - {{ experience.to | date: '%b %Y' }}
-          </div>
-          <div class="location">
-            {{ experience.location }}
-          </div>
+        <div class="time">
+          {{ experience.from | date: '%b %Y' }} - {{ experience.to | date: '%b %Y' }}
         </div>
+        <div class="location">
+          {{ experience.location }}
+        </div>
+      </div>
     </div>
     {% endfor %}
   </section>
@@ -132,21 +152,21 @@ permalink: /resume/
 
     {% for education in site.data.educations %}
     <div class="item education row">
-        <div class="three columns image">
-          <img src="{{ site.baseurl }}/images/resume/{{ education.image }}" alt="{{ education.degree }}"/>
+      <div class="three columns image">
+        <img src="{{ site.baseurl }}/images/resume/{{ education.image }}" alt="{{ education.degree }}" />
+      </div>
+      <div class="nine columns text">
+        <h3 class="education-degree">{{ education.degree }}</h3>
+        <div class="time">
+          {{ education.from | date: '%b %Y' }} - {{ education.to | date: '%b %Y' }}
         </div>
-        <div class="nine columns text">
-          <h3 class="education-degree">{{ education.degree }}</h3>
-          <div class="time">
-            {{ education.from | date: '%b %Y' }} - {{ education.to | date: '%b %Y' }}
-          </div>
-          <div class="university">
-            {{ education.university }}
-          </div>
-          <div class="location">
-            {{ education.location }}
-          </div>
+        <div class="university">
+          {{ education.university }}
         </div>
+        <div class="location">
+          {{ education.location }}
+        </div>
+      </div>
     </div>
     {% endfor %}
   </section>

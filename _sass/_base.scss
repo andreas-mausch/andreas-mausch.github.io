@@ -376,13 +376,48 @@ section:last-of-type {
     display: none;
 }
 
-.resume-title-section .image {
-    text-align: center;
+.resume-title {
+    display: flex;
+    justify-content: center;
 }
 
-.resume-title-section .image img {
-    max-height: 300px;
+.resume-title .image, .resume-title .summary {
+    flex-basis: 300px;
+}
+
+.resume-title .image img {
+    width: 100%;
     border-radius: 30px;
+}
+
+.resume-title .summary {
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 80%;
+}
+
+.resume-title .summary dl {
+    display: flex;
+    flex-flow: row wrap;
+    border: solid #333;
+    border-width: 1px 1px 0 0;
+}
+
+.resume-title .summary dt {
+    flex-basis: 100px;
+    padding: 2px 4px;
+    background: #333;
+    text-align: right;
+    color: #fff;
+}
+
+.resume-title .summary dd {
+    flex-basis: 170px;
+    flex-grow: 1;
+    margin: 0;
+    padding: 2px 4px;
+    border-bottom: 1px solid #333;
 }
 
 .section-title {
