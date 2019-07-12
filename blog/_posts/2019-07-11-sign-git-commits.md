@@ -32,7 +32,7 @@ In this case, **1234567890123456** would be your signingkey you need to configur
 git config user.signingkey 1234567890123456
 ```
 
-https://help.github.com/en/articles/telling-git-about-your-signing-key
+[https://help.github.com/en/articles/telling-git-about-your-signing-key](https://help.github.com/en/articles/telling-git-about-your-signing-key)
 
 # Sign commits
 
