@@ -26,5 +26,5 @@ Some explaination:
 I like to archive thumbnails of images. This way, you can store tons of images in small disk space.
 
 ```
-magick convert -resize "600x600>" -auto-orient -strip -quality 75 -define webp:method=6 image.jpg image.webp
+magick convert -resize "600x600>" -auto-orient -strip -quality 75 -define webp:method=6 -define webp:use-sharp-yuv=1 image.jpg image.webp
 ```
