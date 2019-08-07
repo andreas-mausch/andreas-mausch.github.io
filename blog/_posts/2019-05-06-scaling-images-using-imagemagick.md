@@ -5,10 +5,12 @@ date:   2019-05-06 22:00:00 +02:00
 tags:
 ---
 
+# Downscale images (batch)
+
 Just a useful command I use to downscale my images, for example to share them on social media.
 
 ```
-magick mogrify -resize 1920x1080\> -quality 85 -auto-orient -strip *.jpg
+magick mogrify -resize "1920x1080>" -quality 85 -auto-orient -strip *.jpg
 ```
 
 Some explaination:
@@ -18,3 +20,11 @@ Some explaination:
 - quality sets the jpeg compression
 - auto-orient will rotate the image accordingly to it's exif metadata
 - strip will remove any exif metadata afterwards. I do this because I usually don't want to share private data like GPS locations, which is stored in exif.
+
+# Convert images to webp
+
+I like to archive thumbnails of images. This way, you can store tons of images in small disk space.
+
+```
+magick convert -auto-orient -strip -resize "600x600>" -quality 75 -define webp:method=6 image.jpg image.webp
+```
