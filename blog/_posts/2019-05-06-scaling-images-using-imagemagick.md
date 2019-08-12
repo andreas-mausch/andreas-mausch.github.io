@@ -9,8 +9,8 @@ tags:
 
 Just a useful command I use to downscale my images, for example to share them on social media.
 
-```
-magick mogrify -resize "1920x1920>" -quality 85 -auto-orient -strip *.jpg
+```bash
+magick mogrify -auto-orient -strip -resize "1920x1920>" -quality 85 *.jpg
 ```
 
 Some explaination:
@@ -25,6 +25,18 @@ Some explaination:
 
 I like to archive thumbnails of images. This way, you can store tons of images in small disk space.
 
+```bash
+magick convert -auto-orient -strip -resize "600x600>" -quality 75 -define webp:method=6 -define webp:use-sharp-yuv=1 image.jpg image.webp
 ```
-magick convert -resize "600x600>" -auto-orient -strip -quality 75 -define webp:method=6 -define webp:use-sharp-yuv=1 image.jpg image.webp
+
+# Create animated webp
+
+```bash
+img2webp -d 300 -lossy -m 6 -min_size -o animated.webp *.jpg
+```
+
+# Batch processing
+
+```bash
+for i in *.jpg; do magick convert /* your options */ $i ${i/.jpg/.webp}; done
 ```
