@@ -32,3 +32,5 @@ I've created two profiles.
 - Run `autorandr --save docked`.
 
 autorandr should switch to the correct mode automatically (hence the name) from now on.
+
+What's neat: If you close the lid while the notebook is connected to the external monitor, it doesn't go into sleep mode.
