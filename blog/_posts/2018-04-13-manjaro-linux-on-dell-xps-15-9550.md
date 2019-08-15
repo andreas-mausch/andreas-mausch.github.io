@@ -388,6 +388,7 @@ git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --d
 - meld (for directory diff)
 - HandBrake
 - Avidemux
+- cool-retro-term
 
 # Measures
 
