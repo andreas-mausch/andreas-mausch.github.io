@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<div class="home cheatsheet">
+
+  <h1>{{ page.title }}</h1>
+
+  {% for section in page.section %}
+  <div class="section">
+    <div class="section-name">{{ section.name }}</div>
+
+    <div class="section-body">
+      {% for command in section.commands %}
+      <div>
+        <span>{{ command[0] }}</span>
+        <pre>{{ command[1] | escape }}</pre>
+      </div>
+      {% endfor %}
+
+      {% if section.shortcuts %}
+      <table class="shortcuts">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Shortcut</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for shortcut in section.shortcuts %}
+          <tr>
+            <td>{{ shortcut[0] }}</td>
+            <td>{{ shortcut[1] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  {{ content }}
+</div>
