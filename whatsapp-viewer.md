@@ -94,9 +94,10 @@ Do you have a good idea or new feature you would like to see in a future release
     Sometimes WhatsApp creates a malformed backup and you need to repair it. Currently there is no automatic repair option in WhatsApp Viewer, so you need to do it manually.
     You need sqlite installed on your computer and run these two lines from command prompt:
 
-    ```echo .dump | sqlite3 msgstore.db > temp.sql```
-
-    ```echo .quit | sqlite3 -init temp.sql repaired.db```
+    ```
+echo .dump | sqlite3 msgstore.db > temp.sql
+echo .quit | sqlite3 -init temp.sql repaired.db
+    ```
 
     Now you can load repaired.db with WhatsApp Viewer.
 
