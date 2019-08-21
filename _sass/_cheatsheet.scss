@@ -21,7 +21,31 @@
   margin-bottom: 1em;
 }
 
+#cheatsheet-search {
+  width: 100%;
+}
+
 .cheatsheet-link {
   display: inline-block;
   margin-bottom: 2em;
+}
+
+.cheatsheet-entries {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  li a {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    display: block;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
 }
