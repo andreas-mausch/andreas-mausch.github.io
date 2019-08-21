@@ -8,12 +8,27 @@ permalink: /cheatsheets/
 
   <h1>Cheat sheets</h1>
 
+  <input id="cheatsheet-search" oninput="onSearchInput()" autofocus>
+
   <ul>
     {% for cheatsheet in site.cheatsheets %}
-    <li>
+    <li class="cheatsheet-entry">
       <a href="{{ cheatsheet.url }}">{{ cheatsheet.title }}</a>
     </li>
     {% endfor %}
   </ul>
 
 </div>
+
+<script>
+  function onSearchInput() {
+    var term = document.getElementById("cheatsheet-search").value;
+    var links = document.querySelectorAll(".cheatsheet-entry a");
+
+    links.forEach(link => {
+      if (link.innerText.toUpperCase() === term.toUpperCase()) {
+        window.location.href = link.href;
+      }
+    });
+  }
+</script>
