@@ -1,6 +1,6 @@
 ---
 layout: cheatsheet
-tags: image-processing
+tags: image-processing webp
 section:
   - name: Image modification
     commands:
