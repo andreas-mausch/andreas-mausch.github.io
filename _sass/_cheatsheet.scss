@@ -20,3 +20,8 @@
 .section:not(:last-child) {
   margin-bottom: 1em;
 }
+
+.cheatsheet-link {
+  display: inline-block;
+  margin-bottom: 2em;
+}
