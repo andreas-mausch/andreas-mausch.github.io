@@ -22,12 +22,19 @@ permalink: /cheatsheets/
 
 <script>
   function onSearchInput() {
-    var term = document.getElementById("cheatsheet-search").value;
+    var term = document.getElementById("cheatsheet-search").value.toUpperCase();
     var links = document.querySelectorAll(".cheatsheet-entry a");
 
     links.forEach(link => {
-      if (link.innerText.toUpperCase() === term.toUpperCase()) {
+      var linkText = link.innerText.toUpperCase();
+      if (linkText === term) {
         window.location.href = link.href;
+      }
+
+      if (linkText.indexOf(term) > -1) {
+        link.parentElement.style.display = "";
+      } else {
+        link.parentElement.style.display = "none";
       }
     });
   }
