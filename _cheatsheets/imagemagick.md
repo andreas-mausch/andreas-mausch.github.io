@@ -1,5 +1,6 @@
 ---
 layout: cheatsheet
+tags: image-processing
 section:
   - name: Image modification
     commands:

@@ -13,7 +13,13 @@ permalink: /cheatsheets/
   <ul class="cheatsheet-entries">
     {% for cheatsheet in site.cheatsheets %}
     <li>
-      <a href="{{ cheatsheet.url }}">{{ cheatsheet.title }}</a>
+      <a href="{{ cheatsheet.url }}">
+        <span class="cheatsheet-title">{{ cheatsheet.title }}</span>
+
+        {% for tag in cheatsheet.tags %}
+        <span class="cheatsheet-tag">#{{ tag }}</span>
+        {% endfor %}
+      </a>
     </li>
     {% endfor %}
   </ul>
@@ -23,18 +29,18 @@ permalink: /cheatsheets/
 <script>
   function onSearchInput() {
     var term = document.getElementById("cheatsheet-search").value.toUpperCase();
-    var links = document.querySelectorAll(".cheatsheet-entries li a");
+    var titles = document.querySelectorAll(".cheatsheet-entries li a .cheatsheet-title");
 
-    links.forEach(link => {
-      var linkText = link.innerText.toUpperCase();
-      if (linkText === term) {
-        window.location.href = link.href;
+    titles.forEach(title => {
+      var titleText = title.innerText.toUpperCase();
+      if (titleText === term) {
+        window.location.href = title.parentElement.href;
       }
 
-      if (linkText.indexOf(term) > -1) {
-        link.parentElement.style.display = "";
+      if (titleText.indexOf(term) > -1) {
+        title.parentElement.parentElement.style.display = "";
       } else {
-        link.parentElement.style.display = "none";
+        title.parentElement.parentElement.style.display = "none";
       }
     });
   }
