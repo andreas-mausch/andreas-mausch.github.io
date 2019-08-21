@@ -14,7 +14,7 @@ permalink: /cheatsheets/
     {% for cheatsheet in site.cheatsheets %}
     <li>
       <a href="{{ cheatsheet.url }}">
-        <span class="cheatsheet-title">{{ cheatsheet.title }}</span>
+        <span class="cheatsheet-title">{{ cheatsheet.title | downcase }}</span>
 
         {% for tag in cheatsheet.tags %}
         <span class="cheatsheet-tag">#{{ tag }}</span>
