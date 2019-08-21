@@ -37,11 +37,20 @@ permalink: /cheatsheets/
         window.location.href = title.parentElement.href;
       }
 
-      if (titleText.indexOf(term) > -1) {
+      if (titleText.indexOf(term) > -1 || tagsMatch(title.parentElement, term)) {
         title.parentElement.parentElement.style.display = "";
       } else {
         title.parentElement.parentElement.style.display = "none";
       }
+    });
+  }
+
+  function tagsMatch(link, term) {
+    var tags = Array.prototype.slice.call(link.querySelectorAll(".cheatsheet-tag"));
+
+    return tags.some(tag => {
+      var tagText = tag.innerText.toUpperCase();
+      return tagText.indexOf(term) > -1;
     });
   }
 
