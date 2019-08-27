@@ -1,6 +1,6 @@
 ---
 layout: cheatsheet
-tags: #pacman #manjaro
+tags: pacman manjaro
 section:
   - name: Install
     commands:

@@ -1,6 +1,6 @@
 ---
 layout: cheatsheet
-tags: #record-screen #screencast
+tags: record-screen screencast
 section:
   - name: Record screencasts (lossless)
     commands:
