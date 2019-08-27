@@ -11,13 +11,13 @@ section:
     commands:
       search package: yay -Ss <package>
       package details: yay -Si <package>
-      list files: pacman -Fl <package>
+      list files: yay -Fl <package>
   - name: Installed packages
     commands:
       search package: yay -Qs <package>
       package details: yay -Qii <package>
       list files: yay -Ql <package>
-      orphans: pacman -Qdt
+      orphans: yay -Qdt
   - name: Official repo vs. AUR
     commands:
       repo: yay -[...] --repo
