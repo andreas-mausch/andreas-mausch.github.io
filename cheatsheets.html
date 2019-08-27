@@ -8,7 +8,7 @@ permalink: /cheatsheets/
 
   <h1>Cheat sheets</h1>
 
-  <input id="cheatsheet-search" type="text" placeholder="Filter.." oninput="onSearchInput()" autofocus>
+  <input id="cheatsheet-search" type="text" placeholder="Filter.." oninput="onSearchInput()" onkeydown="handleEnter(event)" autofocus>
 
   <ul class="cheatsheet-entries">
     {% for cheatsheet in site.cheatsheets %}
@@ -43,6 +43,17 @@ permalink: /cheatsheets/
         title.parentElement.parentElement.style.display = "none";
       }
     });
+  }
+
+  function handleEnter(event) {
+    if (event.keyCode == 13) {
+      var titles = document.querySelectorAll(".cheatsheet-entries li a .cheatsheet-title");
+      var visibleTitles = Array.from(titles).filter(title => title.parentElement.parentElement.style.display === "");
+
+      if (visibleTitles.length == 1) {
+        window.location.href = visibleTitles[0].parentElement.href;
+      }
+    }
   }
 
   function tagsMatch(link, term) {
