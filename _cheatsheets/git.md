@@ -35,3 +35,11 @@ fi
 
 Keep in mind you might need to `git push --force` afterwards.
 Please be aware of all the consequences of a force push.
+
+**Push local repo to a remote url**
+
+```bash
+git remote -v # List remotes
+git remote add origin <ssh-url> # e.g. git@gitlab.com:andreas-mausch/repo.git
+git push -u origin --all
+```
