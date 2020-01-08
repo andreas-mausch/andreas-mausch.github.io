@@ -51,3 +51,9 @@ git remote -v # List remotes
 git remote add origin <ssh-url> # e.g. git@gitlab.com:andreas-mausch/repo.git
 git push -u origin --all
 ```
+
+**git log**
+
+```bash
+git config --global alias.lg "log --graph --abbrev-commit --decorate --date=format:'%Y-%m-%d %H:%M:%S' --format=format:'%C(blue)%h%C(reset) %C(dim white)%ad%C(reset) %C(green)%<(8,trunc)%an%C(reset)%C(yellow)%d%C(reset) %C(white)%s%C(reset)'"
+```
