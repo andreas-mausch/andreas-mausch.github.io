@@ -3,12 +3,16 @@ layout: cheatsheet
 section:
   - name: Sign commits
     commands:
-      Set your key (obtain by 'gpg --list-secret-keys --keyid-format LONG'): "git config user.signingkey <key>"
+      Obtain your key: gpg --list-secret-keys --keyid-format LONG
+      Set your key: "git config user.signingkey <key>"
       Tell git to sign all of your commits: git config commit.gpgsign true
   - name: cleanup
     commands:
       Delete merged local branches: git branch --merged origin/master | grep -v \* | xargs git branch -D
       Update remote branches: git remote update origin --prune
+  - name: Feature branches
+    commands:
+      Count commits on feature branch: git rev-list [--no-merges] --count origin/master..HEAD
   - name: git gui
     shortcuts:
       Stage file: <kbd>CTRL</kbd>+<kbd>T</kbd>
