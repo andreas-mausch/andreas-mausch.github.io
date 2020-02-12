@@ -17,34 +17,40 @@ See also: [here](https://stackoverflow.com/questions/729692/why-should-text-file
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/posix.png)
 
-## git diff
+## How tools show it
+
+### git diff
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/git-diff.png)
 
 Note: `4b825dc642cb6eb9a060e54bf8d69288fbee4904` is a hash for the empty tree of git (see [here](https://stackoverflow.com/questions/9765453/is-gits-semi-secret-empty-tree-object-reliable-and-why-is-there-not-a-symbolic)).
 
-## git gui
+### cat
+
+![]({{ site.baseurl }}/images/2020-02-12-no-newline/cat.png)
+
+### git gui
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/git-gui.png)
 
-## Github
+### Github
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/github.png)
 
-## Gitlab
+### Gitlab
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/gitlab.png)
 
-## Sourcetree
+### Sourcetree
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/sourcetree.png)
 
-## VS Code setting
+### VS Code setting
 
 ..to automatically at a newline, if missing:
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/vscode-setting.png)
 
-## ESLint rule
+### ESLint rule
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/eslint.png)
