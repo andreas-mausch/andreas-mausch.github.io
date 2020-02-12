@@ -38,6 +38,8 @@ Some more links:
 - [Popper: update vue-popper][element-update-popper.js]
 - [popper.js: Support for ShadowDOM][popper.js-bugfix]
 
+![]({{ site.baseurl }}/images/2020-02-12-element-ui/stale.png)
+
 [urgs]: https://github.com/ElemeFE/element/blob/dev/src/utils/popper.js
 [stackoverflow.com]: https://stackoverflow.com/questions/54352781/how-to-fix-element-and-popper-js-errors-in-vuejs-web-components-with-a-shadowroo
 [element-extract-dependency]: https://github.com/ElemeFE/element/pull/18792
