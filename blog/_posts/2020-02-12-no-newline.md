@@ -11,9 +11,9 @@ tl;dr: Please put an empty line at the end of each text/source file (if you want
 
 ## Reason
 
-[This.](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html##tag_03_206)
+[This.](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206)
 
-See also: [here](https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline/729795##729795)
+See also: [here](https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline/729795#729795)
 
 ![]({{ site.baseurl }}/images/2020-02-12-no-newline/posix.png)
 
