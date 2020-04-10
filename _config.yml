@@ -9,8 +9,3 @@ url: "https://andreas-mausch.de"
 # Build settings
 markdown: kramdown
 permalink: pretty
-
-collections:
-  cheatsheets:
-    output: true
-    permalink: /:collection/:name

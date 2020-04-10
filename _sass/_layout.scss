@@ -189,13 +189,18 @@
     }
 }
 
-kbd {
-  padding: 2px 4px;
-  white-space: nowrap;
-  color: #000;
-  background: #eee;
-  border-width: 1px 3px 3px 1px;
-  border-style: solid;
-  border-color: #ccc #aaa #888 #bbb;
-  border-radius: 5px;
+ul.gallery {
+  list-style-type: none;
+}
+
+ul.gallery li {
+  display: inline;
+}
+
+ul.gallery img {
+  width: 144px;
+  height: 144px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  object-fit: cover;
 }
