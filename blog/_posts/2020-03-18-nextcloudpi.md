@@ -56,6 +56,13 @@ Here's what I did differently:
 - Polls
 - Talk
 - Tasks
+- Music
+- Draw.io
+- Markdown Editor
+- Text
+- Mind Map
+- JavaScript XMPP Chat
+- Group folders
 
 # Apps for Android
 
