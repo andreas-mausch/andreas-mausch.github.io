@@ -4,8 +4,6 @@
 }
 
 html, body {
-  width: 210mm;
-  height: 297mm;
   background-color: transparent;
   font-size: 14px;
 }
@@ -21,7 +19,11 @@ html, body {
 
 .resume-title-section {
   display: block;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
+}
+
+section {
+  margin-bottom: 40px;
 }
 
 .section-title {
@@ -42,6 +44,12 @@ html, body {
 .project:not(:last-child),
 .experience:not(:last-child) {
     padding-bottom: 4px;
+}
+
+.project .image,
+.experience .image,
+.education .image {
+    text-align: center;
 }
 
 .job-role,
