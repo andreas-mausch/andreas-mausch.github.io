@@ -14,60 +14,105 @@ permalink: /resume/
         <img src="../images/me.jpg">
       </div>
       <div class="summary">
+        <div class="name">
+          Andreas Mausch
+        </div>
+
         <dl>
-          <dt>Name</dt>
-          <dd>Andreas Mausch</dd>
           <dt>E-Mail</dt>
           <dd>andreas.mausch@gmail.com</dd>
           <dt>Phone</dt>
           <dd>+4915757575577</dd>
+          <dt>Web</dt>
+          <dd>https://andreas-mausch.de</dd>
         </dl>
         <dl>
           <dt>Job</dt>
           <dd>Software Developer</dd>
           <dt>Location</dt>
-          <dd>Hamburg</dd>
+          <dd>Hamburg, Germany</dd>
           <dt>Availability</dt>
           <dd>June 2020</dd>
         </dl>
       </div>
     </div>
   </section>
+
+  <section class="experiences-section">
+    <h2 class="section-title"><i class="fas fa-list"></i>Experiences</h2>
+
+    {% for experience in site.data.experiences %}
+    <div class="item experience row">
+      <div class="three columns">
+        {{ experience.from | date: '%b %Y' }} - {{ experience.to | date: '%b %Y' }}
+      </div>
+      <div class="two columns image">
+        <img src="{{ site.baseurl }}/images/resume/{{ experience.image }}" alt="{{ experience.role }}" />
+      </div>
+      <div class="seven columns text">
+        <h3 class="job-role">{{ experience.role }}</h3>
+        <div class="company">
+          {{ experience.company }}
+        </div>
+        <div class="location">
+          {{ experience.location }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="educations-section">
+    <h2 class="section-title"><i class="fas fa-graduation-cap"></i>Educations</h2>
+
+    {% for education in site.data.educations %}
+    <div class="item education row">
+      <div class="three columns">
+        {{ education.from | date: '%b %Y' }} - {{ education.to | date: '%b %Y' }}
+      </div>
+      <div class="two columns image">
+        <img src="{{ site.baseurl }}/images/resume/{{ education.image }}" alt="{{ education.degree }}" />
+      </div>
+      <div class="seven columns text">
+        <h3 class="education-degree">{{ education.degree }}</h3>
+        <div class="university">
+          {{ education.university }}
+        </div>
+        <div class="location">
+          {{ education.location }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
   <section class="key-skills-section">
     <h2 class="section-title"><i class="fas fa-american-sign-language-interpreting"></i>Skills</h2>
 
-    <ul class="key-skills row">
-      <li class="one-third column">
-        <div class="centered fixed">
-          <div class="key-skill">Full Stack</div>
-        </div>
-        <ul class="sub-key-skills">
-          <li>Web apps</li>
-          <li>API</li>
-          <li>Mobile apps</li>
-        </ul>
-      </li>
-      <li class="one-third column">
-        <div class="centered fixed">
-          <div class="key-skill">Java</div>
-        </div>
-        <ul class="sub-key-skills">
-          <li>Kotlin</li>
-          <li>TypeScript</li>
-          <li>Python</li>
-        </ul>
-      </li>
-      <li class="one-third column">
-        <div class="centered fixed">
-          <div class="key-skill">CI/CD</div>
-        </div>
-        <ul class="sub-key-skills">
-          <li>Test-driven</li>
-          <li>Docker</li>
-          <li>1-click deployment</li>
-        </ul>
-      </li>
-    </ul>
+    <div class="item row">
+      <div class="five columns">
+        Technologies
+      </div>
+      <div class="seven columns text">
+        Kotlin, Java, TypeScript, Vue.js, Python, Docker
+      </div>
+    </div>
+    <div class="item row">
+      <div class="five columns">
+        Methods
+      </div>
+      <div class="seven columns text">
+        Test-driven, Automation, CI/CD
+      </div>
+    </div>
+    <div class="item row">
+      <div class="five columns">
+        Stack
+      </div>
+      <div class="seven columns text">
+        Web apps, APIs, Mobile apps, Frontends
+      </div>
+    </div>
   </section>
 
   <section class="projects-section">
@@ -121,54 +166,6 @@ permalink: /resume/
       {% endif %}
       {% endfor %}
     </div>
-  </section>
-
-  <section class="experiences-section">
-    <h2 class="section-title"><i class="fas fa-list"></i>Experiences</h2>
-
-    {% for experience in site.data.experiences %}
-    <div class="item experience row">
-      <div class="three columns image">
-        <img src="{{ site.baseurl }}/images/resume/{{ experience.image }}" alt="{{ experience.role }}" />
-      </div>
-      <div class="nine columns text">
-        <h3 class="job-role">{{ experience.role }}</h3>
-        <div class="company">
-          {{ experience.company }}
-        </div>
-        <div class="time">
-          {{ experience.from | date: '%b %Y' }} - {{ experience.to | date: '%b %Y' }}
-        </div>
-        <div class="location">
-          {{ experience.location }}
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </section>
-
-  <section class="educations-section">
-    <h2 class="section-title"><i class="fas fa-graduation-cap"></i>Educations</h2>
-
-    {% for education in site.data.educations %}
-    <div class="item education row">
-      <div class="three columns image">
-        <img src="{{ site.baseurl }}/images/resume/{{ education.image }}" alt="{{ education.degree }}" />
-      </div>
-      <div class="nine columns text">
-        <h3 class="education-degree">{{ education.degree }}</h3>
-        <div class="time">
-          {{ education.from | date: '%b %Y' }} - {{ education.to | date: '%b %Y' }}
-        </div>
-        <div class="university">
-          {{ education.university }}
-        </div>
-        <div class="location">
-          {{ education.location }}
-        </div>
-      </div>
-    </div>
-    {% endfor %}
   </section>
 
 </div>

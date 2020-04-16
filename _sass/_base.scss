@@ -255,19 +255,19 @@ h1 {
 .project,
 .experience,
 .education {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .project:not(:last-child),
 .experience:not(:last-child) {
     border-bottom: 1px solid $background-color;
-    padding-bottom: 16px;
+    padding-bottom: 24px;
 }
 
 .project-name,
 .job-role,
 .education-degree {
-    font-size: 20px;
+    font-size: 130%;
     font-weight: bold;
 }
 
@@ -275,13 +275,17 @@ h1 {
 .experience .image,
 .education .image {
     text-align: center;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
-.project .image img,
 .experience .image img,
 .education .image img {
+    max-width: 70px;
+    max-height: 24px;
+}
+
+.project .image img {
     max-width: 100px;
     max-height: 50px;
 }
@@ -383,7 +387,11 @@ section:last-of-type {
     align-items: center;
 }
 
-.resume-title .image, .resume-title .summary {
+.resume-title .image {
+    flex-basis: 240px;
+}
+
+.resume-title .summary {
     flex-basis: 300px;
 }
 
@@ -395,6 +403,12 @@ section:last-of-type {
 .resume-title .summary {
     margin-left: 30px;
     font-size: 80%;
+}
+
+.resume-title .name {
+    font-size: 200%;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
 .resume-title .summary dl {
@@ -421,7 +435,7 @@ section:last-of-type {
 }
 
 .section-title {
-    font-size: 24px;
+    font-size: 150%;
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 20px;

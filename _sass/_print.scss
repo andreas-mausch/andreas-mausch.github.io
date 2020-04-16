@@ -7,6 +7,7 @@ html, body {
   width: 210mm;
   height: 297mm;
   background-color: transparent;
+  font-size: 14px;
 }
 
 .site-header, .site-footer {
@@ -18,33 +19,37 @@ html, body {
   background-color: transparent;
 }
 
-.key-skills > li .fixed {
-  width: 110px;
-  padding-top: 110px;
-}
-
-.other-customer {
-  width: 150px;
-}
-
-.other-customer img {
-  max-width: 150px;
-}
-
 .resume-title-section {
   display: block;
-  margin-bottom: 160px;
+  margin-bottom: 100px;
 }
 
-.key-skills-section {
-  page-break-after: always;
+.section-title {
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
-.key-skills-section h2 {
-  text-align: center;
-  margin-bottom: 40px;
+.section-title i {
+  display: none;
 }
 
-.experiences-section {
-  page-break-before: always;
+.project,
+.experience,
+.education {
+    margin-bottom: 4px;
+}
+
+.project:not(:last-child),
+.experience:not(:last-child) {
+    padding-bottom: 4px;
+}
+
+.job-role,
+.education-degree {
+    font-size: 100%;
+    margin-bottom: 0;
+}
+
+.projects-section {
+  display: none;
 }
