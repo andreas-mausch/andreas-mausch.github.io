@@ -1,0 +1,416 @@
+- project:
+  name: dreamIT
+  role: Full Stack Developer
+  from: 2019-08-01
+  to: 2020-04-30
+  location: Hamburg, Germany
+  technologies:
+  - Kotlin
+  - ktor
+  - Contract testing (Pact)
+  - Separate verticals
+  - Micro-frontend architecture
+  - GraphQL API (Apollo)
+  - arrow-kt
+  - Testcontainers
+  - Vue
+  - Web components
+  - Element-UI
+  - MongoDB
+  - Apache Pulsar
+  - Gitlab CI
+  - Docker
+  - Kubernetes
+  - Gradle
+  text: |
+    New project, new architecture.
+
+    Aim to build the largest lottery platform out there.
+  image: dreamit.svg
+  link: https://www.dreamit.de
+- project:
+  name: dreamIT
+  role: Full Stack Developer
+  from: 2018-08-01
+  to: 2019-07-31
+  location: Hamburg, Germany
+  technologies:
+  - Java EE
+  - JSF
+  - Kafka
+  - MongoDB
+  - Teamcity
+  - JavaScript
+  - React
+  - REST
+  text: |
+    Development for big lottery websites.
+  image: dreamit.svg
+  link: https://www.dreamit.de
+- project:
+  name: get-a-way.com
+  role: Backend Developer
+  from: 2016-07-01
+  to: 2018-07-31
+  location: Berlin, Germany
+  technologies:
+  - Pair programming
+  - Test-driven development
+  - Java EE
+  - Glassfish
+  - Spock
+  - Gitlab CI
+  - Amazon AWS (Elastic Beanstalk, CloudWatch, S3, EC2, CloudFront, Elastic Container Service, Lambda)
+  - Cloudflare CDN
+  - Jersey, JAX-RS
+  - MongoDB (Mongo Cloud / Atlas)
+  - EclipseLink
+  - Kibana
+  - Groovy
+  - Webjars
+  - Docker
+  - REST API
+  - Server-Sent Events
+  - Android App
+  - Load testing (Locust, loader.io)
+  text: |
+    GETAWAY is a startup in Berlin which provides a peer-to-peer car sharing service.
+
+    - Developed the API for the app, MongoDB database
+    - Admin webapp for operations and customer care
+    - Built the CI and server infrastructure (on AWS) from scratch
+    - Zero downtime 1-click deployments, multiple times a day
+    - Human-readable tests by using Spock
+  image: getaway.png
+  link: https://get-a-way.com
+- project:
+  name: blau Mobilfunk GmbH
+  role: Backend Developer
+  from: 2014-07-01
+  to: 2016-06-30
+  location: Hamburg, Germany
+  technologies:
+  - Pair programming
+  - Test-driven development
+  - Clean code
+  - Spring
+  - Hibernate
+  - REST and SOAP webservices
+  - Selenium
+  - CasperJS
+  - Bamboo
+  - Jira
+  - Apache Tomcat
+  - Oracle SQL
+  - "Legacy system: Java EE, EJB 2, JBoss"
+  text: |
+    Mobile service provider (later part of Telefónica). Developed the IT platform for postpaid and prepaid customers.
+
+    Software development in a team using Scrum for order management, customer care, contract management, billing, business process modeling and connecting third-party services.
+    Specification and architectural design, implementation, continuous integration, quality assurance via tests, supported operations, optimization.
+  image: blau.png
+  link: https://www.blau.de
+- project:
+  name: saam
+  role: Full Stack Developer
+  from: 2016-03-01
+  to: 2016-06-30
+  technologies:
+  - Android
+  - Ionic, Cordova
+  - AngularJS
+  - JavaScript
+  - MongoDB
+  - Gulp
+  - BDD
+  - Yadda
+  - Mocha
+  - CasperJS
+  - OAuth 2.0
+  - Continuous Delivery
+  - HTML, SCSS
+  text: |
+    App to arrange events with your friends or strangers (soccer, movies, bike rides, ...).
+    Self-hosted Gitlab for CI, every commit builds an APK.
+  image: saam.png
+- project:
+  name: WhatsApp Viewer
+  from: 2014-03-01
+  to: 2014-06-30
+  technologies:
+  - C++
+  - SQLite
+  - AES
+  - HTML
+  - Win32 API
+  - CLI
+  - Electron
+  text: |
+    Small desktop tool to display chats from the Android msgstore.db database.
+  image: whatsapp-viewer.png
+  link: https://github.com/andreas-mausch/whatsapp-viewer
+- project:
+  name: Sabbatical
+  from: 2013-10-01
+  to: 2014-06-30
+  location: Christ Church, Barbados
+  image: sabbatical.png
+- project:
+  name: Telefónica
+  role: Backend Developer
+  from: 2013-09-30
+  to: 2013-08-01
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - Amdocs
+  - JUnit
+  - Mockito
+  - IBM ClearCase
+  - FileMon
+  text: |
+    The previous contractor deleted the original sources and formatted the laptop.
+    There were still some outdated, incomplete sources in the VCS.
+    My job was to fix a bug in the production system, and it was a mixture of reverse-engineer
+    the existing production binary and combining it with the sources.
+
+    Together with a specialist from Czech Republic we managed to transfer the project back to a stable,
+    tested state.
+  image: telefonica.svg
+- project:
+  name: Telefónica
+  role: Full Stack Developer
+  from: 2013-07-31
+  to: 2013-07-01
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - SOAP
+  - ClearBasic
+  - Ant
+  - JUnit
+  - Clarify
+  text: |
+    The existing CRM-system needed to be extended for SEPA debiting.
+
+    - Frontend view to enter SEPA data
+    - Backend to verify entered data (via a SOAP service)
+    - Store granted mandates into the system
+    - IBAN calculator to let users input account number and bank code
+  image: telefonica.svg
+- project:
+  name: Edeka
+  role: Backend Developer
+  from: 2013-06-01
+  to: 2013-06-30
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - FirstSpirit
+  - REST
+  - JAX-RS
+  - Maven
+  - SVN
+  text: |
+    Landing page for QR codes
+
+    Customers can scan QR codes to get to fact sheets for groceries.
+    They are shown details about the product, nutritional value, similar products and recipes.
+
+    - Connect the product database to FirstSpirit CMS data stores via a REST service
+  image: edeka.svg
+- project:
+  name: Edeka
+  role: Backend Developer
+  from: 2013-05-01
+  to: 2013-05-31
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - Hibernate
+  - FirstSpirit
+  - REST
+  - JAX-RS
+  - Maven
+  - SVN
+  - Mockito
+  - RabbitMQ
+  text: |
+    Flyers, which are usually shipped by mail to customers, should now additionally be available on a website.
+    Customers should be able to select market nearest to them and see the current offers.
+
+    - Implemented REST webservice for the FirstSpirit frontend
+    - Database connection via Hibernate
+    - Async import of new offers via message queue (RabbitMQ)
+    - Export data for mobile apps (iOS, Android)
+  image: edeka.svg
+- project:
+  name: Telefónica
+  role: Full Stack Developer
+  from: 2013-02-01
+  to: 2013-04-30
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - Spring MVC
+  - Spring Security
+  - Hibernate
+  - Active Directory
+  - Oracle
+  - Tomcat
+  - SVN
+  - Ant
+  - HTML
+  - CSS
+  - JavaScript
+  text: |
+    Internal platform for refurbished cell phones
+
+    Transfer big excel sheets into a webapp, make them easily filterable by reselling group
+    (staff shop, customer outlet, auction, third-parties) and generate reports.
+
+    - Authentication via Active Directory
+    - Import existing excel sheets into database
+    - Views to manage refurbished cell phones
+    - Export reports (CSV files)
+  image: telefonica.svg
+- project:
+  name: Kassenärztliche Vereinigung Westfalen-Lippe
+  role: Backend Developer
+  from: 2012-11-01
+  to: 2012-12-31
+  location: Dortmund, Germany
+  technologies:
+  - OpenAM
+  - OpenIDM
+  - Java
+  - OpenLDAP
+  - Single Sign-On
+  - SAML
+  text: |
+    Install a corporate-wide Authentication service (OpenAM) and connect it to
+    existing web applications.
+    OpenIDM was used to gather existing credentials from different data sources.
+    Tricky case: deal with the credentials of a proprietary web service.
+
+    - (Automated) installation of OpenAM on a Linux box
+    - Connect one data store via OpenLDAP
+    - Test with the customer's application "ePruefung USS"
+    - Layout customization
+    - Short training for the users
+  image: kvwl.svg
+- project:
+  name: Telefónica
+  role: Backend Developer
+  from: 2013-01-01
+  to: 2013-01-31
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - Spring
+  - CAS
+  - Single Sign-On
+  - Selenium
+  text: |
+    Extend Central Authentication Service (CAS) with a new authentication method
+
+    Due to a new format of customer ids, the CAS needed to be modified to allow a login
+    with these new numbers. Additionally, the login via the old customer ids should still work.
+
+    - Implementation of the new login method
+    - Care about the correct logout (a third-party system needed to be informed about the logout)
+    - Handle special cases correctly (timeout, already logged in, wrong password, etc.)
+  image: telefonica.svg
+- project:
+  name: Springer
+  role: Full Stack Developer
+  from: 2011-10-01
+  to: 2012-10-31
+  location: London, England
+  technologies:
+  - Agile software development
+  - Kanban
+  - Scala
+  - Ruby
+  - Sinatra
+  - Scalatra
+  - OpenAM
+  - Jade templates
+  - Git
+  - Simple Build Tool (SBT)
+  - Go (CI)
+  - Mingle
+  - Chef
+  - Capistrano
+  - SAP, MPS
+  - REST web services
+  - SAML
+  - Shibboleth
+  - Pair programming
+  - Test-driven development
+  text: |
+    Relaunch. Worked in a team of ~30 people from eight different countries, most of them from ThoughtWorks.
+    At first, my goal was to integrate OpenAM into their platform to let people authenticate by Username/Password, IP address or via Shibboleth (SAML 2.0).
+
+    Later, I've joined the Scala development team. The website offers thousands of scientific books, which can be searched, previewed, bought and downloaded.
+    Strictly test-driven. Weekly, automated releases.
+  image: springer.png
+  link: https://rd.springer.com
+- project:
+  name: Commerz Direktservice GmbH
+  role: Full Stack Developer
+  from: 2011-04-01
+  to: 2011-09-30
+  location: Hamburg, Germany
+  technologies:
+  - Java
+  - Apache Wicket
+  - Hibernate
+  - Spring DI
+  - JGroups
+  - AndroMDA
+  - Maven
+  - Microsoft SQL database
+  text: |
+    FIPS - Filial- und Termininformationsanwendung
+
+    Webapp for managing subsidiaries and appointments for a service company of the Commerzbank.
+
+    - Conception of new features (together with the customer)
+    - Development
+    - Testing
+    - Documentation
+  image: commerzbank.svg
+- project:
+  name: Prinovis Ltd. & Co. KG
+  role: Integrated degree program
+  from: 2007-09-01
+  to: 2011-03-31
+  location: Itzehoe, Germany
+  technologies:
+  - ETL process
+  - Microsoft SQL database
+  - Reporting Services
+  - Integration Services
+  - Cryptography
+  text: |
+    Served in several departments of the company, such as:
+
+    - Production Planning and Control
+    - Energy management / operating technology
+    - IT / applications
+    - IT / systems and support
+
+    Bachelor-Thesis: Migration, Processing und Reporting of staff data via Microsoft SQL Servers' ETL functions (SSIS / SSRS)
+  image: prinovis.svg
+  link: https://www.prinovis.com/
+- project:
+  name: Nordakademie - Hochschule der Wirtschaft
+  role: Student
+  from: 2007-09-01
+  to: 2011-03-31
+  location: Elmshorn, Germany
+  text: |
+    Bachelor of Science, Business Informatics
+  image: nordakademie.jpg
+  link: https://www.nordakademie.de/

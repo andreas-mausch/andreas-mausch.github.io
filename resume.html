@@ -158,13 +158,13 @@ permalink: /resume/
   <section class="projects-section">
     <h2 class="section-title"><i class="fas fa-users"></i>Other clients</h2>
     <div class="other-customers">
-      {% for image in site.static_files %}
-      {% if image.path contains 'images/resume/other-customers' %}
       <div class="other-customer">
-        <img src="{{ site.baseurl }}{{ image.path }}" alt="Other customer">
+        <img src="{{ site.baseurl }}/images/resume/commerzbank.svg" alt="Other customer">
+        <img src="{{ site.baseurl }}/images/resume/dreamit.svg" alt="Other customer">
+        <img src="{{ site.baseurl }}/images/resume/edeka.svg" alt="Other customer">
+        <img src="{{ site.baseurl }}/images/resume/kvwl.svg" alt="Other customer">
+        <img src="{{ site.baseurl }}/images/resume/telefonica.svg" alt="Other customer">
       </div>
-      {% endif %}
-      {% endfor %}
     </div>
   </section>
 

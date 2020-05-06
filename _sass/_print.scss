@@ -61,3 +61,7 @@ section {
 .projects-section {
   display: none;
 }
+
+.all-projects-section .project {
+  page-break-inside: avoid;
+}
