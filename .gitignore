@@ -3,7 +3,8 @@ _site
 .jekyll-metadata
 Gemfile.lock
 vendor/
-resume-pdf/node_modules/
-resume-pdf/resume.pdf
+pdf/node_modules/
+pdf/resume.pdf
+pdf/projects.pdf
 
 andreas-mausch.github.io.url

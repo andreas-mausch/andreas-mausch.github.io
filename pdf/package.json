@@ -1,0 +1,15 @@
+{
+  "name": "pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "resume": "chrome-headless-render-pdf --url=http://localhost:4000/resume/ --pdf=resume.pdf --include-background --no-margins --paper-width=8.26 --paper-height=11.69",
+    "projects": "chrome-headless-render-pdf --url=http://localhost:4000/projects/ --pdf=projects.pdf --include-background --no-margins --paper-width=8.26 --paper-height=11.69"
+  },
+  "devDependencies": {
+    "chrome-headless-render-pdf": "1.8.4"
+  }
+}
