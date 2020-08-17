@@ -1,7 +1,14 @@
 - experience:
+  role: Full Stack Web Developer
+  from: 2020-08-12
+  to:
+  company: PEAC (Germany) GmbH
+  location: Hamburg, Germany
+  image: peac.png
+- experience:
   role: Freelancer
   from: 2016-07-01
-  to:
+  to: 2020-07-31
   image: freelancer.png
 - experience:
   role: Senior Java Software Developer

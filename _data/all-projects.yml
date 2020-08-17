@@ -1,4 +1,19 @@
 - project:
+  name: PEAC (Germany) GmbH
+  role: Full Stack Web Developer
+  from: 2020-08-12
+  to:
+  location: Hamburg, Germany
+  technologies:
+  - Vue.js
+  - Java
+  - Micronaut
+  - Docker
+  - Ansible
+  text:
+  image: peac.png
+  link: https://www.peacfinance.de
+- project:
   name: dreamIT
   role: Full Stack Developer
   from: 2019-08-01
