@@ -9,10 +9,11 @@ Corona quarantine time. So I've gotten myself a toy.
 
 ![]({{ site.baseurl }}/images/2020-04-13-raspberry-pi-gpi-case/gpi-case.jpg){:height="400px"}
 
-This Game Boy looking device can hold a Raspberry Pi (W), has inputs, a display and sound.
+This Game Boy looking device can hold a Raspberry Pi Zero (W), has inputs, a display and sound.
 I've installed RetroPie onto it.
 
-What's also impressive: If you don't want to use RetroPie, you still have a Raspi which just on batteries!
+What's also impressive: If you don't want to use RetroPie,
+you still have a fully functional Raspi (+ a display) which runs just on batteries!
 
 ![]({{ site.baseurl }}/images/2020-04-13-raspberry-pi-gpi-case/earthworm-jim.jpg){:height="500px"}
 ![]({{ site.baseurl }}/images/2020-04-13-raspberry-pi-gpi-case/commander-keen.jpg){:height="500px"}
