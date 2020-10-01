@@ -12,6 +12,7 @@ And [here]({{ site.baseurl }}{% post_url blog/2020-02-20-tauri %}).
 Today: **wxWidgets**
 
 ![]({{ site.baseurl }}/images/2020-09-29-wxwidgets/linux.png)
+![]({{ site.baseurl }}/images/2020-09-29-wxwidgets/win.png)
 
 The repo for my experiment is here: [https://github.com/andreas-mausch/wxwidgets-conan-premake](https://github.com/andreas-mausch/wxwidgets-conan-premake)
 
