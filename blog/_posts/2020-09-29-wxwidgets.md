@@ -13,6 +13,7 @@ Today: **wxWidgets**
 
 ![]({{ site.baseurl }}/images/2020-09-29-wxwidgets/linux.png)
 ![]({{ site.baseurl }}/images/2020-09-29-wxwidgets/win.png)
+![]({{ site.baseurl }}/images/2020-09-29-wxwidgets/mac.png)
 
 The repo for my experiment is here: [https://github.com/andreas-mausch/wxwidgets-conan-premake](https://github.com/andreas-mausch/wxwidgets-conan-premake)
 
