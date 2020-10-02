@@ -32,6 +32,10 @@ They work very well together.
 
 As someone who never used a dependency manager for C++, I was positively surprised by the ease to add third-party code.
 
+It's feels like adding a maven dependency to a Java project.
+I might take a bit longer the first time you install it (because you might need to compile it first),
+but then it's just nice to have the include and library directories set up automatically.
+
 As you can see in the whatsapp-viewer repo, I still copy/pasted the dependencies into my own repo,
 something which is a very bad practice and something I've [criticized myself]({{ site.baseurl }}{% post_url blog/2020-02-12-element-ui %}) for good reasons.
 
@@ -91,7 +95,7 @@ If you add support for XRC, my binary increases to 11mb. :(
 
 In my opinion they should decide to be either a pure GUI library or a full-blown "app-environment", which features almost everything an OS offers, but in an OS-independet way. They are neither fish nor fowl.
 
-# Comparison
+# Alternatives?
 
 Most of my critism also applies to Qt, which I dislike a lot more for their bloatiness.
 
