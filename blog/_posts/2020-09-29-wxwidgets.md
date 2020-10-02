@@ -74,6 +74,9 @@ I really really dislike some things though, like:
   I believe there was a time were their statement was true, but I also believe a lot has changed since then, and the standard implementations are good now.
   
   The list for their self-written alternatives is long.
+- Magic: You create a frame by calling `new MyFrame()`, but you never `delete` it yourself.  
+  This is [automagically handled by wxWidgets](https://docs.wxwidgets.org/3.1/overview_windowdeletion.html).  
+  While it not only looks confusing in the code, it also means that you **cannot use smart pointers** like unique_ptr for the wxWidgets classes. :(
 
 The 'Hello World' wxWidgets on Linux results in a 7 MB executable. Imo that's bloated, and imo wxWidgets carries
 a lot of stuff which might be convenient, but doesn't belong in a pure GUI lib (implementations of jpeg, png, zlib, html, webview (a complete browser!), ..).
