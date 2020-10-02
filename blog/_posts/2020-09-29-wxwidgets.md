@@ -71,7 +71,7 @@ I really really dislike some things though, like:
   They state:
   > wxWidgets has its own set of stream classes, as an alternative to often buggy standard stream libraries, and to provide enhanced functionality.
 
-  I believe there was a time were their statement was true, but I also believe a lot has changed since then, and the standard implementations are good now.
+  I believe there was a time when their statement was true, but I also believe a lot has changed since then, and the standard implementations are good now.
   
   The list for their self-written alternatives is long.
 - Magic: You create a frame by calling `new MyFrame()`, but you never `delete` it yourself.  
