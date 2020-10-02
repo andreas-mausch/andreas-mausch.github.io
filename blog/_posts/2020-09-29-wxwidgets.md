@@ -77,6 +77,11 @@ I really really dislike some things though, like:
 - Magic: You create a frame by calling `new MyFrame()`, but you never `delete` it yourself.  
   This is [automagically handled by wxWidgets](https://docs.wxwidgets.org/3.1/overview_windowdeletion.html).  
   While it not only looks confusing in the code, it also means that you **cannot use smart pointers** like unique_ptr for the wxWidgets classes. :(
+- HiDPI support: Displays with high DPI are out for so long now, but either the programmers who use wxWidgets are all bad or wxWidgets support for HiDPI is not very great. I will soon find out.
+  I gave codelite a try as my next C++ IDE, but just installing it and looking at tiny fonts made me a bit mad.
+  Some research showed I was [not](https://github.com/eranif/codelite/issues/629) [alone](https://github.com/eranif/codelite/issues/1347).
+  These issues are quite dated though, and I have DPI problems with a lot of other programs (IntelliJ for example).
+  So I still have hope my worries are baseless and let's see, maybe my experience with wxWidgets and HiDPI will be good.
 
 The 'Hello World' wxWidgets on Linux results in a 7 MB executable. Imo that's bloated, and imo wxWidgets carries
 a lot of stuff which might be convenient, but doesn't belong in a pure GUI lib (implementations of jpeg, png, zlib, html, webview (a complete browser!), ..).
