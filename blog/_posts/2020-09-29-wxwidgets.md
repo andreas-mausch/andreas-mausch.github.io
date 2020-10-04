@@ -86,6 +86,9 @@ I really really dislike some things though, like:
   Some research showed I was [not](https://github.com/eranif/codelite/issues/629) [alone](https://github.com/eranif/codelite/issues/1347).
   These issues are quite dated though, and I have DPI problems with a lot of other programs (IntelliJ for example).
   So I still have hope my worries are baseless and let's see, maybe my experience with wxWidgets and HiDPI will be good.
+- In a perfect world, I'd like to replace the GUI library without touching the business logic at all.
+  However, with wxWidgets I have to implement a wxApp class and it even asks me to use their main() function.
+  If I would use all of their eco-system like streams, threads etc. then it would become a lot of work to replace wxWidgets in my app.
 
 The 'Hello World' wxWidgets on Linux results in a 7 MB executable. Imo that's bloated, and imo wxWidgets carries
 a lot of stuff which might be convenient, but doesn't belong in a pure GUI lib (implementations of jpeg, png, zlib, html, webview (a complete browser!), ..).
