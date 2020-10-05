@@ -45,6 +45,8 @@ The only thing which was tricky and not so easy was the 'imports' section.
 I had to execute the wxrc binary (which comes with wxwidgets). So I have to use the binary from the dependency. Unfortunately, the executable name on Windows and Linux/Mac is different (of course!).  
 The solution was to write two lines into the conanfile: One for the `wxrc-3.1` for Linux and Mac, and another for the `wxrc.exe` on Windows.
 
+Update 2020-10-05: Okay, dependencies or their receipes must be maintained by somebody, and apparently this isn't the case for [SqLiteCpp](https://github.com/SRombauts/SQLiteCpp) which is available in version 3.0 since nine months now. The newest version in conan is 2.5, even though it is part of the offical *conan-center-index*. Someone reported an [issue](https://github.com/conan-io/conan-center-index/issues/2217), but there is no reaction yet..
+
 ## Premake
 
 Premake can generate either makefiles, visual studio projects or xcode projects, all with a single description file.
