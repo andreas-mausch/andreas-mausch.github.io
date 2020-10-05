@@ -81,12 +81,12 @@ I really really dislike some things though, like:
 - Magic: You create a frame by calling `new MyFrame()`, but you never `delete` it yourself.  
   This is [automagically handled by wxWidgets](https://docs.wxwidgets.org/3.1/overview_windowdeletion.html).  
   While it not only looks confusing in the code, it also means that you **cannot use smart pointers** like unique_ptr for the wxWidgets classes. :(
+- No [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization): I see a lot of Init()/Destroy() methods, examples where Destroy() is called [manually](https://wiki.wxwidgets.org/Writing_Your_First_Application-Common_Dialogs) (although it can be avoided for the wxFileDialog) and so on. Doesn't really feel C++ish.
 - HiDPI support: Displays with high DPI are out for so long now, but either the programmers who use wxWidgets are all bad or wxWidgets support for HiDPI is not very great. I will soon find out.
   I gave codelite a try as my next C++ IDE, but just installing it and looking at tiny fonts made me a bit mad.
   Some research showed I was [not](https://github.com/eranif/codelite/issues/629) [alone](https://github.com/eranif/codelite/issues/1347).
   These issues are quite dated though, and I have DPI problems with a lot of other programs (IntelliJ for example).
   So I still have hope my worries are baseless and let's see, maybe my experience with wxWidgets and HiDPI will be good.
-- No [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization): I see a lot of Init()/Destroy() methods, examples where Destroy() is called [manually](https://wiki.wxwidgets.org/Writing_Your_First_Application-Common_Dialogs) (although it can be avoided for the wxFileDialog) and so on. Doesn't really feel C++ish.
 - In a perfect world, I'd like to replace the GUI library without touching the business logic at all.
   However, with wxWidgets I have to implement a wxApp class and it even asks me to use their main() function.
   If I would use all of their eco-system like streams, threads etc. then it would become a lot of work to replace wxWidgets in my app.
