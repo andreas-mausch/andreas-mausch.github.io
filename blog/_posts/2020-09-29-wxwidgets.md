@@ -84,6 +84,10 @@ I really really dislike some things though, like:
   This is [automagically handled by wxWidgets](https://docs.wxwidgets.org/3.1/overview_windowdeletion.html).  
   While it not only looks confusing in the code, it also means that you **cannot use smart pointers** like unique_ptr for the wxWidgets classes. :(
 - No [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization): I see a lot of Init()/Destroy() methods, examples where Destroy() is called [manually](https://wiki.wxwidgets.org/Writing_Your_First_Application-Common_Dialogs) (although it can be avoided for the wxFileDialog) and so on. Doesn't really feel C++ish.
+- Complex controls: wxWidgets offers the basic controls like a Win32 API.  
+  However, once you want to have just a little more sophisticated controls, like a [custom list](https://forums.wxwidgets.org/viewtopic.php?t=40950)
+  which you will see in almost every program, you have to do a lot of programming yourself.
+  On other systems (like Android) developers usually get these provided.
 - HiDPI support: Displays with high DPI are out for so long now, but either the programmers who use wxWidgets are all bad or wxWidgets support for HiDPI is not very great. I will soon find out.
   I gave codelite a try as my next C++ IDE, but just installing it and looking at tiny fonts made me a bit mad.
   Some research showed I was [not](https://github.com/eranif/codelite/issues/629) [alone](https://github.com/eranif/codelite/issues/1347).
