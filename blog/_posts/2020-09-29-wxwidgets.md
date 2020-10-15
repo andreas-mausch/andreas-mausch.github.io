@@ -72,7 +72,8 @@ I really really dislike some things though, like:
 - It is not a pure GUI library (although they don't aim to be one)
 - Feels bloated (see below)
 - Macros :cold_sweat:  
-  The `wxBEGIN_EVENT_TABLE` declaration for example.
+  The `wxBEGIN_EVENT_TABLE` declaration for example.  
+  Some macros are even poorly documented, like `XRCSIZERITEM`: It is only mentioned on the *XML Based Resource System (XRC)* page. There is no overview page of all macros available.
 - Reinvent the wheel: Classes like wxString, wxInputStream?? Use std::string, std::istream please!  
   They state:
   > wxWidgets has its own set of stream classes, as an alternative to often buggy standard stream libraries, and to provide enhanced functionality.
@@ -88,6 +89,7 @@ I really really dislike some things though, like:
   However, once you want to have just a little more sophisticated controls, like a [custom list](https://forums.wxwidgets.org/viewtopic.php?t=40950)
   which you will see in almost every program, you have to do a lot of programming yourself.
   On other systems (like Android) developers usually get these provided.
+- Some system settings are not used: You need to set the scrolling rate for a `wxScrolledWindow`. It is specified in pixels, and therefore ignores any system setting. I know at least KDE and Windows have an option to set the number of lines scrolled by mouse wheel.
 - HiDPI support: Displays with high DPI are out for so long now, but either the programmers who use wxWidgets are all bad or wxWidgets support for HiDPI is not very great. I will soon find out.
   I gave codelite a try as my next C++ IDE, but just installing it and looking at tiny fonts made me a bit mad.
   Some research showed I was [not](https://github.com/eranif/codelite/issues/629) [alone](https://github.com/eranif/codelite/issues/1347).
