@@ -89,6 +89,7 @@ I really really dislike some things though, like:
   However, once you want to have just a little more sophisticated controls, like a [custom list](https://forums.wxwidgets.org/viewtopic.php?t=40950)
   which you will see in almost every program, you have to do a lot of programming yourself.
   On other systems (like Android) developers usually get these provided.
+- No overlapping/z-order for child windows: That was a surprise to me! I'm curious how to do overlays like loading spinners.
 - Some system settings are not used: You need to set the scrolling rate for a `wxScrolledWindow`. It is specified in pixels, and therefore ignores any system setting. I know at least KDE and Windows have an option to set the number of lines scrolled by mouse wheel.
 - HiDPI support: Displays with high DPI are out for so long now, but either the programmers who use wxWidgets are all bad or wxWidgets support for HiDPI is not very great. I will soon find out.
   I gave codelite a try as my next C++ IDE, but just installing it and looking at tiny fonts made me a bit mad.
