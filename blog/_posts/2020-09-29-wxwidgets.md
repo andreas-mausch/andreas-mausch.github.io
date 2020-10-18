@@ -72,7 +72,7 @@ I really really dislike some things though, like:
 - It is not a pure GUI library (although they don't aim to be one)
 - Feels bloated (see below)
 - Macros :cold_sweat:  
-  The `wxBEGIN_EVENT_TABLE` declaration for example.  
+  ~~The `wxBEGIN_EVENT_TABLE` declaration for example.~~ can be avoided by using [dynamic events](https://docs.wxwidgets.org/3.1/overview_events.html#overview_events_bind)  
   Some macros are even poorly documented, like `XRCSIZERITEM`: It is only mentioned on the *XML Based Resource System (XRC)* page. There is no overview page of all macros available.
 - Reinvent the wheel: Classes like wxString, wxInputStream?? Use std::string, std::istream please!  
   They state:
