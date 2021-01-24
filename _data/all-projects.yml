@@ -8,8 +8,15 @@
   - Vue.js
   - Java
   - Micronaut
-  - Docker
+  - Spring Cloud Gateway
+  - Netty
+  - Docker Swarm
   - Ansible
+  - Traefik
+  - Quasar
+  - Flowable
+  - Mailhog
+  - Redis
   text:
   image: peac.png
   link: https://www.peacfinance.de
