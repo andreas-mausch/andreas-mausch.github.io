@@ -145,3 +145,12 @@ server.start(wait = true)
 ```
 {valid:false}
 ```
+
+# Alternatives using mock servers
+
+The approach above shows you the one with the greatest flexibiliy.
+In many cases, it is easier and faster to use static data.
+
+My favorite mock server is: [https://github.com/sinedied/smoke](https://github.com/sinedied/smoke)
+
+For Java, I've used this in the past: [https://www.mock-server.com](https://www.mock-server.com)
