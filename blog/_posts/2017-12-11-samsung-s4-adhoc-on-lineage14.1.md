@@ -88,3 +88,5 @@ Most likely, thinktube.com just didn't provide patches.
 - /system/etc/wifi/bcmdhd_sta.bin
 
 I've used lineage-14.1-20171206-nightly-jfltexx-signed.zip
+
+![]({{ site.baseurl }}/images/2017-07-20-mesh-networks-on-android/olsr.png)
