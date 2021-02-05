@@ -45,6 +45,7 @@ This is interesting, as there apparently are two common ways to format that date
 
 - The Cookie date, described in [RFC 6265](https://tools.ietf.org/html/rfc6265#section-5.1.1)  
   This is pretty much the HTTP date (described in [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.2)).  
+  You will also find that format on other HTTP headers, for example in the `If-Modified-Since` header.  
   Example: `Tue, 15 Jan 2013 21:47:38 GMT`
 - Netscape's way, described in [RFC 2109](https://tools.ietf.org/html/rfc2109#section-10.1.2) (from 1997, obsolete)  
   Example: `Tue, 15-Jan-2013 21:47:38 GMT`
@@ -88,6 +89,9 @@ Also, I find it confusing there is a *DEFAULT* and a *STANDARD* [CookieSpec](htt
 
 Why is standard not the default?  
 Anyway, after the change, it worked well.
+
+There is also a [bug ticket](https://issues.apache.org/jira/browse/HTTPCLIENT-1763) in the HttpClient bug tracker.  
+**But wow again!** It has been *resolved* with the reason: *Invalid* :/
 
 For completeness, here is the example above with the standard spec (it uses RFC6265LaxSpec as implementation):
 
