@@ -14,6 +14,7 @@ I am very forgetful so I will just write down how to enable monitor mode for the
 - [Samsung Galaxy S4 & Raspberry Pi 3](#samsung-galaxy-s4--raspberry-pi-3)
 - [Macbook Air 2013 (Broadcom wl)](#macbook-air-2013-broadcom-wl)
 - [Useful commands](#useful-commands)
+- [Frequency Table](#frequency-table)
 
 # Intel Dual Band Wireless-AC 8265 (iwlwifi)
 
@@ -77,3 +78,17 @@ Use prism0 with Wireshark, Aircrack-ng or your favorite analysis tool.
 $ lspci | grep -i wireless
 $ lspci -vv -s 03:00.0 # replace with the numbers the previous command returned
 ```
+
+# Frequency table
+
+[https://en.wikipedia.org/wiki/List_of_WLAN_channels](https://en.wikipedia.org/wiki/List_of_WLAN_channels)
+
+To show the current frequency used by your WiFi adapter, use either `iwlist wlan0 channel` or just plain `iwconfig`.
+
+## 2.4 GHz
+
+![]({{ site.baseurl }}/images/2018-04-30-wifi-monitor-mode/2021-02-27-wifi-channel-frequencies-2.4.png)
+
+## 5 GHz
+
+![]({{ site.baseurl }}/images/2018-04-30-wifi-monitor-mode/2021-02-27-wifi-channel-frequencies-5.png)
