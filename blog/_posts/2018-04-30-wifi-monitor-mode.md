@@ -74,10 +74,57 @@ Use prism0 with Wireshark, Aircrack-ng or your favorite analysis tool.
 
 # Useful commands
 
+## Find network device
+
+```bash
+sudo lshw -C network
+```
+
+<details markdown="1">
+<summary>Example output</summary>
+```
+$ sudo lshw -C network
+  *-network               
+       Beschreibung: Kabellose Verbindung
+       Produkt: BCM4360 802.11ac Wireless Network Adapter
+       Hersteller: Broadcom Corporation
+       Physische ID: 0
+       Bus-Informationen: pci@0000:03:00.0
+       Logischer Name: wlan0
+       Version: 03
+       Seriennummer: 84:11:22:33:44:ff
+       Breite: 64 bits
+       Takt: 33MHz
+       Fähigkeiten: pm msi pciexpress bus_master cap_list ethernet physical wireless
+       Konfiguration: broadcast=yes driver=wl0 driverversion=6.30.223.271 (r587334) ip=192.168.178.38 latency=0 multicast=yes wireless=IEEE 802.11
+       Ressourcen: irq:18 memory:b0600000-b0607fff memory:b0400000-b05fffff
+```
+</details>
+
+## Find driver
+
 ```bash
 $ lspci | grep -i wireless
 $ lspci -vv -s 03:00.0 # replace with the numbers the previous command returned
 ```
+
+<details markdown="1">
+<summary>Example output</summary>
+```
+$ lspci -vv -s 03:00.0
+03:00.0 Network controller: Broadcom Corporation BCM4360 802.11ac Wireless Network Adapter (rev 03)
+	Subsystem: Apple Inc. BCM4360 802.11ac Wireless Network Adapter
+	Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Latency: 0, Cache Line Size: 256 bytes
+	Interrupt: pin A routed to IRQ 18
+	Region 0: Memory at b0600000 (64-bit, non-prefetchable) [size=32K]
+	Region 2: Memory at b0400000 (64-bit, non-prefetchable) [size=2M]
+	Capabilities: <access denied>
+	Kernel driver in use: wl
+	Kernel modules: bcma, wl
+```
+</details>
 
 # Frequency table
 
