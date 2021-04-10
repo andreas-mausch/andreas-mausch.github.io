@@ -437,6 +437,9 @@ music:
       - artist: Kiesza
         title: Hideaway
         youtube: https://www.youtube.com/watch?v=Vnoz5uBEWOA
+      - artist: Laboratorium Pieśni
+        title: Sztoj pa moru
+        youtube: https://www.youtube.com/watch?v=04fEWQOwUD4
       - artist: Lil Wayne
         title: Carter II
         youtube: https://www.youtube.com/watch?v=Ep__S6Vv1Eg
@@ -470,6 +473,9 @@ music:
       - artist: Mogwai
         title: Hungry Face
         youtube: https://www.youtube.com/watch?v=BYSdLYmfQG4
+      - artist: Nate57
+        title: Hanseat
+        youtube: https://www.youtube.com/watch?v=9vz1fMOVhHU
       - artist: Nicky Minaj
         title: Dirty Money
         youtube: https://www.youtube.com/watch?v=w56UQK7QpBw
@@ -485,6 +491,9 @@ music:
       - artist: Reverie
         title: Give it Time
         youtube: https://www.youtube.com/watch?v=7nyJhDFY6z4
+      - artist: Saweetie
+        title: My Type
+        youtube: https://www.youtube.com/watch?v=x5c2iRHlAHA
       - artist: Semargl
         title: Credo Revolution
         youtube: https://www.youtube.com/watch?v=uSjaEHoi1_c
@@ -527,6 +536,9 @@ music:
       - artist: Wilz
         title: Get Outta my Face
         youtube: https://www.youtube.com/watch?v=1RKvqCITai4
+      - artist: Worakls
+        title: Digital DGTL
+        youtube: https://www.youtube.com/watch?v=hAwDKT9ix28
       - artist: Young Money
         title: We Alright (feat. Euro, Birdman, Lil Wayne)
         youtube: https://www.youtube.com/watch?v=8cyUSC8ZJKk
@@ -546,6 +558,9 @@ music:
       - artist: Bushido
         title: Vom Bordstein bis zur Skyline
         youtube: https://www.youtube.com/watch?v=hYXmxphebNM
+      - artist: Bushido
+        title: Vom Bordstein bis zur Skyline (alle Samples)
+        youtube: https://www.youtube.com/watch?v=SA1v6q2EddA
       - artist: Gang Starr
         title: Right were you stand
         youtube: https://www.youtube.com/watch?v=PhV-gTwXNLA
@@ -611,6 +626,8 @@ games:
     youtube: https://www.youtube.com/watch?v=GuKYfRr1qwU
   - title: Atari 2600 Emulator in Minecraft
     youtube: https://www.youtube.com/watch?v=5nViIUfDMJg
+  - title: "Cuphead: Making Of"
+    youtube: https://www.youtube.com/watch?v=wRRV7TIQTX0
   - title: "Detroit: Become Human - Behind the Scenes"
     youtube: https://www.youtube.com/watch?v=9T1rxI1AlmM
   - title: "Detroit: Become Human - Kara"
@@ -715,3 +732,5 @@ other:
     youtube: https://www.youtube.com/watch?v=Wdm7xwT-vEQ
   - title: "The Matrix: Previz Fights"
     youtube: https://www.youtube.com/watch?v=0jreg4e-lXY
+  - title: "Walt Disney's The Old Mill (1937)"
+    youtube: https://www.youtube.com/watch?v=MYEmL0d0lZE
