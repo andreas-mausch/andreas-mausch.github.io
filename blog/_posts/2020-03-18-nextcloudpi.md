@@ -36,15 +36,74 @@ Now I've changed the passwords:
 
 # Setup Wi-Fi hotspot
 
-There's a good documentation [here](https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md) about how to setup Wi-Fi with a Raspberry Pi.
+There's a good documentation [here](https://www.raspberrypi.org/documentation/configuration/wireless/access-point-routed.md) about how to setup Wi-Fi with a Raspberry Pi.
 
 Here's what I did differently:
 
 - `sudo apt install hostapd` (dnsmasq was already installed)
+- I've skipped the `iptables` part
 - Extend `dhcp-range` to .200, to allow more than 20 concurrent clients
 - `sudo systemctl enable dnsmasq` after `sudo systemctl start dnsmasq`: That was missing, and is needed to make dhcp work after reboot
 - Add `192.168.4.1 nextcloudpi` to */etc/hosts*: You will be able to type in `nextcloudpi` in the browser instead of the IP
 - `sudo reboot` at the end and you should be presented a new Wi-Fi network to connect to :)
+
+All commands:
+
+```bash
+sudo apt install hostapd dnsmasq
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+sudo systemctl start dnsmasq
+sudo systemctl enable dnsmasq
+sudo apt install netfilter-persistent iptables-persistent
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo netfilter-persistent save
+sudo rfkill unblock wlan
+```
+
+Add this at the end of */etc/dhcpcd.conf*:
+
+```
+interface wlan0
+    static ip_address=192.168.4.1/24
+    nohook wpa_supplicant
+```
+
+Enable routing. Create a file */etc/sysctl.d/routed-ap.conf*:
+
+```
+# Enable IPv4 routing
+net.ipv4.ip_forward=1
+```
+
+Add this at the end of */etc/dnsmasq.conf*:
+
+```
+interface=wlan0 # Listening interface
+dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+                # Pool of IP addresses served via DHCP
+domain=wlan     # Local wireless DNS domain
+address=/gw.wlan/192.168.4.1
+                # Alias for this router
+```
+
+Create a file */etc/hostapd/hostapd.conf*:
+
+```
+country_code=GB
+interface=wlan0
+ssid=<NameOfNetwork>
+hw_mode=g
+channel=7
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=<YourPassword>
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+```
 
 # My favorite apps for Nextcloud
 
