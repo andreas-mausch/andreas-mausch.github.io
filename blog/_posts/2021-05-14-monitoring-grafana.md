@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Monitoring: Grafana, Loki, Prometheus, Alertmanager"
-date:   2021-05-14 14:00:00 +02:00
-tags:
+title: "Monitoring: Grafana, Loki, Prometheus, Alertmanager"
+date: 2021-05-14 14:00:00 +02:00
+tags: devops, logging, alerting
 ---
 
 Most of the times I evaluate tools or libraries I get disappointed:
@@ -28,7 +28,7 @@ the server crashed on pretty much basic queries.
 
 Now in my current project I was looking for alternatives.
 I knew Grafana from a previous project, but never set it up myself
-(we had a dedicated DevOps team there).
+(we had a dedicated Ops team there).
 
 So this was now my first time to set up Grafana myself.
 I will not go into too much details, you will find an excellent documentation at Grafana Labs.
@@ -92,7 +92,7 @@ So only *auth_url* and *signout_redirect_url* are called by the user, and they n
 
 ## User exists in Keycloak, but has no grafana role
 
-Currently, Grafana cannot deny access to a authenticated user.  
+Currently, Grafana cannot deny access to an authenticated user.  
 He will at least get the *Viewer* role.
 
 But in the latest unreleased version there is a fix already: `role_attribute_strict`.  
@@ -133,12 +133,13 @@ That's because I had colored logs configured with logback:
 %cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n
 ```
 
-This leads to the first character not being a *1*, but the hex value 0x1B:
+This leads to the first character not being a *1*, but the hex value 0x1B (or *\033* octal):
+The [ASCII Escape character](https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character)
 
 ![]({{ site.baseurl }}/images/2021-05-14-monitoring-grafana/hello-world-colored.png)
 
 So in order to filter by the colored output, I've used this regex:
 
 ```
-^\x1B\[31m\d{2}:\d{2}:\d{2},\d{3}
+^\x1B\[36m\d{2}:\d{2}:\d{2},\d{3}
 ```
