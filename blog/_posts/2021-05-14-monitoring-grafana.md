@@ -17,6 +17,8 @@ See my repo with a fully running setup here: [andreas-mausch/grafana-prometheus-
 
 ![]({{ site.baseurl }}/images/2021-05-14-monitoring-grafana/prometheus.png)
 
+![]({{ site.baseurl }}/images/2021-05-14-monitoring-grafana/mailhog.png)
+
 # Background
 
 I've used the ELK stack at AWS before (Elasticsearch, Logstash, Kibana), and maybe my setup
