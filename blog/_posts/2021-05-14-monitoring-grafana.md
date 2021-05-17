@@ -58,7 +58,8 @@ from a specified directory and forwards them to Loki.
 For docker swarm users: Unfortunately, there is no setting to configure the log-opts per docker stack, only per service.
 So you need to either set them globally, or duplicate them at each container.
 
-The only change to the default config file (*/etc/loki/config.yaml*) I made was the connection to the alertmanager.
+The changes I made to the default config file (*/etc/loki/config.yaml*) was the connection to the alertmanager
+and the persistence settings (see below).
 Also, I've added a */etc/loki/rules/alerts/rules.yml* for the alerting.
 
 ## Permission
@@ -90,7 +91,7 @@ But there is a difference in the URLs: Some of them are called by the user's bro
 So only *auth_url* and *signout_redirect_url* are called by the user, and they need to be publicly available URLs.
 *token_url* and *api_url* can be set to URLs only accessible in the local network (they should lead to the same Keycloak server though).
 
-## User exists in Keycloak, but has no grafana role
+### User exists in Keycloak, but has no grafana role
 
 Currently, Grafana cannot deny access to an authenticated user.  
 He will at least get the *Viewer* role.
@@ -100,7 +101,7 @@ See [here](https://github.com/grafana/grafana/pull/28021) and [here](https://git
 
 I will be available in version 8.0.0.
 
-## My auth settings for Grafana
+### My auth settings for Grafana
 
 ```
 [auth]
@@ -184,6 +185,8 @@ So in order to filter by the colored output, I've used this regex:
 When playing around with loki and restarting the service a couple of times,
 I've noticed I lost log entries.
 
+## Ingester, Write-Ahead Log
+
 Some investigation, and I found that the *ingester* only persists logs every few minutes.
 This can be configured, at *chunk_idle_period* for [example](https://grafana.com/docs/loki/latest/configuration/#ingester_config).
 
@@ -191,7 +194,9 @@ Now, there is a good blog post at Grafana Labs where they explain how to not los
 It's pretty recent (Feb 2021), because the feature is just available.  
 Here: [https://grafana.com/blog/2021/02/16/the-essential-config-settings-you-should-use-so-you-wont-drop-logs-in-loki/](https://grafana.com/blog/2021/02/16/the-essential-config-settings-you-should-use-so-you-wont-drop-logs-in-loki/)
 
-I'm still wondering how these can not be the defaults settings though. :(
+I'm still wondering how these can not be the defaults settings though. :(  
+I'm also wondering how the WAL config is not mentioned anywhere on their
+[example config page](https://grafana.com/docs/loki/latest/configuration/examples/).
 
 So please enable the Write-Ahead Log (WAL) and make sure the directory is persisted, for example in a docker volume.
 Check [my loki config](https://github.com/andreas-mausch/grafana-prometheus-loki-alertmanager-setup/blob/master/loki/loki.yml) for an example.
@@ -207,5 +212,7 @@ Strange: [The docu](https://grafana.com/docs/loki/latest/operations/storage/wal/
 > --ingester.recover-from-wal to true to recover data from an existing WAL. The data is recovered even if WAL is disabled and this is set to true. The WAL dir needs to be set for this. If you are going to enable WAL, it is advisable to always set this to true.
 
 I couldn't find it anywhere (even browsed the sources), so I did not use it.
+
+## Retention
 
 And last, I've set the *retention_period* to 14 days to get rid of old logs and keep the disk usage low.
