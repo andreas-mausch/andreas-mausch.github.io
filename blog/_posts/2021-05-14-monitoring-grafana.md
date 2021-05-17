@@ -2,7 +2,7 @@
 layout: post
 title: "Monitoring: Grafana, Loki, Prometheus, Alertmanager"
 date: 2021-05-14 14:00:00 +02:00
-tags: devops, logging, alerting
+tags: devops, logging, alerting, metrics
 ---
 
 Most of the times I evaluate tools or libraries I get disappointed:
