@@ -58,7 +58,7 @@ from a specified directory and forwards them to Loki.
 For docker swarm users: Unfortunately, there is no setting to configure the log-opts per docker stack, only per service.
 So you need to either set them globally, or duplicate them at each container.
 
-The only change to the default config file (*/etc/loki/config.yaml*) I made was the connection to prometheus.
+The only change to the default config file (*/etc/loki/config.yaml*) I made was the connection to the alertmanager.
 Also, I've added a */etc/loki/rules/alerts/rules.yml* for the alerting.
 
 ## Permission
