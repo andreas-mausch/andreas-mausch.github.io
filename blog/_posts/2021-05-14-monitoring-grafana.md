@@ -100,6 +100,37 @@ See [here](https://github.com/grafana/grafana/pull/28021) and [here](https://git
 
 I will be available in version 8.0.0.
 
+## My auth settings for Grafana
+
+```
+[auth]
+disable_login_form = true
+oauth_auto_login = true
+signout_redirect_url = https://keycloak.mycompany.com/auth/realms/my-realm/protocol/openid-connect/logout
+
+[auth.anonymous]
+enabled = false
+
+[auth.generic_oauth]
+name = Keycloak
+enabled = true
+client_id = grafana
+client_secret = {{ grafana_client_secret }}
+scopes = openid profile email
+email_attribute_name = email:primary
+role_attribute_path = "roles[*] && contains(roles[*], 'admin') && 'Admin' || roles[*] && contains(roles[*], 'editor') && 'Editor' || roles[*] && contains(roles[*], 'viewer') && 'Viewer' || 'Forbidden'"
+role_attribute_strict = true
+auth_url = https://keycloak.mycompany.com/auth/realms/my-realm/protocol/openid-connect/auth
+token_url = http://keycloak.intranet/auth/realms/my-realm/protocol/openid-connect/token
+api_url = http://keycloak.intranet/auth/realms/my-realm/protocol/openid-connect/userinfo
+
+# Logging for debugging OAuth Token
+[log]
+filters = oauth:debug oauth.generic_oauth:debug
+```
+
+Use the debug log to analyze errors, display the token etc.
+
 # Multiline
 
 One feature which is pretty essential in my opinion and is only available
