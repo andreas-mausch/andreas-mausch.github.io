@@ -143,3 +143,34 @@ So in order to filter by the colored output, I've used this regex:
 ```
 ^\x1B\[36m\d{2}:\d{2}:\d{2},\d{3}
 ```
+
+# Persistence
+
+When playing around with loki and restarting the service a couple of times,
+I've noticed I lost log entries.
+
+Some investigation, and I found that the *ingester* only persists logs every few minutes.
+This can be configured, at *chunk_idle_period* for [example](https://grafana.com/docs/loki/latest/configuration/#ingester_config).
+
+Now, there is a good blog post at Grafana Labs where they explain how to not lose data.
+It's pretty recent (Feb 2021), because the feature is just available.  
+Here: [https://grafana.com/blog/2021/02/16/the-essential-config-settings-you-should-use-so-you-wont-drop-logs-in-loki/](https://grafana.com/blog/2021/02/16/the-essential-config-settings-you-should-use-so-you-wont-drop-logs-in-loki/)
+
+I'm still wondering how these can not be the defaults settings though. :(
+
+So please enable the Write-Ahead Log (WAL) and make sure the directory is persisted, for example in a docker volume.
+Check [my loki config](https://github.com/andreas-mausch/grafana-prometheus-loki-alertmanager-setup/blob/master/loki/loki.yml) for an example.
+
+I've ran into this error, which could be easily fixed by doing what the error message suggests:
+
+```
+invalid ingester config: the use of the write ahead log (WAL) is incompatible with chunk transfers. It's suggested to use the WAL. Please try setting ingester.max-transfer-retries to 0 to disable transfers
+```
+
+Strange: [The docu](https://grafana.com/docs/loki/latest/operations/storage/wal/) talks about a `--ingester.recover-from-wal` setting.
+
+> --ingester.recover-from-wal to true to recover data from an existing WAL. The data is recovered even if WAL is disabled and this is set to true. The WAL dir needs to be set for this. If you are going to enable WAL, it is advisable to always set this to true.
+
+I couldn't find it anywhere (even browsed the sources), so I did not use it.
+
+And last, I've set the *retention_period* to 14 days to get rid of old logs and keep the disk usage low.
