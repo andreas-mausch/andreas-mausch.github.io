@@ -131,6 +131,10 @@ filters = oauth:debug oauth.generic_oauth:debug
 
 Use the debug log to analyze errors, display the token etc.
 
+These two links were helpful:
+- [https://www.lars-fischer.me/posts/2021/grafana-sso-integration-with-keycloak/](https://www.lars-fischer.me/posts/2021/grafana-sso-integration-with-keycloak/)
+- [https://janikvonrotz.ch/2020/08/27/grafana-oauth-with-keycloak-and-how-to-validate-a-jwt-token/](https://janikvonrotz.ch/2020/08/27/grafana-oauth-with-keycloak-and-how-to-validate-a-jwt-token/)
+
 # Multiline
 
 One feature which is pretty essential in my opinion and is only available
