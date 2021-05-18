@@ -86,8 +86,54 @@ For my needs, adding this to my Prometheus `scrape_configs` was enough:
         - 'rabbitmq:15692'
 ```
 
-I use the *rabbitmq:3.8-management* docker image, which seems to already have the metrics endpoint available.  
-Note that the [official examples](https://github.com/rabbitmq/rabbitmq-server/blob/cb4e293cc7b8524cced8c7f84ba11023c61c84b5/deps/rabbitmq_prometheus/docker/docker-compose-overview.yml)
-use a different docker image: *pivotalrabbitmq/rabbitmq-prometheus*
+I use the *rabbitmq:3.8-management* docker image, which seems to already have the metrics endpoint available.
 
 ![]({{ site.baseurl }}/images/2021-05-17-rabbitmq-persistence/rabbitmq-metrics.png)
+
+```
+$ docker ps
+63ae8f15f137 rabbitmq:3.8-management "docker-entrypoint.s…" 10 minutes ago Up 9 minutes rabbitmq
+
+$ docker exec -it rabbitmq rabbitmq-plugins list
+Listing plugins with pattern ".*" ...
+ Configured: E = explicitly enabled; e = implicitly enabled
+ | Status: * = running on rabbit@rabbitmq
+ |/
+[  ] rabbitmq_amqp1_0                  3.8.16
+[  ] rabbitmq_auth_backend_cache       3.8.16
+[  ] rabbitmq_auth_backend_http        3.8.16
+[  ] rabbitmq_auth_backend_ldap        3.8.16
+[  ] rabbitmq_auth_backend_oauth2      3.8.16
+[  ] rabbitmq_auth_mechanism_ssl       3.8.16
+[  ] rabbitmq_consistent_hash_exchange 3.8.16
+[  ] rabbitmq_event_exchange           3.8.16
+[  ] rabbitmq_federation               3.8.16
+[  ] rabbitmq_federation_management    3.8.16
+[  ] rabbitmq_jms_topic_exchange       3.8.16
+[E*] rabbitmq_management               3.8.16
+[e*] rabbitmq_management_agent         3.8.16
+[  ] rabbitmq_mqtt                     3.8.16
+[  ] rabbitmq_peer_discovery_aws       3.8.16
+[  ] rabbitmq_peer_discovery_common    3.8.16
+[  ] rabbitmq_peer_discovery_consul    3.8.16
+[  ] rabbitmq_peer_discovery_etcd      3.8.16
+[  ] rabbitmq_peer_discovery_k8s       3.8.16
+[E*] rabbitmq_prometheus               3.8.16
+[  ] rabbitmq_random_exchange          3.8.16
+[  ] rabbitmq_recent_history_exchange  3.8.16
+[  ] rabbitmq_sharding                 3.8.16
+[  ] rabbitmq_shovel                   3.8.16
+[  ] rabbitmq_shovel_management        3.8.16
+[  ] rabbitmq_stomp                    3.8.16
+[  ] rabbitmq_top                      3.8.16
+[  ] rabbitmq_tracing                  3.8.16
+[  ] rabbitmq_trust_store              3.8.16
+[e*] rabbitmq_web_dispatch             3.8.16
+[  ] rabbitmq_web_mqtt                 3.8.16
+[  ] rabbitmq_web_mqtt_examples        3.8.16
+[  ] rabbitmq_web_stomp                3.8.16
+[  ] rabbitmq_web_stomp_examples       3.8.16
+```
+
+Note that the [official examples](https://github.com/rabbitmq/rabbitmq-server/blob/cb4e293cc7b8524cced8c7f84ba11023c61c84b5/deps/rabbitmq_prometheus/docker/docker-compose-overview.yml)
+use a different docker image: *pivotalrabbitmq/rabbitmq-prometheus*
