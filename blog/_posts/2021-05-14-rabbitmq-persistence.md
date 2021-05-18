@@ -86,7 +86,8 @@ For my needs, adding this to my Prometheus `scrape_configs` was enough:
         - 'rabbitmq:15692'
 ```
 
-I use the *rabbitmq:3.8-management* docker image, which seems to already have the metrics endpoint available.
+I use the *rabbitmq:3.8-management* docker image, which seems to already have
+[the metrics endpoint available](https://github.com/docker-library/rabbitmq/blob/e62f193dfcf9aee378e256cbbfae30363480c3a7/3.8/ubuntu/Dockerfile#L255).
 
 ![]({{ site.baseurl }}/images/2021-05-17-rabbitmq-persistence/rabbitmq-metrics.png)
 
