@@ -9,10 +9,11 @@ tags: devops, metrics
 
 We've noticed our RabbitMQ lost messages when the container had to be restarted.
 
-Two things to consider to not lose stuff on a restart:
+Three things to consider to not lose stuff on a restart:
 
 - Your exchanges and queues should be **durable**
 - Your messages should be **persistent**
+- If you run RabbitMQ via Docker, make sure to set a fixed hostname
 
 Links to RabbitMQ's documentation:
 
@@ -72,6 +73,20 @@ If you like to use the RabbitMQ cli, you can do it as follows:
 ```bash
 rabbitmqadmin -u rabbitmq -p password publish exchange=my-exchange routing_key=my-routing-key properties="{\"delivery_mode\":2}" payload='test'
 ```
+
+## Set a fixed hostname for RabbitMQ container
+
+> Rabbitmq uses the hostname as part of the folder name in the mnesia directory. Maybe add a --hostname some-rabbit to your docker run?
+
+[github.com](https://github.com/docker-library/rabbitmq/issues/106#issuecomment-241882358)
+
+This is how the *mnesia* directory looks like after a few restarts if you **don't** set a hostname:
+
+![]({{ site.baseurl }}/images/2021-05-17-rabbitmq-persistence/rabbitmq-hostname.png)
+
+Docker generates a new hostname every container run, and RabbitMQ takes it to create the directory structure.
+
+Solution: Set the hostname via `--hostname rabbitmq` or in your *docker-compose.yml* via `hostname: rabbitmq`.
 
 # Metrics
 
