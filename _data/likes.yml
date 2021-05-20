@@ -134,6 +134,9 @@ music:
         title: Glaub an den Herrn (feat. Manuellsen)
         youtube: https://www.youtube.com/watch?v=pfHGJJ2venM
       - artist: Haftbefehl
+        title: Offen / Geschlossen
+        youtube: https://www.youtube.com/watch?v=Cp23UHxJ8gI
+      - artist: Haftbefehl
         title: Parallelen (feat. Celo & Abdi)
         youtube: https://www.youtube.com/watch?v=3ctIO8CwJsk
       - artist: Haftbefehl
@@ -660,6 +663,8 @@ games:
     youtube: https://www.youtube.com/watch?v=kXh1JJ_Jtew
   - title: "StarCraft II: DeepMind"
     youtube: https://www.youtube.com/watch?v=cUTMhmVh1qs
+  - title: "The Environments in Deus Ex: Mankind Divided"
+    youtube: https://www.youtube.com/watch?v=eMFL7ettk7Y
 ads:
   - title: Joga Bonito - Brazil
     youtube: https://www.youtube.com/watch?v=fRHtq2DTdhk
