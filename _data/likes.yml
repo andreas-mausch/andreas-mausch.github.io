@@ -68,6 +68,9 @@ music:
       - game: Portal
         title: The Device has been Modified
         youtube: https://www.youtube.com/watch?v=kuYT-d_fxpE
+      - game: XCOM Enemy Unknown
+        title: Main Menu
+        youtube: https://www.youtube.com/watch?v=f-cdXsAAme0
   songs:
     german:
       - artist: A.i.d.S
