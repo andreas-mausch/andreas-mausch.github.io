@@ -50,6 +50,9 @@ music:
       - game: EVE Online
         title: Akat Mountains
         youtube: https://www.youtube.com/watch?v=PsbI2hS5HZQ
+      - game: God of War III
+        title: Rage Of Sparta
+        youtube: https://www.youtube.com/watch?v=BLEBtvOhGnM
       - game: GTA 4
         title: Intro
         youtube: https://www.youtube.com/watch?v=jqE8M2ZnFL8
@@ -652,6 +655,8 @@ games:
     youtube: https://www.youtube.com/watch?v=j-pF56-ZYkY
   - title: "Gaming Ambience"
     youtube: https://www.youtube.com/c/GamingAmbience/playlists
+  - title: "God of War III: Intro"
+    youtube: https://www.youtube.com/watch?v=W3OfjO0ThhQ
   - title: "Hellblade: Senua Sacrifice - Behind the Scenes"
     youtube: https://www.youtube.com/watch?v=uuTy2iHSODs
   - title: "Horizon Zero Dawn: Animation Reel"
