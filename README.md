@@ -6,3 +6,9 @@ to [run](https://github.com/envygeeks/pathutil/pull/5) this, e.g. you are using 
 ```bash
 docker run -it --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 jekyll/jekyll:3.8 jekyll serve
 ```
+
+Optimize images:
+
+```bash
+optipng image.png
+```
