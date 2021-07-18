@@ -171,8 +171,11 @@ It is far from perfect, but was good enough for my specific problem.
 meld <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
 diff <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
 diff --unified <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
+diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\012'" --unchanged-group-format="" <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
 ```
 
 ![]({{ site.baseurl }}/images/2021-07-17-binary-diffs/colordiff-xxd-inserted-bytes-c1.png)
 
 ![]({{ site.baseurl }}/images/2021-07-17-binary-diffs/meld-xxd-inserted-bytes-c1.png)
+
+![]({{ site.baseurl }}/images/2021-07-17-binary-diffs/diff-offsets-only.png)
