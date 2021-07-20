@@ -386,7 +386,12 @@ This is the perfect result: No data was lost, and the new rating has been set.
 JPEG tags are complicated.
 EXIF, SubIFD, IPTC, XMP..uff!
 
+So many mixed variants for the same idea..
+you can smell how the metadata format has evolved over the years.
+
 No wonder many tools behave differently and compatibility is not always given.
+
+Here is a final overview over the tools I've tested:
 
 | Tool     | Filesize | All data preserved | No more changes than necessary |
 |----------|----------|--------------------|--------------------------------|
