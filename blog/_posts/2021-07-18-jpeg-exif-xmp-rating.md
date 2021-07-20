@@ -85,7 +85,7 @@ You can run exiv2 with the *-pS* parameter for the structure view, but there is 
 the *-pR* parameter for the recursive structure view.
 
 However, *-pR* has been disabled [for security reasons](https://nvd.nist.gov/vuln/detail/CVE-2019-9144).
-I don't really why the feature is completely disabled in release builds and you have no option to enable it,
+I don't really understand why the feature is completely disabled in release builds and you have no option to enable it,
 but I've decided to compile exiv2 myself to enable the feature again.
 
 ```bash
