@@ -177,7 +177,10 @@ The addresses of the Exif tags are relative to the Tiff header though, so you ne
 ```
 
 to get the file offset.  
-So the ImageLength for example is at offset `22 + 12 = 34 (0x22)`.
+So the Orientation for example is at offset `58 + 12 = 70 (0x46)`, it's value `1` means
+*0 degrees: the correct orientation, no adjustment is required*
+(Btw: This blog post: [EXIF Orientation Handling Is a Ghetto](https://www.daveperrett.com/articles/2012/07/28/exif-orientation-handling-is-a-ghetto/) is a bit dated,
+but shows the meaning and compatibility in 2012).
 
 ## XMP
 
