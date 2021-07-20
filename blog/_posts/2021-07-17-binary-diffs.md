@@ -171,6 +171,11 @@ It is far from perfect, but was good enough for my specific problem.
 meld <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
 diff <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
 diff --unified <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
+
+# Only shows offsets of changes.
+# Example output: 00000012-00000012 (00000000) <-> 00000012-00000018 (00000006)
+# Format:         from    -to [file 1]  (size) <-> from    -to [file 2]  (size)
+# All numbers are hex values
 diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\012'" --unchanged-group-format="" <(xxd -c 1 -ps testfile.bin) <(xxd -c 1 -ps testfile_inserted-bytes.bin)
 ```
 
