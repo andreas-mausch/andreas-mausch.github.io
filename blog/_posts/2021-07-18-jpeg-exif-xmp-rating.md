@@ -217,7 +217,7 @@ I will drop all occurences of exif:Rating and exif:RatingPercent.
 
 > Neither of the EXIF Rating tags are standard EXIF
 
-## exiftool
+## exiftool 12.26
 
 Run this to rate the image.
 The `-preserve` flag preserves the file modification date/time.
