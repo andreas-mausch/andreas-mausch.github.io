@@ -182,13 +182,17 @@ So the Orientation for example is at offset `58 + 12 = 70 (0x46)`, it's value `1
 (Btw: This blog post: [EXIF Orientation Handling Is a Ghetto](https://www.daveperrett.com/articles/2012/07/28/exif-orientation-handling-is-a-ghetto/) is a bit dated,
 but shows the meaning and compatibility in 2012).
 
-## XMP
+## XMP Marker
 
 XMP is now a completely different thing than Exif.
 Both contain meta information, but they have a completely different file format and
 are stored in a different way.
-
 But.. the same image file can contain both, Exif and XMP.
+Both are stored as APP1 markers, and an image can contain two (or more) APP1 markers,
+one for Exif and one for XMP.
+A tool can determine the type of the APP1 marker by looking for the Exif Magic bytes
+(then it's a Exif header), or if the data is XML and the namespace matches XMP. Uff.
+
 XMP was developed by Adobe and since 2012 it is standardized as ISO 16684-1:2012 (and later ISO 16684-1:2019).
 The ISO download costs money, but I found [this pdf](https://wwwimages2.adobe.com/content/dam/acom/en/devnet/xmp/pdfs/XMP%20SDK%20Release%20cc-2016-08/XMPSpecificationPart1.pdf) from Adobe which describes the format.
 
