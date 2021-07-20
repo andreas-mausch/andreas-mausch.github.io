@@ -9,3 +9,6 @@ url: "https://andreas-mausch.de"
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+plugins:
+  - jemoji
