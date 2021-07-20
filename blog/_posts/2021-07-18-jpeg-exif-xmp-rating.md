@@ -230,6 +230,17 @@ The `-preserve` flag preserves the file modification date/time.
 exiftool -preserve -rating=3 20210716_185532_exiftool-rating.jpg
 ```
 
+### Filesize
+
+```bash
+$ ls -l ../20210716_185532.jpg
+-rw-r----- 1 neonew neonew 3409348 16. Jul 18:55 ../20210716_185532.jpg
+$ ls -l ./20210716_185532_exiftool-rating.jpg
+-rw-r----- 1 neonew neonew 3412162 16. Jul 18:55 ./20210716_185532_exiftool-rating.jpg
+```
+
+Filesize increased by 2814 bytes.
+
 ### New XMP Marker
 
 If you compare the structure after the change, there is an addtional APP1 marker for XMP.
@@ -238,15 +249,15 @@ If you compare the structure after the change, there is an addtional APP1 marker
 $ exiv2 -pS 20210716_185532_exiftool-rating.jpg
 STRUCTURE OF JPEG FILE: 20210716_185532_exiftool-rating.jpg
  address | marker       |  length | data
-       0 | 0xffd8 SOI  
+       0 | 0xffd8 SOI
        2 | 0xffe1 APP1  |   62326 | Exif..II*......................
    62330 | 0xffe1 APP1  |    2812 | http://ns.adobe.com/xap/1.0/.<?x
    65144 | 0xffe4 APP4  |   17389 | ...............................
-   82535 | 0xffc0 SOF0  |      17 
-   82554 | 0xffdb DQT   |     132 
-   82688 | 0xffc4 DHT   |     418 
-   83108 | 0xffdd DRI   |       4 
-   83114 | 0xffda SOS  
+   82535 | 0xffc0 SOF0  |      17
+   82554 | 0xffdb DQT   |     132
+   82688 | 0xffc4 DHT   |     418
+   83108 | 0xffdd DRI   |       4
+   83114 | 0xffda SOS
 ```
 
 ### Raw XML
@@ -295,9 +306,70 @@ $ diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\0
 There seems to be some re-ordering of existing tags, but the main change is at 0xf37a (= 62330),
 where the new XMP marker has been inserted.
 
-The main goal has been achieved: No data was lost. Great.
+The main goal has been achieved: No data was lost, and the new rating has been set. Great.
 
-## exiv2
+## exiv2 0.27.4
+
+```bash
+exiv2 -M"set Xmp.xmp.Rating 3" 20210716_185532_exiv2-rating.jpg
+```
+
+### Filesize
+
+```bash
+$ ls -l ../20210716_185532.jpg
+-rw-r----- 1 neonew neonew 3409348 16. Jul 18:55 ../20210716_185532.jpg
+$ ls -l ./20210716_185532_exiv2-rating.jpg
+-rw-r----- 1 neonew neonew 3411748 20. Jul 20:46 ./20210716_185532_exiv2-rating.jpg
+```
+
+Filesize increased by 2400 bytes.
+
+### New XMP Marker
+
+```bash
+$ exiv2 -pS 20210716_185532_exiv2-rating.jpg
+STRUCTURE OF JPEG FILE: 20210716_185532_exiv2-rating.jpg
+ address | marker       |  length | data
+       0 | 0xffd8 SOI
+       2 | 0xffe1 APP1  |   62326 | Exif..II*......................
+   62330 | 0xffe1 APP1  |    2398 | http://ns.adobe.com/xap/1.0/.<?x
+   64730 | 0xffe4 APP4  |   17389 | ...............................
+   82121 | 0xffc0 SOF0  |      17
+   82140 | 0xffdb DQT   |     132
+   82274 | 0xffc4 DHT   |     418
+   82694 | 0xffdd DRI   |       4
+   82700 | 0xffda SOS
+```
+
+### Raw XML
+
+```bash
+$ exiv2 -pX 20210716_185532_exiv2-rating.jpg | xmllint --format -
+<?xml version="1.0"?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 4.4.0-Exiv2">
+  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about="" xmp:Rating="3"/>
+  </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="w"?
+```
+
+The XMP looks a bit different (the Rating is now an attribute on the Description tag),
+but it looks fine.
+
+### Binary diff offsets
+
+```bash
+$ diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\012'" --unchanged-group-format="" (xxd -c 1 -ps ../20210716_185532.jpg | psub) (xxd -c 1 -ps 20210716_185532_exiv2-rating.jpg | psub)
+0000f37b-0000f37b (00000000) <-> 0000f37b-0000fcdb (00000960)
+```
+
+The **only** change is the new XMP header, which is great.
+No other tags have been re-ordered or modified in any way.
+
+This is the perfect result: No data was lost, and the new rating has been set.
 
 ## gthumb
 
@@ -308,3 +380,15 @@ The main goal has been achieved: No data was lost. Great.
 ## Windows 7/10
 
 ## Samsung Galaxy S10
+
+## Summary
+
+JPEG tags are complicated.
+EXIF, SubIFD, IPTC, XMP..uff!
+
+No wonder many tools behave differently and compatibility is not always given.
+
+| Tool     | Filesize | All data preserved | No more changes than necessary |
+|----------|----------|--------------------|--------------------------------|
+| exiftool | +2814    | :heavy_check_mark: | :x:                            |
+| exiv2    | +2400    | :heavy_check_mark: | :heavy_check_mark:             |
