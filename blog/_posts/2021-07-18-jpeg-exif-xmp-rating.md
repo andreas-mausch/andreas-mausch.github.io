@@ -981,7 +981,7 @@ No wonder many tools behave differently and compatibility is not always given.
 
 Here is a final overview of the tools I've tested:
 
-| Tool           | Filesize | All data preserved | No more changes than necessary | Notes             |
+| Tool           | Filesize | All data retained  | No more changes than necessary | Notes             |
 |----------------|----------|--------------------|--------------------------------|-------------------|
 | exiftool 12.26 | +2814    | :heavy_check_mark: | :x:                            |                   |
 | exiv2 0.27.4   | +2400    | :heavy_check_mark: | :heavy_check_mark:             |                   |
