@@ -311,7 +311,7 @@ The main goal has been achieved: No data was lost, and the new rating has been s
 ## exiv2 0.27.4
 
 ```bash
-exiv2 -M"set Xmp.xmp.Rating 3" 20210716_185532_exiv2-rating.jpg
+exiv2 --keep --Modify "set Xmp.xmp.Rating 3" 20210716_185532_exiv2-rating.jpg
 ```
 
 ### Filesize
@@ -320,7 +320,7 @@ exiv2 -M"set Xmp.xmp.Rating 3" 20210716_185532_exiv2-rating.jpg
 $ ls -l ../20210716_185532.jpg
 -rw-r----- 1 neonew neonew 3409348 16. Jul 18:55 ../20210716_185532.jpg
 $ ls -l ./20210716_185532_exiv2-rating.jpg
--rw-r----- 1 neonew neonew 3411748 20. Jul 20:46 ./20210716_185532_exiv2-rating.jpg
+-rw-r----- 1 neonew neonew 3411748 16. Jul 18:55 20210716_185532_exiv2-rating.jpg
 ```
 
 Filesize increased by 2400 bytes.
