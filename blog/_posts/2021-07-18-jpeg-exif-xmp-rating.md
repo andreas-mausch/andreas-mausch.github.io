@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JPEG: Exif XMP Rating"
+title: "JPEG: Exif tags and XMP Rating"
 date: 2021-07-18 21:00:00 +02:00
 tags:
 ---
@@ -14,7 +14,7 @@ However, I found there is more than one way to save the rating into the metadata
 of the image, and different tools are not very compatible with each other.
 
 Luckily, there is a defacto standard which most tools can work with: The *Rating*
-tag in the XMP metadata. It was first defined by Adobe (source!!).
+tag in the XMP metadata. It was first defined by Adobe.
 
 So I've decided to use this tag from now on. It does not depend on a platform
 and can be used in almost all tools.
