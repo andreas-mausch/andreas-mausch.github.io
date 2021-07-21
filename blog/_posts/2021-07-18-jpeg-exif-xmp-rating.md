@@ -969,6 +969,10 @@ If the thumbnail has been purposely deleted, I should have at least seen a warni
 
 ## Samsung Galaxy S10
 
+You can mark your favorite images by selecting the *heart* button, but
+that doesn't seem to modify the image file at all.
+I guess Samsung Gallery rather saves all favorites in an internal database, unfortunately.
+
 ## Summary
 
 JPEG tags are complicated.
