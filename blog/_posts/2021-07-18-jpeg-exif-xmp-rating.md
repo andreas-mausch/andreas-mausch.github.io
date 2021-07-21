@@ -371,7 +371,7 @@ No other tags have been re-ordered or modified in any way.
 
 This is the perfect result: No data was lost, and the new rating has been set.
 
-## gthumb
+## gthumb 3.10.3
 
 ### Filesize
 
