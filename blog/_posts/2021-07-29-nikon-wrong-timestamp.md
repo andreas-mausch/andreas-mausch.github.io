@@ -82,7 +82,7 @@ Geändert: 2021-07-29 18:46:10.000000000 +0200
 Geburt: -
 ```
 
-# The fix
+# The fix: Set mtime to exif timestamp
 
 I don't really know how to fix the timestamp on the file system,
 e.g. by changing a setting in the camera or copying the file in a
@@ -157,7 +157,7 @@ date +"%Z %z"
 # Outputs 'CEST +0200' on my system
 ```
 
-# The other way round
+# The other way round: Set exif timestamp to mtime
 
 If you want to set the DateTimeOriginal exif field on a file without exif data,
 and you want to use the mtime as source, you can run this:
@@ -165,3 +165,5 @@ and you want to use the mtime as source, you can run this:
 ```bash
 exiftool "-DateTimeOriginal<FileModifyDate" "-FileModifyDate<FileModifyDate" no-exif.jpg
 ```
+
+Note: This will also update the atime.
