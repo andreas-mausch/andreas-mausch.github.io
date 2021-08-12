@@ -230,6 +230,11 @@ The `-preserve` flag preserves the file modification date/time.
 exiftool -preserve -rating=3 20210716_185532_exiftool-rating.jpg
 ```
 
+```bash
+$ exiftool -rating -short -groupNames 20210716_185532_exiftool-rating.jpg
+[XMP]           Rating                          : 3
+```
+
 ### Filesize
 
 ```bash
