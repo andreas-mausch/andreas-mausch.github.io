@@ -978,7 +978,27 @@ You can mark your favorite images by selecting the *heart* button, but
 that doesn't seem to modify the image file at all.
 I guess Samsung Gallery rather saves all favorites in an internal database, unfortunately.
 
-## Summary
+# Image signature
+
+In order to validate the image itself did not change, you can also check the ImageMagick's signature.
+It is a generated hash based on the pixel data of the image.
+That way you can find out if an image has been re-encoded, for example.
+
+```bash
+magick identify -format "%#" image.jpg
+```
+
+# Keywords
+
+You can also store keywords (a.k.a hashtags) on your files in the XMP data block.
+
+# Test image files
+
+You can see my test image and all modified images in this dropbox folder:
+
+https://www.dropbox.com/sh/btt68sxqt8pnx5z/AADd92q0hD_VWQ4wVyUT1oD7a?dl=0
+
+# Summary
 
 JPEG tags are complicated.
 EXIF, SubIFD, IPTC, XMP..uff!
