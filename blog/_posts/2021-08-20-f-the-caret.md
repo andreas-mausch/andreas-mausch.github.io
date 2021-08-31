@@ -1235,3 +1235,17 @@ In case of the boolean package, the issue has been fixed very quickly (within ho
 but nobody guarantees you people react this fast.
 And if they do not, you need to find ugly workarounds to set the version to your desired fixed value,
 while your whole team might be **blocked** in the CI. :(
+
+---
+
+# Update: Magento 2.4.1 -> 2.4.2
+
+Another sad example of what people do in patch updates.
+
+In the version change in the patch level Magento did this:
+
+- Support for Composer 2: [Magento 2.4.2 introduced support for Composer 2](https://devdocs.magento.com/guides/v2.4/comp-mgr/cli/cli-upgrade.html) (see also [here](https://github.com/magento/community-features/issues/302))
+- File system changes: [From Magento 2.4.2, Magento modified docroot to improve security](https://www.rohanhapani.com/solved-404-not-found-after-fresh-magento-2-4-2-installation/), [frontend and admin not working magento 2.4.2 upgrade](https://magento.stackexchange.com/questions/332400/frontend-and-admin-not-working-magento-2-4-2-upgrade/), [404 Not Found after fresh Magento 2.4.2 installation](https://magento.stackexchange.com/questions/331840/404-not-found-after-fresh-magento-2-4-2-installation)
+
+According to their [versioning schema](https://devdocs.magento.com/guides/v2.4/extension-dev-guide/versioning/),
+*The PATCH version increments when backward-compatible bug fixes occur.*.
