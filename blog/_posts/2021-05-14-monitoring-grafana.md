@@ -221,3 +221,18 @@ Note: There are two retention times.
 One for loki, and one for Prometheus.
 Prometheus setting is named *storage.tsdb.retention.time* and defaults to 15 days.
 I haven't changed the value.
+
+# Memory usage
+
+I've updated the grafana dashboard to also display the memory usage per docker compose service.
+Data comes from cadvisor.
+
+The Prometheus query is this:
+
+```
+sum by (container_label_com_docker_compose_service) (container_memory_usage_bytes{container_label_com_docker_compose_service=~".+"})
+```
+
+In case you use docker swarm, you can use *container_label_com_docker_swarm_service_name* instead of *container_label_com_docker_compose_service*.
+
+![]({{ site.baseurl }}/images/2021-05-14-monitoring-grafana/grafana-with-memory-usage.png)
