@@ -215,4 +215,9 @@ I couldn't find it anywhere (even browsed the sources), so I did not use it.
 
 ## Retention
 
-And last, I've set the *retention_period* to 14 days to get rid of old logs and keep the disk usage low.
+And last, I've set the loki *retention_period* to 14 days to get rid of old logs and keep the disk usage low.
+
+Note: There are two retention times.
+One for loki, and one for Prometheus.
+Prometheus setting is named *storage.tsdb.retention.time* and defaults to 15 days.
+I haven't changed the value.
