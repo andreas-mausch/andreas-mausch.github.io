@@ -8,6 +8,7 @@
   - Vue.js
   - Java
   - Micronaut
+  - vavr.io
   - Spring Cloud Gateway
   - Netty
   - Docker Swarm
@@ -17,6 +18,13 @@
   - Flowable
   - Mailhog
   - Redis
+  - MongoDB
+  - RabbitMQ
+  - PHP
+  - Magento
+  - Grafana
+  - Loki
+  - Prometheus
   text:
   image: peac.png
   link: https://www.peacfinance.de
