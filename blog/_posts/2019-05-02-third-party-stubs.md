@@ -6,7 +6,7 @@ tags:
 ---
 
 When you connect third party web services to your application,
-you'd like convenient way to work with them during development.
+you'd like to have a convenient way to work with them during development.
 
 # The external service
 
