@@ -16,6 +16,7 @@
   - Traefik
   - Quasar
   - Flowable
+  - Keycloak
   - Mailhog
   - Redis
   - MongoDB
