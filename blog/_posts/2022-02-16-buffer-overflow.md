@@ -190,13 +190,13 @@ To generate it, we can use `yasm` for example.
 # Creating the code payload
 
 ```
-echo "JMP 1234" | yasm --arch=x86 --machine=x86 --objfile=output.bin -
+yasm --arch=x86 --machine=x86 --objfile=payload.bin payload.asm
 ```
 
 For disassembly, I found `objdump` useful:
 
 ```
-objdump --disassemble-all --disassembler-options=intel,i8086 --target=binary --architecture i386 output.bin
+objdump --disassemble-all --disassembler-options=intel,i386 --target=binary --architecture i386 payload.bin
 ```
 
 # Security

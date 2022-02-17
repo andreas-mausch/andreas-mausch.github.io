@@ -1,0 +1,5 @@
+BITS 32
+ORG 0xffffce1c
+SECTION .text
+
+JMP 0x0804923d
