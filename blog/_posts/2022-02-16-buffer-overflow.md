@@ -87,6 +87,9 @@ Enter some text:
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 fish: Job 1, './buffer-overflow' terminated by signal SIGSEGV (Adressbereichsfehler)
+
+$ echo $status
+139
 ```
 
 Note: It still manages to output the text, before crashing.
@@ -228,8 +231,20 @@ That is what `MOV EBP, BUFFER_ADDRESS + 0x2c` does.
 
 Note: Our payload must not maintain any characters which would stop scanf() from reading the input.
 0x00, 0x0a, 0x20 are all forbidden.
+That's why we first have the 0xff character after XX,
+and only the payload writes a 0x00 at the end of the string during runtime.
 
 With that payload, the program prints an additional line "XX" and then quits without crashing!
+
+```
+$ cat payload.bin | ./buffer-overflow
+Enter some text:
+You entered: �9����P����P�!�H����XX����
+XX
+
+$ echo $status
+0
+```
 
 # Security
 
