@@ -66,6 +66,8 @@ Run this to disable ASLR (see below):
 echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 ```
 
+I've used gcc 11.1.0 in this example.
+
 # Running and crashing the program
 
 This works fine:
@@ -100,6 +102,8 @@ I've installed it from [here](https://aur.archlinux.org/packages/edb-debugger), 
 the plugin directory manually after the installation (Preferences -> Directories -> Plugin Directory: `/usr/lib/edb`).
 
 ![]({{ site.baseurl }}/images/2022-02-16-buffer-overflow/edb.png)
+
+Also, you might want to install [yasm](https://archlinux.org/packages/extra/x86_64/yasm/) to generate some shell code.
 
 # Finding the right address
 
@@ -168,6 +172,32 @@ Voilà. Now, the program still crashes, but our secret function was called befor
 
 Next challenge could be to build a payload which contains and executes own code,
 instead of executing code which already exists in the binary.
+
+# Executing own code
+
+If we replace the RETURN address with the beginning of the buffer variable `ffff:ce1c`,
+the input we entered will be treated as binary instructions and is executed:
+
+```
+python -c 'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x1c\xce\xff\xff")' | ./buffer-overflow
+```
+
+This fails with *SIGILL, Illegal instruction*. This is expected, as our *aaaaaa..* test string is not valid
+machine code.
+
+To generate it, we can use `yasm` for example.
+
+# Creating the code payload
+
+```
+echo "JMP 1234" | yasm --arch=x86 --machine=x86 --objfile=output.bin -
+```
+
+For disassembly, I found `objdump` useful:
+
+```
+objdump --disassemble-all --disassembler-options=intel,i8086 --target=binary --architecture i386 output.bin
+```
 
 # Security
 
