@@ -2,4 +2,5 @@ BITS 32
 ORG 0xffffce1c
 SECTION .text
 
+MOV EBP, 0xffffce48
 JMP 0x0804923d

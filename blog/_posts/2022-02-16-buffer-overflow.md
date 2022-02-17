@@ -199,6 +199,13 @@ For disassembly, I found `objdump` useful:
 objdump --disassemble-all --disassembler-options=intel,i386 --target=binary --architecture i386 payload.bin
 ```
 
+The EBP got overwritten by the too long input.
+It was stored on the stack, and the leave instruction tried to restore it.
+In order to not crash the program, we need to restore it.
+That is what `MOV EBP, 0xffffce48` does.
+
+`JMP 0x0804923d` returns to the original main function.
+
 # Security
 
 - Position-independent Code  
