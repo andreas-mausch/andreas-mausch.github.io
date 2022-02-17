@@ -57,7 +57,13 @@ It is great the compilers today have that built-in checks, but disabling them ma
 and maybe understand why those checks have been added over time.
 
 ```
-gcc -m32 -fno-stack-protector -no-pie buffer-overflow.c -o buffer-overflow
+gcc -m32 -fno-stack-protector -no-pie -zexecstack buffer-overflow.c -o buffer-overflow
+```
+
+Run this to disable ASLR (see below):
+
+```
+echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 ```
 
 # Running and crashing the program
@@ -162,3 +168,24 @@ Voilà. Now, the program still crashes, but our secret function was called befor
 
 Next challenge could be to build a payload which contains and executes own code,
 instead of executing code which already exists in the binary.
+
+# Security
+
+- Position-independent Code  
+  PIE is not a security feature, but a requirement for Address Space Layout Randomization.
+  In Windows' .exe files, the information is stored in the `.reloc` table referenced in the optional headers.
+  In our example, we explicitly generated **no** PIE information via `-no-pie`.
+- Address Space Layout Randomization  
+  ASLR moves our program and the stack to random addresses.
+  The program can only be moved if PIE is provided.
+  The stack can be in a random address even if no PIE is provided.
+  In our example, we explicitly disabled ASLR via `/proc/sys/kernel/randomize_va_space`.
+  When disabled, our program and the stack are always in the same memory address on each run.
+- Non-Executable Stack  
+  Each memory area is flagged as readable, writable, executable, or a combination of them.
+  So when the stack is marked as non-executable (gcc's default), then you will see an error when the RETURN to a stack address is reached.
+  In our example, we explicitly marked the stack as executable via `-zexecstack`.
+- Stack Protection  
+  > Emit extra code to check for buffer overflows, such as stack smashing attacks. This is done by adding a guard variable to functions with vulnerable objects. This includes functions that call "alloca", and functions with buffers larger than 8 bytes. The guards are initialized when a function is entered and then checked when the function exits. If a guard check fails, an error message is printed and the program exits.
+
+  In our example, we explicitly disabled stack protection via `-fno-stack-protector`.
