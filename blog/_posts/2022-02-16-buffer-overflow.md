@@ -181,6 +181,8 @@ instead of executing code which already exists in the binary.
   The stack can be in a random address even if no PIE is provided.
   In our example, we explicitly disabled ASLR via `/proc/sys/kernel/randomize_va_space`.
   When disabled, our program and the stack are always in the same memory address on each run.
+  This way, we can use hard-coded absolute addresses as the return address and as part of the payload,
+  which makes our life a lot easier.
 - Non-Executable Stack  
   Each memory area is flagged as readable, writable, executable, or a combination of them.
   So when the stack is marked as non-executable (gcc's default), then you will see an error when the RETURN to a stack address is reached.
@@ -189,3 +191,5 @@ instead of executing code which already exists in the binary.
   > Emit extra code to check for buffer overflows, such as stack smashing attacks. This is done by adding a guard variable to functions with vulnerable objects. This includes functions that call "alloca", and functions with buffers larger than 8 bytes. The guards are initialized when a function is entered and then checked when the function exits. If a guard check fails, an error message is printed and the program exits.
 
   In our example, we explicitly disabled stack protection via `-fno-stack-protector`.
+
+In the real-world we would need to bypass all of those security measures.
