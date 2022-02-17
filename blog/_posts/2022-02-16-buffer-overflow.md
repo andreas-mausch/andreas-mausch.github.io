@@ -154,6 +154,7 @@ Our variable `buffer` starts at `ffff:ce1c` (marked in blue) in this case.
 The return address to the main function is stored at `ffff:ce3c` (marked in green).
 
 If we manage to write the address of our secret function (`0x08049196`) into the return address value, our secret function will be called, instead of returning to the main function.
+Note: I suppose to work on a little-endian machine. If you work on a big-endian machine, you need to change the byte order of DWORDs and WORDs.
 
 `0xce3c - 0xce3c = 0x20`, which is 32 in decimal.
 We need to write 32 bytes (any bytes) followed by 0x08049196 into the `buffer` variable, and we should reach our goal:
