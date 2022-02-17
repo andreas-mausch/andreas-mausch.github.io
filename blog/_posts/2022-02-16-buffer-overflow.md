@@ -146,8 +146,8 @@ See the screenshot for details:
 
 ![]({{ site.baseurl }}/images/2022-02-16-buffer-overflow/edb-stack.png)
 
-Our variable `buffer` starts at `ffae:ce1c` (marked in blue) in this case.
-The return address to the main function is stored at `ffae:ce3c` (marked in green).
+Our variable `buffer` starts at `ffff:ce1c` (marked in blue) in this case.
+The return address to the main function is stored at `ffff:ce3c` (marked in green).
 
 If we manage to write the address of our secret function (`0x08049196`) into the return address value, our secret function will be called, instead of returning to the main function.
 
