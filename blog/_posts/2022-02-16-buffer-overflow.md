@@ -195,7 +195,7 @@ To generate it, we can use `yasm` for example.
 
 *payload.asm*
 
-```asm
+```nasm
 BITS 32
 BUFFER_ADDRESS EQU 0xffffce1c ; The address of the buffer variable in memory
 ORG BUFFER_ADDRESS
