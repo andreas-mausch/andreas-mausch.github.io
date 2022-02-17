@@ -190,6 +190,8 @@ To generate it, we can use `yasm` for example.
 
 # Creating the code payload
 
+[payload.asm]({{ site.baseurl }}/files/2022-02-16-buffer-overflow/payload.asm)
+
 ```
 yasm --arch=x86 --machine=x86 --objfile=payload.bin payload.asm
 ```
@@ -203,7 +205,7 @@ objdump --disassemble-all --disassembler-options=intel,i386 --target=binary --ar
 The EBP got overwritten by the too long input.
 It was stored on the stack, and the leave instruction tried to restore it.
 In order to not crash the program, we need to restore it.
-That is what `MOV EBP, 0xffffce48` does.
+That is what `MOV EBP, BUFFER_ADDRESS + 0x2c` does.
 
 `JMP 0x0804923d` returns to the original main function.
 
