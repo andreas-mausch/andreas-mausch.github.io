@@ -106,8 +106,6 @@ the plugin directory manually after the installation (Preferences -> Directories
 
 ![]({{ site.baseurl }}/images/2022-02-16-buffer-overflow/edb.png)
 
-Also, you might want to install [yasm](https://archlinux.org/packages/extra/x86_64/yasm/) to generate some shell code.
-
 # Finding the right address
 
 We don't just want to crash our program, we want to execute the secretFunction().
@@ -189,7 +187,7 @@ python -c 'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x1c\xce\xff\xff")' |
 This fails with *SIGILL, Illegal instruction*. This is expected, as our *aaaaaa..* test string is not valid
 machine code.
 
-To generate it, we can use `yasm` for example.
+To generate it, we can use [yasm]((https://archlinux.org/packages/extra/x86_64/yasm/)) for example.
 
 # Creating the code payload
 
@@ -229,10 +227,13 @@ That is what `MOV EBP, BUFFER_ADDRESS + 0x2c` does.
 
 `JMP 0x0804923d` returns to the original main function.
 
-Note: Our payload must not maintain any characters which would stop scanf() from reading the input.
+First note: Our payload must not maintain any characters which would stop scanf() from reading the input.
 0x00, 0x0a, 0x20 are all forbidden.
 That's why we first have the 0xff character after XX,
 and only the payload writes a 0x00 at the end of the string during runtime.
+
+Second note: The payload length must be exactly 36 bytes.
+Or at least we need to make sure the RETURN address is written to offset 0x20.
 
 With that payload, the program prints an additional line "XX" and then quits without crashing!
 
