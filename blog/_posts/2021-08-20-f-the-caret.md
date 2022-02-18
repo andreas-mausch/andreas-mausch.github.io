@@ -1249,3 +1249,8 @@ In the version change in the patch level Magento did this:
 
 According to their [versioning schema](https://devdocs.magento.com/guides/v2.4/extension-dev-guide/versioning/),
 *The PATCH version increments when backward-compatible bug fixes occur.*.
+
+# Update: vue2-daterange-picker 0.6.3 -> 0.6.8
+
+Another example: The daterange picker in an application was unintentionally updated.
+I don't know the exact details, but some css changes broke the layout in the browser.
