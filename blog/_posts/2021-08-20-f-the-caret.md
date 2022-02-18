@@ -1253,4 +1253,4 @@ According to their [versioning schema](https://devdocs.magento.com/guides/v2.4/e
 # Update: vue2-daterange-picker 0.6.3 -> 0.6.8
 
 Another example: The daterange picker in an application was unintentionally updated.
-I don't know the exact details, but some css changes broke the layout in the browser.
+I haven't checked the exact details, but some css changes broke the layout in the browser.
