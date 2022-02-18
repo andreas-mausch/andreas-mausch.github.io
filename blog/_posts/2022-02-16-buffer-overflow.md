@@ -48,7 +48,10 @@ int main()
 As you can see, the buffer size remains unchecked and a user can enter more than the expected 20 characters.
 This leads to write into parts of the memory the program is not supposed to write.
 
-We will overwrite the RETURN address of the function, which is stored in the stack, in order to execute the secretFunction().
+We will overwrite the RETURN address of the echo() function,
+in order to call the secretFunction() instead of returning to main().
+The address is stored in the stack.
+We need to find the right location and overwrite it.
 
 # Compilation
 
@@ -261,6 +264,8 @@ $ echo $status
   When disabled, our program and the stack are always in the same memory address on each run.
   This way, we can use hard-coded absolute addresses as the return address and as part of the payload,
   which makes our life a lot easier.
+  When enabled, we would need to have a payload which only uses relative addresses and does not rely on absolute addresses.
+  Also, we need to find a way to guess a correct RETURN address to put on the stack.
 - Non-Executable Stack  
   Each memory area is flagged as readable, writable, executable, or a combination of them.
   So when the stack is marked as non-executable (gcc's default), then you will see an error when the RETURN to a stack address is reached.
