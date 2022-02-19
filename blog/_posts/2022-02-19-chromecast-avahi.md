@@ -93,6 +93,7 @@ With all other tools I see this loading screen for about a second before it star
 ![]({{ site.baseurl }}/images/2022-02-19-chromecast-avahi/chromecast-tv-loading.png)
 
 But with Google Chrome, this screen does not show up at all.
+Instead, the first frame I see is the casted screen.
 So I'm pretty sure it should be possible to reverse engineer this
 and see what exact commands Chrome sends to the Chromecast.
 
