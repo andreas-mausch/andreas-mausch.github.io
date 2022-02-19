@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cast your screen using Chromecast without Chrome"
+title: "Cast your screen to a Chromecast without Chrome"
 date: 2022-02-19 17:00:00 +01:00
 tags: tv avahi
 ---
