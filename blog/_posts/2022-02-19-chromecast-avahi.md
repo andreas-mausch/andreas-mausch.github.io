@@ -2,7 +2,7 @@
 layout: post
 title: "Cast your screen to a Chromecast without Chrome"
 date: 2022-02-19 17:00:00 +01:00
-tags: tv avahi
+tags: tv avahi mdns
 ---
 
 I tried to cast my screen to my TV (with a built-in Chromecast).
@@ -97,7 +97,9 @@ Instead, the first frame I see is the casted screen.
 So I'm pretty sure it should be possible to reverse engineer this
 and see what exact commands Chrome sends to the Chromecast.
 
-# avahi
+# Chromecast Protocol
+
+## avahi
 
 One thing I learned was how my laptop finds the Chromecast.
 It uses [avahi](https://en.wikipedia.org/wiki/Avahi_(software)):
@@ -133,3 +135,10 @@ GUI:
 ```
 avahi-discover
 ```
+
+## CASTV2
+
+CASTV2 is the name of the proprietary protocol Google Cast uses.
+
+I've found [https://github.com/dylanmckay/gcast/blob/master/PROTOCOL.md](https://github.com/dylanmckay/gcast/blob/master/PROTOCOL.md) and
+[https://github.com/thibauts/node-castv2](https://github.com/thibauts/node-castv2).
