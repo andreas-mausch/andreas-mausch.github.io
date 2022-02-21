@@ -143,3 +143,10 @@ It wraps Protocol Buffers (Protobuf) messages in a TLS connection.
 
 I've found [https://github.com/dylanmckay/gcast/blob/master/PROTOCOL.md](https://github.com/dylanmckay/gcast/blob/master/PROTOCOL.md) and
 [https://github.com/thibauts/node-castv2](https://github.com/thibauts/node-castv2).
+
+Unfortunately, the private key used for device authentication is not available, so we cannot create an own server which
+is accepted by the Google Chrome browser for example.
+
+See here: [https://github.com/thibauts/node-castv2/issues/2#issuecomment-45437332](https://github.com/thibauts/node-castv2/issues/2#issuecomment-45437332)
+
+![]({{ site.baseurl }}/images/2022-02-19-chromecast-avahi/device-authentication.png)
