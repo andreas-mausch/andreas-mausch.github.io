@@ -139,6 +139,7 @@ avahi-discover
 ## CASTV2
 
 CASTV2 is the name of the proprietary protocol Google Cast uses.
+It wraps Protocol Buffers (Protobuf) messages in a TLS connection.
 
 I've found [https://github.com/dylanmckay/gcast/blob/master/PROTOCOL.md](https://github.com/dylanmckay/gcast/blob/master/PROTOCOL.md) and
 [https://github.com/thibauts/node-castv2](https://github.com/thibauts/node-castv2).
