@@ -150,3 +150,11 @@ is accepted by the Google Chrome browser for example.
 See here: [https://github.com/thibauts/node-castv2/issues/2#issuecomment-45437332](https://github.com/thibauts/node-castv2/issues/2#issuecomment-45437332)
 
 ![]({{ site.baseurl }}/images/2022-02-19-chromecast-avahi/device-authentication.png)
+
+Interestingly, there is an Android app called [AirReceiverLite](https://play.google.com/store/apps/details?id=com.softmedia.receiver.lite),
+which emulates a Chromecast device and I was able to connect to it via Chrome.
+[Somebody says](https://github.com/thibauts/node-castv2/issues/2#issuecomment-885093688):
+
+> It's using predefined AuthResponse, most likely precomputed on a rooted chromecast. DRM not working. Not long till Google bans the certificate.
+
+That was in Jul 2021.
