@@ -275,4 +275,12 @@ $ echo $status
 
   In our example, we explicitly disabled stack protection via `-fno-stack-protector`.
 
-In the real-world we would need to bypass all of those security measures.
+In the real-world we would need to bypass all of those measures.
+
+To check which measures are enabled, you can use [checksec](https://github.com/slimm609/checksec.sh):
+
+```
+$ checksec --file=./buffer-overflow
+RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
+Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   50) Symbols	  No	0		1		./buffer-overflow
+```
