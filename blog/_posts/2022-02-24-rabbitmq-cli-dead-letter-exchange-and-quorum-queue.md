@@ -9,13 +9,13 @@ Today I've taken a closer look at this code snippet in one of our services:
 
 ```java
 @Queue("${app.messaging.queueName}")
-public void receive(@Nullable @Header("x-redelivered-count") Integer count,
-                    byte[] data,
+public void receive(byte[] data,
+                    @Nullable @Header("x-redelivered-count") Integer count,
                     RabbitAcknowledgement rabbitAcknowledgement) {
     LOGGER.info("Received message from queue");
 
     try {
-        someService.handleMessage(new String(data));
+        someService.handleMessage(new String(data, UTF_8));
         rabbitAcknowledgement.ack();
     } catch (Exception ex) {
         LOGGER.warn("Couldn't send queued message to service", ex);
@@ -106,6 +106,28 @@ On the fifth time we don't receive any more messages.
 
 If we look into the `dead-letter-queue`, we find it has moved here, which is exactly what we tried to accomplish:
 Retry for three times, then move into DLX.
+
+# Simplified consumer
+
+Now back to our Java code, the consumer now looks much simpler:
+
+```java
+@Queue(value = "${app.messaging.queueName}", reQueue = true)
+public void receive(byte[] data,
+                    @Nullable @Header("x-delivery-count") Integer deliveryCount,
+                    Envelope envelope) {
+    LOGGER.info("Received message from queue. Routing key: {}; Redelivered: {}, Delivery count: {}",
+            envelope.getRoutingKey(), envelope.isRedeliver(), deliveryCount);
+    someService.handleMessage(new String(data, UTF_8));
+}
+```
+
+Differences:
+
+- Our self-invented `x-redelivered-count` is replaced by RabbitMQ's `x-delivery-count`.
+- We set `reQueue = true` to automatically re-queue messages on exceptions.
+- The acknolegment (`RabbitAcknowledgement`) is now done by [our framework](https://micronaut-projects.github.io/micronaut-rabbitmq/3.1.0/guide/index.html#consumerAcknowledge) (Micronaut).
+- The whole exception handling block is gone. Yay.
 
 # Possible values for ackmode
 
