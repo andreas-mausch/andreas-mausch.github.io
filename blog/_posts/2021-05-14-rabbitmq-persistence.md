@@ -2,7 +2,7 @@
 layout: post
 title: "RabbitMQ: Message persistence and Metrics"
 date: 2021-05-17 19:00:00 +02:00
-tags: devops, metrics
+tags: rabbitmq, devops, metrics
 ---
 
 # Persistence
