@@ -70,7 +70,7 @@ docker exec -it rabbitmq rabbitmqadmin get queue=my-dlx-queue ackmode=reject_req
 ```
 
 Note: We set the `ackmode` to `reject_requeue_false` to reject the message.
-The rejected message will be placed in the dead letter queue `my-dlx-queue`.
+The rejected message will be placed in the `dead-letter-queue`.
 
 # Use a quorum queue for automatic retries
 
