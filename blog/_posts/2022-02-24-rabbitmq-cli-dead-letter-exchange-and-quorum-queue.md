@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "RabbitMQ CLI, Dead letter exchange and quorum queue"
+title: "RabbitMQ CLI, Dead Letter Exchange and Quorum Queue"
 date: 2022-02-24 23:00:00 +01:00
 tags: rabbitmq, devops
 ---
