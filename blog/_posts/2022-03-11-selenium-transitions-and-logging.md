@@ -13,7 +13,7 @@ If you use CSS animations, you have three choices for your tests:
 2. Introduce wait statements to make sure the animation ended
 3. Disable animations
 
-1. was out of the question, sleep statements are just not reliable and bad practice.
+Option 1. was out of the question, sleep statements are just not reliable and bad practice.
 
 I stepped away from 2., because it might be a) a lot of statements which clutter your test
 and b) there's no out-of-the-box solution provided by Selenium.
