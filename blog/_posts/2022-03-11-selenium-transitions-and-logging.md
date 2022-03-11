@@ -2,7 +2,7 @@
 layout: post
 title: "Selenium: Disable CSS transitions and fail on JavaScript errors"
 date: 2022-03-11 16:00:00 +01:00
-tags: tdd testing browser chrome
+tags: tdd testing browser chrome kotlin kotest testcontainers
 ---
 
 # CSS transitions
