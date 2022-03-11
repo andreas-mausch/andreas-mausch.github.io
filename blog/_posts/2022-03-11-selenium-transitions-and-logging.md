@@ -5,6 +5,8 @@ date: 2022-03-11 16:00:00 +01:00
 tags: tdd testing browser chrome kotlin kotest testcontainers
 ---
 
+I've done both steps for a second time (in a different project) now, so I thought it is worth a blog post.
+
 # CSS transitions
 
 If you use CSS animations, you have three choices for your tests:
@@ -27,9 +29,10 @@ Some helpful links:
 - [https://stackoverflow.com/questions/57481903/run-javascript-after-every-page-load](https://stackoverflow.com/questions/57481903/run-javascript-after-every-page-load)
 - [https://stackoverflow.com/questions/51007542/how-to-turn-off-css-for-faster-automation-tests-execution](https://stackoverflow.com/questions/51007542/how-to-turn-off-css-for-faster-automation-tests-execution)
 
-I ended up with this in Kotlin (kotest). Still hacky, but my tests run reliable without the sleep statements now. :)
+I ended up with this in Kotlin (kotest) using the [Testcontainers Selenium solution](https://www.testcontainers.org/modules/webdriver_containers/).
+Still hacky, but my tests run reliably without the sleep statements now. :)
 
-(`chrome` is a `BrowserWebDriverContainer`)
+(`chrome` is a [BrowserWebDriverContainer](https://github.com/testcontainers/testcontainers-java/blob/40341d3912a2fe623adb83651c52a490734f3ab9/modules/selenium/src/main/java/org/testcontainers/containers/BrowserWebDriverContainer.java))
 
 ```kotlin
   override fun beforeTest(testCase: TestCase) {
