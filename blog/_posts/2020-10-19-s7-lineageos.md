@@ -86,3 +86,27 @@ I've used *Magisk v21.0* and *Magisk Manager v8.0.2*.
 Install both, reboot, and you should have full control now.
 
 ![]({{ site.baseurl }}/images/2020-10-19-s7-lineageos/17-magisk-manager.jpg)
+
+# Update: Samsung Galaxy S4 mini (I9195)
+
+Today I've flashed [LineageOS 18.1](https://forum.xda-developers.com/t/rom-i9190-i9192-i9195-unofficial-11-0-0-lineageos-18-1-for-s4-mini.4189967/)
+on a Samsung Galaxy S4 mini (I9195).
+Thanks to arco68, it even runs a recent Android version. :*
+
+It's still a great phone, has a great size, it even supports LTE.
+If Samsung would update it with a modern SoC, an improved camera and maybe a fingerprint sensor in the same form factor (124mm height, 107g) I would pay shitloads of money for it.
+
+The process was similar as described above:
+
+- Boot into *Odin Mode*
+- Flash [TWRP recovery](https://dl.twrp.me/serranoltexx/) (I've used version 3.6.1_9-0)
+- Flash LineageOS (18.1)
+- Optional: Flash [Open GApps](https://opengapps.org/) (I've used ARM, 11.0, pico)
+- Flash *Magisk-v24.0.zip* for root access (Note: rename .apk to .zip and flash via TWRP)
+- After a reboot, the Magisk app wasn't installed automatically, so I had to install *Magisk-v24.0.apk* manually
+
+Important note: I've first tried to use Magisk 24.2 and it failed due to *cannot mount /system*.
+See [this post](https://forum.xda-developers.com/t/rom-i9190-i9192-i9195-unofficial-11-0-0-lineageos-18-1-for-s4-mini.4189967/page-27#post-86526393).
+Version 24.0 works though and is fine for me, so I just took that version to get root access.
+
+Also, please note that *Magisk* and *Magisk Manager* is now bundled in a single .apk file, which is different to the older version described above.
