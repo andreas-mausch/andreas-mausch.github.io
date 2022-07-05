@@ -34,6 +34,8 @@ Still hacky, but my tests run reliably without the sleep statements now. :)
 
 (`chrome` is a [BrowserWebDriverContainer](https://github.com/testcontainers/testcontainers-java/blob/40341d3912a2fe623adb83651c52a490734f3ab9/modules/selenium/src/main/java/org/testcontainers/containers/BrowserWebDriverContainer.java))
 
+Selenium 3 (with kotest 4):
+
 ```kotlin
   override fun beforeTest(testCase: TestCase) {
     super.beforeTest(testCase)
@@ -46,6 +48,21 @@ Still hacky, but my tests run reliably without the sleep statements now. :)
         super.afterNavigateTo(url, driver)
       }
     })
+  }
+```
+
+Selenium 4 (with kotest 5):
+
+```kotlin
+  override suspend fun beforeTest(testCase: TestCase) {
+    super.beforeTest(testCase)
+    val disableAnimationsListener = object : WebDriverListener {
+      override fun afterGet(driver: WebDriver, url: String) {
+        applyStyle("*,:after,:before{-webkit-transition:none!important;-moz-transition:none!important;-ms-transition:none!important;-o-transition:none!important;transition:none!important;-webkit-transform:none!important;-moz-transform:none!important;-ms-transform:none!important;-o-transform:none!important;transform:none!important}")
+        super.afterGet(driver, url)
+      }
+    }
+    driver = EventFiringDecorator(disableAnimationsListener).decorate(chrome.webDriver)
   }
 ```
 
@@ -65,6 +82,9 @@ options.setCapability("goog:loggingPrefs", loggingPreferences)
 ```
 
 The `goog:loggingPrefs` is for Google Chrome only, see [here](https://stackoverflow.com/questions/56507652/selenium-chrome-cant-see-browser-logs-invalidargumentexception).
+
+Update: With Selenium 4 there is now a constant: *org.openqa.selenium.chrome.ChromeOptions#LOGGING_PREFS*.
+The previous LOGGING_PREFS from *org.openqa.selenium.remote.CapabilityType.LOGGING_PREFS* is now deprecated.
 
 Step two: Assert the logs (via kotest again):
 
