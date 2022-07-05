@@ -159,7 +159,6 @@ pre {
     max-width:         calc(#{$content-width} - (#{32px} * 2));
     margin-right: auto;
     margin-left: auto;
-    @extend %clearfix;
 }
 
 
