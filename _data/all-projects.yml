@@ -7,6 +7,7 @@
   technologies:
   - Vue.js
   - Java
+  - Kotlin
   - Micronaut
   - vavr.io
   - Spring Cloud Gateway
@@ -16,6 +17,7 @@
   - Traefik
   - Quasar
   - Flowable
+  - Testcontainers
   - Keycloak
   - Mailhog
   - Redis
@@ -26,6 +28,7 @@
   - Grafana
   - Loki
   - Prometheus
+  - Hashicorp Vault
   text:
   image: peac.png
   link: https://www.peacfinance.de
