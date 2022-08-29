@@ -101,7 +101,7 @@ sudo rsync -avh0 --stats --numeric-ids --rsync-path="sudo rsync" nuc@nuc:/etc/le
 I use certbot (run via docker) to update my Let's encrypt TLS certificates. I just need to stop nginx before and then run this command:
 
 ```
-docker run -it --rm --name certbot -v "/etc/letsencrypt:/etc/letsencrypt" -v "/var/lib/letsencrypt:/var/lib/letsencrypt" certbot/certbot renew
+docker run -it --rm --name certbot -p 80:80 -p 443:443 -v "/etc/letsencrypt:/etc/letsencrypt" -v "/var/lib/letsencrypt:/var/lib/letsencrypt" certbot/certbot renew
 ```
 
 (Use `certificates` instead of `renew` to just print your current certificates)
