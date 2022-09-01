@@ -1,12 +1,9 @@
 ---
 title: This is my first post.
-description: This is a post on Eleventy Sample.
-date: 2022-08-07T15:00:00+02:00
-tags:
-  - some tag
-  - another tag
+description: This is a post on andreas-mausch.de
+date: 2022-09-01T19:30:00+02:00
 ---
 
-This is the Markdown content of my first blog post.
+Welcome to my new blog.
 
 {% image "image.jpg", "Image" %}
