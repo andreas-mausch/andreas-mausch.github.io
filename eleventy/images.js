@@ -24,7 +24,7 @@ function relativeFile(src, page) {
 }
 
 function relativeFileFilter(src) {
-  return `${getPathPrefix()}/${relativeFile(src, this.context.environments.page)}`
+  return path.join(this.context.environments.page.url, src)
 }
 
 function findThumbnail(src, page = this.page) {
