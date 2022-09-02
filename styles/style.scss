@@ -31,6 +31,10 @@ img {
   width: auto;
 }
 
+video {
+  max-width: 100%;
+}
+
 a {
   color: $highlight-color;
   text-decoration: none;

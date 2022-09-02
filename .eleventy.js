@@ -16,12 +16,28 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.svg")
   eleventyConfig.addPassthroughCopy("images")
   eleventyConfig.addPassthroughCopy({ "node_modules/katex/dist/fonts": "styles/fonts" })
+  // Copy all non-processed files from the posts directories
+  eleventyConfig.addPassthroughCopy("posts", {
+    // Use this hack until https://github.com/11ty/eleventy/issues/1496 is fixed
+    // Ideally, we would filter for all template formats which have been added via addTemplateFormats()
+    // See also: https://github.com/11ty/eleventy/issues/1483
+    filter: path => {
+      return !path.endsWith(".md")
+        && !path.endsWith(".ts")
+        && !path.endsWith(".html")
+        && !path.endsWith(".jpg")
+        && !path.endsWith(".jpeg")
+        && !path.endsWith(".png")
+        && !path.endsWith(".svg")
+    }
+  })
 
   eleventyConfig.addLayoutAlias("page", "layouts/page.njk")
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk")
 
   eleventyConfig.setLibrary("md", markdownIt)
 
+  eleventyConfig.addFilter("relativeFile", imageShortcodes.relativeFileFilter)
   eleventyConfig.addFilter("date", dates.date)
   eleventyConfig.addFilter("isoDate", dates.isoDate)
   eleventyConfig.addFilter("isoDateTime", dates.isoDateTime)

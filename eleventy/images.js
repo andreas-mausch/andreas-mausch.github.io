@@ -23,6 +23,10 @@ function relativeFile(src, page) {
   return path.join(path.parse(page.inputPath).dir, src)
 }
 
+function relativeFileFilter(src) {
+  return `${getPathPrefix()}/${relativeFile(src, this.context.environments.page)}`
+}
+
 function findThumbnail(src, page = this.page) {
   const metadata = imageMetadata(relativeFile(src, page))
 
@@ -121,6 +125,7 @@ function comparison(beforeName, afterName, page = this.page) {
 
 module.exports = {
   relativeFile,
+  relativeFileFilter,
   thumbnail,
   clickableThumbnail,
   imageShortcode,
