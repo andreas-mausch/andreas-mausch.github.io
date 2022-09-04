@@ -25,6 +25,7 @@ module.exports = function (eleventyConfig) {
     // See also: https://github.com/11ty/eleventy/issues/1483
     filter: path => {
       return !path.endsWith(".md")
+        && !path.endsWith(".json")
         && !path.endsWith(".ts")
         && !path.endsWith(".html")
     }
