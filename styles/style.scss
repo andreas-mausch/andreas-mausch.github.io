@@ -61,6 +61,14 @@ ol {
   margin-left: $spacing-unit;
 }
 
+ul {
+  list-style: circle inside;
+}
+
+li {
+  margin-bottom: calc($spacing-unit / 4);
+}
+
 .content {
   background-color: $content-background-color;
   padding: 16px 8px;
@@ -300,6 +308,10 @@ $site-nav-spacing: calc($site-nav-width / 4);
   top: 57px;
   transition: all 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
   width: 100%;
+}
+
+.site-nav-items li {
+  margin: 0;
 }
 
 #nav-toggle {
