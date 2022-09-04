@@ -173,6 +173,15 @@ a {
   width: 120px;
 }
 
+.postlist-item-thumbnail img {
+  aspect-ratio: 16/10;
+  object-fit: contain;
+}
+
+.postlist-item-content {
+  flex-grow: 1;
+}
+
 .postlist-link {
   font-size: 14pt;
 }
