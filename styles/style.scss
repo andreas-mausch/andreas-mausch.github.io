@@ -236,11 +236,11 @@ $site-nav-spacing: calc($site-nav-width / 4);
   justify-content: center;
   left: 0;
   list-style-type: none;
+  max-height: 0;
   overflow: hidden;
   position: absolute;
   top: 57px;
-  transform: translate(100%, 0);
-  transition: transform 0.35s cubic-bezier(0.77, 0.2, 0.05, 1);
+  transition: max-height 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
   width: 100%;
 }
 
@@ -296,7 +296,7 @@ $site-nav-spacing: calc($site-nav-width / 4);
 }
 
 #nav-toggle:checked~.site-nav-items {
-  transform: none;
+  max-height: 100%;
 }
 
 @media only screen and (min-width: 641px) {
