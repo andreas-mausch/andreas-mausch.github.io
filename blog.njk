@@ -7,17 +7,17 @@ title: Blog
 <div class="home">
   <ol reversed class="postlist">
     {% for post in collections.posts %}
-    <li class="postlist-item">
+      <li class="postlist-item">
         <div class="postlist-item-thumbnail">
-            {% postThumbnail post %}
+          {% postThumbnail post %}
         </div>
         <div class="postlist-item-content">
-            <div>
-                <a href="{{ post.url | url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-            </div>
-            <time class="postlist-date" datetime="{{ post.date | isoDateTime }}">{{ post.date | isoDate }}</time>
+          <div>
+            <a href="{{ post.url | url }}" class="postlist-link">{{ post.data.title }}</a>
+          </div>
+          <time class="postlist-date" datetime="{{ post.date | isoDateTime }}">{{ post.date | isoDate }}</time>
         </div>
-    </li>
+      </li>
     {% endfor %}
   </ol>
 </div>
