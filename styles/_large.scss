@@ -8,3 +8,18 @@
 .postlist-item {
   flex-direction: row;
 }
+
+.page-link-home {
+  display: none;
+}
+
+.nav-button-container {
+  display: none;
+}
+
+.site-nav-items {
+  flex-direction: row;
+  position: initial;
+  transform: none;
+  transition: none;
+}
