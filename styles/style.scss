@@ -4,7 +4,8 @@
 @use "_image-comparison-slider.scss";
 @use "_table.scss";
 
-$background-color: #fcfcfc;
+$background-color: #ececec;
+$content-background-color: #fcfcfc;
 $highlight-color: rgb(255, 135, 0);
 
 html,
@@ -20,7 +21,7 @@ body {
 }
 
 .content {
-  background-color: $background-color;
+  background-color: $content-background-color;
   padding: 5px;
 }
 
@@ -175,6 +176,8 @@ figcaption {
   justify-content: space-between;
   margin: 0 auto;
   max-width: 1060px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .site-title {
