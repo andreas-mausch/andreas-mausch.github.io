@@ -1,4 +1,5 @@
 const image = require("@11ty/eleventy-img")
+const imageSize = require("image-size")
 const getPathPrefix = require("./path-prefix")
 const path = require("path")
 
@@ -6,7 +7,7 @@ const thumbnailWidth = 300
 
 const imageMetadata = src => {
   const options = {
-    widths: [null, thumbnailWidth],
+    widths: [thumbnailWidth],
     formats: ["jpeg"],
     urlPath: `${getPathPrefix()}/images/`,
     outputDir: "./_site/images/",
@@ -37,11 +38,15 @@ function findThumbnail(src, page = this.page) {
 }
 
 function findImage(src, page = this.page) {
-  const metadata = imageMetadata(relativeFile(src, page))
+  const filename = relativeFile(src, page)
+  imageMetadata(filename)
+  const dimensions = imageSize(filename)
 
-  return metadata.jpeg
-    ?.sort((img1, img2) => img2.width - img1.width)
-    .find(() => true)
+  return {
+    width: dimensions.width,
+    height: dimensions.height,
+    url: `${getPathPrefix()}${path.join(page.url, src)}`
+  }
 }
 
 function thumbnail(src, alt, page = this.page) {
@@ -64,17 +69,9 @@ function clickableThumbnail(src, alt, page = this.page) {
   return `<a href="${largestImageUrl}" target="_blank">${img}</a>`
 }
 
-function imageShortcode(src, alt, sizes = "(min-width: 30em) 50vw, 100vw") {
-  const metadata = imageMetadata(relativeFile(src, this.page))
-
-  const imageAttributes = {
-    alt,
-    sizes,
-    loading: "lazy",
-    decoding: "async"
-  }
-
-  return image.generateHTML(metadata, imageAttributes)
+function imageShortcode(src, alt) {
+  const image = findImage(src, this.page)
+  return `<img src="${image.url}" width="${image.width}" height="${image.height}" alt="${alt}">`
 }
 
 function carousel(srcs) {
