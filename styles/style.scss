@@ -1,3 +1,4 @@
+@use "@fontsource/raleway/scss/mixins" as OpenSans;
 @use "img-comparison-slider/dist/styles.css";
 @use "_code.scss";
 @use "_image-carousel.scss";
@@ -10,9 +11,16 @@ $fa-font-path: "fontawesome";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
+@include OpenSans.fontFace(
+  $weight: 400,
+  $display: fallback,
+  $fontDir: "fontsource"
+);
+
 $background-color: #ececec;
 $content-background-color: #fcfcfc;
 $highlight-color: rgb(255, 135, 0);
+$link-color: #2a7ae2;
 
 html,
 body {
@@ -22,8 +30,9 @@ body {
 
 body {
   background-color: $background-color;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
+  line-height: 1.5;
 }
 
 .content {
@@ -43,12 +52,12 @@ video {
 }
 
 a {
-  color: scale-color($highlight-color, $lightness: -20%);
+  color: $link-color;
   text-decoration: none;
   transition: 0.3s;
 
   &:hover {
-    color: scale-color($highlight-color, $lightness: 20%);
+    color: scale-color($link-color, $lightness: 33%);
     text-decoration: underline;
   }
 }
