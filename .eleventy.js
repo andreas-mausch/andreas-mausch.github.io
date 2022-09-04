@@ -37,6 +37,11 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.setLibrary("md", markdownIt)
 
+  eleventyConfig.addCollection("navigationPages", collectionApi =>
+    collectionApi.getAll()
+      .filter(item => "navigationWeight" in item.data)
+      .sort((item1, item2) => item1.data.navigationWeight - item2.data.navigationWeight))
+
   eleventyConfig.addFilter("relativeFile", imageShortcodes.relativeFileFilter)
   eleventyConfig.addFilter("date", dates.date)
   eleventyConfig.addFilter("isoDate", dates.isoDate)

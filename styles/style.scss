@@ -4,8 +4,8 @@
 @use "_image-comparison-slider.scss";
 @use "_table.scss";
 
-$background-color: #eee;
-$highlight-color: #459721;
+$background-color: #fcfcfc;
+$highlight-color: rgb(255, 135, 0);
 
 html,
 body {
@@ -36,12 +36,12 @@ video {
 }
 
 a {
-  color: $highlight-color;
+  color: scale-color($highlight-color, $lightness: -20%);
   text-decoration: none;
   transition: 0.3s;
 
   &:hover {
-    color: scale-color($highlight-color, $lightness: 30%);
+    color: scale-color($highlight-color, $lightness: 20%);
     text-decoration: underline;
   }
 }
@@ -86,7 +86,7 @@ a {
   list-style-type: none;
 }
 
-.toc > ol {
+.toc>ol {
   margin: 0;
   padding: 0;
 }
@@ -164,6 +164,41 @@ figcaption {
 
 .github-link img {
   width: 50px;
+}
+
+.site-header {
+  border-bottom: 1px solid $highlight-color;
+}
+
+.site-header-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1060px;
+}
+
+.site-title {
+  align-self: center;
+  font-size: 18pt;
+}
+
+.site-header a {
+  &,
+  &:visited {
+    color: #424242;
+  }
+}
+
+.site-nav {
+  line-height: 56px;
+
+  .menu-icon {
+    display: none;
+  }
+
+  .page-link {
+    margin-left: 20px;
+  }
 }
 
 @media only screen and (min-width: 481px) {
