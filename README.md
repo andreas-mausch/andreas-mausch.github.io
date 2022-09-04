@@ -4,7 +4,7 @@ Based on [eleventy-sample](https://github.com/andreas-mausch/eleventy-sample).
 
 # Navigation
 
-To add a navigation page, add a front matter key *navigationWeight* to the page.
+To add a navigation page, add a front matter key `navigationWeight` to the page.
 It will automatically show up in the navigation.
 The navigation is sorted by the weights.
 
