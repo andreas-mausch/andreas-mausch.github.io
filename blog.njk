@@ -12,10 +12,8 @@ title: Blog
           {% postThumbnail post %}
         </div>
         <div class="postlist-item-content">
-          <div>
-            <a href="{{ post.url | url }}" class="postlist-link">{{ post.data.title }}</a>
-          </div>
-          <time class="postlist-date" datetime="{{ post.date | isoDateTime }}">{{ post.date | isoDate }}</time>
+          <time class="postlist-date" datetime="{{ post.date | isoDateTime }}">{{ post.date | date }}</time>
+          <a href="{{ post.url | url }}" class="postlist-link">{{ post.data.title }}</a>
         </div>
       </li>
     {% endfor %}
