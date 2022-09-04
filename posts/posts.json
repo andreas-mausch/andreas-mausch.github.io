@@ -2,5 +2,6 @@
   "tags": [
     "posts"
   ],
-  "layout": "post"
+  "layout": "post",
+  "permalink": "{{ page.filePathStem | replace_first: '/posts/', '/blog/' | replace: '/index', '/' }}/"
 }

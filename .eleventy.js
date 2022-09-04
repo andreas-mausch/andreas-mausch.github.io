@@ -19,7 +19,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "node_modules/@fontsource/raleway/files": "styles/fontsource" })
   eleventyConfig.addPassthroughCopy({ "node_modules/@fortawesome/fontawesome-free/webfonts": "styles/fontawesome" })
   // Copy all non-processed files from the posts directories
-  eleventyConfig.addPassthroughCopy("posts", {
+  eleventyConfig.addPassthroughCopy({ "posts": "blog" }, {
     // Use this hack until https://github.com/11ty/eleventy/issues/1496 is fixed
     // Ideally, we would filter for all template formats which have been added via addTemplateFormats()
     // See also: https://github.com/11ty/eleventy/issues/1483
