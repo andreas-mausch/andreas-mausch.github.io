@@ -19,7 +19,9 @@
 
 .site-nav-items {
   flex-direction: row;
+  gap: 30px;
   max-height: unset;
+  padding: 0;
   position: initial;
   transition: none;
 }

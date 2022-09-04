@@ -21,6 +21,7 @@ $background-color: #ececec;
 $content-background-color: #fcfcfc;
 $highlight-color: rgb(255, 135, 0);
 $link-color: #2a7ae2;
+$spacing-unit: 30px;
 
 html,
 body {
@@ -33,6 +34,31 @@ body {
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
   line-height: 1.5;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+hr,
+dl,
+dd,
+ol,
+ul,
+figure {
+  margin: 0 0 calc($spacing-unit / 2) 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  margin-left: $spacing-unit;
 }
 
 .content {
@@ -149,11 +175,6 @@ a {
   list-style-type: none;
 }
 
-ol {
-  margin: 0;
-  padding: 0;
-}
-
 .external-link::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
   background-position: center;
@@ -231,9 +252,11 @@ figcaption {
 
 .site-header {
   border-bottom: 1px solid $highlight-color;
+  padding: 10px;
 }
 
 .site-header-content {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -254,34 +277,28 @@ figcaption {
   }
 }
 
-.site-nav {
-  line-height: 56px;
-
-  .menu-icon {
-    display: none;
-  }
-
-  .page-link {
-    margin-left: 20px;
-  }
+.site-nav .menu-icon {
+  display: none;
 }
 
 $site-nav-width: 32px;
 $site-nav-spacing: calc($site-nav-width / 4);
 
 .site-nav-items {
-  align-items: center;
   background-color: $background-color;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  gap: calc($spacing-unit / 4);
   justify-content: center;
   left: 0;
   list-style-type: none;
+  margin: 0;
   max-height: 0;
   overflow: hidden;
   position: absolute;
   top: 57px;
-  transition: max-height 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
+  transition: all 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
   width: 100%;
 }
 
@@ -296,7 +313,6 @@ $site-nav-spacing: calc($site-nav-width / 4);
   flex-direction: column;
   height: $site-nav-width;
   justify-content: center;
-  margin: 12px;
   width: $site-nav-width;
 }
 
@@ -338,6 +354,7 @@ $site-nav-spacing: calc($site-nav-width / 4);
 
 #nav-toggle:checked~.site-nav-items {
   max-height: 100%;
+  padding: $spacing-unit;
 }
 
 @media only screen and (min-width: 641px) {
