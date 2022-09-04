@@ -38,9 +38,9 @@ title: andreas-mausch.de
             <div class="nav-button"></div>
           </label>
           <ol class="site-nav-items">
-            <li class="page-link-home"><a class="page-link" href="{{ "/" | url }}">Home</a></li>
+            <a class="page-link" href="{{ "/" | url }}"><li class="page-link-home">Home</li></a>
             {%- for post in collections.navigationPages -%}
-              <li><a class="page-link" href="{{ post.url }}">{{ post.data.title }}</a></li>
+              <a class="page-link" href="{{ post.url }}"><li>{{ post.data.title }}</li></a>
             {%- endfor -%}
           </ol>
         </nav>
