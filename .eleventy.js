@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.svg")
   eleventyConfig.addPassthroughCopy("images")
   eleventyConfig.addPassthroughCopy({ "node_modules/katex/dist/fonts": "styles/fonts" })
+  eleventyConfig.addPassthroughCopy({ "node_modules/@fortawesome/fontawesome-free/webfonts": "styles/fontawesome" })
   // Copy all non-processed files from the posts directories
   eleventyConfig.addPassthroughCopy("posts", {
     // Use this hack until https://github.com/11ty/eleventy/issues/1496 is fixed

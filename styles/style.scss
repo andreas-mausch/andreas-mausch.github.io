@@ -4,6 +4,12 @@
 @use "_image-comparison-slider.scss";
 @use "_table.scss";
 
+$fa-font-path: "fontawesome";
+
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
+
 $background-color: #ececec;
 $content-background-color: #fcfcfc;
 $highlight-color: rgb(255, 135, 0);
