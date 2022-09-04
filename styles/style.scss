@@ -73,14 +73,9 @@ li {
   padding: 16px 8px;
 }
 
-img {
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  width: auto;
-}
-
+img,
 video {
+  height: auto;
   max-width: 100%;
 }
 
