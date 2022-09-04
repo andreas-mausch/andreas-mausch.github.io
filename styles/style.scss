@@ -62,6 +62,47 @@ a {
   }
 }
 
+.me {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.me .image {
+  margin-bottom: 30px;
+}
+
+.me .image img {
+  border-radius: 30px;
+  max-height: 200px;
+}
+
+.me .location,
+.me .contact-email,
+.me .contact-phone {
+  white-space: nowrap;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.how-i-work {
+  text-align: center;
+}
+
+.how-i-work-values {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.how-i-work-values img {
+  margin-left: 20%;
+  margin-right: 20%;
+  max-height: 100px;
+}
+
 .postlist {
   display: flex;
   flex-direction: column;

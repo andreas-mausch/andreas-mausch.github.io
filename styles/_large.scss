@@ -23,3 +23,15 @@
   position: initial;
   transition: none;
 }
+
+.social-links {
+  flex-direction: row;
+  margin: 30px auto 0;
+  width: 300px;
+}
+
+.how-i-work-values > div {
+  flex-basis: 34%;
+  flex-grow: 1;
+  margin: 30px;
+}
