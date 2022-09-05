@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security: Playing around with NSA exploit EternalBlue (MS17-010)</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Security: Playing around with NSA exploit EternalBlue (MS17-010)</h1>
+<div>
+  <time class="postlist-date" datetime="2017-05-14T01:00:00.000+00:00">May 14, 2017</time>
+</div>
+
+
+
+<p>In April, <a href="https://en.wikipedia.org/wiki/The_Shadow_Brokers" class="external-link" target="_blank">TheShadowBrokers</a> have released numerous exploits written by the <a href="https://en.wikipedia.org/wiki/Equation_Group" class="external-link" target="_blank">Equation Group</a>, which are &quot;suspected of being tied to the United States National Security Agency (NSA)&quot;.</p>
+<p>You can find the all the files here: <a href="https://github.com/adamcaudill/EquationGroupLeak" class="external-link" target="_blank">https://github.com/adamcaudill/EquationGroupLeak</a></p>
+<p>Among the files, there is the <a href="https://en.wikipedia.org/wiki/EternalBlue" class="external-link" target="_blank">EternalBlue exploit</a>. For me, it seems to be the biggest exploit since the RPC DCOM exploit used by <a href="https://en.wikipedia.org/wiki/Blaster_(computer_worm)" class="external-link" target="_blank">Blaster</a> in 2003 (see <a href="https://technet.microsoft.com/en-us/library/security/ms03-026.aspx" class="external-link" target="_blank">MS03-26</a>). It allows remote execution on any Windows machine from XP up to Windows 8.1. The only requirement: You need to be in the same network as the victim.</p>
+<p>I'm always interested in computer security and especially how these exploits work, and I've found very good websites explaining it in detail:</p>
+<ul>
+<li><a href="https://zerosum0x0.blogspot.de/2017/04/doublepulsar-initial-smb-backdoor-ring.html" class="external-link" target="_blank">zerosum0x0.blogspot.de</a><br>
+DoublePulsar Initial SMB Backdoor Ring 0 Shellcode Analysis</li>
+<li><a href="https://countercept.com/our-thinking/analyzing-the-doublepulsar-kernel-dll-injection-technique/" class="external-link" target="_blank">countercept.com</a><br>
+Analyzing the DoublePulsar kernel DLL injection technique</li>
+<li><a href="https://www.smittix.co.uk/exploiting-ms17-010-using-eternalblue-and-doublepulsar-to-gain-a-remote-meterpreter-shell/" class="external-link" target="_blank">www.smittix.co.uk</a><br>
+Exploiting MS17-010 – Using EternalBlue and DoublePulsar to gain a remote meterpreter shell</li>
+</ul>
+<p>I'm not a big fan of theory though and wanted to see it myself. I've set up two virtual boxes (XP 32-bit and Windows 7 64-bit), which don't have the latest Microsoft patch <a href="https://technet.microsoft.com/en-us/library/security/ms17-010.aspx" class="external-link" target="_blank">MS17-010</a> installed.
+I've put them in the same network as my attacker machine, a Kali Linux with Metasploit.
+Next I've followed the good tutorial by Una Piba Geek on <a href="https://www.youtube.com/watch?v=vmWeJJ0TLi0" class="external-link" target="_blank">YouTube</a>.</p>
+<p>See below the results of my test. I was able to create a meterpreter shell in Windows 7 64-bit, however EternalBlue failed on the XP 32-bit box.</p>
+<p>I've found it amazingly easy to set everything up and it will take only a couple of minutes to infect a vulnerable machine. Compared to 2003 and the RPC DCOM exploit it also amazes me how much more resources are available on blogs, GitHub, YouTube, etc. I remember I put hours in gathering information about it back then and the outcome was very little, but maybe it was just me not knowing what to look for.</p>
+<img src="/blog/2017-05-14-eternalblue/scan.png" width="1024" height="768" alt="">  
+Scan of the victim machines
+<img src="/blog/2017-05-14-eternalblue/win7-options.png" width="1024" height="768" alt="">  
+<img src="/blog/2017-05-14-eternalblue/win7-hacked.png" width="1024" height="768" alt="">  
+Windows 7 64-bit hacked
+<img src="/blog/2017-05-14-eternalblue/win7-eternalblue-success.png" width="1024" height="768" alt="">  
+Windows 7 64-bit: EternalBlue-2.2.0.exe output
+<img src="/blog/2017-05-14-eternalblue/winxp-eternalblue-fail.png" width="1024" height="768" alt="">  
+Windows XP 32-bit: EternalBlue-2.2.0.exe failed :(
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
