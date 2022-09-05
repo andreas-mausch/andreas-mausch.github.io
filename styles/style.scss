@@ -290,7 +290,7 @@ figcaption {
 
 .site-title {
   align-self: center;
-  font-size: 16pt;
+  font-size: 20pt;
 }
 
 .site-header a {
@@ -306,7 +306,7 @@ figcaption {
   display: none;
 }
 
-$site-nav-width: 32px;
+$site-nav-width: 38px;
 $site-nav-spacing: calc($site-nav-width / 4);
 
 .site-nav-items {
@@ -322,7 +322,7 @@ $site-nav-spacing: calc($site-nav-width / 4);
   max-height: 0;
   overflow: hidden;
   position: absolute;
-  top: 41px;
+  top: 49px;
   transition: all 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
   width: 100%;
 }
@@ -356,7 +356,7 @@ $site-nav-spacing: calc($site-nav-width / 4);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
     background-color 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
     opacity 0.5s ease;
-  width: $site-nav-width;
+  width: calc($site-nav-width * 0.8);
 }
 
 .nav-button::before {
