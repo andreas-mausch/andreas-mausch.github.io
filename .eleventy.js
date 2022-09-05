@@ -3,6 +3,7 @@ const dates = require("./eleventy/dates")
 const directoryOutputPlugin = require("@11ty/eleventy-plugin-directory-output")
 const eleventySass = require("eleventy-sass")
 const emoji = require("eleventy-plugin-emoji")
+const iconFont = require("./eleventy/icon-font")
 const imageShortcodes = require("./eleventy/images")
 const katex = require("katex")
 const linkPost = require("./eleventy/link-post")
@@ -78,5 +79,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(tableOfContents, {
     tags: ["h1", "h2", "h3", "h4", "h5"]
   })
+  eleventyConfig.addPlugin(iconFont)
   eleventyConfig.addPlugin(typescriptPlugin)
 }

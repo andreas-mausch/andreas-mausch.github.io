@@ -2,9 +2,7 @@
   "name": "andreas-mausch-de",
   "version": "1.0.0",
   "scripts": {
-    "predev": "npm run generate:font",
     "dev": "eleventy --serve",
-    "prebuild": "npm run generate:font",
     "build": "ELEVENTY_ENV=production eleventy",
     "generate:font": "icon-font-buildr --config ../../../../icon-font.json",
     "lint": "npm run lint:scripts && npm run lint:scss",
