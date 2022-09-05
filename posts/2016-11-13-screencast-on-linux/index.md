@@ -2,6 +2,7 @@
 title: Record Screencasts on Linux
 date: 2016-11-13T00:00:00+07:00
 tags: ['ffmpeg', 'screencast', 'recording']
+thumbnail: ffmpeg-wrong-colors.png
 ---
 
 # Useful FFMPEG commands for recording your screen
