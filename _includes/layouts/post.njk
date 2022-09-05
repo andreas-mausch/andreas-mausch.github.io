@@ -3,6 +3,9 @@ layout: page
 ---
 
 <h1>Blog post: {{ title | safe }}</h1>
+<div>
+  <time class="postlist-date" datetime="{{ date | isoDateTime }}">{{ date | date }}</time>
+</div>
 
 {% if toc and content | toc %}
   <aside>
