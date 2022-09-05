@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass App in Kotlin</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Compass App in Kotlin</h1>
+<div>
+  <time class="postlist-date" datetime="2017-05-14T00:00:00.000+00:00">May 14, 2017</time>
+</div>
+
+
+
+<p>My colleague spent some time researching into <a href="https://kotlinlang.org/" class="external-link" target="_blank">Kotlin</a>. He was so impressed that it is now his favorite programming lanuage. So I decided to take a look at it and wrote a small compass app.</p>
+<p>I've used IntelliJ with the Android and Kotlin plugins and it was very easy to <a href="https://kotlinlang.org/docs/tutorials/kotlin-android.html" class="external-link" target="_blank">get started</a>. One notable thing is the convenient copy&amp;paste of Java code into the IDE, which then automatically asks if it should convert the code into Kotlin. It worked very well. The language itself looks interesting as well. Although this app doesn't really contain a lot of code, I will dig deeper into the language. In some aspects it reminds me of Scala.</p>
+<p>One thing I disliked a lot: I had to convert the SVG image into Android's special VectorDrawable format. I don't understand why they come up with a completely new format when there already is a standardized one. Well. It cost me some time because the first images I've tried using the built-in svg-&gt;vector converter were stretched or missing half of the image. I've finally found this nice <a href="http://all-free-download.com/free-vector/download/compass-vector_161297.html" class="external-link" target="_blank">SVG</a> though, which worked perfectly.</p>
+<p><a href="https://github.com/andreas-mausch/compass" class="external-link" target="_blank">https://github.com/andreas-mausch/compass</a><br>
+<a href="https://github.com/andreas-mausch/compass/releases" class="external-link" target="_blank">Download APK</a></p>
+<img src="/blog/2017-05-14-compass-app-in-kotlin/compass-app.jpg" width="360" height="640" alt="Screenshot">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
