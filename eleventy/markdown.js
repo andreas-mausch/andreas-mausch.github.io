@@ -19,7 +19,9 @@ const markdown = markdownIt({
     removeMarker: true
   })
   .use(attrs)
-  .use(externalLinks)
+  .use(externalLinks, {
+    externalTarget: "_blank"
+  })
   .use(footnote)
   .use(anchor, {
     permalink: anchor.permalink.ariaHidden({
