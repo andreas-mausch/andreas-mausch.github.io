@@ -135,9 +135,11 @@ a {
 }
 
 .how-i-work-values img {
+  display: inline-block;
   margin-left: 20%;
   margin-right: 20%;
   max-height: 100px;
+  vertical-align: text-bottom;
 }
 
 .postlist {
