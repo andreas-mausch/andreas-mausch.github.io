@@ -17,7 +17,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images")
   eleventyConfig.addPassthroughCopy({ "node_modules/katex/dist/fonts": "styles/fonts" })
   eleventyConfig.addPassthroughCopy({ "node_modules/@fontsource/raleway/files": "styles/fontsource" })
-  eleventyConfig.addPassthroughCopy({ "node_modules/@fortawesome/fontawesome-free/webfonts": "styles/fontawesome" })
   // Copy all non-processed files from the posts directories
   eleventyConfig.addPassthroughCopy({ "posts": "blog" }, {
     // Use this hack until https://github.com/11ty/eleventy/issues/1496 is fixed

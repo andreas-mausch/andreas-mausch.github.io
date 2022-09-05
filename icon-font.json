@@ -5,14 +5,51 @@
     "./node_modules/@fortawesome/fontawesome-free/svgs/brands/[icon].svg"
   ],
   "icons": [
-    "envelope-open-text",
-    "github",
-    "linkedin",
-    "location-dot",
-    "phone",
-    "xing"
+    {
+      "icon": "envelope-open-text",
+      "name": "envelope-open-text",
+      "codepoints": [
+        "\uf658"
+      ]
+    },
+    {
+      "icon": "github",
+      "name": "github",
+      "codepoints": [
+        "\uf09b"
+      ]
+    },
+    {
+      "icon": "linkedin",
+      "name": "linkedin",
+      "codepoints": [
+        "\uf0e1"
+      ]
+    },
+    {
+      "icon": "location-dot",
+      "name": "location-dot",
+      "codepoints": [
+        "\uf5a0"
+      ]
+    },
+    {
+      "icon": "phone",
+      "name": "phone",
+      "codepoints": [
+        "\uf095"
+      ]
+    },
+    {
+      "icon": "xing",
+      "name": "xing",
+      "codepoints": [
+        "\uf168"
+      ]
+    }
   ],
   "output": {
+    "codepoints": true,
     "fonts": "./_site/styles/icons/",
     "fontName": "icons"
   }

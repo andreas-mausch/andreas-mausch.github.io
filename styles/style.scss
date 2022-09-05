@@ -1,15 +1,10 @@
 @use "@fontsource/raleway/scss/mixins" as OpenSans;
 @use "img-comparison-slider/dist/styles.css";
 @use "_code.scss";
+@use  "_icons";
 @use "_image-carousel.scss";
 @use "_image-comparison-slider.scss";
 @use "_table.scss";
-
-$fa-font-path: "fontawesome";
-
-@import "@fortawesome/fontawesome-free/scss/fontawesome";
-@import "@fortawesome/fontawesome-free/scss/solid";
-@import "@fortawesome/fontawesome-free/scss/brands";
 
 @include OpenSans.fontFace(
   $weight: 400,

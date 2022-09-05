@@ -49,6 +49,14 @@ big icon library.
 npm run generate:font
 ```
 
+Tool for checking the file:
+
+```
+ttx -t cmap -o - ./_site/styles/icons/icons.ttf
+ttx -t cmap -o - ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf
+font-manager ./_site/styles/icons/icons.ttf
+```
+
 ## Pre-commit hook
 
 Linting and type checking is also done by the npm package `pre-commit`.

@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "CustomIcons";
+  font-style: normal;
+  font-weight: normal;
+  src: url("icons/icons.woff2") format("woff2"),
+    url("icons/icons.ttf") format("truetype");
+}
+
+.icon {
+  font-family: "CustomIcons";
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-transform: none;
+}
+
+$icons: (
+  "envelope-open-text": \f658,
+  "github": \f09b,
+  "linkedin": \f0e1,
+  "location-dot": \f5a0,
+  "phone": \f095,
+  "xing": \f168
+);
+
+@each $name, $icon in $icons {
+  .icon-#{$name}::before {
+    content: unquote("\"#{ $icon }\"");
+  }
+}
