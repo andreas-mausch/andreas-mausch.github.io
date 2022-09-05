@@ -6,7 +6,7 @@ title: Blog
 
 <div class="home">
   <ol reversed class="postlist">
-    {% for post in collections.posts %}
+    {% for post in collections.posts | reverse %}
       <li class="postlist-item">
         <div class="postlist-item-thumbnail">
           {% postThumbnail post %}
