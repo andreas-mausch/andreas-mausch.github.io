@@ -1,0 +1,69 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moved Gitlab server to another host</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Moved Gitlab server to another host</h1>
+<div>
+  <time class="postlist-date" datetime="2016-05-05T22:00:00.000+00:00">May 5, 2016</time>
+</div>
+
+
+
+<p>I use the Gitlab Community Edition for private projects.</p>
+<p><a href="http://doc.gitlab.com/omnibus/docker/" class="external-link" target="_blank">http://doc.gitlab.com/omnibus/docker/</a></p>
+<p>Now I wanted to replace the Acer Revo with a more powerful Intel NUC i5 I bought.
+So I copied all volumes referenced by the docker container
+(for me it was ./gitlab/config, ./gitlab/data and ./gitlab/logs) and tried to
+start gitlab/gitlab-ce:latest.</p>
+<p>In the log files (docker logs gitlab) Gitlab told me the permissions have changed
+due to the copying. I searched the internet, found <a href="https://github.com/gitlabhq/gitlabhq/issues/9611" class="external-link" target="_blank">this on github.com</a> and I had to run:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab update-permissions</span></code></pre>
+<p>However, I still got error messages like <em>Couldn't connect to redis</em>.
+I took a look at the file system manually and found the permissions have not been
+set correctly. I had to run this command to fix it:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab <span class="token function">chown</span> <span class="token parameter variable">-R</span> gitlab-redis:gitlab-redis /var/opt/gitlab/redis/</span>
+<span class="highlight-line"><span class="token function">docker</span> restart gitlab</span></code></pre>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
