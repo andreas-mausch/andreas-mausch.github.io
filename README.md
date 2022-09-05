@@ -40,6 +40,15 @@ npm run lint
 npm run check
 ```
 
+## Generate Icon Font
+
+This project uses [icon-font-buildr](https://github.com/fabiospampinato/icon-font-buildr) to strip down fontawesomes
+big icon library.
+
+```
+npm run generate:font
+```
+
 ## Pre-commit hook
 
 Linting and type checking is also done by the npm package `pre-commit`.

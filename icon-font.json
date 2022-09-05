@@ -1,0 +1,19 @@
+{
+  "sources": [
+    "./node_modules/@fortawesome/fontawesome-free/svgs/solid/[icon].svg",
+    "./node_modules/@fortawesome/fontawesome-free/svgs/regular/[icon].svg",
+    "./node_modules/@fortawesome/fontawesome-free/svgs/brands/[icon].svg"
+  ],
+  "icons": [
+    "envelope-open-text",
+    "github",
+    "linkedin",
+    "location-dot",
+    "phone",
+    "xing"
+  ],
+  "output": {
+    "fonts": "./_site/styles/icons/",
+    "fontName": "icons"
+  }
+}

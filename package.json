@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "eleventy --serve",
     "build": "ELEVENTY_ENV=production eleventy",
+    "generate:font": "icon-font-buildr --config ../../../../icon-font.json",
     "lint": "npm run lint:scripts && npm run lint:scss",
     "lint:scripts": "eslint --ignore-pattern !.eleventy.js ./.eleventy.js ./eleventy/**/*.js ./scripts/**/*.ts",
     "lint:scss": "stylelint ./styles/**/*.scss",
@@ -23,6 +24,7 @@
     "eleventy-sass": "2.1.0",
     "esbuild": "0.15.1",
     "eslint": "8.21.0",
+    "icon-font-buildr": "1.4.2",
     "markdown-it-anchor": "8.6.4",
     "markdown-it-attribution": "0.1.4",
     "markdown-it-attrs": "4.1.4",
