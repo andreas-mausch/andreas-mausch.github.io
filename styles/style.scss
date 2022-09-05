@@ -90,12 +90,14 @@ video {
 
 a {
   color: $link-color;
-  text-decoration: none;
-  transition: 0.3s;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: color 1s ease,
+    text-decoration-color 1s ease;
 
   &:hover {
-    color: scale-color($link-color, $lightness: 33%);
-    text-decoration: underline;
+    color: $highlight-color;
+    text-decoration-color: initial;
   }
 }
 
@@ -292,6 +294,8 @@ figcaption {
 }
 
 .site-header a {
+  transition: none;
+
   &,
   &:visited {
     color: #424242;
