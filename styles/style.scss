@@ -106,14 +106,11 @@ a {
   text-align: center;
 }
 
-.me .image {
-  margin-bottom: 30px;
-}
-
-.me .image img {
+.me img {
   border-radius: 30px;
-  max-height: 200px;
-  width: auto;
+  display: inline-block;
+  margin-bottom: 30px;
+  vertical-align: text-bottom;
 }
 
 .me .location,
