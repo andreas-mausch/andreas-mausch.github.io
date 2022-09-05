@@ -1,0 +1,80 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Mint: Login loop after new graphics card</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Linux Mint: Login loop after new graphics card</h1>
+
+
+
+<p>I am a big fan of Linux and open-source in general. Despite the big improvements
+on usability there are still too many moments where you need to use the terminal.</p>
+<p>Well, I am a developer and used to the terminal. However, this week I have
+experienced a problem which cost me some hours.</p>
+<p>I have changed my graphics card from ATI to Nvidia. My PC recognized the new card,
+it reset the BIOS and my Windows partition booted up. It required new drivers
+which was fine.</p>
+<p>When I tried to boot my Linux partition, I faced a black screen. After uninstalling
+the ATI drivers and installing the proprietary Nvidia drivers in recovery mode
+on command line I got to the login screen.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> purge <span class="token string">"fglrx.*"</span></span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">--reinstall</span> xserver-xorg-core libgl1-mesa-glx:i386 libgl1-mesa-dri:i386 libgl1-mesa-glx:amd64 libgl1-mesa-dri:amd64</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token function">sudo</span> add-apt-repository ppa:graphics-drivers/ppa</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> update</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nvidia-364 nvidia-settings</span></code></pre>
+<p>But after I entered my credentials the screen went black for two seconds and
+I was on the login screen again. A login loop.
+I tried a lot, reinstalled Xorg lots of times, tried different packages but
+nothing worked.</p>
+<p>After some googling I found other users experienced this as well. But the common
+solution for the login loop on Linux Mint is to fix file permissions on .Xauthority.
+My file permissions where fine though.</p>
+<p>After a lot of more googling I found this helpful post, which suggested to reinstall
+some cinnamon packages. It worked for me, I must have broken them accidentally
+during my Xorg experiments. Thank you very much, Marco77!</p>
+<p><a href="http://www.linuxmintusers.de/index.php?topic=27767.0" class="external-link" target="_blank">http://www.linuxmintusers.de/index.php?topic=27767.0</a></p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> cinnamon mint-meta-cinnamon nemo</span></code></pre>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
