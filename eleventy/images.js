@@ -75,6 +75,10 @@ function imageShortcode(src, alt) {
 }
 
 function carousel(srcs) {
+  if (!srcs || srcs.length === 0) {
+    throw new Error("srcs is undefined or empty")
+  }
+
   let slider = "<div class=\"swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-dark slider-nav-chevron slider-item-ratio-contain\">"
   slider += "<ul class=\"slider-container\">"
   for (const thumbnail of srcs.map(src => clickableThumbnail(src, "Slider image", this.context.environments.page))) {
