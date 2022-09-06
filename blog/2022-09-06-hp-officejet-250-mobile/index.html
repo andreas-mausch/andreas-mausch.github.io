@@ -1,0 +1,116 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printing and Scanning on Linux</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Printing and Scanning on Linux</h1>
+<div>
+  <time class="postlist-date" datetime="2022-09-06T20:00:00.000+00:00">Sep 6, 2022</time>
+</div>
+
+
+  <aside>
+    <nav class="toc" >
+        <ol><li><a href="#introduction">1. Introduction </a><ol><li><a href="#hp-deskjet-320">1.1. HP DeskJet 320 </a></li><li><a href="#hp-officejet-pro-6970">1.2. HP OfficeJet Pro 6970 </a></li><li><a href="#hp...again%3F-hp-officejet-250-mobile">1.3. HP...again? HP OfficeJet 250 Mobile </a></li></ol></li><li><a href="#android">2. Android </a><ol><li><a href="#printing-on-android">2.1. Printing on Android </a></li><li><a href="#scanning-on-android">2.2. Scanning on Android </a></li></ol></li><li><a href="#usb">3. USB </a></li><li><a href="#linux">4. Linux </a><ol><li><a href="#printing-on-linux">4.1. Printing on Linux </a></li><li><a href="#scanning-on-linux">4.2. Scanning on Linux </a></li></ol></li></ol>
+      </nav>
+  </aside>
+
+
+<img src="/blog/2022-09-06-hp-officejet-250-mobile/hplip-printer.jpg" width="1280" height="889" alt="undefined">
+<h1 id="introduction" tabindex="-1">1. Introduction <a class="header-anchor" href="#introduction" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="hp-deskjet-320" tabindex="-1">1.1. HP DeskJet 320 <a class="header-anchor" href="#hp-deskjet-320" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Since a kid I always found printing difficult to do.
+My first printer I had was a HP DeskJet 320.
+It was a very small and compact printer, but since I didn't know much about printers usually look like,
+I didn't care too much about it.</p>
+<p>It had a standard LPT port and worked fine on my Windows 98 machine.
+Except: The document feeder didn't work well. Sometimes I was lucky to get a whole page printed,
+but the printer <strong>always</strong> needed help with the start of feeding and usually also during the print.</p>
+<p>Many pages ended up being crumpled.
+It was a mess.</p>
+<h2 id="hp-officejet-pro-6970" tabindex="-1">1.2. HP OfficeJet Pro 6970 <a class="header-anchor" href="#hp-officejet-pro-6970" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>My last printer I used was a HP OfficeJet Pro 6970, which was especially interesting to me due to the
+duplex scanning function.</p>
+<p>The printer was annoying though: I rarely print, and each time I booted the printer it did a full
+&quot;cartridge-maintenance-program&quot;. Which not only lasts for a too long time, but also wastes a lot of ink.</p>
+<p>And the biggest problem: After the first cartridge that came with the printer (it is just a sample cartridge which is not 100% filled)
+was empty, I've ordered a replacement.
+But to my surprise whenever I printed despite hearing the usual noises the resulting page was still white.
+It just didn't put any ink on pages anymore.</p>
+<p>The device was still in warranty, so I got it replaced by another model.
+Same story: After the first cartridge I wasn't able to print anymore.
+I cannot tell if it was me just being stupied twice, but I remember at least the second time I tried to be extra careful.</p>
+<h2 id="hp...again%3F-hp-officejet-250-mobile" tabindex="-1">1.3. HP...again? HP OfficeJet 250 Mobile <a class="header-anchor" href="#hp...again%3F-hp-officejet-250-mobile" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>So today my new printer arrived: A HP OfficeJet 250 Mobile.</p>
+<p>You might think: This guy is stupid, he was disappointed by HP for three times in a row and still buys a new model from them.
+The reason I did: I wasn't able to find any good alternatives.
+Canon doesn't support Linux and the other brands don't really have portable printers (for full-size A4).
+Also, the reviewers for the product seemed to be very happy with it.</p>
+<p>And since I also like it very much (as of today), I would like to share the setup process.</p>
+<h1 id="android" tabindex="-1">2. Android <a class="header-anchor" href="#android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="printing-on-android" tabindex="-1">2.1. Printing on Android <a class="header-anchor" href="#printing-on-android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>For printing, HP provides an Android plugin which integrates very well into the system:<br>
+<a href="https://play.google.com/store/apps/details?id=com.hp.android.printservice" class="external-link" target="_blank">HP Print Service Plugin</a></p>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/print-plugin/add-printer.png" target="_blank"><img src="/images/add-printer-5ZQ7wunrqA-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/print-plugin/google-drive-print-button.png" target="_blank"><img src="/images/google-drive-print-button-1Yejs3qKgY-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/print-plugin/print-spooler.png" target="_blank"><img src="/images/print-spooler-FqnyrFVCZA-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/print-plugin/printer-info.png" target="_blank"><img src="/images/printer-info-CaXSKWcTLU-300.jpeg" alt="Slider image" width="300" height="633"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button></div></div>
+<p>If you add the printer for the first time, it might take a while to be discovered.
+But for me it appeared almost instantly.</p>
+<h2 id="scanning-on-android" tabindex="-1">2.2. Scanning on Android <a class="header-anchor" href="#scanning-on-android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>For scanning, HP provides a different app:<br>
+<a href="https://play.google.com/store/apps/details?id=com.hp.printercontrol" class="external-link" target="_blank">HP Smart</a></p>
+<p>To make it short: I hate it.</p>
+<ul>
+<li>The first start took a long time. I don't know what happened there.</li>
+<li>It comes with ads, you have to agree to their data usage.</li>
+<li>And: You need to create an account at HP in order to be able to scan. 🤮</li>
+</ul>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/add-account.png" target="_blank"><img src="/images/add-account-MdAZJdA0Lk-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/add-printer.png" target="_blank"><img src="/images/add-printer-6UQbGl6c2c-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/app.png" target="_blank"><img src="/images/app-mJlADtaljC-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/data-usage.png" target="_blank"><img src="/images/data-usage-_tVi60EVwA-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/find-printer.png" target="_blank"><img src="/images/find-printer-CbzvXcNHAM-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/play-store-review.png" target="_blank"><img src="/images/play-store-review-wG5KWP6OGz-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/play-store.png" target="_blank"><img src="/images/play-store-YnDFTqhjAn-300.jpeg" alt="Slider image" width="300" height="633"></a></li><li><a href="/blog/2022-09-06-hp-officejet-250-mobile/android/hp-smart/terms.png" target="_blank"><img src="/images/terms-GOcjys8fV3-300.jpeg" alt="Slider image" width="300" height="633"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button><button></button><button></button><button></button><button></button></div></div>
+<p>I didn't continue here.</p>
+<h1 id="usb" tabindex="-1">3. USB <a class="header-anchor" href="#usb" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>You can directly store a scan on at usb stick (FAT32 file system).
+Works without any further software. 👍</p>
+<h1 id="linux" tabindex="-1">4. Linux <a class="header-anchor" href="#linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="printing-on-linux" tabindex="-1">4.1. Printing on Linux <a class="header-anchor" href="#printing-on-linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="scanning-on-linux" tabindex="-1">4.2. Scanning on Linux <a class="header-anchor" href="#scanning-on-linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
