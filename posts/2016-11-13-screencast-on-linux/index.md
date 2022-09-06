@@ -2,7 +2,7 @@
 title: Record Screencasts on Linux
 date: 2016-11-13T00:00:00+07:00
 tags: ['ffmpeg', 'screencast', 'recording']
-thumbnail: ffmpeg-wrong-colors.png
+thumbnail: after.png
 ---
 
 # Useful FFMPEG commands for recording your screen
@@ -41,7 +41,7 @@ I ended up using ffmpeg, a user-unfriendly command line tool. It worked, but aud
 
 While SimpleScreenRecorder recorded the colors of the screen as they were, I had slightly shifted colors in ffmpeg and Kazam. I was able to fix it for ffmpeg by using libx264rgb instead of libx264. See the screenshot below, top is wrong colors, bottom is correct colors:
 
-{% image "ffmpeg-wrong-colors.png", "FFmpeg wrong colors" %}
+{% image-comparison "before.png" "after.png" %}
 
 # Fixing the audio
 
