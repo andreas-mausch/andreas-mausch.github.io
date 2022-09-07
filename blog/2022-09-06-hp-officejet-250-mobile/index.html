@@ -47,7 +47,7 @@
 
   <aside>
     <nav class="toc" >
-        <ol><li><a href="#introduction">1. Introduction </a><ol><li><a href="#hp-deskjet-320">1.1. HP DeskJet 320 </a></li><li><a href="#hp-officejet-pro-6970">1.2. HP OfficeJet Pro 6970 </a></li><li><a href="#hp...again%3F-hp-officejet-250-mobile">1.3. HP...again? HP OfficeJet 250 Mobile </a></li></ol></li><li><a href="#android">2. Android </a><ol><li><a href="#printing-on-android">2.1. Printing on Android </a></li><li><a href="#scanning-on-android">2.2. Scanning on Android </a></li></ol></li><li><a href="#usb">3. USB </a></li><li><a href="#linux">4. Linux </a><ol><li><a href="#printing-on-linux">4.1. Printing on Linux </a></li><li><a href="#scanning-on-linux">4.2. Scanning on Linux </a></li></ol></li></ol>
+        <ol><li><a href="#introduction">1. Introduction </a><ol><li><a href="#hp-deskjet-320">1.1. HP DeskJet 320 </a></li><li><a href="#hp-officejet-pro-6970">1.2. HP OfficeJet Pro 6970 </a></li><li><a href="#hp...again%3F-hp-officejet-250-mobile">1.3. HP...again? HP OfficeJet 250 Mobile </a></li></ol></li><li><a href="#android">2. Android </a><ol><li><a href="#printing-on-android">2.1. Printing on Android </a></li><li><a href="#scanning-on-android">2.2. Scanning on Android </a></li></ol></li><li><a href="#usb">3. USB </a></li><li><a href="#linux">4. Linux </a><ol><li><a href="#printing-on-linux">4.1. Printing on Linux </a></li><li><a href="#scanning-on-linux">4.2. Scanning on Linux </a></li></ol></li><li><a href="#findings-the-firmware-version">5. Findings the firmware version </a></li><li><a href="#firewall-settings-on-fritzbox">6. Firewall Settings on FritzBox </a></li></ol>
       </nav>
   </aside>
 
@@ -104,9 +104,47 @@ But for me it appeared almost instantly.</p>
 <h1 id="usb" tabindex="-1">3. USB <a class="header-anchor" href="#usb" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>You can directly store a scan on at usb stick (FAT32 file system).
 Works without any further software. 👍</p>
+<p>If you scan via USB, the scan will result in a .pdf file.
+To convert a scanned .pdf to .jpg, I recommend to use the tool <code class="language-plain">pdfimages</code>.
+The <code class="language-plain">-j</code> option saves images as jpegs.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">pdfimages <span class="token parameter variable">-list</span> input.pdf</span>
+<span class="highlight-line">pdfimages <span class="token parameter variable">-j</span> input.pdf <span class="token builtin class-name">.</span></span></code></pre>
 <h1 id="linux" tabindex="-1">4. Linux <a class="header-anchor" href="#linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>For Linux, HP provides an open-source library <a href="https://sourceforge.net/projects/hplip/" class="external-link" target="_blank">HPLIP</a>.
+It can be used for both, printing (via CUPS) and scanning (via SANE).</p>
 <h2 id="printing-on-linux" tabindex="-1">4.1. Printing on Linux <a class="header-anchor" href="#printing-on-linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ lsusb <span class="token operator">|</span> <span class="token function">grep</span> HP</span>
+<span class="highlight-line">Bus 003 Device 003: ID 03f0:e911 HP, Inc OfficeJet <span class="token number">250</span> Mobile Series</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> hplip</span>
+<span class="highlight-line">$ hp-setup <span class="token parameter variable">-i</span></span></code></pre>
+<p>This will walk you through a CLI wizard, it will show all available devices and will add the selected one to CUPS:</p>
+<p><a href="/blog/2022-09-06-hp-officejet-250-mobile/linux/hp-setup.png" target="_blank"><img src="/images/hp-setup-OqDfjhtlQZ-300.jpeg" alt="undefined" width="300" height="404"></a></p>
+<p>To validate the installation was correct, you can call <code class="language-plain">hp-info</code>.
+It will output lots of information about your device.</p>
+<p>If everything worked correctly, you can now just select the printer in your favorite app.</p>
 <h2 id="scanning-on-linux" tabindex="-1">4.2. Scanning on Linux <a class="header-anchor" href="#scanning-on-linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>You can use <code class="language-plain">scanimage</code> to scan a page.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ scanimage --list-devices</span>
+<span class="highlight-line">device <span class="token variable"><span class="token variable">`</span>v4l:/dev/video2' is a Noname Integrated Camera: Integrated I virtual device</span>
+<span class="highlight-line">device <span class="token variable">`</span></span>v4l:/dev/video0<span class="token string">' is a Noname Integrated Camera: Integrated C virtual device</span>
+<span class="highlight-line">device `escl:https://192.168.178.72:443'</span> is a HP OfficeJet <span class="token number">250</span> Mobile Series <span class="token punctuation">[</span>C5372E<span class="token punctuation">]</span> adf scanner</span>
+<span class="highlight-line">device <span class="token variable"><span class="token variable">`</span>hpaio:/usb/OfficeJet_250_Mobile_Series?serial<span class="token operator">=</span>TH' is a Hewlett-Packard OfficeJet_250_Mobile_Series all-in-one</span>
+<span class="highlight-line">device <span class="token variable">`</span></span>hpaio:/net/officejet_250_mobile_series?ip<span class="token operator">=</span><span class="token number">192.168</span>.178.72<span class="token operator">&amp;</span><span class="token assign-left variable">queue</span><span class="token operator">=</span>false' is a Hewlett-Packard officejet_250_mobile_series all-in-one</span></code></pre>
+<p>As you can see, the OfficeJet pops up twice: One time for the wired connection, and the second one for the wireless one.
+I tried both, and I was very happy to see wireless worked on first try.</p>
+<p>Save scan as .jpg:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">scanimage --device-name <span class="token string">"hpaio:/usb/OfficeJet_250_Mobile_Series?serial=TH"</span> <span class="token parameter variable">--progress</span> <span class="token parameter variable">--format</span> tiff <span class="token parameter variable">--mode</span> Color <span class="token parameter variable">--resolution</span> <span class="token number">300</span> <span class="token operator">|</span> magick convert - <span class="token parameter variable">-resize</span> <span class="token number">50</span>% <span class="token parameter variable">-quality</span> <span class="token number">75</span> image.jpg</span></code></pre>
+<p>Just replace the <code class="language-plain">device-name</code> by the one with the IP address and you can scan without a wire.</p>
+<h1 id="findings-the-firmware-version" tabindex="-1">5. Findings the firmware version <a class="header-anchor" href="#findings-the-firmware-version" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I couldn't find the firmware version in the menus on the printer, but I found a menu item to print a status page.
+It contained the firmware version.</p>
+<p><a href="/blog/2022-09-06-hp-officejet-250-mobile/printer-status.jpg" target="_blank"><img src="/images/printer-status-ebgZQKhScN-300.jpeg" alt="undefined" width="300" height="424"></a></p>
+<h1 id="firewall-settings-on-fritzbox" tabindex="-1">6. Firewall Settings on FritzBox <a class="header-anchor" href="#firewall-settings-on-fritzbox" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I want to make sure the printer stays as functional as it is right now,
+so I don't want to allow any automatic updates on the device.</p>
+<p>Therefore, I disabled automatic updates in it's settings.
+Additionally, I also restricted the internet access in the FritzBox, so it cannot access the internet at all.</p>
+<img src="/blog/2022-09-06-hp-officejet-250-mobile/fritzbox-profiles.png" width="1280" height="798" alt="undefined">
 
 
 <script async src="/scripts/index.js"></script>
