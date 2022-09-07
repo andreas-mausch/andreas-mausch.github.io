@@ -1,7 +1,7 @@
 ---
 title: Surfstick Huawei E173 on Linux
 date: 2017-05-31T19:00:00+02:00
-tags: ['surfstick', '3g', 'usb_modeswitch', 'windows', 'metasploit']
+tags: ['surfstick', '3g', 'usb_modeswitch']
 thumbnail: huawei-e173-speedtest.jpg
 ---
 
