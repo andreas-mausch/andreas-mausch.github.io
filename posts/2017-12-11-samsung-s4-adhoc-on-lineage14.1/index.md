@@ -1,7 +1,7 @@
 ---
 title: "Samsung S4: Ad-Hoc WiFi (IBSS) on LineageOS 14.1"
 date: 2017-12-11T02:00:00+01:00
-tags: ['lineageos', 'ad-hoc']
+tags: ['android', 'lineageos', 'mesh', 'ad-hoc']
 thumbnail: olsr.png
 ---
 
