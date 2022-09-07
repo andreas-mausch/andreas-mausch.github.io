@@ -1,0 +1,174 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-made SMS receiver API</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Self-made SMS receiver API</h1>
+<div>
+  <time class="postlist-date" datetime="2018-04-28T16:00:00.000+00:00">Apr 28, 2018</time>
+</div>
+
+
+
+<p>Update: I've uploaded the sources <a href="https://github.com/andreas-mausch/sms-receiver" class="external-link" target="_blank">https://github.com/andreas-mausch/sms-receiver</a>.</p>
+<img src="/blog/2018-04-28-sms-api/website.jpg" width="1280" height="832" alt="undefined">
+<p>This week we had problems with our SMS provider, which offers us virtual phone numbers we can send SMS to.
+We use it as SMS verification service via <a href="https://authy.com/" class="external-link" target="_blank">Authy</a> on our staging system.
+If you register a new account with our app, Authy sends a SMS with a code to verify your phone number.</p>
+<p>On our staging system we use two virtual phone numbers, and when a SMS is sent to them, we can query the text via an API.
+Our automated test then reads the SMS code and continues with the registration.</p>
+<p>I wondered if I could develop a similar service by myself.<br>
+Also, it was a good chance to make use of my old surf stick (see here: <a href="/blog/2017-05-31-surfstick-huawei-e173-on-linux/">Surfstick Huawei E173 on Linux</a>.<br>
+Whenever an SMS is sent to the phone number of the SIM in the surf stick, it should be visible on a website and via a json API.</p>
+<p>My hardware setup: The surf stick, a Raspberry Pi Zero W, a USB OTG cable and a power bank.</p>
+<p>For the software I used gammu-smsd, MongoDB and Flask for API and website.
+The MongoDB is hosted at <a href="https://www.mongodb.com/cloud/atlas" class="external-link" target="_blank">Atlas</a>, they offer a free clustered database, as long as it doesn't exceed 512 MB in size.</p>
+<p>For gammu-smsd, I followed <a href="http://www.mattiasnorell.com/send-sms-from-a-raspberry-pi/" class="external-link" target="_blank">instructions here</a> by Mattias Norell and <a href="https://gist.github.com/rcoup/93460ea39b05e957e884" class="external-link" target="_blank">this Gist</a> by <a href="https://github.com/rcoup" class="external-link" target="_blank">Robert Coup</a>.</p>
+<p>Surprisingly, I didn't have to set up usb_modeswitch. I believe this was done automatically by Raspbian.</p>
+<p>Unfortunately, when I boot up the Pi the first time, the modem is bound to <code class="language-plain">/dev/ttyUSB1</code>. After restarting, it changes to <code class="language-plain">/dev/ttyUSB0</code> tho!
+For me, I could fix it by pointing to <code class="language-plain">/dev/serial/by-id/usb-HUAWEI_Technology_HUAWEI_Mobile-if00-port0</code> in <code class="language-plain">/etc/gammu-smsdrc</code> instead (see <a href="https://wammu.eu/docs/manual/faq/general.html" class="external-link" target="_blank">Gammu FAQ</a>).</p>
+<p>Now, everytime a SMS arrives at my phone number, gammu-smsd triggers the receive.py script.
+It writes the phone number, the timestamp and the text to the MongoDB hosted at Atlas.<br>
+Then, a consumer can access the database directly, poll the API at /json or visit the website to see the latest SMS.</p>
+<p>This is all at minimal costs. The SIM card itself doesn't have any credit on it (receiving SMS doesn't cost anything), and the Raspberry Pi almost eats no power.
+I haven't tested it, but according to some guys on the internet the Pi takes ~100mA, the stick about ~150mA. So 250mA@5V = 1.25 W.<br>
+1.25W * 720h = 0,9 kWh a month.</p>
+<img src="/blog/2018-04-28-sms-api/huawei-e173-modem.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2018-04-28-sms-api/raspberry-pi-zero-w.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2018-04-28-sms-api/setup.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2018-04-28-sms-api/json-api.jpg" width="1280" height="673" alt="undefined">
+<p>Source files (make sure you install pymongo, dnspython and Flask):</p>
+<pre class="language-python"><code data-filename="receive.py" class="language-python"><span class="highlight-line"><span class="token comment">#!/usr/bin/env python</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token keyword">import</span> os</span>
+<span class="highlight-line"><span class="token keyword">from</span> pymongo <span class="token keyword">import</span> MongoClient</span>
+<span class="highlight-line"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    mongo <span class="token operator">=</span> MongoClient<span class="token punctuation">(</span><span class="token string">'mongodb+srv://sms:lalalalala@cluster0-xxxxx.mongodb.net/sms'</span><span class="token punctuation">)</span></span>
+<span class="highlight-line">    database <span class="token operator">=</span> mongo<span class="token punctuation">.</span>get_default_database<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="highlight-line">    messages <span class="token operator">=</span> database<span class="token punctuation">.</span>messages</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    number <span class="token operator">=</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'SMS_1_NUMBER'</span><span class="token punctuation">]</span></span>
+<span class="highlight-line">    text <span class="token operator">=</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'SMS_1_TEXT'</span><span class="token punctuation">]</span></span>
+<span class="highlight-line">    </span>
+<span class="highlight-line">    messages<span class="token punctuation">.</span>insert_one<span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="highlight-line">        <span class="token string">'number'</span><span class="token punctuation">:</span> number<span class="token punctuation">,</span></span>
+<span class="highlight-line">        <span class="token string">'text'</span><span class="token punctuation">:</span> text<span class="token punctuation">,</span></span>
+<span class="highlight-line">        <span class="token string">'timestamp'</span><span class="token punctuation">:</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="highlight-line">    <span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    main<span class="token punctuation">(</span><span class="token punctuation">)</span></span></code></pre>
+<pre class="language-python"><code data-filename="website.py" class="language-python"><span class="highlight-line"><span class="token keyword">from</span> bson <span class="token keyword">import</span> json_util</span>
+<span class="highlight-line"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> render_template<span class="token punctuation">,</span> Response</span>
+<span class="highlight-line"><span class="token keyword">from</span> pymongo <span class="token keyword">import</span> MongoClient<span class="token punctuation">,</span> DESCENDING</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">mongo <span class="token operator">=</span> MongoClient<span class="token punctuation">(</span><span class="token string">'mongodb+srv://sms:lalalalala@cluster0-xxxxx.mongodb.net/sms'</span><span class="token punctuation">)</span></span>
+<span class="highlight-line">database <span class="token operator">=</span> mongo<span class="token punctuation">.</span>get_default_database<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="highlight-line">messages <span class="token operator">=</span> database<span class="token punctuation">.</span>messages</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token keyword">def</span> <span class="token function">findLastMessages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token keyword">return</span> <span class="token builtin">list</span><span class="token punctuation">(</span>messages<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>limit<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token string">'timestamp'</span><span class="token punctuation">,</span> DESCENDING<span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token keyword">def</span> <span class="token function">showMessages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'messages.html'</span><span class="token punctuation">,</span> lastMessages<span class="token operator">=</span>findLastMessages<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/json"</span><span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token keyword">def</span> <span class="token function">showMessagesJson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    lastMessages <span class="token operator">=</span> findLastMessages<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="highlight-line">    <span class="token keyword">for</span> message <span class="token keyword">in</span> lastMessages<span class="token punctuation">:</span></span>
+<span class="highlight-line">        <span class="token keyword">del</span> message<span class="token punctuation">[</span><span class="token string">'_id'</span><span class="token punctuation">]</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    <span class="token keyword">return</span> Response<span class="token punctuation">(</span></span>
+<span class="highlight-line">        json_util<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>lastMessages<span class="token punctuation">,</span></span>
+<span class="highlight-line">            json_options<span class="token operator">=</span>json_util<span class="token punctuation">.</span>JSONOptions<span class="token punctuation">(</span></span>
+<span class="highlight-line">                datetime_representation<span class="token operator">=</span>json_util<span class="token punctuation">.</span>DatetimeRepresentation<span class="token punctuation">.</span>ISO8601</span>
+<span class="highlight-line">            <span class="token punctuation">)</span></span>
+<span class="highlight-line">        <span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">        mimetype<span class="token operator">=</span><span class="token string">'application/json'</span></span>
+<span class="highlight-line">    <span class="token punctuation">)</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">)</span></span></code></pre>
+<pre class="language-html"><code data-filename="templates/messages.html" class="language-html"><span class="highlight-line"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Last received SMS messages<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css<span class="token punctuation">"</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">media</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>screen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jumbotron text-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Last received SMS messages<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>For phone number +491xxxxxxx.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span> </span>
+<span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>table table-hover<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Timestamp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Phone number<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Text<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">            {% for message in lastMessages %}</span>
+<span class="highlight-line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{message.timestamp}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{message.number}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{message.text}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">            {% endfor %}</span>
+<span class="highlight-line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></span>
+<span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></span></code></pre>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
