@@ -1,0 +1,111 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesh networks on Android?</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Mesh networks on Android?</h1>
+<div>
+  <time class="postlist-date" datetime="2017-07-20T19:00:00.000+00:00">Jul 20, 2017</time>
+</div>
+
+
+
+<p>I wondered if lets say three Android phones can be used to build up a <a href="https://en.wikipedia.org/wiki/Mesh_networking" class="external-link" target="_blank">mesh network</a>.
+So if a phone has a connection to at least one of the others, it should still be part of the network. No router, no internet required. In theory, this should work, each device has the needed hardware.</p>
+<p>I know there is <a href="https://play.google.com/store/apps/details?id=org.servalproject" class="external-link" target="_blank">Serval</a>, but that's not really what I am looking for: It is limited to the features they provide in their app. You wouldn't be able to use all the software out there, not even a browser. That's because they have re-implemented common protocols: They have <a href="http://developer.servalproject.org/dokuwiki/doku.php?id=content:tech:mdp" class="external-link" target="_blank">MDP</a> instead of UDP, and they have <a href="http://developer.servalproject.org/dokuwiki/doku.php?id=content:tech:msp" class="external-link" target="_blank">MSP</a> instead of TCP.<br>
+Instead, I'm looking for a solution which just builds a normal MAC or IP network which then can be used by all apps out there. Also, there should be a possibility for a participant to act as a server, for example a Raspberry Pi.</p>
+<p>Second, there is the <a href="https://en.wikipedia.org/wiki/IEEE_802.11s" class="external-link" target="_blank">802.11s standard</a>, which is used by the Google Wifi routers, however I wasn't able to find a software for it.</p>
+<p>There is also <a href="https://github.com/ProjectSPAN/android-manet-manager" class="external-link" target="_blank">ProjectSPAN / MANET</a>, but they don't offer much documentation about how their technology works, plus it only works on the four devices they have made custom <a href="https://github.com/monk-dot/SPAN/tree/master/kernels" class="external-link" target="_blank">kernels</a> for.</p>
+<p>I've read about <a href="https://www.open-mesh.org/projects/batman-adv/wiki" class="external-link" target="_blank">B.A.T.M.A.N. Advanced</a> which seems to provide exactly what I need. However, even though it is part of the Linux kernel, it is disabled in Android. Also, it requires <a href="https://en.wikipedia.org/wiki/Wireless_ad_hoc_network" class="external-link" target="_blank">WiFi Ad-Hoc</a> support, which is not available on Android for <a href="https://issuetracker.google.com/issues/36904180" class="external-link" target="_blank">some reason</a>. The Feature Request has been closed with the Status &quot;Won't Fix (Obsolete)&quot;. Apparently Google doesn't think this is important.<br>
+I think it is, so I've decided to spend a week on this topic.</p>
+<h1 id="wifi-ad-hoc-on-android" tabindex="-1">1. WiFi Ad-Hoc on Android <a class="header-anchor" href="#wifi-ad-hoc-on-android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Luckily for me, there is a group called <strong>Thinktube Inc.</strong>, which created a <a href="http://www.thinktube.com/android-tech/46-android-wifi-ibss" class="external-link" target="_blank">patch</a> to enable WiFi Ad-Hoc on Android. It was even integrated into CyanogenMod builds. Hooray!<br>
+Small downside: only versions 4.2 up to 5.0.</p>
+<img src="/blog/2017-07-20-mesh-networks-on-android/thinktube.com-android-wifi-ibss.png" width="1440" height="808" alt="undefined">
+<p>So I've searched the Internet for the old CyanogenMod builds for my device, which is a Samsung Galaxy S4 i9505 (jflte).
+There are lots of instructions on how to flash a ROM, so I will keep this short. Note, you will lose all data on the phone. First, you need to install a custom recovery. I went with <a href="https://twrp.me/" class="external-link" target="_blank">TWRP</a>, which is the most common choice. I used my Windows machine and installed <a href="http://odindownload.com/" class="external-link" target="_blank">Odin</a>. It didn't work on the first try, but after switching the USB port it did. Once TWRP is installed, you need to wipe (Dalvik Cache, System, Data and Cache) and install the zip.
+Next step: I need root access. I first installed the current LineageOS 14.1, because I wasn't aware WiFi Ad-Hoc is not supported anymore in this version. There is a file <a href="https://download.lineageos.org/extras" class="external-link" target="_blank">here</a> which gives you access to su. For me, it was addonsu-14.1-arm-signed.zip.</p>
+<p>Since 14.1 doesn't support WiFi Ad-Hoc, I installed CyanogenMod 12, because this is the latest version which still does. However, after trying to create the Ad-Hoc WiFi, it turned out that it causes an error: &quot;Association request to the driver failed&quot;, no matter what I've tried. Internet couldn't help me neither.</p>
+<img src="/blog/2017-07-20-mesh-networks-on-android/cyanogenmod12-wifi-adhoc-failed.jpg" width="1024" height="650" alt="undefined">
+<p>Close to desperation, I've installed the version before, CyanogenMod 11. To my surprise, WiFi Ad-Hoc worked! I was able to establish a connection to my laptop without any extra magic.
+Now I only needed to enable the batman-adv kernel module and I should be able to create a mesh network!</p>
+<h1 id="building-cyanogenmod-from-source" tabindex="-1">2. Building CyanogenMod from source <a class="header-anchor" href="#building-cyanogenmod-from-source" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>In order to change anything in CyanogenMod, I first need to build it myself. I did this for the very first time, so it was quite challenging. There are couple of guides for different devices out there, and I got lucky and found <a href="https://zifnab.net/~zifnab/wiki_dump/Build_for_jflte.html" class="external-link" target="_blank">this one</a>.<br>
+My first try did not even compile, that's because I first used a different guide and therefore I've missed the &quot;./extract-files.sh&quot; part. I've tested and played around with different versions and my phone had this version installed when I executed the script: <a href="https://forum.xda-developers.com/galaxy-s4/i9505-orig-develop/rom-lineageos-ex-cm-11-0-galaxy-s4-t3533827" class="external-link" target="_blank">lineage-11-20170709-UNOFFICIAL-jflte.zip</a></p>
+<p>Once I got the files, the build took a long time and finally produced me a flashable zip file. I've used a virtual machine to build the sources. Use plenty of RAM (&gt;4 GB) and SSD if possible. Note that the disk size exceeded 90 GB.<br>
+I was very excited when the build was finally successful and wasted no time to flash it onto my phone. Then the disappointment: The device didn't boot and was caught in the boot animation. Even after 15min it wasn't started, so I removed the battery.
+I didn't know what the problem was, though, and it is not easy to find out: Once you flash a new image and wipe all caches, all known devices to adb are deleted. So the boot animation is shown, but I am not able to connect to the device (adb says &quot;Unauthorized&quot;) and therefore also can't view the log files.<br>
+I tried to flash a working ROM first, grant access to adb and then flashed my ROM without wiping. Then I am able to view the log files which looks like this:</p>
+<pre class="language-plain"><code class="language-plain"><span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): camera_get_number_of_cameras</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span>
+<span class="highlight-line">V/CameraWrapper(  222): check_vendor_module</span></code></pre>
+<p>This goes on for 1.7 MB. To me it indicates that the binary blogs I gathered with the &quot;./extract-files.sh&quot; script doesn't work with the kernel I use. That's just a guess, but I don't really know how to go on from here. I probably try to use all different blobs I find on the internet and on the working CyanogenMod versions I've downloaded.</p>
+<p>One very good thing I've noticed: The kernel sources contain a batman-adv directory, so once I'm able to build a working version it hopefully is very easy to activate.</p>
+<h1 id="todos" tabindex="-1">3. Todos <a class="header-anchor" href="#todos" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li>Get a self-compiled, working CyanogenMod build</li>
+<li>Enable batman-adv</li>
+<li>Provide a basic GUI to connect to a batman-adv network</li>
+<li>Make a patch for WiFi Ad-Hoc for the current LineageOS (so it is not limited to Android 4.4)</li>
+<li>Check limitations of batman-adv: How does it scale in big networks?</li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
