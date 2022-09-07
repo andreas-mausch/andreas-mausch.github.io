@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install Intel WiFi 8265 into Dell XPS 15 (9550)</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Install Intel WiFi 8265 into Dell XPS 15 (9550)</h1>
+<div>
+  <time class="postlist-date" datetime="2017-06-02T17:00:00.000+00:00">Jun 2, 2017</time>
+</div>
+
+
+
+<p>My main laptop I use for developing software is the Dell XPS 15 9550 (2016 model).
+It is a very solid, good laptop.
+One problem I had with it was the WiFi though.
+Connection in general was quite poor and in some places I wasn't able to complete uploads at all.
+They were stuck repeatedly at a certain percentage and didn't continue from there.
+But when I restarted my machine it worked again. I was like...well, might be shitty drivers.
+However, after a quick internet research I found there are other people with the same problems.</p>
+<p>The wireless card installed was the Dell Wireless 1830 (DW1830) with a chip from Broadcom (BCM43602).</p>
+<p>I've decided to buy a <a href="https://ark.intel.com/de/products/94150/Intel-Dual-Band-Wireless-AC-8265" class="external-link" target="_blank">Intel 8265</a>. It only has 2x2 antenna connections instead of the 3x3 of the DW1830, but the internet says it doesn't really make much of a difference.</p>
+<img src="/blog/2017-06-02-intel-8265-wifi-xps-15-9550/intel-8265.jpg" width="640" height="418" alt="undefined">
+<img src="/blog/2017-06-02-intel-8265-wifi-xps-15-9550/xps-15-opened.jpg" width="640" height="426" alt="undefined">
+<img src="/blog/2017-06-02-intel-8265-wifi-xps-15-9550/wifi-dw1830.jpg" width="480" height="565" alt="undefined">
+<img src="/blog/2017-06-02-intel-8265-wifi-xps-15-9550/xps-wifi-antennas.jpg" width="480" height="529" alt="undefined">
+<p>I've installed the card today. However, I've accidentally broke one of the three antenna connectors.
+Luckily, the new card only needs two.
+The new card didn't work out of the box with my Linux Mint 18. That was caused by an outdated kernel (4.4) which doesn't support the Intel 8265.</p>
+<p>I've upgraded the kernel to 4.10, downloaded the firmware from <a href="https://wireless.wiki.kernel.org/en/users/drivers/iwlwifi" class="external-link" target="_blank">here</a>, copied it to the <code class="language-plain">/lib/firmware</code> folder and restarted.
+Voilà.</p>
+<p>I haven't done a lot of testing yet, but I can already say the initial connection time is <strong>LOT</strong> less than before.
+Also, after standby the connection is immediately there. With the old card it always took two to three seconds to establish the wifi connection.
+So I am confident this card will be a lot more stable than the previous one.</p>
+<p>Speed: I did an internet speed test over WiFi and it is about 58 Mbit/s with my FritzBox 7360, which is alright. It is about the same I get with a MacBook Air.</p>
+<p>Bluetooth: I needed to put <code class="language-plain">intel/ibt-12-16.sfi</code> and <code class="language-plain">intel/ibt-12-16.ddc</code> (they are part of this .deb <a href="https://packages.debian.org/en/sid/all/firmware-iwlwifi/download" class="external-link" target="_blank">here</a>) in the <code class="language-plain">/lib/firmware</code> folder.
+I still have some problems using Bluetooth and WiFi at the same time. <a href="https://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work" class="external-link" target="_blank">People</a> <a href="https://askubuntu.com/questions/645009/wi-fi-and-bluetooth-not-working-simultaneously" class="external-link" target="_blank">suggested</a> to disable <code class="language-plain">bt_coex_active</code>, but that didn't change much for me. And yes I want to use 802.11n.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
