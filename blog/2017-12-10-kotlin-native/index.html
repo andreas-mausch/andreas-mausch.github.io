@@ -1,0 +1,126 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotlin Native</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Kotlin Native</h1>
+<div>
+  <time class="postlist-date" datetime="2017-12-10T18:00:00.000+00:00">Dec 10, 2017</time>
+</div>
+
+
+
+<h1 id="double-click-%26-run" tabindex="-1">1. Double-click &amp; run <a class="header-anchor" href="#double-click-%26-run" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I like to develop small native desktop apps like <a href="https://andreas-mausch.de/whatsapp-viewer/" class="external-link" target="_blank">WhatsApp Viewer</a> or <a href="https://github.com/andreas-mausch/csgo-demohighlights" class="external-link" target="_blank">CS:GO Demoviewer</a>.</p>
+<p>However, whenever I want to create an application like this, I struggle to decide on the technology to use.
+Most of the time I (still) end up using C++, because I know it is able to produce a binary which runs on
+any target machine without the need to install any additional libraries, dependencies or frameworks.
+I don't want to explain to people how to install this or that. People don't want to do it, neither.</p>
+<p>Extract the .exe -&gt; run. Works.</p>
+<h2 id="c%2B%2B%3A-downsides" tabindex="-1">1.1. C++: Downsides <a class="header-anchor" href="#c%2B%2B%3A-downsides" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Now I'm not a particular fan of the language itself. It is very powerful, but it has aged.
+For example I really dislike the way how to add third-party libraries. Sometimes you get a compiled
+.lib which only works on the target architecture, sometimes you get source (which might be a pain to
+successfully compile) and so on. It is nowhere near the &quot;add three lines to your pom.xml&quot; comfort.</p>
+<p>Secondly, I dislike the separation of header and implementation, leading to duplication all over the place.</p>
+<p>Thirdly, the development tools are just way better for the newer technologies out there. You are just way faster
+developing in Java, JavaScript, Python, etc.
+I always feel set back to the 90s when developing in C++.</p>
+<h2 id="alternatives%3F" tabindex="-1">1.2. Alternatives? <a class="header-anchor" href="#alternatives%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>That's the reason why I regulary look for alternatives. I took a look at Rust, which lacks a good GUI framwork
+imo, and at Electron with vue.js for a <a href="https://github.com/andreas-mausch/whatsapp-viewer/tree/electron" class="external-link" target="_blank">rewrite of WhatsApp Viewer</a>.
+It was great to use, but comes with a big downside: It ends up in a 150 MB binary which needs to be distributed to customers.</p>
+<p>Another <em>big</em> downside: Memory usage. The Slack app, which is also written in Electron, takes ~700 MB on my machine with three workspaces opened. C'mon.</p>
+<p>So bottom line: I still develop with C++ and all the downsides for Desktop applications to provide no-installation, double-click-and-run, 3 MB executables.</p>
+<h1 id="kotlin-native" tabindex="-1">2. Kotlin Native <a class="header-anchor" href="#kotlin-native" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now a colleague of mine started to experiment with Kotlin, as I've written in a <a href="/blog/2017-05-14-compass-app-in-kotlin/">previous post</a>.
+So for Kotlin, there is also <em>Kotlin Native</em>, which looks extremely interesting to me.
+You can write code in a modern and great language, and it still compiles to small bytecode by using LLVM.</p>
+<h2 id="how-about-the...runtime%3F" tabindex="-1">2.1. How about the...runtime? <a class="header-anchor" href="#how-about-the...runtime%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I'm a bit curious about how it does some things, for example I personally hate garbage collection.
+It's a way to make things easy for developers, but imo it is the responsibility to the programmer to clean up correctly.
+Now people still say that &quot;uh, you might forget a free() or delete in C++, causing memory leaks&quot;.
+Well, I think you don't need to call any delete manually nowadays.</p>
+<p>Also, I don't see how the language/runtime should be responsible for managing memory for you, but not
+all the other resources like open file handles, network streams and so on.
+Yes, I know there are crutches like try-with-resources. try-catch was introduced for exception handling,
+and is now sometimes used in some weird try-finally-constructs to somehow make resource management possible. Urgh!</p>
+<p>In C++ they have a solution for it which I love: <a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization" class="external-link" target="_blank">RAII</a> (especially in combination with smart pointers).<br>
+You simply can't forget to close a file.
+There is an owner for each object, and once you leave the scope, the destructor is called for you <em>automatically</em>.
+Even if there's an exception.
+I prefer this over garbage collection all day long.</p>
+<h2 id="hello-world-project" tabindex="-1">2.2. Hello World project <a class="header-anchor" href="#hello-world-project" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I used <a href="https://github.com/msink/hello-kotlin" class="external-link" target="_blank">this project</a>.
+It was very easy to set up. When you call ./gradlew build for the first time, it downloads all dependencies for you. Convenient. :)</p>
+<pre class="language-kotlin"><code data-filename="Hello.kt" class="language-kotlin"><span class="highlight-line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hello World!"</span></span><span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token builtin class-name">pwd</span></span>
+<span class="highlight-line">./hello-kotlin/build/konan/bin/linux</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ <span class="token function">ls</span> <span class="token parameter variable">-lh</span></span>
+<span class="highlight-line">-rwxr-xr-x <span class="token number">1</span> neonew neonew 404K Dez <span class="token number">10</span> <span class="token number">17</span>:40 Hello-linux.kexe*</span>
+<span class="highlight-line">-rw-r--r-- <span class="token number">1</span> neonew neonew <span class="token number">2</span>,4K Dez <span class="token number">10</span> <span class="token number">17</span>:40 Hello-linux.kt.bc</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ ./Hello-linux.kexe</span>
+<span class="highlight-line">Hello World<span class="token operator">!</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ ldd Hello-linux.kexe</span>
+<span class="highlight-line">	linux-vdso.so.1 <span class="token operator">=</span><span class="token operator">></span>  <span class="token punctuation">(</span>0x00007ffd6a705000<span class="token punctuation">)</span></span>
+<span class="highlight-line">	libdl.so.2 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libdl.so.2 <span class="token punctuation">(</span>0x00007f262531f000<span class="token punctuation">)</span></span>
+<span class="highlight-line">	libm.so.6 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libm.so.6 <span class="token punctuation">(</span>0x00007f2625016000<span class="token punctuation">)</span></span>
+<span class="highlight-line">	libpthread.so.0 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libpthread.so.0 <span class="token punctuation">(</span>0x00007f2624df8000<span class="token punctuation">)</span></span>
+<span class="highlight-line">	libgcc_s.so.1 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libgcc_s.so.1 <span class="token punctuation">(</span>0x00007f2624be2000<span class="token punctuation">)</span></span>
+<span class="highlight-line">	libc.so.6 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libc.so.6 <span class="token punctuation">(</span>0x00007f2624818000<span class="token punctuation">)</span></span>
+<span class="highlight-line">	/lib64/ld-linux-x86-64.so.2 <span class="token punctuation">(</span>0x000055d6b9e10000<span class="token punctuation">)</span></span></code></pre>
+<p>File size looks awesome already, the Hello World example is just 404 KB.</p>
+<h1 id="conclusion" tabindex="-1">3. Conclusion <a class="header-anchor" href="#conclusion" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>So for Kotlin Native I will analyse how it handles garbage collection and how much stuff the Kotlin runtime in the binary does.
+As a programmer, I like to be in control and prefer if not too much magic happens there.
+I want to dig deep into how it works and debug resulting assembly in OllyDbg to get an idea about performance and size.</p>
+<p>I have a very good feeling about Kotlin Native in that regard.<br>
+It looks soo promising and I'm excited to try it on a real project.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
