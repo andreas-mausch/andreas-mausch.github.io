@@ -4,6 +4,11 @@
   justify-content: center;
 }
 
+.image-comparison-slider > img-comparison-slider {
+  --divider-color: rgb(255, 135, 0);
+  --divider-width: 2px;
+}
+
 .image-comparison-slider-handle {
   color: rgb(255, 135, 0);
   transform: scale(1.5);
