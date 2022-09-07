@@ -1,0 +1,85 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration to Visual Studio 2017</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Migration to Visual Studio 2017</h1>
+<div>
+  <time class="postlist-date" datetime="2018-03-29T19:07:00.000+00:00">Mar 29, 2018</time>
+</div>
+
+
+
+<p>I've developed <a href="https://github.com/andreas-mausch/whatsapp-viewer" class="external-link" target="_blank">WhatsApp Viewer</a> with the good old Visual Studio 2008.
+It's a bit dated and doesn't support all of the new C++ <a href="http://en.cppreference.com/w/cpp/language/history" class="external-link" target="_blank">features</a>.</p>
+<p>Since the new Visual Studio 2017 is free (no costs) for personal usage and open-source projects, I thought it might be worth a shot.</p>
+<h2 id="setup" tabindex="-1">1. Setup <a class="header-anchor" href="#setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>My main development machine runs Linux Mint, and I prefer it over Windows <strong>a lot</strong>.
+Even though I use dual-boot (for games), I develop WhatsApp Viewer on Linux using a virtual machine running Windows XP.</p>
+<p>Visual Studio 2017 doesn't support XP anymore, so I had to set up a new virtual box and decided to go with Windows 7 then.</p>
+<p>The VS2017 installer first complained about a missing update (<a href="http://support.microsoft.com/kb/4019990" class="external-link" target="_blank">KB4019990</a>) and about the missing .NET 4.5 framework (I've installed 4.7.1 instead). This was easy to fix.
+Next, I've selected all options I wanted to install and let the setup do it's job. This took some time, as it downloaded roughly 20 GB. The conversion of the old project files went well.</p>
+<p>After the installation was successful, I've tried to build WhatsApp Viewer. I missed to install the &quot;MFC and ATL Support&quot; option, which led to <a href="https://social.msdn.microsoft.com/Forums/de-DE/6b69607a-8a84-4e46-b3c8-5cd832bfb9c7/vs-2017-rc-file-error-rc1015-cannot-open-include-file-afxresh?forum=vcgeneral" class="external-link" target="_blank">this</a> error message, complaining about afxres.h not found.</p>
+<p>Next, I was able to build the project, but encountered a runtime error &quot;Windows Imaging Component couldn't be initialized&quot;. This could be fixed by changing the &quot;Platform toolset&quot; to &quot;Visual Studio 2017 - Windows XP (v141_xp)&quot;. See <a href="https://social.msdn.microsoft.com/Forums/windowsdesktop/en-US/e542d34a-a04b-455e-bd5b-957f162bab94/clsidwicimagingfactory-breaking-change-since-vs11-beta-on-windows-7?forum=windowswic" class="external-link" target="_blank">this link</a> for detailed information.</p>
+<img src="/blog/2018-03-29-migration-to-visual-studio-2017/platform-toolset.png" width="785" height="512" alt="undefined">
+<p>Now the compiled program worked.
+However, when I tried to debug it, some windows showed &quot;The content requires a new version of Internet Explorer&quot;. After I've downloaded the newest IE 11 this was fixed.</p>
+<div class="image-comparison-slider"><img-comparison-slider><img slot="first" src="/blog/2018-03-29-migration-to-visual-studio-2017/msvc-ie-before.png" width="305" height="592" style="max-height: 80vh" /><img slot="second" src="/blog/2018-03-29-migration-to-visual-studio-2017/msvc-ie-after.png"  width="305" height="592" style="max-height: 80vh" /><svg slot="handle" class="image-comparison-slider-handle" xmlns="http://www.w3.org/2000/svg" width="125" viewBox="-8 -3 16 6"><path stroke="#fff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2" stroke-width="1" fill="#fff" vector-effect="non-scaling-stroke"></path></svg></img-comparison-slider></div>
+<p>I've additionally added Clang and exported the virtual machine as an <a href="https://en.wikipedia.org/wiki/Open_Virtualization_Format" class="external-link" target="_blank">.ova</a> image for future usage.
+The only disadvantage is the size: The new image takes ~40 GB on my hard-drive, compared to the 12 GB of Visual Studio 2008 (compressed as .ova its 19 GB vs 6 GB).</p>
+<h2 id="analysis" tabindex="-1">2. Analysis <a class="header-anchor" href="#analysis" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Too see if something major changed, I did a quick analysis on the resulting .exe files.
+Therefore I exported the file headers of both .exe using <a href="https://github.com/merces/pev" class="external-link" target="_blank">pev</a>.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ readpe WhatsApp<span class="token punctuation">\</span> Viewer.vs2008.exe <span class="token operator">></span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2008.exe.readpe.txt</span>
+<span class="highlight-line">$ readpe WhatsApp<span class="token punctuation">\</span> Viewer.vs2017.exe <span class="token operator">></span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2017.exe.readpe.txt</span>
+<span class="highlight-line">$ readpe <span class="token parameter variable">-f</span> json WhatsApp<span class="token punctuation">\</span> Viewer.vs2008.exe <span class="token operator">></span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2008.exe.readpe.json</span>
+<span class="highlight-line">$ readpe <span class="token parameter variable">-f</span> json WhatsApp<span class="token punctuation">\</span> Viewer.vs2017.exe <span class="token operator">></span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2017.exe.readpe.json</span>
+<span class="highlight-line">$ jq <span class="token string">".[<span class="token entity" title="\&quot;">\"</span>Imported functions<span class="token entity" title="\&quot;">\"</span>][].Functions[].Name"</span> <span class="token operator">&lt;</span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2008.exe.readpe.json <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">></span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2008.exe.imports.txt</span>
+<span class="highlight-line">$ jq <span class="token string">".[<span class="token entity" title="\&quot;">\"</span>Imported functions<span class="token entity" title="\&quot;">\"</span>][].Functions[].Name"</span> <span class="token operator">&lt;</span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2017.exe.readpe.json <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">></span> WhatsApp<span class="token punctuation">\</span> Viewer.vs2017.exe.imports.txt</span></code></pre>
+<img src="/blog/2018-03-29-migration-to-visual-studio-2017/pe-diff.png" width="1440" height="900" alt="undefined">
+<p>No new runtime dependencies (.dll) are required. Some imports now use the Unicode version instead of Ansi.
+Beside that, I couldn't find major differences.
+I am quite happy with the result. I expect similar performance and can now use better tools and the new and improved C++ language features.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
