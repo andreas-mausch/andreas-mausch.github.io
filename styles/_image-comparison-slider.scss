@@ -5,11 +5,13 @@
 }
 
 .image-comparison-slider-handle {
+  color: rgb(255, 135, 0);
+  transform: scale(1.5);
   transition: transform 0.2s, opacity 1s;
 }
 
 .image-comparison-slider > img-comparison-slider:hover .image-comparison-slider-handle {
-  transform: scale(1.25);
+  transform: scale(2);
 }
 
 .image-comparison-slider > img-comparison-slider:focus .image-comparison-slider-handle {

@@ -116,7 +116,7 @@ function comparison(beforeName, afterName, page = this.page) {
   comparison += `<img slot="first" src="${before.url}" width="${before.width}" height="${before.height}" style="max-height: 80vh" />`
   comparison += `<img slot="second" src="${after.url}"  width="${after.width}" height="${after.height}" style="max-height: 80vh" />`
   comparison += "<svg slot=\"handle\" class=\"image-comparison-slider-handle\" xmlns=\"http://www.w3.org/2000/svg\" width=\"125\" viewBox=\"-8 -3 16 6\">"
-  comparison += "<path stroke=\"#fff\" d=\"M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2\" stroke-width=\"1\" fill=\"#fff\" vector-effect=\"non-scaling-stroke\"></path>"
+  comparison += "<path stroke=\"#777\" d=\"M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2\" stroke-width=\"1\" fill=\"currentColor\" vector-effect=\"non-scaling-stroke\"></path>"
   comparison += "</svg>"
   comparison += "</img-comparison-slider>"
   comparison += "</div>"
