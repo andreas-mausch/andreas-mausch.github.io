@@ -1,0 +1,152 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi monitor mode</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: WiFi monitor mode</h1>
+<div>
+  <time class="postlist-date" datetime="2018-04-30T17:00:00.000+00:00">Apr 30, 2018</time>
+</div>
+
+
+  <aside>
+    <nav class="toc" >
+        <ol><li><a href="#intel-dual-band-wireless-ac-8265-(iwlwifi)">1. Intel Dual Band Wireless-AC 8265 (iwlwifi) </a></li><li><a href="#samsung-galaxy-s4-%26-raspberry-pi-3">2. Samsung Galaxy S4 &amp; Raspberry Pi 3 </a></li><li><a href="#macbook-air-2013-(broadcom-wl)">3. Macbook Air 2013 (Broadcom wl) </a></li><li><a href="#useful-commands">4. Useful commands </a><ol><li><a href="#find-network-device">4.1. Find network device </a></li><li><a href="#find-driver">4.2. Find driver </a></li></ol></li><li><a href="#frequency-table">5. Frequency table </a><ol><li><a href="#2.4-ghz">5.1. 2.4 GHz </a></li><li><a href="#5-ghz">5.2. 5 GHz </a></li></ol></li></ol>
+      </nav>
+  </aside>
+
+
+<p>With monitor mode enabled, you can receive all packages on wireless networks around, without being connected to any.
+It is useful for debugging and security analysis.</p>
+<p>I am very forgetful so I will just write down how to enable monitor mode for the devices I own.</p>
+<h1 id="intel-dual-band-wireless-ac-8265-(iwlwifi)" tabindex="-1">1. Intel Dual Band Wireless-AC 8265 (iwlwifi) <a class="header-anchor" href="#intel-dual-band-wireless-ac-8265-(iwlwifi)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Detailed explaination: <a href="https://sandilands.info/sgordon/capturing-wifi-in-monitor-mode-with-iw" class="external-link" target="_blank">sanilands.info/sgordon</a></p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ iw dev</span>
+<span class="highlight-line">$ iw phy phy0 info <span class="token comment"># should show all information about the device, including the "monitor" capability</span></span>
+<span class="highlight-line">$ <span class="token function">sudo</span> iw phy phy0 interface <span class="token function">add</span> mon0 <span class="token builtin class-name">type</span> monitor</span>
+<span class="highlight-line">$ <span class="token function">ip</span> <span class="token function">link</span></span>
+<span class="highlight-line">$ <span class="token function">sudo</span> iw dev wlan0 del <span class="token comment"># (I had to replace wlan0 by wlp2s0)</span></span>
+<span class="highlight-line">$ <span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> mon0 up</span>
+<span class="highlight-line">$ iw dev mon0 info</span>
+<span class="highlight-line">$ <span class="token function">sudo</span> iw dev mon0 <span class="token builtin class-name">set</span> freq <span class="token number">2437</span> <span class="token comment"># set it to the right channel</span></span></code></pre>
+<details markdown="1">
+<summary>Details</summary>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">ls</span> <span class="token parameter variable">-lh</span> /lib/firmware/iwlwifi-*</span>
+<span class="highlight-line">-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">2</span>,3M  <span class="token number">8</span>. Apr <span class="token number">17</span>:31 iwlwifi-8265-21.ucode</span>
+<span class="highlight-line">-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">1</span>,8M  <span class="token number">8</span>. Apr <span class="token number">17</span>:31 iwlwifi-8265-22.ucode</span>
+<span class="highlight-line">-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">2</span>,2M  <span class="token number">8</span>. Apr <span class="token number">17</span>:31 iwlwifi-8265-27.ucode</span>
+<span class="highlight-line">-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">2</span>,3M  <span class="token number">8</span>. Apr <span class="token number">17</span>:31 iwlwifi-8265-31.ucode</span>
+<span class="highlight-line">-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">2</span>,4M  <span class="token number">8</span>. Apr <span class="token number">17</span>:31 iwlwifi-8265-34.ucode</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">dmesg</span></span>
+<span class="highlight-line"><span class="token punctuation">[</span>    <span class="token number">1.885451</span><span class="token punctuation">]</span> Intel<span class="token punctuation">(</span>R<span class="token punctuation">)</span> Wireless WiFi driver <span class="token keyword">for</span> Linux</span>
+<span class="highlight-line"><span class="token punctuation">[</span>    <span class="token number">1.885452</span><span class="token punctuation">]</span> Copyright<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2003</span>- <span class="token number">2015</span> Intel Corporation</span>
+<span class="highlight-line"><span class="token punctuation">[</span>    <span class="token number">1.885536</span><span class="token punctuation">]</span> iwlwifi 0000:02:00.0: enabling device <span class="token punctuation">(</span>0000 -<span class="token operator">></span> 0002<span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token punctuation">[</span>    <span class="token number">1.886425</span><span class="token punctuation">]</span> iwlwifi 0000:02:00.0: Direct firmware load <span class="token keyword">for</span> iwlwifi-8265-36.ucode failed with error <span class="token parameter variable">-2</span></span>
+<span class="highlight-line"><span class="token punctuation">[</span>    <span class="token number">1.886433</span><span class="token punctuation">]</span> iwlwifi 0000:02:00.0: Direct firmware load <span class="token keyword">for</span> iwlwifi-8265-35.ucode failed with error <span class="token parameter variable">-2</span></span>
+<span class="highlight-line"><span class="token punctuation">[</span>    <span class="token number">1.889093</span><span class="token punctuation">]</span> iwlwifi 0000:02:00.0: loaded firmware version <span class="token number">34.0</span>.1 op_mode iwlmvm</span></code></pre>
+</details>
+<h1 id="samsung-galaxy-s4-%26-raspberry-pi-3" tabindex="-1">2. Samsung Galaxy S4 &amp; Raspberry Pi 3 <a class="header-anchor" href="#samsung-galaxy-s4-%26-raspberry-pi-3" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li><a href="https://github.com/seemoo-lab/nexmon" class="external-link" target="_blank">Nexmon</a></li>
+<li><a href="https://github.com/ruleh/misc/tree/master/monitor" class="external-link" target="_blank">Native monitor mode in BCMDHD patch</a></li>
+<li><a href="https://dev.seemoo.tu-darmstadt.de/bcm/bcm-rpi3" class="external-link" target="_blank">Nexmon for Raspberry Pi 3</a></li>
+<li><a href="https://github.com/nethunteros/rpi3-kalimon/releases" class="external-link" target="_blank">Ready-to-use image for Raspberry Pi 3</a></li>
+</ul>
+<h1 id="macbook-air-2013-(broadcom-wl)" tabindex="-1">3. Macbook Air 2013 (Broadcom wl) <a class="header-anchor" href="#macbook-air-2013-(broadcom-wl)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>If you are on the wl driver, this is really simple. Just execute:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /proc/brcm_monitor0</span></code></pre>
+<p>And you should find another device prism0 next to your usual wlan0.</p>
+<p>Use prism0 with Wireshark, Aircrack-ng or your favorite analysis tool.</p>
+<h1 id="useful-commands" tabindex="-1">4. Useful commands <a class="header-anchor" href="#useful-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="find-network-device" tabindex="-1">4.1. Find network device <a class="header-anchor" href="#find-network-device" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> lshw <span class="token parameter variable">-C</span> network</span></code></pre>
+<details markdown="1">
+<summary>Example output</summary>
+```
+$ sudo lshw -C network
+  *-network               
+       Beschreibung: Kabellose Verbindung
+       Produkt: BCM4360 802.11ac Wireless Network Adapter
+       Hersteller: Broadcom Corporation
+       Physische ID: 0
+       Bus-Informationen: pci@0000:03:00.0
+       Logischer Name: wlan0
+       Version: 03
+       Seriennummer: 84:11:22:33:44:ff
+       Breite: 64 bits
+       Takt: 33MHz
+       Fähigkeiten: pm msi pciexpress bus_master cap_list ethernet physical wireless
+       Konfiguration: broadcast=yes driver=wl0 driverversion=6.30.223.271 (r587334) ip=192.168.178.38 latency=0 multicast=yes wireless=IEEE 802.11
+       Ressourcen: irq:18 memory:b0600000-b0607fff memory:b0400000-b05fffff
+```
+</details>
+<h2 id="find-driver" tabindex="-1">4.2. Find driver <a class="header-anchor" href="#find-driver" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ lspci <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> wireless</span>
+<span class="highlight-line">$ lspci <span class="token parameter variable">-vv</span> <span class="token parameter variable">-s</span> 03:00.0 <span class="token comment"># replace with the numbers the previous command returned</span></span></code></pre>
+<details markdown="1">
+<summary>Example output</summary>
+```
+$ lspci -vv -s 03:00.0
+03:00.0 Network controller: Broadcom Corporation BCM4360 802.11ac Wireless Network Adapter (rev 03)
+	Subsystem: Apple Inc. BCM4360 802.11ac Wireless Network Adapter
+	Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Latency: 0, Cache Line Size: 256 bytes
+	Interrupt: pin A routed to IRQ 18
+	Region 0: Memory at b0600000 (64-bit, non-prefetchable) [size=32K]
+	Region 2: Memory at b0400000 (64-bit, non-prefetchable) [size=2M]
+	Capabilities: <access denied>
+	Kernel driver in use: wl
+	Kernel modules: bcma, wl
+```
+</details>
+<h1 id="frequency-table" tabindex="-1">5. Frequency table <a class="header-anchor" href="#frequency-table" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><a href="https://en.wikipedia.org/wiki/List_of_WLAN_channels" class="external-link" target="_blank">https://en.wikipedia.org/wiki/List_of_WLAN_channels</a></p>
+<p>To show the current frequency used by your WiFi adapter, use either <code class="language-plain">iwlist wlan0 channel</code> or just plain <code class="language-plain">iwconfig</code>.</p>
+<h2 id="2.4-ghz" tabindex="-1">5.1. 2.4 GHz <a class="header-anchor" href="#2.4-ghz" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<img src="/blog/2018-04-30-wifi-monitor-mode/wifi-channel-frequencies-2.4.png" width="742" height="434" alt="undefined">
+<h2 id="5-ghz" tabindex="-1">5.2. 5 GHz <a class="header-anchor" href="#5-ghz" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<img src="/blog/2018-04-30-wifi-monitor-mode/wifi-channel-frequencies-5.png" width="742" height="690" alt="undefined">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
