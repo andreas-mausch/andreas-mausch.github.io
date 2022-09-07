@@ -84,8 +84,78 @@ I didn't continue here.
 You can directly store a scan on at usb stick (FAT32 file system).
 Works without any further software. 👍
 
+If you scan via USB, the scan will result in a .pdf file.
+To convert a scanned .pdf to .jpg, I recommend to use the tool `pdfimages`.
+The `-j` option saves images as jpegs.
+
+```bash
+pdfimages -list input.pdf
+pdfimages -j input.pdf .
+```
+
 # Linux
+
+For Linux, HP provides an open-source library [HPLIP](https://sourceforge.net/projects/hplip/).
+It can be used for both, printing (via CUPS) and scanning (via SANE).
 
 ## Printing on Linux
 
+```bash
+$ lsusb | grep HP
+Bus 003 Device 003: ID 03f0:e911 HP, Inc OfficeJet 250 Mobile Series
+```
+
+```bash
+$ sudo pacman -S hplip
+$ hp-setup -i
+```
+
+This will walk you through a CLI wizard, it will show all available devices and will add the selected one to CUPS:
+
+{% thumbnail-clickable "linux/hp-setup.png" %}
+
+To validate the installation was correct, you can call `hp-info`.
+It will output lots of information about your device.
+
+If everything worked correctly, you can now just select the printer in your favorite app.
+
 ## Scanning on Linux
+
+You can use `scanimage` to scan a page.
+
+```bash
+$ scanimage --list-devices
+device `v4l:/dev/video2' is a Noname Integrated Camera: Integrated I virtual device
+device `v4l:/dev/video0' is a Noname Integrated Camera: Integrated C virtual device
+device `escl:https://192.168.178.72:443' is a HP OfficeJet 250 Mobile Series [C5372E] adf scanner
+device `hpaio:/usb/OfficeJet_250_Mobile_Series?serial=TH' is a Hewlett-Packard OfficeJet_250_Mobile_Series all-in-one
+device `hpaio:/net/officejet_250_mobile_series?ip=192.168.178.72&queue=false' is a Hewlett-Packard officejet_250_mobile_series all-in-one
+```
+
+As you can see, the OfficeJet pops up twice: One time for the wired connection, and the second one for the wireless one.
+I tried both, and I was very happy to see wireless worked on first try.
+
+Save scan as .jpg:
+
+```bash
+scanimage --device-name "hpaio:/usb/OfficeJet_250_Mobile_Series?serial=TH" --progress --format tiff --mode Color --resolution 300 | magick convert - -resize 50% -quality 75 image.jpg
+```
+
+Just replace the `device-name` by the one with the IP address and you can scan without a wire.
+
+# Findings the firmware version
+
+I couldn't find the firmware version in the menus on the printer, but I found a menu item to print a status page.
+It contained the firmware version.
+
+{% thumbnail-clickable "printer-status.jpg" %}
+
+# Firewall Settings on FritzBox
+
+I want to make sure the printer stays as functional as it is right now,
+so I don't want to allow any automatic updates on the device.
+
+Therefore, I disabled automatic updates in it's settings.
+Additionally, I also restricted the internet access in the FritzBox, so it cannot access the internet at all.
+
+{% image "fritzbox-profiles.png" %}
