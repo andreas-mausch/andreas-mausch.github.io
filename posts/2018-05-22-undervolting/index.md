@@ -1,7 +1,7 @@
 ---
 title: Undervolting the XPS 15 9550 on Linux (i7-6700HQ)
 date: 2018-05-22T22:00:00+02:00
-tags: ['undervolting', 'intel', 'dell', 'xps']
+tags: ['undervolting', 'intel', 'dell', 'xps', 'glances']
 thumbnail: glances.jpg
 ---
 
