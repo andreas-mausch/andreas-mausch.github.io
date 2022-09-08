@@ -98,13 +98,27 @@ a {
 }
 
 .me-image {
-  background-image: url("../images/me.jpg");
+  background-image: url("../images/me-2000.jpg");
   background-size: 200px;
   border-radius: 30px;
   height: 200px;
   margin: 0 auto 30px;
   vertical-align: text-bottom;
   width: 200px;
+}
+
+.me-image img {
+  border-radius: 30px;
+  height: 200px;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+  vertical-align: text-bottom;
+  width: 200px;
+}
+
+.me-image img:hover,
+.me-image img:active {
+  opacity: 0;
 }
 
 .me .location,
