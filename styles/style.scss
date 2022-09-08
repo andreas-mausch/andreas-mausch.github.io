@@ -97,11 +97,14 @@ a {
   text-align: center;
 }
 
-.me img {
+.me-image {
+  background-image: url("../images/me.jpg");
+  background-size: 200px;
   border-radius: 30px;
-  display: inline-block;
-  margin-bottom: 30px;
+  height: 200px;
+  margin: 0 auto 30px;
   vertical-align: text-bottom;
+  width: 200px;
 }
 
 .me .location,
