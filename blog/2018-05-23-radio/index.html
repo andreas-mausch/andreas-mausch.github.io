@@ -1,0 +1,116 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Radio</h1>
+<div>
+  <time class="postlist-date" datetime="2018-05-23T21:00:00.000+00:00">May 23, 2018</time>
+</div>
+
+
+
+<p>During the last weeks I wondered how radio works.
+I wasn't able to find a good source which explains in simple words how the transformation of eletric current to radio waves is done.</p>
+<p>I wonder if it's comparable to a lightbulb, which also transforms current to electromagnetic waves.
+And I wonder if it's the opposite of the photoelectric effect, which takes photons to transform them into current.
+Even the (usually really good) <a href="https://www.youtube.com/watch?v=Nc0tk8WemGg" class="external-link" target="_blank">Sendung mit der Maus</a> couldn't really explain it to me. Armin rather focused on assembling pre-built components. :/</p>
+<p>A lot of stuff is done via radio. Of course, there is FM/AM broadcasting, but there is way more:</p>
+<ul>
+<li>RFID</li>
+<li>Radar</li>
+<li>WiFi</li>
+<li>Bluetooth</li>
+<li>Amateur radio</li>
+<li>TV (DVB-T(2))</li>
+<li>CCTV / cameras</li>
+<li>Navigation (GPS / Galileo / GLONASS / Beidou)</li>
+<li>Mobile communications (GSM / 3G / LTE)</li>
+</ul>
+<p>All of them use the same base technology.</p>
+<h1 id="hardware" tabindex="-1">1. Hardware <a class="header-anchor" href="#hardware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>If you have a radio which can send and receive on any frequency, you could use all of the above technologies with the same single device.
+There is software which can take the raw radio wave and then run all the complicated <a href="https://en.wikipedia.org/wiki/Modulation" class="external-link" target="_blank">modulation</a> on it to extract binary data. A radio which works with this kind of software is called <a href="https://en.wikipedia.org/wiki/Software-defined_radio" class="external-link" target="_blank">Software-defined radio</a>. Some radios are the <a href="https://greatscottgadgets.com/hackrf/" class="external-link" target="_blank">HackRF One</a>, the <a href="https://www.nuand.com/blog/product/bladerf-x40/" class="external-link" target="_blank">bladeRF x40</a>, the <a href="https://myriadrf.org/projects/limesdr/" class="external-link" target="_blank">LimeSDR</a>, the <a href="https://airspy.com/" class="external-link" target="_blank">Airspy</a> and the <a href="https://www.ettus.com/" class="external-link" target="_blank">USRP</a>.</p>
+<p>Luckily, there is also <a href="https://www.rtl-sdr.com/about-rtl-sdr/" class="external-link" target="_blank">RTL-SDR</a>, which stands for SDRs based on the very cheap RTL2832U chip. It's 10 EUR on ebay and works in the frequency range from 24 up to 1766 MHz, which doesn't work for WiFi/Bluetooth, but for example GSM. For me it was enough to play around have some fun with.</p>
+<h1 id="software" tabindex="-1">2. Software <a class="header-anchor" href="#software" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>A nice tool to visualize the waves is <a href="http://gqrx.dk/" class="external-link" target="_blank">gqrx</a>. Connect the RTL-SDR, install gqrx (I used <code class="language-plain">sudo pacman -S gqrx</code> on Manjaro), select the frequency (I used 90.3 MHz for <a href="https://www.ndr.de/903/index.html" class="external-link" target="_blank">NDR</a>), make sure the mode is set correctly in the dropdown (I used WFM mono), and you are ready to listen to radio on your computer.</p>
+<img src="/blog/2018-05-23-radio/notebook.jpg" width="1280" height="960" alt="undefined">
+<h1 id="gsm" tabindex="-1">3. GSM <a class="header-anchor" href="#gsm" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>There is a good series on <a href="https://www.youtube.com/watch?v=PExa5sC4sbE" class="external-link" target="_blank">YouTube</a> which shows how to receive GSM data and explains it's broken encryption.
+I found it interesting and decided to try it myself.
+For this, you need <a href="https://github.com/ptrkrysik/gr-gsm" class="external-link" target="_blank">gr-gsm</a> and <a href="https://www.wireshark.org/" class="external-link" target="_blank">Wireshark</a>.</p>
+<p>First, put your phone in GSM mode (2G) and find out which channel it uses.
+For my Samsung S7, I could dial <code class="language-plain">*#0011#</code> and it showed me the following screen:</p>
+<img src="/blog/2018-05-23-radio/samsung-gsm-arfcn.png" width="360" height="640" alt="undefined">
+<p>We are interested in the BCCH arfcn (in this case 121), which we can put in an <a href="https://www.cellmapper.net/arfcn" class="external-link" target="_blank">online calculator</a> which will give us the up- and downlink frequencies (in my case 959.2 MHz for downlink).</p>
+<p>Install gr-gsm (On my machine via <code class="language-plain">yaourt -S gr-gsm-git</code>, see also <a href="https://github.com/ptrkrysik/gr-gsm" class="external-link" target="_blank">here</a>), and run</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">grgsm_livemon</span></code></pre>
+<p>Enter the frequency in the following screen, and gr-gsm will start to convert the radio waves to binary GSM packages and send them to the loopback network interface of your machine.</p>
+<img src="/blog/2018-05-23-radio/grgsm-livemon.png" width="325" height="338" alt="undefined">
+<p>Now if you open Wireshark and select the loopback device, you can see real GSM packages:</p>
+<img src="/blog/2018-05-23-radio/wireshark-gsm.png" width="1107" height="816" alt="undefined">
+<p>You can apply different filters. Just start typing gsm in the filter field and suggestions will pop up.
+Please note that some packages might get lost.</p>
+<p>Of course, GSM transfer is encrypted. So you cannot just read SMS in plain text.
+However, lots of device use the A5/1 algorithm, which can be fairly easy broken by using a 2 TB rainbow table.
+My particular phone (Samsung S7) uses the A5/3 algorithm instead, which is harder to attack, so I stopped here.</p>
+<h1 id="gps" tabindex="-1">4. GPS <a class="header-anchor" href="#gps" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've tried to set the frequency to 1575.42 MHz in order to receive GPS signals. Unfortunately, I only saw random noise in gqrx.
+The reason: GPS satellites only send with 50 watts and are ~20,000 km away from us.
+I know it's not really comparable, but I've imagined to look at a 60 W light bulb from that distance. You wouldn't see shit.</p>
+<p>But with some incredible tricks (like pseudorandom noise, it's not really random), GPS receivers can still recover the signal.
+The satellites can even send on the same frequency as Galileo for example and the signal can be separated.</p>
+<p>I've also found it impressing that time dilation needs to be considered in two ways:</p>
+<ol>
+<li>The satellites are moving. Therefore, time elapses slower than on earth.</li>
+<li>Gravity is lower for the satellites. Therefore, time elapses faster than on earth.</li>
+</ol>
+<p>In 20,000 km height, the gravitational effect outclasses the speed effect by factor six.
+So time elapses faster on the satellites than on earth.
+Only by a little tiny bit, but if you don't consider it, your calculated position will be wrong!</p>
+<p>I've found something on github which should be able to work with the raw radio data, however I haven't tested it yet:
+<a href="https://github.com/gnss-sdr/gnss-sdr" class="external-link" target="_blank">gnss-sdr</a><br>
+It probably won't work with a passive antenna.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
