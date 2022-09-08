@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undervolting the XPS 15 9550 on Linux (i7-6700HQ)</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Undervolting the XPS 15 9550 on Linux (i7-6700HQ)</h1>
+<div>
+  <time class="postlist-date" datetime="2018-05-22T20:00:00.000+00:00">May 22, 2018</time>
+</div>
+
+
+
+<p>Undervolting in notebooks is useful to reduce temperatures, avoid throttling and extend battery life.</p>
+<p>I tried to undervolt my notebook already some months ago, and found <a href="https://github.com/mihic/linux-intel-undervolt" class="external-link" target="_blank">mihic/linux-intel-undervolt</a>. However, I didn't get it to work because I didn't know what I was doing and <code class="language-plain">rdmsr 0x150</code> always returned 0 for me, even after <code class="language-plain">sudo modprobe msr</code>.
+I think my mistake was to not execute it on every single core.</p>
+<p>But today, I found this <a href="https://github.com/georgewhewell/undervolt" class="external-link" target="_blank">georgewhewell/undervolt</a>. A small python script which does all the complicated work.
+According to the internet most Intel CPUs can be undervolted easily by 100 mV. While this doesn't sound like much, it's almost a 10% cut of the default 1.2 V.</p>
+<p>I got my CPU working with a delta of 130 mV:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> ./undervolt.py <span class="token parameter variable">--gpu</span> <span class="token parameter variable">-50</span> <span class="token parameter variable">--core</span> <span class="token parameter variable">-130</span> <span class="token parameter variable">--cache</span> <span class="token parameter variable">-100</span> <span class="token parameter variable">--uncore</span> <span class="token parameter variable">-130</span> <span class="token parameter variable">--analogio</span> <span class="token parameter variable">-100</span></span></code></pre>
+<img src="/blog/2018-05-22-undervolting/cmd.jpg" width="949" height="120" alt="undefined">
+<p>I've executed <code class="language-plain">stress --cpu 8</code> and temperates dropped from 97 degrees to 83, and power consumption from 60 W to 48 W.
+This is quite significant.</p>
+<img src="/blog/2018-05-22-undervolting/glances.jpg" width="1178" height="690" alt="undefined">
+<p>(The tool shown here is <a href="https://nicolargo.github.io/glances/" class="external-link" target="_blank">glances</a>, a great alternative to top)</p>
+<p>For throttling, for the newer XPS this <a href="https://www.youtube.com/watch?v=nobnPDtMs-E" class="external-link" target="_blank">YouTube video</a> shows you can get ~12% better performance with undervolting, because the CPU doesn't need to reduce it's frequency due to hitting the temperature limit.</p>
+<p>Update: I've got myself a XPS 13 9370, and in order to do the same procedure there I've googled this topic again.
+The ArchWiki refers to <a href="https://github.com/erpalma/lenovo-throttling-fix" class="external-link" target="_blank">lenovo-throttling-fix</a>, which works also on different kind of laptops.
+It's super easy to set up, and also provides an easy way to undervolt. It also cares about settings the registers again after reboot and sleep.</p>
+<p>All I did was installation (yay and systemctl) and changing the UNDERVOLT section in <code class="language-plain">/etc/lenovo_fix.conf</code> according to the readme.
+I've double-checked via <code class="language-plain">sudo undervolt --read</code> and boom it worked out-of-the-box.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
