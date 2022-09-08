@@ -1,0 +1,103 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server on Android using Linux Deploy</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Server on Android using Linux Deploy</h1>
+<div>
+  <time class="postlist-date" datetime="2018-07-14T13:00:00.000+00:00">Jul 14, 2018</time>
+</div>
+
+
+
+<p>A friend asked me how difficult it would be to run a python program 24/7 in his own network.
+I said easy, just use a Raspi. He answered: &quot;I got an old phone with a broken touchscreen&quot;.</p>
+<p>I've played around with Linux Deploy in the past, so I already knew it is possible to install Linux on an Android phone.
+I wasn't sure if python would run, but I was confident it's gonna work so I tried.</p>
+<h1 id="setup" tabindex="-1">1. Setup <a class="header-anchor" href="#setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><a href="https://github.com/meefik/linuxdeploy" class="external-link" target="_blank">Linux Deploy</a>
+(<a href="https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy" class="external-link" target="_blank">PlayStore</a>)</p>
+<p>First thing: You <strong>need</strong> to have a rooted device.</p>
+<p>I've used a Sony Z3 Compact.
+The touch screen doesn't work anymore, but TWRP was already installed.
+Luckily, because this was the only way to grant me ADB access by <a href="https://stackoverflow.com/questions/26213954/how-to-solve-adb-device-unauthorized-in-android-adb-host-device" class="external-link" target="_blank">copying</a> my key to <code class="language-plain">/data/misc/adb/adb_keys</code>.
+I've used an USB-OTG cable to connect a mouse and control the pointer.</p>
+<p>The following commands are all for Arch Linux, so if you decide to use another distro you need to adjust them.</p>
+<p>So go ahead and install Linux Deploy on your rooted device.<br>
+On the configuration screen, I've made the following adjustments:</p>
+<ul>
+<li>Distribution: Arch Linux</li>
+<li>Init: Enable, choose run-parts</li>
+<li>SSH: Enable</li>
+</ul>
+<p>Write the username and password down.
+Create a new image with these settings and run it.
+Next, try to establish a SSH connection <code class="language-plain">ssh android@192.168.178.32</code>.<br>
+If it works: Nice, you are now connected to an Arch Linux running on your phone.</p>
+<p>The next steps for me was to install all dependencies for the software:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> python2 python2-pip python2-requests procps</span>
+<span class="highlight-line"><span class="token function">sudo</span> pip2 <span class="token function">install</span> fake-useragent</span></code></pre>
+<p>I've copied the software to the device (<code class="language-plain">scp -r</code>), and ran it by calling <code class="language-plain">python2 myapp.py</code>. Voilá.</p>
+<h1 id="autostart" tabindex="-1">2. Autostart <a class="header-anchor" href="#autostart" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now I also wanted the server to be started automatically when I power the phone on.
+This means two things: the linux container needs to be started, and also the software within it.</p>
+<p>With run-parts, the <code class="language-plain">/etc/rc.local</code> is executed on container boot, as root. Mine now looks like this:</p>
+<pre class="language-bash"><code data-filename="/etc/rc.local" class="language-bash"><span class="highlight-line"><span class="token shebang important">#!/bin/sh -e</span></span>
+<span class="highlight-line"><span class="token function">su</span> android <span class="token parameter variable">-c</span> <span class="token string">'/home/android/run.sh'</span></span>
+<span class="highlight-line"><span class="token builtin class-name">exit</span> <span class="token number">0</span></span></code></pre>
+<p>So all I do is run another script in the home directory of the user.</p>
+<pre class="language-bash"><code data-filename="/home/android/run.sh" class="language-bash"><span class="highlight-line"><span class="token shebang important">#!/bin/sh -e</span></span>
+<span class="highlight-line"><span class="token builtin class-name">cd</span> /home/android/</span>
+<span class="highlight-line"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ./logs</span>
+<span class="highlight-line">python2 <span class="token parameter variable">-u</span> ./myapp.py <span class="token operator">></span> ./logs/myapp.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span></span></code></pre>
+<p>This now leads to the start of myapp every time the container is started.</p>
+<p>Last thing, to autostart the container on android boot, go to the Linux Deploy settings and enable Autostart. See screenshot below.</p>
+<h1 id="limitations" tabindex="-1">3. Limitations <a class="header-anchor" href="#limitations" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>You are limited in hardware access, because you are only within a chroot environment and Android controls the hardware.</p>
+<p>However, for a simple use-case like a Flask application this should work fine.</p>
+<h1 id="configuration" tabindex="-1">4. Configuration <a class="header-anchor" href="#configuration" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've used version 2.1.0.</p>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2018-07-14-android-server/linux-deploy-1.png" target="_blank"><img src="/images/linux-deploy-1-ezcdujyHFH-300.jpeg" alt="Slider image" width="300" height="533"></a></li><li><a href="/blog/2018-07-14-android-server/linux-deploy-2.png" target="_blank"><img src="/images/linux-deploy-2-JGLn0FW2zP-300.jpeg" alt="Slider image" width="300" height="533"></a></li><li><a href="/blog/2018-07-14-android-server/linux-deploy-3.png" target="_blank"><img src="/images/linux-deploy-3-x7mICDXnq_-300.jpeg" alt="Slider image" width="300" height="533"></a></li><li><a href="/blog/2018-07-14-android-server/linux-deploy-4.png" target="_blank"><img src="/images/linux-deploy-4-1HQnaiefqH-300.jpeg" alt="Slider image" width="300" height="533"></a></li><li><a href="/blog/2018-07-14-android-server/linux-deploy-5.png" target="_blank"><img src="/images/linux-deploy-5-X-5QNnSSss-300.jpeg" alt="Slider image" width="300" height="533"></a></li><li><a href="/blog/2018-07-14-android-server/linux-deploy-6.png" target="_blank"><img src="/images/linux-deploy-6-OnYP6RAFUQ-300.jpeg" alt="Slider image" width="300" height="533"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button><button></button><button></button></div></div>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
