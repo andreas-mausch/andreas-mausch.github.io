@@ -1,0 +1,352 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dell XPS 15 7590</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Dell XPS 15 7590</h1>
+<div>
+  <time class="postlist-date" datetime="2019-07-10T20:00:00.000+00:00">Jul 10, 2019</time>
+</div>
+
+
+  <aside>
+    <nav class="toc" >
+        <ol><li><a href="#change-wifi-chip-for-intel-9260">1. Change WiFi chip for Intel 9260 </a></li><li><a href="#bios-settings">2. BIOS settings </a></li><li><a href="#manjaro">3. Manjaro </a></li><li><a href="#arch-wiki">4. Arch Wiki </a></li><li><a href="#terminal-settings">5. Terminal settings </a></li><li><a href="#yay">6. yay </a><ol><li><a href="#pkgbuild-(.tar)">6.1. PKGBUILD (.tar) </a></li></ol></li><li><a href="#intel-undervolt">7. intel-undervolt </a></li><li><a href="#xdg-user-dirs">8. XDG user dirs </a></li><li><a href="#ecryptfs">9. ecryptfs </a></li><li><a href="#hwclock">10. hwclock </a></li><li><a href="#xcape">11. xcape </a></li><li><a href="#my-shortcuts">12. My shortcuts </a></li><li><a href="#%C3%A4-vs-%5E-(aka-dead-circumflex)">13. ä vs ^ (aka dead circumflex) </a></li><li><a href="#xbacklightmon">14. xbacklightmon </a></li><li><a href="#slock">15. slock </a></li><li><a href="#slick-greeter">16. slick-greeter </a></li><li><a href="#power-saving">17. Power saving </a></li><li><a href="#smbios-thermal-ctl">18. smbios-thermal-ctl </a></li><li><a href="#albert">19. Albert </a></li><li><a href="#not-working">20. Not working </a></li></ol>
+      </nav>
+  </aside>
+
+
+<h1 id="change-wifi-chip-for-intel-9260" tabindex="-1">1. Change WiFi chip for Intel 9260 <a class="header-anchor" href="#change-wifi-chip-for-intel-9260" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2019-07-10-xps-7590/wifi/01-box.jpg" target="_blank"><img src="/images/01-box-jYRLdD0Us8-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/02-xps-7590-on-chair.jpg" target="_blank"><img src="/images/02-xps-7590-on-chair-oL01Nm0lnM-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/03-9550-vs-7590.jpg" target="_blank"><img src="/images/03-9550-vs-7590-vUrRfHgNrP-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/04-xps-7590-back.jpg" target="_blank"><img src="/images/04-xps-7590-back-vWykQI9ba--300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/05-screwdriver.jpg" target="_blank"><img src="/images/05-screwdriver-5ujiXXvbyb-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/06-cut.jpg" target="_blank"><img src="/images/06-cut-yfpER94lLs-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/07-xps-7590-opened.jpg" target="_blank"><img src="/images/07-xps-7590-opened-sCYwRR92Su-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/08-xps-7590-opened-close.jpg" target="_blank"><img src="/images/08-xps-7590-opened-close-r3xJTGA0Ep-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/wifi/09-xps-7590-killer-wifi-card.jpg" target="_blank"><img src="/images/09-xps-7590-killer-wifi-card-0KxM5XOm6C-300.jpeg" alt="Slider image" width="300" height="200"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button><button></button><button></button><button></button><button></button><button></button></div></div>
+<h1 id="bios-settings" tabindex="-1">2. BIOS settings <a class="header-anchor" href="#bios-settings" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2019-07-10-xps-7590/bios/01-ahci.jpg" target="_blank"><img src="/images/01-ahci-8jarKpw0hc-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/bios/02-usb-powershare.jpg" target="_blank"><img src="/images/02-usb-powershare-O8hCNOg8Oc-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/bios/03-absolute-tracking.jpg" target="_blank"><img src="/images/03-absolute-tracking-kthT_CDN4y-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/bios/04-secure-boot.jpg" target="_blank"><img src="/images/04-secure-boot-JzI2qHIaKt-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/bios/05-fastboot.jpg" target="_blank"><img src="/images/05-fastboot-1tBbdyuKXA-300.jpeg" alt="Slider image" width="300" height="200"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button><button></button></div></div>
+<h1 id="manjaro" tabindex="-1">3. Manjaro <a class="header-anchor" href="#manjaro" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2019-07-10-xps-7590/manjaro/01-boot-manager.jpg" target="_blank"><img src="/images/01-boot-manager-ueJnlhJVaI-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/manjaro/02-manjaro-boot-screen.jpg" target="_blank"><img src="/images/02-manjaro-boot-screen-CkD-PU06uZ-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/manjaro/03-manjaro-booting.jpg" target="_blank"><img src="/images/03-manjaro-booting-DcVRdXsOnx-300.jpeg" alt="Slider image" width="300" height="200"></a></li><li><a href="/blog/2019-07-10-xps-7590/manjaro/04-manjaro-booted.jpg" target="_blank"><img src="/images/04-manjaro-booted-LKi9BIW1UG-300.jpeg" alt="Slider image" width="300" height="200"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button></div></div>
+<h1 id="arch-wiki" tabindex="-1">4. Arch Wiki <a class="header-anchor" href="#arch-wiki" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><a href="https://wiki.archlinux.org/index.php/Dell_XPS_15_7590" class="external-link" target="_blank">https://wiki.archlinux.org/index.php/Dell_XPS_15_7590</a></p>
+<h1 id="terminal-settings" tabindex="-1">5. Terminal settings <a class="header-anchor" href="#terminal-settings" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<img src="/blog/2019-07-10-xps-7590/terminal.jpg" width="1920" height="1080" alt="undefined">
+<pre class="language-plain"><code data-filename="~/.config/xfce4/terminal/terminalrc" class="language-plain"><span class="highlight-line">[Configuration]</span>
+<span class="highlight-line">MiscAlwaysShowTabs=FALSE</span>
+<span class="highlight-line">MiscBell=FALSE</span>
+<span class="highlight-line">MiscBordersDefault=FALSE</span>
+<span class="highlight-line">MiscCursorBlinks=FALSE</span>
+<span class="highlight-line">MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK</span>
+<span class="highlight-line">MiscDefaultGeometry=130x38</span>
+<span class="highlight-line">MiscInheritGeometry=FALSE</span>
+<span class="highlight-line">MiscMenubarDefault=FALSE</span>
+<span class="highlight-line">MiscMouseAutohide=FALSE</span>
+<span class="highlight-line">MiscToolbarDefault=FALSE</span>
+<span class="highlight-line">MiscConfirmClose=TRUE</span>
+<span class="highlight-line">MiscCycleTabs=TRUE</span>
+<span class="highlight-line">MiscTabCloseButtons=TRUE</span>
+<span class="highlight-line">MiscTabCloseMiddleClick=TRUE</span>
+<span class="highlight-line">MiscTabPosition=GTK_POS_TOP</span>
+<span class="highlight-line">MiscHighlightUrls=TRUE</span>
+<span class="highlight-line">ScrollingLines=999999</span>
+<span class="highlight-line">BackgroundDarkness=0,860000</span>
+<span class="highlight-line">ScrollingOnOutput=FALSE</span>
+<span class="highlight-line">MiscBellUrgent=FALSE</span>
+<span class="highlight-line">MiscMouseWheelZoom=TRUE</span>
+<span class="highlight-line">MiscMiddleClickOpensUri=FALSE</span>
+<span class="highlight-line">MiscCopyOnSelect=FALSE</span>
+<span class="highlight-line">MiscRewrapOnResize=TRUE</span>
+<span class="highlight-line">MiscUseShiftArrowsToScroll=FALSE</span>
+<span class="highlight-line">MiscSlimTabs=FALSE</span>
+<span class="highlight-line">MiscNewTabAdjacent=FALSE</span>
+<span class="highlight-line">BackgroundImageFile=/home/neonew/Bilder/Frischer-Waldtropfen.jpg</span>
+<span class="highlight-line">BackgroundImageStyle=TERMINAL_BACKGROUND_STYLE_STRETCHED</span>
+<span class="highlight-line">BackgroundImageShading=0,650000</span>
+<span class="highlight-line">MiscShowRelaunchDialog=TRUE</span>
+<span class="highlight-line">FontName=Source Code Pro 11</span>
+<span class="highlight-line">BackgroundMode=TERMINAL_BACKGROUND_IMAGE</span>
+<span class="highlight-line">MiscSearchDialogOpacity=100</span>
+<span class="highlight-line">MiscShowUnsafePasteDialog=TRUE</span>
+<span class="highlight-line">ScrollingBar=TERMINAL_SCROLLBAR_NONE</span>
+<span class="highlight-line">DropdownAlwaysShowTabs=FALSE</span>
+<span class="highlight-line">DropdownKeepAbove=FALSE</span>
+<span class="highlight-line">DropdownKeepOpenDefault=TRUE</span>
+<span class="highlight-line">DropdownStatusIcon=FALSE</span>
+<span class="highlight-line">ColorPalette=rgb(37,31,31);rgb(230,131,96);rgb(148,231,107);rgb(255,172,24);rgb(70,174,222);rgb(240,85,121);rgb(214,219,172);rgb(239,239,239);rgb(94,94,94);rgb(255,169,138);rgb(149,231,107);rgb(255,172,24);rgb(70,174,222);rgb(238,94,128);rgb(214,219,172);rgb(239,239,239)</span>
+<span class="highlight-line">DropdownWidth=100</span>
+<span class="highlight-line">DropdownHeight=75</span>
+<span class="highlight-line">ColorForeground=#ffffffffffff</span>
+<span class="highlight-line">ColorBackground=#000000000000</span>
+<span class="highlight-line">ColorCursor=#ffffffffffff</span></code></pre>
+<h1 id="yay" tabindex="-1">6. yay <a class="header-anchor" href="#yay" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Just as in the <a href="https://github.com/Jguer/yay" class="external-link" target="_blank">readme</a>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">cd</span> /tmp</span>
+<span class="highlight-line"><span class="token function">mkdir</span> yay-build</span>
+<span class="highlight-line"><span class="token builtin class-name">cd</span> yay-build</span>
+<span class="highlight-line"><span class="token function">git</span> clone https://aur.archlinux.org/yay.git</span>
+<span class="highlight-line"><span class="token builtin class-name">cd</span> yay</span>
+<span class="highlight-line">makepkg <span class="token parameter variable">-si</span></span></code></pre>
+<h2 id="pkgbuild-(.tar)" tabindex="-1">6.1. PKGBUILD (.tar) <a class="header-anchor" href="#pkgbuild-(.tar)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>In <em>/etc/makepkg.conf</em> change the line:</p>
+<pre class="language-plain"><code data-filename="/etc/makepkg.conf" class="language-plain"><span class="highlight-line">PKGEXT='.pkg.tar'</span></code></pre>
+<h1 id="intel-undervolt" tabindex="-1">7. intel-undervolt <a class="header-anchor" href="#intel-undervolt" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">yay <span class="token parameter variable">-S</span> intel-undervolt</span></code></pre>
+<p>Modify <em>/etc/intel-undervolt.conf</em>.<br>
+I've set this on my i9-9980HK:</p>
+<pre class="language-plain"><code data-filename="/etc/intel-undervolt.conf" class="language-plain"><span class="highlight-line">undervolt 0 'CPU' -150</span>
+<span class="highlight-line">undervolt 1 'GPU' -75</span>
+<span class="highlight-line">undervolt 2 'CPU Cache' -80</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> intel-undervolt apply</span>
+<span class="highlight-line"><span class="token comment"># If this was successful, and you did some tests to make sure it's stable:</span></span>
+<span class="highlight-line">systemctl <span class="token builtin class-name">enable</span> intel-undervolt.service</span></code></pre>
+<h1 id="xdg-user-dirs" tabindex="-1">8. XDG user dirs <a class="header-anchor" href="#xdg-user-dirs" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Manjaro creates localized user directories by default. I don't like it too much.</p>
+<p>So my <em>~/.config/user-dirs.dirs</em> looks like:</p>
+<pre class="language-plain"><code data-filename="~/.config/user-dirs.dirs" class="language-plain"><span class="highlight-line">XDG_DESKTOP_DIR="$HOME/Desktop"</span>
+<span class="highlight-line">XDG_DOWNLOAD_DIR="$HOME/Downloads"</span>
+<span class="highlight-line">XDG_TEMPLATES_DIR="$HOME/Templates"</span>
+<span class="highlight-line">XDG_PUBLICSHARE_DIR="$HOME/Public"</span>
+<span class="highlight-line">XDG_DOCUMENTS_DIR="$HOME/Documents"</span>
+<span class="highlight-line">XDG_MUSIC_DIR="$HOME/Music"</span>
+<span class="highlight-line">XDG_PICTURES_DIR="$HOME/Pictures"</span>
+<span class="highlight-line">XDG_VIDEOS_DIR="$HOME/Videos"</span></code></pre>
+<h1 id="ecryptfs" tabindex="-1">9. ecryptfs <a class="header-anchor" href="#ecryptfs" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Login as root after a fresh reboot. No other user session should exist.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">modprobe ecryptfs</span>
+<span class="highlight-line">ecryptfs-migrate-home <span class="token parameter variable">-u</span> username</span></code></pre>
+<p>Change <em>/etc/pam.d/system-auth</em> according to <a href="https://wiki.archlinux.org/index.php/ECryptfs#Encrypting_a_home_directory" class="external-link" target="_blank">ECryptfs#Encrypting_a_home_directory</a>.</p>
+<h1 id="hwclock" tabindex="-1">10. hwclock <a class="header-anchor" href="#hwclock" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Set current system time and write it to BIOS.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> ntpdate <span class="token number">0</span>.europe.pool.ntp.org</span>
+<span class="highlight-line"><span class="token function">sudo</span> hwclock <span class="token parameter variable">--show</span></span>
+<span class="highlight-line"><span class="token function">sudo</span> hwclock <span class="token parameter variable">--systohc</span></span></code></pre>
+<h1 id="xcape" tabindex="-1">11. xcape <a class="header-anchor" href="#xcape" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>There is a problem if you want the <em>Super Key</em> to open your whiskermenu, but also want to set custom shortcuts like <em>Super+E</em> to open your file manager. So create a new file:</p>
+<pre class="language-plain"><code data-filename="~/.config/autostart/xcape.desktop" class="language-plain"><span class="highlight-line">[Desktop Entry]</span>
+<span class="highlight-line">Type=Application</span>
+<span class="highlight-line">Name=xcape</span>
+<span class="highlight-line">Exec=/usr/bin/xcape -e 'Super_L=Alt_L|F9;Super_R=Alt_L|F9'</span>
+<span class="highlight-line">StartupNotify=false</span>
+<span class="highlight-line">Terminal=false</span></code></pre>
+<p>Install xcape:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> xcape</span></code></pre>
+<p>From now on, if you just press the <em>Super Key</em>, the whiskermenu should open. But if you press <em>Super+E</em>, your file manager opens <strong>but the whiskermenu does not</strong>.</p>
+<h1 id="my-shortcuts" tabindex="-1">12. My shortcuts <a class="header-anchor" href="#my-shortcuts" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Shortcut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exo-open --launch FileManager</td>
+<td><em>Super+E</em></td>
+<td>Thunar</td>
+</tr>
+<tr>
+<td>exo-open --launch MailReader</td>
+<td><em>Super+T</em></td>
+<td>Thunderbird</td>
+</tr>
+<tr>
+<td>exo-open --launch WebBrowser</td>
+<td><em>Super+W</em></td>
+<td>Chromium</td>
+</tr>
+<tr>
+<td>galculator</td>
+<td><em>Super+C</em></td>
+<td>Calculator</td>
+</tr>
+<tr>
+<td>xfce4-screenshooter -f</td>
+<td><em>Print</em></td>
+<td>Full screen</td>
+</tr>
+<tr>
+<td>xfce4-screenshooter -w</td>
+<td><em>Shift+Print</em></td>
+<td>Window</td>
+</tr>
+<tr>
+<td>xfce4-screenshooter -r</td>
+<td><em>Ctrl+Print</em></td>
+<td>Region (user can select it)</td>
+</tr>
+<tr>
+<td>xfce4-terminal --drop-down</td>
+<td><em>Super+dead circumflex</em></td>
+<td>Console (Counter-Strike style)</td>
+</tr>
+<tr>
+<td>xflock4</td>
+<td><em>Ctrl+Alt+Del</em></td>
+<td>Lock the screen</td>
+</tr>
+</tbody>
+</table>
+<h1 id="%C3%A4-vs-%5E-(aka-dead-circumflex)" tabindex="-1">13. ä vs ^ (aka dead circumflex) <a class="header-anchor" href="#%C3%A4-vs-%5E-(aka-dead-circumflex)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>First, I've tried to open the terminal by using just the <em>dead circumflex</em> key.
+This worked, however my 'ä' key didn't anymore.</p>
+<p>Even <em>xev</em> didn't recognize the key.
+That's why I've changed the shortcut to <em>Super+dead circumflex</em>.</p>
+<h1 id="xbacklightmon" tabindex="-1">14. xbacklightmon <a class="header-anchor" href="#xbacklightmon" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>OLEDs don't have a backlight brightness control. So we can achieve the same effect by changing the gamma.</p>
+<p>To test the brightness change manually, run <code class="language-plain">xrandr --output eDP1 --brightness 0.5</code>.</p>
+<pre class="language-bash"><code data-filename="/usr/local/bin/xbacklightmon" class="language-bash"><span class="highlight-line"><span class="token shebang important">#!/bin/sh</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token assign-left variable">path</span><span class="token operator">=</span>/sys/class/backlight/intel_backlight</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token function-name function">luminance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">    <span class="token builtin class-name">read</span> <span class="token parameter variable">-r</span> level <span class="token operator">&lt;</span> <span class="token string">"<span class="token variable">$path</span>"</span>/actual_brightness</span>
+<span class="highlight-line">    <span class="token assign-left variable">factor</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>max<span class="token variable">))</span></span></span>
+<span class="highlight-line">    <span class="token assign-left variable">new_brightness</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">bc</span> <span class="token parameter variable">-l</span> <span class="token operator">&lt;&lt;&lt;</span> <span class="token string">"scale = 2; <span class="token variable">$level</span> / <span class="token variable">$factor</span>"</span><span class="token variable">)</span></span>"</span></span>
+<span class="highlight-line">    <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">${new_brightness}</span>"</span></span>
+<span class="highlight-line"><span class="token punctuation">}</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token builtin class-name">read</span> <span class="token parameter variable">-r</span> max <span class="token operator">&lt;</span> <span class="token string">"<span class="token variable">$path</span>"</span>/max_brightness</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">xrandr <span class="token parameter variable">--output</span> eDP1 <span class="token parameter variable">--brightness</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span>luminance<span class="token variable">)</span></span>"</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">inotifywait <span class="token parameter variable">-me</span> modify <span class="token string">"<span class="token variable">$path</span>"</span>/actual_brightness <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token builtin class-name">read</span><span class="token punctuation">;</span> <span class="token keyword">do</span></span>
+<span class="highlight-line">    xrandr <span class="token parameter variable">--output</span> eDP1 <span class="token parameter variable">--brightness</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span>luminance<span class="token variable">)</span></span>"</span></span>
+<span class="highlight-line"><span class="token keyword">done</span></span></code></pre>
+<pre class="language-plain"><code data-filename="~/.config/autostart/xbacklightmon.desktop" class="language-plain"><span class="highlight-line">[Desktop Entry]</span>
+<span class="highlight-line">Type=Application</span>
+<span class="highlight-line">Name=xbacklightmon</span>
+<span class="highlight-line">Exec=/usr/local/bin/xbacklightmon</span>
+<span class="highlight-line">StartupNotify=false</span>
+<span class="highlight-line">Terminal=false</span></code></pre>
+<h1 id="slock" tabindex="-1">15. slock <a class="header-anchor" href="#slock" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>slock is a display locker. Clean and fast, no gimmicks.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> slock</span>
+<span class="highlight-line"><span class="token comment"># light-locker opens the lightdm greeter after suspend.</span></span>
+<span class="highlight-line"><span class="token comment"># I don't want this. Go away.</span></span>
+<span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-R</span> light-locker</span>
+<span class="highlight-line">xfconf-query <span class="token parameter variable">-c</span> xfce4-session <span class="token parameter variable">-p</span> /general/LockCommand <span class="token parameter variable">-s</span> <span class="token string">"slock"</span></span></code></pre>
+<pre class="language-plain"><code data-filename="/etc/systemd/system/slock@.service" class="language-plain"><span class="highlight-line">[Unit]</span>
+<span class="highlight-line">Description=Lock X session using slock for user %i</span>
+<span class="highlight-line">Before=sleep.target</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[Service]</span>
+<span class="highlight-line">User=%i</span>
+<span class="highlight-line">Environment=DISPLAY=:0</span>
+<span class="highlight-line">ExecStartPre=/usr/bin/xset dpms force suspend</span>
+<span class="highlight-line">ExecStart=/usr/bin/slock</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[Install]</span>
+<span class="highlight-line">WantedBy=sleep.target</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> slock@neonew.service</span></code></pre>
+<h1 id="slick-greeter" tabindex="-1">16. slick-greeter <a class="header-anchor" href="#slick-greeter" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">yay <span class="token parameter variable">-S</span> lightdm-slick-greeter</span></code></pre>
+<p>HiDPI worked out of the box.<br>
+I've changed the background image in <em>/etc/lightdm/slick-greeter.conf</em>.</p>
+<p>To test it without going to suspend, you can run <code class="language-plain">dm-tool switch-to-greeter</code>.</p>
+<h1 id="power-saving" tabindex="-1">17. Power saving <a class="header-anchor" href="#power-saving" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>This is what powertop suggested me.</p>
+<p>powertop suggested min_power, but Arch Wiki says it might lose data and doesn't save much more power.</p>
+<pre class="language-plain"><code data-filename="/etc/udev/rules.d/hd_power_save.rules" class="language-plain"><span class="highlight-line">ACTION=="add", SUBSYSTEM=="scsi_host", KERNEL=="host*", ATTR{link_power_management_policy}="med_power_with_dipm"</span></code></pre>
+<p>This is for the fingerprint reader. Doesn't work anyway.</p>
+<pre class="language-plain"><code data-filename="/etc/udev/rules.d/50-usb_power_save.rules" class="language-plain"><span class="highlight-line">ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{idVendor}=="27c6", ATTR{idProduct}=="5395", ATTR{power/control}="auto"</span></code></pre>
+<pre class="language-plain"><code data-filename="/etc/udev/rules.d/pci_pm.rules" class="language-plain"><span class="highlight-line">SUBSYSTEM=="pci", ATTR{power/control}="auto"</span></code></pre>
+<p><em>/etc/sysctl.d/98-powersaving.conf</em></p>
+<pre class="language-plain"><code data-filename="/etc/sysctl.d/98-powersaving.conf" class="language-plain"><span class="highlight-line">vm.dirty_writeback_centisecs = 1500</span></code></pre>
+<p>On idle I get ~7W power consumption.</p>
+<h1 id="smbios-thermal-ctl" tabindex="-1">18. smbios-thermal-ctl <a class="header-anchor" href="#smbios-thermal-ctl" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>You can switch between different presets for your CPU, depending on your preference power vs. battery life.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> libsmbios</span>
+<span class="highlight-line"><span class="token function">sudo</span> smbios-thermal-ctl <span class="token parameter variable">--info</span></span>
+<span class="highlight-line"><span class="token function">sudo</span> smbios-thermal-ctl --get-thermal-info</span>
+<span class="highlight-line"><span class="token function">sudo</span> smbios-thermal-ctl --set-thermal-mode<span class="token operator">=</span>Balanced</span></code></pre>
+<p>See also here: <a href="https://github.com/mtorressahli/linuxXPS9570" class="external-link" target="_blank">mtorressahli/linuxXPS9570</a></p>
+<h1 id="albert" tabindex="-1">19. Albert <a class="header-anchor" href="#albert" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<img src="/blog/2019-07-10-xps-7590/albert.jpg" width="1920" height="1080" alt="undefined">
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> albert</span>
+<span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> muparser</span></code></pre>
+<pre class="language-plain"><code data-filename="~/.config/albert/albert.conf" class="language-plain"><span class="highlight-line">[General]</span>
+<span class="highlight-line">frontendId=org.albert.frontend.qmlboxmodel</span>
+<span class="highlight-line">hotkey=Alt+F9</span>
+<span class="highlight-line">showTray=false</span>
+<span class="highlight-line">telemetry=false</span>
+<span class="highlight-line">terminal=xfce4-terminal --drop-down</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.extension.applications]</span>
+<span class="highlight-line">enabled=true</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.extension.calculator]</span>
+<span class="highlight-line">enabled=false</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.extension.hashgenerator]</span>
+<span class="highlight-line">enabled=true</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.extension.terminal]</span>
+<span class="highlight-line">enabled=true</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.extension.virtualbox]</span>
+<span class="highlight-line">enabled=true</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.frontend.qmlboxmodel]</span>
+<span class="highlight-line">alwaysOnTop=true</span>
+<span class="highlight-line">clearOnHide=false</span>
+<span class="highlight-line">hideOnClose=false</span>
+<span class="highlight-line">hideOnFocusLoss=true</span>
+<span class="highlight-line">showCentered=true</span>
+<span class="highlight-line">stylePath=/usr/share/albert/org.albert.frontend.qmlboxmodel/styles/BoxModel/MainComponent.qml</span>
+<span class="highlight-line">windowPosition=@Point(289 94)</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[org.albert.frontend.widgetboxmodel]</span>
+<span class="highlight-line">alwaysOnTop=true</span>
+<span class="highlight-line">clearOnHide=false</span>
+<span class="highlight-line">displayIcons=true</span>
+<span class="highlight-line">displayScrollbar=false</span>
+<span class="highlight-line">displayShadow=true</span>
+<span class="highlight-line">hideOnClose=false</span>
+<span class="highlight-line">hideOnFocusLoss=true</span>
+<span class="highlight-line">itemCount=5</span>
+<span class="highlight-line">showCentered=true</span>
+<span class="highlight-line">theme=DarkOrange</span></code></pre>
+<h1 id="not-working" tabindex="-1">20. Not working <a class="header-anchor" href="#not-working" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li>Fingerprint reader</li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
