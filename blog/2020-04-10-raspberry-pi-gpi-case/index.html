@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retroflag GPi Case with a Raspberry Pi Zero W</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Retroflag GPi Case with a Raspberry Pi Zero W</h1>
+<div>
+  <time class="postlist-date" datetime="2020-04-13T21:00:00.000+00:00">Apr 13, 2020</time>
+</div>
+
+
+
+<p>Corona quarantine time. So I've gotten myself a toy.</p>
+<img src="/blog/2020-04-10-raspberry-pi-gpi-case/gpi-case.jpg" width="833" height="1280" alt="undefined">
+<p>This Game Boy looking device can hold a Raspberry Pi Zero (W), has inputs, a display and sound.
+I've installed RetroPie onto it.</p>
+<p>What's also impressive: If you don't want to use RetroPie,
+you still have a fully functional Raspi (+ a display) which runs just on batteries!</p>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2020-04-10-raspberry-pi-gpi-case/games/commander-keen.jpg" target="_blank"><img src="/images/commander-keen-SGo-OjTv27-300.jpeg" alt="Slider image" width="300" height="463"></a></li><li><a href="/blog/2020-04-10-raspberry-pi-gpi-case/games/earthworm-jim.jpg" target="_blank"><img src="/images/earthworm-jim-9UpOT5HWB1-300.jpeg" alt="Slider image" width="300" height="533"></a></li><li><a href="/blog/2020-04-10-raspberry-pi-gpi-case/games/jazz-jackrabbit.jpg" target="_blank"><img src="/images/jazz-jackrabbit-Z4z114IM5v-300.jpeg" alt="Slider image" width="300" height="466"></a></li><li><a href="/blog/2020-04-10-raspberry-pi-gpi-case/games/omf2097.jpg" target="_blank"><img src="/images/omf2097-gciinu5p6l-300.jpeg" alt="Slider image" width="300" height="467"></a></li><li><a href="/blog/2020-04-10-raspberry-pi-gpi-case/games/thps2.jpg" target="_blank"><img src="/images/thps2-crl5NcO0ay-300.jpeg" alt="Slider image" width="300" height="423"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button><button></button></div></div>
+<h1 id="installation-retropie" tabindex="-1">1. Installation RetroPie <a class="header-anchor" href="#installation-retropie" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Here is a good <a href="https://howchoo.com/g/ndc3njbhytv/retroflag-gpi-setup" class="external-link" target="_blank">guide</a>.</p>
+<p>Steps:</p>
+<ul>
+<li>Flash image</li>
+<li>Install <a href="http://download.retroflag.com/Products/GPi_Case/GPi_Case_patch.zip" class="external-link" target="_blank">GPi Case patch</a></li>
+<li>Enable ssh: <em>touch ssh</em> in boot partition</li>
+<li>Setup WiFi: <em>wpa_supplicant.conf</em> in boot partition with:</li>
+</ul>
+<pre class="language-plain"><code data-filename="wpa_supplicant.conf" class="language-plain"><span class="highlight-line">country=US</span>
+<span class="highlight-line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span>
+<span class="highlight-line">update_config=1</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"># RETROPIE CONFIG START</span>
+<span class="highlight-line">network={</span>
+<span class="highlight-line">    ssid="your_real_wifi_ssid"</span>
+<span class="highlight-line">    psk="your_real_password"</span>
+<span class="highlight-line">}</span></code></pre>
+<ul>
+<li>Boot</li>
+<li>Install <a href="https://github.com/RetroFlag/retroflag-picase" class="external-link" target="_blank">safe shutdown scripts</a></li>
+</ul>
+<h1 id="kodi" tabindex="-1">2. Kodi <a class="header-anchor" href="#kodi" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>You can <a href="https://github.com/RetroPie/RetroPie-Setup/wiki/KODI" class="external-link" target="_blank">install Kodi</a> if you like.</p>
+<h1 id="emulators" tabindex="-1">3. Emulators <a class="header-anchor" href="#emulators" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="game-boy-%2F-game-boy-color-%2F-game-boy-advanced" tabindex="-1">3.1. Game Boy / Game Boy Color / Game Boy Advanced <a class="header-anchor" href="#game-boy-%2F-game-boy-color-%2F-game-boy-advanced" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>You might need to copy a BIOS file for each Game Boy.</p>
+<p>See <a href="https://github.com/RetroPie/RetroPie-Setup/wiki/Game-Boy" class="external-link" target="_blank">here (GB)</a>
+and <a href="https://github.com/RetroPie/RetroPie-Setup/wiki/Game-Boy-Advance" class="external-link" target="_blank">here (GBA)</a>.</p>
+<p>And I had to do this:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">ln</span> <span class="token parameter variable">-s</span> /opt/retropie/libretrocores/lr-gpsp/game_config.txt /home/pi/RetroPie/roms/gba/game_config.txt</span></code></pre>
+<h2 id="dosbox" tabindex="-1">3.2. DosBox <a class="header-anchor" href="#dosbox" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I wasn't able to configure inputs with lr-dosbox.
+Same for rpix86, which runs games much faster, but I couldn't get it working with the inputs. :(</p>
+<p>So I used the normal <em>dosbox</em> emulator.
+To configure keys, I've <a href="https://www.freddyblog.de/retropie-dosbox-controller-mapping-erstellen/" class="external-link" target="_blank">ran</a>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">ssh</span> <span class="token parameter variable">-X</span> pi@retropie</span>
+<span class="highlight-line"><span class="token builtin class-name">cd</span> /opt/retropie/emulators/dosbox/bin/</span>
+<span class="highlight-line">./dosbox <span class="token parameter variable">-startmapper</span></span></code></pre>
+<img src="/blog/2020-04-10-raspberry-pi-gpi-case/dosbox-mapper.png" width="982" height="767" alt="undefined">
+<p>Config file: <em>/opt/retropie/configs/pc/mapper-SVN.map</em><br>
+<a href="/blog/2020-04-10-raspberry-pi-gpi-case/files/mapper-SVN.map">Download</a></p>
+<p>Controls:</p>
+<ul>
+<li>I've mapped mod_1 and mod_2 to the shoulder keys (L and R) at the back</li>
+<li><em>L+Down</em> exits DosBox</li>
+<li><em>Select</em> is Escape</li>
+<li><em>Start</em> is Enter</li>
+<li><em>A</em> is Control</li>
+<li><em>B</em> is Alt</li>
+<li><em>X</em> is Space</li>
+<li><em>R+up</em> is <em>Y</em>, <em>R+down</em> is <em>N</em> (needed for some games)</li>
+</ul>
+<p>For real fullscreen mode without black bars, make sure you set <em>aspect=true</em> and <em>fullscreen=true</em> in the config.</p>
+<p>Config file: <em>/opt/retropie/configs/pc/dosbox-SVN.conf</em><br>
+<a href="/blog/2020-04-10-raspberry-pi-gpi-case/files/dosbox-SVN.conf">Download</a></p>
+<p>timidity was eating a lot of CPU and slowed games down.
+I couldn't even figure out what it's useful for, since games still played midi sounds perfectly well even when I disabled it.</p>
+<p>Edit the file <em>/home/pi/RetroPie/roms/pc/+Start DOSBox.sh</em> and comment out the lines <em>midi_synth start</em> and <em>midi_synth stop</em>.
+Should be four lines in total.</p>
+<h2 id="playstation" tabindex="-1">3.3. Playstation <a class="header-anchor" href="#playstation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Emulator: PCSX-reARMed<br>
+Guide: <a href="https://www.reddit.com/r/retroflag_gpi/comments/d91tuv/how_to_get_pcsxrearmed_to_work_on_retropie_for/" class="external-link" target="_blank">here</a></p>
+<p>Maybe better solution?: <a href="https://sinisterspatula.github.io/RetroflagGpiGuides/Controls_Updater_Menu" class="external-link" target="_blank">xboxdrv</a></p>
+<p>Config file: <em>/opt/retropie/configs/psx/pcsx/pcsx.cfg</em><br>
+<a href="/blog/2020-04-10-raspberry-pi-gpi-case/files/pcsx.cfg">Download</a></p>
+<p>It was a bit confusing, because there is also an empty folder <em>cfg</em> there.
+But that's how I got it working.</p>
+<p><strong>START and D-PAD LEFT</strong> to enable Joystick/Axis input mode<br>
+<strong>START and D-PAD UP</strong> to enable D-PAD input mode</p>
+<p>The light at the top of the GPi case will do a confirmation blink purple on every mode change.</p>
+<h1 id="themes" tabindex="-1">4. Themes <a class="header-anchor" href="#themes" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I like TFT, but I like <a href="https://github.com/KALEL1981/es-theme-Super-Retroboy" class="external-link" target="_blank">Super Retroboy</a> even better.</p>
+<h2 id="splashscreen" tabindex="-1">4.1. Splashscreen <a class="header-anchor" href="#splashscreen" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I use <a href="https://www.youtube.com/watch?v=xblMd-je7eU" class="external-link" target="_blank">this video</a>.</p>
+<p>And I had to set audio_pwm_mode=0 in <em>/boot/config.txt</em>.</p>
+<p>See <a href="https://sudomod.com/forum/viewtopic.php?f=44&amp;t=5953&amp;sid=a445fc61f5d69f18b005c1318d303f41&amp;start=10#p61371" class="external-link" target="_blank">here</a>.</p>
+<h1 id="power-consumption" tabindex="-1">5. Power consumption <a class="header-anchor" href="#power-consumption" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The GPi Case runs either with 3x AA batteries, or with a provided USB power supply cable.</p>
+<p>I've measured power consumption in-game with 100% CPU and in the menu of EmulationStation with 0% CPU.
+Medium brightness.
+Make sure to enable EmulationStation's Power safe options.</p>
+<p>Power consumption under 100% load is about <strong>1.63 W</strong>.</p>
+<p>Battery lifetime is about 4h.</p>
+<img src="/blog/2020-04-10-raspberry-pi-gpi-case/power-consumption-idle.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-04-10-raspberry-pi-gpi-case/power-consumption-load.jpg" width="720" height="1280" alt="undefined">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
