@@ -8,11 +8,13 @@ title: Blog
   <ol reversed class="postlist">
     {% for post in collections.posts | reverse %}
       <li class="postlist-item">
-        <div class="postlist-item-thumbnail">
-          {% postThumbnail post %}
-        </div>
+        <a href="{{ post.url | url }}">
+          <div class="postlist-item-thumbnail">
+            {% postThumbnail post %}
+          </div>
+        </a>
         <div class="postlist-item-content">
-          <a href="{{ post.url | url }}" class="postlist-link">{{ post.data.title }}</a>
+          <a href="{{ post.url | url }}" class="postlist-title">{{ post.data.title }}</a>
           <time class="postlist-date" datetime="{{ post.date | isoDateTime }}">{{ post.date | date }}</time>
         </div>
       </li>
