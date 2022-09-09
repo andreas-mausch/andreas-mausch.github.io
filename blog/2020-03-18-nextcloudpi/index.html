@@ -1,0 +1,155 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextCloudPi with Wi-Fi Hotspot</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: NextCloudPi with Wi-Fi Hotspot</h1>
+<div>
+  <time class="postlist-date" datetime="2020-03-18T01:30:00.000+00:00">Mar 18, 2020</time>
+</div>
+
+
+
+<p><a href="https://ownyourbits.com/nextcloudpi/" class="external-link" target="_blank">NextCloudPi</a> is a great project which provides ready-to-run images to run NextCloud on a Raspberry Pi.
+My favorite models are the 3B (<strong>without</strong> the plus) and the Zero W, because of their efficiency.
+I'll use a Raspberry Pi 3B for this project. It can be powered by an ordinary power bank.</p>
+<p>My goal is to have a cloud service which is:</p>
+<ul>
+<li>easy to connect to</li>
+<li>energy-efficient</li>
+<li>and portable</li>
+</ul>
+<h1 id="general-setup" tabindex="-1">1. General setup <a class="header-anchor" href="#general-setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ol>
+<li>Extract image to SD card (I've used <a href="https://www.balena.io/etcher/" class="external-link" target="_blank">Ether</a>, although I hate electron)</li>
+<li>Connect your Pi to your network via cable</li>
+<li>Browse the URL of the Pi</li>
+<li>Run the activation steps and note the passwords</li>
+</ol>
+<h1 id="changing-the-passwords" tabindex="-1">2. Changing the passwords <a class="header-anchor" href="#changing-the-passwords" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now I've changed the passwords:</p>
+<ul>
+<li>Nextcloud's default admin account, named <em>ncp</em></li>
+<li>NextCloudPi's admin console user, also named <em>ncp</em></li>
+<li>And I've enabled SSH and changed the password (note: you need to change it again after the first login)</li>
+</ul>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2020-03-18-nextcloudpi/admin-user-password.png" target="_blank"><img src="/images/admin-user-password-fWmRJWOLG7-300.jpeg" alt="Slider image" width="300" height="209"></a></li><li><a href="/blog/2020-03-18-nextcloudpi/nextcloudpi-control-panel-password.png" target="_blank"><img src="/images/nextcloudpi-control-panel-password-uT1m9jB9Vc-300.jpeg" alt="Slider image" width="300" height="209"></a></li><li><a href="/blog/2020-03-18-nextcloudpi/ssh-password.png" target="_blank"><img src="/images/ssh-password-PLTxhE6hTo-300.jpeg" alt="Slider image" width="300" height="210"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button></div></div>
+<h1 id="setup-wi-fi-hotspot" tabindex="-1">3. Setup Wi-Fi hotspot <a class="header-anchor" href="#setup-wi-fi-hotspot" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>There's a good documentation <a href="https://www.raspberrypi.org/documentation/configuration/wireless/access-point-routed.md" class="external-link" target="_blank">here</a> about how to setup Wi-Fi with a Raspberry Pi.</p>
+<p>Here's what I did differently:</p>
+<ul>
+<li><code class="language-plain">sudo apt install hostapd</code> (dnsmasq was already installed)</li>
+<li>I've skipped the <code class="language-plain">iptables</code> part</li>
+<li>Extend <code class="language-plain">dhcp-range</code> to .200, to allow more than 20 concurrent clients</li>
+<li><code class="language-plain">sudo systemctl enable dnsmasq</code> after <code class="language-plain">sudo systemctl start dnsmasq</code>: That was missing, and is needed to make dhcp work after reboot</li>
+<li>Add <code class="language-plain">192.168.4.1 nextcloudpi</code> to <em>/etc/hosts</em>: You will be able to type in <code class="language-plain">nextcloudpi</code> in the browser instead of the IP</li>
+<li><code class="language-plain">sudo reboot</code> at the end and you should be presented a new Wi-Fi network to connect to :)</li>
+</ul>
+<p>All commands:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> hostapd dnsmasq</span>
+<span class="highlight-line"><span class="token function">sudo</span> systemctl unmask hostapd</span>
+<span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> hostapd</span>
+<span class="highlight-line"><span class="token function">sudo</span> systemctl start dnsmasq</span>
+<span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> dnsmasq</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> netfilter-persistent iptables-persistent</span>
+<span class="highlight-line"><span class="token function">sudo</span> iptables <span class="token parameter variable">-t</span> nat <span class="token parameter variable">-A</span> POSTROUTING <span class="token parameter variable">-o</span> eth0 <span class="token parameter variable">-j</span> MASQUERADE</span>
+<span class="highlight-line"><span class="token function">sudo</span> netfilter-persistent save</span>
+<span class="highlight-line"><span class="token function">sudo</span> rfkill unblock wlan</span></code></pre>
+<p>Add this at the end of the file:</p>
+<pre class="language-plain"><code data-filename="/etc/dhcpcd.conf" class="language-plain"><span class="highlight-line">interface wlan0</span>
+<span class="highlight-line">    static ip_address=192.168.4.1/24</span>
+<span class="highlight-line">    nohook wpa_supplicant</span></code></pre>
+<p>Enable routing. Create the following file:</p>
+<pre class="language-plain"><code data-filename="/etc/sysctl.d/routed-ap.conf" class="language-plain"><span class="highlight-line"># Enable IPv4 routing</span>
+<span class="highlight-line">net.ipv4.ip_forward=1</span></code></pre>
+<p>Add this at the end of the file:</p>
+<pre class="language-plain"><code data-filename="/etc/dnsmasq.conf" class="language-plain"><span class="highlight-line">interface=wlan0 # Listening interface</span>
+<span class="highlight-line">dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h</span>
+<span class="highlight-line">                # Pool of IP addresses served via DHCP</span>
+<span class="highlight-line">domain=wlan     # Local wireless DNS domain</span>
+<span class="highlight-line">address=/gw.wlan/192.168.4.1</span>
+<span class="highlight-line">                # Alias for this router</span></code></pre>
+<p>Create a new file:</p>
+<pre class="language-plain"><code data-filename="/etc/hostapd/hostapd.conf" class="language-plain"><span class="highlight-line">country_code=GB</span>
+<span class="highlight-line">interface=wlan0</span>
+<span class="highlight-line">ssid=&lt;NameOfNetwork></span>
+<span class="highlight-line">hw_mode=g</span>
+<span class="highlight-line">channel=7</span>
+<span class="highlight-line">macaddr_acl=0</span>
+<span class="highlight-line">auth_algs=1</span>
+<span class="highlight-line">ignore_broadcast_ssid=0</span>
+<span class="highlight-line">wpa=2</span>
+<span class="highlight-line">wpa_passphrase=&lt;YourPassword></span>
+<span class="highlight-line">wpa_key_mgmt=WPA-PSK</span>
+<span class="highlight-line">wpa_pairwise=TKIP</span>
+<span class="highlight-line">rsn_pairwise=CCMP</span></code></pre>
+<h1 id="my-favorite-apps-for-nextcloud" tabindex="-1">4. My favorite apps for Nextcloud <a class="header-anchor" href="#my-favorite-apps-for-nextcloud" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li>Calendar</li>
+<li>Contacts</li>
+<li>GpxPod</li>
+<li>Notes</li>
+<li>PhoneTrack</li>
+<li>Polls</li>
+<li>Talk</li>
+<li>Tasks</li>
+<li>Music</li>
+<li>Draw.io</li>
+<li>Markdown Editor</li>
+<li>Text</li>
+<li>Mind Map</li>
+<li>JavaScript XMPP Chat</li>
+<li>Group folders</li>
+</ul>
+<h1 id="apps-for-android" tabindex="-1">5. Apps for Android <a class="header-anchor" href="#apps-for-android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li><a href="https://f-droid.org/en/packages/com.nextcloud.client/" class="external-link" target="_blank">Nextcloud</a></li>
+<li><a href="https://f-droid.org/en/packages/com.nextcloud.talk2/" class="external-link" target="_blank">Nextcloud Talk</a></li>
+<li><a href="https://f-droid.org/en/packages/it.niedermann.owncloud.notes/" class="external-link" target="_blank">Nextcloud Notes</a></li>
+<li><a href="https://f-droid.org/en/packages/org.dmfs.tasks/" class="external-link" target="_blank">OpenTasks</a></li>
+<li><a href="https://f-droid.org/en/packages/at.bitfire.davdroid/" class="external-link" target="_blank">DAVx⁵</a></li>
+<li><a href="https://f-droid.org/en/packages/net.eneiluj.nextcloud.phonetrack/" class="external-link" target="_blank">PhoneTrack</a></li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
