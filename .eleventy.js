@@ -56,6 +56,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addLiquidShortcode("thumbnail", imageShortcodes.thumbnail)
   eleventyConfig.addLiquidShortcode("thumbnail-clickable", imageShortcodes.clickableThumbnail)
   eleventyConfig.addLiquidShortcode("carousel", imageShortcodes.carousel)
+  eleventyConfig.addLiquidShortcode("video", imageShortcodes.videoShortcode)
   eleventyConfig.addLiquidTag("link-post", linkPost)
 
   eleventyConfig.addNunjucksShortcode("postThumbnail", postThumbnail)

@@ -74,6 +74,13 @@ function imageShortcode(src, alt) {
   return `<img src="${image.url}" width="${image.width}" height="${image.height}" alt="${alt}">`
 }
 
+function videoShortcode(src, type, attributes = "autoplay muted loop") {
+  const url = `${getPathPrefix()}${path.join(this.page.url, src)}`
+  return `<video preload="auto" ${attributes}>
+    <source src="${url}" type="${type}"></source>
+  </video>`
+}
+
 function carousel(srcs) {
   if (!srcs || srcs.length === 0) {
     throw new Error("srcs is undefined or empty")
@@ -132,5 +139,6 @@ module.exports = {
   imageShortcode,
   imageUrl,
   carousel,
-  comparison
+  comparison,
+  videoShortcode
 }
