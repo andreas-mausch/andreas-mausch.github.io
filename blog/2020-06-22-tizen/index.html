@@ -1,0 +1,193 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizen on Samsung Gear S3</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Tizen on Samsung Gear S3</h1>
+<div>
+  <time class="postlist-date" datetime="2020-06-22T12:00:00.000+00:00">Jun 22, 2020</time>
+</div>
+
+
+  <aside>
+    <nav class="toc" >
+        <ol><li><a href="#development-environment-setup">1. Development environment setup </a></li><li><a href="#running-the-app">2. Running the app </a><ol><li><a href="#emulator">2.1. Emulator </a></li><li><a href="#simulator">2.2. Simulator </a></li><li><a href="#real-device">2.3. Real device </a></li><li><a href="#workaround-for-development">2.4. Workaround for development </a></li><li><a href="#tizen4docker-to-the-rescue%3F">2.5. Tizen4Docker to the rescue? </a></li><li><a href="#summary">2.6. Summary </a></li></ol></li><li><a href="#problems-with-the-sample">3. Problems with the sample </a></li><li><a href="#cli-commands-i-use">4. CLI commands I use </a></li><li><a href="#modern-web-technologies">5. Modern web technologies </a></li><li><a href="#samsung-certificates">6. Samsung Certificates </a></li></ol>
+      </nav>
+  </aside>
+
+
+<p>I want to share my experience developing a watch face for a Galaxy S3 Gear smartwatch.</p>
+<img src="/blog/2020-06-22-tizen/DSC_3608_.jpg" width="1920" height="1920" alt="undefined">
+<p>You can find the resulting project here: <a href="https://gitlab.com/andreas-mausch/moonwatch" class="external-link" target="_blank">https://gitlab.com/andreas-mausch/moonwatch</a></p>
+<h1 id="development-environment-setup" tabindex="-1">1. Development environment setup <a class="header-anchor" href="#development-environment-setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>First off, it was difficult to set up a development environment:<br>
+The only Linux Tizen SDK supports is Ubuntu.</p>
+<p>So, I don't want to switch to a different operating system just to be able to develop software for my target (Hello, Apple!).</p>
+<p>I tried to install Tizen SDK <a href="https://www.linuxsecrets.com/archlinux-wiki/wiki.archlinux.org/index.php/Tizen_SDK.html" class="external-link" target="_blank">the unofficial way</a>. Long story short: Didn't work well.</p>
+<p>Tizen SDK requires Java 8 and only Java 8. I had a recent Java installed, and it didn't work (can't remember the error message tho).</p>
+<p>Next try: Install Ubuntu in VirtualBox, add Java 8 and install Tizen SDK there.<br>
+Voilà, some progress. Everything installed correctly.</p>
+<p>I spent some hours until I found it's possible to develop a watch face via the web tooling. Not sure if I was very blind or the documentation very unclear.
+(Actually it is pretty much documented <a href="https://docs.tizen.org/application/web/get-started/wearable-watch/first-app-watch/" class="external-link" target="_blank">here</a>, but that link was hard to be find for me as I started <a href="https://developer.samsung.com/galaxy-watch-develop/creating-your-first-app/overview.html" class="external-link" target="_blank">here</a>).<br>
+The sample project is really helpful tho.</p>
+<h1 id="running-the-app" tabindex="-1">2. Running the app <a class="header-anchor" href="#running-the-app" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="emulator" tabindex="-1">2.1. Emulator <a class="header-anchor" href="#emulator" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>When I tried to run the sample project for the first time, I had trouble with the emulator.
+It just gave me a kernel panic:</p>
+<details>
+  <summary>Kernel Panic!</summary>
+  <pre>
+    *** Setting model-config.xml
+    [   19.584182] system_info_ini (1250) used greatest stack depth: 6220 bytes left
+    Illegal instruction
+    Illegal instruction
+    - width=360, height=360
+    Illegal instruction
+    Illegal instruction
+    Illegal instruction
+    - dpi=301
+    /init: /new_root/etc/emulator/prerun.d/set-model-config.sh: line 109: /new_root/usr/bin/system_info_update_db: not found
+    /init: /new_root/etc/emulator/prerun.d/set-model-config.sh: line 109: /new_root/usr/bin/system_info_update_db: not found
+    [1;34mSwitching root...[0m
+    [   20.541447] Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000004
+    [   20.541447] 
+    [   20.542005] CPU: 2 PID: 1 Comm: systemd Tainted: G S      W       4.4.35 #1
+    [   20.542315] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.1-0-g8891697-prebuilt.qemu-project.org 04/01/2014
+    [   20.542798]  00000000 00000046 df4c3e20 c120c92a df4d0000 c189c098 df4c3e38 c10d3937
+    [   20.543203]  c189c098 df4d0000 c189c098 df4d0000 df4c3e74 c103b4ec c179bca9 00000004
+    [   20.543641]  df4d047c df4d0000 00000001 de786738 00000000 df4c3e5c df4c3e60 df4c3e60
+    [   20.544032] Call Trace:
+    [   20.544173]  [&lt;c120c92a&gt;] dump_stack+0x5d/0x84
+    [   20.544370]  [&lt;c10d3937&gt;] panic+0x86/0x1aa
+    [   20.544565]  [&lt;c103b4ec&gt;] do_exit+0x436/0x85a
+    [   20.544764]  [&lt;c103b978&gt;] do_group_exit+0x37/0x84
+    [   20.544970]  [&lt;c1043624&gt;] get_signal+0x4b9/0x507
+    [   20.545175]  [&lt;c1002114&gt;] do_signal+0x1e/0x4c7
+    [   20.545385]  [&lt;c10027f1&gt;] ? do_trap+0x74/0x7a
+    [   20.545571]  [&lt;c10028b5&gt;] ? do_error_trap+0xae/0xb9
+    [   20.545781]  [&lt;c1112109&gt;] ? SyS_fstatat64+0x2f/0x34
+    [   20.545995]  [&lt;c10011c8&gt;] prepare_exit_to_usermode+0x57/0x92
+    [   20.546219]  [&lt;c1002dc7&gt;] ? do_overflow+0x1a/0x1a
+    [   20.546403]  [&lt;c1628a4d&gt;] resume_userspace+0xd/0x14
+    [   20.546592]  [&lt;c1002dc7&gt;] ? do_overflow+0x1a/0x1a
+    [   20.550408] Kernel Offset: disabled
+    [   20.550408] ---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000004
+    [   20.550408] 
+  </pre>
+</details>
+<p>After some googling it turned out to be a problem with the hardware acceleration. I couldn't enable it because VirtualBox and KVM...something.<br>
+The <a href="https://wiki.tizen.org/Emulator#Tizen:Common_on_virtualbox" class="external-link" target="_blank">wiki</a> says:</p>
+<blockquote>
+<p>As of today VirtualBox does not provide guest addition with support for Wayland and therefore Weston can not run with hardware acceleration. This restriction makes it impossible to run Tizen IVI in VirtualBox at the moment.</p>
+</blockquote>
+<h2 id="simulator" tabindex="-1">2.2. Simulator <a class="header-anchor" href="#simulator" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>There is also a web simulator, which is basically a Google Chrome (which needs to be installed) with some add-on for the tizen runtime.</p>
+<p><a href="https://developer.tizen.org/development/tizen-studio/web-tools/using-web-simulator" class="external-link" target="_blank">However</a>:</p>
+<blockquote>
+<p>The Web Simulator does not support a wearable circular UI.</p>
+</blockquote>
+<p>For me, even the BasicWatch example didn't work, because the browser console explained <code class="language-plain">tizen.time.setTimezoneChangeListener</code> is undefined.
+<code class="language-plain">tizen.time.getCurrentDateTime</code> is defined however, so I just assume the API is not implemented 100% for watches.</p>
+<h2 id="real-device" tabindex="-1">2.3. Real device <a class="header-anchor" href="#real-device" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Luckily, running the app on the real device worked (after setting up a certificate).
+It is not the optimal way to develop, because the turnaround time always takes like ~1min to deploy to a real device, but I can work with that.</p>
+<p>One thing I've noticed: I cannot deploy to the real device when I still have the Simulator open. Gna.</p>
+<h2 id="workaround-for-development" tabindex="-1">2.4. Workaround for development <a class="header-anchor" href="#workaround-for-development" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Because I only have a very simple app and only call two API functions from tizen,
+I've decided to mock them for developing purposes.
+Then, I can just develop with Google Chrome, which makes the whole development process a lot faster.</p>
+<p>See <a href="https://gitlab.com/andreas-mausch/moonwatch/-/blob/70966b3513b68ebdc77a5d21438b9136814e2661/tizen/tizenMock.ts" class="external-link" target="_blank">this file</a>.<br>
+Note: It is only loaded during development mode, so it is not included in the generated production build!</p>
+<h2 id="tizen4docker-to-the-rescue%3F" tabindex="-1">2.5. Tizen4Docker to the rescue? <a class="header-anchor" href="#tizen4docker-to-the-rescue%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I found it late, but there is a very nice repo <a href="https://github.com/kamildzi/Tizen4Docker" class="external-link" target="_blank">https://github.com/kamildzi/Tizen4Docker</a> which makes it possible to run the Tizen IDE (based on Eclipse), the simulator and the emulator with full hardware acceleration on a Linux other than Ubuntu!</p>
+<p>Hooray!</p>
+<p>This seems to be the best solution in hindsight.</p>
+<p>One note: On manjaro I had to do this to get it working:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> xorg-xhost</span>
+<span class="highlight-line">xhost +local:docker</span>
+<span class="highlight-line"><span class="token function">docker-compose</span> --env-file<span class="token operator">=</span>.env build</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Then, you can execute these commands to run the IDE, the tizen cli tool or the sdb tool</span></span>
+<span class="highlight-line"><span class="token function">docker-compose</span> run <span class="token parameter variable">--rm</span> tizen /opt/scripts/runTizenIDE.sh</span>
+<span class="highlight-line"><span class="token function">docker-compose</span> run <span class="token parameter variable">--rm</span> tizen ~/tizen-studio/tools/ide/bin/tizen</span>
+<span class="highlight-line"><span class="token function">docker-compose</span> run <span class="token parameter variable">--rm</span> tizen ~/tizen-studio/tools/sdb</span></code></pre>
+<h2 id="summary" tabindex="-1">2.6. Summary <a class="header-anchor" href="#summary" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<ul>
+<li>Linux: Tizen SDK only supports Ubuntu</li>
+<li>Only with JDK 8</li>
+<li>Emulator: Kernel virtualization strictly required</li>
+<li>..and not working inside VirtualBox</li>
+<li>Simulator: Not showing all options? Doesn't support tizen.time.setTimezoneChangeListener</li>
+<li><em>Run in Simulator</em> and <em>Run on real device</em> cannot be done at the same time</li>
+<li>Tizen4Docker is the best tool to run the IDE and the emulator</li>
+</ul>
+<h1 id="problems-with-the-sample" tabindex="-1">3. Problems with the sample <a class="header-anchor" href="#problems-with-the-sample" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The sample uses just plain JavaScript with no dependencies.</p>
+<p>No npm, no SCSS, no TypeScript, no Babel, no Webpack, ...</p>
+<p><a href="https://github.com/LukeDS-it/tizen-web-base" class="external-link" target="_blank">Somebody else noticed that already</a> and hopes</p>
+<blockquote>
+<p>that the Tizen team realizes that advanced js tools exist</p>
+</blockquote>
+<p>I hope that, too!</p>
+<h1 id="cli-commands-i-use" tabindex="-1">4. CLI commands I use <a class="header-anchor" href="#cli-commands-i-use" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">sdb connect <span class="token number">192.168</span>.178.25</span>
+<span class="highlight-line">sdb devices</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">tizen clean</span>
+<span class="highlight-line">tizen build-web</span>
+<span class="highlight-line">tizen cli-config <span class="token parameter variable">-l</span></span>
+<span class="highlight-line">tizen package <span class="token parameter variable">--type</span> wgt -- ./.buildResult/</span>
+<span class="highlight-line">tizen <span class="token function">install</span> <span class="token parameter variable">-n</span> ./.buildResult/MoonWatch.wgt</span>
+<span class="highlight-line">tizen run <span class="token parameter variable">-p</span> KJAMc748fQ</span></code></pre>
+<h1 id="modern-web-technologies" tabindex="-1">5. Modern web technologies <a class="header-anchor" href="#modern-web-technologies" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>My goal was to use TypeScript, SCSS, npm and webpack as technologies and Visual Studio Code and Google Chrome as development environment.</p>
+<p>I've started off with LukeDS' code and adjusted it a bit (to use a more recent webpack etc.).</p>
+<p>In the end, I'm very happy with the result and have a good feeling developing apps for Tizen, even tho it was quite a bit of work to get to that point.</p>
+<h1 id="samsung-certificates" tabindex="-1">6. Samsung Certificates <a class="header-anchor" href="#samsung-certificates" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>This is a topic on it's own.<br>
+I've written about the process <a href="https://gitlab.com/andreas-mausch/moonwatch/-/blob/master/certificates/CreateSamsungCertificate.md" class="external-link" target="_blank">here</a>
+and I plan to move it to the blog.</p>
+<p>For just the commands, I have created <a href="https://gist.github.com/andreas-mausch/026413d908ba61cda15981bb4fbcd276" class="external-link" target="_blank">this gist</a>.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
