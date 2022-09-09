@@ -1,6 +1,6 @@
 ---
 title: Scaling images using imagemagick
-date: 2019-05-02T17:00:00+02:00
+date: 2019-05-06T22:00:00+02:00
 tags: ['imagemagick', 'scaling', 'batch-processing', 'cli']
 ---
 
