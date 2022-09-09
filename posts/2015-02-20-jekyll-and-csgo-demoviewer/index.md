@@ -1,7 +1,7 @@
 ---
 title: Jekyll and CS:GO Demoviewer
 date: 2015-02-20T21:13:44+01:00
-tags: ['jekyll', 'csgo-demoviewer']
+tags: ['jekyll', 'csgo-demoviewer', 'desktop']
 thumbnail: csgo-demoviewer.jpg
 ---
 Today I have set up Jekyll and did some work on my new project, the CS:GO Demoviewer.

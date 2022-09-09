@@ -1,7 +1,7 @@
 ---
 title: WhatsApp Viewer v1.9 with crypt12 support released
 date: 2016-10-23T00:00:00+02:00
-tags: ['whatsapp-viewer']
+tags: ['whatsapp-viewer', 'desktop']
 ---
 I have released a new version of WhatsApp Viewer, get it here:
 

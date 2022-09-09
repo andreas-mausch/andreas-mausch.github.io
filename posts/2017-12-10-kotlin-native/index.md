@@ -1,7 +1,7 @@
 ---
 title: Kotlin Native
 date: 2017-12-10T19:00:00+01:00
-tags: ['kotlin', 'native']
+tags: ['kotlin', 'native', 'desktop']
 ---
 
 # Double-click & run
