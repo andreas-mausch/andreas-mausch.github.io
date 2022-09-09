@@ -1,0 +1,88 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Git Repos</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Split Git Repos</h1>
+<div>
+  <time class="postlist-date" datetime="2020-04-10T13:00:00.000+00:00">Apr 10, 2020</time>
+</div>
+
+
+
+<p>My website has grown over time.</p>
+<p>First, I just had a site for the WhatsApp Viewer.<br>
+Then, I've added a blog.<br>
+Then, I've added my landing page to present myself as a software professional.<br>
+Then, I've added a gallery.<br>
+Then, I've added my resume.<br>
+Then, I've added a site about things I like.<br>
+Then, I've added cheatsheets.</p>
+<p>I've noticed the repo was getting too big for my likes.</p>
+<p>So I'd rather like to have subdomains with separated repos, like <a href="https://cheatsheets.andreas-mausch.de" class="external-link" target="_blank">cheatsheets.andreas-mausch.de</a>.</p>
+<p>Here are some commands which were useful to me:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># Create a new copy of the existing repo</span></span>
+<span class="highlight-line"><span class="token function">git</span> clone <span class="token operator">&lt;</span>original_repo<span class="token operator">></span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># This command keeps all files with this pattern: gallery.html gallery images/gallery _layouts/gallery.html</span></span>
+<span class="highlight-line"><span class="token comment"># All other files are deleted, and all commits which do not touch these files are dropped.</span></span>
+<span class="highlight-line"><span class="token function">git</span> filter-branch --index-filter <span class="token string">'git rm --cached -qr --ignore-unmatch -- . &amp;&amp; git reset -q $GIT_COMMIT -- gallery.html gallery images/gallery _layouts/gallery.html'</span> --prune-empty -- <span class="token parameter variable">--all</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Now, this repo only contains files related to gallery stuff.</span></span>
+<span class="highlight-line"><span class="token comment"># But, there are still references in the .git folder to all the other files.</span></span>
+<span class="highlight-line"><span class="token comment"># We don't need them any longer and can save some space by shrinking the .git folder:</span></span>
+<span class="highlight-line"><span class="token function">rm</span> <span class="token parameter variable">-Rf</span> .git/refs/original</span>
+<span class="highlight-line"><span class="token function">rm</span> <span class="token parameter variable">-Rf</span> .git/logs/</span>
+<span class="highlight-line"><span class="token function">git</span> gc <span class="token parameter variable">--aggressive</span> <span class="token parameter variable">--prune</span><span class="token operator">=</span>now</span>
+<span class="highlight-line"><span class="token function">git</span> prune <span class="token parameter variable">--expire</span> now</span></code></pre>
+<p>Once we have created a new repo with only gallery-files inside,
+we can delete those files in the original repo.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>original_repo<span class="token operator">></span></span>
+<span class="highlight-line"><span class="token comment"># This deletes all gallery related files from the repo</span></span>
+<span class="highlight-line"><span class="token function">git</span> filter-branch --index-filter <span class="token string">'git rm -rf --cached --ignore-unmatch gallery.html gallery images/gallery _layouts/gallery.html'</span> --prune-empty --tag-name-filter <span class="token function">cat</span> -- <span class="token parameter variable">--all</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Now, run the same cleanup commands from above</span></span></code></pre>
+<p>Note: You need to <strong>force-push</strong> after the changes. Do this with care and be aware what the consequences of a force-push are!</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
