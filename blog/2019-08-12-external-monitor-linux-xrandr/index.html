@@ -1,0 +1,75 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External monitor on Linux</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: External monitor on Linux</h1>
+<div>
+  <time class="postlist-date" datetime="2019-08-12T19:00:00.000+00:00">Aug 12, 2019</time>
+</div>
+
+
+
+<h1 id="on-each-connect" tabindex="-1">1. On each connect <a class="header-anchor" href="#on-each-connect" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Short command to set the correct resolution and scaling for an external monitor.<br>
+I've decided to write this down because the <em>--scale-from</em> parameter seems to be uncommon. Most suggestions on the internet only use <em>--scale</em>, which I find less intuitive to use.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># XPS 13 with full hd display</span></span>
+<span class="highlight-line">xrandr <span class="token parameter variable">--output</span> DP1 <span class="token parameter variable">--primary</span> <span class="token parameter variable">--mode</span> 1920x1080 --scale-from 1920x1080 --same-as eDP1</span>
+<span class="highlight-line"><span class="token comment"># XPS 15 with 4k display on an external WQHD display</span></span>
+<span class="highlight-line">xrandr <span class="token parameter variable">--output</span> DP1 <span class="token parameter variable">--primary</span> <span class="token parameter variable">--mode</span> 2560x1440 --scale-from 3840x2160 --same-as eDP1</span></code></pre>
+<h1 id="automate-it-by-using-autorandr" tabindex="-1">2. Automate it by using <a href="https://github.com/wertarbyte/autorandr" class="external-link" target="_blank"><em>autorandr</em></a> <a class="header-anchor" href="#automate-it-by-using-autorandr" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> autorandr</span>
+<span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> autorandr.service</span></code></pre>
+<p>I've created two profiles.</p>
+<ul>
+<li>First, I connect <strong>no</strong> external monitor.</li>
+<li>Then I run <code class="language-plain">autorandr --save default</code>.</li>
+<li>Next, connect the external monitor.</li>
+<li>Run the fitting xrandr command above. Check everything looks nice.</li>
+<li>Run <code class="language-plain">autorandr --save docked</code>.</li>
+</ul>
+<p>autorandr should switch to the correct mode automatically (hence the name) from now on.</p>
+<p>What's neat: If you close the lid while the notebook is connected to the external monitor, it doesn't go into sleep mode.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
