@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Thunar to Nextcloud</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Connect Thunar to Nextcloud</h1>
+<div>
+  <time class="postlist-date" datetime="2020-04-10T16:00:00.000+00:00">Apr 10, 2020</time>
+</div>
+
+
+
+<p>I was looking for a way to integrate the Nextcloud WebDAV interface into Thunar, a Linux file manager.</p>
+<p>After some time I found you can just paste this link <em>davs://cloud.neonew.de/remote.php/dav/files/&lt;username&gt;</em>
+into the address line. Then I've right clicked -&gt; Store as bookmark.</p>
+<p>However, only the first part of the link was stored: <em>davs://cloud.neonew.de/remote.php/dav</em>. :(</p>
+<p>So next I tried to find out where Thunar stores it bookmarks. A lot of stuff I've found said <em>~<s>/.gtk-bookmarks</s></em>.
+This is outdated tho, and the file is now located at <em>~/.config/gtk-3.0/bookmarks</em>.</p>
+<p>So add a new line to the file:</p>
+<pre class="language-plain"><code data-filename="~/.config/gtk-3.0/bookmarks" class="language-plain"><span class="highlight-line">davs://cloud.neonew.de/remote.php/dav/files/&lt;username> Nextcloud</span></code></pre>
+<p>..and it should work as expected.</p>
+<p>One thing about the authentication: You should setup a new app password in your user settings (in case you use 2FA you even have to):</p>
+<img src="/blog/2020-04-10-nextcloud-thunar/nextcloud-authentication.png" width="1419" height="857" alt="undefined">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
