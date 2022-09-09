@@ -1,7 +1,7 @@
 ---
 title: Eat my time, element-ui
 date: 2020-02-12T19:00:00+01:00
-tags: ['software-development', 'frontend', 'element-ui', 'npm', ]
+tags: ['software-development', 'frontend', 'element-ui', 'npm', 'popper.js', 'copied-dependency']
 thumbnail: stale.png
 ---
 
