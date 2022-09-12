@@ -1,0 +1,170 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary diffs</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Binary diffs</h1>
+<div>
+  <time class="postlist-date" datetime="2021-07-17T20:00:00.000+00:00">Jul 17, 2021</time>
+</div>
+
+
+  <aside>
+    <nav class="toc" >
+        <ol><li><a href="#files-are-the-same-size%2C-and-some-bytes-are-changed">1. Files are the same size, and some bytes are changed </a><ol><li><a href="#just-diff">1.1. Just diff </a></li><li><a href="#cmp">1.2. cmp </a></li><li><a href="#diff-and-xxd">1.3. diff and xxd </a></li><li><a href="#meld-and-xxd">1.4. meld and xxd </a></li><li><a href="#dhex">1.5. dhex </a></li></ol></li><li><a href="#second-file-has-bytes-inserted">2. Second file has bytes inserted </a><ol><li><a href="#diff%2C-cmp">2.1. diff, cmp </a></li><li><a href="#diff-and-xxd%2C-meld-and-xxd%2C-dhex">2.2. diff and xxd, meld and xxd, dhex </a></li><li><a href="#solution">2.3. Solution </a></li></ol></li></ol>
+      </nav>
+  </aside>
+
+
+<p>When I searched the internet on how to diff two binary files,
+the first results were not helpful to me.</p>
+<p>Most of them only work well when the files are the same size and
+only differ in some bytes.</p>
+<p>When there are bytes inserted at some point of the file, the result
+is not useful.</p>
+<p>Let me show you.</p>
+<h1 id="files-are-the-same-size%2C-and-some-bytes-are-changed" tabindex="-1">1. Files are the same size, and some bytes are changed <a class="header-anchor" href="#files-are-the-same-size%2C-and-some-bytes-are-changed" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Let's assume we have these two files:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ xxd testfile.bin</span>
+<span class="highlight-line">00000000: 0000 0000 0000 <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">2222</span> <span class="token number">2222</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token string">""</span>"<span class="token string">"</span>
+<span class="highlight-line">00000010: 2222 3333 3333 3333 4444 4444 4444 5555  "</span>"333333DDDDDDUU</span>
+<span class="highlight-line">00000020: <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">7777</span>  UUUUffffffwwwwww</span>
+<span class="highlight-line">00000030: <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">9999</span> <span class="token number">9999</span> <span class="token number">9999</span> aaaa aaaa  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000040: aaaa bbbb bbbb bbbb cccc cccc cccc dddd  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000050: dddd dddd eeee eeee eeee ffff ffff ffff  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ xxd testfile_changed-bytes.bin</span>
+<span class="highlight-line">00000000: 0000 0000 0000 <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">2222</span> <span class="token number">2222</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token string">""</span>"<span class="token string">"</span>
+<span class="highlight-line">00000010: 2222 3333 3333 3333 4444 4444 ffff 5555  "</span>"333333DDDD<span class="token punctuation">..</span>UU</span>
+<span class="highlight-line">00000020: <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">7777</span>  UUUUffffffwwwwww</span>
+<span class="highlight-line">00000030: <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">9999</span> <span class="token number">9999</span> <span class="token number">9999</span> aaaa aaaa  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000040: ffff bbbb bbbb bbbb cccc cccc cccc dddd  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000050: dddd dddd eeee eeee eeee ffff ffff ffff  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span></code></pre>
+<p>The second file differs at offsets 0x1c/0x1d and 0x40/0x41. The rest is identical.</p>
+<h2 id="just-diff" tabindex="-1">1.1. Just diff <a class="header-anchor" href="#just-diff" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>If you do <code class="language-plain">diff</code>, it will tell you if the files are equal or not.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">diff</span> testfile.bin testfile_changed-bytes.bin</span>
+<span class="highlight-line">Binärdateien testfile.bin und testfile_inserted-bytes.bin sind verschieden.</span></code></pre>
+<p>(This is German and means the files are different)</p>
+<h2 id="cmp" tabindex="-1">1.2. cmp <a class="header-anchor" href="#cmp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>If you do <code class="language-plain">cmp</code>, it will tell you where the <strong>first</strong> difference in the files is.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">cmp</span> --print-bytes testfile.bin testfile_changed-bytes.bin</span>
+<span class="highlight-line">testfile.bin testfile_changed-bytes.bin sind verschieden: Zeichen <span class="token number">29</span>, Zeile <span class="token number">1</span> ist <span class="token number">104</span> D <span class="token number">377</span> M-^?</span></code></pre>
+<h2 id="diff-and-xxd" tabindex="-1">1.3. diff and xxd <a class="header-anchor" href="#diff-and-xxd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>The next suggestion is to use <code class="language-plain">diff &lt;(xxd b1) &lt;(xxd b2)</code>.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">diff</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd testfile_changed-bytes.bin<span class="token punctuation">)</span></span>
+<span class="highlight-line">2c2</span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000010: <span class="token number">2222</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">4444</span> <span class="token number">4444</span> <span class="token number">4444</span> <span class="token number">5555</span>  <span class="token string">""</span>333333DDDDDDUU</span>
+<span class="highlight-line">---</span>
+<span class="highlight-line"><span class="token operator">></span> 00000010: <span class="token number">2222</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">4444</span> <span class="token number">4444</span> ffff <span class="token number">5555</span>  <span class="token string">""</span>333333DDDD<span class="token punctuation">..</span>UU</span>
+<span class="highlight-line">5c5</span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000040: aaaa bbbb bbbb bbbb cccc cccc cccc dddd  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">---</span>
+<span class="highlight-line"><span class="token operator">></span> 00000040: aaaa bbbb bbbb bbbb cccc cccc ffff dddd  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span></code></pre>
+<p>In fish shell, use the following command (see <a href="https://stackoverflow.com/questions/48855508/fish-error-while-trying-to-run-command-on-mac" class="external-link" target="_blank">here</a>)</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">diff</span> <span class="token punctuation">(</span>xxd testfile.bin <span class="token operator">|</span> psub<span class="token punctuation">)</span> <span class="token punctuation">(</span>xxd testfile_changed-bytes.bin <span class="token operator">|</span> psub<span class="token punctuation">)</span></span></code></pre>
+<img src="/blog/2021-07-17-binary-diffs/colordiff-xxd-changed-bytes.png" width="1196" height="256" alt="undefined">
+<p>This is an okayish result, because now we know at least in which lines the differences are.</p>
+<p>You can also use <code class="language-plain">-y</code> or <code class="language-plain">--side-by-side</code>:</p>
+<img src="/blog/2021-07-17-binary-diffs/colordiff-xxd-sidebyside-changed-bytes.png" width="1756" height="198" alt="undefined">
+<h2 id="meld-and-xxd" tabindex="-1">1.4. meld and xxd <a class="header-anchor" href="#meld-and-xxd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">meld <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd testfile_changed-bytes.bin<span class="token punctuation">)</span></span></code></pre>
+<img src="/blog/2021-07-17-binary-diffs/meld-xxd-changed-bytes.png" width="1986" height="916" alt="undefined">
+<h2 id="dhex" tabindex="-1">1.5. dhex <a class="header-anchor" href="#dhex" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>We get an even better result if we use <em>dhex</em>, because it tells us exactly which bytes differ:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token assign-left variable"><span class="token environment constant">LINES</span></span><span class="token operator">=</span><span class="token number">24</span> <span class="token assign-left variable"><span class="token environment constant">COLUMNS</span></span><span class="token operator">=</span><span class="token number">80</span> dhex testfile.bin testfile_changed-bytes.bin</span></code></pre>
+<img src="/blog/2021-07-17-binary-diffs/dhex-changed-bytes.png" width="1136" height="678" alt="undefined">
+<h1 id="second-file-has-bytes-inserted" tabindex="-1">2. Second file has bytes inserted <a class="header-anchor" href="#second-file-has-bytes-inserted" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now, let's come to the point of this article.
+What happens when there are bytes inserted somewhere in the file?</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ xxd testfile_inserted-bytes.bin</span>
+<span class="highlight-line">00000000: 0000 0000 0000 <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">2222</span> <span class="token number">2222</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token string">""</span>"<span class="token string">"</span>
+<span class="highlight-line">00000010: 2222 ffff ffff ffff 3333 3333 3333 4444  "</span>"<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>333333DD</span>
+<span class="highlight-line">00000020: <span class="token number">4444</span> <span class="token number">4444</span> <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">6666</span>  DDDDUUUUUUffffff</span>
+<span class="highlight-line">00000030: <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">9999</span> <span class="token number">9999</span>  wwwwww<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000040: <span class="token number">9999</span> aaaa aaaa aaaa bbbb bbbb bbbb cccc  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000050: cccc cccc dddd dddd dddd eeee eeee eeee  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">00000060: ffff ffff ffff                           <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span></code></pre>
+<p>At offset 0x12, six bytes of 0xff have been inserted. The rest is identical.</p>
+<h2 id="diff%2C-cmp" tabindex="-1">2.1. diff, cmp <a class="header-anchor" href="#diff%2C-cmp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>diff and cmp still work the same.</p>
+<h2 id="diff-and-xxd%2C-meld-and-xxd%2C-dhex" tabindex="-1">2.2. diff and xxd, meld and xxd, dhex <a class="header-anchor" href="#diff-and-xxd%2C-meld-and-xxd%2C-dhex" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>None of the tools provide a useable output.
+They all claim that <strong>all</strong> bytes are changed after the first change.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">diff</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd testfile_inserted-bytes.bin<span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token number">2</span>,6c2,7</span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000010: <span class="token number">2222</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">4444</span> <span class="token number">4444</span> <span class="token number">4444</span> <span class="token number">5555</span>  <span class="token string">""</span>333333DDDDDDUU</span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000020: <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">7777</span>  UUUUffffffwwwwww</span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000030: <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">9999</span> <span class="token number">9999</span> <span class="token number">9999</span> aaaa aaaa  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000040: aaaa bbbb bbbb bbbb cccc cccc cccc dddd  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line"><span class="token operator">&lt;</span> 00000050: dddd dddd eeee eeee eeee ffff ffff ffff  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line">---</span>
+<span class="highlight-line"><span class="token operator">></span> 00000010: <span class="token number">2222</span> ffff ffff ffff <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">3333</span> <span class="token number">4444</span>  <span class="token string">""</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>333333DD</span>
+<span class="highlight-line"><span class="token operator">></span> 00000020: <span class="token number">4444</span> <span class="token number">4444</span> <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">5555</span> <span class="token number">6666</span> <span class="token number">6666</span> <span class="token number">6666</span>  DDDDUUUUUUffffff</span>
+<span class="highlight-line"><span class="token operator">></span> 00000030: <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">7777</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">8888</span> <span class="token number">9999</span> <span class="token number">9999</span>  wwwwww<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line"><span class="token operator">></span> 00000040: <span class="token number">9999</span> aaaa aaaa aaaa bbbb bbbb bbbb cccc  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line"><span class="token operator">></span> 00000050: cccc cccc dddd dddd dddd eeee eeee eeee  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span>
+<span class="highlight-line"><span class="token operator">></span> 00000060: ffff ffff ffff                           <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></span></code></pre>
+<img src="/blog/2021-07-17-binary-diffs/colordiff-xxd-inserted-bytes.png" width="1210" height="398" alt="undefined">
+<img src="/blog/2021-07-17-binary-diffs/colordiff-xxd-sidebyside-inserted-bytes.png" width="1758" height="228" alt="undefined">
+<img src="/blog/2021-07-17-binary-diffs/meld-xxd-inserted-bytes.png" width="1980" height="914" alt="undefined">
+<img src="/blog/2021-07-17-binary-diffs/dhex-inserted-bytes.png" width="1138" height="680" alt="undefined">
+<h2 id="solution" tabindex="-1">2.3. Solution <a class="header-anchor" href="#solution" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>The best I came up with after some research was to output each file one byte a line
+and diff that outcome.</p>
+<p>It is far from perfect, but was good enough for my specific problem.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">meld <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile_inserted-bytes.bin<span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token function">diff</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile_inserted-bytes.bin<span class="token punctuation">)</span></span>
+<span class="highlight-line"><span class="token function">diff</span> <span class="token parameter variable">--unified</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile_inserted-bytes.bin<span class="token punctuation">)</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Only shows offsets of changes.</span></span>
+<span class="highlight-line"><span class="token comment"># Example output: 00000012-00000012 (00000000) &lt;-> 00000012-00000018 (00000006)</span></span>
+<span class="highlight-line"><span class="token comment"># Format:         from    -to [file 1]  (size) &lt;-> from    -to [file 2]  (size)</span></span>
+<span class="highlight-line"><span class="token comment"># All numbers are hex values</span></span>
+<span class="highlight-line"><span class="token function">diff</span> --changed-group-format<span class="token operator">=</span><span class="token string">"%08xe-%08xl (%08xn) &lt;-> %08xE-%08xL (%08xN) %c'<span class="token entity" title="\012">\012</span>'"</span> --unchanged-group-format<span class="token operator">=</span><span class="token string">""</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile.bin<span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span>xxd <span class="token parameter variable">-c</span> <span class="token number">1</span> <span class="token parameter variable">-ps</span> testfile_inserted-bytes.bin<span class="token punctuation">)</span></span></code></pre>
+<img src="/blog/2021-07-17-binary-diffs/colordiff-xxd-inserted-bytes-c1.png" width="1614" height="450" alt="undefined">
+<img src="/blog/2021-07-17-binary-diffs/meld-xxd-inserted-bytes-c1.png" width="1972" height="902" alt="undefined">
+<img src="/blog/2021-07-17-binary-diffs/diff-offsets-only.png" width="1120" height="112" alt="undefined">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
