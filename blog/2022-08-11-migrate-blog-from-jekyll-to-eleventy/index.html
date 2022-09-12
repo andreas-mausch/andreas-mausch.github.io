@@ -1,0 +1,157 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrate Blog from Jekyll to Eleventy</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Migrate Blog from Jekyll to Eleventy</h1>
+<div>
+  <time class="postlist-date" datetime="2022-08-11T19:00:00.000+00:00">Aug 11, 2022</time>
+</div>
+
+
+
+<h1 id="why-jekyll-in-first-place-(2015)" tabindex="-1">1. Why Jekyll in first place (2015) <a class="header-anchor" href="#why-jekyll-in-first-place-(2015)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The reason I've decided to use Jekyll was pretty straight-forward:
+Github Pages was released and they offered built-in Jekyll integration.</p>
+<p>Back then there was no Github Actions or any kind of built-in Github CI, and I wanted to have
+a way to publish blog posts with the lowest possible barrier.</p>
+<p>At that point in time I wasn't sure how frequently I would even use my own blog, and I thought
+it could be very closely to never.
+So my main goal was simplicity: A simple method to add blog posts, and almost zero maintenance.</p>
+<p>I didn't have an own domain back then, so all I had to do was enable Github Pages for the repo
+and use some simple Jekyll basic theme.</p>
+<h1 id="importing-tumblr-blog" tabindex="-1">2. Importing tumblr blog <a class="header-anchor" href="#importing-tumblr-blog" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I used to have a tumblr blog for my trip to Barbados (2013).
+I discovered Jekyll offers an import method, so I added all the blog posts from tumblr also to my personal blog.</p>
+<p>That felt great. All of the sudden, I had control over my older blog posts in such an easy way.</p>
+<h1 id="why-eleventy" tabindex="-1">3. Why Eleventy <a class="header-anchor" href="#why-eleventy" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>When I realized I use the blog from time to time, I also discovered some things I didn't like about the way
+Github Pages or Jekyll works:</p>
+<ul>
+<li>I couldn't choose freely from available Jekyll plugins for security reasons.
+GitHub provides a list of <a href="https://pages.github.com/versions/" class="external-link" target="_blank">supported plugins</a>.</li>
+<li>Integrate third-party dependencies (npm)
+I <strong>hate</strong> to have third-party code as part of my own repositiories.
+While it is ugly to maintain it also destroys full-text search over your repo.
+See also my rant post <a href="/blog/2020-02-12-element-ui/">here</a>.</li>
+<li>Limitation to JavaScript, no built-in TypeScript support
+I always loved statically typed languages for two reasons:
+Discover mistakes earlier and better IDE integration for auto-completion.</li>
+<li>No thumbnail support
+I'd like to only have the original image as part of the repo, and smaller versions of it could be generated.</li>
+<li>Images and blog posts are usually in different folders
+I'd rather have one blog post with all it's associated files in a single place</li>
+</ul>
+<p>So I searched the web for some alternative, and I tried Hugo and Hexo.
+I explicitly did not want to use any js framework like Nuxt or Gatsby to keep the site very simple and fast.</p>
+<p>For Hugo I disliked the third-party dependency integration.
+I would have liked to see a <em>npm-dependencies.txt</em> file or similar.
+However, you'd have to set up a npm repo and have hugo as a dependency, which is the wrong way round in my opinion.</p>
+<p>For eleventy it works the same, but in this case it makes sense since eleventy is a npm dependency itself and it's the common way to install it.
+I liked it a bit better, also because I won't mix technologies too much. It is just npm then.
+That's why I set up a <a href="https://github.com/andreas-mausch/eleventy-sample" class="external-link" target="_blank">sample repository</a> to check out if eleventy was good in my case.</p>
+<h1 id="experience-with-eleventy" tabindex="-1">4. Experience with Eleventy <a class="header-anchor" href="#experience-with-eleventy" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I like the speed and the hot-reload.
+I dislike no built-in TypeScript and SCSS support (how dare you?!).</p>
+<p>It can be added, but those are really parts I don't want to have as part of my blog repo.
+In best case it should only contain the real content and maybe the theming and no technical quirks like that.</p>
+<p>I added TypeScript support by manually hacking a &quot;plugin&quot; for it.
+I used @swc/core and I really like how easy it was to integrate it's <em>bundle</em> function, which
+automatically resolves all imported dependencies and does the babeling stuff.
+It doesn't check your TypeScript for valid types and linting, so you need to run these tasks separately.
+I later exchanged swc for esbuild.</p>
+<p>For SCSS I used a community plugin: eleventy-sass.
+I just had to add the <em>node_modules</em> folder to the <code class="language-plain">loadPaths</code> in order to resolve styles from packages.</p>
+<p>Thumbnail integration felt weird. There is an official <em>eleventy-img</em> plugin, however I didn't find an easy way
+to access a single thumbnail image directly. Instead, they offer a way to have an img HTML tag with the srcset and sizes.
+I wrote some liquid shortcodes myself to address that just for my personal needs.</p>
+<h1 id="summary" tabindex="-1">5. Summary <a class="header-anchor" href="#summary" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>It took some time to convert all blog posts and layouts to the new style.
+Despite having too much non-content and code in the repo, I think it is a very good base to continue with.
+My main goal is still to have a low barrier to write new posts. That even got easier, thanks to image shortcodes, carousel etc.
+The markdown files look a bit cleaner, which is great.</p>
+<p>I also used the occasion to update the mobile burger menu to look cleaner and have some css transitions.
+Some stuff is still missing (Resume, RSS feed and Barbados posts), but that can be easily added later.</p>
+<p>Overall, I am very happy with the result.</p>
+<img src="/blog/2022-08-11-migrate-blog-from-jekyll-to-eleventy/thumbnail.png" width="618" height="640" alt="undefined">
+<h1 id="pros-%2F-cons" tabindex="-1">6. Pros / Cons <a class="header-anchor" href="#pros-%2F-cons" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li>👍 I have a new flexible blogging system:
+<ul>
+<li>in modern style (TypeScript + SCSS)</li>
+<li>which can make use of npm dependencies</li>
+<li>with thumbnail support</li>
+<li>beautiful code blocks with line numbers and filenames</li>
+<li>numbered headings</li>
+<li>..and <a href="https://github.com/andreas-mausch/eleventy-sample" class="external-link" target="_blank">some more features</a></li>
+</ul>
+</li>
+<li>👍 markdown-it-prism is great and it even got support for inline code within days after I have
+<a href="https://github.com/jGleitz/markdown-it-prism/issues/599" class="external-link" target="_blank">requested it</a>. Thank you, jGleitz!</li>
+<li>❓ The only thing missing for me was <a href="https://github.com/jGleitz/markdown-it-prism/issues/1" class="external-link" target="_blank">line numbers</a>,
+but I could work around that with some js and css.</li>
+<li>❓ There is one huge <a href="https://github.com/11ty/eleventy/blob/e9ca971210fa06efd2af3a7931ef368dcb085a79/src/Template.js" class="external-link" target="_blank">Template.js</a>
+with lots of nesting. Puts a question mark on overall code quality.</li>
+<li>❓ Not much progress on older issues: <a href="https://github.com/11ty/eleventy/issues/822" class="external-link" target="_blank">822</a>,
+<a href="https://github.com/11ty/eleventy/issues/867" class="external-link" target="_blank">867</a></li>
+<li>👎 pathPrefix is ignored by the official plugin <a href="https://github.com/11ty/eleventy-img/issues/44" class="external-link" target="_blank">eleventy-img</a>
+and <a href="https://github.com/atomrc/eleventy-favicon/issues/8" class="external-link" target="_blank">eleventy-favicon</a>.
+pathPrefix is important when you want to deploy to a subdirectory of a domain.
+Edit: Seems to be addressed by a new <a href="https://www.11ty.dev/docs/plugins/html-base/" class="external-link" target="_blank">plugin</a>.</li>
+<li>👎 No build-in SASS/SCSS support. Luckily, somebody <a href="https://github.com/kentaroi/eleventy-sass" class="external-link" target="_blank">developed a plugin</a>.</li>
+<li>👎 No build-in TypeScript support. I have solved this for myself by first using swc, then esbuild.</li>
+<li>👎 <code class="language-plain">.eleventy.js</code> must be JavaScript, not TypeScript</li>
+<li>👎 <code class="language-plain">.eleventy.js</code> must use the old-style <code class="language-plain">require()</code> instead of <code class="language-plain">import</code>. type: &quot;module&quot; is not supported:
+<a href="https://github.com/11ty/eleventy/issues/836" class="external-link" target="_blank">link</a></li>
+<li>👎 No default human-readable date filter?!
+I don't like to write basic functionality myself.</li>
+<li>👎 I switched from <a href="https://www.11ty.dev/docs/plugins/syntaxhighlight/" class="external-link" target="_blank">eleventy-plugin-syntaxhighlight</a>
+to <a href="https://github.com/jGleitz/markdown-it-prism" class="external-link" target="_blank">markdown-it-prism</a> because of
+<a href="https://github.com/11ty/eleventy-plugin-syntaxhighlight/issues/66#issuecomment-1214289872" class="external-link" target="_blank">this issue</a>.</li>
+<li>👎 I had to copy and modify the <code class="language-plain">markdown-it-hierarchy.js</code> to the repo to
+<a href="https://github.com/andreas-mausch/eleventy-sample/commit/af9aee3a7b09aed12a66909b548e7b8cd21b5f5d" class="external-link" target="_blank">fix</a>
+a <a href="https://github.com/shytikov/markdown-it-hierarchy/issues/4" class="external-link" target="_blank">state issue</a>.</li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
