@@ -1,0 +1,76 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Please support deploying to a subdirectory</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Please support deploying to a subdirectory</h1>
+<div>
+  <time class="postlist-date" datetime="2022-01-26T14:00:00.000+00:00">Jan 26, 2022</time>
+</div>
+
+
+
+<p>Lately I worked with three web apps which refused to being deployed on a subdirectory of a domain,
+for example <code class="language-plain">https://my.domain/path</code>.
+They all expected to run at the root of the domain <code class="language-plain">https://my.domain</code>.
+Which makes it difficult to use multiple apps on the same domain.</p>
+<p>The only options are:</p>
+<ul>
+<li>Run them on a different port</li>
+<li>Run them on a subdomain</li>
+</ul>
+<p>The first one makes the URL ugly, and in some companies it requires some bureaucracy to get another
+port opened in the company-wide firewall.
+The second one requires some technical setup as well, and it's not always the solution you are looking for.</p>
+<p>I had the same problem with these apps:</p>
+<ul>
+<li><a href="https://github.com/magento/magento2" class="external-link" target="_blank">Magento</a></li>
+<li><a href="https://github.com/Soluto/oidc-server-mock" class="external-link" target="_blank">OpenId Connect Server Mock</a> (<a href="https://github.com/Soluto/oidc-server-mock/issues/81" class="external-link" target="_blank">#81</a>)</li>
+<li>A custom extension written by a third-party for Shopify (could be solved by calling <a href="https://laravel.com/api/5.8/Illuminate/Routing/UrlGenerator.html#method_forceRootUrl" class="external-link" target="_blank">forceRootUrl</a>)</li>
+</ul>
+<p>So here is my friendly request to every web app developer:
+Please support some option to deploy your app on another path than root.
+Thank you.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
