@@ -1,0 +1,169 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NitroKey, encryption, gpg</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: NitroKey, encryption, gpg</h1>
+<div>
+  <time class="postlist-date" datetime="2021-02-23T22:00:00.000+00:00">Feb 23, 2021</time>
+</div>
+
+
+
+<p>I've used the following commands to get my NitroKey Pro running on Manjaro Linux.</p>
+<p>NitroKey is an alternative for the YubiKey, which is better known, cheaper, has more functionality...<strong>BUT</strong>:<br>
+The NitroKey's <a href="https://github.com/Nitrokey/nitrokey-pro-hardware" class="external-link" target="_blank">hardware</a> and <a href="https://github.com/Nitrokey/nitrokey-pro-firmware" class="external-link" target="_blank">firmware</a> are open source!</p>
+<p>I use my NitroKey mainly for <a href="https://www.passwordstore.org/" class="external-link" target="_blank">pass</a>, the &quot;standard unix password manager&quot;,
+to keep my very important passwords top secret.</p>
+<p>So I don't really use FIDO2 or other features of a YubiKey.
+NitroKey provides a <a href="https://www.nitrokey.com/de#comparison" class="external-link" target="_blank">comparison sheet</a> for their different keys,
+and as you can see you have to decide between gpg or FIDO2. Too bad.</p>
+<h1 id="controversy-about-gpg" tabindex="-1">1. Controversy about gpg <a class="header-anchor" href="#controversy-about-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Last month there was <a href="https://lists.gnupg.org/pipermail/gnupg-announce/2021q1/000455.html" class="external-link" target="_blank">a bug</a> in libgcrypt,
+discovered by <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=2145" class="external-link" target="_blank">Project Zero</a>.</p>
+<p>It was published on January 28. A fixed libgcrypt version (1.9.1) was published the next day.</p>
+<p><a href="https://www.golem.de/news/verschluesselung-gpg-muss-endlich-weg-2102-153820.html" class="external-link" target="_blank">golem.de</a> said the main developer,
+Werner Koch, <a href="https://dev.gnupg.org/T5279#142667" class="external-link" target="_blank">reacted in an unprofessional way</a> to the suggestion to introduce a CI.<br>
+My opinion: They (the ticket author Hanno and Werner Koch) seem to know each other and I don't give too much about decency. Nobody was hurt.</p>
+<p>It's further about the <a href="https://twitter.com/tqbf/status/1355176541139972098" class="external-link" target="_blank">lacking code quality</a> of gpg.
+The only alternative mentioned is <a href="https://github.com/rnpgp/rnp" class="external-link" target="_blank">RNP</a>.</p>
+<p>However, gpg is the only OpenPGP implementation I know of which supports smartcards.
+It might be of poor code quality, it might be missing a CI.
+While I usually insist on good test coverage and everything automated, I don't really have a choice here.
+Beside, I can't really judge gpg about those things, because I haven't taken a closer look.<br>
+So for me, I will continue using it.</p>
+<p>If anybody knows any alternative which works with smartcards, please let me know.</p>
+<h1 id="pictures" tabindex="-1">2. Pictures <a class="header-anchor" href="#pictures" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've ordered my NitroKey bundled with a tiny USB-A to -C adapter.</p>
+<img src="/blog/2021-02-23-nitrokey/nitrokey-1.jpg" width="1280" height="851" alt="undefined">
+<img src="/blog/2021-02-23-nitrokey/nitrokey-2.jpg" width="1280" height="886" alt="undefined">
+<img src="/blog/2021-02-23-nitrokey/usb-a-to-c-adapter.jpg" width="1280" height="813" alt="undefined">
+<h1 id="nitrokey-setup" tabindex="-1">3. NitroKey setup <a class="header-anchor" href="#nitrokey-setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> ccid</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">wget</span> <span class="token parameter variable">-O</span> /etc/udev/rules.d/41-nitrokey.rules https://raw.githubusercontent.com/Nitrokey/libnitrokey/master/data/41-nitrokey.rules</span></code></pre>
+<p>..as described in the official <a href="https://www.nitrokey.com/documentation/frequently-asked-questions-faq#openpgp-card-not-available" class="external-link" target="_blank">documentation</a>.<br>
+<a href="/files/2021-02-23-nitrokey/41-nitrokey.rules">Here</a> is a mirror of that file.</p>
+<p>Restart, and <code class="language-plain">gpg --card-status</code> should return something similar to this:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ gpg --card-status</span>
+<span class="highlight-line">Reader <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.: 20A0:4108:00000000000000000000AAAA:0</span>
+<span class="highlight-line">Application ID <span class="token punctuation">..</span>.: D27600011111111100050000AAAA0000</span>
+<span class="highlight-line">Application <span class="token builtin class-name">type</span> .: OpenPGP</span>
+<span class="highlight-line">Version <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>: <span class="token number">3.3</span></span>
+<span class="highlight-line">Manufacturer <span class="token punctuation">..</span><span class="token punctuation">..</span>.: ZeitControl</span>
+<span class="highlight-line">Serial number <span class="token punctuation">..</span><span class="token punctuation">..</span>: 0000AAAA</span>
+<span class="highlight-line">Name of cardholder: <span class="token punctuation">[</span>nicht gesetzt<span class="token punctuation">]</span></span>
+<span class="highlight-line">Language prefs <span class="token punctuation">..</span>.: de</span>
+<span class="highlight-line">Salutation <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.: </span>
+<span class="highlight-line">URL of public key <span class="token builtin class-name">:</span> <span class="token punctuation">[</span>nicht gesetzt<span class="token punctuation">]</span></span>
+<span class="highlight-line">Login data <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.: <span class="token punctuation">[</span>nicht gesetzt<span class="token punctuation">]</span></span>
+<span class="highlight-line">Signature PIN <span class="token punctuation">..</span><span class="token punctuation">..</span>: zwingend</span>
+<span class="highlight-line">Key attributes <span class="token punctuation">..</span>.: rsa2048 rsa2048 rsa2048</span>
+<span class="highlight-line">Max. PIN lengths .: <span class="token number">64</span> <span class="token number">64</span> <span class="token number">64</span></span>
+<span class="highlight-line">PIN retry counter <span class="token builtin class-name">:</span> <span class="token number">3</span> <span class="token number">0</span> <span class="token number">3</span></span>
+<span class="highlight-line">Signature counter <span class="token builtin class-name">:</span> <span class="token number">0</span></span>
+<span class="highlight-line">KDF setting <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>: off</span>
+<span class="highlight-line">Signature key <span class="token punctuation">..</span><span class="token punctuation">..</span>: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span>
+<span class="highlight-line">Encryption key<span class="token punctuation">..</span><span class="token punctuation">..</span>: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span>
+<span class="highlight-line">Authentication key: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span>
+<span class="highlight-line">General key info<span class="token punctuation">..</span>: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span></code></pre>
+<h1 id="gpg-test-file" tabindex="-1">4. GPG test file <a class="header-anchor" href="#gpg-test-file" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Let's assume you have both, the public and secret key, in your local gpg ring.
+No NitroKey in play, yet.</p>
+<p>Here are some basic commands to encrypt and decrypt a file with your key.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --list-public-keys</span>
+<span class="highlight-line">gpg --list-secret-keys</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token builtin class-name">test</span> <span class="token operator">></span> test.txt</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Encryption</span></span>
+<span class="highlight-line">gpg <span class="token parameter variable">--output</span> test.txt.gpg <span class="token parameter variable">--encrypt</span> <span class="token parameter variable">--recipient</span> username@email test.txt</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Decryption</span></span>
+<span class="highlight-line">gpg <span class="token parameter variable">--output</span> test.decrypted.txt <span class="token parameter variable">--decrypt</span> test.txt.gpg</span></code></pre>
+<h1 id="move-the-secret-key-to-the-nitrokey" tabindex="-1">5. Move the secret key to the NitroKey <a class="header-anchor" href="#move-the-secret-key-to-the-nitrokey" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --edit-key <span class="token parameter variable">--expert</span> username@email</span></code></pre>
+<p>It will show you some info, then type the <code class="language-plain">keytocard</code> command to transfer the key to the NitroKey.
+I had to enter the admin PIN twice (default: 12345678).
+After this, type <code class="language-plain">quit</code> and confirm.</p>
+<p>After this, the <code class="language-plain">gpg --list-secret-keys</code> command should show some output like this:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ gpg --list-secret-keys</span>
+<span class="highlight-line">/home/user/.gnupg/pubring.kbx</span>
+<span class="highlight-line">-------------------------------</span>
+<span class="highlight-line">sec<span class="token operator">></span>  rsa4096 <span class="token number">1999</span>-01-01 <span class="token punctuation">[</span>SC<span class="token punctuation">]</span></span>
+<span class="highlight-line">      BE6B9238A3F73D41599A474AE430E46A820299F6</span>
+<span class="highlight-line">      Kartenseriennr. <span class="token operator">=</span> 0005 0000AAAA</span>
+<span class="highlight-line">uid        <span class="token punctuation">[</span> unbekannt <span class="token punctuation">]</span> username@email</span>
+<span class="highlight-line">ssb<span class="token operator">></span>  rsa4096 <span class="token number">1999</span>-01-01 <span class="token punctuation">[</span>E<span class="token punctuation">]</span></span></code></pre>
+<p>As you can see, the <em>Kartenseriennr</em> (english: card serial number) is shown.
+That means the reference to the NitroKey was successfully installed. Good work.</p>
+<p>Try to run the decryption command from above again.
+It should now ask you for your PIN (default: 123456), and the NitroKey is queried by gpg.</p>
+<h1 id="on-a-different-computer" tabindex="-1">6. On a different computer <a class="header-anchor" href="#on-a-different-computer" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>On a new computer, run <code class="language-plain">gpg --card-edit</code>, then enter <code class="language-plain">fetch</code> and <code class="language-plain">quit</code> to import
+the reference to the secret key on the NitroKey.</p>
+<p>Note: The public key must be known to gpg at this point. It is <a href="https://stackoverflow.com/a/46735922" class="external-link" target="_blank">not possible</a>
+to just import the public key from the NitroKey itself, because some information is missing.</p>
+<p>If your public key is not on some server, please see the steps below how to export your key.
+Afterwards, you can run <code class="language-plain">gpg --import file</code>.</p>
+<h1 id="exporting-keys-with-gpg" tabindex="-1">7. Exporting keys with gpg <a class="header-anchor" href="#exporting-keys-with-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="public-key" tabindex="-1">7.1. Public key <a class="header-anchor" href="#public-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--output</span> public.asc <span class="token parameter variable">--armor</span> <span class="token parameter variable">--export</span> username@email</span></code></pre>
+<p><code class="language-plain">armor</code> makes the output file a <em>ASCII-Armor-Format</em>, a 7-bit copy-pastable file.</p>
+<h2 id="secret-key" tabindex="-1">7.2. Secret key <a class="header-anchor" href="#secret-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--output</span> private.asc <span class="token parameter variable">--armor</span> --export-secret-key username@email</span></code></pre>
+<p>If you run this on a key which was already moved to the NitroKey, this command will not fail,
+but only copies the <em>reference</em> to the private key.
+There is no (gpg) way to get access to the private key anymore. That's why you own a NitroKey, right?</p>
+<h1 id="links" tabindex="-1">8. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've scraped these sites during my setup:</p>
+<ul>
+<li><a href="https://www.kuketz-blog.de/gnupg-schluesselerstellung-und-smartcard-transfer-nitrokey-teil2/" class="external-link" target="_blank">https://www.kuketz-blog.de/gnupg-schluesselerstellung-und-smartcard-transfer-nitrokey-teil2/</a></li>
+<li><a href="https://dokuwiki.nausch.org/doku.php/centos:nitrokey:pro" class="external-link" target="_blank">https://dokuwiki.nausch.org/doku.php/centos:nitrokey:pro</a></li>
+<li><a href="https://www.nitrokey.com/documentation/frequently-asked-questions-faq#openpgp-card-not-available" class="external-link" target="_blank">https://www.nitrokey.com/documentation/frequently-asked-questions-faq#openpgp-card-not-available</a></li>
+<li><a href="https://freundederlust.de/doku.php?id=lenovo_thinkpad_t460s#nitrokey" class="external-link" target="_blank">https://freundederlust.de/doku.php?id=lenovo_thinkpad_t460s#nitrokey</a></li>
+<li><a href="https://raymii.org/s/articles/Get_Started_With_The_Nitrokey_HSM.html" class="external-link" target="_blank">https://raymii.org/s/articles/Get_Started_With_The_Nitrokey_HSM.html</a></li>
+<li><a href="https://www.privacy-handbuch.de/handbuch_32r.htm" class="external-link" target="_blank">https://www.privacy-handbuch.de/handbuch_32r.htm</a></li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
