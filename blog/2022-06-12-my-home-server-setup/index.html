@@ -1,0 +1,228 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My home server setup (Intel NUC)</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: My home server setup (Intel NUC)</h1>
+<div>
+  <time class="postlist-date" datetime="2022-06-12T16:00:00.000+00:00">Jun 12, 2022</time>
+</div>
+
+
+
+<p>I have my setup for quite a while now, but since I need to make some changes to it, I thought it is a good time to share the process.</p>
+<h1 id="hardware" tabindex="-1">1. Hardware <a class="header-anchor" href="#hardware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I use a Intel NUC for being my 24/7 server.</p>
+<p>Previously I have used a DC53427HYE (8 GB RAM, 120 GB SSD), and I now upgrade it to an D54250WYK (still old), but with 16 GB RAM and 500 GB SSD.
+I found two old cores are more than enough for my needs.</p>
+<p>I've bought it on eBay for 127 EUR.</p>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2022-06-12-my-home-server-setup/nuc-front.jpg" target="_blank"><img src="/images/nuc-front-soQi6vJFzs-300.jpeg" alt="Slider image" width="300" height="227"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/nuc-back.jpg" target="_blank"><img src="/images/nuc-back-W9whU1tZ9p-300.jpeg" alt="Slider image" width="300" height="210"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/nuc-bottom.jpg" target="_blank"><img src="/images/nuc-bottom-t2QeRZF5yd-300.jpeg" alt="Slider image" width="300" height="259"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button></div></div>
+<h1 id="reset-the-bios-password" tabindex="-1">2. Reset the BIOS password <a class="header-anchor" href="#reset-the-bios-password" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Unfortunately, it still had an BIOS password set, and the previous owner forgot it.</p>
+<p>The official support <a href="https://www.intel.com/content/www/us/en/support/articles/000007242/intel-nuc.html" class="external-link" target="_blank">provides instructions</a>
+how to clear it.
+It has to be done via hardware jumpers, something I haven't touched like 20 years ago to set the master/slave hard-drive.</p>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2022-06-12-my-home-server-setup/jumper.jpg" target="_blank"><img src="/images/jumper-BmeuWu1TAz-300.jpeg" alt="Slider image" width="300" height="313"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/config-menu.jpg" target="_blank"><img src="/images/config-menu-kbOXpVrz3x-300.jpeg" alt="Slider image" width="300" height="168"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/nuc-bios.jpg" target="_blank"><img src="/images/nuc-bios-ePgbARdzQu-300.jpeg" alt="Slider image" width="300" height="217"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button></div></div>
+<h1 id="services" tabindex="-1">3. Services <a class="header-anchor" href="#services" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I run <a href="https://about.gitlab.com/" class="external-link" target="_blank">GitLab</a> and <a href="https://nextcloud.com/" class="external-link" target="_blank">Nextcloud</a> on the server.
+I use them to host private Git repos, sync my contacts and notes and store files on my private cloud drive.</p>
+<p>I think privacy is important and I also think too many people share private data with too many companies.</p>
+<h1 id="router-and-dns-settings" tabindex="-1">4. Router and DNS settings <a class="header-anchor" href="#router-and-dns-settings" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I have requested an IPv4 address at my ISP, I have set up a <a href="https://www.myfritz.net" class="external-link" target="_blank">MyFritz! account</a> to get a dynamic DNS name,
+and I further have configured a CNAME DNS entry for my own personal domain.</p>
+<p>Whenever I try to access my domain, I will be forwarded to my FritzBox router.</p>
+<p>On the FritzBox, I have set up port forwardings for Port 22 (SSH) 80 (HTTP) and 443 (HTTPS), both for IPv4 and IPv6.</p>
+<h1 id="server-os" tabindex="-1">5. Server OS <a class="header-anchor" href="#server-os" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The Intel NUC runs a recent Debian (I've used <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso" class="external-link" target="_blank">this image</a>)
+with basically just Docker installed.</p>
+<p>I copied the .iso to an USB stick <a href="https://linuxize.com/post/create-bootable-debian-10-usb-stick-on-linux/" class="external-link" target="_blank">via</a>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">lsblk <span class="token parameter variable">-f</span></span>
+<span class="highlight-line"><span class="token comment"># Make sure the drive is not mounted</span></span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">dd</span> <span class="token assign-left variable">bs</span><span class="token operator">=</span>4M <span class="token assign-left variable">if</span><span class="token operator">=</span>/home/neonew/Downloads/debian-11.3.0-amd64-netinst.iso <span class="token assign-left variable">of</span><span class="token operator">=</span>/dev/sdX <span class="token assign-left variable">status</span><span class="token operator">=</span>progress <span class="token assign-left variable">oflag</span><span class="token operator">=</span>sync</span></code></pre>
+<p>Alternatively, you can use <a href="https://www.balena.io/etcher/" class="external-link" target="_blank">balenaEtcher</a>.</p>
+<p>After the installation, I've:</p>
+<ul>
+<li>Decrease Grub Timeout for faster startup time</li>
+<li>Enable ssh</li>
+<li>Install sudo</li>
+<li>Add my user to sudoers</li>
+<li>Enable sudo without password</li>
+<li>Install docker</li>
+<li>Setup docker for non-root access</li>
+</ul>
+<p>I run a nginx server to forward incoming connections to the right service,
+and I have one Docker container for each GitLab and Nextcloud.</p>
+<h1 id="backup" tabindex="-1">6. Backup <a class="header-anchor" href="#backup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>First, I had to make a backup of the existing server.</p>
+<p>Since some docker containers created files with a different user, I had to make the backup via sudo.</p>
+<p><a href="https://askubuntu.com/questions/719439/using-rsync-with-sudo-on-the-destination-machine" class="external-link" target="_blank">This post</a>
+helped to do it.</p>
+<p>I ended up with these commands:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">rsync</span> <span class="token parameter variable">-avh0</span> <span class="token parameter variable">--stats</span> --numeric-ids --rsync-path<span class="token operator">=</span><span class="token string">"sudo rsync"</span> nuc@nuc:/home/nuc home</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">rsync</span> <span class="token parameter variable">-avh0</span> <span class="token parameter variable">--stats</span> --numeric-ids --rsync-path<span class="token operator">=</span><span class="token string">"sudo rsync"</span> nuc@nuc:/etc/letsencrypt letsencrypt</span></code></pre>
+<h1 id="tls-(nginx-settings-and-let's-encrypt)" tabindex="-1">7. TLS (nginx settings and Let's encrypt) <a class="header-anchor" href="#tls-(nginx-settings-and-let's-encrypt)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I use certbot (run via docker) to update my Let's encrypt TLS certificates. I just need to stop nginx before and then run this command:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">--name</span> certbot <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 <span class="token parameter variable">-p</span> <span class="token number">443</span>:443 <span class="token parameter variable">-v</span> <span class="token string">"/etc/letsencrypt:/etc/letsencrypt"</span> <span class="token parameter variable">-v</span> <span class="token string">"/var/lib/letsencrypt:/var/lib/letsencrypt"</span> certbot/certbot renew</span></code></pre>
+<p>(Use <code class="language-plain">certificates</code> instead of <code class="language-plain">renew</code> to just print your current certificates)</p>
+<p>In the nginx config, I refer to that certificate.
+Also, I explicitly only allow a single (strong) SSL Cipher via TLS 1.2.</p>
+<details markdown="1">
+<summary>nginx.conf</summary>
+<pre class="language-plain"><code class="language-plain"><span class="highlight-line">events {</span>
+<span class="highlight-line">}</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">http {</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">  ssl_session_cache shared:SSL:10m;</span>
+<span class="highlight-line">  ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384;</span>
+<span class="highlight-line">  ssl_protocols TLSv1.2;</span>
+<span class="highlight-line">  proxy_buffering off;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">  gzip on;</span>
+<span class="highlight-line">  gzip_vary on;</span>
+<span class="highlight-line">  gzip_proxied any;</span>
+<span class="highlight-line">  gzip_comp_level 6;</span>
+<span class="highlight-line">  gzip_types text/plain text/css text/xml application/json application/javascript application/xml application/xml+rss image/svg+xml;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">  server {</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    listen 443 http2 ssl;</span>
+<span class="highlight-line">    listen [::]:443 http2 ssl;</span>
+<span class="highlight-line">    server_name git.neonew.de;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    ssl_certificate /opt/git.neonew.de/fullchain.pem;</span>
+<span class="highlight-line">    ssl_certificate_key /opt/git.neonew.de/privkey.pem;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    location / {</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">      proxy_pass http://192.168.1.2:8080;</span>
+<span class="highlight-line">      proxy_set_header Host $host;</span>
+<span class="highlight-line">      proxy_set_header X-Real-IP $remote_addr;</span>
+<span class="highlight-line">      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+<span class="highlight-line">      proxy_set_header X-Forwarded-Proto $scheme;</span>
+<span class="highlight-line">      proxy_set_header X-Forwarded-Ssl on;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">      proxy_redirect http:// https://;</span>
+<span class="highlight-line">    }</span>
+<span class="highlight-line">  }</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">  server {</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    listen 443 http2 ssl;</span>
+<span class="highlight-line">    listen [::]:443 http2 ssl;</span>
+<span class="highlight-line">    server_name cloud.neonew.de;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    ssl_certificate /opt/cloud.neonew.de/fullchain.pem;</span>
+<span class="highlight-line">    ssl_certificate_key /opt/cloud.neonew.de/privkey.pem;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    location / {</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">      proxy_pass http://192.168.1.3:5555;</span>
+<span class="highlight-line">      proxy_set_header Host $host;</span>
+<span class="highlight-line">      proxy_set_header X-Real-IP $remote_addr;</span>
+<span class="highlight-line">      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+<span class="highlight-line">      proxy_set_header X-Forwarded-Proto $scheme;</span>
+<span class="highlight-line">      proxy_set_header X-Forwarded-Ssl on;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">      proxy_redirect http:// https://;</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">      client_max_body_size 16400M;</span>
+<span class="highlight-line">    }</span>
+<span class="highlight-line">  }</span>
+<span class="highlight-line">}</span></code></pre>
+</details>
+<h1 id="portainer" tabindex="-1">8. Portainer <a class="header-anchor" href="#portainer" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Usually I manage the containers via ssh and the Docker CLI.
+I thought about having Portainer running to manage the containers via a web view, but this is not done yet.</p>
+<p>Might be updated in future.</p>
+<h1 id="performance%2C-noise-and-power-consumption" tabindex="-1">9. Performance, noise and power consumption <a class="header-anchor" href="#performance%2C-noise-and-power-consumption" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>It is important to me the server is quiet and doesn't consume too much power.
+Performance on the other side shouldn't be too poor, but is not that important to me.</p>
+<p>For the noise: I can hear the server's fan in idle mode when I get close to it. As soon as I move away 2 meters I can barely hear anything.
+This is ok for me.</p>
+<p>The power consumption is really good for the Intel NUCs. I haven't tested it myself, but
+<a href="https://www.legitreviews.com/intel-nuc-kit-d54250wyk-review-the-nuc-gets-haswell-power_124251/6" class="external-link" target="_blank">someone</a>
+measured around 5W in idle mode, which is 3.7 kWh per month or 44 kWh per year.</p>
+<h1 id="screenshots" tabindex="-1">10. Screenshots <a class="header-anchor" href="#screenshots" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Nextcloud app (files), Contact sync (<a href="https://www.davx5.com/" class="external-link" target="_blank">DAVx</a>), Tasks sync (OpenTasks), Notes app</p>
+<div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2022-06-12-my-home-server-setup/nextcloud.jpg" target="_blank"><img src="/images/nextcloud-YorxUnMPXO-270.jpeg" alt="Slider image" width="270" height="570"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/davx.jpg" target="_blank"><img src="/images/davx-Q7GvQDaqCv-270.jpeg" alt="Slider image" width="270" height="570"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/opentasks.jpg" target="_blank"><img src="/images/opentasks-4bxl7XyXRL-270.jpeg" alt="Slider image" width="270" height="570"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/notes.jpg" target="_blank"><img src="/images/notes-O5mymmpqp4-270.jpeg" alt="Slider image" width="270" height="570"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button><button></button></div></div>
+<h1 id="comparision-vs.-cloud-providers" tabindex="-1">11. Comparision vs. Cloud providers <a class="header-anchor" href="#comparision-vs.-cloud-providers" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The main reason I still suggest cloud providers to most people is either</p>
+<ol>
+<li>missing skills</li>
+<li>convenience<br>
+Everybody can use Google Drive or similar services. You just create an account and have access.
+Most people won't be willing to spend several hours a month just to keep their services running or do administration work.
+Even projects like the <a href="https://shop.nitrokey.com/de_DE/shop/product/nextbox-116" class="external-link" target="_blank">NextBox</a>, who claim <em>Unattended, long-term updates and no monthly costs</em> are gonna experience a problem/downtime at some point and then you are in charge to fix the problem.</li>
+<li>costs<br>
+Running your own service costs money, at least for hardware and power. Most cloud services are free for basic usage.</li>
+</ol>
+<p>Let's look at some more points closely:</p>
+<h2 id="%F0%9F%91%8E-availability" tabindex="-1">11.1. 👎 Availability <a class="header-anchor" href="#%F0%9F%91%8E-availability" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I only run a single server, which of course can have hardware failures.
+So in the (at least unlikely) event the server dies, my services won't be available.
+If this happens when I'm not at home (like a vacation), nobody will try to solve the issue for me.</p>
+<p>Cloud providers have redundancy, multiple nodes, etc. so they are much more likely to be available.
+If there still is a problem somewhere, a lot of people will try to fix it immediately without your assistence.</p>
+<h2 id="%F0%9F%91%8E-maintenance" tabindex="-1">11.2. 👎 Maintenance <a class="header-anchor" href="#%F0%9F%91%8E-maintenance" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Having an self-hosted server also means you have to maintain it yourself, and this can be quite some extra regular work.</p>
+<p>I usually update the services and OS every few months, or on a major release for one of the services.
+I also update the certificates manually.</p>
+<p>For backups: I don't really care too much for this server, because most of the data is just needed for a few hours/days (like my notes) or is stored elsewhere (like contacts).
+The configuration for nginx is stored in a Git repo, which I also have on my laptop.
+So in the unlikely event the server dies, I will just replace it and configure it from scratch again.</p>
+<p>If you keep important data on your server, you are of course also responsible to properly backup it.</p>
+<h2 id="%F0%9F%91%8E-security" tabindex="-1">11.3. 👎 Security <a class="header-anchor" href="#%F0%9F%91%8E-security" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Of course, updates are very important for the server's security.
+Since I only do updates every few months I might be a target to software vulnerabilities for a small period of time, but that's a risk I take.
+If I randomly stumble across an exploit in the news, I will do an update asap.</p>
+<p>A cloud provider will update more frequently and much faster than I can.</p>
+<p>Also, I don't really check the logs. If there is anything suspicious in there, I probably won't notice it.
+Cloud providers will detect suspicious behavior most certainly.</p>
+<h2 id="%F0%9F%91%8D-storage" tabindex="-1">11.4. 👍 Storage <a class="header-anchor" href="#%F0%9F%91%8D-storage" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Having your own server let's you usually have a lot more disk space for a lot less money.</p>
+<h2 id="%F0%9F%91%8D-privacy" tabindex="-1">11.5. 👍 Privacy <a class="header-anchor" href="#%F0%9F%91%8D-privacy" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>That's my main reason I want to host a private server and this outweights all drawbacks, at least for me.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
