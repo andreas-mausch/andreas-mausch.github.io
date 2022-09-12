@@ -1,0 +1,120 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android: LineageOS, Root and TWRP Recovery on Samung Galaxy S7</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Android: LineageOS, Root and TWRP Recovery on Samung Galaxy S7</h1>
+<div>
+  <time class="postlist-date" datetime="2020-10-19T21:00:00.000+00:00">Oct 19, 2020</time>
+</div>
+
+
+
+<p>To get full control of the phone, I've installed LineageOS with root access.</p>
+<p>The following instructions might result in data loss, so make sure you have a backup of all data on the phone!</p>
+<h1 id="install-twrp-recovery" tabindex="-1">1. Install TWRP recovery <a class="header-anchor" href="#install-twrp-recovery" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><a href="https://twrp.me/samsung/samsunggalaxys7.html" class="external-link" target="_blank">Download</a></p>
+<p>First, you need to boot into <em>Odin Mode</em>.
+Press and hold <em>Power</em>+<em>Home</em>+<em>Volume Down</em>.</p>
+<img src="/blog/2020-10-19-s7-lineageos/01-warrenty-warning.jpg" width="720" height="1280" alt="undefined">
+<p>Confirm you are about to lose warrenty by pressing <em>Volume Up</em>.</p>
+<img src="/blog/2020-10-19-s7-lineageos/02-odin-mode.jpg" width="720" height="1280" alt="undefined">
+<p>On Manjaro, I've used <a href="https://www.archlinux.org/packages/community/x86_64/heimdall/" class="external-link" target="_blank">heimdall</a>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">heimdall detect <span class="token parameter variable">--verbose</span></span>
+<span class="highlight-line">heimdall flash <span class="token parameter variable">--RECOVERY</span> twrp-3.4.0-0-herolte.img --no-reboot</span></code></pre>
+<p>Important: <strong>Immediately</strong> after the screen turns black, press and hold <em>Power</em>+<em>Home</em>+<em>Volume Up</em>
+to boot into the recovery. If the original ROM is loaded, it will restore the recovery
+and you need to start over again.</p>
+<h1 id="in-twrp" tabindex="-1">2. In TWRP <a class="header-anchor" href="#in-twrp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<img src="/blog/2020-10-19-s7-lineageos/03-twrp-boot.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/04-twrp-readonly-warning.jpg" width="720" height="1280" alt="undefined">
+<h2 id="wipe" tabindex="-1">2.1. Wipe <a class="header-anchor" href="#wipe" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Swipe to confirm you want to make changes to the system.</p>
+<img src="/blog/2020-10-19-s7-lineageos/05-twrp-menu.jpg" width="720" height="1280" alt="undefined">
+<p>First, format the <em>/data</em> partition. Click on <em>Wipe</em> in the menu:</p>
+<img src="/blog/2020-10-19-s7-lineageos/06-twrp-wipe.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/07-twrp-format-data-confirmation.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/08-twrp-format-data.jpg" width="720" height="1280" alt="undefined">
+<h2 id="install-lineageos" tabindex="-1">2.2. Install LineageOS <a class="header-anchor" href="#install-lineageos" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>In recovery, you can already connect via adb.</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">adb push <span class="token parameter variable">-a</span> lineage-17.1-20201008-UNOFFICIAL-herolte.zip /sdcard/</span></code></pre>
+<p>(I've used an image file from <a href="https://forum.xda-developers.com/galaxy-s7/development/beta-lineageos-17-0-galaxy-s7-build-1-t3980101" class="external-link" target="_blank">xda</a>.)</p>
+<img src="/blog/2020-10-19-s7-lineageos/09-twrp-install.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/10-twrp-install-lineageos-confirmation.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/11-twrp-install-lineageos.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/12-twrp-install-lineageos-done.jpg" width="720" height="1280" alt="undefined">
+<h2 id="reboot" tabindex="-1">2.3. Reboot <a class="header-anchor" href="#reboot" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<img src="/blog/2020-10-19-s7-lineageos/13-twrp-reboot.jpg" width="720" height="1280" alt="undefined">
+<p>Make sure to uncheck all boxes and click <em>Do Not Install</em>.</p>
+<h1 id="lineageos" tabindex="-1">3. LineageOS <a class="header-anchor" href="#lineageos" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<img src="/blog/2020-10-19-s7-lineageos/14-lineageos-boot.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/15-lineageos-menu.jpg" width="720" height="1280" alt="undefined">
+<img src="/blog/2020-10-19-s7-lineageos/16-lineageos-android-version.jpg" width="720" height="1280" alt="undefined">
+<h1 id="magisk" tabindex="-1">4. Magisk <a class="header-anchor" href="#magisk" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now you've successfully installed LineageOS, but you don't have root access (via su) yet.
+To get it, go <a href="https://github.com/topjohnwu/Magisk/releases/" class="external-link" target="_blank">here</a>.
+I've used <em>Magisk v21.0</em> and <em>Magisk Manager v8.0.2</em>.</p>
+<p>Install both, reboot, and you should have full control now.</p>
+<img src="/blog/2020-10-19-s7-lineageos/17-magisk-manager.jpg" width="720" height="1280" alt="undefined">
+<h1 id="update%3A-samsung-galaxy-s4-mini-(i9195)" tabindex="-1">5. Update: Samsung Galaxy S4 mini (I9195) <a class="header-anchor" href="#update%3A-samsung-galaxy-s4-mini-(i9195)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Today I've flashed <a href="https://forum.xda-developers.com/t/rom-i9190-i9192-i9195-unofficial-11-0-0-lineageos-18-1-for-s4-mini.4189967/" class="external-link" target="_blank">LineageOS 18.1</a>
+on a Samsung Galaxy S4 mini (I9195).
+Thanks to arco68, it even runs a recent Android version. :*</p>
+<p>It's still a great phone, has a great size, it even supports LTE.
+If Samsung would update it with a modern SoC, an improved camera and maybe a fingerprint sensor in the same form factor (124mm height, 107g) I would pay shitloads of money for it.</p>
+<p>The process was similar as described above:</p>
+<ul>
+<li>Boot into <em>Odin Mode</em></li>
+<li>Flash <a href="https://dl.twrp.me/serranoltexx/" class="external-link" target="_blank">TWRP recovery</a> (I've used version 3.6.1_9-0)</li>
+<li>Flash LineageOS (18.1)</li>
+<li>Optional: Flash <a href="https://opengapps.org/" class="external-link" target="_blank">Open GApps</a> (I've used ARM, 11.0, pico)</li>
+<li>Flash <em>Magisk-v24.0.zip</em> for root access (Note: rename .apk to .zip and flash via TWRP)</li>
+<li>After a reboot, the Magisk app wasn't installed automatically, so I had to install <em>Magisk-v24.0.apk</em> manually</li>
+</ul>
+<p>Important note: I've first tried to use Magisk 24.2 and it failed due to <em>cannot mount /system</em>.
+See <a href="https://forum.xda-developers.com/t/rom-i9190-i9192-i9195-unofficial-11-0-0-lineageos-18-1-for-s4-mini.4189967/page-27#post-86526393" class="external-link" target="_blank">this post</a>.
+Version 24.0 works though and is fine for me, so I just took that version to get root access.</p>
+<p>Also, please note that <em>Magisk</em> and <em>Magisk Manager</em> is now bundled in a single .apk file, which is different to the older version described above.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
