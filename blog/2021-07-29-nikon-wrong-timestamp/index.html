@@ -1,0 +1,162 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikon stores wrong timestamp</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Nikon stores wrong timestamp</h1>
+<div>
+  <time class="postlist-date" datetime="2021-07-29T15:00:00.000+00:00">Jul 29, 2021</time>
+</div>
+
+
+
+<p>I noticed the <em>File Modification Date/Time</em> timestamp is saved incorrectly
+on my Nikon D5600.</p>
+<p>This is annoying, because when I copy my files to my phone, some tools order the
+photos by their mtime, and if it is set incorrectly, pictures won't be in order.</p>
+<p>I shot a photo at 16:40:30 CEST (UTC+2).
+Note: My camera settings are set to Berlin time (UTC+1) with summer time enabled.
+Sync time via bluetooth is enabled.</p>
+<h1 id="the-problem" tabindex="-1">1. The problem <a class="header-anchor" href="#the-problem" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Note: The commands below were executed after the file has been moved from the SD card to my ext4 file system.
+I've moved them with Thunar, which usually keeps the timestamps as they are.
+I'm on the <code class="language-plain">5.10.49-1-MANJARO</code> kernel and Thunar <code class="language-plain">4.16.8</code>.</p>
+<p>This is what exiftool's output looks like:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ exiftool DSC_8783-shot-at-16-40-cest.JPG <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token function">time</span></span>
+<span class="highlight-line">File Modification Date/Time     <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">18</span>:40:30+02:00</span>
+<span class="highlight-line">File Access Date/Time           <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:41:09+02:00</span>
+<span class="highlight-line">File Inode Change Date/Time     <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:41:38+02:00</span>
+<span class="highlight-line">Exposure Time                   <span class="token builtin class-name">:</span> <span class="token number">1</span>/60</span>
+<span class="highlight-line">Date/Time Original              <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:40:29</span>
+<span class="highlight-line">Time Zone                       <span class="token builtin class-name">:</span> +01:00</span>
+<span class="highlight-line">Power Up Time                   <span class="token builtin class-name">:</span> 0000:00:00 00:00:00</span>
+<span class="highlight-line">Sub Sec Time                    <span class="token builtin class-name">:</span> <span class="token number">87</span></span>
+<span class="highlight-line">Sub Sec Time Original           <span class="token builtin class-name">:</span> <span class="token number">87</span></span>
+<span class="highlight-line">Sub Sec Time Digitized          <span class="token builtin class-name">:</span> <span class="token number">87</span></span>
+<span class="highlight-line">GPS Time Stamp                  <span class="token builtin class-name">:</span> <span class="token number">14</span>:40:28.31</span>
+<span class="highlight-line">Date/Time Original              <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:40:29.87</span>
+<span class="highlight-line">GPS Date/Time                   <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">14</span>:40:28.31Z</span></code></pre>
+<p>So the <em>File Modification Date/Time</em> is just wrong.
+It should be either <em>2021:07:29 16:40:30+02:00</em> or
+<em>2021:07:29 18:40:30Z</em>.</p>
+<p>See the mtime from stat:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">stat</span> DSC_8783-shot-at-16-40-cest.JPG </span>
+<span class="highlight-line"> Datei: DSC_8783-shot-at-16-40-cest.JPG</span>
+<span class="highlight-line"> Größe: <span class="token number">7027908</span>   	Blöcke: <span class="token number">13728</span>      EA Block: <span class="token number">4096</span>   reguläre Datei</span>
+<span class="highlight-line"> Gerät: 10302h/66306d	Inode: <span class="token number">2887230</span>     Verknüpfungen: <span class="token number">1</span></span>
+<span class="highlight-line">Zugriff: <span class="token punctuation">(</span>0644/-rw-r--r--<span class="token punctuation">)</span>  Uid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span>   Gid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span></span>
+<span class="highlight-line">Zugriff: <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:09.435963000 +0200</span>
+<span class="highlight-line">Modifiziert: <span class="token number">2021</span>-07-29 <span class="token number">18</span>:40:30.000000000 +0200</span>
+<span class="highlight-line">Geändert: <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:38.542630557 +0200</span>
+<span class="highlight-line">Geburt: <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:09.435963322 +0200</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ <span class="token function">stat</span> <span class="token parameter variable">-c</span> <span class="token string">"Filename : %n</span>
+<span class="highlight-line">atime    : %x</span>
+<span class="highlight-line">mtime    : %y</span>
+<span class="highlight-line">ctime    : %z</span>
+<span class="highlight-line">"</span> DSC_8783-shot-at-16-40-cest.JPG </span>
+<span class="highlight-line">Filename <span class="token builtin class-name">:</span> DSC_8783-shot-at-16-40-cest.JPG</span>
+<span class="highlight-line">atime    <span class="token builtin class-name">:</span> <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:09.435963000 +0200</span>
+<span class="highlight-line">mtime    <span class="token builtin class-name">:</span> <span class="token number">2021</span>-07-29 <span class="token number">18</span>:40:30.000000000 +0200</span>
+<span class="highlight-line">ctime    <span class="token builtin class-name">:</span> <span class="token number">2021</span>-07-29 <span class="token number">16</span>:51:29.019308742 +0200</span></code></pre>
+<p>On the SD card with a FAT32 file system the output looks like this:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">stat</span> DSC_8783.JPG </span>
+<span class="highlight-line"> Datei: DSC_8783.JPG</span>
+<span class="highlight-line"> Größe: <span class="token number">7027908</span>   	Blöcke: <span class="token number">13728</span>      EA Block: <span class="token number">32768</span>  reguläre Datei</span>
+<span class="highlight-line"> Gerät: b301h/45825d	Inode: <span class="token number">345</span>         Verknüpfungen: <span class="token number">1</span></span>
+<span class="highlight-line">Zugriff: <span class="token punctuation">(</span>0644/-rw-r--r--<span class="token punctuation">)</span>  Uid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span>   Gid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span></span>
+<span class="highlight-line">Zugriff: <span class="token number">2021</span>-07-29 02:00:00.000000000 +0200</span>
+<span class="highlight-line">Modifiziert: <span class="token number">2021</span>-07-29 <span class="token number">18</span>:46:10.000000000 +0200</span>
+<span class="highlight-line">Geändert: <span class="token number">2021</span>-07-29 <span class="token number">18</span>:46:10.000000000 +0200</span>
+<span class="highlight-line">Geburt: -</span></code></pre>
+<h1 id="the-fix%3A-set-mtime-to-exif-timestamp" tabindex="-1">2. The fix: Set mtime to exif timestamp <a class="header-anchor" href="#the-fix%3A-set-mtime-to-exif-timestamp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I don't really know how to fix the timestamp on the file system,
+e.g. by changing a setting in the camera or copying the file in a
+different way.</p>
+<p>That's why I use this command to set the ctime of the file to the
+DateTimeOriginal from the exif data.
+I do it right after I move the files from the SD card, so I know I have
+not changed them before.</p>
+<p>Note: This might lose information, so be careful applying this command.</p>
+<h2 id="first-attempt" tabindex="-1">2.1. First attempt <a class="header-anchor" href="#first-attempt" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Second note: Your file must have exif information and a DateTimeOriginal field set.
+If your file does not have the field, exiftool will output <em>No writable tags set</em>
+and won't change the timestamp (which is great).</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">exiftool <span class="token string">"-FileModifyDate&lt;DateTimeOriginal"</span> DSC_8783-shot-at-16-40-cest.JPG</span></code></pre>
+<p>If you want to change the dates by a fixed time interval, you can also use
+<a href="https://photo.stackexchange.com/questions/7919/how-to-shift-exif-date-time-created-by-time-in-days-hours-minutes" class="external-link" target="_blank">this alternative</a>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">exiftool <span class="token string">"-FileModifyDate+=1:12:28 14:54:32"</span> <span class="token parameter variable">-verbose</span> DSC_8783-shot-at-16-40-cest.JPG</span></code></pre>
+<p>This will add 1 year, 12 month, 28 days, 14 hours, 54 minutes, 32 seconds.</p>
+<h2 id="second-attempt" tabindex="-1">2.2. Second attempt <a class="header-anchor" href="#second-attempt" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>The command above has a problem though: It also updates the atime.
+If you don't want that, use this command:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">touch</span> <span class="token parameter variable">-m</span> <span class="token parameter variable">-t</span> <span class="token variable"><span class="token variable">`</span>exiftool <span class="token parameter variable">-s3</span> <span class="token parameter variable">-d</span> <span class="token string">"%Y%m%d%H%M.%S"</span> <span class="token parameter variable">-DateTimeOriginal</span> DSC_7947.JPG<span class="token variable">`</span></span> DSC_7947.JPG</span>
+<span class="highlight-line"><span class="token comment"># # for all files in directory</span></span>
+<span class="highlight-line"><span class="token keyword">for</span> <span class="token for-or-select variable">f</span> <span class="token keyword">in</span> DSC_*.JPG <span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token function">touch</span> <span class="token parameter variable">-m</span> <span class="token parameter variable">-t</span> <span class="token variable"><span class="token variable">`</span>exiftool <span class="token parameter variable">-s3</span> <span class="token parameter variable">-d</span> <span class="token string">"%Y%m%d%H%M.%S"</span> <span class="token parameter variable">-DateTimeOriginal</span> <span class="token string">"<span class="token variable">$f</span>"</span><span class="token variable">`</span></span> <span class="token string">"<span class="token variable">$f</span>"</span> <span class="token punctuation">;</span> <span class="token keyword">done</span></span>
+<span class="highlight-line"><span class="token comment"># recursively</span></span>
+<span class="highlight-line"><span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-iname</span> <span class="token string">"DSC_*.jpg"</span> <span class="token parameter variable">-type</span> f <span class="token parameter variable">-exec</span> <span class="token function">sh</span> <span class="token parameter variable">-c</span> <span class="token string">'touch -m -t $(exiftool -s3 -d "%Y%m%d%H%M.%S" -DateTimeOriginal "$1") "$1"'</span> <span class="token function">sh</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span></span></code></pre>
+<h1 id="manually-update-mtime" tabindex="-1">3. Manually update mtime <a class="header-anchor" href="#manually-update-mtime" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The ctime is controlled by Linux so you cannot easily change it.
+And you don't really need to.</p>
+<p>What you can change is the mtime (last modification date):</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">touch</span> <span class="token parameter variable">-m</span> <span class="token parameter variable">-d</span> <span class="token string">"5 hours ago"</span> image.jpg</span>
+<span class="highlight-line"><span class="token function">touch</span> <span class="token parameter variable">-m</span> <span class="token parameter variable">-d</span> <span class="token string">"2007-01-31T08:46:26+02:00"</span> image.jpg</span></code></pre>
+<h1 id="timezone-issues" tabindex="-1">4. Timezone issues <a class="header-anchor" href="#timezone-issues" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>On the second command, touch saves the time as <code class="language-plain">2007-01-31 07:46:26 +0100</code>,
+so it still converts the timezone to +01:00.
+That's because in January 2007 there was CET in Berlin, not CEST (summer time).
+touch should respect the <em>TZ</em> environment variable, and it does, but it
+still converts the timezone. :(</p>
+<p>I could not find a fix for this. It does not hurt that much, because the time
+is still correct for sorting etc.</p>
+<p>Btw: Here is how you can check your current timezone:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">date</span> +<span class="token string">"%Z %z"</span></span>
+<span class="highlight-line"><span class="token comment"># Outputs 'CEST +0200' on my system</span></span></code></pre>
+<h1 id="the-other-way-round%3A-set-exif-timestamp-to-mtime" tabindex="-1">5. The other way round: Set exif timestamp to mtime <a class="header-anchor" href="#the-other-way-round%3A-set-exif-timestamp-to-mtime" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>If you want to set the DateTimeOriginal exif field on a file without exif data,
+and you want to use the mtime as source, you can run this:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">exiftool <span class="token string">"-DateTimeOriginal&lt;FileModifyDate"</span> <span class="token string">"-FileModifyDate&lt;FileModifyDate"</span> no-exif.jpg</span></code></pre>
+<p>Note: This will also update the atime.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
