@@ -13,6 +13,7 @@ const postcss = require("postcss")
 const postThumbnail = require("./eleventy/post-thumbnail")
 const tableOfContents = require("eleventy-plugin-toc")
 const typescriptPlugin = require("./eleventy/typescript-esbuild")
+const yaml = require("js-yaml")
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.svg")
@@ -41,6 +42,8 @@ module.exports = function (eleventyConfig) {
     collectionApi.getAll()
       .filter(item => "navigationWeight" in item.data)
       .sort((item1, item2) => item1.data.navigationWeight - item2.data.navigationWeight))
+
+  eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents))
 
   eleventyConfig.addFilter("relativeFile", imageShortcodes.relativeFileFilter)
   eleventyConfig.addFilter("date", dates.date)

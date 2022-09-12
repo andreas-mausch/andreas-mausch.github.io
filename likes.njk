@@ -1,0 +1,84 @@
+---
+layout: page
+---
+
+<div class="home">
+
+    <h4>Soundtrack - Movies</h4>
+    {% for like in likes.music.soundtrack.movies %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.movie }}: {{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Soundtrack - Games</h4>
+    {% for like in likes.music.soundtrack.games %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.game }}: {{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Songs - German</h4>
+    {% for like in likes.music.songs.german %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.artist }}: {{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Songs - International</h4>
+    {% for like in likes.music.songs.international %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.artist }}: {{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Songs - Instrumentals</h4>
+    {% for like in likes.music.songs.instrumentals %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.artist }}: {{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Demoscene</h4>
+    {% for like in likes.demoscene %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.artist }}: {{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Games</h4>
+    {% for like in likes.games %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Ads</h4>
+    {% for like in likes.ads %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Documentations</h4>
+    {% for like in likes.documentations %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Security</h4>
+    {% for like in likes.security %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+    <h4>Others</h4>
+    {% for like in likes.other %}
+    <div>
+        <a href="{{ like.youtube }}" target="_blank">{{ like.title }}</a>
+    </div>
+    {% endfor %}
+
+</div>
