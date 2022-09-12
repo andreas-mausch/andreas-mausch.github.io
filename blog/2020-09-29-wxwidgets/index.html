@@ -1,0 +1,159 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native Desktop GUI apps: wxWidgets with conan and premake</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Native Desktop GUI apps: wxWidgets with conan and premake</h1>
+<div>
+  <time class="postlist-date" datetime="2020-09-29T16:00:00.000+00:00">Sep 29, 2020</time>
+</div>
+
+
+
+<p>I'm always looking for better ways to create desktop applications.</p>
+<p>See <a href="/blog/2017-12-10-kotlin-native/">here</a>.
+And <a href="/blog/2020-02-20-tauri/">here</a>.</p>
+<p>Today: <strong>wxWidgets</strong></p>
+<img src="/blog/2020-09-29-wxwidgets/linux.png" width="619" height="428" alt="undefined">
+<img src="/blog/2020-09-29-wxwidgets/win.png" width="620" height="428" alt="undefined">
+<img src="/blog/2020-09-29-wxwidgets/mac.png" width="618" height="428" alt="undefined">
+<p>The repo for my experiment is here: <a href="https://github.com/andreas-mausch/wxwidgets-conan-premake" class="external-link" target="_blank">https://github.com/andreas-mausch/wxwidgets-conan-premake</a></p>
+<h1 id="stats" tabindex="-1">1. Stats <a class="header-anchor" href="#stats" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Binary sizes on Linux are 7 MB and 11 MB (with XRC).</p>
+<h1 id="conan-and-premake" tabindex="-1">2. Conan and Premake <a class="header-anchor" href="#conan-and-premake" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><a href="https://conan.io" class="external-link" target="_blank">Conan</a> is a C/C++ Package Manager.<br>
+<a href="https://premake.github.io" class="external-link" target="_blank">Premake</a> is a build configuration tool.</p>
+<p>They work very well together.</p>
+<h2 id="conan" tabindex="-1">2.1. Conan <a class="header-anchor" href="#conan" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>As someone who never used a dependency manager for C++, I was positively surprised by the ease to add third-party code.</p>
+<p>It's feels like adding a maven dependency to a Java project.
+I might take a bit longer the first time you install it (because you might need to compile it first),
+but then it's just nice to have the include and library directories set up automatically.</p>
+<p>As you can see in the whatsapp-viewer repo, I still copy/pasted the dependencies into my own repo,
+something which is a very bad practice and something I've <a href="/blog/2020-02-12-element-ui/">criticized myself</a> for good reasons.</p>
+<p>It's a joy to quickly add a new dependency, even if you might have to build it first.</p>
+<p>The only thing which was tricky and not so easy was the 'imports' section.<br>
+I had to execute the wxrc binary (which comes with wxwidgets). So I have to use the binary from the dependency. Unfortunately, the executable name on Windows and Linux/Mac is different (of course!).<br>
+The solution was to write two lines into the conanfile: One for the <code class="language-plain">wxrc-3.1</code> for Linux and Mac, and another for the <code class="language-plain">wxrc.exe</code> on Windows.</p>
+<p>Update 2020-10-05: Okay, dependencies or their receipes must be maintained by somebody, and apparently this isn't the case for <a href="https://github.com/SRombauts/SQLiteCpp" class="external-link" target="_blank">SqLiteCpp</a> which is available in version 3.0 since nine months now. The newest version in conan is 2.5, even though it is part of the offical <em>conan-center-index</em>. Someone reported an <a href="https://github.com/conan-io/conan-center-index/issues/2217" class="external-link" target="_blank">issue</a>, but there is no reaction yet..</p>
+<h2 id="premake" tabindex="-1">2.2. Premake <a class="header-anchor" href="#premake" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Premake can generate either makefiles, visual studio projects or xcode projects, all with a single description file.
+Very useful for cross-platform development.</p>
+<p>I've decided to try it out instead of CMake, because while CMake is widely used, it's syntax is ugly and harder to understand than Premake's.
+The main reason I found on the internet to use CMake was &quot;because others use it&quot;, which by itself is not a very strong argument..</p>
+<p>Premake was ok to set up, but I didn't manage to properly clear the <em>generated</em> folder if you call <em>make clean</em>.</p>
+<p>There is something like <a href="https://github.com/premake/premake-core/wiki/cleancommands" class="external-link" target="_blank">cleancommands</a>, but they are not intended to be used in a <em>WindowedApp</em>. Well.</p>
+<p>Also, I've started by using <code class="language-plain">os.mkdir()</code> to create the directory, however I've discovered later the much better way is to use <code class="language-plain">{MKDIR}</code> inside the <em>prebuildcommands</em>.
+The downside of <code class="language-plain">os.mkdir()</code> is: The directory is created at the time you excecute <code class="language-plain">premake5</code>, rather than in front of every single build. The directory might have been deleted in between.</p>
+<h1 id="critism-on-wxwidgets" tabindex="-1">3. Critism on wxWidgets <a class="header-anchor" href="#critism-on-wxwidgets" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I always thought wxWidgets is some very old technology and pretty much deprecated.
+It is old, but actively maintained and not deprecated at all.</p>
+<p>I really really dislike some things though, like:</p>
+<ul>
+<li>
+<p>It is not a pure GUI library (although they don't aim to be one)</p>
+</li>
+<li>
+<p>Feels bloated (see below)</p>
+</li>
+<li>
+<p>Macros :cold_sweat:<br>
+<s>The <code class="language-plain">wxBEGIN_EVENT_TABLE</code> declaration for example.</s> can be avoided by using <a href="https://docs.wxwidgets.org/3.1/overview_events.html#overview_events_bind" class="external-link" target="_blank">dynamic events</a><br>
+Some macros are even poorly documented, like <code class="language-plain">XRCSIZERITEM</code>: It is only mentioned on the <em>XML Based Resource System (XRC)</em> page. There is no overview page of all macros available.</p>
+</li>
+<li>
+<p>Reinvent the wheel: Classes like wxString, wxInputStream?? Use std::string, std::istream please!<br>
+They state:</p>
+<blockquote>
+<p>wxWidgets has its own set of stream classes, as an alternative to often buggy standard stream libraries, and to provide enhanced functionality.</p>
+</blockquote>
+<p>I believe there was a time when their statement was true, but I also believe a lot has changed since then, and the standard implementations are good now.</p>
+<p>The list for their self-written alternatives is long.</p>
+</li>
+<li>
+<p>Magic: You create a frame by calling <code class="language-plain">new MyFrame()</code>, but you never <code class="language-plain">delete</code> it yourself.<br>
+This is <a href="https://docs.wxwidgets.org/3.1/overview_windowdeletion.html" class="external-link" target="_blank">automagically handled by wxWidgets</a>.<br>
+While it not only looks confusing in the code, it also means that you <strong>cannot use smart pointers</strong> like unique_ptr for the wxWidgets classes. :(</p>
+</li>
+<li>
+<p>No <a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization" class="external-link" target="_blank">RAII</a>: I see a lot of Init()/Destroy() methods, examples where Destroy() is called <a href="https://wiki.wxwidgets.org/Writing_Your_First_Application-Common_Dialogs" class="external-link" target="_blank">manually</a> (although it can be avoided for the wxFileDialog) and so on. Doesn't really feel C++ish.</p>
+</li>
+<li>
+<p>Complex controls: wxWidgets offers the basic controls like a Win32 API.<br>
+However, once you want to have just a little more sophisticated controls, like a <a href="https://forums.wxwidgets.org/viewtopic.php?t=40950" class="external-link" target="_blank">custom list</a>
+which you will see in almost every program, you have to do a lot of programming yourself.
+On other systems (like Android) developers usually get these provided.</p>
+</li>
+<li>
+<p>No overlapping/z-order for child windows: That was a surprise to me! I'm curious how to do overlays (wxOverlay, wxBusyInfo or wxProgressDialog maybe?) like loading spinners.</p>
+</li>
+<li>
+<p>Some system settings are not used: You need to set the scrolling rate for a <code class="language-plain">wxScrolledWindow</code>. It is specified in pixels, and therefore ignores any system setting. I know at least KDE and Windows have an option to set the number of lines scrolled by mouse wheel.</p>
+</li>
+<li>
+<p>HiDPI support: Displays with high DPI are out for so long now, but either the programmers who use wxWidgets are all bad or wxWidgets support for HiDPI is not very great. I will soon find out.
+I gave codelite a try as my next C++ IDE, but just installing it and looking at tiny fonts made me a bit mad.
+Some research showed I was <a href="https://github.com/eranif/codelite/issues/629" class="external-link" target="_blank">not</a> <a href="https://github.com/eranif/codelite/issues/1347" class="external-link" target="_blank">alone</a>.
+These issues are quite dated though, and I have DPI problems with a lot of other programs (IntelliJ for example).
+So I still have hope my worries are baseless and let's see, maybe my experience with wxWidgets and HiDPI will be good.</p>
+</li>
+<li>
+<p>In a perfect world, I'd like to replace the GUI library without touching the business logic at all.
+However, with wxWidgets I have to implement a wxApp class and it even asks me to use their main() function.
+If I would use all of their eco-system like streams, threads etc. then it would become a lot of work to replace wxWidgets in my app.</p>
+</li>
+</ul>
+<p>The 'Hello World' wxWidgets on Linux results in a 7 MB executable. Imo that's bloated, and imo wxWidgets carries
+a lot of stuff which might be convenient, but doesn't belong in a pure GUI lib (implementations of jpeg, png, zlib, html, webview (a complete browser!), ..).
+I'm not quite sure why the linker doesn't discard the unused bits. I can't believe there is 7 MB code needed to render an empty window.</p>
+<p>If you add support for XRC, my binary increases to 11mb. :(</p>
+<p>In my opinion they should decide to be either a pure GUI library or a full-blown &quot;app-environment&quot;, which features almost everything an OS offers, but in an OS-independet way. They are neither fish nor fowl.</p>
+<h1 id="alternatives%3F" tabindex="-1">4. Alternatives? <a class="header-anchor" href="#alternatives%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Most of my critism also applies to Qt, which I dislike a lot more for their bloatiness.</p>
+<p>Unfortunately, <a href="https://github.com/andlabs/libui" class="external-link" target="_blank">libui</a> doesn't seem to be moving. :(</p>
+<p>However, if you look for a GUI library which renders native controls and can be linked statically on all platforms, you don't have much of a choice but to use wxWidgets.
+That's why I have to say it is my preferred library to build native desktop apps today.</p>
+<p>If you know any other/better library, please let me know.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
