@@ -1,0 +1,68 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show images in terminal</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Blog post: Show images in terminal</h1>
+<div>
+  <time class="postlist-date" datetime="2021-07-21T08:00:00.000+00:00">Jul 21, 2021</time>
+</div>
+
+
+
+<p>Sometimes it is useful to display an image or video in the terminal,
+for example if you are on a ssh connection.</p>
+<p>I used to use <code class="language-plain">tiv</code> (<a href="https://github.com/stefanhaustein/TerminalImageViewer" class="external-link" target="_blank">Link</a>)
+for this purpose, but now I've switched to <code class="language-plain">timg</code> (<a href="https://github.com/hzeller/timg" class="external-link" target="_blank">Link</a>).</p>
+<p>Images just look better and the detection for terminal width and height works also better.</p>
+<p>See the two example screenshots of tiv and timg in <em>xfce4-terminal</em>.</p>
+<p>tiv:</p>
+<img src="/blog/2021-07-21-show-images-in-terminal/tiv.png" width="2804" height="1460" alt="undefined">
+<p>timg:</p>
+<img src="/blog/2021-07-21-show-images-in-terminal/timg.png" width="2804" height="1460" alt="undefined">
+<p>As you can see, the aspect ration is off for tiv, and I had to adjust the height.
+It seems to use the whole width by default and ignores the height, while timg
+detects both, width and height, correctly.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
