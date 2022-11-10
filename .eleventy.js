@@ -11,6 +11,7 @@ const linkPost = require("./eleventy/link-post")
 const markdownIt = require("./eleventy/markdown")
 const postcss = require("postcss")
 const postThumbnail = require("./eleventy/post-thumbnail")
+const rss = require("@11ty/eleventy-plugin-rss")
 const tableOfContents = require("eleventy-plugin-toc")
 const typescriptPlugin = require("./eleventy/typescript-esbuild")
 const yaml = require("js-yaml")
@@ -86,5 +87,6 @@ module.exports = function (eleventyConfig) {
     tags: ["h1", "h2", "h3", "h4", "h5"]
   })
   eleventyConfig.addPlugin(iconFont)
+  eleventyConfig.addPlugin(rss)
   eleventyConfig.addPlugin(typescriptPlugin)
 }
