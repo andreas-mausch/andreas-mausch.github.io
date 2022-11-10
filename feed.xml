@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://andreas-mausch.de/blog/">
+  <title>andreas-mausch.de</title>
+  <subtitle>Dev and personal blog</subtitle>
+  <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
+  <link href="https://andreas-mausch.de/blog/"/>
+  <updated>2022-09-06T20:00:00Z</updated>
+  <id>https://andreas-mausch.de/blog/</id>
+  <author>
+    <name>Andreas Mausch</name>
+  </author>
+  <entry>
+    <title>Printing and Scanning on Linux</title>
+    <link href="https://andreas-mausch.de/blog/2022-09-06-hp-officejet-250-mobile/"/>
+    <updated>2022-09-06T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-09-06-hp-officejet-250-mobile/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2022-09-06-hp-officejet-250-mobile/hplip-printer.jpg&quot; width=&quot;1280&quot; height=&quot;889&quot; alt=&quot;undefined&quot; /&gt;
+&lt;h1 id=&quot;introduction&quot; tabindex=&quot;-1&quot;&gt;1. Introduction &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-09-06-hp-officejet-250-mobile/#introduction&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;hp-deskjet-320&quot; tabindex=&quot;-1&quot;&gt;1.1. HP DeskJet 320 &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-09-06-hp-officejet-250-mobile/#hp-deskjet-320&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;</content>
+  </entry>
+  <entry>
+    <title>Migrate Blog from Jekyll to Eleventy</title>
+    <link href="https://andreas-mausch.de/blog/2022-08-11-migrate-blog-from-jekyll-to-eleventy/"/>
+    <updated>2022-08-11T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-08-11-migrate-blog-from-jekyll-to-eleventy/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;why-jekyll-in-first-place-(2015)&quot; tabindex=&quot;-1&quot;&gt;1. Why Jekyll in first place (2015) &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-08-11-migrate-blog-from-jekyll-to-eleventy/#why-jekyll-in-first-place-(2015)&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;The reason I&#39;ve decided to use Jekyll was pretty straight-forward:
+Github Pages was released and they offered built-in Jekyll integration.&lt;/p&gt;
+&lt;p&gt;Back then there was no Github Actions or any kind of built-in Github CI, and I wanted to have
+a way to publish blog posts with the lowest possible barrier.&lt;/p&gt;
+&lt;p&gt;At that point in time I w&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>My home server setup (Intel NUC)</title>
+    <link href="https://andreas-mausch.de/blog/2022-06-12-my-home-server-setup/"/>
+    <updated>2022-06-12T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-06-12-my-home-server-setup/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I have my setup for quite a while now, but since I need to make some changes to it, I thought it is a good time to share the process.&lt;/p&gt;
+&lt;h1 id=&quot;hardware&quot; tabindex=&quot;-1&quot;&gt;1. Hardware &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-06-12-my-home-server-setup/#hardware&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I use a Intel NUC for being my 24/7 server.&lt;/p&gt;
+&lt;p&gt;Previously I have used a DC53427HYE (8 GB RAM, 120 GB SSD), and I now upgrade it to an D54250WYK (still old), but with 16 GB RAM and 500 GB SSD.
+I found two old cores are more than enough for my needs.&lt;/p&gt;
+&lt;p&gt;I&#39;ve &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>makemkv: Backup Blu-ray discs</title>
+    <link href="https://andreas-mausch.de/blog/2022-03-14-makemkv-blu-ray-backup/"/>
+    <updated>2022-03-14T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-03-14-makemkv-blu-ray-backup/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I still like to use Blu-ray discs to watch movies.&lt;/p&gt;
+&lt;p&gt;Sometimes I want to watch them over the network though, and therefore I need to rip them from disc to put them on a hard-drive.&lt;/p&gt;
+&lt;p&gt;I stumbled across &lt;a href=&quot;https://www.makemkv.com/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;makemkv&lt;/a&gt; and a Docker image &lt;a href=&quot;https://github.com/jlesage/docker-makemkv&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Since I prefer CLI usage over GUI, I also looked up &lt;a href=&quot;https://github.com/lasley/docker-makemkvcon&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;this Docker image&lt;/a&gt;,
+which provides only the CLI part named &lt;code class=&quot;language-plain&quot;&gt;makemkvcon&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;installation&quot; tabindex=&quot;-1&quot;&gt;1. Installation &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-03-14-makemkv-blu-ray-backup/#installation&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Selenium: Disable CSS transitions and fail on JavaScript errors</title>
+    <link href="https://andreas-mausch.de/blog/2022-03-11-selenium-transitions-and-logging/"/>
+    <updated>2022-03-11T15:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-03-11-selenium-transitions-and-logging/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve done both steps for a second time (in a different project) now, so I thought it is worth a blog post.&lt;/p&gt;
+&lt;h1 id=&quot;css-transitions&quot; tabindex=&quot;-1&quot;&gt;1. CSS transitions &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-03-11-selenium-transitions-and-logging/#css-transitions&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;If you use CSS animations, you have three choices for your tests:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Sleep for a specific amount of time and hope the animation has finished after&lt;/li&gt;
+&lt;li&gt;Introduce wait statements to make sure the animation ended&lt;/li&gt;
+&lt;li&gt;Disable animations&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Opti&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>RabbitMQ CLI, Dead Letter Exchange and Quorum Queue</title>
+    <link href="https://andreas-mausch.de/blog/2022-02-24-rabbitmq-cli-dead-letter-exchange-and-quorum-queue/"/>
+    <updated>2022-02-24T22:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-02-24-rabbitmq-cli-dead-letter-exchange-and-quorum-queue/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Today I&#39;ve taken a closer look at this code snippet in one of our services:&lt;/p&gt;
+&lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token annotation punctuation&quot;&gt;@Queue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;${app.messaging.queueName}&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;receive&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;                    &lt;span class=&quot;token annotation punctuation&quot;&gt;@Nullable&lt;/span&gt; &lt;span class=&quot;token annotation punctuation&quot;&gt;@Header&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;x-redelivered-count&quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Cast your screen to a Chromecast without Chrome</title>
+    <link href="https://andreas-mausch.de/blog/2022-02-19-chromecast-avahi/"/>
+    <updated>2022-02-19T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-02-19-chromecast-avahi/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I tried to cast my screen to my TV (with a built-in Chromecast).&lt;/p&gt;
+&lt;h1 id=&quot;tools-tested&quot; tabindex=&quot;-1&quot;&gt;1. Tools tested &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-02-19-chromecast-avahi/#tools-tested&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;google-chrome-%2F-chromium&quot; tabindex=&quot;-1&quot;&gt;1.1. Google Chrome / Chromium &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-02-19-chromecast-avahi/#google-chrome-%2F-chromium&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;</content>
+  </entry>
+  <entry>
+    <title>Buffer Overflow</title>
+    <link href="https://andreas-mausch.de/blog/2022-02-16-buffer-overflow/"/>
+    <updated>2022-02-16T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-02-16-buffer-overflow/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I remember I&#39;ve tried hard when I was younger to create a super easy example of a buffer overflow.
+I read about it and understood the mechanism, but never accomplished writing a real program which demonstrates the effect.&lt;/p&gt;
+&lt;p&gt;That thought crossed my mind today and I realized I should be able to do it today with a little more experience.&lt;/p&gt;
+&lt;p&gt;In addition, I found this wonderful article about it:&lt;br /&gt;
+&lt;a href=&quot;https://dhavalkapil.com/blogs/Buffer-Overflow-Exploit/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;dhavalkapil.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So, I will basically repeat the steps in the article and build my first own buffer overflow program.&lt;/p&gt;
+&lt;h1 id=&quot;the-program&quot; tabindex=&quot;-1&quot;&gt;1. The program &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-02-16-buffer-overflow/#the-program&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Please support deploying to a subdirectory</title>
+    <link href="https://andreas-mausch.de/blog/2022-01-26-deploy-to-subdirectory/"/>
+    <updated>2022-01-26T14:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-01-26-deploy-to-subdirectory/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Lately I worked with three web apps which refused to being deployed on a subdirectory of a domain,
+for example &lt;code class=&quot;language-plain&quot;&gt;https://my.domain/path&lt;/code&gt;.
+They all expected to run at the root of the domain &lt;code class=&quot;language-plain&quot;&gt;https://my.domain&lt;/code&gt;.
+Which makes it difficult to use multiple apps on the same domain.&lt;/p&gt;
+&lt;p&gt;The only options are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run them on a different port&lt;/li&gt;
+&lt;li&gt;Run them on a subdomain&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first one makes the URL ugly, and in some companies it requires some bureaucracy to get another
+port opened in the company-wide firewall.
+The second one requires some technical setup as well, and it&#39;s not always the solution you are looking for.&lt;/p&gt;
+&lt;p&gt;I had the same problem with these apps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/magento/magento2&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Magento&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Soluto/oidc-server-mock&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;OpenId Connect Server Mock&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>F the caret</title>
+    <link href="https://andreas-mausch.de/blog/2021-08-20-f-the-caret/"/>
+    <updated>2021-08-20T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-08-20-f-the-caret/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Why I prefer fixed versions for dependencies and a reproducible build.&lt;/p&gt;
+&lt;h1 id=&quot;npm-and-the-caret-(%5E)&quot; tabindex=&quot;-1&quot;&gt;1. npm and the caret (^) &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-08-20-f-the-caret/#npm-and-the-caret-(%5E)&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Most likely you have seen or maybe use yourself the caret in front of
+your dependency version, for example &lt;code class=&quot;language-plain&quot;&gt;^1.4.2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here is a great article which explains it&#39;s meaning:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Nikon stores wrong timestamp</title>
+    <link href="https://andreas-mausch.de/blog/2021-07-29-nikon-wrong-timestamp/"/>
+    <updated>2021-07-29T15:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-07-29-nikon-wrong-timestamp/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I noticed the &lt;em&gt;File Modification Date/Time&lt;/em&gt; timestamp is saved incorrectly
+on my Nikon D5600.&lt;/p&gt;
+&lt;p&gt;This is annoying, because when I copy my files to my phone, some tools order the
+photos by their mtime, and if it is set incorrectly, pictures won&#39;t be in order.&lt;/p&gt;
+&lt;p&gt;I shot a photo at 16:40:30 CEST (UTC+2).
+Note: My camera settings are set to Berlin time (UTC+1) with summer time enabled.
+Sync time via bluetooth is enabled.&lt;/p&gt;
+&lt;h1 id=&quot;the-problem&quot; tabindex=&quot;-1&quot;&gt;1. The problem &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-07-29-nikon-wrong-timestamp/#the-problem&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Show images in terminal</title>
+    <link href="https://andreas-mausch.de/blog/2021-07-21-show-images-in-terminal/"/>
+    <updated>2021-07-21T08:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-07-21-show-images-in-terminal/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Sometimes it is useful to display an image or video in the terminal,
+for example if you are on a ssh connection.&lt;/p&gt;
+&lt;p&gt;I used to use &lt;code class=&quot;language-plain&quot;&gt;tiv&lt;/code&gt; (&lt;a href=&quot;https://github.com/stefanhaustein/TerminalImageViewer&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Link&lt;/a&gt;)
+for this purpose, but now I&#39;ve switched to &lt;code class=&quot;language-plain&quot;&gt;timg&lt;/code&gt; (&lt;a href=&quot;https://github.com/hzeller/timg&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Link&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Images just look better and the detection for terminal width and height works also better.&lt;/p&gt;
+&lt;p&gt;See the two example screenshots of tiv and timg in &lt;em&gt;xfce4-terminal&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;tiv:&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2021-07-21-show-images-in-terminal/tiv.png&quot; width=&quot;2804&quot; height=&quot;1460&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;timg:&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2021-07-21-show-images-in-terminal/timg.png&quot; width=&quot;2804&quot; height=&quot;1460&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;As you can see, the aspect ration is off for tiv, and I had to adjust the height.
+It seems to use the whole widt&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>JPEG: Exif tags and XMP Rating</title>
+    <link href="https://andreas-mausch.de/blog/2021-07-18-jpeg-exif-xmp-rating/"/>
+    <updated>2021-07-18T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-07-18-jpeg-exif-xmp-rating/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I like to mark my best photos with a rating.
+There are plenty of tools for the job.&lt;/p&gt;
+&lt;p&gt;Since Windows 7 (or Vista?) it was even integrated into the operating system.&lt;/p&gt;
+&lt;p&gt;However, I found there is more than one way to save the rating into the metadata
+of the image, and different tools are not very compatible with each other.&lt;/p&gt;
+&lt;p&gt;Luckily, there is a defacto standard which most tools can work with: The &lt;em&gt;Rating&lt;/em&gt;
+tag in the XMP metadata. It was first defined by Adobe.&lt;/p&gt;
+&lt;p&gt;So I&#39;ve decided to use this tag from now on. It does not depend on a platform
+and can be used in almost all tools.
+However..I noticed that some tools lose data when I saved a rated image file.
+Not all previously existing meta tags were maintained.&lt;/p&gt;
+&lt;p&gt;That made me curious, and I now want to find a way to rate and tag my images
+without losing any data.&lt;/p&gt;
+&lt;h1 id=&quot;analyze-and-display-all-metadata-on-a-.jpg-image&quot; tabindex=&quot;-1&quot;&gt;1. Analyze and display all metadata on a .jpg image &lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Binary diffs</title>
+    <link href="https://andreas-mausch.de/blog/2021-07-17-binary-diffs/"/>
+    <updated>2021-07-17T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-07-17-binary-diffs/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;When I searched the internet on how to diff two binary files,
+the first results were not helpful to me.&lt;/p&gt;
+&lt;p&gt;Most of them only work well when the files are the same size and
+only differ in some bytes.&lt;/p&gt;
+&lt;p&gt;When there are bytes inserted at some point of the file, the result
+is not useful.&lt;/p&gt;
+&lt;p&gt;Let me show you.&lt;/p&gt;
+&lt;h1 id=&quot;files-are-the-same-size%2C-and-some-bytes-are-changed&quot; tabindex=&quot;-1&quot;&gt;1. Files are the same size, and some bytes are changed &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-07-17-binary-diffs/#files-are-the-same-size%2C-and-some-bytes-are-changed&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Zeal: Offline Documentation Browser</title>
+    <link href="https://andreas-mausch.de/blog/2021-07-03-zeal/"/>
+    <updated>2021-07-03T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-07-03-zeal/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2021-07-03-zeal/zeal.png&quot; width=&quot;1124&quot; height=&quot;707&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;Zeal is a great tool for browsing documentation without the need for an internet connection.&lt;/p&gt;
+&lt;p&gt;As a great addition I can recommend &lt;a href=&quot;https://github.com/xantiagoma/zealusercontributions&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;zealusercontributions&lt;/a&gt;:
+&lt;a href=&quot;https://zealusercontributions.now.sh/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://zealusercontributions.now.sh&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I love how fast it feels to browse the documentation, instead of wasting seconds after seconds waiting for some overloaded website to load.&lt;/p&gt;
+&lt;p&gt;I think the unfree MacOS tool &lt;a href=&quot;https://kapeli.com/dash&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Dash&lt;/a&gt; was there before, they also provide the docsets.&lt;/p&gt;
+&lt;p&gt;Zeal reminds me of the good old .chm file format: &lt;a href=&quot;https://en.wikipedia.org/wiki/Microsoft_Compiled_HTML_Help&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Microsoft Compiled HTML Help&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>RabbitMQ: Message persistence and Metrics</title>
+    <link href="https://andreas-mausch.de/blog/2021-05-14-rabbitmq-persistence/"/>
+    <updated>2021-05-17T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-05-14-rabbitmq-persistence/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;persistence&quot; tabindex=&quot;-1&quot;&gt;1. Persistence &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-05-14-rabbitmq-persistence/#persistence&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;We&#39;ve noticed our RabbitMQ lost messages when the container had to be restarted.&lt;/p&gt;
+&lt;p&gt;Three things to consider to not lose stuff on a restart:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your exchanges and queues should be &lt;strong&gt;durable&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Your messages should be &lt;strong&gt;persistent&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;If you run RabbitMQ via Docker, make sure to set a fixed hostname&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Links to RabbitMQ&#39;s document&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Monitoring: Grafana, Loki, Prometheus, Alertmanager</title>
+    <link href="https://andreas-mausch.de/blog/2021-05-14-monitoring-grafana/"/>
+    <updated>2021-05-14T12:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-05-14-monitoring-grafana/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Most of the times I evaluate tools or libraries I get disappointed:
+Bugs in the most common features, missing the simplest of use-cases, bad documentation, etc.&lt;/p&gt;
+&lt;p&gt;So that&#39;s why I&#39;ve decided to write a praise to Grafana and Loki,
+which I&#39;ve both heavily enjoyed to set up and use.&lt;/p&gt;
+&lt;p&gt;See my repo with a fully running setup here: &lt;a href=&quot;https://github.com/andreas-mausch/grafana-prometheus-loki-alertmanager-setup&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;andreas-mausch/grafana-prometheus-loki-alertmanager-setup&lt;/a&gt;&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2021-05-14-monitoring-grafana/grafana.png&quot; width=&quot;1511&quot; height=&quot;976&quot; alt=&quot;undefined&quot; /&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2021-05-14-monitoring-grafana/prometheus.png&quot; width=&quot;1511&quot; height=&quot;976&quot; alt=&quot;undefined&quot; /&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2021-05-14-monitoring-grafana/mailhog.png&quot; width=&quot;1511&quot; height=&quot;976&quot; alt=&quot;undefined&quot; /&gt;
+&lt;h1 id=&quot;background&quot; tabindex=&quot;-1&quot;&gt;1. Background &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-05-14-monitoring-grafana/#background&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>OpenWRT on tp-link Archer C7 v5 AC1750</title>
+    <link href="https://andreas-mausch.de/blog/2021-05-01-openwrt/"/>
+    <updated>2021-05-01T15:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-05-01-openwrt/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2021-05-01-openwrt/tplink-router.jpg&quot; width=&quot;960&quot; height=&quot;540&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;Your Internet Service Provider (ISP) has access to your router provided by them
+and therefore access to your whole network.&lt;/p&gt;
+&lt;p&gt;In order to get some privacy into your network, you can use another router.
+To gain some more trust, use an open-source custom firmware, like OpenWrt.&lt;/p&gt;
+&lt;p&gt;If your router is supported, I recommend to try &lt;a href=&quot;https://librecmc.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;LibreCMC&lt;/a&gt;.
+It is a free firmware without any blobs required for some firmwares.&lt;/p&gt;
+&lt;h1 id=&quot;original-firmware-download&quot; tabindex=&quot;-1&quot;&gt;1. Original Firmware Download &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-05-01-openwrt/#original-firmware-download&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Raspberry Pi Headless Setup</title>
+    <link href="https://andreas-mausch.de/blog/2021-03-17-raspberry-pi-setup/"/>
+    <updated>2021-03-17T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-03-17-raspberry-pi-setup/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve done this a couple of times already so I thought I should write it down.&lt;/p&gt;
+&lt;p&gt;How to setup the Raspberry Pi with Pi OS for ssh and wifi.&lt;/p&gt;
+&lt;h1 id=&quot;flash&quot; tabindex=&quot;-1&quot;&gt;1. Flash &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-03-17-raspberry-pi-setup/#flash&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Flash the OS to the sd card.
+My favorite tool for this is &lt;a href=&quot;https://www.balena.io/etcher/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Balana Etcher&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;mount&quot; tabindex=&quot;-1&quot;&gt;2. Mount &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-03-17-raspberry-pi-setup/#mount&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Nikon DSLR as Webcam</title>
+    <link href="https://andreas-mausch.de/blog/2021-03-08-nikon-dslr-webcam/"/>
+    <updated>2021-03-08T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-03-08-nikon-dslr-webcam/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2021-03-08-nikon-dslr-webcam/setup.jpg&quot; width=&quot;1280&quot; height=&quot;720&quot; alt=&quot;undefined&quot; /&gt;
+&lt;h1 id=&quot;equipment&quot; tabindex=&quot;-1&quot;&gt;1. Equipment &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-03-08-nikon-dslr-webcam/#equipment&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;nikon-d5600&quot; tabindex=&quot;-1&quot;&gt;1.1. Nikon D5600 &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-03-08-nikon-dslr-webcam/#nikon-d5600&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;</content>
+  </entry>
+  <entry>
+    <title>NitroKey, encryption, gpg</title>
+    <link href="https://andreas-mausch.de/blog/2021-02-23-nitrokey/"/>
+    <updated>2021-02-23T22:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-02-23-nitrokey/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve used the following commands to get my NitroKey Pro running on Manjaro Linux.&lt;/p&gt;
+&lt;p&gt;NitroKey is an alternative for the YubiKey, which is better known, cheaper, has more functionality...&lt;strong&gt;BUT&lt;/strong&gt;:&lt;br /&gt;
+The NitroKey&#39;s &lt;a href=&quot;https://github.com/Nitrokey/nitrokey-pro-hardware&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;hardware&lt;/a&gt; and &lt;a href=&quot;https://github.com/Nitrokey/nitrokey-pro-firmware&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;firmware&lt;/a&gt; are open source!&lt;/p&gt;
+&lt;p&gt;I use my NitroKey mainly for &lt;a href=&quot;https://www.passwordstore.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;pass&lt;/a&gt;, the &amp;quot;standard unix password manager&amp;quot;,
+to keep my very important passwords top secret.&lt;/p&gt;
+&lt;p&gt;So I don&#39;t really use FIDO2 or other features of a YubiKey.
+NitroKey provides a &lt;a href=&quot;https://www.nitrokey.com/de#comparison&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;comparison sheet&lt;/a&gt; for their different keys,
+and as you can see you have to decide between gpg or FIDO2. Too bad.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Cookie formats and Apache HttpClient</title>
+    <link href="https://andreas-mausch.de/blog/2021-02-03-cookie-formats-and-apache-httpclient/"/>
+    <updated>2021-02-03T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2021-02-03-cookie-formats-and-apache-httpclient/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve spent some time isolating a bug in the company&#39;s cookie proxy.
+This is about the &lt;em&gt;expires&lt;/em&gt; part of a cookie.&lt;/p&gt;
+&lt;h1 id=&quot;two-formats&quot; tabindex=&quot;-1&quot;&gt;1. Two formats &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-02-03-cookie-formats-and-apache-httpclient/#two-formats&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Let&#39;s see what &lt;strong&gt;google.com&lt;/strong&gt; uses:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;curl&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-v&lt;/span&gt; http://www.google.com&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Android: LineageOS, Root and TWRP Recovery on Samung Galaxy S7</title>
+    <link href="https://andreas-mausch.de/blog/2020-10-19-s7-lineageos/"/>
+    <updated>2020-10-19T21:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-10-19-s7-lineageos/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;To get full control of the phone, I&#39;ve installed LineageOS with root access.&lt;/p&gt;
+&lt;p&gt;The following instructions might result in data loss, so make sure you have a backup of all data on the phone!&lt;/p&gt;
+&lt;h1 id=&quot;install-twrp-recovery&quot; tabindex=&quot;-1&quot;&gt;1. Install TWRP recovery &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-10-19-s7-lineageos/#install-twrp-recovery&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://twrp.me/samsung/samsunggalaxys7.html&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Download&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;First, you need to boot into &lt;em&gt;Odin Mode&lt;/em&gt;.
+Pre&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Track your position with Nextcloud and PhoneTrack</title>
+    <link href="https://andreas-mausch.de/blog/2020-10-16-phonetrack/"/>
+    <updated>2020-10-16T15:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-10-16-phonetrack/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;tracking-tools&quot; tabindex=&quot;-1&quot;&gt;1. Tracking tools &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-10-16-phonetrack/#tracking-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I like to track my position via my phone and sync the data with my self-hosted Nextcloud server.&lt;/p&gt;
+&lt;p&gt;I use the &lt;a href=&quot;https://apps.nextcloud.com/apps/phonetrack&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;PhoneTrack app&lt;/a&gt; for Nextcloud and the &lt;a href=&quot;https://f-droid.org/en/packages/net.eneiluj.nextcloud.phonetrack/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;PhoneTrack app&lt;/a&gt; for Andro&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Native Desktop GUI apps: wxWidgets with conan and premake</title>
+    <link href="https://andreas-mausch.de/blog/2020-09-29-wxwidgets/"/>
+    <updated>2020-09-29T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-09-29-wxwidgets/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;m always looking for better ways to create desktop applications.&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&quot;https://andreas-mausch.de/blog/2017-12-10-kotlin-native/&quot;&gt;here&lt;/a&gt;.
+And &lt;a href=&quot;https://andreas-mausch.de/blog/2020-02-20-tauri/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Today: &lt;strong&gt;wxWidgets&lt;/strong&gt;&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2020-09-29-wxwidgets/linux.png&quot; width=&quot;619&quot; height=&quot;428&quot; alt=&quot;undefined&quot; /&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2020-09-29-wxwidgets/win.png&quot; width=&quot;620&quot; height=&quot;428&quot; alt=&quot;undefined&quot; /&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2020-09-29-wxwidgets/mac.png&quot; width=&quot;618&quot; height=&quot;428&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;The repo for my experiment is here: &lt;a href=&quot;https://github.com/andreas-mausch/wxwidgets-conan-premake&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/andreas-mausch/wxwidgets-conan-premake&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;stats&quot; tabindex=&quot;-1&quot;&gt;1. Stats &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-09-29-wxwidgets/#stats&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Nostalgia: Highscreen 386</title>
+    <link href="https://andreas-mausch.de/blog/2020-09-07-highscreen-386/"/>
+    <updated>2020-09-07T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-09-07-highscreen-386/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;intro&quot; tabindex=&quot;-1&quot;&gt;1. Intro &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-09-07-highscreen-386/#intro&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;My first own PC was a 286 with MS-DOS 3 (or maybe 4?).&lt;/p&gt;
+&lt;p&gt;My second PC, and the one I&#39;ve spent most time with, was a &lt;em&gt;Highscreen 386&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;For nostalgia, I&#39;ve decided to buy almost the exact model I had owned back then.
+Despite being a popular model, it was not that easy to find a functional computer together with it&#39;s original monitor, keyboard and mouse on the internet.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Unable to login after uninstalling eCryptFS</title>
+    <link href="https://andreas-mausch.de/blog/2020-08-19-ecryptfs/"/>
+    <updated>2020-08-19T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-08-19-ecryptfs/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2020-08-19-ecryptfs/unable-to-login.jpg&quot; width=&quot;720&quot; height=&quot;405&quot; alt=&quot;undefined&quot; /&gt;
+&lt;h1 id=&quot;the-setup&quot; tabindex=&quot;-1&quot;&gt;1. The setup &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-08-19-ecryptfs/#the-setup&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I&#39;ve used eCryptFS for the several past years to secure the data in my home directory.&lt;/p&gt;
+&lt;p&gt;However it comes with a big limitation: Filenames cannot be longer than 144 chars (plus minus).
+So this will fail on an eCryptFS&#39;d directory:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Tizen on Samsung Gear S3</title>
+    <link href="https://andreas-mausch.de/blog/2020-06-22-tizen/"/>
+    <updated>2020-06-22T12:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-06-22-tizen/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I want to share my experience developing a watch face for a Galaxy S3 Gear smartwatch.&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2020-06-22-tizen/DSC_3608_.jpg&quot; width=&quot;1920&quot; height=&quot;1920&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;You can find the resulting project here: &lt;a href=&quot;https://gitlab.com/andreas-mausch/moonwatch&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://gitlab.com/andreas-mausch/moonwatch&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;development-environment-setup&quot; tabindex=&quot;-1&quot;&gt;1. Development environment setup &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-06-22-tizen/#development-environment-setup&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Retroflag GPi Case with a Raspberry Pi Zero W</title>
+    <link href="https://andreas-mausch.de/blog/2020-04-13-raspberry-pi-gpi-case/"/>
+    <updated>2020-04-13T21:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-04-13-raspberry-pi-gpi-case/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Corona quarantine time. So I&#39;ve gotten myself a toy.&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2020-04-13-raspberry-pi-gpi-case/gpi-case.jpg&quot; width=&quot;833&quot; height=&quot;1280&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;This Game Boy looking device can hold a Raspberry Pi Zero (W), has inputs, a display and sound.
+I&#39;ve installed RetroPie onto it.&lt;/p&gt;
+&lt;p&gt;What&#39;s also impressive: If you don&#39;t want to use RetroPie,
+you still have a fully functional Raspi (+ a display) which runs just on batteries!&lt;/p&gt;
+&lt;div class=&quot;swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain&quot;&gt;&lt;ul class=&quot;slider-container&quot;&gt;&lt;li&gt;&lt;a href=&quot;https://andreas-mausch.de/blog/2020-04-13-raspberry-pi-gpi-case/games/commander-keen.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://andreas-mausch.de/images/commander-keen-SGo-OjTv27-300.jpeg&quot; alt=&quot;Slider image&quot; width=&quot;300&quot; height=&quot;463&quot; /&gt;&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</content>
+  </entry>
+  <entry>
+    <title>Connect Thunar to Nextcloud</title>
+    <link href="https://andreas-mausch.de/blog/2020-04-10-nextcloud-thunar/"/>
+    <updated>2020-04-10T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-04-10-nextcloud-thunar/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I was looking for a way to integrate the Nextcloud WebDAV interface into Thunar, a Linux file manager.&lt;/p&gt;
+&lt;p&gt;After some time I found you can just paste this link &lt;em&gt;davs://cloud.neonew.de/remote.php/dav/files/&amp;lt;username&amp;gt;&lt;/em&gt;
+into the address line. Then I&#39;ve right clicked -&amp;gt; Store as bookmark.&lt;/p&gt;
+&lt;p&gt;However, only the first part of the link was stored: &lt;em&gt;davs://cloud.neonew.de/remote.php/dav&lt;/em&gt;. :(&lt;/p&gt;
+&lt;p&gt;So next I tried to find out where Thunar stores it bookmarks. A lot of stuff I&#39;ve found said &lt;em&gt;~&lt;s&gt;/.gtk-bookmarks&lt;/s&gt;&lt;/em&gt;.
+This is outdated tho, and the file is now located at &lt;em&gt;~/.config/gtk-3.0/bookmarks&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So add a new line to the file:&lt;/p&gt;
+&lt;pre class=&quot;language-plain&quot;&gt;&lt;code data-filename=&quot;~/.config/gtk-3.0/bookmarks&quot; class=&quot;language-plain&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;davs://cloud.neonew.de/remote.php/dav/files/&amp;lt;username&gt; Nextcloud&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;..and it should work as expected.&lt;/p&gt;
+&lt;p&gt;One thing about the authentication: You should setup&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Split Git Repos</title>
+    <link href="https://andreas-mausch.de/blog/2020-04-10-split-git-repos/"/>
+    <updated>2020-04-10T13:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-04-10-split-git-repos/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;My website has grown over time.&lt;/p&gt;
+&lt;p&gt;First, I just had a site for the WhatsApp Viewer.&lt;br /&gt;
+Then, I&#39;ve added a blog.&lt;br /&gt;
+Then, I&#39;ve added my landing page to present myself as a software professional.&lt;br /&gt;
+Then, I&#39;ve added a gallery.&lt;br /&gt;
+Then, I&#39;ve added my resume.&lt;br /&gt;
+Then, I&#39;ve added a site about things I like.&lt;br /&gt;
+Then, I&#39;ve added cheatsheets.&lt;/p&gt;
+&lt;p&gt;I&#39;ve noticed the repo was getting too big for my likes.&lt;/p&gt;
+&lt;p&gt;So I&#39;d rather like to have subdomains with separated repos, like &lt;a href=&quot;https://cheatsheets.andreas-mausch.de/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;cheatsheets.andreas-mausch.de&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here are some commands which were useful to me:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Create a new copy of the existing repo&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; clone &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;original_repo&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>NextCloudPi with Wi-Fi Hotspot</title>
+    <link href="https://andreas-mausch.de/blog/2020-03-18-nextcloudpi/"/>
+    <updated>2020-03-18T01:30:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-03-18-nextcloudpi/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://ownyourbits.com/nextcloudpi/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;NextCloudPi&lt;/a&gt; is a great project which provides ready-to-run images to run NextCloud on a Raspberry Pi.
+My favorite models are the 3B (&lt;strong&gt;without&lt;/strong&gt; the plus) and the Zero W, because of their efficiency.
+I&#39;ll use a Raspberry Pi 3B for this project. It can be powered by an ordinary power bank.&lt;/p&gt;
+&lt;p&gt;My goal is to have a cloud service which is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;easy to connect to&lt;/li&gt;
+&lt;li&gt;energy-efficient&lt;/li&gt;
+&lt;li&gt;and portable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;general-setup&quot; tabindex=&quot;-1&quot;&gt;1. General setup &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-03-18-nextcloudpi/#general-setup&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Desktop apps with Tauri</title>
+    <link href="https://andreas-mausch.de/blog/2020-02-20-tauri/"/>
+    <updated>2020-02-20T13:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-02-20-tauri/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;m always looking for better ways to create desktop applications.
+See &lt;a href=&quot;https://andreas-mausch.de/blog/2017-12-10-kotlin-native/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now, the easiest way to compose UIs is HTML and CSS, because it is used everywhere.
+And it would be great if it could be used to create desktop apps, right?&lt;/p&gt;
+&lt;p&gt;&amp;quot;Ah, there&#39;s Electron!&amp;quot; you might say. And yes, you are right. Electron exists.&lt;/p&gt;
+&lt;p&gt;However, I&#39;m not exactly a fan of it, mainly because of the resulting executable file size (&amp;gt;100mb),
+but also of security things..I&#39;m sure the browser of most electron apps are never updated and
+are target to hackers (see: &lt;a href=&quot;https://www.techradar.com/news/whatsapp-desktop-has-a-worrying-security-flaw&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;WhatsApp Desktop patches major security vulnerability&lt;/a&gt;).
+People call it the &amp;quot;flash for desktop&amp;quot; for a reason.&lt;/p&gt;
+&lt;p&gt;Now there&#39;s &lt;a href=&quot;https://github.com/tauri-apps/tauri&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Tauri&lt;/a&gt;: It just uses the o&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Eat my time, element-ui</title>
+    <link href="https://andreas-mausch.de/blog/2020-02-12-element-ui/"/>
+    <updated>2020-02-12T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-02-12-element-ui/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;m currently on a project to build a micro-frontend. Cool!&lt;/p&gt;
+&lt;p&gt;In general.&lt;/p&gt;
+&lt;p&gt;Technology stack is Vue.js, element-ui, export as web components, GraphQL API.&lt;/p&gt;
+&lt;p&gt;So today we found that dropdowns (el-select) won&#39;t work properly due to a bug.
+The dropdown popup (implemented using popper.js) is positioned incorrectly and we see erros in the browser console.&lt;/p&gt;
+&lt;p&gt;:(&lt;/p&gt;
+&lt;p&gt;After some investigation we found &lt;strong&gt;&lt;a href=&quot;https://github.com/ElemeFE/element/blob/8ab1db83c537bf0b0d63bb6397ad3440811e892e/src/utils/popper.js&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;this!&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Right, somebody decided it&#39;s a good idea to just c/p the source of popper.js into the element-ui repo,
+instead of just making it a dependency (like any good citizen would).&lt;/p&gt;
+&lt;p&gt;No chance to overwrite the version in the package-lock.json because of this inlined dependency.&lt;/p&gt;
+&lt;p&gt;Element has nearly 44k stars on github btw. How.&lt;/p&gt;
+&lt;p&gt;Now the last time this &amp;quot;dependency&amp;quot; has been up&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>No newline at end of file</title>
+    <link href="https://andreas-mausch.de/blog/2020-02-12-no-newline/"/>
+    <updated>2020-02-12T10:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2020-02-12-no-newline/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2020-02-12-no-newline/no-newline.png&quot; width=&quot;1200&quot; height=&quot;600&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;tl;dr: Please put an empty line at the end of each text/source file (if you want to be POSIX compliant).&lt;/p&gt;
+&lt;h2 id=&quot;reason&quot; tabindex=&quot;-1&quot;&gt;1. Reason &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2020-02-12-no-newline/#reason&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;This.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See also: &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>External monitor on Linux</title>
+    <link href="https://andreas-mausch.de/blog/2019-08-12-external-monitor-linux-xrandr/"/>
+    <updated>2019-08-12T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2019-08-12-external-monitor-linux-xrandr/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;on-each-connect&quot; tabindex=&quot;-1&quot;&gt;1. On each connect &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-08-12-external-monitor-linux-xrandr/#on-each-connect&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Short command to set the correct resolution and scaling for an external monitor.&lt;br /&gt;
+I&#39;ve decided to write this down because the &lt;em&gt;--scale-from&lt;/em&gt; parameter seems to be uncommon. Most suggestions on the internet only use &lt;em&gt;--scale&lt;/em&gt;, which I find less intuitive to use.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Sign Git commits</title>
+    <link href="https://andreas-mausch.de/blog/2019-07-11-sign-git-commits/"/>
+    <updated>2019-07-12T14:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2019-07-11-sign-git-commits/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;find-signingkey&quot; tabindex=&quot;-1&quot;&gt;1. Find signingkey &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-07-11-sign-git-commits/#find-signingkey&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Assuming you already have a GPG key:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ gpg --list-secret-keys --keyid-format LONG&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;/home/neonew/.gnupg/pubring.kbx&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;-------------------------------&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;sec   rsa2048/1234567890123456 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Dell XPS 15 7590</title>
+    <link href="https://andreas-mausch.de/blog/2019-07-10-xps-7590/"/>
+    <updated>2019-07-10T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2019-07-10-xps-7590/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;change-wifi-chip-for-intel-9260&quot; tabindex=&quot;-1&quot;&gt;1. Change WiFi chip for Intel 9260 &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-07-10-xps-7590/#change-wifi-chip-for-intel-9260&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class=&quot;swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain&quot;&gt;&lt;ul class=&quot;slider-container&quot;&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</content>
+  </entry>
+  <entry>
+    <title>Scaling images using imagemagick</title>
+    <link href="https://andreas-mausch.de/blog/2019-05-06-scaling-images-using-imagemagick/"/>
+    <updated>2019-05-06T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2019-05-06-scaling-images-using-imagemagick/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;downscale-images-(batch)&quot; tabindex=&quot;-1&quot;&gt;1. Downscale images (batch) &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-05-06-scaling-images-using-imagemagick/#downscale-images-(batch)&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Just a useful command I use to downscale my images, for example to share them on social media.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;magick mogrify -auto-orient &lt;span class=&quot;token parameter variable&quot;&gt;-strip&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-resize&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;1920x1920&gt;&quot;&lt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Stubbing third party services</title>
+    <link href="https://andreas-mausch.de/blog/2019-05-02-third-party-stubs/"/>
+    <updated>2019-05-02T15:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2019-05-02-third-party-stubs/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;When you connect third party web services to your application,
+you&#39;d like to have a convenient way to work with them during development.&lt;/p&gt;
+&lt;h1 id=&quot;the-external-service&quot; tabindex=&quot;-1&quot;&gt;1. The external service &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-05-02-third-party-stubs/#the-external-service&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Let&#39;s assume our application calls a REST API to validate user addresses.&lt;/p&gt;
+&lt;pre class=&quot;language-plain&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;GET https://imaginary-address-validation.com/api?address=Jungf&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Server on Android using Linux Deploy</title>
+    <link href="https://andreas-mausch.de/blog/2018-07-14-android-server/"/>
+    <updated>2018-07-14T13:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-07-14-android-server/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;A friend asked me how difficult it would be to run a python program 24/7 in his own network.
+I said easy, just use a Raspi. He answered: &amp;quot;I got an old phone with a broken touchscreen&amp;quot;.&lt;/p&gt;
+&lt;p&gt;I&#39;ve played around with Linux Deploy in the past, so I already knew it is possible to install Linux on an Android phone.
+I wasn&#39;t sure if python would run, but I was confident it&#39;s gonna work so I tried.&lt;/p&gt;
+&lt;h1 id=&quot;setup&quot; tabindex=&quot;-1&quot;&gt;1. Setup &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2018-07-14-android-server/#setup&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Radio</title>
+    <link href="https://andreas-mausch.de/blog/2018-05-23-radio/"/>
+    <updated>2018-05-23T21:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-05-23-radio/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;During the last weeks I wondered how radio works.
+I wasn&#39;t able to find a good source which explains in simple words how the transformation of eletric current to radio waves is done.&lt;/p&gt;
+&lt;p&gt;I wonder if it&#39;s comparable to a lightbulb, which also transforms current to electromagnetic waves.
+And I wonder if it&#39;s the opposite of the photoelectric effect, which takes photons to transform them into current.
+Even the (usually really good) &lt;a href=&quot;https://www.youtube.com/watch?v=Nc0tk8WemGg&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Sendung mit der Maus&lt;/a&gt; couldn&#39;t really explain it to me. Armin rather focused on assembling pre-built components. :/&lt;/p&gt;
+&lt;p&gt;A lot of stuff is done via radio. Of course, there is FM/AM broadcasting, but there is way more:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RFID&lt;/li&gt;
+&lt;li&gt;Radar&lt;/li&gt;
+&lt;li&gt;WiFi&lt;/li&gt;
+&lt;li&gt;Bluetooth&lt;/li&gt;
+&lt;li&gt;Amateur radio&lt;/li&gt;
+&lt;li&gt;TV (DVB-T(2))&lt;/li&gt;
+&lt;li&gt;CCTV / cameras&lt;/li&gt;
+&lt;li&gt;Navigation (GPS / Galileo / GLONASS / Beidou)&lt;/li&gt;
+&lt;li&gt;Mobile communications (GSM / 3G / LTE)&lt;/li&gt;
+&lt;/&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Undervolting the XPS 15 9550 on Linux (i7-6700HQ)</title>
+    <link href="https://andreas-mausch.de/blog/2018-05-22-undervolting/"/>
+    <updated>2018-05-22T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-05-22-undervolting/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Undervolting in notebooks is useful to reduce temperatures, avoid throttling and extend battery life.&lt;/p&gt;
+&lt;p&gt;I tried to undervolt my notebook already some months ago, and found &lt;a href=&quot;https://github.com/mihic/linux-intel-undervolt&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;mihic/linux-intel-undervolt&lt;/a&gt;. However, I didn&#39;t get it to work because I didn&#39;t know what I was doing and &lt;code class=&quot;language-plain&quot;&gt;rdmsr 0x150&lt;/code&gt; always returned 0 for me, even after &lt;code class=&quot;language-plain&quot;&gt;sudo modprobe msr&lt;/code&gt;.
+I think my mistake was to not execute it on every single core.&lt;/p&gt;
+&lt;p&gt;But today, I found this &lt;a href=&quot;https://github.com/georgewhewell/undervolt&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;georgewhewell/undervolt&lt;/a&gt;. A small python script which does all the complicated work.
+According to the internet most Intel CPUs can be undervolted easily by 100 mV. While this doesn&#39;t sound like much, it&#39;s almost a 10% cut of the default 1.2 V.&lt;/p&gt;
+&lt;p&gt;I got my CPU working with a delta of &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>WiFi monitor mode</title>
+    <link href="https://andreas-mausch.de/blog/2018-04-30-wifi-monitor-mode/"/>
+    <updated>2018-04-30T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-04-30-wifi-monitor-mode/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;With monitor mode enabled, you can receive all packages on wireless networks around, without being connected to any.
+It is useful for debugging and security analysis.&lt;/p&gt;
+&lt;p&gt;I am very forgetful so I will just write down how to enable monitor mode for the devices I own.&lt;/p&gt;
+&lt;h1 id=&quot;intel-dual-band-wireless-ac-8265-(iwlwifi)&quot; tabindex=&quot;-1&quot;&gt;1. Intel Dual Band Wireless-AC 8265 (iwlwifi) &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2018-04-30-wifi-monitor-mode/#intel-dual-band-wireless-ac-8265-(iwlwifi)&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Detailed explaination: &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Self-made SMS receiver API</title>
+    <link href="https://andreas-mausch.de/blog/2018-04-28-sms-api/"/>
+    <updated>2018-04-28T16:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-04-28-sms-api/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Update: I&#39;ve uploaded the sources &lt;a href=&quot;https://github.com/andreas-mausch/sms-receiver&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/andreas-mausch/sms-receiver&lt;/a&gt;.&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2018-04-28-sms-api/website.jpg&quot; width=&quot;1280&quot; height=&quot;832&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;This week we had problems with our SMS provider, which offers us virtual phone numbers we can send SMS to.
+We use it as SMS verification service via &lt;a href=&quot;https://authy.com/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Authy&lt;/a&gt; on our staging system.
+If you register a new account with our app, Authy sends a SMS with a code to verify your phone number.&lt;/p&gt;
+&lt;p&gt;On our staging system we use two virtual phone numbers, and when a SMS is sent to them, we can query the text via an API.
+Our automated test then reads the SMS code and continues with the registration.&lt;/p&gt;
+&lt;p&gt;I wondered if I could develop a similar service by myself.&lt;br /&gt;
+Also, it was a good chance to make use of my old surf stick (see here: &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Manjaro Linux on Dell XPS 15 9550</title>
+    <link href="https://andreas-mausch.de/blog/2018-04-13-manjaro-linux-on-dell-xps-15-9550/"/>
+    <updated>2018-04-13T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-04-13-manjaro-linux-on-dell-xps-15-9550/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Below is a list of how I configured my laptop. Most is personal preference, some settings might affect more users. Maybe someone find it useful.&lt;/p&gt;
+&lt;h1 id=&quot;my-device&quot; tabindex=&quot;-1&quot;&gt;1. My device &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2018-04-13-manjaro-linux-on-dell-xps-15-9550/#my-device&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I use the XPS 15 9550 in the maxed-out configuration.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel i7-6700HQ&lt;/li&gt;
+&lt;li&gt;32 GB DDR4-2133MHz&lt;/li&gt;
+&lt;li&gt;4K (Ultra-HD) Display&lt;/li&gt;
+&lt;li&gt;1 TB SSD (Toshiba)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;preparation&quot; tabindex=&quot;-1&quot;&gt;2. Preparation &lt;/h1&gt;</content>
+  </entry>
+  <entry>
+    <title>Migration to Visual Studio 2017</title>
+    <link href="https://andreas-mausch.de/blog/2018-03-29-migration-to-visual-studio-2017/"/>
+    <updated>2018-03-29T19:07:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2018-03-29-migration-to-visual-studio-2017/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve developed &lt;a href=&quot;https://github.com/andreas-mausch/whatsapp-viewer&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;WhatsApp Viewer&lt;/a&gt; with the good old Visual Studio 2008.
+It&#39;s a bit dated and doesn&#39;t support all of the new C++ &lt;a href=&quot;http://en.cppreference.com/w/cpp/language/history&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;features&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Since the new Visual Studio 2017 is free (no costs) for personal usage and open-source projects, I thought it might be worth a shot.&lt;/p&gt;
+&lt;h2 id=&quot;setup&quot; tabindex=&quot;-1&quot;&gt;1. Setup &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2018-03-29-migration-to-visual-studio-2017/#setup&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;</content>
+  </entry>
+  <entry>
+    <title>Samsung S4: Ad-Hoc WiFi (IBSS) on LineageOS 14.1</title>
+    <link href="https://andreas-mausch.de/blog/2017-12-11-samsung-s4-adhoc-on-lineage14.1/"/>
+    <updated>2017-12-11T01:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-12-11-samsung-s4-adhoc-on-lineage14.1/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I did some investigations into &lt;a href=&quot;https://andreas-mausch.de/blog/2017-07-20-mesh-networks-on-android/&quot;&gt;Mesh Networks&lt;/a&gt; few weeks ago, in which I set up an Ad-Hoc WiFi network on my Samsung S4 phone.&lt;br /&gt;
+However, I used CyanogenMod 11, which is a little outdated.&lt;/p&gt;
+&lt;p&gt;I&#39;ve received an e-mail from Andrew Hunter &lt;a href=&quot;mailto:andrew.hunter@utexas.edu&quot;&gt;andrew.hunter@utexas.edu&lt;/a&gt; from Texas, who tried to run an Ad-Hoc network on the current LineageOS, 14.1.&lt;/p&gt;
+&lt;p&gt;For some reason, CyanogenMod decided to drop support for Ad-Hoc, so the current LineageOS doesn&#39;t have it.&lt;br /&gt;
+In fact, you won&#39;t be even able to see Ad-Hoc networks on the network list. They are filtered out.&lt;/p&gt;
+&lt;p&gt;So he tried to establish a connection by directly calling the Linux command in the adb shell ($SSID can be TestAdHoc and $FREQ 2412 for example):&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ iw wlan0 &lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Kotlin Native</title>
+    <link href="https://andreas-mausch.de/blog/2017-12-10-kotlin-native/"/>
+    <updated>2017-12-10T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-12-10-kotlin-native/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;double-click-%26-run&quot; tabindex=&quot;-1&quot;&gt;1. Double-click &amp;amp; run &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2017-12-10-kotlin-native/#double-click-%26-run&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I like to develop small native desktop apps like &lt;a href=&quot;https://andreas-mausch.de/whatsapp-viewer/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;WhatsApp Viewer&lt;/a&gt; or &lt;a href=&quot;https://github.com/andreas-mausch/csgo-demohighlights&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;CS:GO Demoviewer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;However, whenever I want to create an application like this, I struggle to&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Mesh networks on Android?</title>
+    <link href="https://andreas-mausch.de/blog/2017-07-20-mesh-networks-on-android/"/>
+    <updated>2017-07-20T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-07-20-mesh-networks-on-android/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I wondered if lets say three Android phones can be used to build up a &lt;a href=&quot;https://en.wikipedia.org/wiki/Mesh_networking&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;mesh network&lt;/a&gt;.
+So if a phone has a connection to at least one of the others, it should still be part of the network. No router, no internet required. In theory, this should work, each device has the needed hardware.&lt;/p&gt;
+&lt;p&gt;I know there is &lt;a href=&quot;https://play.google.com/store/apps/details?id=org.servalproject&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Serval&lt;/a&gt;, but that&#39;s not really what I am looking for: It is limited to the features they provide in their app. You wouldn&#39;t be able to use all the software out there, not even a browser. That&#39;s because they have re-implemented common protocols: They have &lt;a href=&quot;http://developer.servalproject.org/dokuwiki/doku.php?id=content:tech:mdp&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;MDP&lt;/a&gt; instead of UDP, and they have &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Dell XPS 15 (9550) BIOS updates changelog</title>
+    <link href="https://andreas-mausch.de/blog/2017-06-16-xps-15-9550-bios-updates-changelog/"/>
+    <updated>2017-06-16T01:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-06-16-xps-15-9550-bios-updates-changelog/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I tried to find a changelog of the BIOS updates for the XPS 15. I failed. So I&#39;ve decided to create a list myself.&lt;/p&gt;
+&lt;p&gt;There is a well-hidden overview on the official Dell website. Click &lt;a href=&quot;http://downloads.dell.com/published/pages/xps-15-9550-laptop.html&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; for details. Note: There have been some updates released, which are not available for download anymore.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;1.6.1&lt;/strong&gt;&lt;br /&gt;
+2017-12-23
+&lt;ol&gt;
+&lt;li&gt;Updated to the latest INTEL CPU microcodes.&lt;/li&gt;
+&lt;li&gt;Updated Intel ME Firmware to address security advisories INTEL-SA-00086 (CVE-2017-5705, CVE-2017-5708, CVE-2017-5711 &amp;amp; CVE-2017-5712) &amp;amp; INTEL-SA-00101(CVE-2017-13077, CVE-2017-13078 &amp;amp; CVE-2017-13080).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1.5.1&lt;/strong&gt;&lt;br /&gt;
+2017-11-14
+&lt;ol&gt;
+&lt;li&gt;Enhance audio quality when the brightness is adjusted&lt;/li&gt;
+&lt;li&gt;Extending battery support&lt;/li&gt;
+&lt;li&gt;Allows Dell Command Configure to implement the required Thunderbolt Sec Level settings w&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Install Intel WiFi 8265 into Dell XPS 15 (9550)</title>
+    <link href="https://andreas-mausch.de/blog/2017-06-02-intel-8265-wifi-xps-15-9550/"/>
+    <updated>2017-06-02T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-06-02-intel-8265-wifi-xps-15-9550/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;My main laptop I use for developing software is the Dell XPS 15 9550 (2016 model).
+It is a very solid, good laptop.
+One problem I had with it was the WiFi though.
+Connection in general was quite poor and in some places I wasn&#39;t able to complete uploads at all.
+They were stuck repeatedly at a certain percentage and didn&#39;t continue from there.
+But when I restarted my machine it worked again. I was like...well, might be shitty drivers.
+However, after a quick internet research I found there are other people with the same problems.&lt;/p&gt;
+&lt;p&gt;The wireless card installed was the Dell Wireless 1830 (DW1830) with a chip from Broadcom (BCM43602).&lt;/p&gt;
+&lt;p&gt;I&#39;ve decided to buy a &lt;a href=&quot;https://ark.intel.com/de/products/94150/Intel-Dual-Band-Wireless-AC-8265&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Intel 8265&lt;/a&gt;. It only has 2x2 antenna connections instead of the 3x3 of the DW1830, but the internet says it doesn&#39;t really make much of a difference.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Surfstick Huawei E173 on Linux</title>
+    <link href="https://andreas-mausch.de/blog/2017-05-31-surfstick-huawei-e173-on-linux/"/>
+    <updated>2017-05-31T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-05-31-surfstick-huawei-e173-on-linux/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve tried to use an USB modem I&#39;ve bought two years ago (and never really used) on my Linux machine.
+On the first try, everything went plug&#39;n&#39;play and I was asked to enter the PIN and it automatically connected.
+That was nice, but didn&#39;t work like that again. After some googling I&#39;ve found this link:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wiki.ubuntuusers.de/USB_ModeSwitch/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://wiki.ubuntuusers.de/USB_ModeSwitch/&lt;/a&gt;&lt;br /&gt;
+(German only)&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2017-05-31-surfstick-huawei-e173-on-linux/huawei-lsusb-drive-mode.jpg&quot; width=&quot;1565&quot; height=&quot;900&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;So &amp;quot;Huawei Technologies Co., Ltd. Broadband stick&amp;quot; is the device.&lt;br /&gt;
+We can see the Vendor ID (12d1) and the Product ID (1446).&lt;/p&gt;
+&lt;p&gt;A call to &lt;code class=&quot;language-plain&quot;&gt;usb-devices&lt;/code&gt; shows it is in drive-mode:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ usb-devices&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;T:  &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Security: Playing around with NSA exploit EternalBlue (MS17-010)</title>
+    <link href="https://andreas-mausch.de/blog/2017-05-14-eternalblue/"/>
+    <updated>2017-05-14T01:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-05-14-eternalblue/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In April, &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Shadow_Brokers&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;TheShadowBrokers&lt;/a&gt; have released numerous exploits written by the &lt;a href=&quot;https://en.wikipedia.org/wiki/Equation_Group&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Equation Group&lt;/a&gt;, which are &amp;quot;suspected of being tied to the United States National Security Agency (NSA)&amp;quot;.&lt;/p&gt;
+&lt;p&gt;You can find the all the files here: &lt;a href=&quot;https://github.com/adamcaudill/EquationGroupLeak&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/adamcaudill/EquationGroupLeak&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Among the files, there is the &lt;a href=&quot;https://en.wikipedia.org/wiki/EternalBlue&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;EternalBlue exploit&lt;/a&gt;. For me, it seems to be the biggest exploit since the RPC DCOM exploit used by &lt;a href=&quot;https://en.wikipedia.org/wiki/Blaster_(computer_worm)&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Blaster&lt;/a&gt; in 2003 (see &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Compass App in Kotlin</title>
+    <link href="https://andreas-mausch.de/blog/2017-05-14-compass-app-in-kotlin/"/>
+    <updated>2017-05-14T00:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2017-05-14-compass-app-in-kotlin/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;My colleague spent some time researching into &lt;a href=&quot;https://kotlinlang.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Kotlin&lt;/a&gt;. He was so impressed that it is now his favorite programming lanuage. So I decided to take a look at it and wrote a small compass app.&lt;/p&gt;
+&lt;p&gt;I&#39;ve used IntelliJ with the Android and Kotlin plugins and it was very easy to &lt;a href=&quot;https://kotlinlang.org/docs/tutorials/kotlin-android.html&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;get started&lt;/a&gt;. One notable thing is the convenient copy&amp;amp;paste of Java code into the IDE, which then automatically asks if it should convert the code into Kotlin. It worked very well. The language itself looks interesting as well. Although this app doesn&#39;t really contain a lot of code, I will dig deeper into the language. In some aspects it reminds me of Scala.&lt;/p&gt;
+&lt;p&gt;One thing I disliked a lot: I had to convert the SVG image into Android&#39;s special VectorDrawable format. I don&#39;t understand why they come up with a completely new fo&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Record Screencasts on Linux</title>
+    <link href="https://andreas-mausch.de/blog/2016-11-13-screencast-on-linux/"/>
+    <updated>2016-11-12T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2016-11-13-screencast-on-linux/</id>
+    <content xml:lang="en" type="html">&lt;h1 id=&quot;useful-ffmpeg-commands-for-recording-your-screen&quot; tabindex=&quot;-1&quot;&gt;1. Useful FFMPEG commands for recording your screen &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2016-11-13-screencast-on-linux/#useful-ffmpeg-commands-for-recording-your-screen&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Record screen without audio. Replace 3840x2160 with your resolution.&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# The video is lossless, because of&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>WhatsApp Viewer v1.9 with crypt12 support released</title>
+    <link href="https://andreas-mausch.de/blog/2016-10-23-whatsapp-viewer-v1-9/"/>
+    <updated>2016-10-22T22:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2016-10-23-whatsapp-viewer-v1-9/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I have released a new version of WhatsApp Viewer, get it here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/andreas-mausch/whatsapp-viewer/releases&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Download WhatsApp Viewer v1.9&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Thanks to TripCode, who released source code to decrypt the crypt12 file format:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/EliteAndroidApps/WhatsApp-Crypt12-Decrypter&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/EliteAndroidApps/WhatsApp-Crypt12-Decrypter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See details about the format here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.digitalinternals.com/security/decrypt-whatsapp-crypt12-database-messages/559/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;How to Decrypt WhatsApp crypt12 Database Messages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gitlab.com/digitalinternals/whatsapp-crypt12/tree/master&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;gitlab.com digitalinternals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Moved Gitlab server to another host</title>
+    <link href="https://andreas-mausch.de/blog/2016-05-06-moved-gitlab-server/"/>
+    <updated>2016-05-05T22:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2016-05-06-moved-gitlab-server/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I use the Gitlab Community Edition for private projects.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://doc.gitlab.com/omnibus/docker/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;http://doc.gitlab.com/omnibus/docker/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now I wanted to replace the Acer Revo with a more powerful Intel NUC i5 I bought.
+So I copied all volumes referenced by the docker container
+(for me it was ./gitlab/config, ./gitlab/data and ./gitlab/logs) and tried to
+start gitlab/gitlab-ce:latest.&lt;/p&gt;
+&lt;p&gt;In the log files (docker logs gitlab) Gitlab told me the permissions have changed
+due to the copying. I searched the internet, found &lt;a href=&quot;https://github.com/gitlabhq/gitlabhq/issues/9611&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;this on github.com&lt;/a&gt; and I had to run:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;token builtin class-name&quot;&gt;exec&lt;/span&gt; gitlab update-permissions&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, I still got error messages lik&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Linux Mint: Login loop after new graphics card</title>
+    <link href="https://andreas-mausch.de/blog/2016-04-23-linux-mint-new-graphics-card/"/>
+    <updated>2016-04-23T02:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2016-04-23-linux-mint-new-graphics-card/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I am a big fan of Linux and open-source in general. Despite the big improvements
+on usability there are still too many moments where you need to use the terminal.&lt;/p&gt;
+&lt;p&gt;Well, I am a developer and used to the terminal. However, this week I have
+experienced a problem which cost me some hours.&lt;/p&gt;
+&lt;p&gt;I have changed my graphics card from ATI to Nvidia. My PC recognized the new card,
+it reset the BIOS and my Windows partition booted up. It required new drivers
+which was fine.&lt;/p&gt;
+&lt;p&gt;When I tried to boot my Linux partition, I faced a black screen. After uninstalling
+the ATI drivers and installing the proprietary Nvidia drivers in recovery mode
+on command line I got to the login screen.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; purge &lt;span class=&quot;token string&quot;&gt;&quot;fglrx.*&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Hypriot Docker and remote access</title>
+    <link href="https://andreas-mausch.de/blog/2015-12-18-hypriot-docker/"/>
+    <updated>2015-12-18T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2015-12-18-hypriot-docker/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Hypriot offers an Raspberry Pi image to run docker.&lt;br /&gt;
+&lt;a href=&quot;http://blog.hypriot.com/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;http://blog.hypriot.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;However, by default docker doesn&#39;t listen on a network port which would allow to conveniently run docker commands from another host.&lt;/p&gt;
+&lt;h1 id=&quot;make-docker-listen-on-network-interface&quot; tabindex=&quot;-1&quot;&gt;1. Make docker listen on network interface &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2015-12-18-hypriot-docker/#make-docker-listen-on-network-interface&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Find and&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Protractor: Geolocation in Google Chrome</title>
+    <link href="https://andreas-mausch.de/blog/2015-12-14-protractor-chrome-fake-geolocation/"/>
+    <updated>2015-12-14T05:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2015-12-14-protractor-chrome-fake-geolocation/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I am currently developing a hybrid app using Ionic.
+&lt;a href=&quot;http://ionicframework.com/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;http://ionicframework.com&lt;/a&gt;&lt;br /&gt;
+For end-to-end tests, they recommend Protractor. &lt;a href=&quot;http://www.protractortest.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;http://www.protractortest.org&lt;/a&gt;&lt;br /&gt;
+Furthermore, I use a &lt;a href=&quot;https://github.com/SeleniumHQ/docker-selenium&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Selenium docker container&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As many other apps, I make use of geolocation to receive the user&#39;s position.
+However, when I tried to run a test with geolocation, it failed. I then used VNC to see if there is any error message, and I discovered Google Chrome prompts the user to allow or disallow geolocation. I searched the internet for answers, but couldn&#39;t find any. &lt;a href=&quot;http://stackoverflow.com/questions/23431059/how-to-mock-call-to-navigator-geolocation-in-protractor-tests&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;This&lt;/a&gt; didn&#39;t work for m&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>111 Stars on Github for WhatsApp Viewer</title>
+    <link href="https://andreas-mausch.de/blog/2015-11-23-whatsapp-viewer-111-stars/"/>
+    <updated>2015-11-23T21:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2015-11-23-whatsapp-viewer-111-stars/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2015-11-23-whatsapp-viewer-111-stars/whatsapp-viewer_111_stars.png&quot; width=&quot;1018&quot; height=&quot;388&quot; alt=&quot;Image&quot; /&gt;
+&lt;p&gt;Today I have received the 111th star on WhatsApp Viewer on github.
+I am still surprised by the spread of the application.
+I get lots of emails regarding key recovery, bugs and new features.
+Even though I have not worked on WhatsApp Viewer for a few months, download numbers are continual and a lot of people are interested in the app.&lt;/p&gt;
+&lt;p&gt;Thank you very much.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/andreas-mausch/whatsapp-viewer&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/andreas-mausch/whatsapp-viewer&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>CS:GO Demoviewer Gif</title>
+    <link href="https://andreas-mausch.de/blog/2015-02-23-csgo-demoviewer-gif/"/>
+    <updated>2015-02-23T14:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2015-02-23-csgo-demoviewer-gif/</id>
+    <content xml:lang="en" type="html">&lt;video preload=&quot;auto&quot; autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; width=&quot;665&quot; height=&quot;690&quot;&gt;
+    &lt;source src=&quot;https://andreas-mausch.de/blog/2015-02-23-csgo-demoviewer-gif/csgo-demoviewer.webm&quot; type=&quot;video/webm&quot; /&gt;
+&lt;/video&gt;
+&lt;p&gt;Current development screenshot&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Jekyll and CS:GO Demoviewer</title>
+    <link href="https://andreas-mausch.de/blog/2015-02-20-jekyll-and-csgo-demoviewer/"/>
+    <updated>2015-02-20T20:13:44Z</updated>
+    <id>https://andreas-mausch.de/blog/2015-02-20-jekyll-and-csgo-demoviewer/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Today I have set up Jekyll and did some work on my new project, the CS:GO Demoviewer.&lt;/p&gt;
+&lt;p&gt;CS:GO Demoviewer will be a tool to quickly review .dem files of the game Counter-Strike Global Offensive rendered in 2D. Development just started and I have a lot of ideas in mind to implement.
+Below a screenshot of a very early version:&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2015-02-20-jekyll-and-csgo-demoviewer/csgo-demoviewer.jpg&quot; width=&quot;861&quot; height=&quot;881&quot; alt=&quot;Image&quot; /&gt;
+&lt;p&gt;Furthermore I am working on another tool for CS:GO, which will also parse a .dem file and output all highlights of it. Currently it shows the round number of rounds where a player got at least 3 frags and also clutches, when a lonely player left on his team won the round in 1vsX.&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2015-02-20-jekyll-and-csgo-demoviewer/csgo-demohighlights.jpg&quot; width=&quot;847&quot; height=&quot;438&quot; alt=&quot;Image&quot; /&gt;
+</content>
+  </entry>
+</feed>
