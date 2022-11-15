@@ -67,12 +67,57 @@ It is a free firmware without any blobs required for some firmwares.</p>
 <img src="/blog/2021-05-01-openwrt/openwrt-installed.png" width="1511" height="976" alt="undefined">
 <img src="/blog/2021-05-01-openwrt/openwrt-status.png" width="1511" height="976" alt="undefined">
 <img src="/blog/2021-05-01-openwrt/openwrt-ssh.png" width="634" height="373" alt="undefined">
-<h1 id="routerfreiheit" tabindex="-1">5. Routerfreiheit <a class="header-anchor" href="#routerfreiheit" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="problem-with-ssh-connection" tabindex="-1">5. Problem with SSH connection <a class="header-anchor" href="#problem-with-ssh-connection" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">ssh</span> <span class="token parameter variable">-v</span> root@192.168.1.1</span>
+<span class="highlight-line"><span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span></span>
+<span class="highlight-line">debug1: SSH2_MSG_KEXINIT sent</span>
+<span class="highlight-line">debug1: SSH2_MSG_KEXINIT received</span>
+<span class="highlight-line">debug1: kex: algorithm: curve25519-sha256</span>
+<span class="highlight-line">debug1: kex: <span class="token function">host</span> key algorithm: <span class="token punctuation">(</span>no match<span class="token punctuation">)</span></span>
+<span class="highlight-line">Unable to negotiate with <span class="token number">192.168</span>.1.1 port <span class="token number">22</span>: no matching <span class="token function">host</span> key <span class="token builtin class-name">type</span> found. Their offer: ssh-rsa</span></code></pre>
+<p>The solution was to specify the algorithm directly:</p>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">ssh</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-oHostKeyAlgorithms</span><span class="token operator">=</span>+ssh-rsa root@192.168.1.1</span></code></pre>
+<p>I am not sure why this was needed though.</p>
+<h1 id="upgrade-firmware" tabindex="-1">6. Upgrade Firmware <a class="header-anchor" href="#upgrade-firmware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>See the <a href="https://openwrt.org/docs/guide-user/installation/sysupgrade.cli" class="external-link" target="_blank">official instructions</a>.</p>
+<p>I had to add the <code class="language-plain">-O</code> flag to scp:</p>
+<blockquote>
+<p>Use the legacy SCP protocol for file transfers instead of the SFTP protocol.  Forcing the use of the SCP protocol may be necessary for servers that do not implement SFTP, for backwards-compatibility for particular filename wildcard patterns and for expanding paths with a ‘~’ prefix for older SFTP servers.</p>
+</blockquote>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">scp</span> <span class="token parameter variable">-oHostKeyAlgorithms</span><span class="token operator">=</span>+ssh-rsa <span class="token parameter variable">-O</span> openwrt-22.03.2-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin root@192.168.1.1:/tmp</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Then, on the server in the /tmp directory:</span></span>
+<span class="highlight-line">sysupgrade <span class="token parameter variable">-v</span> openwrt-22.03.2-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin</span></code></pre>
+<h1 id="enable-wifi" tabindex="-1">7. Enable WiFi <a class="header-anchor" href="#enable-wifi" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">uci show wireless</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">uci <span class="token builtin class-name">set</span> <span class="token assign-left variable">wireless.radio0.country</span><span class="token operator">=</span><span class="token string">'DE'</span></span>
+<span class="highlight-line">uci <span class="token builtin class-name">set</span> <span class="token assign-left variable">wireless.radio0.disabled</span><span class="token operator">=</span><span class="token string">'0'</span></span>
+<span class="highlight-line">uci <span class="token builtin class-name">set</span> <span class="token assign-left variable">wireless.default_radio0.encryption</span><span class="token operator">=</span><span class="token string">'psk2'</span></span>
+<span class="highlight-line">uci <span class="token builtin class-name">set</span> <span class="token assign-left variable">wireless.default_radio0.ssid</span><span class="token operator">=</span><span class="token string">'MyNetwork'</span></span>
+<span class="highlight-line">uci <span class="token builtin class-name">set</span> <span class="token assign-left variable">wireless.default_radio0.key</span><span class="token operator">=</span><span class="token string">'Password'</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Same for radio1 / default_radio1</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">uci commit wireless</span>
+<span class="highlight-line">wifi</span></code></pre>
+<h1 id="resolve-hostnames-on-the-local-network" tabindex="-1">8. Resolve hostnames on the local network <a class="header-anchor" href="#resolve-hostnames-on-the-local-network" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">uci <span class="token parameter variable">-N</span> show dhcp.@dnsmasq<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span></span>
+<span class="highlight-line">uci <span class="token builtin class-name">set</span> dhcp.@dnsmasq<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>.domainneeded<span class="token operator">=</span><span class="token string">'0'</span></span>
+<span class="highlight-line">uci commit dhcp</span>
+<span class="highlight-line">/etc/init.d/dnsmasq restart</span></code></pre>
+<h1 id="routerfreiheit" tabindex="-1">9. Routerfreiheit <a class="header-anchor" href="#routerfreiheit" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>In Germany, there is a law to guarantee customers to work with a modem of their choice
 (<em>Gesetz zur Auswahl und zum Anschluss von Telekommunikationsendgeräten</em>, see <a href="https://dejure.org/BGBl/2016/BGBl._I_S._106" class="external-link" target="_blank">here</a>).</p>
 <p>My provider (willy.tel) has some instructions and lecture you the disadvantages of operating your own router.
 However, they provide all information needed, which is great.</p>
 <img src="/blog/2021-05-01-openwrt/willytel-routerfreiheit.png" width="708" height="972" alt="undefined">
+<p>Unfortunately, DOCSIS doesn't work on OpenWrt.
+See <a href="https://openwrt.org/unsupported/cable_modem" class="external-link" target="_blank">here</a> for the explanation:</p>
+<blockquote>
+<p>DOCSIS functionality is based on cryptographic certificates to authenticate cable modems and their running firmware to the ISP - that is not supportable by OpenWrt under any circumstances.
+There is no FOSS solution available for cable modems.</p>
+</blockquote>
 
 
 <script async src="/scripts/index.js"></script>
