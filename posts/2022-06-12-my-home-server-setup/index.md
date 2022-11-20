@@ -1,7 +1,7 @@
 ---
 title: My home server setup (Intel NUC)
 date: 2022-06-12T18:00:00+02:00
-tags: ['server', 'docker', 'nginx', 'gitlab', 'nextcloud', 'intel nuc']
+tags: ['server', 'docker', 'nginx', 'caddy', 'gitlab', 'nextcloud', 'gitea', 'portainer', 'intel nuc']
 thumbnail: nuc-front.jpg
 ---
 
@@ -30,10 +30,14 @@ It has to be done via hardware jumpers, something I haven't touched like 20 year
 
 # Services
 
-I run [GitLab](https://about.gitlab.com/) and [Nextcloud](https://nextcloud.com/) on the server.
-I use them to host private Git repos, sync my contacts and notes and store files on my private cloud drive.
-
+I run [GitLab](https://about.gitlab.com/) and [Nextcloud](https://nextcloud.com/) on the server publicly available on the internet.
+I use them to host some of my Git repos, sync my contacts and notes and store files on my private cloud drive.
 I think privacy is important and I also think too many people share private data with too many companies.
+
+I additionally have a [Gitea](https://gitea.io/) instance and [Portainer](https://www.portainer.io/) running,
+accessible from my local network only.
+Gitea is used for private Git repos and as a backup/mirror server for my GitHub and GitLab repos.
+Portainer is used for managing docker instances.
 
 # Router and DNS settings
 
@@ -69,8 +73,8 @@ After the installation, I've:
 - Install docker
 - Setup docker for non-root access
 
-I run a nginx server to forward incoming connections to the right service,
-and I have one Docker container for each GitLab and Nextcloud.
+I run a ~~nginx~~ caddy server to forward incoming connections to the right service,
+and I have one Docker container for each GitLab, Nextcloud, Gitea and Portainer.
 
 # Backup
 
@@ -88,9 +92,9 @@ sudo rsync -avh0 --stats --numeric-ids --rsync-path="sudo rsync" nuc@nuc:/home/n
 sudo rsync -avh0 --stats --numeric-ids --rsync-path="sudo rsync" nuc@nuc:/etc/letsencrypt letsencrypt
 ```
 
-# TLS (nginx settings and Let's encrypt)
+# TLS (caddy settings and Let's encrypt)
 
-I use certbot (run via docker) to update my Let's encrypt TLS certificates. I just need to stop nginx before and then run this command:
+I use certbot (run via docker) to update my Let's encrypt TLS certificates. I just need to stop caddy before and then run this command:
 
 ```bash
 docker run -it --rm --name certbot -p 80:80 -p 443:443 -v "/etc/letsencrypt:/etc/letsencrypt" -v "/var/lib/letsencrypt:/var/lib/letsencrypt" certbot/certbot renew
@@ -98,74 +102,39 @@ docker run -it --rm --name certbot -p 80:80 -p 443:443 -v "/etc/letsencrypt:/etc
 
 (Use `certificates` instead of `renew` to just print your current certificates)
 
-In the nginx config, I refer to that certificate.
-Also, I explicitly only allow a single (strong) SSL Cipher via TLS 1.2.
+I've used to use nginx as my reverse proxy, but I switched to [Caddy](https://caddyserver.com/)
+for the much easier to read configuration file.
+
+In this config, I refer to the TLS certificate.
 
 <details markdown="1">
-<summary>nginx.conf</summary>
+<summary>Caddyfile</summary>
 
 ```
-events {
+{
+  admin off
 }
 
-http {
+(tls_settings) {
+  protocols tls1.3
+  # Ciphers are ignored for TLS 1.3:
+  # https://caddy.community/t/customise-tls-1-3-cipher-suites/14015
+  # https://github.com/golang/go/issues/29349
+  ciphers TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+}
 
-  ssl_session_cache shared:SSL:10m;
-  ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384;
-  ssl_protocols TLSv1.2;
-  proxy_buffering off;
-
-  gzip on;
-  gzip_vary on;
-  gzip_proxied any;
-  gzip_comp_level 6;
-  gzip_types text/plain text/css text/xml application/json application/javascript application/xml application/xml+rss image/svg+xml;
-
-  server {
-
-    listen 443 http2 ssl;
-    listen [::]:443 http2 ssl;
-    server_name git.neonew.de;
-
-    ssl_certificate /opt/git.neonew.de/fullchain.pem;
-    ssl_certificate_key /opt/git.neonew.de/privkey.pem;
-
-    location / {
-
-      proxy_pass http://192.168.1.2:8080;
-      proxy_set_header Host $host;
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Proto $scheme;
-      proxy_set_header X-Forwarded-Ssl on;
-
-      proxy_redirect http:// https://;
-    }
+https://cloud.neonew.de {
+  tls /opt/cloud.neonew.de/fullchain.pem /opt/cloud.neonew.de/privkey.pem {
+    import tls_settings
   }
+  reverse_proxy http://nextcloud
+}
 
-  server {
-
-    listen 443 http2 ssl;
-    listen [::]:443 http2 ssl;
-    server_name cloud.neonew.de;
-
-    ssl_certificate /opt/cloud.neonew.de/fullchain.pem;
-    ssl_certificate_key /opt/cloud.neonew.de/privkey.pem;
-
-    location / {
-
-      proxy_pass http://192.168.1.3:5555;
-      proxy_set_header Host $host;
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Proto $scheme;
-      proxy_set_header X-Forwarded-Ssl on;
-
-      proxy_redirect http:// https://;
-
-      client_max_body_size 16400M;
-    }
+https://git.neonew.de {
+  tls /opt/git.neonew.de/fullchain.pem /opt/git.neonew.de/privkey.pem {
+    import tls_settings
   }
+  reverse_proxy http://gitlab
 }
 ```
 
@@ -177,6 +146,11 @@ Usually I manage the containers via ssh and the Docker CLI.
 I thought about having Portainer running to manage the containers via a web view, but this is not done yet.
 
 Might be updated in future.
+
+Update: Portainer is set up and running.
+I still hop on to the server to execute docker commands directly via SSH,
+because I find it easier to have my commands collected in a Git repo rather than clicking on a web frontend,
+but Portainer is still neat to have.
 
 # Performance, noise and power consumption
 
@@ -227,7 +201,7 @@ I usually update the services and OS every few months, or on a major release for
 I also update the certificates manually.
 
 For backups: I don't really care too much for this server, because most of the data is just needed for a few hours/days (like my notes) or is stored elsewhere (like contacts).
-The configuration for nginx is stored in a Git repo, which I also have on my laptop.
+The configuration for Caddy and other docker containers is stored in a Git repo, which I also have on my laptop.
 So in the unlikely event the server dies, I will just replace it and configure it from scratch again.
 
 If you keep important data on your server, you are of course also responsible to properly backup it.
