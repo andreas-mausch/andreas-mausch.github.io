@@ -60,9 +60,13 @@ how to clear it.
 It has to be done via hardware jumpers, something I haven't touched like 20 years ago to set the master/slave hard-drive.</p>
 <div class="swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain"><ul class="slider-container"><li><a href="/blog/2022-06-12-my-home-server-setup/jumper.jpg" target="_blank"><img src="/images/jumper-BmeuWu1TAz-300.jpeg" alt="Slider image" width="300" height="313"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/config-menu.jpg" target="_blank"><img src="/images/config-menu-kbOXpVrz3x-300.jpeg" alt="Slider image" width="300" height="168"></a></li><li><a href="/blog/2022-06-12-my-home-server-setup/nuc-bios.jpg" target="_blank"><img src="/images/nuc-bios-ePgbARdzQu-300.jpeg" alt="Slider image" width="300" height="217"></a></li></ul><button type="button" class="slider-nav"></button><button type="button" class="slider-nav slider-nav-next"></button><div class="slider-indicators"><button class="active"></button><button></button><button></button></div></div>
 <h1 id="services" tabindex="-1">3. Services <a class="header-anchor" href="#services" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<p>I run <a href="https://about.gitlab.com/" class="external-link" target="_blank">GitLab</a> and <a href="https://nextcloud.com/" class="external-link" target="_blank">Nextcloud</a> on the server.
-I use them to host private Git repos, sync my contacts and notes and store files on my private cloud drive.</p>
-<p>I think privacy is important and I also think too many people share private data with too many companies.</p>
+<p>I run <a href="https://about.gitlab.com/" class="external-link" target="_blank">GitLab</a> and <a href="https://nextcloud.com/" class="external-link" target="_blank">Nextcloud</a> on the server publicly available on the internet.
+I use them to host some of my Git repos, sync my contacts and notes and store files on my private cloud drive.
+I think privacy is important and I also think too many people share private data with too many companies.</p>
+<p>I additionally have a <a href="https://gitea.io/" class="external-link" target="_blank">Gitea</a> instance and <a href="https://www.portainer.io/" class="external-link" target="_blank">Portainer</a> running,
+accessible from my local network only.
+Gitea is used for private Git repos and as a backup/mirror server for my GitHub and GitLab repos.
+Portainer is used for managing docker instances.</p>
 <h1 id="router-and-dns-settings" tabindex="-1">4. Router and DNS settings <a class="header-anchor" href="#router-and-dns-settings" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I have requested an IPv4 address at my ISP, I have set up a <a href="https://www.myfritz.net" class="external-link" target="_blank">MyFritz! account</a> to get a dynamic DNS name,
 and I further have configured a CNAME DNS entry for my own personal domain.</p>
@@ -86,8 +90,8 @@ with basically just Docker installed.</p>
 <li>Install docker</li>
 <li>Setup docker for non-root access</li>
 </ul>
-<p>I run a nginx server to forward incoming connections to the right service,
-and I have one Docker container for each GitLab and Nextcloud.</p>
+<p>I run a <s>nginx</s> caddy server to forward incoming connections to the right service,
+and I have one Docker container for each GitLab, Nextcloud, Gitea and Portainer.</p>
 <h1 id="backup" tabindex="-1">6. Backup <a class="header-anchor" href="#backup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>First, I had to make a backup of the existing server.</p>
 <p>Since some docker containers created files with a different user, I had to make the backup via sudo.</p>
@@ -96,81 +100,49 @@ helped to do it.</p>
 <p>I ended up with these commands:</p>
 <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">rsync</span> <span class="token parameter variable">-avh0</span> <span class="token parameter variable">--stats</span> --numeric-ids --rsync-path<span class="token operator">=</span><span class="token string">"sudo rsync"</span> nuc@nuc:/home/nuc home</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">rsync</span> <span class="token parameter variable">-avh0</span> <span class="token parameter variable">--stats</span> --numeric-ids --rsync-path<span class="token operator">=</span><span class="token string">"sudo rsync"</span> nuc@nuc:/etc/letsencrypt letsencrypt</span></code></pre>
-<h1 id="tls-(nginx-settings-and-let's-encrypt)" tabindex="-1">7. TLS (nginx settings and Let's encrypt) <a class="header-anchor" href="#tls-(nginx-settings-and-let's-encrypt)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<p>I use certbot (run via docker) to update my Let's encrypt TLS certificates. I just need to stop nginx before and then run this command:</p>
+<h1 id="tls-(caddy-settings-and-let's-encrypt)" tabindex="-1">7. TLS (caddy settings and Let's encrypt) <a class="header-anchor" href="#tls-(caddy-settings-and-let's-encrypt)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I use certbot (run via docker) to update my Let's encrypt TLS certificates. I just need to stop caddy before and then run this command:</p>
 <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">--name</span> certbot <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 <span class="token parameter variable">-p</span> <span class="token number">443</span>:443 <span class="token parameter variable">-v</span> <span class="token string">"/etc/letsencrypt:/etc/letsencrypt"</span> <span class="token parameter variable">-v</span> <span class="token string">"/var/lib/letsencrypt:/var/lib/letsencrypt"</span> certbot/certbot renew</span></code></pre>
 <p>(Use <code class="language-plain">certificates</code> instead of <code class="language-plain">renew</code> to just print your current certificates)</p>
-<p>In the nginx config, I refer to that certificate.
-Also, I explicitly only allow a single (strong) SSL Cipher via TLS 1.2.</p>
+<p>I've used to use nginx as my reverse proxy, but I switched to <a href="https://caddyserver.com/" class="external-link" target="_blank">Caddy</a>
+for the much easier to read configuration file.</p>
+<p>In this config, I refer to the TLS certificate.</p>
 <details markdown="1">
-<summary>nginx.conf</summary>
-<pre class="language-plain"><code class="language-plain"><span class="highlight-line">events {</span>
+<summary>Caddyfile</summary>
+<pre class="language-plain"><code class="language-plain"><span class="highlight-line">{</span>
+<span class="highlight-line">  admin off</span>
 <span class="highlight-line">}</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">http {</span>
+<span class="highlight-line">(tls_settings) {</span>
+<span class="highlight-line">  protocols tls1.3</span>
+<span class="highlight-line">  # Ciphers are ignored for TLS 1.3:</span>
+<span class="highlight-line">  # https://caddy.community/t/customise-tls-1-3-cipher-suites/14015</span>
+<span class="highlight-line">  # https://github.com/golang/go/issues/29349</span>
+<span class="highlight-line">  ciphers TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</span>
+<span class="highlight-line">}</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">  ssl_session_cache shared:SSL:10m;</span>
-<span class="highlight-line">  ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384;</span>
-<span class="highlight-line">  ssl_protocols TLSv1.2;</span>
-<span class="highlight-line">  proxy_buffering off;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">  gzip on;</span>
-<span class="highlight-line">  gzip_vary on;</span>
-<span class="highlight-line">  gzip_proxied any;</span>
-<span class="highlight-line">  gzip_comp_level 6;</span>
-<span class="highlight-line">  gzip_types text/plain text/css text/xml application/json application/javascript application/xml application/xml+rss image/svg+xml;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">  server {</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">    listen 443 http2 ssl;</span>
-<span class="highlight-line">    listen [::]:443 http2 ssl;</span>
-<span class="highlight-line">    server_name git.neonew.de;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">    ssl_certificate /opt/git.neonew.de/fullchain.pem;</span>
-<span class="highlight-line">    ssl_certificate_key /opt/git.neonew.de/privkey.pem;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">    location / {</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">      proxy_pass http://192.168.1.2:8080;</span>
-<span class="highlight-line">      proxy_set_header Host $host;</span>
-<span class="highlight-line">      proxy_set_header X-Real-IP $remote_addr;</span>
-<span class="highlight-line">      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
-<span class="highlight-line">      proxy_set_header X-Forwarded-Proto $scheme;</span>
-<span class="highlight-line">      proxy_set_header X-Forwarded-Ssl on;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">      proxy_redirect http:// https://;</span>
-<span class="highlight-line">    }</span>
+<span class="highlight-line">https://cloud.neonew.de {</span>
+<span class="highlight-line">  tls /opt/cloud.neonew.de/fullchain.pem /opt/cloud.neonew.de/privkey.pem {</span>
+<span class="highlight-line">    import tls_settings</span>
 <span class="highlight-line">  }</span>
+<span class="highlight-line">  reverse_proxy http://nextcloud</span>
+<span class="highlight-line">}</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">  server {</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">    listen 443 http2 ssl;</span>
-<span class="highlight-line">    listen [::]:443 http2 ssl;</span>
-<span class="highlight-line">    server_name cloud.neonew.de;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">    ssl_certificate /opt/cloud.neonew.de/fullchain.pem;</span>
-<span class="highlight-line">    ssl_certificate_key /opt/cloud.neonew.de/privkey.pem;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">    location / {</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">      proxy_pass http://192.168.1.3:5555;</span>
-<span class="highlight-line">      proxy_set_header Host $host;</span>
-<span class="highlight-line">      proxy_set_header X-Real-IP $remote_addr;</span>
-<span class="highlight-line">      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
-<span class="highlight-line">      proxy_set_header X-Forwarded-Proto $scheme;</span>
-<span class="highlight-line">      proxy_set_header X-Forwarded-Ssl on;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">      proxy_redirect http:// https://;</span>
-<span class="highlight-line"></span>
-<span class="highlight-line">      client_max_body_size 16400M;</span>
-<span class="highlight-line">    }</span>
+<span class="highlight-line">https://git.neonew.de {</span>
+<span class="highlight-line">  tls /opt/git.neonew.de/fullchain.pem /opt/git.neonew.de/privkey.pem {</span>
+<span class="highlight-line">    import tls_settings</span>
 <span class="highlight-line">  }</span>
+<span class="highlight-line">  reverse_proxy http://gitlab</span>
 <span class="highlight-line">}</span></code></pre>
 </details>
 <h1 id="portainer" tabindex="-1">8. Portainer <a class="header-anchor" href="#portainer" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Usually I manage the containers via ssh and the Docker CLI.
 I thought about having Portainer running to manage the containers via a web view, but this is not done yet.</p>
 <p>Might be updated in future.</p>
+<p>Update: Portainer is set up and running.
+I still hop on to the server to execute docker commands directly via SSH,
+because I find it easier to have my commands collected in a Git repo rather than clicking on a web frontend,
+but Portainer is still neat to have.</p>
 <h1 id="performance%2C-noise-and-power-consumption" tabindex="-1">9. Performance, noise and power consumption <a class="header-anchor" href="#performance%2C-noise-and-power-consumption" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>It is important to me the server is quiet and doesn't consume too much power.
 Performance on the other side shouldn't be too poor, but is not that important to me.</p>
@@ -205,7 +177,7 @@ If there still is a problem somewhere, a lot of people will try to fix it immedi
 <p>I usually update the services and OS every few months, or on a major release for one of the services.
 I also update the certificates manually.</p>
 <p>For backups: I don't really care too much for this server, because most of the data is just needed for a few hours/days (like my notes) or is stored elsewhere (like contacts).
-The configuration for nginx is stored in a Git repo, which I also have on my laptop.
+The configuration for Caddy and other docker containers is stored in a Git repo, which I also have on my laptop.
 So in the unlikely event the server dies, I will just replace it and configure it from scratch again.</p>
 <p>If you keep important data on your server, you are of course also responsible to properly backup it.</p>
 <h2 id="%F0%9F%91%8E-security" tabindex="-1">11.3. 👎 Security <a class="header-anchor" href="#%F0%9F%91%8E-security" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
