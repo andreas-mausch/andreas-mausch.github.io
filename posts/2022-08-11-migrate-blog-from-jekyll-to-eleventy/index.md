@@ -113,8 +113,8 @@ Overall, I am very happy with the result.
   and [eleventy-favicon](https://github.com/atomrc/eleventy-favicon/issues/8).
   pathPrefix is important when you want to deploy to a subdirectory of a domain.
   Edit: Seems to be addressed by a new [plugin](https://www.11ty.dev/docs/plugins/html-base/).
-- 👎 No build-in SASS/SCSS support. Luckily, somebody [developed a plugin](https://github.com/kentaroi/eleventy-sass).
-- 👎 No build-in TypeScript support. I have solved this for myself by first using swc, then esbuild.
+- 👎 No built-in SASS/SCSS support. Luckily, somebody [developed a plugin](https://github.com/kentaroi/eleventy-sass).
+- 👎 No built-in TypeScript support. I have solved this for myself by first using swc, then esbuild.
 - 👎 `.eleventy.js` must be JavaScript, not TypeScript
 - 👎 `.eleventy.js` must use the old-style `require()` instead of `import`. type: "module" is not supported:
   [link](https://github.com/11ty/eleventy/issues/836)

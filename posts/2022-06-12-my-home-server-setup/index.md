@@ -20,7 +20,7 @@ I've bought it on eBay for 127 EUR.
 
 # Reset the BIOS password
 
-Unfortunately, it still had an BIOS password set, and the previous owner forgot it.
+Unfortunately, it still had a BIOS password set, and the previous owner forgot it.
 
 The official support [provides instructions](https://www.intel.com/content/www/us/en/support/articles/000007242/intel-nuc.html)
 how to clear it.
