@@ -4,11 +4,24 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2022-09-06T20:00:00Z</updated>
+  <updated>2022-11-28T19:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Virtual machines: VirtualBox vs. libvirt, QEMU on M1, vagrant</title>
+    <link href="https://andreas-mausch.de/blog/2022-11-28-virtual-machines-virtualbox-libvirt-qemu-vagrant/"/>
+    <updated>2022-11-28T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2022-11-28-virtual-machines-virtualbox-libvirt-qemu-vagrant/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve used various virtualization technologies in the past and have now switched to
+&lt;a href=&quot;https://libvirt.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;libvirt&lt;/a&gt; as my main tool and would like to explain why.&lt;/p&gt;
+&lt;h1 id=&quot;what-i-use-virtualization-for&quot; tabindex=&quot;-1&quot;&gt;1. What I use virtualization for &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2022-11-28-virtual-machines-virtualbox-libvirt-qemu-vagrant/#what-i-use-virtualization-for&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I use virtual machines..&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;..as an isolated playground for new technologies.&lt;/li&gt;
+&lt;li&gt;..to build programs for diff&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Printing and Scanning on Linux</title>
     <link href="https://andreas-mausch.de/blog/2022-09-06-hp-officejet-250-mobile/"/>
