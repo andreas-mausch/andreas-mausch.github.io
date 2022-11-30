@@ -213,6 +213,14 @@ Let me try to break this down a bit:
   - libvirt-nss: an extension module to access a libvirt machine by it's hostname
 - **cloud-init**: A tool to set up a brand new machine. It will set up networking, SSH keys, create users and so on.
 
+I have used these versions for the commands in this post:
+
+- GCC: 12
+- arm gnueabihf binutils: 2.38
+- QEMU: 7.1.0
+- libvirt: 8.9.0
+- virt-manager / virt-install: 4.1.0
+
 ## Why not just pure QEMU?
 
 QEMU works great on it's own.
