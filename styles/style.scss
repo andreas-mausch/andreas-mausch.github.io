@@ -47,6 +47,7 @@ ol,
 ul,
 figure {
   margin: 0 0 calc($spacing-unit / 2) 0;
+  overflow-wrap: break-word;
   padding: 0;
 }
 
