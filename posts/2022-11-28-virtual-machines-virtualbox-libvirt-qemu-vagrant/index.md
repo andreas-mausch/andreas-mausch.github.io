@@ -71,15 +71,13 @@ Later, I used it to build programs for the Raspberry Pi and Arduino.
 
 ## Cross-compiling example (ARM)
 
-<details markdown="1">
-
 Here is a small example how to cross-compile a simple assembler Hello World for ARM architecture.
 
 First, install a toolchain for
 
-- an assembler: 
-- a linker: 
-- gcc: 
+- an assembler
+- a linker
+- gcc
 - and some other tools like objdump
 
 You can either use the precompiled `arm-none-linux-gnueabihf-toolchain-bin` (you can find a more recent version 
@@ -146,8 +144,6 @@ $ arm-linux-gnueabihf-gcc -static -o example-c example.c
 Note: If you don't statically link the file, you might see [this error](https://stackoverflow.com/questions/47787562/u-boot-lib-ld-linux-armhf-so-3-no-such-file-or-directory):
 
 > qemu-arm: Could not open '/lib/ld-linux-armhf.so.3': No such file or directory
-
-</details>
 
 ### Run ARM binary on x86_64 system
 
