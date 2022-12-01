@@ -12,7 +12,7 @@ const markdownIt = require("./eleventy/markdown")
 const postcss = require("postcss")
 const postThumbnail = require("./eleventy/post-thumbnail")
 const rss = require("@11ty/eleventy-plugin-rss")
-const tableOfContents = require("eleventy-plugin-toc")
+const tableOfContents = require("eleventy-plugin-nesting-toc")
 const typescriptPlugin = require("./eleventy/typescript-esbuild")
 const yaml = require("js-yaml")
 
