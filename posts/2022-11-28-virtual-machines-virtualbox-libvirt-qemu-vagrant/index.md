@@ -584,6 +584,8 @@ After that, even the ruby [WinRM example](https://github.com/WinRb/WinRM#example
 
 - ✅ libvirt works on M1
 - ✅ Vagrant can be installed on M1
+  - However, it ships it's own embedded version of ruby, instead of using the one provided by the system. 🤮
+  - And, that shipped version is x86_64 always. 🤮🤮
 - 🚧 However, the vagrant-libvirt plugin can not be installed ootb.
 
 ```bash
@@ -615,7 +617,7 @@ and [libvirt-ruby](https://gitlab.com/libvirt/libvirt-ruby/-/merge_requests/19).
 But both projects did not have a release for over a year now, and one of them is even an offical libvirt project.
 This makes me think..
 
-So I guess for Apple Silicon I still have to wait some time until libvirt is fully supported.
+So I guess for Apple Silicon I still have to wait some time until Vagrant is fully supported.
 
 # libvirt vs. VirtualBox
 
