@@ -19,7 +19,7 @@ We can see the Vendor ID (12d1) and the Product ID (1446).
 
 A call to `usb-devices` shows it is in drive-mode:
 
-```bash
+```shell-session
 $ usb-devices
 T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  5 Spd=480 MxCh= 0
 D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
@@ -39,7 +39,7 @@ sudo usb_modeswitch -v 0x12d1 -p 0x1446 -V 0x12d1 -P 0x1436 -M 55534243123456780
 
 Afterwards, `lsusb` shows this:
 
-```bash
+```shell-session
 $ lsusb
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 003: ID 04f3:21d4 Elan Microelectronics Corp.
@@ -51,7 +51,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 And `usb-devices` this:
 
-```bash
+```shell-session
 $ usb-devices
 T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  6 Spd=480 MxCh= 0
 D:  Ver= 2.00 Cls=ef(misc ) Sub=02 Prot=01 MxPS=64 #Cfgs=  1

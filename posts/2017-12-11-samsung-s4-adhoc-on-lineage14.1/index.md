@@ -16,8 +16,8 @@ In fact, you won't be even able to see Ad-Hoc networks on the network list. They
 So he tried to establish a connection by directly calling the Linux command in the adb shell ($SSID can be TestAdHoc and $FREQ 2412 for example):
 
 ```bash
-$ iw wlan0 set type ibss
-$ iw wlan0 ibss join $SSID $FREQ
+iw wlan0 set type ibss
+iw wlan0 ibss join $SSID $FREQ
 ```
 
 However, this results in an error message:
@@ -39,7 +39,7 @@ Well, I didn't. But after several trials and errors he made great progress and g
 Luckily, the IBSS firmware is part of the LineageOS image and already on the phone.
 In order to load it, open up a shell on your rooted phone:
 
-```bash
+```shell-session
 $ adb shell
 jfltexx:/ $ su
 jfltexx:/ #

@@ -107,7 +107,7 @@ Luckily it worked without major damage.
 
 The commands I ran were:
 
-```bash
+```shell-session
 $ ./makemkvcon f -l
 Found 1 drives(s)
 00: dev_21:0, /dev/sr0, /dev/sr0

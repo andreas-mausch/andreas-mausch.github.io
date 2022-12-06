@@ -11,7 +11,7 @@ This is about the *expires* part of a cookie.
 
 Let's see what **google.com** uses:
 
-```bash
+```shell-session
 $ curl -v http://www.google.com
 *   Trying 2a00:1450:4005:800::2004:80...
 * Connected to www.google.com (2a00:1450:4005:800::2004) port 80 (#0)

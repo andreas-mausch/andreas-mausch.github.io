@@ -16,20 +16,20 @@ I am very forgetful so I will just write down how to enable monitor mode for the
 Detailed explaination: [sanilands.info/sgordon](https://sandilands.info/sgordon/capturing-wifi-in-monitor-mode-with-iw)
 
 ```bash
-$ iw dev
-$ iw phy phy0 info # should show all information about the device, including the "monitor" capability
-$ sudo iw phy phy0 interface add mon0 type monitor
-$ ip link
-$ sudo iw dev wlan0 del # (I had to replace wlan0 by wlp2s0)
-$ sudo ip link set mon0 up
-$ iw dev mon0 info
-$ sudo iw dev mon0 set freq 2437 # set it to the right channel
+iw dev
+iw phy phy0 info # should show all information about the device, including the "monitor" capability
+sudo iw phy phy0 interface add mon0 type monitor
+ip link
+sudo iw dev wlan0 del # (I had to replace wlan0 by wlp2s0)
+sudo ip link set mon0 up
+iw dev mon0 info
+sudo iw dev mon0 set freq 2437 # set it to the right channel
 ```
 
 <details markdown="1">
 <summary>Details</summary>
 
-```bash
+```shell-session
 $ ls -lh /lib/firmware/iwlwifi-*
 -rw-r--r--  1 root root  2,3M  8. Apr 17:31 iwlwifi-8265-21.ucode
 -rw-r--r--  1 root root  1,8M  8. Apr 17:31 iwlwifi-8265-22.ucode
@@ -38,7 +38,7 @@ $ ls -lh /lib/firmware/iwlwifi-*
 -rw-r--r--  1 root root  2,4M  8. Apr 17:31 iwlwifi-8265-34.ucode
 ```
 
-```bash
+```shell-session
 $ dmesg
 [    1.885451] Intel(R) Wireless WiFi driver for Linux
 [    1.885452] Copyright(c) 2003- 2015 Intel Corporation
@@ -101,13 +101,13 @@ $ sudo lshw -C network
 ## Find driver
 
 ```bash
-$ lspci | grep -i wireless
-$ lspci -vv -s 03:00.0 # replace with the numbers the previous command returned
+lspci | grep -i wireless
+lspci -vv -s 03:00.0 # replace with the numbers the previous command returned
 ```
 
 <details markdown="1">
 <summary>Example output</summary>
-```
+```shell-session
 $ lspci -vv -s 03:00.0
 03:00.0 Network controller: Broadcom Corporation BCM4360 802.11ac Wireless Network Adapter (rev 03)
 	Subsystem: Apple Inc. BCM4360 802.11ac Wireless Network Adapter

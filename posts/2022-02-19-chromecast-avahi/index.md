@@ -62,7 +62,7 @@ I was able to reduce it by setting the `keyint` option. Still not perfect, but w
 
 Similar experience to `castnow`.
 
-```bash
+```shell-session
 $ ./go-chromecast ls
 1) device="2021/22 Philips UHD Android TV" device_name="Philips TV" address="192.168.1.23:8009" uuid="1234567890abcdef1234567890abcdef"
 ```
@@ -110,7 +110,7 @@ It uses [avahi](https://en.wikipedia.org/wiki/Avahi_(software)):
 
 Find Chromecasts in your network:
 
-```bash
+```shell-session
 $ avahi-browse --verbose --ignore-local --resolve --terminate _googlecast._tcp
 Server version: avahi 0.8; Host name: neonew-lenovo.local
 E Ifce Prot Name                                          Type                 Domain

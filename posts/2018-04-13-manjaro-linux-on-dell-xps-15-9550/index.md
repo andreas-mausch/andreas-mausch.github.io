@@ -400,7 +400,7 @@ With the Nvidia GPU disabled, it was reduced to 6.5 W.
 
 ## Boot time
 
-```bash
+```shell-session
 $ systemd-analyze
 Startup finished in 7.796s (firmware) + 3.584s (loader) + 1.312s (kernel) + 2.324s (userspace) = 15.017s
 graphical.target reached after 2.140s in userspace

@@ -73,7 +73,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-```bash
+```shell-session
 $ pwd
 ./hello-kotlin/build/konan/bin/linux
 

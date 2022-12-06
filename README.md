@@ -12,31 +12,31 @@ The navigation is sorted by the weights.
 
 ## Install dependencies
 
-```
+```bash
 npm install
 ```
 
 ## Run local development server
 
-```
+```bash
 npm run dev
 ```
 
 ## Production build
 
-```
+```bash
 npm run build
 ```
 
 ## Linting
 
-```
+```bash
 npm run lint
 ```
 
 ## Type checking (via tsc)
 
-```
+```bash
 npm run check
 ```
 
@@ -45,13 +45,13 @@ npm run check
 This project uses [icon-font-buildr](https://github.com/fabiospampinato/icon-font-buildr) to strip down fontawesomes
 big icon library.
 
-```
+```bash
 npm run generate:font
 ```
 
 Tool for checking the file:
 
-```
+```bash
 ttx -t cmap -o - ./_site/styles/icons/icons.ttf
 ttx -t cmap -o - ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf
 font-manager ./_site/styles/icons/icons.ttf

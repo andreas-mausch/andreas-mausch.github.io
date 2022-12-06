@@ -66,7 +66,7 @@ I found [this pdf](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd
 
 List the markers of an image:
 
-```bash
+```shell-session
 $ exiv2 -pS 20210716_185532.jpg 
 STRUCTURE OF JPEG FILE: 20210716_185532.jpg
  address | marker       |  length | data
@@ -104,7 +104,7 @@ The Exif Marker is in TIFF file format.
 After the header, it contains two *Image File Directories* (IFD), IFD0 and IFD1.
 IFD0 is for image tags and IFD1 for thumbnail information.
 
-```bash
+```shell-session
 $ ./exiv2/build/bin/exiv2 -pR 20210716_185532.jpg 
 STRUCTURE OF JPEG FILE: 20210716_185532.jpg
  address | marker       |  length | data
@@ -231,14 +231,14 @@ The `-preserve` flag preserves the file modification date/time.
 exiftool -preserve -rating=3 20210716_185532_exiftool-rating.jpg
 ```
 
-```bash
+```shell-session
 $ exiftool -rating -short -groupNames 20210716_185532_exiftool-rating.jpg
 [XMP]           Rating                          : 3
 ```
 
 ### Filesize
 
-```bash
+```shell-session
 $ ls -l ../20210716_185532.jpg
 -rw-r----- 1 neonew neonew 3409348 16. Jul 18:55 ../20210716_185532.jpg
 $ ls -l ./20210716_185532_exiftool-rating.jpg
@@ -251,7 +251,7 @@ Filesize increased by 2814 bytes.
 
 If you compare the structure after the change, there is an addtional APP1 marker for XMP.
 
-```bash
+```shell-session
 $ exiv2 -pS 20210716_185532_exiftool-rating.jpg
 STRUCTURE OF JPEG FILE: 20210716_185532_exiftool-rating.jpg
  address | marker       |  length | data
@@ -268,7 +268,7 @@ STRUCTURE OF JPEG FILE: 20210716_185532_exiftool-rating.jpg
 
 ### Raw XML
 
-```bash
+```shell-session
 $ exiv2 -pX 20210716_185532_exiftool-rating.jpg | xmllint --format -
 <?xml version="1.0"?>
 <?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
@@ -286,7 +286,7 @@ $ exiv2 -pX 20210716_185532_exiftool-rating.jpg | xmllint --format -
 
 See [here]({% link-post "2021-07-17-binary-diffs" %}).
 
-```bash
+```shell-session
 $ diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\012'" --unchanged-group-format="" (xxd -c 1 -ps ../20210716_185532.jpg | psub) (xxd -c 1 -ps 20210716_185532_exiftool-rating.jpg | psub)
 0000005a-0000005b (00000001) <-> 0000005a-0000005b (00000001)
 00000066-00000067 (00000001) <-> 00000066-00000067 (00000001)
@@ -322,7 +322,7 @@ exiv2 --keep --Modify "set Xmp.xmp.Rating 3" 20210716_185532_exiv2-rating.jpg
 
 ### Filesize
 
-```bash
+```shell-session
 $ ls -l ../20210716_185532.jpg
 -rw-r----- 1 neonew neonew 3409348 16. Jul 18:55 ../20210716_185532.jpg
 $ ls -l ./20210716_185532_exiv2-rating.jpg
@@ -333,7 +333,7 @@ Filesize increased by 2400 bytes.
 
 ### New XMP Marker
 
-```bash
+```shell-session
 $ exiv2 -pS 20210716_185532_exiv2-rating.jpg
 STRUCTURE OF JPEG FILE: 20210716_185532_exiv2-rating.jpg
  address | marker       |  length | data
@@ -350,7 +350,7 @@ STRUCTURE OF JPEG FILE: 20210716_185532_exiv2-rating.jpg
 
 ### Raw XML
 
-```bash
+```shell-session
 $ exiv2 -pX 20210716_185532_exiv2-rating.jpg | xmllint --format -
 <?xml version="1.0"?>
 <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
@@ -367,7 +367,7 @@ but it looks fine.
 
 ### Binary diff offsets
 
-```bash
+```shell-session
 $ diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\012'" --unchanged-group-format="" (xxd -c 1 -ps ../20210716_185532.jpg | psub) (xxd -c 1 -ps 20210716_185532_exiv2-rating.jpg | psub)
 0000f37b-0000f37b (00000000) <-> 0000f37b-0000fcdb (00000960)
 ```
@@ -381,7 +381,7 @@ This is the perfect result: No data was lost, and the new rating has been set.
 
 ### Filesize
 
-```bash
+```shell-session
 $ ls -l ../20210716_185532.jpg
 -rw-r----- 1 neonew neonew 3409348 16. Jul 18:55 ../20210716_185532.jpg
 $ ls -l ./20210716_185532_gthumb-rating.jpg
@@ -393,7 +393,7 @@ I planned on adding information to the file, not removing some.
 
 ### New XMP Marker
 
-```bash
+```shell-session
 $ exiv2 -pS 20210716_185532_gthumb-rating.jpg
 STRUCTURE OF JPEG FILE: 20210716_185532_gthumb-rating.jpg
  address | marker       |  length | data
@@ -414,7 +414,7 @@ And now we have the XMP marker but also an additional APP13 marker.
 
 ### Raw XML
 
-```bash
+```shell-session
 $ exiv2 -pX 20210716_185532_gthumb-rating.jpg | xmllint --format -
 <?xml version="1.0"?>
 <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
@@ -433,7 +433,7 @@ This looks fine. The DateTimeOriginal was also written to the XMP, but the Ratin
 <details markdown="1">
 <summary>Too many changes..</summary>
 
-```bash
+```shell-session
 $ diff --changed-group-format="%08xe-%08xl (%08xn) <-> %08xE-%08xL (%08xN) %c'\012'" --unchanged-group-format="" (xxd -c 1 -ps ../20210716_185532.jpg | psub) (xxd -c 1 -ps 20210716_185532_gthumb-rating.jpg | psub)
 00000004-00000006 (00000002) <-> 00000004-00000006 (00000002)
 0000005a-0000005b (00000001) <-> 0000005a-0000005b (00000001)
@@ -937,7 +937,7 @@ Wait, what? This is way too much.
 
 If you look at the changed exif data, the diff looks like this:
 
-```bash
+```shell-session
 $ diff (exiv2 -pa ../20210716_185532.jpg | psub) (exiv2 -pa 20210716_185532_gthumb-rating.jpg | psub)
 21a22
 > Exif.Photo.ComponentsConfiguration           Undefined   4  YCbCr

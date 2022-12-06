@@ -53,7 +53,7 @@ This means two things: the linux container needs to be started, and also the sof
 
 With run-parts, the `/etc/rc.local` is executed on container boot, as root. Mine now looks like this:
 
-```bash {data-filename=/etc/rc.local}
+```sh {data-filename=/etc/rc.local}
 #!/bin/sh -e
 su android -c '/home/android/run.sh'
 exit 0
@@ -61,7 +61,7 @@ exit 0
 
 So all I do is run another script in the home directory of the user.
 
-```bash {data-filename=/home/android/run.sh}
+```sh {data-filename=/home/android/run.sh}
 #!/bin/sh -e
 cd /home/android/
 mkdir -p ./logs

@@ -22,7 +22,7 @@ I'm on the `5.10.49-1-MANJARO` kernel and Thunar `4.16.8`.
 
 This is what exiftool's output looks like:
 
-```bash
+```shell-session
 $ exiftool DSC_8783-shot-at-16-40-cest.JPG | grep -i time
 File Modification Date/Time     : 2021:07:29 18:40:30+02:00
 File Access Date/Time           : 2021:07:29 16:41:09+02:00
@@ -45,8 +45,8 @@ It should be either *2021:07:29 16:40:30+02:00* or
 
 See the mtime from stat:
 
-```bash
-$ stat DSC_8783-shot-at-16-40-cest.JPG 
+```shell-session
+$ stat DSC_8783-shot-at-16-40-cest.JPG
  Datei: DSC_8783-shot-at-16-40-cest.JPG
  Größe: 7027908   	Blöcke: 13728      EA Block: 4096   reguläre Datei
  Gerät: 10302h/66306d	Inode: 2887230     Verknüpfungen: 1
@@ -69,8 +69,8 @@ ctime    : 2021-07-29 16:51:29.019308742 +0200
 
 On the SD card with a FAT32 file system the output looks like this:
 
-```bash
-stat DSC_8783.JPG 
+```shell-session
+$ stat DSC_8783.JPG
  Datei: DSC_8783.JPG
  Größe: 7027908   	Blöcke: 13728      EA Block: 32768  reguläre Datei
  Gerät: b301h/45825d	Inode: 345         Verknüpfungen: 1

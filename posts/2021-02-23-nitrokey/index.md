@@ -61,7 +61,7 @@ sudo wget -O /etc/udev/rules.d/41-nitrokey.rules https://raw.githubusercontent.c
 
 Restart, and `gpg --card-status` should return something similar to this:
 
-```bash
+```shell-session
 $ gpg --card-status
 Reader ...........: 20A0:4108:00000000000000000000AAAA:0
 Application ID ...: D27600011111111100050000AAAA0000
@@ -118,7 +118,7 @@ After this, type `quit` and confirm.
 
 After this, the `gpg --list-secret-keys` command should show some output like this:
 
-```bash
+```shell-session
 $ gpg --list-secret-keys
 /home/user/.gnupg/pubring.kbx
 -------------------------------

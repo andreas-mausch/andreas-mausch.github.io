@@ -21,7 +21,7 @@ Let me show you.
 
 Let's assume we have these two files:
 
-```bash
+```shell-session
 $ xxd testfile.bin
 00000000: 0000 0000 0000 1111 1111 1111 2222 2222  ............""""
 00000010: 2222 3333 3333 3333 4444 4444 4444 5555  ""333333DDDDDDUU
@@ -45,7 +45,7 @@ The second file differs at offsets 0x1c/0x1d and 0x40/0x41. The rest is identica
 
 If you do `diff`, it will tell you if the files are equal or not.
 
-```bash
+```shell-session
 $ diff testfile.bin testfile_changed-bytes.bin
 Binärdateien testfile.bin und testfile_inserted-bytes.bin sind verschieden.
 ```
@@ -56,7 +56,7 @@ Binärdateien testfile.bin und testfile_inserted-bytes.bin sind verschieden.
 
 If you do `cmp`, it will tell you where the **first** difference in the files is.
 
-```bash
+```shell-session
 $ cmp --print-bytes testfile.bin testfile_changed-bytes.bin
 testfile.bin testfile_changed-bytes.bin sind verschieden: Zeichen 29, Zeile 1 ist 104 D 377 M-^?
 ```
@@ -65,7 +65,7 @@ testfile.bin testfile_changed-bytes.bin sind verschieden: Zeichen 29, Zeile 1 is
 
 The next suggestion is to use `diff <(xxd b1) <(xxd b2)`.
 
-```bash
+```shell-session
 $ diff <(xxd testfile.bin) <(xxd testfile_changed-bytes.bin)
 2c2
 < 00000010: 2222 3333 3333 3333 4444 4444 4444 5555  ""333333DDDDDDUU
@@ -114,7 +114,7 @@ LINES=24 COLUMNS=80 dhex testfile.bin testfile_changed-bytes.bin
 Now, let's come to the point of this article.
 What happens when there are bytes inserted somewhere in the file?
 
-```bash
+```shell-session
 $ xxd testfile_inserted-bytes.bin
 00000000: 0000 0000 0000 1111 1111 1111 2222 2222  ............""""
 00000010: 2222 ffff ffff ffff 3333 3333 3333 4444  ""......333333DD
@@ -136,7 +136,7 @@ diff and cmp still work the same.
 None of the tools provide a useable output.
 They all claim that **all** bytes are changed after the first change.
 
-```bash
+```shell-session
 $ diff <(xxd testfile.bin) <(xxd testfile_inserted-bytes.bin)
 2,6c2,7
 < 00000010: 2222 3333 3333 3333 4444 4444 4444 5555  ""333333DDDDDDUU

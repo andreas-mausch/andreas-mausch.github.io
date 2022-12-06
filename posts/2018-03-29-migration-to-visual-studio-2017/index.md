@@ -40,12 +40,12 @@ Too see if something major changed, I did a quick analysis on the resulting .exe
 Therefore I exported the file headers of both .exe using [pev](https://github.com/merces/pev).
 
 ```bash
-$ readpe WhatsApp\ Viewer.vs2008.exe > WhatsApp\ Viewer.vs2008.exe.readpe.txt
-$ readpe WhatsApp\ Viewer.vs2017.exe > WhatsApp\ Viewer.vs2017.exe.readpe.txt
-$ readpe -f json WhatsApp\ Viewer.vs2008.exe > WhatsApp\ Viewer.vs2008.exe.readpe.json
-$ readpe -f json WhatsApp\ Viewer.vs2017.exe > WhatsApp\ Viewer.vs2017.exe.readpe.json
-$ jq ".[\"Imported functions\"][].Functions[].Name" < WhatsApp\ Viewer.vs2008.exe.readpe.json | sort > WhatsApp\ Viewer.vs2008.exe.imports.txt
-$ jq ".[\"Imported functions\"][].Functions[].Name" < WhatsApp\ Viewer.vs2017.exe.readpe.json | sort > WhatsApp\ Viewer.vs2017.exe.imports.txt
+readpe WhatsApp\ Viewer.vs2008.exe > WhatsApp\ Viewer.vs2008.exe.readpe.txt
+readpe WhatsApp\ Viewer.vs2017.exe > WhatsApp\ Viewer.vs2017.exe.readpe.txt
+readpe -f json WhatsApp\ Viewer.vs2008.exe > WhatsApp\ Viewer.vs2008.exe.readpe.json
+readpe -f json WhatsApp\ Viewer.vs2017.exe > WhatsApp\ Viewer.vs2017.exe.readpe.json
+jq ".[\"Imported functions\"][].Functions[].Name" < WhatsApp\ Viewer.vs2008.exe.readpe.json | sort > WhatsApp\ Viewer.vs2008.exe.imports.txt
+jq ".[\"Imported functions\"][].Functions[].Name" < WhatsApp\ Viewer.vs2017.exe.readpe.json | sort > WhatsApp\ Viewer.vs2017.exe.imports.txt
 ```
 
 {% image "pe-diff.png" %}

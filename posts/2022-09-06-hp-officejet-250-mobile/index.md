@@ -100,14 +100,14 @@ It can be used for both, printing (via CUPS) and scanning (via SANE).
 
 ## Printing on Linux
 
-```bash
+```shell-session
 $ lsusb | grep HP
 Bus 003 Device 003: ID 03f0:e911 HP, Inc OfficeJet 250 Mobile Series
 ```
 
 ```bash
-$ sudo pacman -S hplip
-$ hp-setup -i
+sudo pacman -S hplip
+hp-setup -i
 ```
 
 This will walk you through a CLI wizard, it will show all available devices and will add the selected one to CUPS:
@@ -123,7 +123,7 @@ If everything worked correctly, you can now just select the printer in your favo
 
 You can use `scanimage` to scan a page.
 
-```bash
+```shell-session
 $ scanimage --list-devices
 device `v4l:/dev/video2' is a Noname Integrated Camera: Integrated I virtual device
 device `v4l:/dev/video0' is a Noname Integrated Camera: Integrated C virtual device

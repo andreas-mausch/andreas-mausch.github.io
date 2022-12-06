@@ -205,7 +205,7 @@ OLEDs don't have a backlight brightness control. So we can achieve the same effe
 
 To test the brightness change manually, run `xrandr --output eDP1 --brightness 0.5`.
 
-```bash {data-filename=/usr/local/bin/xbacklightmon}
+```sh {data-filename=/usr/local/bin/xbacklightmon}
 #!/bin/sh
 
 path=/sys/class/backlight/intel_backlight
