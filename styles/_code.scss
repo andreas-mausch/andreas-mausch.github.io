@@ -11,13 +11,10 @@ code[class*="language-"] {
 }
 
 code[data-filename]::before {
-  color: #ccc;
+  color: #000;
   content: attr(data-filename);
   display: block;
-  font-family: courier, courier new, serif;
-  font-size: 11pt;
-  font-weight: 100;
-  padding-left: 0.6em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   user-select: none;
 }
 

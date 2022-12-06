@@ -1,20 +1,17 @@
-/**
- * Dracula Theme originally by Zeno Rocha [@zenorocha]
- * https://draculatheme.com/
- *
- * Ported for PrismJS by Albert Vallverdu [@byverdu]
- */
+@use "sass:color";
+
+$primary-color: rgb(255, 135, 0);
+$secondary-color: #2a7ae2;
 
 code[class*="language-"],
 pre[class*="language-"] {
   background: none;
-  color: #f8f8f2;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  color: #000;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   hyphens: none;
   line-height: 1.5;
   tab-size: 4;
   text-align: left;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   white-space: pre;
   word-break: normal;
   word-spacing: normal;
@@ -31,7 +28,7 @@ pre[class*="language-"] {
 
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
-  background: #282a36;
+  background: #ececec;
 }
 
 /* Inline code */
@@ -45,11 +42,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #6272a4;
+  color: #858585;
 }
 
 .token.punctuation {
-  color: #f8f8f2;
+  color: color.scale($secondary-color, $lightness: -60%);
 }
 
 .namespace {
@@ -61,12 +58,12 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #ff79c6;
+  color: $secondary-color;
 }
 
 .token.boolean,
 .token.number {
-  color: #bd93f9;
+  color: color.scale($secondary-color, $lightness: -30%);
 }
 
 .token.selector,
@@ -75,7 +72,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: #50fa7b;
+  color: color.scale($primary-color, $lightness: -50%);
 }
 
 .token.operator,
@@ -84,23 +81,23 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string,
 .token.variable {
-  color: #f8f8f2;
+  color: $secondary-color;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.function,
 .token.class-name {
-  color: #f1fa8c;
+  color: color.scale($primary-color, $lightness: -20%);
 }
 
 .token.keyword {
-  color: #8be9fd;
+  color: color.scale($primary-color, $lightness: -40%);
 }
 
 .token.regex,
 .token.important {
-  color: #ffb86c;
+  color: color.scale($primary-color, $lightness: 20%);
 }
 
 .token.important,
