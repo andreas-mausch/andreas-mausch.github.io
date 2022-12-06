@@ -221,10 +221,10 @@ Check the <a href="https://aur.archlinux.org/packages/arm-linux-gnueabihf-gcc" c
 <span class="highlight-line">.ascii <span class="token string">"Hello, ARM32!\n"</span></span>
 <span class="highlight-line">len <span class="token operator">=</span> . <span class="token operator">-</span> msg</span></code></pre>
 <p>Compile and link the program as follows</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ arm-linux-gnueabihf-as <span class="token parameter variable">-o</span> example-as.out example.as</span>
-<span class="highlight-line">$ arm-linux-gnueabihf-ld <span class="token parameter variable">-o</span> example-as example-as.out</span>
-<span class="highlight-line">$ <span class="token function">file</span> ./example-as</span>
-<span class="highlight-line">./example-as: ELF <span class="token number">32</span>-bit LSB executable, ARM, EABI5 version <span class="token number">1</span> <span class="token punctuation">(</span>SYSV<span class="token punctuation">)</span>, statically linked, not stripped</span></code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">arm-linux-gnueabihf-as <span class="token parameter variable">-o</span> example-as.out example.as</span></span></span>
+<span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">arm-linux-gnueabihf-ld <span class="token parameter variable">-o</span> example-as example-as.out</span></span></span>
+<span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">file</span> ./example-as</span></span></span>
+<span class="highlight-line"><span class="token output">./example-as: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, not stripped</span></code></pre>
 <h3 id="c-example-(gcc)" tabindex="-1">4.1.2. C example (gcc) <a class="header-anchor" href="#c-example-(gcc)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <pre class="language-c"><code data-filename="example.c" class="language-c"><span class="highlight-line"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span></span>
 <span class="highlight-line"></span>
@@ -232,7 +232,7 @@ Check the <a href="https://aur.archlinux.org/packages/arm-linux-gnueabihf-gcc" c
 <span class="highlight-line">  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"ARM C Test\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="highlight-line">  <span class="token keyword">return</span> <span class="token number">99</span><span class="token punctuation">;</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ arm-linux-gnueabihf-gcc <span class="token parameter variable">-static</span> <span class="token parameter variable">-o</span> example-c example.c</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">arm-linux-gnueabihf-gcc <span class="token parameter variable">-static</span> <span class="token parameter variable">-o</span> example-c example.c</span></code></pre>
 <p>Note: If you don't statically link the file, you might see <a href="https://stackoverflow.com/questions/47787562/u-boot-lib-ld-linux-armhf-so-3-no-such-file-or-directory" class="external-link" target="_blank">this error</a>:</p>
 <blockquote>
 <p>qemu-arm: Could not open '/lib/ld-linux-armhf.so.3': No such file or directory</p>
@@ -243,15 +243,15 @@ You can run a single binary by using <a href="https://qemu-project.gitlab.io/qem
 or run a full-blown system via the <a href="https://qemu-project.gitlab.io/qemu/system/index.html" class="external-link" target="_blank">System emulation</a>.
 With the latter, you can run Windows XP on an ARM CPU, for example.
 We will use the User Mode emulation in our example, though.</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> qemu-user</span>
-<span class="highlight-line">$ ./example-as</span>
-<span class="highlight-line">exec: Failed to execute process: <span class="token string">'./example-as'</span> the <span class="token function">file</span> could not be run by the operating system.</span>
-<span class="highlight-line">$ qemu-arm ./example-as</span>
-<span class="highlight-line">Hello, ARM32<span class="token operator">!</span></span></code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ qemu-arm ./example-c</span>
-<span class="highlight-line">ARM C Test</span>
-<span class="highlight-line">$ <span class="token builtin class-name">echo</span> <span class="token variable">$status</span></span>
-<span class="highlight-line"><span class="token number">99</span></span></code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> qemu-user</span></span></span>
+<span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./example-as</span></span></span>
+<span class="highlight-line"><span class="token output">exec: Failed to execute process: './example-as' the file could not be run by the operating system.</span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">qemu-arm ./example-as</span></span></span>
+<span class="highlight-line"><span class="token output">Hello, ARM32!</span></code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">qemu-arm ./example-c</span></span></span>
+<span class="highlight-line"><span class="token output">ARM C Test</span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">echo</span> <span class="token variable">$status</span></span></span></span>
+<span class="highlight-line"><span class="token output">99</span></code></pre>
 <h3 id="virtualization-vs.-emulation" tabindex="-1">4.1.4. Virtualization vs. Emulation <a class="header-anchor" href="#virtualization-vs.-emulation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>A short note on this:
 I'm sure most of you are aware of the differences (especially performance-wise).
@@ -577,22 +577,22 @@ with an OpenSSL update.</p>
 </li>
 <li>🚧 However, the vagrant-libvirt plugin can not be installed ootb.</li>
 </ul>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">vagrant plugin <span class="token function">install</span> vagrant-libvirt</span>
-<span class="highlight-line"><span class="token comment"># ruby-libvirt-0.8.0.gem</span></span>
-<span class="highlight-line"><span class="token string">"gcc -o conftest -I/opt/vagrant/embedded/include/ruby-2.7.0/x86_64-darwin19 -I/opt/vagrant/embedded/include/ruby-2.7.0/ruby/backward -I/opt/vagrant/embedded/include/ruby-2.7.0 -I. -I/opt/homebrew/Cellar/libvirt/8.9.0/include -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/opt/vagrant/embedded/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I./include -O3 -std=c99 -fno-common -pipe  conftest.c  -L. -L/opt/vagrant/embedded/lib -L/opt/vagrant/embedded/lib -L.  -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -fstack-protector-strong -L/opt/vagrant/embedded/lib -L/opt/homebrew/Cellar/libvirt/8.9.0/lib     -lvirt -lruby.2.7 -lvirt  -lvirt  "</span></span>
-<span class="highlight-line">conftest.c:16:13: error: conflicting types <span class="token keyword">for</span> <span class="token string">'virConnectOpen'</span></span>
-<span class="highlight-line">extern void virConnectOpen<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">vagrant plugin <span class="token function">install</span> vagrant-libvirt</span></span></span>
+<span class="highlight-line"><span class="token output">// ruby-libvirt-0.8.0.gem</span>
+<span class="highlight-line">"gcc -o conftest -I/opt/vagrant/embedded/include/ruby-2.7.0/x86_64-darwin19 -I/opt/vagrant/embedded/include/ruby-2.7.0/ruby/backward -I/opt/vagrant/embedded/include/ruby-2.7.0 -I. -I/opt/homebrew/Cellar/libvirt/8.9.0/include -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/opt/vagrant/embedded/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I./include -O3 -std=c99 -fno-common -pipe  conftest.c  -L. -L/opt/vagrant/embedded/lib -L/opt/vagrant/embedded/lib -L.  -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -fstack-protector-strong -L/opt/vagrant/embedded/lib -L/opt/homebrew/Cellar/libvirt/8.9.0/lib     -lvirt -lruby.2.7 -lvirt  -lvirt  "</span>
+<span class="highlight-line">conftest.c:16:13: error: conflicting types for 'virConnectOpen'</span>
+<span class="highlight-line">extern void virConnectOpen();</span>
 <span class="highlight-line">            ^</span>
 <span class="highlight-line">/opt/homebrew/Cellar/libvirt/8.9.0/include/libvirt/libvirt-host.h:737:25: note: previous declaration is here</span>
-<span class="highlight-line">virConnectPtr           virConnectOpen          <span class="token punctuation">(</span>const char *name<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line">virConnectPtr           virConnectOpen          (const char *name);</span>
 <span class="highlight-line">                        ^</span>
-<span class="highlight-line">conftest.c:17:30: error: too few arguments to <span class="token keyword">function</span> call, single argument <span class="token string">'name'</span> was not specified</span>
-<span class="highlight-line">int t<span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token punctuation">{</span> virConnectOpen<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token builtin class-name">return</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span></span>
+<span class="highlight-line">conftest.c:17:30: error: too few arguments to function call, single argument 'name' was not specified</span>
+<span class="highlight-line">int t(void) { virConnectOpen(); return 0; }</span>
 <span class="highlight-line">              ~~~~~~~~~~~~~~ ^</span>
-<span class="highlight-line">/opt/homebrew/Cellar/libvirt/8.9.0/include/libvirt/libvirt-host.h:737:25: note: <span class="token string">'virConnectOpen'</span> declared here</span>
-<span class="highlight-line">virConnectPtr           virConnectOpen          <span class="token punctuation">(</span>const char *name<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line">/opt/homebrew/Cellar/libvirt/8.9.0/include/libvirt/libvirt-host.h:737:25: note: 'virConnectOpen' declared here</span>
+<span class="highlight-line">virConnectPtr           virConnectOpen          (const char *name);</span>
 <span class="highlight-line">                        ^</span>
-<span class="highlight-line"><span class="token number">2</span> errors generated.</span></code></pre>
+<span class="highlight-line">2 errors generated.</span></code></pre>
 <p>There is an <a href="https://github.com/vagrant-libvirt/vagrant-libvirt/issues/1205#issuecomment-1083794064" class="external-link" target="_blank">open issue on GitHub</a>
 for exactly this plugin.</p>
 <p>However, it is open since Februar 2021 already.
