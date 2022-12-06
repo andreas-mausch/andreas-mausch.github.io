@@ -52,8 +52,8 @@ However, I used CyanogenMod 11, which is a little outdated.</p>
 <p>For some reason, CyanogenMod decided to drop support for Ad-Hoc, so the current LineageOS doesn't have it.<br>
 In fact, you won't be even able to see Ad-Hoc networks on the network list. They are filtered out.</p>
 <p>So he tried to establish a connection by directly calling the Linux command in the adb shell ($SSID can be TestAdHoc and $FREQ 2412 for example):</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ iw wlan0 <span class="token builtin class-name">set</span> <span class="token builtin class-name">type</span> ibss</span>
-<span class="highlight-line">$ iw wlan0 ibss <span class="token function">join</span> <span class="token variable">$SSID</span> <span class="token variable">$FREQ</span></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line">iw wlan0 <span class="token builtin class-name">set</span> <span class="token builtin class-name">type</span> ibss</span>
+<span class="highlight-line">iw wlan0 ibss <span class="token function">join</span> <span class="token variable">$SSID</span> <span class="token variable">$FREQ</span></span></code></pre>
 <p>However, this results in an error message:</p>
 <blockquote>
 <p>command failed: File table overflow (-23)</p>
@@ -72,9 +72,9 @@ This isn't hard once you know it, but I'm rather surprised I couldn't find any d
 </figure>
 <p>Luckily, the IBSS firmware is part of the LineageOS image and already on the phone.
 In order to load it, open up a shell on your rooted phone:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ adb shell</span>
-<span class="highlight-line">jfltexx:/ $ <span class="token function">su</span></span>
-<span class="highlight-line">jfltexx:/ <span class="token comment">#</span></span></code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">adb shell</span></span></span>
+<span class="highlight-line"><span class="token output">jfltexx:/ $ su</span>
+<span class="highlight-line">jfltexx:/ #</span></code></pre>
 <p>Now open the network view on the phone and disable WiFi.</p>
 <p>Execute the following commands:</p>
 <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># WiFi should be down already, just make sure it is</span></span>

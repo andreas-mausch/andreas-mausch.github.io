@@ -58,52 +58,52 @@ Sync time via bluetooth is enabled.</p>
 I've moved them with Thunar, which usually keeps the timestamps as they are.
 I'm on the <code class="language-plain">5.10.49-1-MANJARO</code> kernel and Thunar <code class="language-plain">4.16.8</code>.</p>
 <p>This is what exiftool's output looks like:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ exiftool DSC_8783-shot-at-16-40-cest.JPG <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token function">time</span></span>
-<span class="highlight-line">File Modification Date/Time     <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">18</span>:40:30+02:00</span>
-<span class="highlight-line">File Access Date/Time           <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:41:09+02:00</span>
-<span class="highlight-line">File Inode Change Date/Time     <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:41:38+02:00</span>
-<span class="highlight-line">Exposure Time                   <span class="token builtin class-name">:</span> <span class="token number">1</span>/60</span>
-<span class="highlight-line">Date/Time Original              <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:40:29</span>
-<span class="highlight-line">Time Zone                       <span class="token builtin class-name">:</span> +01:00</span>
-<span class="highlight-line">Power Up Time                   <span class="token builtin class-name">:</span> 0000:00:00 00:00:00</span>
-<span class="highlight-line">Sub Sec Time                    <span class="token builtin class-name">:</span> <span class="token number">87</span></span>
-<span class="highlight-line">Sub Sec Time Original           <span class="token builtin class-name">:</span> <span class="token number">87</span></span>
-<span class="highlight-line">Sub Sec Time Digitized          <span class="token builtin class-name">:</span> <span class="token number">87</span></span>
-<span class="highlight-line">GPS Time Stamp                  <span class="token builtin class-name">:</span> <span class="token number">14</span>:40:28.31</span>
-<span class="highlight-line">Date/Time Original              <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">16</span>:40:29.87</span>
-<span class="highlight-line">GPS Date/Time                   <span class="token builtin class-name">:</span> <span class="token number">2021</span>:07:29 <span class="token number">14</span>:40:28.31Z</span></code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">exiftool DSC_8783-shot-at-16-40-cest.JPG <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token function">time</span></span></span></span>
+<span class="highlight-line"><span class="token output">File Modification Date/Time     : 2021:07:29 18:40:30+02:00</span>
+<span class="highlight-line">File Access Date/Time           : 2021:07:29 16:41:09+02:00</span>
+<span class="highlight-line">File Inode Change Date/Time     : 2021:07:29 16:41:38+02:00</span>
+<span class="highlight-line">Exposure Time                   : 1/60</span>
+<span class="highlight-line">Date/Time Original              : 2021:07:29 16:40:29</span>
+<span class="highlight-line">Time Zone                       : +01:00</span>
+<span class="highlight-line">Power Up Time                   : 0000:00:00 00:00:00</span>
+<span class="highlight-line">Sub Sec Time                    : 87</span>
+<span class="highlight-line">Sub Sec Time Original           : 87</span>
+<span class="highlight-line">Sub Sec Time Digitized          : 87</span>
+<span class="highlight-line">GPS Time Stamp                  : 14:40:28.31</span>
+<span class="highlight-line">Date/Time Original              : 2021:07:29 16:40:29.87</span>
+<span class="highlight-line">GPS Date/Time                   : 2021:07:29 14:40:28.31Z</span></code></pre>
 <p>So the <em>File Modification Date/Time</em> is just wrong.
 It should be either <em>2021:07:29 16:40:30+02:00</em> or
 <em>2021:07:29 18:40:30Z</em>.</p>
 <p>See the mtime from stat:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">stat</span> DSC_8783-shot-at-16-40-cest.JPG </span>
-<span class="highlight-line"> Datei: DSC_8783-shot-at-16-40-cest.JPG</span>
-<span class="highlight-line"> Größe: <span class="token number">7027908</span>   	Blöcke: <span class="token number">13728</span>      EA Block: <span class="token number">4096</span>   reguläre Datei</span>
-<span class="highlight-line"> Gerät: 10302h/66306d	Inode: <span class="token number">2887230</span>     Verknüpfungen: <span class="token number">1</span></span>
-<span class="highlight-line">Zugriff: <span class="token punctuation">(</span>0644/-rw-r--r--<span class="token punctuation">)</span>  Uid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span>   Gid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span></span>
-<span class="highlight-line">Zugriff: <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:09.435963000 +0200</span>
-<span class="highlight-line">Modifiziert: <span class="token number">2021</span>-07-29 <span class="token number">18</span>:40:30.000000000 +0200</span>
-<span class="highlight-line">Geändert: <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:38.542630557 +0200</span>
-<span class="highlight-line">Geburt: <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:09.435963322 +0200</span>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">stat</span> DSC_8783-shot-at-16-40-cest.JPG</span></span></span>
+<span class="highlight-line"><span class="token output"> Datei: DSC_8783-shot-at-16-40-cest.JPG</span>
+<span class="highlight-line"> Größe: 7027908   	Blöcke: 13728      EA Block: 4096   reguläre Datei</span>
+<span class="highlight-line"> Gerät: 10302h/66306d	Inode: 2887230     Verknüpfungen: 1</span>
+<span class="highlight-line">Zugriff: (0644/-rw-r--r--)  Uid: ( 1000/  neonew)   Gid: ( 1000/  neonew)</span>
+<span class="highlight-line">Zugriff: 2021-07-29 16:41:09.435963000 +0200</span>
+<span class="highlight-line">Modifiziert: 2021-07-29 18:40:30.000000000 +0200</span>
+<span class="highlight-line">Geändert: 2021-07-29 16:41:38.542630557 +0200</span>
+<span class="highlight-line">Geburt: 2021-07-29 16:41:09.435963322 +0200</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">$ <span class="token function">stat</span> <span class="token parameter variable">-c</span> <span class="token string">"Filename : %n</span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">stat</span> <span class="token parameter variable">-c</span> <span class="token string">"Filename : %n</span>
 <span class="highlight-line">atime    : %x</span>
 <span class="highlight-line">mtime    : %y</span>
 <span class="highlight-line">ctime    : %z</span>
-<span class="highlight-line">"</span> DSC_8783-shot-at-16-40-cest.JPG </span>
-<span class="highlight-line">Filename <span class="token builtin class-name">:</span> DSC_8783-shot-at-16-40-cest.JPG</span>
-<span class="highlight-line">atime    <span class="token builtin class-name">:</span> <span class="token number">2021</span>-07-29 <span class="token number">16</span>:41:09.435963000 +0200</span>
-<span class="highlight-line">mtime    <span class="token builtin class-name">:</span> <span class="token number">2021</span>-07-29 <span class="token number">18</span>:40:30.000000000 +0200</span>
-<span class="highlight-line">ctime    <span class="token builtin class-name">:</span> <span class="token number">2021</span>-07-29 <span class="token number">16</span>:51:29.019308742 +0200</span></code></pre>
+<span class="highlight-line">"</span> DSC_8783-shot-at-16-40-cest.JPG </span></span></span>
+<span class="highlight-line"><span class="token output">Filename : DSC_8783-shot-at-16-40-cest.JPG</span>
+<span class="highlight-line">atime    : 2021-07-29 16:41:09.435963000 +0200</span>
+<span class="highlight-line">mtime    : 2021-07-29 18:40:30.000000000 +0200</span>
+<span class="highlight-line">ctime    : 2021-07-29 16:51:29.019308742 +0200</span></code></pre>
 <p>On the SD card with a FAT32 file system the output looks like this:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">stat</span> DSC_8783.JPG </span>
-<span class="highlight-line"> Datei: DSC_8783.JPG</span>
-<span class="highlight-line"> Größe: <span class="token number">7027908</span>   	Blöcke: <span class="token number">13728</span>      EA Block: <span class="token number">32768</span>  reguläre Datei</span>
-<span class="highlight-line"> Gerät: b301h/45825d	Inode: <span class="token number">345</span>         Verknüpfungen: <span class="token number">1</span></span>
-<span class="highlight-line">Zugriff: <span class="token punctuation">(</span>0644/-rw-r--r--<span class="token punctuation">)</span>  Uid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span>   Gid: <span class="token punctuation">(</span> <span class="token number">1000</span>/  neonew<span class="token punctuation">)</span></span>
-<span class="highlight-line">Zugriff: <span class="token number">2021</span>-07-29 02:00:00.000000000 +0200</span>
-<span class="highlight-line">Modifiziert: <span class="token number">2021</span>-07-29 <span class="token number">18</span>:46:10.000000000 +0200</span>
-<span class="highlight-line">Geändert: <span class="token number">2021</span>-07-29 <span class="token number">18</span>:46:10.000000000 +0200</span>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">stat</span> DSC_8783.JPG</span></span></span>
+<span class="highlight-line"><span class="token output"> Datei: DSC_8783.JPG</span>
+<span class="highlight-line"> Größe: 7027908   	Blöcke: 13728      EA Block: 32768  reguläre Datei</span>
+<span class="highlight-line"> Gerät: b301h/45825d	Inode: 345         Verknüpfungen: 1</span>
+<span class="highlight-line">Zugriff: (0644/-rw-r--r--)  Uid: ( 1000/  neonew)   Gid: ( 1000/  neonew)</span>
+<span class="highlight-line">Zugriff: 2021-07-29 02:00:00.000000000 +0200</span>
+<span class="highlight-line">Modifiziert: 2021-07-29 18:46:10.000000000 +0200</span>
+<span class="highlight-line">Geändert: 2021-07-29 18:46:10.000000000 +0200</span>
 <span class="highlight-line">Geburt: -</span></code></pre>
 <h1 id="the-fix%3A-set-mtime-to-exif-timestamp" tabindex="-1">2. The fix: Set mtime to exif timestamp <a class="header-anchor" href="#the-fix%3A-set-mtime-to-exif-timestamp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I don't really know how to fix the timestamp on the file system,

@@ -317,8 +317,7 @@ and as you can see you have to decide between gpg or FIDO2. Too bad.&lt;/p&gt;
 This is about the &lt;em&gt;expires&lt;/em&gt; part of a cookie.&lt;/p&gt;
 &lt;h1 id=&quot;two-formats&quot; tabindex=&quot;-1&quot;&gt;1. Two formats &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-02-03-cookie-formats-and-apache-httpclient/#two-formats&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Let&#39;s see what &lt;strong&gt;google.com&lt;/strong&gt; uses:&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;curl&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-v&lt;/span&gt; http://www.google.com&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Android: LineageOS, Root and TWRP Recovery on Samung Galaxy S7</title>
@@ -659,7 +658,7 @@ However, I used CyanogenMod 11, which is a little outdated.&lt;/p&gt;
 &lt;p&gt;For some reason, CyanogenMod decided to drop support for Ad-Hoc, so the current LineageOS doesn&#39;t have it.&lt;br /&gt;
 In fact, you won&#39;t be even able to see Ad-Hoc networks on the network list. They are filtered out.&lt;/p&gt;
 &lt;p&gt;So he tried to establish a connection by directly calling the Linux command in the adb shell ($SSID can be TestAdHoc and $FREQ 2412 for example):&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ iw wlan0 &lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;iw wlan0 &lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Kotlin Native</title>
@@ -731,8 +730,7 @@ That was nice, but didn&#39;t work like that again. After some googling I&#39;ve
 &lt;p&gt;So &amp;quot;Huawei Technologies Co., Ltd. Broadband stick&amp;quot; is the device.&lt;br /&gt;
 We can see the Vendor ID (12d1) and the Product ID (1446).&lt;/p&gt;
 &lt;p&gt;A call to &lt;code class=&quot;language-plain&quot;&gt;usb-devices&lt;/code&gt; shows it is in drive-mode:&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ usb-devices&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;T:  &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Security: Playing around with NSA exploit EternalBlue (MS17-010)</title>

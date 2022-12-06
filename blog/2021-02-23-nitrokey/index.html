@@ -80,28 +80,28 @@ So for me, I will continue using it.</p>
 <p>..as described in the official <a href="https://www.nitrokey.com/documentation/frequently-asked-questions-faq#openpgp-card-not-available" class="external-link" target="_blank">documentation</a>.<br>
 <a href="/files/2021-02-23-nitrokey/41-nitrokey.rules">Here</a> is a mirror of that file.</p>
 <p>Restart, and <code class="language-plain">gpg --card-status</code> should return something similar to this:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ gpg --card-status</span>
-<span class="highlight-line">Reader <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.: 20A0:4108:00000000000000000000AAAA:0</span>
-<span class="highlight-line">Application ID <span class="token punctuation">..</span>.: D27600011111111100050000AAAA0000</span>
-<span class="highlight-line">Application <span class="token builtin class-name">type</span> .: OpenPGP</span>
-<span class="highlight-line">Version <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>: <span class="token number">3.3</span></span>
-<span class="highlight-line">Manufacturer <span class="token punctuation">..</span><span class="token punctuation">..</span>.: ZeitControl</span>
-<span class="highlight-line">Serial number <span class="token punctuation">..</span><span class="token punctuation">..</span>: 0000AAAA</span>
-<span class="highlight-line">Name of cardholder: <span class="token punctuation">[</span>nicht gesetzt<span class="token punctuation">]</span></span>
-<span class="highlight-line">Language prefs <span class="token punctuation">..</span>.: de</span>
-<span class="highlight-line">Salutation <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.: </span>
-<span class="highlight-line">URL of public key <span class="token builtin class-name">:</span> <span class="token punctuation">[</span>nicht gesetzt<span class="token punctuation">]</span></span>
-<span class="highlight-line">Login data <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.: <span class="token punctuation">[</span>nicht gesetzt<span class="token punctuation">]</span></span>
-<span class="highlight-line">Signature PIN <span class="token punctuation">..</span><span class="token punctuation">..</span>: zwingend</span>
-<span class="highlight-line">Key attributes <span class="token punctuation">..</span>.: rsa2048 rsa2048 rsa2048</span>
-<span class="highlight-line">Max. PIN lengths .: <span class="token number">64</span> <span class="token number">64</span> <span class="token number">64</span></span>
-<span class="highlight-line">PIN retry counter <span class="token builtin class-name">:</span> <span class="token number">3</span> <span class="token number">0</span> <span class="token number">3</span></span>
-<span class="highlight-line">Signature counter <span class="token builtin class-name">:</span> <span class="token number">0</span></span>
-<span class="highlight-line">KDF setting <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>: off</span>
-<span class="highlight-line">Signature key <span class="token punctuation">..</span><span class="token punctuation">..</span>: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span>
-<span class="highlight-line">Encryption key<span class="token punctuation">..</span><span class="token punctuation">..</span>: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span>
-<span class="highlight-line">Authentication key: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span>
-<span class="highlight-line">General key info<span class="token punctuation">..</span>: <span class="token punctuation">[</span>none<span class="token punctuation">]</span></span></code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg --card-status</span></span></span>
+<span class="highlight-line"><span class="token output">Reader ...........: 20A0:4108:00000000000000000000AAAA:0</span>
+<span class="highlight-line">Application ID ...: D27600011111111100050000AAAA0000</span>
+<span class="highlight-line">Application type .: OpenPGP</span>
+<span class="highlight-line">Version ..........: 3.3</span>
+<span class="highlight-line">Manufacturer .....: ZeitControl</span>
+<span class="highlight-line">Serial number ....: 0000AAAA</span>
+<span class="highlight-line">Name of cardholder: [nicht gesetzt]</span>
+<span class="highlight-line">Language prefs ...: de</span>
+<span class="highlight-line">Salutation .......: </span>
+<span class="highlight-line">URL of public key : [nicht gesetzt]</span>
+<span class="highlight-line">Login data .......: [nicht gesetzt]</span>
+<span class="highlight-line">Signature PIN ....: zwingend</span>
+<span class="highlight-line">Key attributes ...: rsa2048 rsa2048 rsa2048</span>
+<span class="highlight-line">Max. PIN lengths .: 64 64 64</span>
+<span class="highlight-line">PIN retry counter : 3 0 3</span>
+<span class="highlight-line">Signature counter : 0</span>
+<span class="highlight-line">KDF setting ......: off</span>
+<span class="highlight-line">Signature key ....: [none]</span>
+<span class="highlight-line">Encryption key....: [none]</span>
+<span class="highlight-line">Authentication key: [none]</span>
+<span class="highlight-line">General key info..: [none]</span></code></pre>
 <h1 id="gpg-test-file" tabindex="-1">4. GPG test file <a class="header-anchor" href="#gpg-test-file" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Let's assume you have both, the public and secret key, in your local gpg ring.
 No NitroKey in play, yet.</p>
@@ -122,14 +122,14 @@ No NitroKey in play, yet.</p>
 I had to enter the admin PIN twice (default: 12345678).
 After this, type <code class="language-plain">quit</code> and confirm.</p>
 <p>After this, the <code class="language-plain">gpg --list-secret-keys</code> command should show some output like this:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ gpg --list-secret-keys</span>
-<span class="highlight-line">/home/user/.gnupg/pubring.kbx</span>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg --list-secret-keys</span></span></span>
+<span class="highlight-line"><span class="token output">/home/user/.gnupg/pubring.kbx</span>
 <span class="highlight-line">-------------------------------</span>
-<span class="highlight-line">sec<span class="token operator">></span>  rsa4096 <span class="token number">1999</span>-01-01 <span class="token punctuation">[</span>SC<span class="token punctuation">]</span></span>
+<span class="highlight-line">sec>  rsa4096 1999-01-01 [SC]</span>
 <span class="highlight-line">      BE6B9238A3F73D41599A474AE430E46A820299F6</span>
-<span class="highlight-line">      Kartenseriennr. <span class="token operator">=</span> 0005 0000AAAA</span>
-<span class="highlight-line">uid        <span class="token punctuation">[</span> unbekannt <span class="token punctuation">]</span> username@email</span>
-<span class="highlight-line">ssb<span class="token operator">></span>  rsa4096 <span class="token number">1999</span>-01-01 <span class="token punctuation">[</span>E<span class="token punctuation">]</span></span></code></pre>
+<span class="highlight-line">      Kartenseriennr. = 0005 0000AAAA</span>
+<span class="highlight-line">uid        [ unbekannt ] username@email</span>
+<span class="highlight-line">ssb>  rsa4096 1999-01-01 [E]</span></code></pre>
 <p>As you can see, the <em>Kartenseriennr</em> (english: card serial number) is shown.
 That means the reference to the NitroKey was successfully installed. Good work.</p>
 <p>Try to run the decryption command from above again.

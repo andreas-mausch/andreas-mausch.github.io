@@ -50,30 +50,30 @@
 This is about the <em>expires</em> part of a cookie.</p>
 <h1 id="two-formats" tabindex="-1">1. Two formats <a class="header-anchor" href="#two-formats" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Let's see what <strong>google.com</strong> uses:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">curl</span> <span class="token parameter variable">-v</span> http://www.google.com</span>
-<span class="highlight-line">*   Trying 2a00:1450:4005:800::2004:80<span class="token punctuation">..</span>.</span>
-<span class="highlight-line">* Connected to www.google.com <span class="token punctuation">(</span>2a00:1450:4005:800::2004<span class="token punctuation">)</span> port <span class="token number">80</span> <span class="token punctuation">(</span><span class="token comment">#0)</span></span>
-<span class="highlight-line"><span class="token operator">></span> GET / HTTP/1.1</span>
-<span class="highlight-line"><span class="token operator">></span> Host: www.google.com</span>
-<span class="highlight-line"><span class="token operator">></span> User-Agent: curl/7.74.0</span>
-<span class="highlight-line"><span class="token operator">></span> Accept: */*</span>
-<span class="highlight-line"><span class="token operator">></span> </span>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">curl</span> <span class="token parameter variable">-v</span> http://www.google.com</span></span></span>
+<span class="highlight-line"><span class="token output">*   Trying 2a00:1450:4005:800::2004:80...</span>
+<span class="highlight-line">* Connected to www.google.com (2a00:1450:4005:800::2004) port 80 (#0)</span>
+<span class="highlight-line">> GET / HTTP/1.1</span>
+<span class="highlight-line">> Host: www.google.com</span>
+<span class="highlight-line">> User-Agent: curl/7.74.0</span>
+<span class="highlight-line">> Accept: */*</span>
+<span class="highlight-line">> </span>
 <span class="highlight-line">* Mark bundle as not supporting multiuse</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> HTTP/1.1 <span class="token number">200</span> OK</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Date: Thu, 04 Feb <span class="token number">2021</span> <span class="token number">14</span>:52:31 GMT</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Expires: <span class="token parameter variable">-1</span></span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Cache-Control: private, max-age<span class="token operator">=</span><span class="token number">0</span></span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Content-Type: text/html<span class="token punctuation">;</span> <span class="token assign-left variable">charset</span><span class="token operator">=</span>ISO-8859-1</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> P3P: <span class="token assign-left variable">CP</span><span class="token operator">=</span><span class="token string">"This is not a P3P policy! See g.co/p3phelp for more info."</span></span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Server: gws</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> X-XSS-Protection: <span class="token number">0</span></span>
-<span class="highlight-line"><span class="token operator">&lt;</span> X-Frame-Options: SAMEORIGIN</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Set-Cookie: <span class="token assign-left variable">NID</span><span class="token operator">=</span><span class="token number">208</span><span class="token operator">=</span>Q71yKqzPX7wekeaMyaa-RndCAZz6pLnozTJRLprMjuZzuImXnlCCXFoqoRoeuxrjn7pk8l2gIesgE5LITdauT_AnYm3jmUlwkqLW1LN4igl8zDVBW5UzTJUizdVeiyuIy4F7RfABvuLUI-dIXlQItQbiYCtTNQTzBh7lEwtn5YM<span class="token punctuation">;</span> <span class="token assign-left variable">expires</span><span class="token operator">=</span>Fri, 06-Aug-2021 <span class="token number">14</span>:52:31 GMT<span class="token punctuation">;</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/<span class="token punctuation">;</span> <span class="token assign-left variable">domain</span><span class="token operator">=</span>.google.com<span class="token punctuation">;</span> HttpOnly</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Accept-Ranges: none</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Vary: Accept-Encoding</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> Transfer-Encoding: chunked</span>
-<span class="highlight-line"><span class="token operator">&lt;</span> </span>
-<span class="highlight-line"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span><span class="token operator">&lt;</span>html and so on<span class="token punctuation">..</span></span></code></pre>
+<span class="highlight-line">&lt; HTTP/1.1 200 OK</span>
+<span class="highlight-line">&lt; Date: Thu, 04 Feb 2021 14:52:31 GMT</span>
+<span class="highlight-line">&lt; Expires: -1</span>
+<span class="highlight-line">&lt; Cache-Control: private, max-age=0</span>
+<span class="highlight-line">&lt; Content-Type: text/html; charset=ISO-8859-1</span>
+<span class="highlight-line">&lt; P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."</span>
+<span class="highlight-line">&lt; Server: gws</span>
+<span class="highlight-line">&lt; X-XSS-Protection: 0</span>
+<span class="highlight-line">&lt; X-Frame-Options: SAMEORIGIN</span>
+<span class="highlight-line">&lt; Set-Cookie: NID=208=Q71yKqzPX7wekeaMyaa-RndCAZz6pLnozTJRLprMjuZzuImXnlCCXFoqoRoeuxrjn7pk8l2gIesgE5LITdauT_AnYm3jmUlwkqLW1LN4igl8zDVBW5UzTJUizdVeiyuIy4F7RfABvuLUI-dIXlQItQbiYCtTNQTzBh7lEwtn5YM; expires=Fri, 06-Aug-2021 14:52:31 GMT; path=/; domain=.google.com; HttpOnly</span>
+<span class="highlight-line">&lt; Accept-Ranges: none</span>
+<span class="highlight-line">&lt; Vary: Accept-Encoding</span>
+<span class="highlight-line">&lt; Transfer-Encoding: chunked</span>
+<span class="highlight-line">&lt; </span>
+<span class="highlight-line">&lt;!doctype html>&lt;html and so on..</span></code></pre>
 <p>See? It says <strong>expires=Fri, 06-Aug-2021 14:52:31 GMT</strong>.</p>
 <p>This is interesting, as there apparently are two common ways to format that date.</p>
 <ul>

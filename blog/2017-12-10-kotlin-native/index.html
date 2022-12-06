@@ -92,24 +92,24 @@ It was very easy to set up. When you call ./gradlew build for the first time, it
 <pre class="language-kotlin"><code data-filename="Hello.kt" class="language-kotlin"><span class="highlight-line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hello World!"</span></span><span class="token punctuation">)</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token builtin class-name">pwd</span></span>
-<span class="highlight-line">./hello-kotlin/build/konan/bin/linux</span>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">pwd</span></span></span></span>
+<span class="highlight-line"><span class="token output">./hello-kotlin/build/konan/bin/linux</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">$ <span class="token function">ls</span> <span class="token parameter variable">-lh</span></span>
-<span class="highlight-line">-rwxr-xr-x <span class="token number">1</span> neonew neonew 404K Dez <span class="token number">10</span> <span class="token number">17</span>:40 Hello-linux.kexe*</span>
-<span class="highlight-line">-rw-r--r-- <span class="token number">1</span> neonew neonew <span class="token number">2</span>,4K Dez <span class="token number">10</span> <span class="token number">17</span>:40 Hello-linux.kt.bc</span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">ls</span> <span class="token parameter variable">-lh</span></span></span></span>
+<span class="highlight-line"><span class="token output">-rwxr-xr-x 1 neonew neonew 404K Dez 10 17:40 Hello-linux.kexe*</span>
+<span class="highlight-line">-rw-r--r-- 1 neonew neonew 2,4K Dez 10 17:40 Hello-linux.kt.bc</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">$ ./Hello-linux.kexe</span>
-<span class="highlight-line">Hello World<span class="token operator">!</span></span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./Hello-linux.kexe</span></span></span>
+<span class="highlight-line"><span class="token output">Hello World!</span>
 <span class="highlight-line"></span>
-<span class="highlight-line">$ ldd Hello-linux.kexe</span>
-<span class="highlight-line">	linux-vdso.so.1 <span class="token operator">=</span><span class="token operator">></span>  <span class="token punctuation">(</span>0x00007ffd6a705000<span class="token punctuation">)</span></span>
-<span class="highlight-line">	libdl.so.2 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libdl.so.2 <span class="token punctuation">(</span>0x00007f262531f000<span class="token punctuation">)</span></span>
-<span class="highlight-line">	libm.so.6 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libm.so.6 <span class="token punctuation">(</span>0x00007f2625016000<span class="token punctuation">)</span></span>
-<span class="highlight-line">	libpthread.so.0 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libpthread.so.0 <span class="token punctuation">(</span>0x00007f2624df8000<span class="token punctuation">)</span></span>
-<span class="highlight-line">	libgcc_s.so.1 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libgcc_s.so.1 <span class="token punctuation">(</span>0x00007f2624be2000<span class="token punctuation">)</span></span>
-<span class="highlight-line">	libc.so.6 <span class="token operator">=</span><span class="token operator">></span> /lib/x86_64-linux-gnu/libc.so.6 <span class="token punctuation">(</span>0x00007f2624818000<span class="token punctuation">)</span></span>
-<span class="highlight-line">	/lib64/ld-linux-x86-64.so.2 <span class="token punctuation">(</span>0x000055d6b9e10000<span class="token punctuation">)</span></span></code></pre>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">ldd Hello-linux.kexe</span></span></span>
+<span class="highlight-line"><span class="token output">	linux-vdso.so.1 =>  (0x00007ffd6a705000)</span>
+<span class="highlight-line">	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f262531f000)</span>
+<span class="highlight-line">	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f2625016000)</span>
+<span class="highlight-line">	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f2624df8000)</span>
+<span class="highlight-line">	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f2624be2000)</span>
+<span class="highlight-line">	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f2624818000)</span>
+<span class="highlight-line">	/lib64/ld-linux-x86-64.so.2 (0x000055d6b9e10000)</span></code></pre>
 <p>File size looks awesome already, the Hello World example is just 404 KB.</p>
 <h1 id="conclusion" tabindex="-1">3. Conclusion <a class="header-anchor" href="#conclusion" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>So for Kotlin Native I will analyse how it handles garbage collection and how much stuff the Kotlin runtime in the binary does.

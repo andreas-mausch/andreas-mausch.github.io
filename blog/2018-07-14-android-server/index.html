@@ -78,11 +78,11 @@ If it works: Nice, you are now connected to an Arch Linux running on your phone.
 <p>Now I also wanted the server to be started automatically when I power the phone on.
 This means two things: the linux container needs to be started, and also the software within it.</p>
 <p>With run-parts, the <code class="language-plain">/etc/rc.local</code> is executed on container boot, as root. Mine now looks like this:</p>
-<pre class="language-bash"><code data-filename="/etc/rc.local" class="language-bash"><span class="highlight-line"><span class="token shebang important">#!/bin/sh -e</span></span>
+<pre class="language-sh"><code data-filename="/etc/rc.local" class="language-sh"><span class="highlight-line"><span class="token shebang important">#!/bin/sh -e</span></span>
 <span class="highlight-line"><span class="token function">su</span> android <span class="token parameter variable">-c</span> <span class="token string">'/home/android/run.sh'</span></span>
 <span class="highlight-line"><span class="token builtin class-name">exit</span> <span class="token number">0</span></span></code></pre>
 <p>So all I do is run another script in the home directory of the user.</p>
-<pre class="language-bash"><code data-filename="/home/android/run.sh" class="language-bash"><span class="highlight-line"><span class="token shebang important">#!/bin/sh -e</span></span>
+<pre class="language-sh"><code data-filename="/home/android/run.sh" class="language-sh"><span class="highlight-line"><span class="token shebang important">#!/bin/sh -e</span></span>
 <span class="highlight-line"><span class="token builtin class-name">cd</span> /home/android/</span>
 <span class="highlight-line"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ./logs</span>
 <span class="highlight-line">python2 <span class="token parameter variable">-u</span> ./myapp.py <span class="token operator">></span> ./logs/myapp.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span></span></code></pre>
