@@ -119,7 +119,7 @@ len = . - msg
 
 Compile and link the program as follows
 
-```bash
+```shell-session
 $ arm-linux-gnueabihf-as -o example-as.out example.as
 $ arm-linux-gnueabihf-ld -o example-as example-as.out
 $ file ./example-as
@@ -138,7 +138,7 @@ int main() {
 ```
 
 ```bash
-$ arm-linux-gnueabihf-gcc -static -o example-c example.c
+arm-linux-gnueabihf-gcc -static -o example-c example.c
 ```
 
 Note: If you don't statically link the file, you might see [this error](https://stackoverflow.com/questions/47787562/u-boot-lib-ld-linux-armhf-so-3-no-such-file-or-directory):
@@ -153,7 +153,7 @@ or run a full-blown system via the [System emulation](https://qemu-project.gitla
 With the latter, you can run Windows XP on an ARM CPU, for example.
 We will use the User Mode emulation in our example, though.
 
-```bash
+```shell-session
 $ sudo pacman -S qemu-user
 $ ./example-as
 exec: Failed to execute process: './example-as' the file could not be run by the operating system.
@@ -161,7 +161,7 @@ $ qemu-arm ./example-as
 Hello, ARM32!
 ```
 
-```bash
+```shell-session
 $ qemu-arm ./example-c
 ARM C Test
 $ echo $status
@@ -588,9 +588,9 @@ After that, even the ruby [WinRM example](https://github.com/WinRb/WinRM#example
   - And, that shipped version is x86_64 always. 🤮🤮
 - 🚧 However, the vagrant-libvirt plugin can not be installed ootb.
 
-```bash
-vagrant plugin install vagrant-libvirt
-# ruby-libvirt-0.8.0.gem
+```shell-session
+$ vagrant plugin install vagrant-libvirt
+// ruby-libvirt-0.8.0.gem
 "gcc -o conftest -I/opt/vagrant/embedded/include/ruby-2.7.0/x86_64-darwin19 -I/opt/vagrant/embedded/include/ruby-2.7.0/ruby/backward -I/opt/vagrant/embedded/include/ruby-2.7.0 -I. -I/opt/homebrew/Cellar/libvirt/8.9.0/include -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/opt/vagrant/embedded/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I./include -O3 -std=c99 -fno-common -pipe  conftest.c  -L. -L/opt/vagrant/embedded/lib -L/opt/vagrant/embedded/lib -L.  -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -fstack-protector-strong -L/opt/vagrant/embedded/lib -L/opt/homebrew/Cellar/libvirt/8.9.0/lib     -lvirt -lruby.2.7 -lvirt  -lvirt  "
 conftest.c:16:13: error: conflicting types for 'virConnectOpen'
 extern void virConnectOpen();
