@@ -583,9 +583,13 @@ After that, even the ruby [WinRM example](https://github.com/WinRb/WinRM#example
 # Apple Silicon
 
 - ✅ libvirt works on M1
-- ✅ Vagrant can be installed on M1
+- ✅ Vagrant 2.3.3 can be installed on M1
   - However, it ships it's own embedded version of ruby, instead of using the one provided by the system. 🤮
-  - And, that shipped version is x86_64 always. 🤮🤮
+  - And, that shipped version is x86_64 always.
+  - And, that version (2.7.0) is from December 2019.
+  - And, Ruby offers a newer 2.x release: 2.7.7, from November 2022.
+  - And, support for 2.7.x ends in three months: [2023-03-31](https://endoflife.date/ruby).
+  - And, of course, there is the fully supported Ruby 3.x, which is out for almost two years now.
 - 🚧 However, the vagrant-libvirt plugin can not be installed ootb.
 
 ```shell-session
