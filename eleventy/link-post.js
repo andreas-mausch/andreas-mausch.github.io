@@ -6,7 +6,7 @@ module.exports = _liquidEngine => ({
   },
   render: async function (scope, _hash) {
     const linkToPost = await this.liquid.evalValue(this.linkToPost, scope)
-    const post = scope.environments.collections.posts.find(post => post.url === `/blog/${linkToPost}/`)
+    const post = scope.environments.collections.post.find(post => post.url === `/blog/${linkToPost}/`)
 
     if (!post) {
       throw new Error(`link-post: Post not found ${linkToPost}`)

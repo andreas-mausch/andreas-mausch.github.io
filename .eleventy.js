@@ -16,6 +16,8 @@ const tableOfContents = require("eleventy-plugin-nesting-toc")
 const typescriptPlugin = require("./eleventy/typescript-esbuild")
 const yaml = require("js-yaml")
 
+const showDrafts = process.env.ELEVENTY_ENV === "development"
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.svg")
   eleventyConfig.addPassthroughCopy("images")
@@ -43,6 +45,9 @@ module.exports = function (eleventyConfig) {
     collectionApi.getAll()
       .filter(item => "navigationWeight" in item.data)
       .sort((item1, item2) => item1.data.navigationWeight - item2.data.navigationWeight))
+  eleventyConfig.addCollection("posts", collections =>
+    collections.getFilteredByTag("post")
+      .filter(post => showDrafts || !post.data.draft))
 
   eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents))
 
