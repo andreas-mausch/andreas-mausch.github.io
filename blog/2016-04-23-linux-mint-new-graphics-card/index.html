@@ -56,13 +56,18 @@ which was fine.</p>
 <p>When I tried to boot my Linux partition, I faced a black screen. After uninstalling
 the ATI drivers and installing the proprietary Nvidia drivers in recovery mode
 on command line I got to the login screen.</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> purge <span class="token string">"fglrx.*"</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> purge <span class="token string">"fglrx.*"</span></span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">--reinstall</span> xserver-xorg-core libgl1-mesa-glx:i386 libgl1-mesa-dri:i386 libgl1-mesa-glx:amd64 libgl1-mesa-dri:amd64</span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token function">sudo</span> add-apt-repository ppa:graphics-drivers/ppa</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> update</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nvidia-364 nvidia-settings</span></code></pre>
-<p>But after I entered my credentials the screen went black for two seconds and
+
+    </div><p>But after I entered my credentials the screen went black for two seconds and
 I was on the login screen again. A login loop.
 I tried a lot, reinstalled Xorg lots of times, tried different packages but
 nothing worked.</p>
@@ -73,8 +78,13 @@ My file permissions where fine though.</p>
 some cinnamon packages. It worked for me, I must have broken them accidentally
 during my Xorg experiments. Thank you very much, Marco77!</p>
 <p><a href="http://www.linuxmintusers.de/index.php?topic=27767.0" class="external-link" target="_blank">http://www.linuxmintusers.de/index.php?topic=27767.0</a></p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> cinnamon mint-meta-cinnamon nemo</span></code></pre>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> cinnamon mint-meta-cinnamon nemo</span></code></pre>
 
+    </div>
 
 <script async src="/scripts/index.js"></script>
 

@@ -59,12 +59,22 @@ For some reason, you need to pass two devices: <em>/dev/sr0</em> and <em>/dev/sg
 And I had the <em>/dev/sr0</em>, but <em>/dev/sg0</em> was missing.</p>
 <p>After some googling, I found that <code class="language-plain">sudo modprobe sg</code> solved it, and the device appeared.
 To have the module loaded at every boot, you can also do this:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token builtin class-name">echo</span> sg <span class="token operator">></span> /etc/modules-load.d/sg.conf</span></code></pre>
-<h1 id="disable-auto-update%2C-settings.conf" tabindex="-1">2. Disable Auto-Update, settings.conf <a class="header-anchor" href="#disable-auto-update%2C-settings.conf" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> sg <span class="token operator">></span> /etc/modules-load.d/sg.conf</span></code></pre>
+
+    </div><h1 id="disable-auto-update%2C-settings.conf" tabindex="-1">2. Disable Auto-Update, settings.conf <a class="header-anchor" href="#disable-auto-update%2C-settings.conf" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>There is a file settings.conf with various settings, but barely documented.</p>
 <p>The software greets me with this message:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">Automatic checking for updates is enabled, you may disable it in preferences if you don't want MakeMKV to contact web server.</span></code></pre>
-<p>..but I couldn't find a CLI flag to disable it.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">Automatic checking for updates is enabled, you may disable it in preferences if you don't want MakeMKV to contact web server.</span></code></pre>
+
+    </div><p>..but I couldn't find a CLI flag to disable it.</p>
 <p>I searched for a flag for the settings.conf to disable it, but didn't find it.</p>
 <p>Eventually I used the GUI to disable the checkbox, and checked the settings.conf afterwards.
 And voilá, a key <code class="language-plain">app_UpdateEnable</code> was written in the file.</p>
@@ -74,12 +84,22 @@ After knowing the key, I found <a href="https://forum.makemkv.com/forum/viewtopi
 <h1 id="my-drive" tabindex="-1">3. My drive <a class="header-anchor" href="#my-drive" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I own a techPulse 120 drive.</p>
 <p>makemkv told me the drive was detected as:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">HL-DT-ST_BD-RE_BU40N_1.02_211711301218_KZMIXXXXX51</span></code></pre>
-<p>which luckily is a very common model.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">HL-DT-ST_BD-RE_BU40N_1.02_211711301218_KZMIXXXXX51</span></code></pre>
+
+    </div><p>which luckily is a very common model.</p>
 <h1 id="rip-the-disc" tabindex="-1">4. Rip the disc <a class="header-anchor" href="#rip-the-disc" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>To just rip the whole disc, run this command:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-e</span> <span class="token string">"APP_KEY=&lt;secret key>"</span> <span class="token parameter variable">--device</span> /dev/sr0 <span class="token parameter variable">--device</span> /dev/sg0 <span class="token parameter variable">-v</span> <span class="token punctuation">(</span>pwd<span class="token punctuation">)</span>:/output lasley/makemkvcon:1.14.5 makemkvcon mkv disc:0 all /output</span></code></pre>
-<p>In general, I didn't find much documentation about the CLI commands.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-e</span> <span class="token string">"APP_KEY=&lt;secret key>"</span> <span class="token parameter variable">--device</span> /dev/sr0 <span class="token parameter variable">--device</span> /dev/sg0 <span class="token parameter variable">-v</span> <span class="token punctuation">(</span>pwd<span class="token punctuation">)</span>:/output lasley/makemkvcon:1.14.5 makemkvcon mkv disc:0 all /output</span></code></pre>
+
+    </div><p>In general, I didn't find much documentation about the CLI commands.</p>
 <p>I found <a href="https://gist.github.com/pjobson/b17a869f6a0a722521fd0f008ba45355" class="external-link" target="_blank">this great gist</a> and a lot of commands in the forum,
 but it required some searching to find the commands I need.</p>
 <h1 id="corrupt-or-invalid-at-offset" tabindex="-1">5. Corrupt or invalid at offset <a class="header-anchor" href="#corrupt-or-invalid-at-offset" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
@@ -91,8 +111,13 @@ It didn't help.</p>
 <p>The next thing was an updated firmware. Not only does it unlock all region codes, but it also enables something called <em>LibreDrive</em>,
 which (from what I understand) grants makemkv more direct access to the hardware.</p>
 <p>Before flashing the firmware, I saw this log message:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">LibreDrive firmware support is not yet available for this drive (id=5B235XXXXFC2)</span></code></pre>
-<p>I was a bit scared to flash the firmware, because when I bought the model I remember there were like seven variations of the drive
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">LibreDrive firmware support is not yet available for this drive (id=5B235XXXXFC2)</span></code></pre>
+
+    </div><p>I was a bit scared to flash the firmware, because when I bought the model I remember there were like seven variations of the drive
 (with/without 4K support, with/without M-Disc write support and some more).
 So I feared to lose like the M-Disc support by flashing a wrong firmware variant.</p>
 <p>Luckily it worked without major damage.</p>
@@ -103,13 +128,18 @@ So I feared to lose like the M-Disc support by flashing a wrong firmware variant
 <li>sdf.bin: <a href="https://makemkv.com/sdf.bin" class="external-link" target="_blank">https://makemkv.com/sdf.bin</a></li>
 </ul>
 <p>The commands I ran were:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./makemkvcon f <span class="token parameter variable">-l</span></span></span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./makemkvcon f <span class="token parameter variable">-l</span></span></span></span>
 <span class="highlight-line"><span class="token output">Found 1 drives(s)</span>
 <span class="highlight-line">00: dev_21:0, /dev/sr0, /dev/sr0</span>
 <span class="highlight-line">  HL-DT-ST_BD-RE_BU40N_1.02_211711301218_KZMIXXXXX51</span>
 <span class="highlight-line"></span>
 <span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./makemkvcon f <span class="token parameter variable">-v</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-d</span> /dev/sr0 <span class="token parameter variable">-f</span> ./sdf.bin rawflash main <span class="token parameter variable">-i</span> ./HL-DT-ST-BD-RE_BU40N-1.03-NM00000-211810241934.bin</span></span></span></code></pre>
-<p>And it worked! On the next connection, my drive was detected with the updated firmware.</p>
+
+    </div><p>And it worked! On the next connection, my drive was detected with the updated firmware.</p>
 <h1 id="docker%2C-virtualbox" tabindex="-1">7. Docker, VirtualBox <a class="header-anchor" href="#docker%2C-virtualbox" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>However, the flashed firmware didn't solve the problem of the corrupt sectors.
 So I tried a Windows VM in VirtualBox, passed the USB connection over and tried there.

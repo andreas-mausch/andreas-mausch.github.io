@@ -190,10 +190,15 @@ Unfortunately, they can only be called from the Windows Setup. So you need a boo
 Windows 7 can only be installed when your disk is set to AHCI mode in the BIOS.
 I've created my USB stick via Rufus. Make sure you choose &quot;GPT partition for UEFI&quot;. Afterwards, I also needed some drivers for the SSD, in my case Toshiba OCZ. They need to be integrated into the setup files before continuing (I've used DISM GUI to do it), otherwise Windows Setup won't find your disk.</p>
 <p>When Windows setup is started, execute these commands:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">Bootrec /fixmbr</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">Bootrec /fixmbr</span>
 <span class="highlight-line">Bootrec /fixboot</span>
 <span class="highlight-line">Bootrec /rebuildbcd</span></code></pre>
-<p>For some reason I had to call them a couple of tries until the files in <em>/boot/efi/EFI/Microsoft/Boot/</em> were recovered, not sure why.</p>
+
+    </div><p>For some reason I had to call them a couple of tries until the files in <em>/boot/efi/EFI/Microsoft/Boot/</em> were recovered, not sure why.</p>
 <p><em>Important</em>: You need to boot from the USB stick via EFI. If you boot in legacy mode, Windows Setup will complain that the
 installed version is not compatible.</p>
 <h1 id="post-installation" tabindex="-1">3. Post Installation <a class="header-anchor" href="#post-installation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
@@ -204,18 +209,38 @@ Linux is lacking behind in this regard and I don't understand why I have to run 
 <p>Grub is really old and has 1500ms reaction time when used on a 4K screen. :/
 However, until I get <a href="https://wiki.archlinux.org/index.php/EFISTUB" class="external-link" target="_blank">EFISTUB</a> to work I have to use it.
 Fonts are too small by default, this can be fixed by calling:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> grub-mkfont <span class="token parameter variable">--output</span><span class="token operator">=</span>/boot/grub/fonts/DroidSansMono32.pf2 <span class="token parameter variable">--size</span><span class="token operator">=</span><span class="token number">32</span> /usr/share/fonts/TTF/DroidSansMono.ttf</span></code></pre>
-<p>Then, edit or create an entry in <em>/etc/default/grub</em>:</p>
-<pre class="language-plain"><code data-filename="/etc/default/grub" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">GRUB_FONT=/boot/grub/fonts/DroidSansMono32.pf2</span></code></pre>
-<p>Theme: I use <a href="https://github.com/ooxxvv/basil-tw" class="external-link" target="_blank">ooxxvv/basil-tw</a></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> grub-mkfont <span class="token parameter variable">--output</span><span class="token operator">=</span>/boot/grub/fonts/DroidSansMono32.pf2 <span class="token parameter variable">--size</span><span class="token operator">=</span><span class="token number">32</span> /usr/share/fonts/TTF/DroidSansMono.ttf</span></code></pre>
+
+    </div><p>Then, edit or create an entry in <em>/etc/default/grub</em>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/default/grub" class="language-plain"><span class="highlight-line">GRUB_FONT=/boot/grub/fonts/DroidSansMono32.pf2</span></code></pre>
+
+    </div><p>Theme: I use <a href="https://github.com/ooxxvv/basil-tw" class="external-link" target="_blank">ooxxvv/basil-tw</a></p>
 <p>To install it, extract all files into <em>/usr/share/grub/themes/basil-tw</em> and change the line:</p>
-<pre class="language-plain"><code data-filename="/usr/share/grub/themes/basil-tw" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">GRUB_THEME="/usr/share/grub/themes/basil-tw/theme.txt"</span></code></pre>
-<p>If all configuration is done, run <code class="language-plain">grub-mkconfig -o /boot/grub/grub.cfg</code>.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/usr/share/grub/themes/basil-tw" class="language-plain"><span class="highlight-line">GRUB_THEME="/usr/share/grub/themes/basil-tw/theme.txt"</span></code></pre>
+
+    </div><p>If all configuration is done, run <code class="language-plain">grub-mkconfig -o /boot/grub/grub.cfg</code>.</p>
 <h3 id="lightdm-login-screen" tabindex="-1">3.1.2. LightDM Login Screen <a class="header-anchor" href="#lightdm-login-screen" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>I've changed the following two lines in <em>/etc/lightdm/lightdm-gtk-greeter.conf</em>:</p>
-<pre class="language-plain"><code data-filename="/etc/lightdm/lightdm-gtk-greeter.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">background = /usr/share/grub/themes/basil-tw/background.png</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/lightdm/lightdm-gtk-greeter.conf" class="language-plain"><span class="highlight-line">background = /usr/share/grub/themes/basil-tw/background.png</span>
 <span class="highlight-line">theme-name = Adwaita-dark</span></code></pre>
-<h4 id="spectre%2C-meltdown.." tabindex="-1">3.1.2.1. Spectre, Meltdown.. <a class="header-anchor" href="#spectre%2C-meltdown.." aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h4>
+
+    </div><h4 id="spectre%2C-meltdown.." tabindex="-1">3.1.2.1. Spectre, Meltdown.. <a class="header-anchor" href="#spectre%2C-meltdown.." aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h4>
 <p>Maybe controversial, but I like to disable all hacky tries to fix something in software
 which is actually broken in hardware. More and more vulnerabilities come up. All of them
 slow the CPU down. No widespread attacks are happening.</p>
@@ -223,57 +248,111 @@ slow the CPU down. No widespread attacks are happening.</p>
 someone's leeching my memory at 5 kbit/s..
 I'm not a data center, so I think it is very unlikely I'm gonna suffer from these attacks.</p>
 <p>That's why I have these options in my <em>/etc/default/grub</em></p>
-<pre class="language-plain"><code data-filename="/etc/default/grub" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">GRUB_CMDLINE_LINUX="noibrs noibpb nopti nospectre_v2 nospectre_v1 l1tf=off nospec_store_bypass_disable no_stf_barrier mds=off mitigations=off"</span></code></pre>
-<p>Update: There is now a website which provides the best kernel parameters to speed things up: <a href="https://make-linux-fast-again.com" class="external-link" target="_blank">make-linux-fast-again.com</a>. Notice the new <code class="language-plain">mitigations=off</code> parameter, which was introduced in Kernel 5.2 and should disable all &quot;security fixes&quot;.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/default/grub" class="language-plain"><span class="highlight-line">GRUB_CMDLINE_LINUX="noibrs noibpb nopti nospectre_v2 nospectre_v1 l1tf=off nospec_store_bypass_disable no_stf_barrier mds=off mitigations=off"</span></code></pre>
+
+    </div><p>Update: There is now a website which provides the best kernel parameters to speed things up: <a href="https://make-linux-fast-again.com" class="external-link" target="_blank">make-linux-fast-again.com</a>. Notice the new <code class="language-plain">mitigations=off</code> parameter, which was introduced in Kernel 5.2 and should disable all &quot;security fixes&quot;.</p>
 <h3 id="manjaro" tabindex="-1">3.1.3. Manjaro <a class="header-anchor" href="#manjaro" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Open Settings Manager → Appearance → Fonts (in German it's Einstellungen → Erscheinungsbild → Schriften) and overwrite the DPI value (I set mine to 192).</p>
 <h3 id="gnome%2C-gtk%2B" tabindex="-1">3.1.4. Gnome, GTK+ <a class="header-anchor" href="#gnome%2C-gtk%2B" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Add to ~/.profile:</p>
-<pre class="language-plain"><code data-filename="~/.profile" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">export GDK_SCALE=2</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="~/.profile" class="language-plain"><span class="highlight-line">export GDK_SCALE=2</span>
 <span class="highlight-line">export GDK_DPI_SCALE=0.5</span></code></pre>
-<h3 id="tty" tabindex="-1">3.1.5. TTY <a class="header-anchor" href="#tty" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+
+    </div><h3 id="tty" tabindex="-1">3.1.5. TTY <a class="header-anchor" href="#tty" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>You can open the Linux console if you press CTRL+ALT+F2 (go back to graphical UI: CTRL+ALT+F7). To make fonts bigger here as well, make sure you have the font inside <em>/usr/share/kbd/consolefonts/</em> and edit or create the file <em>/etc/vconsole.conf</em>:</p>
-<pre class="language-plain"><code data-filename="/etc/vconsole.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">KEYMAP=de-latin1-nodeadkeys</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/vconsole.conf" class="language-plain"><span class="highlight-line">KEYMAP=de-latin1-nodeadkeys</span>
 <span class="highlight-line">FONT=ter-132n</span>
 <span class="highlight-line">FONT_MAP=8859-2</span></code></pre>
-<p>(Choose your own Keymap of course.)</p>
+
+    </div><p>(Choose your own Keymap of course.)</p>
 <h2 id="terminal" tabindex="-1">3.2. Terminal <a class="header-anchor" href="#terminal" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>By default, Manjaro has this weird collapsible terminal. I don't like it too much, so I've decided to change it back to classic mode.
 Therefore, I've rebound the CTRL+ALT+T shortcut to <em>xfce4-terminal</em>.</p>
 <p>Unfortunately, the old xfce4-terminal works poorly with GDK_SCALE and GDK_DPI_SCALE.
 Fonts looks blurred, and I hate it. I've managed to work around that by creating a file at ~/terminal.sh:</p>
-<pre class="language-plain"><code data-filename="~/terminal.sh" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">GDK_SCALE=1 GDK_DPI_SCALE=1 xfce4-terminal</span></code></pre>
-<p><code class="language-plain">chmod +x ~/terminal.sh</code> and bind the shortcut to the terminal.sh.
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="~/terminal.sh" class="language-plain"><span class="highlight-line">GDK_SCALE=1 GDK_DPI_SCALE=1 xfce4-terminal</span></code></pre>
+
+    </div><p><code class="language-plain">chmod +x ~/terminal.sh</code> and bind the shortcut to the terminal.sh.
 This way, the GDK variables are set for all other programs but xfce4-terminal.
 It's super-ugly, but it works well for me.</p>
 <h3 id="fish-shell" tabindex="-1">3.2.1. Fish Shell <a class="header-anchor" href="#fish-shell" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Fish is my favorite shell. I love the autocompletion features. To install it, run:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">pacman <span class="token parameter variable">-S</span> fish</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">pacman <span class="token parameter variable">-S</span> fish</span>
 <span class="highlight-line">chsh <span class="token parameter variable">-s</span> /usr/bin/fish</span></code></pre>
-<p>To install custom themes and much more, I use <a href="https://github.com/oh-my-fish/oh-my-fish" class="external-link" target="_blank">Oh-My-Fish</a>:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">curl</span> <span class="token parameter variable">-L</span> https://get.oh-my.fish <span class="token operator">|</span> fish</span></code></pre>
-<p>My favorite theme is eclm, it shows a success flag of the last command, the current git branch and if there's any changes on your current branch: <code class="language-plain">omf theme eclm</code></p>
+
+    </div><p>To install custom themes and much more, I use <a href="https://github.com/oh-my-fish/oh-my-fish" class="external-link" target="_blank">Oh-My-Fish</a>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">curl</span> <span class="token parameter variable">-L</span> https://get.oh-my.fish <span class="token operator">|</span> fish</span></code></pre>
+
+    </div><p>My favorite theme is eclm, it shows a success flag of the last command, the current git branch and if there's any changes on your current branch: <code class="language-plain">omf theme eclm</code></p>
 <h3 id="autojump" tabindex="-1">3.2.2. Autojump <a class="header-anchor" href="#autojump" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">pacman <span class="token parameter variable">-S</span> autojump</span></code></pre>
-<p>Edit <em>~/.config/fish/config.fish</em> and append:</p>
-<pre class="language-plain"><code data-filename="~/.config/fish/config.fish" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">begin</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">pacman <span class="token parameter variable">-S</span> autojump</span></code></pre>
+
+    </div><p>Edit <em>~/.config/fish/config.fish</em> and append:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="~/.config/fish/config.fish" class="language-plain"><span class="highlight-line">begin</span>
 <span class="highlight-line">    set --local AUTOJUMP_PATH /usr/share/autojump/autojump.fish</span>
 <span class="highlight-line">    if test -e $AUTOJUMP_PATH</span>
 <span class="highlight-line">        source $AUTOJUMP_PATH</span>
 <span class="highlight-line">    end</span>
 <span class="highlight-line">end</span></code></pre>
-<h2 id="bluetooth" tabindex="-1">3.3. Bluetooth <a class="header-anchor" href="#bluetooth" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+
+    </div><h2 id="bluetooth" tabindex="-1">3.3. Bluetooth <a class="header-anchor" href="#bluetooth" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Bluetooth was enabled by default on each boot, which I don't like.
 To disable it, append the following line to <em>/etc/rc.local</em></p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">rfkill block bluetooth</span></code></pre>
-<p>Check it worked by calling <code class="language-plain">rfkill list</code>, which should state hci0 is soft-blocked.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">rfkill block bluetooth</span></code></pre>
+
+    </div><p>Check it worked by calling <code class="language-plain">rfkill list</code>, which should state hci0 is soft-blocked.</p>
 <h2 id="graphic-card-drivers%2C-acpi" tabindex="-1">3.4. Graphic card drivers, ACPI <a class="header-anchor" href="#graphic-card-drivers%2C-acpi" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <h3 id="block-nouveau-(nvidia-driver)" tabindex="-1">3.4.1. Block Nouveau (Nvidia driver) <a class="header-anchor" href="#block-nouveau-(nvidia-driver)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Create a file <em>/etc/modprobe.d/blacklist-nouveau.conf</em> with the content:</p>
-<pre class="language-plain"><code data-filename="/etc/modprobe.d/blacklist-nouveau.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">blacklist nouveau</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/modprobe.d/blacklist-nouveau.conf" class="language-plain"><span class="highlight-line">blacklist nouveau</span>
 <span class="highlight-line">options nouveau modeset=0</span></code></pre>
-<p>Disable the Nvidia GPU completely (this will save power, see below), create two services:</p>
-<pre class="language-plain"><code data-filename="/usr/lib/systemd/user/dgpu-off.service" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">[Unit]</span>
+
+    </div><p>Disable the Nvidia GPU completely (this will save power, see below), create two services:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/usr/lib/systemd/user/dgpu-off.service" class="language-plain"><span class="highlight-line">[Unit]</span>
 <span class="highlight-line">Description=Power-off dGPU</span>
 <span class="highlight-line">After=graphical.target</span>
 <span class="highlight-line"></span>
@@ -283,7 +362,12 @@ To disable it, append the following line to <em>/etc/rc.local</em></p>
 <span class="highlight-line"></span>
 <span class="highlight-line">[Install]</span>
 <span class="highlight-line">WantedBy=graphical.target</span></code></pre>
-<pre class="language-plain"><code data-filename="/usr/lib/systemd/user/dgpu-off-after-resume.service" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">[Unit]</span>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/usr/lib/systemd/user/dgpu-off-after-resume.service" class="language-plain"><span class="highlight-line">[Unit]</span>
 <span class="highlight-line">Description=Power-off dGPU after resume from suspend</span>
 <span class="highlight-line">After=suspend.target</span>
 <span class="highlight-line"></span>
@@ -293,15 +377,26 @@ To disable it, append the following line to <em>/etc/rc.local</em></p>
 <span class="highlight-line"></span>
 <span class="highlight-line">[Install]</span>
 <span class="highlight-line">WantedBy=suspend.target</span></code></pre>
-<h2 id="lock-screen" tabindex="-1">3.5. Lock screen <a class="header-anchor" href="#lock-screen" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+
+    </div><h2 id="lock-screen" tabindex="-1">3.5. Lock screen <a class="header-anchor" href="#lock-screen" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>I personally like i3lock-color, called with these settings:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">i3lock <span class="token parameter variable">--clock</span> <span class="token parameter variable">--blur</span><span class="token operator">=</span><span class="token number">6</span> <span class="token parameter variable">--radius</span><span class="token operator">=</span><span class="token number">400</span> <span class="token parameter variable">--timesize</span><span class="token operator">=</span><span class="token number">100</span> <span class="token parameter variable">--datesize</span><span class="token operator">=</span><span class="token number">100</span> <span class="token parameter variable">--timepos</span><span class="token operator">=</span><span class="token string">"w/2:h/2+70"</span> <span class="token parameter variable">--datepos</span><span class="token operator">=</span><span class="token string">"w/2:h/2-80"</span> <span class="token parameter variable">--datestr</span><span class="token operator">=</span><span class="token string">"%Y-%m-%d"</span> <span class="token parameter variable">--datecolor</span><span class="token operator">=</span>ffffffff <span class="token parameter variable">--timecolor</span><span class="token operator">=</span>ffffffff --ring-width<span class="token operator">=</span><span class="token number">20</span> <span class="token parameter variable">-i</span> /home/neonew/i3lock/lockscreen.png <span class="token parameter variable">-t</span> <span class="token parameter variable">-n</span></span></code></pre>
-<p><em>lockscreen.png</em> is just a one-pixel file, which has the alpha value set to 0.75 (to darken the screen).</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">i3lock <span class="token parameter variable">--clock</span> <span class="token parameter variable">--blur</span><span class="token operator">=</span><span class="token number">6</span> <span class="token parameter variable">--radius</span><span class="token operator">=</span><span class="token number">400</span> <span class="token parameter variable">--timesize</span><span class="token operator">=</span><span class="token number">100</span> <span class="token parameter variable">--datesize</span><span class="token operator">=</span><span class="token number">100</span> <span class="token parameter variable">--timepos</span><span class="token operator">=</span><span class="token string">"w/2:h/2+70"</span> <span class="token parameter variable">--datepos</span><span class="token operator">=</span><span class="token string">"w/2:h/2-80"</span> <span class="token parameter variable">--datestr</span><span class="token operator">=</span><span class="token string">"%Y-%m-%d"</span> <span class="token parameter variable">--datecolor</span><span class="token operator">=</span>ffffffff <span class="token parameter variable">--timecolor</span><span class="token operator">=</span>ffffffff --ring-width<span class="token operator">=</span><span class="token number">20</span> <span class="token parameter variable">-i</span> /home/neonew/i3lock/lockscreen.png <span class="token parameter variable">-t</span> <span class="token parameter variable">-n</span></span></code></pre>
+
+    </div><p><em>lockscreen.png</em> is just a one-pixel file, which has the alpha value set to 0.75 (to darken the screen).</p>
 <h2 id="ulimit" tabindex="-1">3.6. ulimit <a class="header-anchor" href="#ulimit" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Don't really know what it is, but Visual Studio Code and IntelliJ needs this value increased in <em>/etc/security/limits.conf</em> (add these lines):</p>
-<pre class="language-plain"><code data-filename="/etc/security/limits.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">*       soft    nofile  380180</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/security/limits.conf" class="language-plain"><span class="highlight-line">*       soft    nofile  380180</span>
 <span class="highlight-line">*       hard    nofile  380180</span></code></pre>
-<h2 id="xfce" tabindex="-1">3.7. XFCE <a class="header-anchor" href="#xfce" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+
+    </div><h2 id="xfce" tabindex="-1">3.7. XFCE <a class="header-anchor" href="#xfce" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Disable grouping in the panel:
 Right-click empty space in the panel, Panel &gt; Panel Preferences &gt; Items &gt; select &quot;Window Buttons&quot; &gt; Edit the currently selected item (a button on the right side) &gt; Behaviour &gt; Window grouping: Never <a href="https://forum.xfce.org/viewtopic.php?id=7529" class="external-link" target="_blank">(source)</a></p>
 <h2 id="terminal-1" tabindex="-1">3.8. Terminal <a class="header-anchor" href="#terminal-1" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
@@ -313,13 +408,18 @@ Put it in <em>~/.local/share/xfce4/terminal/colorschemes/</em>.</p>
 <p><a href="/blog/2018-04-13-manjaro-linux-on-dell-xps-15-9550/conkyrc.txt">config file</a></p>
 <p>Most of it was created by <a href="https://github.com/mervyn-mccreight" class="external-link" target="_blank">Mervyn McCreight</a>, thanks dude.</p>
 <p>For Autostart, create a file:</p>
-<pre class="language-plain"><code data-filename="~/.config/autostart/conky.desktop" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">[Desktop Entry]</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="~/.config/autostart/conky.desktop" class="language-plain"><span class="highlight-line">[Desktop Entry]</span>
 <span class="highlight-line">Type=Application</span>
 <span class="highlight-line">Name=conky</span>
 <span class="highlight-line">Exec=conky --daemonize --pause=5</span>
 <span class="highlight-line">StartupNotify=false</span>
 <span class="highlight-line">Terminal=false</span></code></pre>
-<h2 id="package-manager-for-aur" tabindex="-1">3.10. Package manager for AUR <a class="header-anchor" href="#package-manager-for-aur" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+
+    </div><h2 id="package-manager-for-aur" tabindex="-1">3.10. Package manager for AUR <a class="header-anchor" href="#package-manager-for-aur" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>I like to use <a href="https://github.com/Jguer/yay" class="external-link" target="_blank">yay</a>.</p>
 <p>One adjustment: In <em>/etc/makepkg.conf</em> I've set <code class="language-plain">PKGEXT='.pkg.tar'</code> to improve the build speed.
 Otherwise it tends to spend a lot of time in the &quot;Compressing...&quot; step.</p>
@@ -354,9 +454,14 @@ This might not be recommended, but I prefer to not be annoyed on every update.</
 So when you boot your system and start the first Chromium instance,
 the last used profile is loaded automatically.
 I like to use my personal profile on every fresh Chromium instead.</p>
-<pre class="language-plain"><code data-filename="~/.config/chromium-flags.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">--password-store=basic</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="~/.config/chromium-flags.conf" class="language-plain"><span class="highlight-line">--password-store=basic</span>
 <span class="highlight-line">--profile-directory=Default</span></code></pre>
-<p>Also, I like to use <a href="https://github.com/Eloston/ungoogled-chromium" class="external-link" target="_blank">ungoogled-chromium</a>, which has some google-specific code disabled
+
+    </div><p>Also, I like to use <a href="https://github.com/Eloston/ungoogled-chromium" class="external-link" target="_blank">ungoogled-chromium</a>, which has some google-specific code disabled
 and some sensible privacy-settings enabled by default.
 For Manjaro you can find the binary in <a href="https://aur.archlinux.org/packages/ungoogled-chromium-bin/" class="external-link" target="_blank">AUR</a>.</p>
 <p>For blocking ads I use <a href="https://github.com/gorhill/uBlock" class="external-link" target="_blank">uBlock Origin</a>.</p>
@@ -369,10 +474,20 @@ I use the &quot;Ultimate&quot; (lol, marketing) list from <a href="https://fanbo
 <p>I got the error message <code class="language-plain">/usr/lib/git-core/git-gui: Zeile 10: exec: wish: Nicht gefunden.</code>
 This is caused by the missing program wish, which is part of the package tk.</p>
 <p>Then it starts, but complains about a missing spelling check file. This can be fixed by installing aspell-de (change accordingly for your language).</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> tk aspell-de</span></code></pre>
-<p>Favorite logging:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">git</span> log <span class="token parameter variable">--pretty</span><span class="token operator">=</span>format:<span class="token string">'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s'</span> <span class="token parameter variable">--date</span><span class="token operator">=</span>short</span></code></pre>
-<p><a href="https://stackoverflow.com/questions/1441010/the-shortest-possible-output-from-git-log-containing-author-and-date" class="external-link" target="_blank">source</a></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> tk aspell-de</span></code></pre>
+
+    </div><p>Favorite logging:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">git</span> log <span class="token parameter variable">--pretty</span><span class="token operator">=</span>format:<span class="token string">'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s'</span> <span class="token parameter variable">--date</span><span class="token operator">=</span>short</span></code></pre>
+
+    </div><p><a href="https://stackoverflow.com/questions/1441010/the-shortest-possible-output-from-git-log-containing-author-and-date" class="external-link" target="_blank">source</a></p>
 <h3 id="thunderbird" tabindex="-1">3.11.5. Thunderbird <a class="header-anchor" href="#thunderbird" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <ul>
 <li>View &gt; Message Body as &gt; Simple HTML</li>
@@ -404,10 +519,15 @@ This is caused by the missing program wish, which is part of the package tk.</p>
 <p>With the Nvidia GPU disabled, it was reduced to 6.5 W.<br>
 (In both cases connected to WiFi, lowest brightness).</p>
 <h2 id="boot-time" tabindex="-1">4.2. Boot time <a class="header-anchor" href="#boot-time" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
-<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">systemd-analyze</span></span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">systemd-analyze</span></span></span>
 <span class="highlight-line"><span class="token output">Startup finished in 7.796s (firmware) + 3.584s (loader) + 1.312s (kernel) + 2.324s (userspace) = 15.017s</span>
 <span class="highlight-line">graphical.target reached after 2.140s in userspace</span></code></pre>
-<h1 id="links" tabindex="-1">5. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+
+    </div><h1 id="links" tabindex="-1">5. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <ul>
 <li><a href="https://wiki.archlinux.org/index.php/Dell_XPS_15_(9550)" class="external-link" target="_blank">archlinux.org</a></li>
 <li><a href="http://wiki.yobi.be/wiki/Laptop_Dell_XPS_15" class="external-link" target="_blank">yobi.be</a></li>

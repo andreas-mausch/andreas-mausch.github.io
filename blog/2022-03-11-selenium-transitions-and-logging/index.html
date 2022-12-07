@@ -69,7 +69,11 @@ You'd have to write <a href="https://stackoverflow.com/questions/39245064/wait-f
 Still hacky, but my tests run reliably without the sleep statements now. :)</p>
 <p>(<code class="language-plain">chrome</code> is a <a href="https://github.com/testcontainers/testcontainers-java/blob/40341d3912a2fe623adb83651c52a490734f3ab9/modules/selenium/src/main/java/org/testcontainers/containers/BrowserWebDriverContainer.java" class="external-link" target="_blank">BrowserWebDriverContainer</a>)</p>
 <p>Selenium 3 (with kotest 4):</p>
-<pre class="language-kotlin"><code class="language-kotlin"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">beforeTest</span><span class="token punctuation">(</span>testCase<span class="token operator">:</span> TestCase<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-kotlin"><code class="language-kotlin"><span class="highlight-line">  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">beforeTest</span><span class="token punctuation">(</span>testCase<span class="token operator">:</span> TestCase<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">beforeTest</span><span class="token punctuation">(</span>testCase<span class="token punctuation">)</span></span>
 <span class="highlight-line">    driver <span class="token operator">=</span> <span class="token function">EventFiringWebDriver</span><span class="token punctuation">(</span>chrome<span class="token punctuation">.</span>webDriver<span class="token punctuation">)</span></span>
 <span class="highlight-line">    driver<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> <span class="token function">AbstractWebDriverEventListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
@@ -81,8 +85,13 @@ Still hacky, but my tests run reliably without the sleep statements now. :)</p>
 <span class="highlight-line">      <span class="token punctuation">}</span></span>
 <span class="highlight-line">    <span class="token punctuation">}</span><span class="token punctuation">)</span></span>
 <span class="highlight-line">  <span class="token punctuation">}</span></span></code></pre>
-<p>Selenium 4 (with kotest 5):</p>
-<pre class="language-kotlin"><code class="language-kotlin"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">  <span class="token keyword">override</span> <span class="token keyword">suspend</span> <span class="token keyword">fun</span> <span class="token function">beforeTest</span><span class="token punctuation">(</span>testCase<span class="token operator">:</span> TestCase<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+
+    </div><p>Selenium 4 (with kotest 5):</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-kotlin"><code class="language-kotlin"><span class="highlight-line">  <span class="token keyword">override</span> <span class="token keyword">suspend</span> <span class="token keyword">fun</span> <span class="token function">beforeTest</span><span class="token punctuation">(</span>testCase<span class="token operator">:</span> TestCase<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">beforeTest</span><span class="token punctuation">(</span>testCase<span class="token punctuation">)</span></span>
 <span class="highlight-line">    <span class="token keyword">val</span> disableAnimationsListener <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> WebDriverListener <span class="token punctuation">{</span></span>
 <span class="highlight-line">      <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">afterGet</span><span class="token punctuation">(</span>driver<span class="token operator">:</span> WebDriver<span class="token punctuation">,</span> url<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
@@ -92,26 +101,37 @@ Still hacky, but my tests run reliably without the sleep statements now. :)</p>
 <span class="highlight-line">    <span class="token punctuation">}</span></span>
 <span class="highlight-line">    driver <span class="token operator">=</span> <span class="token function">EventFiringDecorator</span><span class="token punctuation">(</span>disableAnimationsListener<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decorate</span><span class="token punctuation">(</span>chrome<span class="token punctuation">.</span>webDriver<span class="token punctuation">)</span></span>
 <span class="highlight-line">  <span class="token punctuation">}</span></span></code></pre>
-<h1 id="javascript-console-logging-errors" tabindex="-1">2. JavaScript console logging errors <a class="header-anchor" href="#javascript-console-logging-errors" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+
+    </div><h1 id="javascript-console-logging-errors" tabindex="-1">2. JavaScript console logging errors <a class="header-anchor" href="#javascript-console-logging-errors" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Second thing I wanted to check is that no JavaScript errors occured during the test.</p>
 <p>Step one: I enabled logging of all levels, just in case I want to inspect non-errors also:</p>
-<pre class="language-kotlin"><code class="language-kotlin"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">val</span> loggingPreferences <span class="token operator">=</span> <span class="token function">LoggingPreferences</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-kotlin"><code class="language-kotlin"><span class="highlight-line"><span class="token keyword">val</span> loggingPreferences <span class="token operator">=</span> <span class="token function">LoggingPreferences</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
 <span class="highlight-line">loggingPreferences<span class="token punctuation">.</span><span class="token function">enable</span><span class="token punctuation">(</span>BROWSER<span class="token punctuation">,</span> ALL<span class="token punctuation">)</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token keyword">val</span> options <span class="token operator">=</span> <span class="token function">ChromeOptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
 <span class="highlight-line">options<span class="token punctuation">.</span><span class="token function">setCapability</span><span class="token punctuation">(</span>LOGGING_PREFS<span class="token punctuation">,</span> loggingPreferences<span class="token punctuation">)</span></span>
 <span class="highlight-line">options<span class="token punctuation">.</span><span class="token function">setCapability</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"goog:loggingPrefs"</span></span><span class="token punctuation">,</span> loggingPreferences<span class="token punctuation">)</span></span></code></pre>
-<p>The <code class="language-plain">goog:loggingPrefs</code> is for Google Chrome only, see <a href="https://stackoverflow.com/questions/56507652/selenium-chrome-cant-see-browser-logs-invalidargumentexception" class="external-link" target="_blank">here</a>.</p>
+
+    </div><p>The <code class="language-plain">goog:loggingPrefs</code> is for Google Chrome only, see <a href="https://stackoverflow.com/questions/56507652/selenium-chrome-cant-see-browser-logs-invalidargumentexception" class="external-link" target="_blank">here</a>.</p>
 <p>Update: With Selenium 4 there is now a constant: <em>org.openqa.selenium.chrome.ChromeOptions#LOGGING_PREFS</em>.
 The previous LOGGING_PREFS from <em>org.openqa.selenium.remote.CapabilityType.LOGGING_PREFS</em> is now deprecated.</p>
 <p>Step two: Assert the logs (via kotest again):</p>
-<pre class="language-kotlin"><code class="language-kotlin"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">fun</span> <span class="token function">assertBrowserLogs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-kotlin"><code class="language-kotlin"><span class="highlight-line"><span class="token keyword">fun</span> <span class="token function">assertBrowserLogs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token keyword">val</span> entries <span class="token operator">=</span> driver<span class="token punctuation">.</span><span class="token function">manage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">logs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>BROWSER<span class="token punctuation">)</span></span>
 <span class="highlight-line">    <span class="token keyword">val</span> warningsAndHigher <span class="token operator">=</span> entries<span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>level<span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">>=</span> WARNING<span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line">    <span class="token function">withClue</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Browser logs"</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> warningsAndHigher<span class="token punctuation">.</span><span class="token function">shouldBeEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
 
+    </div>
 
 <script async src="/scripts/index.js"></script>
 

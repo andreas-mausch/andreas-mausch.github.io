@@ -57,7 +57,11 @@ Then, I've added cheatsheets.</p>
 <p>I've noticed the repo was getting too big for my likes.</p>
 <p>So I'd rather like to have subdomains with separated repos, like <a href="https://cheatsheets.andreas-mausch.de" class="external-link" target="_blank">cheatsheets.andreas-mausch.de</a>.</p>
 <p>Here are some commands which were useful to me:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment"># Create a new copy of the existing repo</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># Create a new copy of the existing repo</span></span>
 <span class="highlight-line"><span class="token function">git</span> clone <span class="token operator">&lt;</span>original_repo<span class="token operator">></span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># This command keeps all files with this pattern: gallery.html gallery images/gallery _layouts/gallery.html</span></span>
@@ -71,14 +75,20 @@ Then, I've added cheatsheets.</p>
 <span class="highlight-line"><span class="token function">rm</span> <span class="token parameter variable">-Rf</span> .git/logs/</span>
 <span class="highlight-line"><span class="token function">git</span> gc <span class="token parameter variable">--aggressive</span> <span class="token parameter variable">--prune</span><span class="token operator">=</span>now</span>
 <span class="highlight-line"><span class="token function">git</span> prune <span class="token parameter variable">--expire</span> now</span></code></pre>
-<p>Once we have created a new repo with only gallery-files inside,
+
+    </div><p>Once we have created a new repo with only gallery-files inside,
 we can delete those files in the original repo.</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>original_repo<span class="token operator">></span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>original_repo<span class="token operator">></span></span>
 <span class="highlight-line"><span class="token comment"># This deletes all gallery related files from the repo</span></span>
 <span class="highlight-line"><span class="token function">git</span> filter-branch --index-filter <span class="token string">'git rm -rf --cached --ignore-unmatch gallery.html gallery images/gallery _layouts/gallery.html'</span> --prune-empty --tag-name-filter <span class="token function">cat</span> -- <span class="token parameter variable">--all</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Now, run the same cleanup commands from above</span></span></code></pre>
-<p>Note: You need to <strong>force-push</strong> after the changes. Do this with care and be aware what the consequences of a force-push are!</p>
+
+    </div><p>Note: You need to <strong>force-push</strong> after the changes. Do this with care and be aware what the consequences of a force-push are!</p>
 
 
 <script async src="/scripts/index.js"></script>

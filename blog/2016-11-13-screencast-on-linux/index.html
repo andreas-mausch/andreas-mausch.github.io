@@ -47,7 +47,11 @@
 
 
 <h1 id="useful-ffmpeg-commands-for-recording-your-screen" tabindex="-1">1. Useful FFMPEG commands for recording your screen <a class="header-anchor" href="#useful-ffmpeg-commands-for-recording-your-screen" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment"># Record screen without audio. Replace 3840x2160 with your resolution.</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># Record screen without audio. Replace 3840x2160 with your resolution.</span></span>
 <span class="highlight-line"><span class="token comment"># The video is lossless, because of the -qp 0 flag.</span></span>
 <span class="highlight-line">ffmpeg <span class="token parameter variable">-video_size</span> 3840x2160 <span class="token parameter variable">-framerate</span> <span class="token number">30</span> <span class="token parameter variable">-f</span> x11grab <span class="token parameter variable">-i</span> :0.0 <span class="token parameter variable">-c:v</span> libx264rgb <span class="token parameter variable">-qp</span> <span class="token number">0</span> <span class="token parameter variable">-preset</span> ultrafast capture.mp4</span>
 <span class="highlight-line"></span>
@@ -60,7 +64,8 @@
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Record screen with both, speakers and microphone audio.</span></span>
 <span class="highlight-line">ffmpeg <span class="token parameter variable">-f</span> pulse <span class="token parameter variable">-ac</span> <span class="token number">2</span> <span class="token parameter variable">-i</span> alsa_output.pci-0000_00_1f.3.analog-stereo.monitor <span class="token parameter variable">-f</span> pulse <span class="token parameter variable">-ac</span> <span class="token number">1</span> <span class="token parameter variable">-i</span> alsa_input.pci-0000_00_1f.3.analog-stereo <span class="token parameter variable">-filter_complex</span> <span class="token assign-left variable">amix</span><span class="token operator">=</span>inputs<span class="token operator">=</span><span class="token number">2</span> <span class="token parameter variable">-video_size</span> 3840x2160 <span class="token parameter variable">-framerate</span> <span class="token number">30</span> <span class="token parameter variable">-f</span> x11grab <span class="token parameter variable">-i</span> :0.0 <span class="token parameter variable">-c:v</span> libx264rgb <span class="token parameter variable">-qp</span> <span class="token number">0</span> <span class="token parameter variable">-preset</span> ultrafast capture.mp4</span></code></pre>
-<h1 id="description" tabindex="-1">2. Description <a class="header-anchor" href="#description" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+
+    </div><h1 id="description" tabindex="-1">2. Description <a class="header-anchor" href="#description" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Hi, I tried to record a screencast on Linux.</p>
 <p>There are good working tools already out there, a very easy one to use is Kazam.</p>
 <p>However, I was looking for a tool which can downscale the video, while still recording the speakers audio and my microphone.</p>
@@ -73,19 +78,34 @@
 <h1 id="fixing-the-audio" tabindex="-1">4. Fixing the audio <a class="header-anchor" href="#fixing-the-audio" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I figured out the volume of my PulseAudio device was set to 20% for whatever reason.</p>
 <p>So first, list all your PulseAudio devices:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">pacmd list-sources</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">pacmd list-sources</span>
 <span class="highlight-line"><span class="token comment"># To get a shorter list use this:</span></span>
 <span class="highlight-line">pacmd list-sources<span class="token operator">|</span><span class="token function">awk</span> <span class="token string">'/index:/ {print $0}; /name:/ {print $0}; /device\.description/ {print $0}'</span></span></code></pre>
-<p>On my PC, the output looks like this:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">index: <span class="token number">0</span></span>
+
+    </div><p>On my PC, the output looks like this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">index: <span class="token number">0</span></span>
 <span class="highlight-line">name: <span class="token operator">&lt;</span>alsa_output.pci-0000_00_1f.3.analog-stereo.monitor<span class="token operator">></span></span>
 <span class="highlight-line">device.description <span class="token operator">=</span> <span class="token string">"Monitor of Internes Audio Analog Stereo"</span></span>
 <span class="highlight-line">* index: <span class="token number">1</span></span>
 <span class="highlight-line">name: <span class="token operator">&lt;</span>alsa_input.pci-0000_00_1f.3.analog-stereo<span class="token operator">></span></span>
 <span class="highlight-line">device.description <span class="token operator">=</span> <span class="token string">"Internes Audio Analog Stereo"</span></span></code></pre>
-<p>The following command set the volume level to 100%, you can validate it by calling &quot;pacmd list-sources&quot; again.</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">pactl set-source-volume <span class="token string">"alsa_output.pci-0000_00_1f.3.analog-stereo.monitor"</span> <span class="token number">100</span>%</span></code></pre>
 
+    </div><p>The following command set the volume level to 100%, you can validate it by calling &quot;pacmd list-sources&quot; again.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">pactl set-source-volume <span class="token string">"alsa_output.pci-0000_00_1f.3.analog-stereo.monitor"</span> <span class="token number">100</span>%</span></code></pre>
+
+    </div>
 
 <script async src="/scripts/index.js"></script>
 

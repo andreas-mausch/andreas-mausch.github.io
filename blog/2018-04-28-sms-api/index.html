@@ -74,7 +74,11 @@ I haven't tested it, but according to some guys on the internet the Pi takes ~10
 <img src="/blog/2018-04-28-sms-api/setup.jpg" width="1280" height="720" alt="undefined">
 <img src="/blog/2018-04-28-sms-api/json-api.jpg" width="1280" height="673" alt="undefined">
 <p>Source files (make sure you install pymongo, dnspython and Flask):</p>
-<pre class="language-python"><code data-filename="receive.py" class="language-python"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment">#!/usr/bin/env python</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-python"><code data-filename="receive.py" class="language-python"><span class="highlight-line"><span class="token comment">#!/usr/bin/env python</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token keyword">import</span> os</span>
 <span class="highlight-line"><span class="token keyword">from</span> pymongo <span class="token keyword">import</span> MongoClient</span>
@@ -96,7 +100,12 @@ I haven't tested it, but according to some guys on the internet the Pi takes ~10
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span></span>
 <span class="highlight-line">    main<span class="token punctuation">(</span><span class="token punctuation">)</span></span></code></pre>
-<pre class="language-python"><code data-filename="website.py" class="language-python"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">from</span> bson <span class="token keyword">import</span> json_util</span>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-python"><code data-filename="website.py" class="language-python"><span class="highlight-line"><span class="token keyword">from</span> bson <span class="token keyword">import</span> json_util</span>
 <span class="highlight-line"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> render_template<span class="token punctuation">,</span> Response</span>
 <span class="highlight-line"><span class="token keyword">from</span> pymongo <span class="token keyword">import</span> MongoClient<span class="token punctuation">,</span> DESCENDING</span>
 <span class="highlight-line"></span>
@@ -130,7 +139,12 @@ I haven't tested it, but according to some guys on the internet the Pi takes ~10
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span></span>
 <span class="highlight-line">    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">)</span></span></code></pre>
-<pre class="language-html"><code data-filename="templates/messages.html" class="language-html"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span></span>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-html"><code data-filename="templates/messages.html" class="language-html"><span class="highlight-line"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
@@ -166,6 +180,7 @@ I haven't tested it, but according to some guys on the internet the Pi takes ~10
 <span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></span></code></pre>
 
+    </div>
 
 <script async src="/scripts/index.js"></script>
 

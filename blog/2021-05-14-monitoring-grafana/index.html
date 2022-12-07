@@ -85,8 +85,13 @@ So you need to either set them globally, or duplicate them at each container.</p
 and the persistence settings (see below).
 Also, I've added a <em>/etc/loki/rules/alerts/rules.yml</em> for the alerting.</p>
 <h2 id="permission" tabindex="-1">3.2. Permission <a class="header-anchor" href="#permission" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">loki_1     | level=error ts=2021-05-14T16:19:26.017663788Z caller=log.go:106 msg="error initializing bucket client" err="mkdir /data/loki/chunks: permission denied"</span></code></pre>
-<p>I can find <a href="https://github.com/grafana/loki/issues/1833" class="external-link" target="_blank">two</a> <a href="https://github.com/grafana/loki/issues/2018" class="external-link" target="_blank">issues</a>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">loki_1     | level=error ts=2021-05-14T16:19:26.017663788Z caller=log.go:106 msg="error initializing bucket client" err="mkdir /data/loki/chunks: permission denied"</span></code></pre>
+
+    </div><p>I can find <a href="https://github.com/grafana/loki/issues/1833" class="external-link" target="_blank">two</a> <a href="https://github.com/grafana/loki/issues/2018" class="external-link" target="_blank">issues</a>
 for this error, but they have been closed already. I still have this problem though.</p>
 <p>My (ugly) workaround: Let run loki as root.</p>
 <h1 id="grafana" tabindex="-1">4. Grafana <a class="header-anchor" href="#grafana" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
@@ -107,7 +112,11 @@ He will at least get the <em>Viewer</em> role.</p>
 See <a href="https://github.com/grafana/grafana/pull/28021" class="external-link" target="_blank">here</a> and <a href="https://github.com/grafana/grafana/issues/23218" class="external-link" target="_blank">here</a>.</p>
 <p>I will be available in version 8.0.0.</p>
 <h3 id="my-auth-settings-for-grafana" tabindex="-1">4.1.2. My auth settings for Grafana <a class="header-anchor" href="#my-auth-settings-for-grafana" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">[auth]</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">[auth]</span>
 <span class="highlight-line">disable_login_form = true</span>
 <span class="highlight-line">oauth_auto_login = true</span>
 <span class="highlight-line">signout_redirect_url = https://keycloak.mycompany.com/auth/realms/my-realm/protocol/openid-connect/logout</span>
@@ -131,7 +140,8 @@ See <a href="https://github.com/grafana/grafana/pull/28021" class="external-link
 <span class="highlight-line"># Logging for debugging OAuth Token</span>
 <span class="highlight-line">[log]</span>
 <span class="highlight-line">filters = oauth:debug oauth.generic_oauth:debug</span></code></pre>
-<p>Use the debug log to analyze errors, display the token etc.</p>
+
+    </div><p>Use the debug log to analyze errors, display the token etc.</p>
 <p>These two links were helpful:</p>
 <ul>
 <li><a href="https://www.lars-fischer.me/posts/2021/grafana-sso-integration-with-keycloak/" class="external-link" target="_blank">https://www.lars-fischer.me/posts/2021/grafana-sso-integration-with-keycloak/</a></li>
@@ -152,13 +162,23 @@ Loki will then group these lines again and Grafana can display them together.</p
 <p>I've used this <em>'^\d{2}:\d{2}:\d{2},\d{3}'</em> regex and was surprised it didn't match the following line:
 <code class="language-plain">13:37:00,123 Test output</code></p>
 <p>That's because I had colored logs configured with logback:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n</span></code></pre>
-<p>This leads to the first character not being a <em>1</em>, but the hex value 0x1B (or <em>\033</em> octal):
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n</span></code></pre>
+
+    </div><p>This leads to the first character not being a <em>1</em>, but the hex value 0x1B (or <em>\033</em> octal):
 The <a href="https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character" class="external-link" target="_blank">ASCII Escape character</a></p>
 <img src="/blog/2021-05-14-monitoring-grafana/hello-world-colored.png" width="555" height="86" alt="undefined">
 <p>So in order to filter by the colored output, I've used this regex:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">^\x1B\[36m\d{2}:\d{2}:\d{2},\d{3}</span></code></pre>
-<h1 id="persistence" tabindex="-1">7. Persistence <a class="header-anchor" href="#persistence" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">^\x1B\[36m\d{2}:\d{2}:\d{2},\d{3}</span></code></pre>
+
+    </div><h1 id="persistence" tabindex="-1">7. Persistence <a class="header-anchor" href="#persistence" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>When playing around with loki and restarting the service a couple of times,
 I've noticed I lost log entries.</p>
 <h2 id="ingester%2C-write-ahead-log" tabindex="-1">7.1. Ingester, Write-Ahead Log <a class="header-anchor" href="#ingester%2C-write-ahead-log" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
@@ -173,8 +193,13 @@ I'm also wondering how the WAL config is not mentioned anywhere on their
 <p>So please enable the Write-Ahead Log (WAL) and make sure the directory is persisted, for example in a docker volume.
 Check <a href="https://github.com/andreas-mausch/grafana-prometheus-loki-alertmanager-setup/blob/master/loki/loki.yml" class="external-link" target="_blank">my loki config</a> for an example.</p>
 <p>I've ran into this error, which could be easily fixed by doing what the error message suggests:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">invalid ingester config: the use of the write ahead log (WAL) is incompatible with chunk transfers. It's suggested to use the WAL. Please try setting ingester.max-transfer-retries to 0 to disable transfers</span></code></pre>
-<p>Strange: <a href="https://grafana.com/docs/loki/latest/operations/storage/wal/" class="external-link" target="_blank">The docu</a> talks about a <code class="language-plain">--ingester.recover-from-wal</code> setting.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">invalid ingester config: the use of the write ahead log (WAL) is incompatible with chunk transfers. It's suggested to use the WAL. Please try setting ingester.max-transfer-retries to 0 to disable transfers</span></code></pre>
+
+    </div><p>Strange: <a href="https://grafana.com/docs/loki/latest/operations/storage/wal/" class="external-link" target="_blank">The docu</a> talks about a <code class="language-plain">--ingester.recover-from-wal</code> setting.</p>
 <blockquote>
 <p><code class="language-plain">--ingester.recover-from-wal</code> to true to recover data from an existing WAL. The data is recovered even if WAL is disabled and this is set to true. The WAL dir needs to be set for this. If you are going to enable WAL, it is advisable to always set this to true.</p>
 </blockquote>
@@ -189,8 +214,13 @@ I haven't changed the value.</p>
 <p>I've updated the grafana dashboard to also display the memory usage per docker compose service.
 Data comes from cadvisor.</p>
 <p>The Prometheus query is this:</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">sum by (container_label_com_docker_compose_service) (container_memory_usage_bytes{container_label_com_docker_compose_service=~".+"})</span></code></pre>
-<p>In case you use docker swarm, you can use <em>container_label_com_docker_swarm_service_name</em> instead of <em>container_label_com_docker_compose_service</em>.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">sum by (container_label_com_docker_compose_service) (container_memory_usage_bytes{container_label_com_docker_compose_service=~".+"})</span></code></pre>
+
+    </div><p>In case you use docker swarm, you can use <em>container_label_com_docker_swarm_service_name</em> instead of <em>container_label_com_docker_compose_service</em>.</p>
 <img src="/blog/2021-05-14-monitoring-grafana/grafana-with-memory-usage.png" width="1550" height="885" alt="undefined">
 
 

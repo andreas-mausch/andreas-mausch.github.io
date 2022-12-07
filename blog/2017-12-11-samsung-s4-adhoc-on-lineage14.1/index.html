@@ -52,9 +52,14 @@ However, I used CyanogenMod 11, which is a little outdated.</p>
 <p>For some reason, CyanogenMod decided to drop support for Ad-Hoc, so the current LineageOS doesn't have it.<br>
 In fact, you won't be even able to see Ad-Hoc networks on the network list. They are filtered out.</p>
 <p>So he tried to establish a connection by directly calling the Linux command in the adb shell ($SSID can be TestAdHoc and $FREQ 2412 for example):</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">iw wlan0 <span class="token builtin class-name">set</span> <span class="token builtin class-name">type</span> ibss</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">iw wlan0 <span class="token builtin class-name">set</span> <span class="token builtin class-name">type</span> ibss</span>
 <span class="highlight-line">iw wlan0 ibss <span class="token function">join</span> <span class="token variable">$SSID</span> <span class="token variable">$FREQ</span></span></code></pre>
-<p>However, this results in an error message:</p>
+
+    </div><p>However, this results in an error message:</p>
 <blockquote>
 <p>command failed: File table overflow (-23)</p>
 </blockquote>
@@ -72,12 +77,21 @@ This isn't hard once you know it, but I'm rather surprised I couldn't find any d
 </figure>
 <p>Luckily, the IBSS firmware is part of the LineageOS image and already on the phone.
 In order to load it, open up a shell on your rooted phone:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">adb shell</span></span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">adb shell</span></span></span>
 <span class="highlight-line"><span class="token output">jfltexx:/ $ su</span>
 <span class="highlight-line">jfltexx:/ #</span></code></pre>
-<p>Now open the network view on the phone and disable WiFi.</p>
+
+    </div><p>Now open the network view on the phone and disable WiFi.</p>
 <p>Execute the following commands:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment"># WiFi should be down already, just make sure it is</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># WiFi should be down already, just make sure it is</span></span>
 <span class="highlight-line"><span class="token function">ifconfig</span> wlan0 down</span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Load the correct firmware files for WiFi Ad-Hoc (IBSS)</span></span>
@@ -92,7 +106,8 @@ In order to load it, open up a shell on your rooted phone:</p>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Join or create the network</span></span>
 <span class="highlight-line">iw wlan0 ibss <span class="token function">join</span> <span class="token variable">$SSID</span> <span class="token variable">$FREQ</span></span></code></pre>
-<p>The new WiFi with the SSID should now show up on other devices when you scan for open networks.</p>
+
+    </div><p>The new WiFi with the SSID should now show up on other devices when you scan for open networks.</p>
 <p><strong>Thank you Andrew for the work you put into this and for sharing the knowledge!</strong></p>
 <h1 id="why-did-it-work-on-cyanogenmod-11%3F" tabindex="-1">1. Why did it work on CyanogenMod 11? <a class="header-anchor" href="#why-did-it-work-on-cyanogenmod-11%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>thinktube.com created patches for CM 11 and 12.

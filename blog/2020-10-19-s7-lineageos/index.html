@@ -56,9 +56,14 @@ Press and hold <em>Power</em>+<em>Home</em>+<em>Volume Down</em>.</p>
 <p>Confirm you are about to lose warrenty by pressing <em>Volume Up</em>.</p>
 <img src="/blog/2020-10-19-s7-lineageos/02-odin-mode.jpg" width="720" height="1280" alt="undefined">
 <p>On Manjaro, I've used <a href="https://www.archlinux.org/packages/community/x86_64/heimdall/" class="external-link" target="_blank">heimdall</a>:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">heimdall detect <span class="token parameter variable">--verbose</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">heimdall detect <span class="token parameter variable">--verbose</span></span>
 <span class="highlight-line">heimdall flash <span class="token parameter variable">--RECOVERY</span> twrp-3.4.0-0-herolte.img --no-reboot</span></code></pre>
-<p>Important: <strong>Immediately</strong> after the screen turns black, press and hold <em>Power</em>+<em>Home</em>+<em>Volume Up</em>
+
+    </div><p>Important: <strong>Immediately</strong> after the screen turns black, press and hold <em>Power</em>+<em>Home</em>+<em>Volume Up</em>
 to boot into the recovery. If the original ROM is loaded, it will restore the recovery
 and you need to start over again.</p>
 <h1 id="in-twrp" tabindex="-1">2. In TWRP <a class="header-anchor" href="#in-twrp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
@@ -73,8 +78,13 @@ and you need to start over again.</p>
 <img src="/blog/2020-10-19-s7-lineageos/08-twrp-format-data.jpg" width="720" height="1280" alt="undefined">
 <h2 id="install-lineageos" tabindex="-1">2.2. Install LineageOS <a class="header-anchor" href="#install-lineageos" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>In recovery, you can already connect via adb.</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">adb push <span class="token parameter variable">-a</span> lineage-17.1-20201008-UNOFFICIAL-herolte.zip /sdcard/</span></code></pre>
-<p>(I've used an image file from <a href="https://forum.xda-developers.com/galaxy-s7/development/beta-lineageos-17-0-galaxy-s7-build-1-t3980101" class="external-link" target="_blank">xda</a>.)</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">adb push <span class="token parameter variable">-a</span> lineage-17.1-20201008-UNOFFICIAL-herolte.zip /sdcard/</span></code></pre>
+
+    </div><p>(I've used an image file from <a href="https://forum.xda-developers.com/galaxy-s7/development/beta-lineageos-17-0-galaxy-s7-build-1-t3980101" class="external-link" target="_blank">xda</a>.)</p>
 <img src="/blog/2020-10-19-s7-lineageos/09-twrp-install.jpg" width="720" height="1280" alt="undefined">
 <img src="/blog/2020-10-19-s7-lineageos/10-twrp-install-lineageos-confirmation.jpg" width="720" height="1280" alt="undefined">
 <img src="/blog/2020-10-19-s7-lineageos/11-twrp-install-lineageos.jpg" width="720" height="1280" alt="undefined">

@@ -51,15 +51,25 @@
 <p>However, by default docker doesn't listen on a network port which would allow to conveniently run docker commands from another host.</p>
 <h1 id="make-docker-listen-on-network-interface" tabindex="-1">1. Make docker listen on network interface <a class="header-anchor" href="#make-docker-listen-on-network-interface" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Find and replace the following line:</p>
-<pre class="language-plain"><code data-filename="/lib/systemd/system/docker.service" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"># Old:</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/lib/systemd/system/docker.service" class="language-plain"><span class="highlight-line"># Old:</span>
 <span class="highlight-line">ExecStart=/usr/bin/docker daemon -H fd:// $DOCKER_OPTS</span>
 <span class="highlight-line"># New:</span>
 <span class="highlight-line">ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 $DOCKER_OPTS</span></code></pre>
-<p>Either restart docker (<code class="language-plain">sudo service docker restart</code>) or your Pi.</p>
+
+    </div><p>Either restart docker (<code class="language-plain">sudo service docker restart</code>) or your Pi.</p>
 <h3 id="remote-docker-run" tabindex="-1">1.1. Remote docker run <a class="header-anchor" href="#remote-docker-run" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Now you can run <code class="language-plain">docker build</code> and <code class="language-plain">docker run</code> on another computer with DOCKER_HOST=%IP_OF_HYPRIOT%:2375 set.</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token assign-left variable">DOCKER_HOST</span><span class="token operator">=</span><span class="token number">192.168</span>.178.37:2375 <span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> ubuntu:14.04 /bin/echo <span class="token string">"Hello world"</span></span></code></pre>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token assign-left variable">DOCKER_HOST</span><span class="token operator">=</span><span class="token number">192.168</span>.178.37:2375 <span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> ubuntu:14.04 /bin/echo <span class="token string">"Hello world"</span></span></code></pre>
 
+    </div>
 
 <script async src="/scripts/index.js"></script>
 

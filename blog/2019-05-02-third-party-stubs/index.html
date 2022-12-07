@@ -50,23 +50,37 @@
 you'd like to have a convenient way to work with them during development.</p>
 <h1 id="the-external-service" tabindex="-1">1. The external service <a class="header-anchor" href="#the-external-service" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Let's assume our application calls a REST API to validate user addresses.</p>
-<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">GET https://imaginary-address-validation.com/api?address=Jungfernstieg%201,20095%20Hamburg</span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">GET https://imaginary-address-validation.com/api?address=Jungfernstieg%201,20095%20Hamburg</span>
 <span class="highlight-line"></span>
 <span class="highlight-line">HTTP/1.1 200 OK</span>
 <span class="highlight-line">{valid:true}</span></code></pre>
-<h1 id="the-problem" tabindex="-1">2. The problem <a class="header-anchor" href="#the-problem" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+
+    </div><h1 id="the-problem" tabindex="-1">2. The problem <a class="header-anchor" href="#the-problem" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>In my current project, they've decided to choose a mechanism like this:</p>
-<pre class="language-java"><code class="language-java"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Address</span> address<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-java"><code class="language-java"><span class="highlight-line"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Address</span> address<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isOnLocalServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
 <span class="highlight-line">    <span class="token punctuation">}</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line">    <span class="token keyword">return</span> <span class="token function">callRestApi</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">"ADDRESS_VALIDATION_API_ENDPOINT"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
-<p>This way, you can easily develop, while still having a working address validation on your production and testing systems, right?<br>
+
+    </div><p>This way, you can easily develop, while still having a working address validation on your production and testing systems, right?<br>
 Well, not really. The problem with this code snippet is: <strong>You can't reproduce an invalid address on your local system</strong>.</p>
 <p>In order to test a failing address validation locally, you'd have to bloat this code to something like this:</p>
-<pre class="language-java"><code class="language-java"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Address</span> address<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-java"><code class="language-java"><span class="highlight-line"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Address</span> address<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isOnLocalServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"invalidaddress"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>address<span class="token punctuation">.</span><span class="token function">getStreetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
@@ -76,7 +90,8 @@ Well, not really. The problem with this code snippet is: <strong>You can't repro
 <span class="highlight-line"></span>
 <span class="highlight-line">    <span class="token keyword">return</span> <span class="token function">callRestApi</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">"ADDRESS_VALIDATION_API_ENDPOINT"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
-<p>So whenever you type in &quot;invalidaddress&quot; in the street name field, the validation will fail on your local development server.
+
+    </div><p>So whenever you type in &quot;invalidaddress&quot; in the street name field, the validation will fail on your local development server.
 This can be handy for manual testing.</p>
 <p>So what's the problem with this solution?<br>
 It is not <strong>automatically testable</strong>!</p>
@@ -110,15 +125,24 @@ You start it in your local environment and the CI, and point the endpoint url to
 The stub can even be written using a different technology than your main application.<br>
 You can move the &quot;invalidaddress&quot; logic for successful and non-successful responses into the stub.</p>
 <p>The production code will be cleaner, too, as it doesn't have to differentiate between your environment anymore:</p>
-<pre class="language-java"><code class="language-java"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Address</span> address<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-java"><code class="language-java"><span class="highlight-line"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Address</span> address<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">    <span class="token keyword">return</span> <span class="token function">callRestApi</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">"ADDRESS_VALIDATION_API_ENDPOINT"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
-<p>Of course, you need to maintain the stub accordingly to the real API. However, to me that's not a real downside because you need to maintain the real API calls in your application anyway. This way, you even make sure your application works fine after an API has changed.</p>
+
+    </div><p>Of course, you need to maintain the stub accordingly to the real API. However, to me that's not a real downside because you need to maintain the real API calls in your application anyway. This way, you even make sure your application works fine after an API has changed.</p>
 <h1 id="example-stub-using-kscript-and-ktor" tabindex="-1">4. Example stub using kscript and ktor <a class="header-anchor" href="#example-stub-using-kscript-and-ktor" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>For the simple API in this example, please find below a stub written in <a href="https://github.com/holgerbrandl/kscript" class="external-link" target="_blank">kscript</a> and <a href="https://ktor.io/" class="external-link" target="_blank">ktor</a>.
 Ramp-up time is &lt;2sec, and as you can see it's not much code and pretty straight-forward.<br>
 To run it, execute <code class="language-plain">kscript stub.kscript</code>, and it will start listening on port 8080. Example URL: http://0.0.0.0:8080/api?address=invalidaddress</p>
-<pre class="language-kotlin"><code data-filename="stub.kscript" class="language-kotlin"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token annotation builtin">@file:DependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"io.ktor:ktor-server-core:1.1.4"</span></span><span class="token punctuation">)</span></span>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-kotlin"><code data-filename="stub.kscript" class="language-kotlin"><span class="highlight-line"><span class="token annotation builtin">@file:DependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"io.ktor:ktor-server-core:1.1.4"</span></span><span class="token punctuation">)</span></span>
 <span class="highlight-line"><span class="token annotation builtin">@file:DependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"io.ktor:ktor-server-netty:1.1.4"</span></span><span class="token punctuation">)</span></span>
 <span class="highlight-line"><span class="token annotation builtin">@file:DependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"ch.qos.logback:logback-classic:1.2.3"</span></span><span class="token punctuation">)</span></span>
 <span class="highlight-line"></span>
@@ -152,9 +176,20 @@ To run it, execute <code class="language-plain">kscript stub.kscript</code>, and
 <span class="highlight-line">    <span class="token punctuation">}</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span>
 <span class="highlight-line">server<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span>wait <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span></span></code></pre>
-<pre class="language-json"><code data-filename="success.json" class="language-json"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token punctuation">{</span>valid<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">}</span></span></code></pre>
-<pre class="language-json"><code data-filename="failure.json" class="language-json"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token punctuation">{</span>valid<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">}</span></span></code></pre>
-<h1 id="alternatives-using-mock-servers" tabindex="-1">5. Alternatives using mock servers <a class="header-anchor" href="#alternatives-using-mock-servers" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-json"><code data-filename="success.json" class="language-json"><span class="highlight-line"><span class="token punctuation">{</span>valid<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">}</span></span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-json"><code data-filename="failure.json" class="language-json"><span class="highlight-line"><span class="token punctuation">{</span>valid<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">}</span></span></code></pre>
+
+    </div><h1 id="alternatives-using-mock-servers" tabindex="-1">5. Alternatives using mock servers <a class="header-anchor" href="#alternatives-using-mock-servers" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>The approach above shows you the one with the greatest flexibiliy.
 In many cases, it is easier and faster to use static data.</p>
 <p>My favorite mock server is: <a href="https://github.com/sinedied/smoke" class="external-link" target="_blank">https://github.com/sinedied/smoke</a></p>

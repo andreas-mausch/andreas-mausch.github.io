@@ -52,8 +52,13 @@ I think my mistake was to not execute it on every single core.</p>
 <p>But today, I found this <a href="https://github.com/georgewhewell/undervolt" class="external-link" target="_blank">georgewhewell/undervolt</a>. A small python script which does all the complicated work.
 According to the internet most Intel CPUs can be undervolted easily by 100 mV. While this doesn't sound like much, it's almost a 10% cut of the default 1.2 V.</p>
 <p>I got my CPU working with a delta of 130 mV:</p>
-<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> ./undervolt.py <span class="token parameter variable">--gpu</span> <span class="token parameter variable">-50</span> <span class="token parameter variable">--core</span> <span class="token parameter variable">-130</span> <span class="token parameter variable">--cache</span> <span class="token parameter variable">-100</span> <span class="token parameter variable">--uncore</span> <span class="token parameter variable">-130</span> <span class="token parameter variable">--analogio</span> <span class="token parameter variable">-100</span></span></code></pre>
-<img src="/blog/2018-05-22-undervolting/cmd.jpg" width="949" height="120" alt="undefined">
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> ./undervolt.py <span class="token parameter variable">--gpu</span> <span class="token parameter variable">-50</span> <span class="token parameter variable">--core</span> <span class="token parameter variable">-130</span> <span class="token parameter variable">--cache</span> <span class="token parameter variable">-100</span> <span class="token parameter variable">--uncore</span> <span class="token parameter variable">-130</span> <span class="token parameter variable">--analogio</span> <span class="token parameter variable">-100</span></span></code></pre>
+
+    </div><img src="/blog/2018-05-22-undervolting/cmd.jpg" width="949" height="120" alt="undefined">
 <p>I've executed <code class="language-plain">stress --cpu 8</code> and temperates dropped from 97 degrees to 83, and power consumption from 60 W to 48 W.
 This is quite significant.</p>
 <img src="/blog/2018-05-22-undervolting/glances.jpg" width="1178" height="690" alt="undefined">
