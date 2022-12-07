@@ -2,19 +2,18 @@
 
 pre[class*="language-"] {
   padding: 0.5em;
+  position: relative;
 }
 
 pre>code[class*="language-"],
 code[class*="language-"] {
   counter-reset: lineNumber;
-  font-size: 9pt;
 }
 
 code[data-filename]::before {
   color: #000;
   content: attr(data-filename);
   display: block;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   user-select: none;
 }
 
@@ -30,4 +29,11 @@ code[class*="language-"] .highlight-line::before {
   text-align: right;
   user-select: none;
   width: 1.4em;
+}
+
+.copy-to-clipboard {
+  font-size: inherit;
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
 }

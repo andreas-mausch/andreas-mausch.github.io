@@ -1,10 +1,17 @@
 {
   "sources": [
-    "./node_modules/@fortawesome/fontawesome-free/svgs/solid/[icon].svg",
     "./node_modules/@fortawesome/fontawesome-free/svgs/regular/[icon].svg",
+    "./node_modules/@fortawesome/fontawesome-free/svgs/solid/[icon].svg",
     "./node_modules/@fortawesome/fontawesome-free/svgs/brands/[icon].svg"
   ],
   "icons": [
+    {
+      "icon": "copy",
+      "name": "copy",
+      "codepoints": [
+        "\uf0c5"
+      ]
+    },
     {
       "icon": "envelope-open-text",
       "name": "envelope-open-text",
