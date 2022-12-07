@@ -102,7 +102,7 @@ The decrypted file should be in the same folder, you can now open it in WhatsApp
 <p><strong>Error: could not load chat list sqlite error 11 database disk image is malformed</strong><br>
 Sometimes WhatsApp creates a malformed backup and you need to repair it. Currently there is no automatic repair option in WhatsApp Viewer, so you need to do it manually.
 You need sqlite installed on your computer and run these two lines from command prompt:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> .dump <span class="token operator">|</span> sqlite3 msgstore.db <span class="token operator">></span> temp.sql</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token builtin class-name">echo</span> .dump <span class="token operator">|</span> sqlite3 msgstore.db <span class="token operator">></span> temp.sql</span>
 <span class="highlight-line"><span class="token builtin class-name">echo</span> .quit <span class="token operator">|</span> sqlite3 <span class="token parameter variable">-init</span> temp.sql repaired.db</span></code></pre>
 <p>Now you can load repaired.db with WhatsApp Viewer.</p>
 </li>

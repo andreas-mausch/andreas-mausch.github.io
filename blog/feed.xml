@@ -88,9 +88,9 @@ which provides only the CLI part named &lt;code class=&quot;language-plain&quot;
     <updated>2022-02-24T22:00:00Z</updated>
     <id>https://andreas-mausch.de/blog/2022-02-24-rabbitmq-cli-dead-letter-exchange-and-quorum-queue/</id>
     <content xml:lang="en" type="html">&lt;p&gt;Today I&#39;ve taken a closer look at this code snippet in one of our services:&lt;/p&gt;
-&lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token annotation punctuation&quot;&gt;@Queue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;${app.messaging.queueName}&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token annotation punctuation&quot;&gt;@Queue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;${app.messaging.queueName}&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;receive&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;                    &lt;span class=&quot;token annotation punctuation&quot;&gt;@Nullable&lt;/span&gt; &lt;span class=&quot;token annotation punctuation&quot;&gt;@Header&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;x-redelivered-count&quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;span class=&quot;highlight-line&quot;&gt;                    &lt;span class=&quot;token annotation punctuation&quot;&gt;@Nullable&lt;/span&gt; &lt;span class=&quot;token annotation punctuation&quot;&gt;@Header&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Cast your screen to a Chromecast without Chrome</title>
@@ -317,7 +317,7 @@ and as you can see you have to decide between gpg or FIDO2. Too bad.&lt;/p&gt;
 This is about the &lt;em&gt;expires&lt;/em&gt; part of a cookie.&lt;/p&gt;
 &lt;h1 id=&quot;two-formats&quot; tabindex=&quot;-1&quot;&gt;1. Two formats &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-02-03-cookie-formats-and-apache-httpclient/#two-formats&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Let&#39;s see what &lt;strong&gt;google.com&lt;/strong&gt; uses:&lt;/p&gt;
-&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Android: LineageOS, Root and TWRP Recovery on Samung Galaxy S7</title>
@@ -414,9 +414,8 @@ into the address line. Then I&#39;ve right clicked -&amp;gt; Store as bookmark.&
 &lt;p&gt;So next I tried to find out where Thunar stores it bookmarks. A lot of stuff I&#39;ve found said &lt;em&gt;~&lt;s&gt;/.gtk-bookmarks&lt;/s&gt;&lt;/em&gt;.
 This is outdated tho, and the file is now located at &lt;em&gt;~/.config/gtk-3.0/bookmarks&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;So add a new line to the file:&lt;/p&gt;
-&lt;pre class=&quot;language-plain&quot;&gt;&lt;code data-filename=&quot;~/.config/gtk-3.0/bookmarks&quot; class=&quot;language-plain&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;davs://cloud.neonew.de/remote.php/dav/files/&amp;lt;username&gt; Nextcloud&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;..and it should work as expected.&lt;/p&gt;
-&lt;p&gt;One thing about the authentication: You should setup&lt;/p&gt;</content>
+&lt;pre class=&quot;language-plain&quot;&gt;&lt;code data-filename=&quot;~/.config/gtk-3.0/bookmarks&quot; class=&quot;language-plain&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;davs://cloud.neonew.de/remote.php/dav/files/&amp;lt;username&gt; Nextcloud&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;..and &lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Split Git Repos</title>
@@ -434,8 +433,8 @@ Then, I&#39;ve added cheatsheets.&lt;/p&gt;
 &lt;p&gt;I&#39;ve noticed the repo was getting too big for my likes.&lt;/p&gt;
 &lt;p&gt;So I&#39;d rather like to have subdomains with separated repos, like &lt;a href=&quot;https://cheatsheets.andreas-mausch.de/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;cheatsheets.andreas-mausch.de&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Here are some commands which were useful to me:&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Create a new copy of the existing repo&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; clone &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;original_repo&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Create a new copy of the existing repo&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; clone &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>NextCloudPi with Wi-Fi Hotspot</title>
@@ -506,7 +505,7 @@ instead of just making it a dependency (like any good citizen would).&lt;/p&gt;
     <content xml:lang="en" type="html">&lt;h1 id=&quot;on-each-connect&quot; tabindex=&quot;-1&quot;&gt;1. On each connect &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-08-12-external-monitor-linux-xrandr/#on-each-connect&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Short command to set the correct resolution and scaling for an external monitor.&lt;br /&gt;
 I&#39;ve decided to write this down because the &lt;em&gt;--scale-from&lt;/em&gt; parameter seems to be uncommon. Most suggestions on the internet only use &lt;em&gt;--scale&lt;/em&gt;, which I find less intuitive to use.&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Sign Git commits</title>
@@ -515,10 +514,9 @@ I&#39;ve decided to write this down because the &lt;em&gt;--scale-from&lt;/em&gt
     <id>https://andreas-mausch.de/blog/2019-07-11-sign-git-commits/</id>
     <content xml:lang="en" type="html">&lt;h1 id=&quot;find-signingkey&quot; tabindex=&quot;-1&quot;&gt;1. Find signingkey &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-07-11-sign-git-commits/#find-signingkey&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Assuming you already have a GPG key:&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ gpg --list-secret-keys --keyid-format LONG&lt;/span&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ gpg --list-secret-keys --keyid-format LONG&lt;/span&gt;
 &lt;span class=&quot;highlight-line&quot;&gt;/home/neonew/.gnupg/pubring.kbx&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;-------------------------------&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;sec   rsa2048/1234567890123456 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;span class=&quot;highlight-line&quot;&gt;------------------------&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Dell XPS 15 7590</title>
@@ -535,7 +533,7 @@ I&#39;ve decided to write this down because the &lt;em&gt;--scale-from&lt;/em&gt
     <id>https://andreas-mausch.de/blog/2019-05-06-scaling-images-using-imagemagick/</id>
     <content xml:lang="en" type="html">&lt;h1 id=&quot;downscale-images-(batch)&quot; tabindex=&quot;-1&quot;&gt;1. Downscale images (batch) &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-05-06-scaling-images-using-imagemagick/#downscale-images-(batch)&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Just a useful command I use to downscale my images, for example to share them on social media.&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;magick mogrify -auto-orient &lt;span class=&quot;token parameter variable&quot;&gt;-strip&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-resize&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;1920x1920&gt;&quot;&lt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;magick mogrify -auto-orient &lt;span class=&quot;token parameter variable&quot;&gt;-strip&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Stubbing third party services</title>
@@ -546,7 +544,7 @@ I&#39;ve decided to write this down because the &lt;em&gt;--scale-from&lt;/em&gt
 you&#39;d like to have a convenient way to work with them during development.&lt;/p&gt;
 &lt;h1 id=&quot;the-external-service&quot; tabindex=&quot;-1&quot;&gt;1. The external service &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2019-05-02-third-party-stubs/#the-external-service&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Let&#39;s assume our application calls a REST API to validate user addresses.&lt;/p&gt;
-&lt;pre class=&quot;language-plain&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;GET https://imaginary-address-validation.com/api?address=Jungf&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-plain&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Server on Android using Linux Deploy</title>
@@ -658,7 +656,7 @@ However, I used CyanogenMod 11, which is a little outdated.&lt;/p&gt;
 &lt;p&gt;For some reason, CyanogenMod decided to drop support for Ad-Hoc, so the current LineageOS doesn&#39;t have it.&lt;br /&gt;
 In fact, you won&#39;t be even able to see Ad-Hoc networks on the network list. They are filtered out.&lt;/p&gt;
 &lt;p&gt;So he tried to establish a connection by directly calling the Linux command in the adb shell ($SSID can be TestAdHoc and $FREQ 2412 for example):&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;iw wlan0 &lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;iw wla&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Kotlin Native</title>
@@ -730,7 +728,7 @@ That was nice, but didn&#39;t work like that again. After some googling I&#39;ve
 &lt;p&gt;So &amp;quot;Huawei Technologies Co., Ltd. Broadband stick&amp;quot; is the device.&lt;br /&gt;
 We can see the Vendor ID (12d1) and the Product ID (1446).&lt;/p&gt;
 &lt;p&gt;A call to &lt;code class=&quot;language-plain&quot;&gt;usb-devices&lt;/code&gt; shows it is in drive-mode:&lt;/p&gt;
-&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Security: Playing around with NSA exploit EternalBlue (MS17-010)</title>
@@ -756,8 +754,8 @@ We can see the Vendor ID (12d1) and the Product ID (1446).&lt;/p&gt;
     <updated>2016-11-12T17:00:00Z</updated>
     <id>https://andreas-mausch.de/blog/2016-11-13-screencast-on-linux/</id>
     <content xml:lang="en" type="html">&lt;h1 id=&quot;useful-ffmpeg-commands-for-recording-your-screen&quot; tabindex=&quot;-1&quot;&gt;1. Useful FFMPEG commands for recording your screen &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2016-11-13-screencast-on-linux/#useful-ffmpeg-commands-for-recording-your-screen&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Record screen without audio. Replace 3840x2160 with your resolution.&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# The video is lossless, because of&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Record screen without audio. Replace 3840x2160 with your resolution.&lt;/span&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>WhatsApp Viewer v1.9 with crypt12 support released</title>
@@ -789,8 +787,7 @@ So I copied all volumes referenced by the docker container
 start gitlab/gitlab-ce:latest.&lt;/p&gt;
 &lt;p&gt;In the log files (docker logs gitlab) Gitlab told me the permissions have changed
 due to the copying. I searched the internet, found &lt;a href=&quot;https://github.com/gitlabhq/gitlabhq/issues/9611&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;this on github.com&lt;/a&gt; and I had to run:&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;token builtin class-name&quot;&gt;exec&lt;/span&gt; gitlab update-permissions&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;However, I still got error messages lik&lt;/p&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;token builtin class-name&quot;&gt;exec&lt;/span&gt; g&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Linux Mint: Login loop after new graphics card</title>
@@ -807,8 +804,7 @@ which was fine.&lt;/p&gt;
 &lt;p&gt;When I tried to boot my Linux partition, I faced a black screen. After uninstalling
 the ATI drivers and installing the proprietary Nvidia drivers in recovery mode
 on command line I got to the login screen.&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; purge &lt;span class=&quot;token string&quot;&gt;&quot;fglrx.*&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;&lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; purge &lt;span class=&quot;token string&quot;&gt;&quot;fglrx.*&quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Hypriot Docker and remote access</title>

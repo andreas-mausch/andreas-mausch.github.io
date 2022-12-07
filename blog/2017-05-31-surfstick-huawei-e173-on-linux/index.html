@@ -55,7 +55,7 @@ That was nice, but didn't work like that again. After some googling I've found t
 <p>So &quot;Huawei Technologies Co., Ltd. Broadband stick&quot; is the device.<br>
 We can see the Vendor ID (12d1) and the Product ID (1446).</p>
 <p>A call to <code class="language-plain">usb-devices</code> shows it is in drive-mode:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">usb-devices</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">usb-devices</span></span></span>
 <span class="highlight-line"><span class="token output">T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  5 Spd=480 MxCh= 0</span>
 <span class="highlight-line">D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1</span>
 <span class="highlight-line">P:  Vendor=12d1 ProdID=1446 Rev=00.00</span>
@@ -65,9 +65,9 @@ We can see the Vendor ID (12d1) and the Product ID (1446).</p>
 <span class="highlight-line">I:  If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage</span>
 <span class="highlight-line">I:  If#= 1 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage</span></code></pre>
 <p>The adjusted command from the wiki page (I've exchanged the Product ID):</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> usb_modeswitch <span class="token parameter variable">-v</span> 0x12d1 <span class="token parameter variable">-p</span> 0x1446 <span class="token parameter variable">-V</span> 0x12d1 <span class="token parameter variable">-P</span> 0x1436 <span class="token parameter variable">-M</span> <span class="token number">55534243123456780000000000000011062000000100000000000000000000</span></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> usb_modeswitch <span class="token parameter variable">-v</span> 0x12d1 <span class="token parameter variable">-p</span> 0x1446 <span class="token parameter variable">-V</span> 0x12d1 <span class="token parameter variable">-P</span> 0x1436 <span class="token parameter variable">-M</span> <span class="token number">55534243123456780000000000000011062000000100000000000000000000</span></span></code></pre>
 <p>Afterwards, <code class="language-plain">lsusb</code> shows this:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">lsusb</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">lsusb</span></span></span>
 <span class="highlight-line"><span class="token output">Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span>
 <span class="highlight-line">Bus 001 Device 003: ID 04f3:21d4 Elan Microelectronics Corp.</span>
 <span class="highlight-line">Bus 001 Device 002: ID 8087:0a2b Intel Corp.</span>
@@ -75,7 +75,7 @@ We can see the Vendor ID (12d1) and the Product ID (1446).</p>
 <span class="highlight-line">Bus 001 Device 006: ID 12d1:1436 Huawei Technologies Co., Ltd. Broadband stick</span>
 <span class="highlight-line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span></code></pre>
 <p>And <code class="language-plain">usb-devices</code> this:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">usb-devices</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">usb-devices</span></span></span>
 <span class="highlight-line"><span class="token output">T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  6 Spd=480 MxCh= 0</span>
 <span class="highlight-line">D:  Ver= 2.00 Cls=ef(misc ) Sub=02 Prot=01 MxPS=64 #Cfgs=  1</span>
 <span class="highlight-line">P:  Vendor=12d1 ProdID=1436 Rev=00.00</span>

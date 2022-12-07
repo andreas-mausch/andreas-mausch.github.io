@@ -196,12 +196,12 @@ Great times.</p>
 <p>You can either use the precompiled <code class="language-plain">arm-none-linux-gnueabihf-toolchain-bin</code> (you can find a more recent version
 <a href="https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads" class="external-link" target="_blank">here</a>)
 or compile it yourself by using <code class="language-plain">arm-linux-gnueabihf-gcc</code> (it will take some time, though, &gt;1h on my machine).</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">yay <span class="token parameter variable">-S</span> arm-linux-gnueabihf-gcc</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">yay <span class="token parameter variable">-S</span> arm-linux-gnueabihf-gcc</span></code></pre>
 <p>This costs some time and needed manual adjustments.
 Check the <a href="https://aur.archlinux.org/packages/arm-linux-gnueabihf-gcc" class="external-link" target="_blank">AUR page</a> for instructions.</p>
 <h3 id="assembly-example" tabindex="-1">4.1.1. Assembly example <a class="header-anchor" href="#assembly-example" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Let's take this ARM 32-bit Hello World program:</p>
-<pre class="language-arm-asm"><code data-filename="example.as" class="language-arm-asm"><span class="highlight-line">.section .text</span>
+<pre class="language-arm-asm"><code data-filename="example.as" class="language-arm-asm"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">.section .text</span>
 <span class="highlight-line">.global _start</span>
 <span class="highlight-line"></span>
 <span class="highlight-line">_start:</span>
@@ -221,18 +221,18 @@ Check the <a href="https://aur.archlinux.org/packages/arm-linux-gnueabihf-gcc" c
 <span class="highlight-line">.ascii <span class="token string">"Hello, ARM32!\n"</span></span>
 <span class="highlight-line">len <span class="token operator">=</span> . <span class="token operator">-</span> msg</span></code></pre>
 <p>Compile and link the program as follows</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">arm-linux-gnueabihf-as <span class="token parameter variable">-o</span> example-as.out example.as</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">arm-linux-gnueabihf-as <span class="token parameter variable">-o</span> example-as.out example.as</span></span></span>
 <span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">arm-linux-gnueabihf-ld <span class="token parameter variable">-o</span> example-as example-as.out</span></span></span>
 <span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">file</span> ./example-as</span></span></span>
 <span class="highlight-line"><span class="token output">./example-as: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, not stripped</span></code></pre>
 <h3 id="c-example-(gcc)" tabindex="-1">4.1.2. C example (gcc) <a class="header-anchor" href="#c-example-(gcc)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
-<pre class="language-c"><code data-filename="example.c" class="language-c"><span class="highlight-line"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span></span>
+<pre class="language-c"><code data-filename="example.c" class="language-c"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="highlight-line">  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"ARM C Test\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="highlight-line">  <span class="token keyword">return</span> <span class="token number">99</span><span class="token punctuation">;</span></span>
 <span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">arm-linux-gnueabihf-gcc <span class="token parameter variable">-static</span> <span class="token parameter variable">-o</span> example-c example.c</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">arm-linux-gnueabihf-gcc <span class="token parameter variable">-static</span> <span class="token parameter variable">-o</span> example-c example.c</span></code></pre>
 <p>Note: If you don't statically link the file, you might see <a href="https://stackoverflow.com/questions/47787562/u-boot-lib-ld-linux-armhf-so-3-no-such-file-or-directory" class="external-link" target="_blank">this error</a>:</p>
 <blockquote>
 <p>qemu-arm: Could not open '/lib/ld-linux-armhf.so.3': No such file or directory</p>
@@ -243,12 +243,12 @@ You can run a single binary by using <a href="https://qemu-project.gitlab.io/qem
 or run a full-blown system via the <a href="https://qemu-project.gitlab.io/qemu/system/index.html" class="external-link" target="_blank">System emulation</a>.
 With the latter, you can run Windows XP on an ARM CPU, for example.
 We will use the User Mode emulation in our example, though.</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> qemu-user</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> qemu-user</span></span></span>
 <span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./example-as</span></span></span>
 <span class="highlight-line"><span class="token output">exec: Failed to execute process: './example-as' the file could not be run by the operating system.</span>
 <span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">qemu-arm ./example-as</span></span></span>
 <span class="highlight-line"><span class="token output">Hello, ARM32!</span></code></pre>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">qemu-arm ./example-c</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">qemu-arm ./example-c</span></span></span>
 <span class="highlight-line"><span class="token output">ARM C Test</span>
 <span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token builtin class-name">echo</span> <span class="token variable">$status</span></span></span></span>
 <span class="highlight-line"><span class="token output">99</span></code></pre>
@@ -259,7 +259,7 @@ My goal is to have a virtual machine running, by either emulation or virtualizat
 Since both can be used to accomplish this, this article deals with both terms.</p>
 <h2 id="check-support-for-kvm" tabindex="-1">4.2. Check support for KVM <a class="header-anchor" href="#check-support-for-kvm" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>To check support for hardware-assisted virtualization via KVM, run these commands:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>C lscpu <span class="token operator">|</span> <span class="token function">grep</span> Virtualization</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>C lscpu <span class="token operator">|</span> <span class="token function">grep</span> Virtualization</span>
 <span class="highlight-line">zgrep CONFIG_KVM /proc/config.gz</span></code></pre>
 <h1 id="libvirt-and-virt-manager" tabindex="-1">5. libvirt and virt-manager <a class="header-anchor" href="#libvirt-and-virt-manager" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Back to virtualization and trying the alternative for VirtualBox: libvirt.</p>
@@ -298,7 +298,7 @@ There are a lot of different tools and libraries and it feels like a bunch of ev
 <h2 id="why-not-just-pure-qemu%3F" tabindex="-1">5.1. Why not just pure QEMU? <a class="header-anchor" href="#why-not-just-pure-qemu%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>QEMU works great on it's own.
 Here is a small example how to set up a Windows XP box.</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img create <span class="token parameter variable">-f</span> qcow2 windows.qcow2 30G</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">qemu-img create <span class="token parameter variable">-f</span> qcow2 windows.qcow2 30G</span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Boot from iso and run Windows Setup</span></span>
 <span class="highlight-line">qemu-system-x86_64 <span class="token parameter variable">-m</span> 2G <span class="token punctuation">[</span>-machine <span class="token assign-left variable">type</span><span class="token operator">=</span>q35<span class="token punctuation">]</span> <span class="token parameter variable">-smp</span> <span class="token number">2</span> <span class="token parameter variable">-vga</span> virtio <span class="token parameter variable">-usb</span> <span class="token parameter variable">-device</span> usb-tablet <span class="token parameter variable">-display</span> default,show-cursor<span class="token operator">=</span>on <span class="token parameter variable">-hda</span> windows.qcow2 <span class="token parameter variable">-cdrom</span> ~/Downloads/en_windows_xp_professional_with_service_pack_3_x86_cd_vl_x14-73974.iso</span>
@@ -320,7 +320,7 @@ You would have to remember all CLI options for each machine, and also which hard
 <p><code class="language-plain">libvirt</code> addtionally helps you to save the settings of the box, set up the network,
 and it supports different providers than just QEMU.</p>
 <p>It stores the configuration for each box in a XML file.</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> cloud-image-utils virt-install virt-manager qemu qemu-ui-gtk</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> cloud-image-utils virt-install virt-manager qemu qemu-ui-gtk</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl status libvirtd.service</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> libvirtd.service</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl start libvirtd.service</span>
@@ -337,18 +337,18 @@ and it supports different providers than just QEMU.</p>
 module which comes with libvirt: <code class="language-plain">libvirt-nss</code>.</p>
 <h3 id="dns-service-via-systemd" tabindex="-1">5.3.1. DNS service via systemd <a class="header-anchor" href="#dns-service-via-systemd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Change the systemd resolver config as follows:</p>
-<pre class="language-plain"><code data-filename="/etc/systemd/resolved.conf" class="language-plain"><span class="highlight-line">[Resolve]</span>
+<pre class="language-plain"><code data-filename="/etc/systemd/resolved.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">[Resolve]</span>
 <span class="highlight-line">DNS=192.168.122.1</span>
 <span class="highlight-line">Domains=~libvirt</span></code></pre>
 <p>The IP address in the DNS field needs to match your libvirt network configuration (see below).
 Also, you box must have set the correct domain.</p>
 <p>After editing the file you need to restart the resolver</p>
-<pre class="language-plain"><code class="language-plain"><span class="highlight-line">sudo systemctl restart systemd-resolved.service</span></code></pre>
+<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">sudo systemctl restart systemd-resolved.service</span></code></pre>
 <p>Then, you can access your machine by it's hostname, for example <code class="language-plain">my-box.libvirt</code>.</p>
 <h3 id="libvirt-nss" tabindex="-1">5.3.2. libvirt-nss <a class="header-anchor" href="#libvirt-nss" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>I prefer this <code class="language-plain">libvirt-nss</code> method, though.
 It's already included in the Arch package, so all I had to do to use it was to modify my config file:</p>
-<pre class="language-plain"><code data-filename="/etc/nsswitch.conf" class="language-plain"><span class="highlight-line">// ...</span>
+<pre class="language-plain"><code data-filename="/etc/nsswitch.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">// ...</span>
 <span class="highlight-line">hosts: files libvirt libvirt_guest dns</span>
 <span class="highlight-line">// ...</span></code></pre>
 <p>See <a href="https://libvirt.org/nss.html" class="external-link" target="_blank">this page</a> for full instructions.</p>
@@ -360,12 +360,12 @@ Then, I can access the machine by both names, <code class="language-plain">hostn
 See <a href="https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html" class="external-link" target="_blank">this post</a></p>
 <p>So after seeing a lot of <em>Access denied</em> messages, I've decided to use <code class="language-plain">qemu:///system</code> as my default.
 Therefore, you can create this config:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> uri_default <span class="token operator">=</span> <span class="token punctuation">\</span>"qemu:///system<span class="token punctuation">\</span>" <span class="token operator">>></span> ~/.config/libvirt/libvirt.conf</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token builtin class-name">echo</span> uri_default <span class="token operator">=</span> <span class="token punctuation">\</span>"qemu:///system<span class="token punctuation">\</span>" <span class="token operator">>></span> ~/.config/libvirt/libvirt.conf</span></code></pre>
 <p>Now running <code class="language-plain">virsh net-list --all</code> is implicitly called like <code class="language-plain">virsh --connect qemu:///system net-list --all</code>,
 which makes all commands on the CLI much easier to type.</p>
 <h2 id="useful-virsh-cli-commands" tabindex="-1">5.5. Useful virsh CLI commands <a class="header-anchor" href="#useful-virsh-cli-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Here is a full example how to set up an Ubuntu machine via libvirt and QEMU:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># Show all boxes (the libvirt term is 'domain' for whatever obscuring reason)</span></span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment"># Show all boxes (the libvirt term is 'domain' for whatever obscuring reason)</span></span>
 <span class="highlight-line"><span class="token function">virsh</span> list <span class="token parameter variable">--all</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Show all networks</span></span>
@@ -401,7 +401,7 @@ which makes all commands on the CLI much easier to type.</p>
 <details markdown="1">
 <summary>Files</summary>
 <p>Example network file:</p>
-<pre class="language-xml"><code data-filename="virsh-my-network.xml" class="language-xml"><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>network</span> <span class="token attr-name">connections</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>1<span class="token punctuation">'</span></span><span class="token punctuation">></span></span></span>
+<pre class="language-xml"><code data-filename="virsh-my-network.xml" class="language-xml"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>network</span> <span class="token attr-name">connections</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>1<span class="token punctuation">'</span></span><span class="token punctuation">></span></span></span>
 <span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>my-network<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uuid</span><span class="token punctuation">></span></span>e60f1806-bf2b-4991-be55-03d51ee38b50<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>uuid</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>forward</span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>nat<span class="token punctuation">'</span></span><span class="token punctuation">></span></span></span>
@@ -419,9 +419,9 @@ which makes all commands on the CLI much easier to type.</p>
 <span class="highlight-line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ip</span><span class="token punctuation">></span></span></span>
 <span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>network</span><span class="token punctuation">></span></span></span></code></pre>
 <p>Example cloud-init files:</p>
-<pre class="language-yaml"><code data-filename="box.meta-data" class="language-yaml"><span class="highlight-line"><span class="token key atrule">instance-id</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>box</span>
+<pre class="language-yaml"><code data-filename="box.meta-data" class="language-yaml"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token key atrule">instance-id</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>box</span>
 <span class="highlight-line"><span class="token key atrule">local-hostname</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>box</span></code></pre>
-<pre class="language-yaml"><code data-filename="box.user-data" class="language-yaml"><span class="highlight-line"><span class="token comment">#cloud-config</span></span>
+<pre class="language-yaml"><code data-filename="box.user-data" class="language-yaml"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment">#cloud-config</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token key atrule">hostname</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>box</span>
 <span class="highlight-line"><span class="token key atrule">local-hostname</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>box</span>
@@ -462,12 +462,12 @@ there is no need to follow a (maybe longer) command list.
 Additionally, people can choose their personal favorite provider between libvirt, VirtualBox and more
 (as long as the base box is available for the provider).</p>
 <p>Make sure to have the Vagrant and its required plugins installed on your machine:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> vagrant</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> vagrant</span>
 <span class="highlight-line">vagrant plugin <span class="token function">install</span> vagrant-hostmanager</span>
 <span class="highlight-line">vagrant plugin <span class="token function">install</span> vagrant-libvirt</span>
 <span class="highlight-line">vagrant plugin list</span></code></pre>
 <p>Here is a sample Vagrantfile I use:</p>
-<pre class="language-ruby"><code data-filename="Vagrantfile" class="language-ruby"><span class="highlight-line"><span class="token comment"># -*- mode: ruby -*-</span></span>
+<pre class="language-ruby"><code data-filename="Vagrantfile" class="language-ruby"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token comment"># -*- mode: ruby -*-</span></span>
 <span class="highlight-line"><span class="token comment"># vi: set ft=ruby :</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line">Vagrant<span class="token punctuation">.</span>configure<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>config<span class="token operator">|</span></span>
@@ -502,7 +502,7 @@ Additionally, people can choose their personal favorite provider between libvirt
 <span class="highlight-line">  <span class="token keyword">end</span></span>
 <span class="highlight-line"><span class="token keyword">end</span></span></code></pre>
 <p>Whether the user wants to use libvirt or VirtualBox, he can just put the file in a directory and call</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">vagrant up</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">vagrant up</span></code></pre>
 <p>If necessary, he can explicitly pass the provider he would like to use via the <code class="language-plain">--provider=libvirt</code> flag.</p>
 <h1 id="vagrant-and-windows" tabindex="-1">7. vagrant and Windows <a class="header-anchor" href="#vagrant-and-windows" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p><a href="https://github.com/andreas-mausch/whatsapp-viewer/blob/master/Vagrantfile" class="external-link" target="_blank">WhatsApp Viewer's Vagrantfile</a>
@@ -520,7 +520,7 @@ INFO interface: Machine: error-exit [&quot;VagrantPlugins::CommunicatorWinRM::Er
 </blockquote>
 <p>I ran <code class="language-plain">vagrant up --debug</code>, which gave me this:</p>
 <details markdown="1">
-<pre class="language-plain"><code class="language-plain"><span class="highlight-line">Shell: Cmd</span>
+<pre class="language-plain"><code class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">Shell: Cmd</span>
 <span class="highlight-line">Command: hostname</span>
 <span class="highlight-line">Message: Digest initialization failed: initialization error</span>
 <span class="highlight-line">ERROR vagrant: /opt/vagrant/embedded/gems/2.3.3/gems/vagrant-2.3.3/plugins/communicators/winrm/shell.rb:198:in `raise_winrm_exception'</span>
@@ -556,7 +556,7 @@ with an OpenSSL update.</p>
 <p>The problem was NTLM still uses MD4 hashes, and those are disabled in newer OpenSSL releases.</p>
 <p>I had to edit the OpenSSL config file to re-enable MD4
 (Oh man, how I love good error handling with descriptive messages..).</p>
-<pre class="language-plain"><code data-filename="/etc/ssl/openssl.cnf" class="language-plain"><span class="highlight-line">[provider_sect]</span>
+<pre class="language-plain"><code data-filename="/etc/ssl/openssl.cnf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">[provider_sect]</span>
 <span class="highlight-line">default = default_sect</span>
 <span class="highlight-line">legacy = legacy_sect</span>
 <span class="highlight-line"></span>
@@ -581,7 +581,7 @@ with an OpenSSL update.</p>
 </li>
 <li>🚧 However, the vagrant-libvirt plugin can not be installed ootb.</li>
 </ul>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">vagrant plugin <span class="token function">install</span> vagrant-libvirt</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">vagrant plugin <span class="token function">install</span> vagrant-libvirt</span></span></span>
 <span class="highlight-line"><span class="token output">// ruby-libvirt-0.8.0.gem</span>
 <span class="highlight-line">"gcc -o conftest -I/opt/vagrant/embedded/include/ruby-2.7.0/x86_64-darwin19 -I/opt/vagrant/embedded/include/ruby-2.7.0/ruby/backward -I/opt/vagrant/embedded/include/ruby-2.7.0 -I. -I/opt/homebrew/Cellar/libvirt/8.9.0/include -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/opt/vagrant/embedded/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/opt/vagrant/embedded/include -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I./include -O3 -std=c99 -fno-common -pipe  conftest.c  -L. -L/opt/vagrant/embedded/lib -L/opt/vagrant/embedded/lib -L.  -mmacosx-version-min=10.9 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -fstack-protector-strong -L/opt/vagrant/embedded/lib -L/opt/homebrew/Cellar/libvirt/8.9.0/lib     -lvirt -lruby.2.7 -lvirt  -lvirt  "</span>
 <span class="highlight-line">conftest.c:16:13: error: conflicting types for 'virConnectOpen'</span>

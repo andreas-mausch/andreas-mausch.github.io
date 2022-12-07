@@ -51,7 +51,7 @@
 <p>I've used eCryptFS for the several past years to secure the data in my home directory.</p>
 <p>However it comes with a big limitation: Filenames cannot be longer than 144 chars (plus minus).
 So this will fail on an eCryptFS'd directory:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">touch</span> xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">touch</span> xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></code></pre>
 <p>The limitation only applies to single filenames. The path in total can be longer than 144 chars.</p>
 <p>Most of the times you won't have such long single filenames. However, for my new job I tried to clone a repo which contained long filenames.
 I wasn't able to clone it because of eCryptFS. :(</p>

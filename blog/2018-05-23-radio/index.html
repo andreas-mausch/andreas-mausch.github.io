@@ -80,7 +80,7 @@ For my Samsung S7, I could dial <code class="language-plain">*#0011#</code> and 
 <img src="/blog/2018-05-23-radio/samsung-gsm-arfcn.png" width="360" height="640" alt="undefined">
 <p>We are interested in the BCCH arfcn (in this case 121), which we can put in an <a href="https://www.cellmapper.net/arfcn" class="external-link" target="_blank">online calculator</a> which will give us the up- and downlink frequencies (in my case 959.2 MHz for downlink).</p>
 <p>Install gr-gsm (On my machine via <code class="language-plain">yaourt -S gr-gsm-git</code>, see also <a href="https://github.com/ptrkrysik/gr-gsm" class="external-link" target="_blank">here</a>), and run</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line">grgsm_livemon</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">grgsm_livemon</span></code></pre>
 <p>Enter the frequency in the following screen, and gr-gsm will start to convert the radio waves to binary GSM packages and send them to the loopback network interface of your machine.</p>
 <img src="/blog/2018-05-23-radio/grgsm-livemon.png" width="325" height="338" alt="undefined">
 <p>Now if you open Wireshark and select the loopback device, you can see real GSM packages:</p>

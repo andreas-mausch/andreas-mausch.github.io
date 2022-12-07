@@ -82,7 +82,7 @@ I'll use a Raspberry Pi 3B for this project. It can be powered by an ordinary po
 <li><code class="language-plain">sudo reboot</code> at the end and you should be presented a new Wi-Fi network to connect to :)</li>
 </ul>
 <p>All commands:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> hostapd dnsmasq</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> hostapd dnsmasq</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl unmask hostapd</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> hostapd</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl start dnsmasq</span>
@@ -92,21 +92,21 @@ I'll use a Raspberry Pi 3B for this project. It can be powered by an ordinary po
 <span class="highlight-line"><span class="token function">sudo</span> netfilter-persistent save</span>
 <span class="highlight-line"><span class="token function">sudo</span> rfkill unblock wlan</span></code></pre>
 <p>Add this at the end of the file:</p>
-<pre class="language-plain"><code data-filename="/etc/dhcpcd.conf" class="language-plain"><span class="highlight-line">interface wlan0</span>
+<pre class="language-plain"><code data-filename="/etc/dhcpcd.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">interface wlan0</span>
 <span class="highlight-line">    static ip_address=192.168.4.1/24</span>
 <span class="highlight-line">    nohook wpa_supplicant</span></code></pre>
 <p>Enable routing. Create the following file:</p>
-<pre class="language-plain"><code data-filename="/etc/sysctl.d/routed-ap.conf" class="language-plain"><span class="highlight-line"># Enable IPv4 routing</span>
+<pre class="language-plain"><code data-filename="/etc/sysctl.d/routed-ap.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"># Enable IPv4 routing</span>
 <span class="highlight-line">net.ipv4.ip_forward=1</span></code></pre>
 <p>Add this at the end of the file:</p>
-<pre class="language-plain"><code data-filename="/etc/dnsmasq.conf" class="language-plain"><span class="highlight-line">interface=wlan0 # Listening interface</span>
+<pre class="language-plain"><code data-filename="/etc/dnsmasq.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">interface=wlan0 # Listening interface</span>
 <span class="highlight-line">dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h</span>
 <span class="highlight-line">                # Pool of IP addresses served via DHCP</span>
 <span class="highlight-line">domain=wlan     # Local wireless DNS domain</span>
 <span class="highlight-line">address=/gw.wlan/192.168.4.1</span>
 <span class="highlight-line">                # Alias for this router</span></code></pre>
 <p>Create a new file:</p>
-<pre class="language-plain"><code data-filename="/etc/hostapd/hostapd.conf" class="language-plain"><span class="highlight-line">country_code=GB</span>
+<pre class="language-plain"><code data-filename="/etc/hostapd/hostapd.conf" class="language-plain"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line">country_code=GB</span>
 <span class="highlight-line">interface=wlan0</span>
 <span class="highlight-line">ssid=&lt;NameOfNetwork></span>
 <span class="highlight-line">hw_mode=g</span>

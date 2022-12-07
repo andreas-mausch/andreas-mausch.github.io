@@ -54,11 +54,11 @@ So I copied all volumes referenced by the docker container
 start gitlab/gitlab-ce:latest.</p>
 <p>In the log files (docker logs gitlab) Gitlab told me the permissions have changed
 due to the copying. I searched the internet, found <a href="https://github.com/gitlabhq/gitlabhq/issues/9611" class="external-link" target="_blank">this on github.com</a> and I had to run:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab update-permissions</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab update-permissions</span></code></pre>
 <p>However, I still got error messages like <em>Couldn't connect to redis</em>.
 I took a look at the file system manually and found the permissions have not been
 set correctly. I had to run this command to fix it:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab <span class="token function">chown</span> <span class="token parameter variable">-R</span> gitlab-redis:gitlab-redis /var/opt/gitlab/redis/</span>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> gitlab <span class="token function">chown</span> <span class="token parameter variable">-R</span> gitlab-redis:gitlab-redis /var/opt/gitlab/redis/</span>
 <span class="highlight-line"><span class="token function">docker</span> restart gitlab</span></code></pre>
 
 

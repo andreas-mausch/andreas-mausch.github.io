@@ -70,7 +70,7 @@ But beside that it looks super-promising imo:</p>
 <p>I've written a small docker image for builds on linux (see below), because I don't like to pollute my system with thousands of dependencies,
 and the resulting binary is executable without the dev-dependencies.</p>
 <p>I've ran <code class="language-plain">tauri init</code> once in the app directory, and now I can use this:</p>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>:/root/app tauri tauri build</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>:/root/app tauri tauri build</span></code></pre>
 <h2 id="windows" tabindex="-1">1.2. Windows <a class="header-anchor" href="#windows" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Aha! Windows. You have to install the world. Prepare to spend some time on installing the prerequisites.</p>
 <p>I've started on a clean Win7 box and had to install this:</p>
@@ -234,7 +234,7 @@ $ ldd src-tauri/target/release/app
 <p>File size is 6.6 MB.</p>
 <img src="/blog/2020-02-20-tauri/tauri.png" width="900" height="739" alt="undefined">
 <h1 id="dockerfile" tabindex="-1">3. Dockerfile <a class="header-anchor" href="#dockerfile" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<pre class="language-docker"><code class="language-docker"><span class="highlight-line"><span class="token instruction"><span class="token keyword">FROM</span> ubuntu:19.10</span></span>
+<pre class="language-docker"><code class="language-docker"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token instruction"><span class="token keyword">FROM</span> ubuntu:19.10</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token instruction"><span class="token keyword">ENV</span> DEBIAN_FRONTEND=noninteractive</span></span>
 <span class="highlight-line"><span class="token instruction"><span class="token keyword">ENV</span> TZ=Europe/Berlin</span></span>
@@ -257,7 +257,7 @@ $ ldd src-tauri/target/release/app
 <span class="highlight-line"><span class="token instruction"><span class="token keyword">RUN</span> npm install --unsafe-perm -g tauri</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token instruction"><span class="token keyword">WORKDIR</span> /root/app</span></span></code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> build <span class="token parameter variable">-t</span> tauri <span class="token builtin class-name">.</span></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><button type="button" class="copy-to-clipboard"><i class="icon icon-copy"></i></button><span class="highlight-line"><span class="token function">docker</span> build <span class="token parameter variable">-t</span> tauri <span class="token builtin class-name">.</span></span></code></pre>
 <p>Note on the Dockerfile: I <em>hate</em> the way you have to install node and rust. Running scripts from the web. :/
 This should be discouraged.</p>
 <p>Tauri at least warns about it in their documentation:</p>
