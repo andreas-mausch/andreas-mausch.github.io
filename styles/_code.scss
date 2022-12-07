@@ -1,8 +1,17 @@
 @use "_code-theme.scss";
 
+.code-block {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 9pt;
+  position: relative;
+}
+
+.code-block i.icon-check {
+  color: #2a7ae2;
+}
+
 pre[class*="language-"] {
   padding: 0.5em;
-  position: relative;
 }
 
 pre>code[class*="language-"],
@@ -36,8 +45,4 @@ code[class*="language-"] .highlight-line::before {
   position: absolute;
   right: 0.5em;
   top: 0.5em;
-}
-
-pre[class*="language-"] i.icon-check {
-  color: #2a7ae2;
 }
