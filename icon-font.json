@@ -6,6 +6,13 @@
   ],
   "icons": [
     {
+      "icon": "check",
+      "name": "check",
+      "codepoints": [
+        "\uf00c"
+      ]
+    },
+    {
       "icon": "copy",
       "name": "copy",
       "codepoints": [
