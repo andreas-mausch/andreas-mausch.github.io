@@ -6,6 +6,19 @@
   position: relative;
 }
 
+.code-block > button {
+  opacity: 0;
+  transition: visibility 0.3s linear,opacity 0.3s linear;
+  visibility: hidden;
+}
+
+.code-block:active > button,
+.code-block:focus > button,
+.code-block:hover > button {
+  opacity: 1;
+  visibility: visible;
+}
+
 .code-block i.icon-check {
   color: #2a7ae2;
 }
