@@ -45,6 +45,8 @@ npm run check
 This project uses [icon-font-buildr](https://github.com/fabiospampinato/icon-font-buildr) to strip down fontawesomes
 big icon library.
 
+It runs automatically with the eleventy build, but you can also call it manually:
+
 ```bash
 npm run generate:font
 ```
@@ -55,6 +57,42 @@ Tool for checking the file:
 ttx -t cmap -o - ./_site/styles/icons/icons.ttf
 ttx -t cmap -o - ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf
 font-manager ./_site/styles/icons/icons.ttf
+```
+
+### Add new icon
+
+Find codepoint by name:
+
+Open `./node_modules/@fortawesome/fontawesome-free/scss/_variables.scss` and search for the name of the icon, for example for *copy*:
+
+```
+$fa-var-copy: \f0c5;
+```
+
+Then, add an entry to `./icon-font.json`:
+
+```json
+    {
+      "icon": "copy",
+      "name": "copy",
+      "codepoints": [
+        "\uf0c5"
+      ]
+    }
+```
+
+Next, add the icon to the `$icons` section in `styles/_icons.scss`:
+
+```
+$icons: (
+  "copy": \f0c5
+}
+```
+
+Last, use your icon in the HTML:
+
+```html
+<i class="icon icon-copy"></i>
 ```
 
 ## Pre-commit hook
