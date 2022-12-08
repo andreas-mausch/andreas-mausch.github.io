@@ -31,7 +31,15 @@ npm run lint
 ## Type checking (via tsc)
 
 ```bash
-npm run check
+npm run check:typescript
+```
+
+## Check for broken links
+
+Run `build` first.
+
+```bash
+npm run check:links
 ```
 
 ## Generate Icon Font
