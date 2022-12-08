@@ -24,7 +24,7 @@ Here is a good [guide](https://howchoo.com/g/ndc3njbhytv/retroflag-gpi-setup).
 Steps:
 
 - Flash image
-- Install [GPi Case patch](http://download.retroflag.com/Products/GPi_Case/GPi_Case_patch.zip)
+- Install [GPi Case patch](https://support.retroflag.com/Products/GPi_Case/GPi_Case_patch.zip) ([Mirror on github.com](https://github.com/kristijandraca/GPi_Case_patch))
 - Enable ssh: *touch ssh* in boot partition
 - Setup WiFi: *wpa_supplicant.conf* in boot partition with:
 
