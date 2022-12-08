@@ -38,6 +38,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addLayoutAlias("page", "layouts/page.njk")
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk")
+  eleventyConfig.addLayoutAlias("post-list", "layouts/post-list.njk")
 
   eleventyConfig.setLibrary("md", markdownIt)
 
@@ -58,6 +59,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("carousel", imageShortcodes.carousel)
   eleventyConfig.addFilter("glob", files.glob)
   eleventyConfig.addFilter("katex", text => katex.renderToString(text, { throwOnError: false }))
+  eleventyConfig.addFilter("filterByTags", (collection = [], requiredTags) =>
+    collection.filter(post =>
+      requiredTags.every(tag => post.data.tags?.includes(tag))
+    )
+  )
 
   eleventyConfig.addLiquidShortcode("image", imageShortcodes.imageShortcode)
   eleventyConfig.addLiquidShortcode("image-url", imageShortcodes.imageUrl)
