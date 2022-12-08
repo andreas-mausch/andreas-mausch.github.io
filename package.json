@@ -8,7 +8,7 @@
     "lint": "npm run lint:scripts && npm run lint:scss",
     "lint:scripts": "eslint --ignore-pattern !.eleventy.js ./.eleventy.js ./eleventy/**/*.js ./scripts/**/*.ts",
     "lint:scss": "stylelint ./styles/**/*.scss",
-    "check:typescript": "tsc",
+    "check:types": "tsc",
     "check:links": "linkinator --skip=linkedin.com,github.com --recurse --timeout 3000 --verbosity error ./_site/",
     "clean": "rimraf ./_site/"
   },
@@ -53,6 +53,6 @@
   },
   "pre-commit": [
     "lint",
-    "check:typescript"
+    "check:types"
   ]
 }

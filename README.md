@@ -31,7 +31,7 @@ npm run lint
 ## Type checking (via tsc)
 
 ```bash
-npm run check:typescript
+npm run check:types
 ```
 
 ## Check for broken links
