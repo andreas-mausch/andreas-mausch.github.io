@@ -5,6 +5,13 @@ layout: page
 <h1>{{ title | safe }}</h1>
 <div>
   <time class="postlist-date" datetime="{{ date | isoDateTime }}">{{ date | date }}</time>
+  <ul class="tags">
+    {% for tag in tags | sort %}
+        {% if tag not in ["post"] %}
+          <li><a href="/blog/tags/{{ tag | urlencode }}">#{{ tag }}</a></li>
+        {% endif %}
+    {% endfor %}
+  </ul>
 </div>
 
 {% if toc and content | toc %}
