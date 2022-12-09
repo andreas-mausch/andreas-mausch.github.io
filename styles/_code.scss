@@ -1,9 +1,13 @@
 @use "_code-theme.scss";
 
 .code-block {
+  position: relative;
+}
+
+.code-block,
+code[class*="language-"] {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 9pt;
-  position: relative;
 }
 
 .code-block > button {
@@ -27,7 +31,6 @@ pre[class*="language-"] {
   padding: 0.5em;
 }
 
-pre>code[class*="language-"],
 code[class*="language-"] {
   counter-reset: lineNumber;
 }
