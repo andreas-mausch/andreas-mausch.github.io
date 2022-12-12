@@ -267,6 +267,19 @@ newgrp libvirt
 sudo systemctl restart libvirtd.service
 ```
 
+## Permissions
+
+I got some *Access denied* errors when trying to run a virtual box where the image file was in my home directory.
+The problem was that the user `libvirt-qemu` needs to have access to that image.
+
+There are [several ways](https://ostechnix.com/solved-cannot-access-storage-file-permission-denied-error-in-kvm-libvirt/)
+to solve this. You could..
+
+1. ..move the file into a directory which is accessible by you and libvirt-qemu.
+1. ..switch the user qemu uses inside `/etc/libvirt/qemu.conf`.
+1. ..grant libvirt-qemu access to that file:  
+   `sudo setfacl -m u:libvirt-qemu:rx /home/user/image.qcow2`
+
 ## Machine hostname resolving (DNS)
 
 To access boxes by their hostname, you can either set up a DNS service, or use a
