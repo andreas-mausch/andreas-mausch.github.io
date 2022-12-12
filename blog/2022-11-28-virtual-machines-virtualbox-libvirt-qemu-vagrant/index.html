@@ -144,22 +144,25 @@
                     <li><a href="#install-libvirt%2C-virt-manager">5.2. Install libvirt, virt-manager</a>
             		</li>
 
-                    <li><a href="#machine-hostname-resolving-(dns)">5.3. Machine hostname resolving (DNS)</a>
+                    <li><a href="#permissions">5.3. Permissions</a>
+            		</li>
+
+                    <li><a href="#machine-hostname-resolving-(dns)">5.4. Machine hostname resolving (DNS)</a>
             
                 <ol>
                     
-                    <li><a href="#dns-service-via-systemd">5.3.1. DNS service via systemd</a>
+                    <li><a href="#dns-service-via-systemd">5.4.1. DNS service via systemd</a>
             		</li>
 
-                    <li><a href="#libvirt-nss">5.3.2. libvirt-nss</a>
+                    <li><a href="#libvirt-nss">5.4.2. libvirt-nss</a>
             		</li>
                 </ol>
             		</li>
 
-                    <li><a href="#qemu%3A%2F%2F%2Fsystem-vs-qemu%3A%2F%2F%2Fsession">5.4. qemu:///system vs qemu:///session</a>
+                    <li><a href="#qemu%3A%2F%2F%2Fsystem-vs-qemu%3A%2F%2F%2Fsession">5.5. qemu:///system vs qemu:///session</a>
             		</li>
 
-                    <li><a href="#useful-virsh-cli-commands">5.5. Useful virsh CLI commands</a>
+                    <li><a href="#useful-virsh-cli-commands">5.6. Useful virsh CLI commands</a>
             		</li>
                 </ol>
             		</li>
@@ -431,10 +434,21 @@ and it supports different providers than just QEMU.</p>
 <span class="highlight-line">newgrp libvirt</span>
 <span class="highlight-line"><span class="token function">sudo</span> systemctl restart libvirtd.service</span></code></pre>
 
-    </div><h2 id="machine-hostname-resolving-(dns)" tabindex="-1">5.3. Machine hostname resolving (DNS) <a class="header-anchor" href="#machine-hostname-resolving-(dns)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+    </div><h2 id="permissions" tabindex="-1">5.3. Permissions <a class="header-anchor" href="#permissions" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I got some <em>Access denied</em> errors when trying to run a virtual box where the image file was in my home directory.
+The problem was that the user <code class="language-plain">libvirt-qemu</code> needs to have access to that image.</p>
+<p>There are <a href="https://ostechnix.com/solved-cannot-access-storage-file-permission-denied-error-in-kvm-libvirt/" class="external-link" target="_blank">several ways</a>
+to solve this. You could..</p>
+<ol>
+<li>..move the file into a directory which is accessible by you and libvirt-qemu.</li>
+<li>..switch the user qemu uses inside <code class="language-plain">/etc/libvirt/qemu.conf</code>.</li>
+<li>..grant libvirt-qemu access to that file:<br>
+<code class="language-plain">sudo setfacl -m u:libvirt-qemu:rx /home/user/image.qcow2</code></li>
+</ol>
+<h2 id="machine-hostname-resolving-(dns)" tabindex="-1">5.4. Machine hostname resolving (DNS) <a class="header-anchor" href="#machine-hostname-resolving-(dns)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>To access boxes by their hostname, you can either set up a DNS service, or use a
 module which comes with libvirt: <code class="language-plain">libvirt-nss</code>.</p>
-<h3 id="dns-service-via-systemd" tabindex="-1">5.3.1. DNS service via systemd <a class="header-anchor" href="#dns-service-via-systemd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<h3 id="dns-service-via-systemd" tabindex="-1">5.4.1. DNS service via systemd <a class="header-anchor" href="#dns-service-via-systemd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Change the systemd resolver config as follows:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
@@ -454,7 +468,7 @@ Also, you box must have set the correct domain.</p>
     <pre class="language-plain"><code class="language-plain"><span class="highlight-line">sudo systemctl restart systemd-resolved.service</span></code></pre>
 
     </div><p>Then, you can access your machine by it's hostname, for example <code class="language-plain">my-box.libvirt</code>.</p>
-<h3 id="libvirt-nss" tabindex="-1">5.3.2. libvirt-nss <a class="header-anchor" href="#libvirt-nss" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<h3 id="libvirt-nss" tabindex="-1">5.4.2. libvirt-nss <a class="header-anchor" href="#libvirt-nss" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>I prefer this <code class="language-plain">libvirt-nss</code> method, though.
 It's already included in the Arch package, so all I had to do to use it was to modify my config file:</p>
 <div class="code-block">
@@ -469,7 +483,7 @@ It's already included in the Arch package, so all I had to do to use it was to m
 <p>Note: The module only works for the hostname, not for the FQDN hostname.domain.
 I solved it for myself by naming the machine hostname.domain.
 Then, I can access the machine by both names, <code class="language-plain">hostname</code> and <code class="language-plain">hostname.domain</code>.</p>
-<h2 id="qemu%3A%2F%2F%2Fsystem-vs-qemu%3A%2F%2F%2Fsession" tabindex="-1">5.4. qemu:///system vs qemu:///session <a class="header-anchor" href="#qemu%3A%2F%2F%2Fsystem-vs-qemu%3A%2F%2F%2Fsession" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="qemu%3A%2F%2F%2Fsystem-vs-qemu%3A%2F%2F%2Fsession" tabindex="-1">5.5. qemu:///system vs qemu:///session <a class="header-anchor" href="#qemu%3A%2F%2F%2Fsystem-vs-qemu%3A%2F%2F%2Fsession" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Regarding virsh: Some things, like setting up a network, can only be done with QEMU in system mode.
 See <a href="https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html" class="external-link" target="_blank">this post</a></p>
 <p>So after seeing a lot of <em>Access denied</em> messages, I've decided to use <code class="language-plain">qemu:///system</code> as my default.
@@ -482,7 +496,7 @@ Therefore, you can create this config:</p>
 
     </div><p>Now running <code class="language-plain">virsh net-list --all</code> is implicitly called like <code class="language-plain">virsh --connect qemu:///system net-list --all</code>,
 which makes all commands on the CLI much easier to type.</p>
-<h2 id="useful-virsh-cli-commands" tabindex="-1">5.5. Useful virsh CLI commands <a class="header-anchor" href="#useful-virsh-cli-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="useful-virsh-cli-commands" tabindex="-1">5.6. Useful virsh CLI commands <a class="header-anchor" href="#useful-virsh-cli-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Here is a full example how to set up an Ubuntu machine via libvirt and QEMU:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
