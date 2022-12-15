@@ -1,5 +1,5 @@
 ---
-title: OpenWRT on tp-link Archer C7 v5 AC1750
+title: OpenWRT on tp-link Archer C7 v5 AC1750 router
 date: 2021-05-01T17:00:00+02:00
 tags: ['router', 'openwrt', 'privacy']
 thumbnail: tplink-router.jpg
