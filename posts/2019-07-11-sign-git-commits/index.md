@@ -9,11 +9,11 @@ tags: ['git', 'security', 'signing', 'certificates', 'gpg']
 Assuming you already have a GPG key:
 
 ```bash
-$ gpg --list-secret-keys --keyid-format LONG
+$ gpg --list-secret-keys --keyid-format long
 /home/neonew/.gnupg/pubring.kbx
 -------------------------------
 sec   rsa2048/1234567890123456 2018-09-01 [SC] [verfällt: 2019-09-01]
-      21DC32103D5A8C9FE2B26EC69170EACB0809D64B
+      21DC32103D5A8C9FE2B26EC61234567890123456
 uid              [ ultimativ ] Andreas Mausch <andreas@test.com>
 ssb   rsa2048/12345BEFBD9E7997 2018-09-01 [E] [verfällt: 2019-09-01]
 ```
