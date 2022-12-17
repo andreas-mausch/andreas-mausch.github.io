@@ -536,7 +536,7 @@ I&#39;ve decided to write this down because the &lt;em&gt;--scale-from&lt;/em&gt
     &lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;
       &lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;
     &lt;/button&gt;
-    &lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ gpg --list-secret-keys --keyid-format LONG&lt;/span&gt;
+    &lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;$ gpg --list-secret-keys --keyid-format long&lt;/span&gt;
 &lt;span class=&quot;highlight-line&quot;&gt;/home/neonew/.gnupg/pubring.kbx&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
