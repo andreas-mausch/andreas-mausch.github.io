@@ -179,7 +179,8 @@ But today (2022-12-18), I found some updates in [their blog](https://www.nitroke
 - 2022-07-27: [Nitrokey 3: OpenPGP Card Development](https://www.nitrokey.com/blog/2022/nitrokey-3-openpgp-card-development)
 - 2022-10-07: [Nitrokey 3 Status Update](https://www.nitrokey.com/blog/2022/nitrokey-3-status-update-2)
 - 2022-10-22: [OpenPGP Card Alpha For Nitrokey 3](https://www.nitrokey.com/blog/2022/openpgp-card-alpha-nitrokey-3)
-- 2022-12-06: [Nitrokey 3 Alpha Firmware](Nitrokey 3 Alpha Firmware)
+- 2022-12-06: [Nitrokey 3 Alpha Firmware](https://www.nitrokey.com/blog/2022/nitrokey-3-alpha-firmware)
+- 2022-12-07: [Nitrokey 3A is Available; OpenPGP Card and One-Time Passwords as Test Versions](https://www.nitrokey.com/news/2022/nitrokey-3a-available-openpgp-card-and-one-time-passwords-test-versions)
 
 Also, in December 2022 they added RSA support to the alpha firmware.
 Keys are not yet stored in the secure element ("cryptographic keys are still stored unencrypted in the microprocessor"), which is a bummer, but well, there is progress.
