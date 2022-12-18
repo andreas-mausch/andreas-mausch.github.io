@@ -166,6 +166,28 @@ If you run this on a key which was already moved to the NitroKey, this command w
 but only copies the *reference* to the private key.
 There is no (gpg) way to get access to the private key anymore. That's why you own a NitroKey, right?
 
+# Nitrokey 3C NFC
+
+I've bought the new Nitrokey with USB-C port in March 2021, and it arrived in November 2021.
+However, since then I never really used it, because I was waiting for the promised OpenGPG support.
+When I ordered Nitrokey already said they are still working on that feature.
+Then, they had other problems, like supply-chain issues and re-writing the firmware for a different chip (not 100% sure about it, but something like that).
+
+Months passed by and I almost gave up on any update regarding this issue.
+But today (2022-12-18), I found some updates in [their blog](https://www.nitrokey.com/de/blog):
+
+- 2022-07-27: [Nitrokey 3: OpenPGP Card Development](https://www.nitrokey.com/blog/2022/nitrokey-3-openpgp-card-development)
+- 2022-10-07: [Nitrokey 3 Status Update](https://www.nitrokey.com/blog/2022/nitrokey-3-status-update-2)
+- 2022-10-22: [OpenPGP Card Alpha For Nitrokey 3](https://www.nitrokey.com/blog/2022/openpgp-card-alpha-nitrokey-3)
+- 2022-12-06: [Nitrokey 3 Alpha Firmware](Nitrokey 3 Alpha Firmware)
+
+Also, in December 2022 they added RSA support to the alpha firmware.
+Keys are not yet stored in the secure element ("cryptographic keys are still stored unencrypted in the microprocessor"), which is a bummer, but well, there is progress.
+
+I still criticize there is no status page on their website to track the progress, so I follow
+[this issue](https://github.com/Nitrokey/nitrokey-3-firmware/issues/100) and
+[this issue](https://github.com/Nitrokey/nitrokey-3-firmware/issues/136) on GitHub.
+
 # Links
 
 I've scraped these sites during my setup:
