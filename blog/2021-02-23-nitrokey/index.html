@@ -210,7 +210,25 @@ Afterwards, you can run <code class="language-plain">gpg --import file</code>.</
     </div><p>If you run this on a key which was already moved to the NitroKey, this command will not fail,
 but only copies the <em>reference</em> to the private key.
 There is no (gpg) way to get access to the private key anymore. That's why you own a NitroKey, right?</p>
-<h1 id="links" tabindex="-1">8. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="nitrokey-3c-nfc" tabindex="-1">8. Nitrokey 3C NFC <a class="header-anchor" href="#nitrokey-3c-nfc" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've bought the new Nitrokey with USB-C port in March 2021, and it arrived in November 2021.
+However, since then I never really used it, because I was waiting for the promised OpenGPG support.
+When I ordered Nitrokey already said they are still working on that feature.
+Then, they had other problems, like supply-chain issues and re-writing the firmware for a different chip (not 100% sure about it, but something like that).</p>
+<p>Months passed by and I almost gave up on any update regarding this issue.
+But today (2022-12-18), I found some updates in <a href="https://www.nitrokey.com/de/blog" class="external-link" target="_blank">their blog</a>:</p>
+<ul>
+<li>2022-07-27: <a href="https://www.nitrokey.com/blog/2022/nitrokey-3-openpgp-card-development" class="external-link" target="_blank">Nitrokey 3: OpenPGP Card Development</a></li>
+<li>2022-10-07: <a href="https://www.nitrokey.com/blog/2022/nitrokey-3-status-update-2" class="external-link" target="_blank">Nitrokey 3 Status Update</a></li>
+<li>2022-10-22: <a href="https://www.nitrokey.com/blog/2022/openpgp-card-alpha-nitrokey-3" class="external-link" target="_blank">OpenPGP Card Alpha For Nitrokey 3</a></li>
+<li>2022-12-06: [Nitrokey 3 Alpha Firmware](Nitrokey 3 Alpha Firmware)</li>
+</ul>
+<p>Also, in December 2022 they added RSA support to the alpha firmware.
+Keys are not yet stored in the secure element (&quot;cryptographic keys are still stored unencrypted in the microprocessor&quot;), which is a bummer, but well, there is progress.</p>
+<p>I still criticize there is no status page on their website to track the progress, so I follow
+<a href="https://github.com/Nitrokey/nitrokey-3-firmware/issues/100" class="external-link" target="_blank">this issue</a> and
+<a href="https://github.com/Nitrokey/nitrokey-3-firmware/issues/136" class="external-link" target="_blank">this issue</a> on GitHub.</p>
+<h1 id="links" tabindex="-1">9. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I've scraped these sites during my setup:</p>
 <ul>
 <li><a href="https://www.kuketz-blog.de/gnupg-schluesselerstellung-und-smartcard-transfer-nitrokey-teil2/" class="external-link" target="_blank">https://www.kuketz-blog.de/gnupg-schluesselerstellung-und-smartcard-transfer-nitrokey-teil2/</a></li>
