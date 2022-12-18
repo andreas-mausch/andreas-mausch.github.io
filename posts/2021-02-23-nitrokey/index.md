@@ -57,7 +57,7 @@ sudo wget -O /etc/udev/rules.d/41-nitrokey.rules https://raw.githubusercontent.c
 ```
 
 ..as described in the official [documentation](https://www.nitrokey.com/documentation/frequently-asked-questions-faq#openpgp-card-not-available).  
-[Here]({{ site.url }}/files/2021-02-23-nitrokey/41-nitrokey.rules) is a mirror of that file.
+[Here]({{ "41-nitrokey.rules" | relativeFile | url }}) is a mirror of that file.
 
 Restart, and `gpg --card-status` should return something similar to this:
 
