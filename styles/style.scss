@@ -411,6 +411,10 @@ $site-nav-spacing: calc($site-nav-width / 4);
   padding: $spacing-unit;
 }
 
+.icon {
+  vertical-align: middle;
+}
+
 @media only screen and (min-width: 641px) {
   @import "_large";
 }
