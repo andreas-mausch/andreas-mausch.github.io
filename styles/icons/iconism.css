@@ -1,0 +1,28 @@
+
+@font-face {
+    font-family: "iconism";
+    src: url("./iconism.woff2") format("woff2"),
+	 url("./iconism.ttf") format("truetype");
+    font-display: swap;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+                font-family: "iconism" !important;
+                font-weight: normal !important;
+                 font-style: normal;
+               font-variant: normal;
+            text-decoration: none;
+             text-transform: none;
+                line-height: 1;
+     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-check:before { content: "\f00c" } 
+.icon-copy:before { content: "\f0c5" } 
+.icon-envelope-open-text:before { content: "\f658" } 
+.icon-github:before { content: "\f09b" } 
+.icon-linkedin:before { content: "\f0e1" } 
+.icon-location-dot:before { content: "\f5a0" } 
+.icon-phone:before { content: "\f095" } 
+.icon-xing:before { content: "\f168" } 
