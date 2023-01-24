@@ -20,9 +20,24 @@
     "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/github.svg"
   },
   {
+    "name": "graduation-cap",
+    "unicode": "\uf19d",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/graduation-cap.svg"
+  },
+  {
+    "name": "hands-asl-interpreting",
+    "unicode": "\uf2a3",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/hands-asl-interpreting.svg"
+  },
+  {
     "name": "linkedin",
     "unicode": "\uf0e1",
     "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/linkedin.svg"
+  },
+  {
+    "name": "list",
+    "unicode": "\uf03a",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/list.svg"
   },
   {
     "name": "location-dot",
@@ -33,6 +48,16 @@
     "name": "phone",
     "unicode": "\uf095",
     "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/phone.svg"
+  },
+  {
+    "name": "rocket",
+    "unicode": "\uf135",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/rocket.svg"
+  },
+  {
+    "name": "users",
+    "unicode": "\uf0c0",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/users.svg"
   },
   {
     "name": "xing",

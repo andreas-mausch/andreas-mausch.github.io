@@ -1,0 +1,21 @@
+@page {
+  margin: 64px 30px;
+  size: A4;
+}
+
+html,
+body {
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.resume-title-section {
+  display: block;
+  margin-bottom: 60px;
+}
+
+.project .image,
+.experience .image,
+.education .image {
+  text-align: center;
+}

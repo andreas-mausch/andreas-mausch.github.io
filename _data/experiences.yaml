@@ -1,0 +1,33 @@
+- experience:
+  role: Full Stack Web Developer
+  from: 2020-08-12
+  to:
+  company: PEAC (Germany) GmbH
+  location: Hamburg, Germany
+  image: peac.png
+- experience:
+  role: Freelancer
+  from: 2016-07-01
+  to: 2020-07-31
+  image: freelancer.png
+- experience:
+  role: Senior Java Software Developer
+  from: 2014-07-01
+  to: 2016-06-30
+  company: blau Mobilfunk GmbH (later Telefónica)
+  location: Hamburg, Germany
+  image: blau.png
+- experience:
+  role: IT Consultant
+  from: 2011-04-01
+  to: 2013-09-30
+  company: Acando GmbH
+  location: Hamburg, Germany
+  image: acando.png
+- experience:
+  role: Dual student
+  from: 2007-09-01
+  to: 2011-03-31
+  company: Prinovis Ltd. & Co. KG
+  location: Itzehoe, Germany
+  image: prinovis.svg

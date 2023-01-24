@@ -1,0 +1,163 @@
+---
+layout: page
+title: Resume
+navigationWeight: 2
+---
+
+<section class="resume-title-section">
+    <div class="resume-title">
+        <div class="image">
+            <img src="{{ "/images/me-2021.jpg" | url }}">
+        </div>
+        <div class="summary">
+            <div class="name">
+                Andreas Mausch
+            </div>
+
+            <dl>
+                <dt>E-Mail</dt>
+                <dd>andreas.mausch@gmail.com</dd>
+                <dt>Phone</dt>
+                <dd>+49 157 5757 5577</dd>
+                <dt>Web</dt>
+                <dd>https://andreas-mausch.de</dd>
+            </dl>
+            <dl>
+                <dt>Job</dt>
+                <dd>Software Developer</dd>
+                <dt>Location</dt>
+                <dd>Hamburg, Germany</dd>
+            </dl>
+        </div>
+    </div>
+</section>
+
+<section class="experiences-section">
+  <h2 class="section-title"><i class="icon icon-list"></i>Experiences</h2>
+
+  {% for experience in experiences %}
+  <div class="experience">
+    <div>
+      {{ experience.from | isoDate }} - {{ experience.to | isoDate }}
+    </div>
+    <div class="image">
+      <img src="{{ site.baseurl }}/images/resume/{{ experience.image }}" alt="{{ experience.role }}" />
+    </div>
+    <div class="text">
+      <h3 class="job-role">{{ experience.role }}</h3>
+      <div class="company">
+        {{ experience.company }}
+      </div>
+      <div class="location">
+        {{ experience.location }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="educations-section">
+  <h2 class="section-title"><i class="icon icon-graduation-cap"></i>Educations</h2>
+
+  {% for education in educations %}
+  <div class="item education row">
+    <div class="three columns">
+      {{ education.from | isoDate }} - {{ education.to | isoDate }}
+    </div>
+    <div class="two columns image">
+      <img src="{{ site.baseurl }}/images/resume/{{ education.image }}" alt="{{ education.degree }}" />
+    </div>
+    <div class="seven columns text">
+      <h3 class="education-degree">{{ education.degree }}</h3>
+      <div class="university">
+        {{ education.university }}
+      </div>
+      <div class="location">
+        {{ education.location }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="key-skills-section">
+  <h2 class="section-title"><i class="icon icon-hands-asl-interpreting"></i>Skills</h2>
+
+  <div class="item row">
+    <div class="five columns">
+      Technologies
+    </div>
+    <div class="seven columns text">
+      Kotlin, Java, TypeScript, Vue.js, Python, Docker
+    </div>
+  </div>
+  <div class="item row">
+    <div class="five columns">
+      Methods
+    </div>
+    <div class="seven columns text">
+      Test-driven, Automation, CI/CD
+    </div>
+  </div>
+  <div class="item row">
+    <div class="five columns">
+      Stack
+    </div>
+    <div class="seven columns text">
+      Web apps, APIs, Mobile apps, Frontends
+    </div>
+  </div>
+</section>
+
+<section class="projects-section">
+  <h2 class="section-title"><i class="icon icon-rocket"></i>Notable projects</h2>
+
+  {% for project in site.data.projects %}
+  <div class="item project row">
+    <div class="three columns">
+      <h3 class="project-name">{{ project.name }}</h3>
+      <div class="role">
+        {{ project.role }}
+      </div>
+      <div class="time">
+        {{ project.from | isoDate }} - {{ project.to | isoDate }}
+      </div>
+      <div class="location">
+        {{ project.location }}
+      </div>
+      <div class="image">
+        <img src="{{ site.baseurl }}/images/resume/{{ project.image }}" alt="{{ project.name }}" />
+      </div>
+    </div>
+
+    <div class="nine columns">
+      <div class="text">
+        {{ project.text | markdownify }}
+      </div>
+
+      <div class="link">
+        <a href="{{ project.link }}">{{ project.link }}</a>
+      </div>
+
+      <ul class="technologies">
+        {% for technology in project.technologies %}
+        <li>{{ technology }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="projects-section">
+  <h2 class="section-title"><i class="icon icon-users"></i>Other clients</h2>
+  <div class="other-clients">
+    <div class="other-client">
+      <img src="{{ site.baseurl }}/images/resume/commerzbank.svg" alt="Commerzbank">
+      <img src="{{ site.baseurl }}/images/resume/dreamit.svg" alt="DreamIT">
+      <img src="{{ site.baseurl }}/images/resume/edeka.svg" alt="Edeka">
+      <img src="{{ site.baseurl }}/images/resume/kvwl.svg" alt="KVWL">
+      <img src="{{ site.baseurl }}/images/resume/telefonica.svg" alt="Telefonica">
+    </div>
+  </div>
+</section>
