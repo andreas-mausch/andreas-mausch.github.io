@@ -20,9 +20,6 @@ And I want to show how it would make a difference, if these projects happened to
 
 In the second part of this post I want to share the power of software which works even
 without an internet connection.
-Even though I do have a very stable connection and cannot complain about bad internet,
-I still love the feeling of independent / autarkic software, which guarantees it will
-run tomorrow the same way it runs today.
 
 # Ugly examples of closed source software
 
@@ -43,9 +40,20 @@ I cannot update the firmware (?) and cannot connect to the AppStore.
 
 # And would open source be better?
 
+Explain how it solves the problems above.
+
 # Offline data
+
+Even though I do have a very stable connection and cannot complain about bad internet,
+I still love the feeling of independent / autarkic software, which guarantees it will
+run tomorrow the same way it runs today.
 
 ## OsmAnd / OpenStreetMap
 
 ## Wikipedia / Kiwix
 
+# My favorite open source softwares
+
+In opposite of the ugly examples, here is a list of my favorite apps.
+
+...
