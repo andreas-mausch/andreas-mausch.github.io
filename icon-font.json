@@ -1,70 +1,42 @@
-{
-  "sources": [
-    "./node_modules/@fortawesome/fontawesome-free/svgs/regular/[icon].svg",
-    "./node_modules/@fortawesome/fontawesome-free/svgs/solid/[icon].svg",
-    "./node_modules/@fortawesome/fontawesome-free/svgs/brands/[icon].svg"
-  ],
-  "icons": [
-    {
-      "icon": "check",
-      "name": "check",
-      "codepoints": [
-        "\uf00c"
-      ]
-    },
-    {
-      "icon": "copy",
-      "name": "copy",
-      "codepoints": [
-        "\uf0c5"
-      ]
-    },
-    {
-      "icon": "envelope-open-text",
-      "name": "envelope-open-text",
-      "codepoints": [
-        "\uf658"
-      ]
-    },
-    {
-      "icon": "github",
-      "name": "github",
-      "codepoints": [
-        "\uf09b"
-      ]
-    },
-    {
-      "icon": "linkedin",
-      "name": "linkedin",
-      "codepoints": [
-        "\uf0e1"
-      ]
-    },
-    {
-      "icon": "location-dot",
-      "name": "location-dot",
-      "codepoints": [
-        "\uf5a0"
-      ]
-    },
-    {
-      "icon": "phone",
-      "name": "phone",
-      "codepoints": [
-        "\uf095"
-      ]
-    },
-    {
-      "icon": "xing",
-      "name": "xing",
-      "codepoints": [
-        "\uf168"
-      ]
-    }
-  ],
-  "output": {
-    "codepoints": true,
-    "fonts": "./_site/styles/icons/",
-    "fontName": "icons"
+[
+  {
+    "name": "check",
+    "unicode": "\uf00c",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/check.svg"
+  },
+  {
+    "name": "copy",
+    "unicode": "\uf0c5",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/copy.svg"
+  },
+  {
+    "name": "envelope-open-text",
+    "unicode": "\uf658",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/envelope-open-text.svg"
+  },
+  {
+    "name": "github",
+    "unicode": "\uf09b",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/github.svg"
+  },
+  {
+    "name": "linkedin",
+    "unicode": "\uf0e1",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/linkedin.svg"
+  },
+  {
+    "name": "location-dot",
+    "unicode": "\uf5a0",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/location-dot.svg"
+  },
+  {
+    "name": "phone",
+    "unicode": "\uf095",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/phone.svg"
+  },
+  {
+    "name": "xing",
+    "unicode": "\uf168",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/xing.svg"
   }
-}
+]

@@ -44,7 +44,7 @@ npm run check:links
 
 ## Generate Icon Font
 
-This project uses [icon-font-buildr](https://github.com/fabiospampinato/icon-font-buildr) to strip down fontawesomes
+This project uses [iconism](https://github.com/orcunsaltik/iconism) to strip down fontawesomes
 big icon library.
 
 It runs automatically with the eleventy build, but you can also call it manually:
@@ -74,21 +74,11 @@ $fa-var-copy: \f0c5;
 Then, add an entry to `./icon-font.json`:
 
 ```json
-    {
-      "icon": "copy",
-      "name": "copy",
-      "codepoints": [
-        "\uf0c5"
-      ]
-    }
-```
-
-Next, add the icon to the `$icons` section in `styles/_icons.scss`:
-
-```
-$icons: (
-  "copy": \f0c5
-}
+  {
+    "name": "copy",
+    "unicode": "\uf0c5",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/copy.svg"
+  }
 ```
 
 Last, use your icon in the HTML:
