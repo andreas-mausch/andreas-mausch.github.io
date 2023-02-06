@@ -596,7 +596,7 @@ After that, even the ruby [WinRM example](https://github.com/WinRb/WinRM#example
 # Apple Silicon
 
 - ✅ libvirt works on M1
-- ✅ Vagrant 2.3.3 can be installed on M1
+- ✅ [Vagrant 2.3.3](https://releases.hashicorp.com/vagrant/2.3.3/vagrant_2.3.3_darwin_amd64.dmg) can be installed on M1
   - However, it ships it's own embedded version of ruby, instead of using the one provided by the system. 🤮
   - And, that shipped version is x86_64 always.
   - And, that version (2.7.0) is from December 2019.
