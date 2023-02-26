@@ -6,7 +6,8 @@ tags: ['raspberrypi', 'headless', 'ssh', 'wifi']
 
 I've done this a couple of times already so I thought I should write it down.
 
-How to setup the Raspberry Pi with Pi OS for ssh and wifi.
+How to setup the Raspberry Pi with [Pi OS](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
+for ssh and wifi.
 
 # Flash
 
@@ -57,4 +58,32 @@ Add your ssh key (run this on your local machine, replace the hostname):
 
 ```bash
 ssh-copy-id pi@raspberrypi
+```
+
+# Backup and editing
+
+## Create a full backup of the SD card
+
+```bash
+sudo dd if=/dev/sdb of=./raspberrypi.dd.img bs=1M status=progress
+```
+
+## Make the backup file immutable, if needed
+
+```bash
+sudo chattr +i raspberrypi.dd.img
+```
+
+## Create devices for mounting partitions from the backup file
+
+```bash
+sudo kpartx -arsv raspberrypi.dd.img
+```
+
+You can now mount the partitions, read files, do changes if needed, and unmount them again.
+
+Afterwords, delete the devices:
+
+```bash
+sudo kpartx -dv retropie.dd.img
 ```
