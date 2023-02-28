@@ -41,8 +41,10 @@ and it disrupts me if I'd have to move my right hand in the upper right area to 
 which is on a different position on every keyboard. Too many misses, I need to find these keys blind.
 
 So the same manufacturer, Dell, decided that `Fn+Left` does **not** map to Home
-on the XPS 13 9370.
+on the XPS 13 9370. In fact, it doesn't map to anything.
 I love that laptop, but every time I use it, this bothers me.
+And since the Fn-key mappings do not emit any scancode, the shortcuts cannot be defined on software level either.
+This would be easily fixable by Dell, but they just don't care.
 
 And it is [not](https://www.dell.com/community/XPS/Control-Home-Control-End-Keys/td-p/6212592)
 [only](https://www.dell.com/community/XPS/Please-re-map-Fn-Left-and-Fn-Right-to-Home-and-End-on-the-new/td-p/7649522)
