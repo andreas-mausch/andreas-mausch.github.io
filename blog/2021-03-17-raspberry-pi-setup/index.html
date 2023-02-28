@@ -138,9 +138,10 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-arsv</span> raspberrypi.dd.img</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-arv</span> raspberrypi.dd.img</span></code></pre>
 
-    </div><p>You can now mount the partitions, read files, do changes if needed, and unmount them again.</p>
+    </div><p>(-a: Add partition mappings, -r: Read-only partition mappings, -v: Operate verbosely)</p>
+<p>You can now mount the partitions, read files, do changes if needed, and unmount them again.</p>
 <p>Afterwords, delete the devices:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
@@ -148,7 +149,8 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-dv</span> retropie.dd.img</span></code></pre>
 
-    </div>
+    </div><p>(-d: Delete partition mappings)</p>
+
 
 <script async src="/scripts/index.js"></script>
 
