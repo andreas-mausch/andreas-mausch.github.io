@@ -77,8 +77,10 @@ sudo chattr +i raspberrypi.dd.img
 ## Create devices for mounting partitions from the backup file
 
 ```bash
-sudo kpartx -arsv raspberrypi.dd.img
+sudo kpartx -arv raspberrypi.dd.img
 ```
+
+(-a: Add partition mappings, -r: Read-only partition mappings, -v: Operate verbosely)
 
 You can now mount the partitions, read files, do changes if needed, and unmount them again.
 
@@ -87,3 +89,5 @@ Afterwords, delete the devices:
 ```bash
 sudo kpartx -dv retropie.dd.img
 ```
+
+(-d: Delete partition mappings)
