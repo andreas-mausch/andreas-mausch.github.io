@@ -25,6 +25,7 @@ There are two good solutions for that: Use an US Intl layout, which maps
 
 The second option, which I prefer and now use, is [EurKEY](https://eurkey.steffen.bruentjen.eu/).
 It comes preinstalled with Manjaro and after some readjusting is a joy to use.
+ä, ö, ü are now placed on AlgGr + a, o and u, which is easy to remember.
 
 I do own ISO and ANSI keyboards, and I am comfortable using EurKEY on both.
 
@@ -58,7 +59,15 @@ a key on the *upper right area* together with Fn? You must be kidding..
 
 Same goes for some sweet 65% keyboards, which have ugly mappings as well.
 
-I need a dedicated F1-F12 function key row, I need a AltGr key, and I need `Fn+Left` map to Home. Please.
+I need:
+
+- a dedicated F1-F12 function key row
+- an AltGr key
+- `Fn+Left` maps to Home, `Fn+Right` maps to End
+- `Fn+Up` maps to PageUp, `Fn+Down` maps to PageDown
+- `Fn+Backspace` maps to Delete
+
+Please.
 
 # My personal favorite keyboard
 
