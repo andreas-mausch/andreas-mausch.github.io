@@ -33,3 +33,14 @@ I've created two profiles.
 autorandr should switch to the correct mode automatically (hence the name) from now on.
 
 What's neat: If you close the lid while the notebook is connected to the external monitor, it doesn't go into sleep mode.
+
+**Problems with autorandr**
+
+I now had two different laptops where autorandr caused problems.
+After connecting to a screen I had no output (not even on the laptop screen)
+and xrandr commands were "ignored": It returned immediately, but didn't change anything.
+
+I don't know a good alternative, so I will keep custom xrandr scripts for my different displays. :(
+
+I might try [xlayoutdisplay](https://github.com/alex-courtis/xlayoutdisplay)
+in future, although it works a bit differently.
