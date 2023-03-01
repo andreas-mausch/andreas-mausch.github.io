@@ -110,6 +110,13 @@ I've decided to write this down because the <em>--scale-from</em> parameter seem
 </ul>
 <p>autorandr should switch to the correct mode automatically (hence the name) from now on.</p>
 <p>What's neat: If you close the lid while the notebook is connected to the external monitor, it doesn't go into sleep mode.</p>
+<p><strong>Problems with autorandr</strong></p>
+<p>I now had two different laptops where autorandr caused problems.
+After connecting to a screen I had no output (not even on the laptop screen)
+and xrandr commands were &quot;ignored&quot;: It returned immediately, but didn't change anything.</p>
+<p>I don't know a good alternative, so I will keep custom xrandr scripts for my different displays. :(</p>
+<p>I might try <a href="https://github.com/alex-courtis/xlayoutdisplay" class="external-link" target="_blank">xlayoutdisplay</a>
+in future, although it works a bit differently.</p>
 
 
 <script async src="/scripts/index.js"></script>
