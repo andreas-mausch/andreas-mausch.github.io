@@ -124,22 +124,22 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/sdb <span class="token assign-left variable">of</span><span class="token operator">=</span>./raspberrypi.dd.img <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">status</span><span class="token operator">=</span>progress</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/sdb <span class="token assign-left variable">of</span><span class="token operator">=</span>./raspberrypi.raw.img <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">status</span><span class="token operator">=</span>progress</span></code></pre>
 
     </div><h2 id="make-the-backup-file-immutable%2C-if-needed" tabindex="-1">7.2. Make the backup file immutable, if needed <a class="header-anchor" href="#make-the-backup-file-immutable%2C-if-needed" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> chattr +i raspberrypi.dd.img</span>
-<span class="highlight-line">lsattr raspberrypi.dd.img</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> chattr +i raspberrypi.raw.img</span>
+<span class="highlight-line">lsattr raspberrypi.raw.img</span></code></pre>
 
     </div><h2 id="create-devices-for-mounting-partitions-from-the-backup-file" tabindex="-1">7.3. Create devices for mounting partitions from the backup file <a class="header-anchor" href="#create-devices-for-mounting-partitions-from-the-backup-file" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-arv</span> raspberrypi.dd.img</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-arv</span> raspberrypi.raw.img</span></code></pre>
 
     </div><p>(-a: Add partition mappings, -r: Read-only partition mappings, -v: Operate verbosely)</p>
 <p>You can now mount the partitions, read files, do changes if needed, and unmount them again.</p>
@@ -148,7 +148,7 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-dv</span> retropie.dd.img</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-dv</span> retropie.raw.img</span></code></pre>
 
     </div><p>(-d: Delete partition mappings)</p>
 <h1 id="qemu-testing" tabindex="-1">8. QEMU testing <a class="header-anchor" href="#qemu-testing" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
@@ -162,12 +162,12 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">nano</span> /mnt/etc/ld.so.preload</span>
 <span class="highlight-line"><span class="token comment"># Comment out the only line</span></span></code></pre>
 
-    </div><h2 id="unmount-and-convert" tabindex="-1">8.2. Unmount and convert <a class="header-anchor" href="#unmount-and-convert" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+    </div><h2 id="unmount-and-convert-(optional)" tabindex="-1">8.2. Unmount and convert (optional) <a class="header-anchor" href="#unmount-and-convert-(optional)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img convert <span class="token parameter variable">-f</span> raw <span class="token parameter variable">-O</span> qcow2 raspberrypi.dd.img raspberrypi.qcow2</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img convert <span class="token parameter variable">-f</span> raw <span class="token parameter variable">-O</span> qcow2 raspberrypi.raw.img raspberrypi.qcow2</span></code></pre>
 
     </div><h2 id="download-kernel-and-run" tabindex="-1">8.3. Download kernel and run <a class="header-anchor" href="#download-kernel-and-run" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
@@ -186,12 +186,14 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
 <span class="highlight-line">              <span class="token parameter variable">-net</span> nic <span class="token parameter variable">-net</span> user <span class="token punctuation">\</span></span>
 <span class="highlight-line">              <span class="token parameter variable">-net</span> tap,ifname<span class="token operator">=</span>vnet0,script<span class="token operator">=</span>no,downscript<span class="token operator">=</span>no</span></code></pre>
 
-    </div><h2 id="convert-qemu-image-back-to-raw" tabindex="-1">8.4. Convert QEMU image back to raw <a class="header-anchor" href="#convert-qemu-image-back-to-raw" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+    </div><p>If you want to use a raw image instead of qcow2, you can pass <code class="language-plain">-drive format=raw,file=raspberrypi.raw.img</code>
+instead of the <code class="language-plain">-hda</code> option.</p>
+<h2 id="convert-qemu-image-back-to-raw" tabindex="-1">8.4. Convert QEMU image back to raw <a class="header-anchor" href="#convert-qemu-image-back-to-raw" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img <span class="token function">dd</span> <span class="token parameter variable">-f</span> qcow2 <span class="token parameter variable">-O</span> raw <span class="token assign-left variable">bs</span><span class="token operator">=</span>4M <span class="token assign-left variable">if</span><span class="token operator">=</span>raspberrypi.qcow2 <span class="token assign-left variable">of</span><span class="token operator">=</span>back-to-raw.dd.img</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img <span class="token function">dd</span> <span class="token parameter variable">-f</span> qcow2 <span class="token parameter variable">-O</span> raw <span class="token assign-left variable">bs</span><span class="token operator">=</span>4M <span class="token assign-left variable">if</span><span class="token operator">=</span>raspberrypi.qcow2 <span class="token assign-left variable">of</span><span class="token operator">=</span>back-to.raw.img</span></code></pre>
 
     </div>
 
