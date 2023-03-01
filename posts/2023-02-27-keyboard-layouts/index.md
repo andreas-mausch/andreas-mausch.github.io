@@ -2,6 +2,7 @@
 title: "Keyboard layouts, laptops and programming"
 date: 2023-02-27T20:00:00+01:00
 tags: ['eurkey', 'mechanical keyboard', 'fn+left']
+thumbnail: eurkey-layout.svg
 ---
 
 # US keyboard layout, umlauts and EurKEY
