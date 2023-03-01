@@ -72,6 +72,7 @@ sudo dd if=/dev/sdb of=./raspberrypi.dd.img bs=1M status=progress
 
 ```bash
 sudo chattr +i raspberrypi.dd.img
+lsattr raspberrypi.dd.img
 ```
 
 ## Create devices for mounting partitions from the backup file
