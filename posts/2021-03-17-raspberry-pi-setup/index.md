@@ -92,3 +92,44 @@ sudo kpartx -dv retropie.dd.img
 ```
 
 (-d: Delete partition mappings)
+
+# QEMU testing
+
+Taken from [plembo](https://gist.github.com/plembo/c4920016312f058209f5765cb9a3a25e) and [qemu-rpi-kernel](https://github.com/dhruvvyas90/qemu-rpi-kernel/wiki).
+
+## Mount and edit ld.so.preload
+
+Mount via `kpartx`, see above.
+
+```bash
+sudo nano /mnt/etc/ld.so.preload
+# Comment out the only line
+```
+
+## Unmount and convert
+
+```bash
+qemu-img convert -f raw -O qcow2 raspberrypi.dd.img raspberrypi.qcow2
+```
+
+## Download kernel and run
+
+```bash
+wget https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/9fb4fcf463df4341dbb7396df127374214b90841/kernel-qemu-4.14.79-stretch?raw=true
+wget https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/9fb4fcf463df4341dbb7396df127374214b90841/versatile-pb.dtb?raw=true
+sudo qemu-system-arm -kernel kernel-qemu-4.14.79-stretch \
+              -cpu arm1176 -m 256 \
+              -M versatilepb -dtb versatile-pb.dtb \
+              -no-reboot \
+              -serial stdio \
+              -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" \
+              -hda raspberrypi.qcow2 \
+              -net nic -net user \
+              -net tap,ifname=vnet0,script=no,downscript=no
+```
+
+## Convert QEMU image back to raw
+
+```bash
+qemu-img dd -f qcow2 -O raw bs=4M if=raspberrypi.qcow2 of=back-to-raw.dd.img
+```
