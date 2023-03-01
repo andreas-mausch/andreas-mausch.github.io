@@ -2,10 +2,9 @@
 title: "Keyboard layouts, laptops and programming"
 date: 2023-02-27T20:00:00+01:00
 tags: ['eurkey', 'mechanical keyboard', 'fn+left']
-draft: true
 ---
 
-# US keyboard layout and EurKEY
+# US keyboard layout, umlauts and EurKEY
 
 When you start programming on a German (DE) keyboard layout, you will
 quickly notice that some keys, like curly brackets, are hard to type.
@@ -23,13 +22,14 @@ are now...nowhere.
 There are two good solutions for that: Use an US Intl layout, which maps
 Ä to `AltGr + Q`, Ü to `AltGr + Y`, Ö to `AltGr + P` and ß to `AltGr + S`.
 
-The second option, which I prefer and now use, is [EurKEY](https://eurkey.steffen.bruentjen.eu/).
+The second option, which I prefer and now use, is [EurKEY](https://eurkey.steffen.bruentjen.eu/),
+the **European Keyboard Layout for Europeans, Coders and Translators**.
 It comes preinstalled with Manjaro and after some readjusting is a joy to use.
 ä, ö, ü are now placed on AlgGr + a, o and u, which is easy to remember.
 
 I do own ISO and ANSI keyboards, and I am comfortable using EurKEY on both.
 
-TODO: layout.svg
+{% image "eurkey-layout.svg", "EurKEY Keyboard Layout" %}
 
 # Keyboard shortcomings
 
@@ -53,7 +53,6 @@ And it is [not](https://www.dell.com/community/XPS/Control-Home-Control-End-Keys
 
 Or the XPS 13 9315 for example, which would make a good replacement for my old XPS 13,
 has Home on `Fn+F11`. I can't even..
-
 F11 is *of course* used for fullscreen-toggle in a number of apps, and pressing
 a key on the *upper right area* together with Fn? You must be kidding..
 
@@ -62,7 +61,7 @@ Same goes for some sweet 65% keyboards, which have ugly mappings as well.
 I need:
 
 - a dedicated F1-F12 function key row
-- an AltGr key
+- an AltGr key for umlauts and special characters
 - `Fn+Left` maps to Home, `Fn+Right` maps to End
 - `Fn+Up` maps to PageUp, `Fn+Down` maps to PageDown
 - `Fn+Backspace` maps to Delete
@@ -71,4 +70,4 @@ Please.
 
 # My personal favorite keyboard
 
-TODO: Photo of Keychron K8
+Photo of Keychron K8
