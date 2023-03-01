@@ -65,20 +65,20 @@ ssh-copy-id pi@raspberrypi
 ## Create a full backup of the SD card
 
 ```bash
-sudo dd if=/dev/sdb of=./raspberrypi.dd.img bs=1M status=progress
+sudo dd if=/dev/sdb of=./raspberrypi.raw.img bs=1M status=progress
 ```
 
 ## Make the backup file immutable, if needed
 
 ```bash
-sudo chattr +i raspberrypi.dd.img
-lsattr raspberrypi.dd.img
+sudo chattr +i raspberrypi.raw.img
+lsattr raspberrypi.raw.img
 ```
 
 ## Create devices for mounting partitions from the backup file
 
 ```bash
-sudo kpartx -arv raspberrypi.dd.img
+sudo kpartx -arv raspberrypi.raw.img
 ```
 
 (-a: Add partition mappings, -r: Read-only partition mappings, -v: Operate verbosely)
@@ -88,7 +88,7 @@ You can now mount the partitions, read files, do changes if needed, and unmount 
 Afterwords, delete the devices:
 
 ```bash
-sudo kpartx -dv retropie.dd.img
+sudo kpartx -dv retropie.raw.img
 ```
 
 (-d: Delete partition mappings)
@@ -106,10 +106,10 @@ sudo nano /mnt/etc/ld.so.preload
 # Comment out the only line
 ```
 
-## Unmount and convert
+## Unmount and convert (optional)
 
 ```bash
-qemu-img convert -f raw -O qcow2 raspberrypi.dd.img raspberrypi.qcow2
+qemu-img convert -f raw -O qcow2 raspberrypi.raw.img raspberrypi.qcow2
 ```
 
 ## Download kernel and run
@@ -128,8 +128,11 @@ sudo qemu-system-arm -kernel kernel-qemu-4.14.79-stretch \
               -net tap,ifname=vnet0,script=no,downscript=no
 ```
 
+If you want to use a raw image instead of qcow2, you can pass `-drive format=raw,file=raspberrypi.raw.img`
+instead of the `-hda` option.
+
 ## Convert QEMU image back to raw
 
 ```bash
-qemu-img dd -f qcow2 -O raw bs=4M if=raspberrypi.qcow2 of=back-to-raw.dd.img
+qemu-img dd -f qcow2 -O raw bs=4M if=raspberrypi.qcow2 of=back-to.raw.img
 ```
