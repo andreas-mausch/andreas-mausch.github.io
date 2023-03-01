@@ -151,7 +151,49 @@ I will use <em>/tmp/sdcard/</em> as mounting point in this example.</p>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> kpartx <span class="token parameter variable">-dv</span> retropie.dd.img</span></code></pre>
 
     </div><p>(-d: Delete partition mappings)</p>
+<h1 id="qemu-testing" tabindex="-1">8. QEMU testing <a class="header-anchor" href="#qemu-testing" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Taken from <a href="https://gist.github.com/plembo/c4920016312f058209f5765cb9a3a25e" class="external-link" target="_blank">plembo</a> and <a href="https://github.com/dhruvvyas90/qemu-rpi-kernel/wiki" class="external-link" target="_blank">qemu-rpi-kernel</a>.</p>
+<h2 id="mount-and-edit-ld.so.preload" tabindex="-1">8.1. Mount and edit ld.so.preload <a class="header-anchor" href="#mount-and-edit-ld.so.preload" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Mount via <code class="language-plain">kpartx</code>, see above.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">nano</span> /mnt/etc/ld.so.preload</span>
+<span class="highlight-line"><span class="token comment"># Comment out the only line</span></span></code></pre>
 
+    </div><h2 id="unmount-and-convert" tabindex="-1">8.2. Unmount and convert <a class="header-anchor" href="#unmount-and-convert" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img convert <span class="token parameter variable">-f</span> raw <span class="token parameter variable">-O</span> qcow2 raspberrypi.dd.img raspberrypi.qcow2</span></code></pre>
+
+    </div><h2 id="download-kernel-and-run" tabindex="-1">8.3. Download kernel and run <a class="header-anchor" href="#download-kernel-and-run" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">wget</span> https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/9fb4fcf463df4341dbb7396df127374214b90841/kernel-qemu-4.14.79-stretch?raw<span class="token operator">=</span>true</span>
+<span class="highlight-line"><span class="token function">wget</span> https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/9fb4fcf463df4341dbb7396df127374214b90841/versatile-pb.dtb?raw<span class="token operator">=</span>true</span>
+<span class="highlight-line"><span class="token function">sudo</span> qemu-system-arm <span class="token parameter variable">-kernel</span> kernel-qemu-4.14.79-stretch <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-cpu</span> arm1176 <span class="token parameter variable">-m</span> <span class="token number">256</span> <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-M</span> versatilepb <span class="token parameter variable">-dtb</span> versatile-pb.dtb <span class="token punctuation">\</span></span>
+<span class="highlight-line">              -no-reboot <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-serial</span> stdio <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-append</span> <span class="token string">"root=/dev/sda2 panic=1 rootfstype=ext4 rw"</span> <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-hda</span> raspberrypi.qcow2 <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-net</span> nic <span class="token parameter variable">-net</span> user <span class="token punctuation">\</span></span>
+<span class="highlight-line">              <span class="token parameter variable">-net</span> tap,ifname<span class="token operator">=</span>vnet0,script<span class="token operator">=</span>no,downscript<span class="token operator">=</span>no</span></code></pre>
+
+    </div><h2 id="convert-qemu-image-back-to-raw" tabindex="-1">8.4. Convert QEMU image back to raw <a class="header-anchor" href="#convert-qemu-image-back-to-raw" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qemu-img <span class="token function">dd</span> <span class="token parameter variable">-f</span> qcow2 <span class="token parameter variable">-O</span> raw <span class="token assign-left variable">bs</span><span class="token operator">=</span>4M <span class="token assign-left variable">if</span><span class="token operator">=</span>raspberrypi.qcow2 <span class="token assign-left variable">of</span><span class="token operator">=</span>back-to-raw.dd.img</span></code></pre>
+
+    </div>
 
 <script async src="/scripts/index.js"></script>
 
