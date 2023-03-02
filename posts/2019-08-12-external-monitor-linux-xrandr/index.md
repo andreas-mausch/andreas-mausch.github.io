@@ -44,3 +44,7 @@ I don't know a good alternative, so I will keep custom xrandr scripts for my dif
 
 I might try [xlayoutdisplay](https://github.com/alex-courtis/xlayoutdisplay)
 in future, although it works a bit differently.
+
+**Update**: This doesn't seem to be a problem of autorandr, but rather some display driver issue,
+even though I've experienced this issue on two different devices.
+I had the same problem with autorandr uninstalled and using xrandr directly now.
