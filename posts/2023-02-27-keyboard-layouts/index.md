@@ -59,7 +59,7 @@ a key on the *upper right area* together with Fn? You must be kidding..
 
 Same goes for some sweet 65% keyboards, which have ugly mappings as well.
 
-I need:
+On a laptop I need:
 
 - a dedicated F1-F12 function key row
 - an AltGr key for umlauts and special characters
@@ -71,4 +71,12 @@ Please.
 
 # My personal favorite keyboard
 
-Photo of Keychron K8
+My favorite keyboard right now is the
+[Keychron K8 Non-Backlight Wireless Mechanical Keyboard](https://www.keychron.com/products/keychron-k8-non-backlight-wireless-mechanical-keyboard).
+
+{% image "keychron-k8-tkl.jpg" %}
+
+It is a Tenkeyless layout, it works on either USB or Bluetooth (up to three devices),
+it has great mechanical switches and the best: it has retro colors and looks almost identical to my 386 keyboard.
+
+{% image "highscreen-386-keyboard.jpg" %}
