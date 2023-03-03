@@ -77,6 +77,6 @@ My favorite keyboard right now is the
 {% image "keychron-k8-tkl.jpg" %}
 
 It is a Tenkeyless layout, it works on either USB or Bluetooth (up to three devices),
-it has great mechanical switches and the best: it has retro colors and looks almost identical to my 386 keyboard.
+it has great mechanical switches and the best: it has retro colors and looks almost identical to my [386 keyboard]({% link-post "2020-09-07-highscreen-386" %}).
 
 {% image "highscreen-386-keyboard.jpg" %}
