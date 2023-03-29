@@ -1,0 +1,389 @@
+---
+title: "GnuPG for everything"
+date: 2023-03-29T19:00:00+02:00
+tags: ['gpg', 'tpm', 'ssh', 'security']
+toc: true
+draft: true
+---
+
+When I work with Git, I use SSH keys for authentication with GitHub, GitLab etc.
+Same goes for SSH connections for terminal connections to servers.
+
+When I want to sign or encrypt my e-mails, I use GPG.
+I also use GPG indirectly when using [pass - The Standard Unix Password Manager](https://www.passwordstore.org/).
+And you need GPG if you want to publish a package to Maven Central, for example.
+You can also use GPG to sign your git commits.
+
+I barely used GPG in the past, but since I heard you can use the GPG key also for SSH connections,
+I thought that this would be a big improvement for me.
+I would only have to handle the single GPG key instead of having GPG and SSH simultaneously.
+
+I have also used a Nitrokey in [the past]({% link-post "2021-02-23-nitrokey" %}), which can be used as a GPG smartcard.
+That means your keys wouldn't be stored on your computer, but inaccessible on a secure device. Nice.
+Modern computers also have a secure chip built-in, which works similar to a Nitrokey: TPM.
+
+I tried to put this all together to end up with a GPG key stored in the TPM which I can use for:
+
+- Sign and encrypt files
+- Sign e-mails
+- SSH terminal connections
+- Git authentication (GitHub, GitLab)
+- Passwords (via pass)
+
+# Setup keys
+
+## Install gpg
+
+The default [gpg package](https://archlinux.org/packages/core/x86_64/gnupg/) in Manjaro/Arch is still 2.2.41, which is the latest LTS version.
+However, you need at least 2.3 to work with TPM 2.0. The latest version (as of today) is 2.4.0 released on 2022-12-16.
+
+In AUR I couldn't find a 2.4 though. There is a [gnupg-git](https://aur.archlinux.org/packages/gnupg-git) which just points to the latest master.
+And there is [gnupg23](https://aur.archlinux.org/packages/gnupg23), which is not the latest, but at least an officially released version and the version
+just before 2.4.0. I decided to use it.
+
+```bash
+paru -S gnupg23
+```
+
+It will warn you that..
+
+> :: gnupg23 and gnupg are in conflict. Remove gnupg? [y/N]
+
+but you can just proceed with yes.
+
+```shell-session
+$ gpg --version
+gpg (GnuPG) 2.3.8
+libgcrypt 1.10.1-unknown
+Copyright (C) 2021 Free Software Foundation, Inc.
+License GNU GPL-3.0-or-later <https://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Home: /home/neonew/.gnupg
+Supported algorithms:
+Pubkey: RSA, ELG, DSA, ECDH, ECDSA, EDDSA
+Cipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH,
+        CAMELLIA128, CAMELLIA192, CAMELLIA256
+AEAD: EAX, OCB
+Hash: SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224
+Compression: Uncompressed, ZIP, ZLIB, BZIP2
+```
+
+## Generate primary key
+
+We will generate one key for each usage flag of GPG.
+Usage flags are: cert, encrypt, sign and auth.
+
+Our primary key will only have the cert flag, and we will have one subkey for each other flag.
+
+### Using a config file
+
+I recommend to use the method below, but for completeness, here is an alternative:
+
+```{data-filename=key.config}
+%echo Generating a OpenPGP key
+%echo https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html
+Key-Type: RSA
+Key-Length: 4096
+# Allowed values are ‘encrypt’, ‘sign’, and ‘auth’.
+Key-Usage: cert
+Subkey-Type: RSA
+Subkey-Length: 2048
+Name-Real: Joe Tester
+Name-Comment: with a comment
+Name-Email: joe@foo.bar
+Expire-Date: 0
+# Passphrase: <not used, passed via stdin>
+# Do a commit here, so that we can later print "done" :-)
+%commit
+%echo done
+```
+
+```bash
+gpg --batch --generate-key key.config
+```
+
+### Using quick-generate-key (recommended)
+
+You can also use `gpg --gen-key` or `gpg --full-generate-key`, but they require more interactive input, that's
+why I like `gpg --quick-generate-key` best.
+
+```bash
+gpg --quick-generate-key "MyName (MyComment) <my@email.com>" rsa4096 cert 1y
+```
+
+### Revocation key
+
+You should also generate a revocation key now, in case you forget your password or your key is compromised.
+Use the long key id as argument for `gen-revoke`.
+
+```bash
+gpg --list-secret-keys --keyid-format long --with-keygrip
+gpg --output primary.revoke.asc --gen-revoke 1111111190ABCDEF1234567890ABCDEF11111111
+```
+
+Revoke certificate generation is not possible in batch mode. :/
+
+### Add photo
+
+> “Keeping the image close to 240×288 is a good size to use”. Further, there is a warning displayed if the image is above 6144 bytes saying that “This JPEG is really large”.
+> -- [Creating a small JPEG photo for your OpenPGP key](https://blog.josefsson.org/2014/06/19/creating-a-small-jpeg-photo-for-your-openpgp-key/)
+
+This is the command I used to generate my small photo, which is just under 6.144 bytes.
+
+```bash
+magick convert -auto-orient -strip -gravity center -crop 240:288 +repage -resize "240x288" -gaussian-blur 0.05 -sampling-factor 4:2:0 -interlace JPEG -colorspace YUV -quality 52 input.jpg gpg.jpg
+```
+
+Verify the sampling factor via `identify`:
+
+```bash
+identify -format "%[jpeg:sampling-factor]" gpg.jpg
+```
+
+| Sampling Factor | identity output |
+|-----------------|-----------------|
+| 4:2:0           | 2x2,1x1,1x1     |
+| 4:2:2H          | 2x1,1x1,1x1     |
+| 4:2:2V          | 1x2,1x1,1x1     |
+| 4:4:4           | 1x1,1x1,1x1     |
+
+See here: [How to find out the chroma subsampling of a jpg?](https://www.reddit.com/r/GIMP/comments/31w0j2/how_to_find_out_the_chroma_subsampling_of_a_jpg/).
+In my case, the output was just `2x2`.
+
+If you are happy with the result, add the jpg to your key via:
+
+```bash
+gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 addphoto save
+```
+
+## Generate Subkeys
+
+```bash
+gpg --batch --quick-add-key 1111111190ABCDEF1234567890ABCDEF11111111 rsa2048 sign 1y
+gpg --batch --quick-add-key 1111111190ABCDEF1234567890ABCDEF11111111 rsa2048 encrypt 1y
+gpg --batch --quick-add-key 1111111190ABCDEF1234567890ABCDEF11111111 rsa2048 auth 1y
+```
+
+## Backup all your keys
+
+This is very important. In the following steps, we are going to delete all keys from GPG,
+so you need to have a backup of your keys!
+
+### Reset password (optional)
+
+```bash
+gpg --change-passphrase 1111111190ABCDEF1234567890ABCDEF11111111
+```
+
+### Backup to file
+
+```bash
+gpg --output primary-with-subkeys.public.asc --armor --export 1111111190ABCDEF1234567890ABCDEF11111111
+gpg --output primary-with-subkeys.secret.asc --armor --export-secret-keys --export-options export-backup 1111111190ABCDEF1234567890ABCDEF11111111
+gpg --output subkeys-only.secret.asc --armor --export-secret-subkeys --export-options export-backup 1111111190ABCDEF1234567890ABCDEF11111111
+
+# Validate:
+gpg --show-keys primary-with-subkeys.public.asc
+```
+
+> Subkeys are bound to the primary key and exported together with it when calling gpg --export or gpg --send-keys. Same applies to signatures and user ID packages.
+> -- [One public key contains all subkeys?](https://security.stackexchange.com/questions/51474/one-public-key-contains-all-subkeys)
+
+## Delete private key
+
+Please, make sure you have a working backup before executing this.
+
+```bash
+gpg --delete-secret-keys 1111111190ABCDEF1234567890ABCDEF11111111
+
+# Validate:
+gpg --list-secret-keys --keyid-format long --with-keygrip
+
+# To delete a sub-key only, you need the exclamation mark!
+# gpg --delete-secret-keys 5555ABCDEFAB5555!
+```
+
+## Re-Import the Sub-Keys only
+
+We want to put the primary key backup in a secure place and only leave the sub-keys on our system for everyday use.
+
+```bash
+gpg --import subkeys-only.secret.asc
+
+# Validate:
+gpg --list-secret-keys --keyid-format long --with-keygrip
+```
+
+Not the hash sign (#) after the primary key, which indicates it is not stored on the disk.
+
+## Trust the key
+
+In order to sign and encrypt, we need to trust this key.
+Just set the trust level to *ultimate (5)*.
+
+```bash
+gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 trust quit
+```
+
+# Key ID: Short vs. Long vs. Keygrip vs. Fingerprint
+
+TODO
+
+# Thoughts on multiple identities
+
+TODO
+
+# Use TPM 2.0
+
+See [this guide](https://gnupg.org/blog/20210315-using-tpm-with-gnupg-2.3.html) from the official gnupg.org page.
+
+Important: TPM only supports a specific set of algorithms for encryption and hashing.
+Make sure you use algorithms supported by your hardware.
+
+TPM 2.0 gurantees RSA-2048 and SHA-256 will work.
+
+## Move subkeys
+
+```bash
+gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 "key 5555ABCDEFAB5555" keytotpm quit
+gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 "key 6666ABCDEFAB6666" keytotpm quit
+gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 "key 7777725CD5447777" keytotpm quit
+```
+
+You need to enter the original password of your gpg key and then you can choose the same (or different) password used by the TPM.
+Note the `>` signs after ssb in the `gpg --list-secret-keys` output, which tells the key is now stored inside the TPM and cannot be accessed directly anymore.
+
+## Test signing
+
+Make sure the subkey still works:
+
+```bash
+echo Test > test.txt
+gpg --clear-sign --local-user amausch@peacsolutions.eu --output test.txt.asc test.txt
+cat test.txt.asc
+rm test.txt test.txt.asc
+```
+
+You are now asked to enter the TPM password.
+
+## Troubleshooting SHA-512
+
+I had a problem connecting to my server via SSH after I moved the keys to the TPM.
+
+It took me some time to find the reason: SSH tried to do the signature with SHA-512, which is not supported by my TPM.
+
+```shell-session
+$ ssh -vvvv nuc@nuc
+debug1: Server accepts key: (none) RSA SHA256:++3tZOdzV9LhXrOHIkn8Cvfm4OknxQ8UYT7vjg7PQDw agent
+debug3: sign_and_send_pubkey: using publickey with RSA SHA256:++3tZOdzV9LhXrOHIkn8Cvfm4OknxQ8UYT7vjg7PQDw
+debug3: sign_and_send_pubkey: signing using rsa-sha2-512 SHA256:++3tZOdzV9LhXrOHIkn8Cvfm4OknxQ8UYT7vjg7PQDw
+sign_and_send_pubkey: signing failed for RSA "(none)" from agent: agent refused operation
+
+$ systemctl --user status gpg-agent
+● gpg-agent.service - GnuPG cryptographic agent and passphrase cache
+     Loaded: loaded (/usr/lib/systemd/user/gpg-agent.service; static)
+     Active: active (running) since Tue 2023-03-28 23:39:17 CEST; 33min ago
+TriggeredBy: ● gpg-agent-extra.socket
+             ● gpg-agent-ssh.socket
+             ● gpg-agent-browser.socket
+             ● gpg-agent.socket
+       Docs: man:gpg-agent(1)
+   Main PID: 1316 (gpg-agent)
+      Tasks: 8 (limit: 38083)
+     Memory: 16.6M
+        CPU: 6.257s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/app.slice/gpg-agent.service
+             ├─1316 /usr/bin/gpg-agent --supervised
+             ├─3031 scdaemon --multi-server
+             └─3034 tpm2daemon --multi-server
+
+Mär 29 00:12:57 andreas-peac gpg-agent[3034]: ERROR:esys:src/tss2-esys/esys_iutil.c:394:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff).
+Mär 29 00:12:57 andreas-peac gpg-agent[3034]: ERROR:esys:src/tss2-esys/esys_iutil.c:1105:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b)
+Mär 29 00:12:57 andreas-peac gpg-agent[3034]: ERROR:esys:src/tss2-esys/esys_tr.c:522:Esys_TRSess_SetAttributes() Object not found ErrorCode (0x0007000b)
+Mär 29 00:12:57 andreas-peac gpg-agent[3034]: tpm2daemon[3034]: DBG: asking for PIN 'TPM Key Passphrase'
+Mär 29 00:12:58 andreas-peac gpg-agent[3034]: WARNING:esys:src/tss2-esys/api/Esys_Sign.c:311:Esys_Sign_Finish() Received TPM Error
+Mär 29 00:12:58 andreas-peac gpg-agent[3034]: ERROR:esys:src/tss2-esys/api/Esys_Sign.c:105:Esys_Sign() Esys Finish ErrorCode (0x000001d5)
+Mär 29 00:12:58 andreas-peac gpg-agent[3034]: TPM2_Sign failed with 469
+Mär 29 00:12:58 andreas-peac gpg-agent[3034]: tpm:parameter(1):structure is the wrong size
+Mär 29 00:12:58 andreas-peac gpg-agent[1316]: smartcard signing failed: Kartenfehler
+Mär 29 00:12:58 andreas-peac gpg-agent[1316]: ssh sign request failed: Kartenfehler <Quelle nicht angegeben>
+```
+
+https://lists.archive.carbon60.com/gnupg/devel/91138
+
+Depending on the sshd_config, you might need to specify the algorithm.
+SHA-512 is not compatible with TPM2.0, so you might try this:
+
+```bash
+ssh -vvvv -o PubkeyAcceptedKeyTypes=rsa-sha2-256 nuc@nuc
+```
+
+Or, alternatively you can set this option for all connections:
+
+```bash
+echo "Host *" >> ~/.ssh/config
+echo "  PubkeyAcceptedKeyTypes rsa-sha2-256" >> ~/.ssh/config
+```
+
+TODO
+
+Alternative? personal-digest-preferences in ~/.gnupg/gpg.conf
+https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html
+
+## Use tpm2 from command line
+
+To use TPM without GPG you can run [this example](https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa):
+
+```bash
+openssl genrsa -out private.pem 2048
+openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+tpm2_createprimary -C e -c primary.ctx
+tpm2_import -C primary.ctx -G rsa -i private.pem -u key.pub -r key.priv
+rm private.pem
+
+echo "This is the secret" > test.txt
+openssl pkeyutl -encrypt -pubin -inkey public.pem -in test.txt -out test.txt.enc
+
+tpm2_load -C primary.ctx -u key.pub -r key.priv -c key.ctx
+tpm2_rsadecrypt -c key.ctx -o test.decrypted.txt test.txt.enc
+cat test.decrypted.txt
+rm test.txt test.txt.enc test.decrypted.txt public.pem primary.ctx key.pub key.priv
+```
+
+# SSH via GPG
+
+GPG Key with usage flag *Authentication* is needed.
+
+Here is my setup for `gpg-agent` and the `fish` shell.
+
+```bash
+echo enable-ssh-support >> ~/.gnupg/gpg-agent.conf
+echo 2D9D2A6748BBF5D548BCE4203B95F3633F442614 >> ~/.gnupg/sshcontrol
+gpg --export-ssh-key 1111111190ABCDEF1234567890ABCDEF11111111
+```
+
+```bash
+echo "set --erase SSH_AGENT_PID" >> ~/.config/fish/conf.d/gpg-ssh.fish
+echo "set --erase SSH_AUTH_SOCK" >> ~/.config/fish/conf.d/gpg-ssh.fish
+echo "set --universal --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)" >> ~/.config/fish/conf.d/gpg-ssh.fish
+echo "set --export GPG_TTY (tty)" >> ~/.config/fish/conf.d/gpg-ssh.fish
+echo "gpg-connect-agent updatestartuptty /bye >/dev/null" >> ~/.config/fish/conf.d/gpg-ssh.fish
+```
+
+# pass
+
+TODO
+
+## PassFF
+
+TODO
+
+# Links
+
+https://mikeross.xyz/create-gpg-key-pair-with-subkeys/
+https://wiki.archlinux.org/title/GnuPG#SSH_agent
+https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3
+https://opensource.com/article/19/4/gpg-subkeys-ssh
+https://www.foxk.it/blog/gpg-ssh-agent-fish/
