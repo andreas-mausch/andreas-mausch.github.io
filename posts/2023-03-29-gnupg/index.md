@@ -6,6 +6,8 @@ toc: true
 draft: true
 ---
 
+TODO: Add cool-retro-term screenshot
+
 When I work with Git, I use SSH keys for authentication with GitHub, GitLab etc.
 Same goes for SSH connections for terminal connections to servers.
 
@@ -119,7 +121,7 @@ You should also generate a revocation key now, in case you forget your password 
 Use the long key id as argument for `gen-revoke`.
 
 ```bash
-gpg --list-secret-keys --keyid-format long --with-keygrip
+gpg --list-secret-keys --keyid-format long --with-keygrip --with-subkey-fingerprints
 gpg --output primary.revoke.asc --gen-revoke 1111111190ABCDEF1234567890ABCDEF11111111
 ```
 
@@ -199,7 +201,7 @@ Please, make sure you have a working backup before executing this.
 gpg --delete-secret-keys 1111111190ABCDEF1234567890ABCDEF11111111
 
 # Validate:
-gpg --list-secret-keys --keyid-format long --with-keygrip
+gpg --list-secret-keys --keyid-format long --with-keygrip --with-subkey-fingerprints
 
 # To delete a sub-key only, you need the exclamation mark!
 # gpg --delete-secret-keys 5555ABCDEFAB5555!
@@ -213,7 +215,7 @@ We want to put the primary key backup in a secure place and only leave the sub-k
 gpg --import subkeys-only.secret.asc
 
 # Validate:
-gpg --list-secret-keys --keyid-format long --with-keygrip
+gpg --list-secret-keys --keyid-format long --with-keygrip --with-subkey-fingerprints
 ```
 
 Not the hash sign (#) after the primary key, which indicates it is not stored on the disk.
@@ -229,7 +231,32 @@ gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 trust quit
 
 # Key ID: Short vs. Long vs. Keygrip vs. Fingerprint
 
-TODO
+| Type         | Value                                              |
+|--------------|---------------------------------------------------:|
+| Fingerprint  | 7196 E081 94D5 3FCB FD15  D960 FA6C 71F9 A73D BE0B |
+| Long Key ID  |                                FA6C 71F9 A73D BE0B |
+| Short Key ID |                                          A73D BE0B |
+
+> Neither of these [long and short ID] should be used for key identification nowadays — it is possible to create keys with matching key ids (and this has been demonstrated with short key ids).
+> -- [https://unix.stackexchange.com/questions/576933/what-are-the-keyid-and-finguerprint-of-a-public-key-in-gpg-and-apt-key](https://unix.stackexchange.com/questions/576933/what-are-the-keyid-and-finguerprint-of-a-public-key-in-gpg-and-apt-key)
+
+-> Always use the fingerprint
+
+What is the Keygrip then?
+
+> So a keygrip is protocol agnostic, that means no information coming from GnuPG (e.g. the packet version) nor SSH (e.g. the typename) is used to build them. Only information coming from the key algorithm is used.
+> -- [https://blog.djoproject.net/2020/05/03/main-differences-between-a-gnupg-fingerprint-a-ssh-fingerprint-and-a-keygrip/](https://blog.djoproject.net/2020/05/03/main-differences-between-a-gnupg-fingerprint-a-ssh-fingerprint-and-a-keygrip/)
+
+Also, the keygrip has the same length as a fingerprint:
+
+```
+7196E08194D53FCBFD15D960FA6C71F9A73DBE0B
+69B7D1FBF6F48ACA54531CB771088109C081C081
+```
+
+Pff...confuse me more.
+gpg cli in my opinion should never display the short and long key ids if they are not to be trusted.
+And it should put a prefix/name if it outputs a (seemingly) random number to the user. But well.
 
 # Thoughts on multiple identities
 
@@ -243,6 +270,12 @@ Important: TPM only supports a specific set of algorithms for encryption and has
 Make sure you use algorithms supported by your hardware.
 
 TPM 2.0 gurantees RSA-2048 and SHA-256 will work.
+
+One thing I'd like to see is TPM with a smartcard interface.
+I can't understand why there need to be `keytocard` and `keytotpm` commands, when they are essentially doing the same thing.
+I do understand TPM is different from a smartcard and maybe offers more features, but it just would be nice to support the smartcard interface.
+On Windows for example, there is a thing like a [TPM virtual smart card](https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-overview).
+That's what I mean, but it should be part of TPM, in my opinion.
 
 ## Move subkeys
 
@@ -374,11 +407,56 @@ echo "gpg-connect-agent updatestartuptty /bye >/dev/null" >> ~/.config/fish/conf
 
 # pass
 
-TODO
+pass automatically works with GPG, so all you need to do is set up the right key:
 
-## PassFF
+```bash
+pass init [-p subfolder] 1111111190ABCDEF1234567890ABCDEF11111111
+```
 
-TODO
+## PassFF for Firefox
+
+To automatically fill passwords in your browser, use this sweet extension:
+[github.com/passff/passff](https://github.com/passff/passff)
+
+Unfortunately, it requires a host service to run on your machine.
+It works well, though.
+
+I prefer it over [github.com/browserpass/browserpass-extension](https://github.com/browserpass/browserpass-extension),
+because it doesn't require your filename to match the URL of a service.
+I prefer to have a paypal.gpg rather than a paypal.com.gpg.
+
+Reason: I have an account for a service, not a domain.
+Domains might change, and to support multiple domains, you
+[need hacks](https://github.com/browserpass/browserpass-extension#how-to-use-the-same-username-and-password-pair-on-multiple-domains).
+
+This specific problem is [not solved](https://github.com/passff/passff/issues/466) for passff either,
+but I like the approach to specify the URL inside the data just better.
+
+Installation and example usage of passff:
+
+```bash
+sudo pacman -S passff-host firefox-extension-passff
+```
+
+```shell-session
+$ pass insert -m someservice
+Enter contents of someservice and press Ctrl+D when finished:
+
+my-secret-password
+login: my@email.com
+url: someservice.com
+[master 6e0d7a4] Add given password for someservice to store.
+ 1 file changed, 2 insertions(+)
+ create mode 100644 someservice.gpg
+```
+
+# git: Sign commits SSH vs. GPG
+
+Since 2021 it is also possible to use SSH (and not just GPG) to sign commits.
+
+I like GPG better though: It can contain your uid (or multiple), a photo, sharing via keyservers is easier..
+
+Also, I'm not sure if common other tools like Thunderbird support signing via SSH key, so I want to have a GPG key anyway.
 
 # Links
 
