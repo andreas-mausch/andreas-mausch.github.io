@@ -39,23 +39,33 @@ I tried to put this all together to end up with a GPG key stored in the TPM whic
 The default [gpg package](https://archlinux.org/packages/core/x86_64/gnupg/) in Manjaro/Arch is still 2.2.41, which is the latest LTS version.
 However, you need at least 2.3 to work with TPM 2.0. The latest version (as of today) is 2.4.0 released on 2022-12-16.
 
+> The current stable branch is the 2.2 series, so that's what Arch packages.
+> The 2.3 series is currently a testing branch for what will become the next stable release, 2.4.
+> Actually above statement on which version is stable is  incorrect according to Wener Koch of gnupg:
+> 2.3 is in fact the stable branch and latest release is 2.3.4 [1]
+> 2.2 is the older long term stable branch with current version 2.2.34 [2]
+> -- https://bbs.archlinux.org/viewtopic.php?id=269394
+
 In AUR I couldn't find a 2.4 though. There is a [gnupg-git](https://aur.archlinux.org/packages/gnupg-git) which just points to the latest master.
 And there is [gnupg23](https://aur.archlinux.org/packages/gnupg23), which is not the latest, but at least an officially released version and the version
 just before 2.4.0. I decided to use it.
 
+**Edit**: And just as I write this, there was a new package: [gnupg24](https://aur.archlinux.org/packages/gnupg24).
+Thank you, ImperatorStorm.
+
 ```bash
-paru -S gnupg23
+paru -S gnupg24
 ```
 
 It will warn you that..
 
-> :: gnupg23 and gnupg are in conflict. Remove gnupg? [y/N]
+> :: gnupg24 and gnupg are in conflict. Remove gnupg? [y/N]
 
 but you can just proceed with yes.
 
 ```shell-session
 $ gpg --version
-gpg (GnuPG) 2.3.8
+gpg (GnuPG) 2.4.0
 libgcrypt 1.10.1-unknown
 Copyright (C) 2021 Free Software Foundation, Inc.
 License GNU GPL-3.0-or-later <https://gnu.org/licenses/gpl.html>
@@ -67,7 +77,6 @@ Supported algorithms:
 Pubkey: RSA, ELG, DSA, ECDH, ECDSA, EDDSA
 Cipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH,
         CAMELLIA128, CAMELLIA192, CAMELLIA256
-AEAD: EAX, OCB
 Hash: SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224
 Compression: Uncompressed, ZIP, ZLIB, BZIP2
 ```
@@ -92,9 +101,9 @@ Key-Length: 4096
 Key-Usage: cert
 Subkey-Type: RSA
 Subkey-Length: 2048
-Name-Real: Joe Tester
-Name-Comment: with a comment
-Name-Email: joe@foo.bar
+Name-Real: My Name
+Name-Comment: MyComment
+Name-Email: my@email.com
 Expire-Date: 0
 # Passphrase: <not used, passed via stdin>
 # Do a commit here, so that we can later print "done" :-)
@@ -112,7 +121,7 @@ You can also use `gpg --gen-key` or `gpg --full-generate-key`, but they require 
 why I like `gpg --quick-generate-key` best.
 
 ```bash
-gpg --quick-generate-key "MyName (MyComment) <my@email.com>" rsa4096 cert 1y
+gpg --quick-generate-key "My Name (MyComment) <my@email.com>" rsa4096 cert 1y
 ```
 
 ### Revocation key
@@ -262,6 +271,13 @@ And it should put a prefix/name if it outputs a (seemingly) random number to the
 
 TODO
 
+# Thoughts on pinentry
+
+I dislike you cannot see which process asked for the key when doing a decryption or signing.
+pinentry just pops ups and asks for a your passphrase.
+
+The user cannot see which process (maybe with PID and icon) wants to use the key for what reason.
+
 # Use TPM 2.0
 
 See [this guide](https://gnupg.org/blog/20210315-using-tpm-with-gnupg-2.3.html) from the official gnupg.org page.
@@ -294,7 +310,7 @@ Make sure the subkey still works:
 
 ```bash
 echo Test > test.txt
-gpg --clear-sign --local-user amausch@peacsolutions.eu --output test.txt.asc test.txt
+gpg --clear-sign --local-user my@email.com --output test.txt.asc test.txt
 cat test.txt.asc
 rm test.txt test.txt.asc
 ```
@@ -344,7 +360,8 @@ Mär 29 00:12:58 andreas-peac gpg-agent[1316]: smartcard signing failed: Kartenf
 Mär 29 00:12:58 andreas-peac gpg-agent[1316]: ssh sign request failed: Kartenfehler <Quelle nicht angegeben>
 ```
 
-https://lists.archive.carbon60.com/gnupg/devel/91138
+The important bits here are `TPM2_Sign failed with 469` and `structure is the wrong size`.
+See here: [lists.archive.carbon60.com/gnupg/devel/91138](https://lists.archive.carbon60.com/gnupg/devel/91138)
 
 Depending on the sshd_config, you might need to specify the algorithm.
 SHA-512 is not compatible with TPM2.0, so you might try this:
@@ -383,6 +400,12 @@ tpm2_load -C primary.ctx -u key.pub -r key.priv -c key.ctx
 tpm2_rsadecrypt -c key.ctx -o test.decrypted.txt test.txt.enc
 cat test.decrypted.txt
 rm test.txt test.txt.enc test.decrypted.txt public.pem primary.ctx key.pub key.priv
+```
+
+# gpg-agent log
+
+```bash
+systemctl --user status gpg-agent
 ```
 
 # SSH via GPG
