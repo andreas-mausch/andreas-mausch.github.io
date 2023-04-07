@@ -128,40 +128,46 @@
                     <li><a href="#thoughts-on-multiple-identities">3. Thoughts on multiple identities</a>
             		</li>
 
-                    <li><a href="#use-tpm-2.0">4. Use TPM 2.0</a>
+                    <li><a href="#thoughts-on-pinentry">4. Thoughts on pinentry</a>
+            		</li>
+
+                    <li><a href="#use-tpm-2.0">5. Use TPM 2.0</a>
             
                 <ol>
                     
-                    <li><a href="#move-subkeys">4.1. Move subkeys</a>
+                    <li><a href="#move-subkeys">5.1. Move subkeys</a>
             		</li>
 
-                    <li><a href="#test-signing">4.2. Test signing</a>
+                    <li><a href="#test-signing">5.2. Test signing</a>
             		</li>
 
-                    <li><a href="#troubleshooting-sha-512">4.3. Troubleshooting SHA-512</a>
+                    <li><a href="#troubleshooting-sha-512">5.3. Troubleshooting SHA-512</a>
             		</li>
 
-                    <li><a href="#use-tpm2-from-command-line">4.4. Use tpm2 from command line</a>
+                    <li><a href="#use-tpm2-from-command-line">5.4. Use tpm2 from command line</a>
             		</li>
                 </ol>
             		</li>
 
-                    <li><a href="#ssh-via-gpg">5. SSH via GPG</a>
+                    <li><a href="#gpg-agent-log">6. gpg-agent log</a>
             		</li>
 
-                    <li><a href="#pass">6. pass</a>
+                    <li><a href="#ssh-via-gpg">7. SSH via GPG</a>
+            		</li>
+
+                    <li><a href="#pass">8. pass</a>
             
                 <ol>
                     
-                    <li><a href="#passff-for-firefox">6.1. PassFF for Firefox</a>
+                    <li><a href="#passff-for-firefox">8.1. PassFF for Firefox</a>
             		</li>
                 </ol>
             		</li>
 
-                    <li><a href="#git%3A-sign-commits-ssh-vs.-gpg">7. git: Sign commits SSH vs. GPG</a>
+                    <li><a href="#git%3A-sign-commits-ssh-vs.-gpg">9. git: Sign commits SSH vs. GPG</a>
             		</li>
 
-                    <li><a href="#links">8. Links</a>
+                    <li><a href="#links">10. Links</a>
             		</li>
                 </ol>
             </nav>
@@ -193,18 +199,30 @@ Modern computers also have a secure chip built-in, which works similar to a Nitr
 <h2 id="install-gpg" tabindex="-1">1.1. Install gpg <a class="header-anchor" href="#install-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>The default <a href="https://archlinux.org/packages/core/x86_64/gnupg/" class="external-link" target="_blank">gpg package</a> in Manjaro/Arch is still 2.2.41, which is the latest LTS version.
 However, you need at least 2.3 to work with TPM 2.0. The latest version (as of today) is 2.4.0 released on 2022-12-16.</p>
+<figure class="quote">
+<blockquote cite="https://bbs.archlinux.org/viewtopic.php?id=269394">
+<p>The current stable branch is the 2.2 series, so that's what Arch packages.
+The 2.3 series is currently a testing branch for what will become the next stable release, 2.4.
+Actually above statement on which version is stable is  incorrect according to Wener Koch of gnupg:
+2.3 is in fact the stable branch and latest release is 2.3.4 [1]
+2.2 is the older long term stable branch with current version 2.2.34 [2]</p>
+</blockquote>
+<figcaption class="quote-attribution">https://bbs.archlinux.org/viewtopic.php?id=269394</figcaption>
+</figure>
 <p>In AUR I couldn't find a 2.4 though. There is a <a href="https://aur.archlinux.org/packages/gnupg-git" class="external-link" target="_blank">gnupg-git</a> which just points to the latest master.
 And there is <a href="https://aur.archlinux.org/packages/gnupg23" class="external-link" target="_blank">gnupg23</a>, which is not the latest, but at least an officially released version and the version
 just before 2.4.0. I decided to use it.</p>
+<p><strong>Edit</strong>: And just as I write this, there was a new package: <a href="https://aur.archlinux.org/packages/gnupg24" class="external-link" target="_blank">gnupg24</a>.
+Thank you, ImperatorStorm.</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">paru <span class="token parameter variable">-S</span> gnupg23</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">paru <span class="token parameter variable">-S</span> gnupg24</span></code></pre>
 
     </div><p>It will warn you that..</p>
 <blockquote>
-<p>:: gnupg23 and gnupg are in conflict. Remove gnupg? [y/N]</p>
+<p>:: gnupg24 and gnupg are in conflict. Remove gnupg? [y/N]</p>
 </blockquote>
 <p>but you can just proceed with yes.</p>
 <div class="code-block">
@@ -212,7 +230,7 @@ just before 2.4.0. I decided to use it.</p>
       <i class="icon icon-copy"></i>
     </button>
     <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">gpg <span class="token parameter variable">--version</span></span></span></span>
-<span class="highlight-line"><span class="token output">gpg (GnuPG) 2.3.8</span>
+<span class="highlight-line"><span class="token output">gpg (GnuPG) 2.4.0</span>
 <span class="highlight-line">libgcrypt 1.10.1-unknown</span>
 <span class="highlight-line">Copyright (C) 2021 Free Software Foundation, Inc.</span>
 <span class="highlight-line">License GNU GPL-3.0-or-later &lt;https://gnu.org/licenses/gpl.html></span>
@@ -224,7 +242,6 @@ just before 2.4.0. I decided to use it.</p>
 <span class="highlight-line">Pubkey: RSA, ELG, DSA, ECDH, ECDSA, EDDSA</span>
 <span class="highlight-line">Cipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH,</span>
 <span class="highlight-line">        CAMELLIA128, CAMELLIA192, CAMELLIA256</span>
-<span class="highlight-line">AEAD: EAX, OCB</span>
 <span class="highlight-line">Hash: SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224</span>
 <span class="highlight-line">Compression: Uncompressed, ZIP, ZLIB, BZIP2</span></code></pre>
 
@@ -246,9 +263,9 @@ Usage flags are: cert, encrypt, sign and auth.</p>
 <span class="highlight-line">Key-Usage: cert</span>
 <span class="highlight-line">Subkey-Type: RSA</span>
 <span class="highlight-line">Subkey-Length: 2048</span>
-<span class="highlight-line">Name-Real: Joe Tester</span>
-<span class="highlight-line">Name-Comment: with a comment</span>
-<span class="highlight-line">Name-Email: joe@foo.bar</span>
+<span class="highlight-line">Name-Real: My Name</span>
+<span class="highlight-line">Name-Comment: MyComment</span>
+<span class="highlight-line">Name-Email: my@email.com</span>
 <span class="highlight-line">Expire-Date: 0</span>
 <span class="highlight-line"># Passphrase: &lt;not used, passed via stdin></span>
 <span class="highlight-line"># Do a commit here, so that we can later print "done" :-)</span>
@@ -268,7 +285,7 @@ why I like <code class="language-plain">gpg --quick-generate-key</code> best.</p
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --quick-generate-key <span class="token string">"MyName (MyComment) &lt;my@email.com>"</span> rsa4096 cert 1y</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --quick-generate-key <span class="token string">"My Name (MyComment) &lt;my@email.com>"</span> rsa4096 cert 1y</span></code></pre>
 
     </div><h3 id="revocation-key" tabindex="-1">1.2.3. Revocation key <a class="header-anchor" href="#revocation-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>You should also generate a revocation key now, in case you forget your password or your key is compromised.
@@ -459,7 +476,11 @@ gpg cli in my opinion should never display the short and long key ids if they ar
 And it should put a prefix/name if it outputs a (seemingly) random number to the user. But well.</p>
 <h1 id="thoughts-on-multiple-identities" tabindex="-1">3. Thoughts on multiple identities <a class="header-anchor" href="#thoughts-on-multiple-identities" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>TODO</p>
-<h1 id="use-tpm-2.0" tabindex="-1">4. Use TPM 2.0 <a class="header-anchor" href="#use-tpm-2.0" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="thoughts-on-pinentry" tabindex="-1">4. Thoughts on pinentry <a class="header-anchor" href="#thoughts-on-pinentry" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I dislike you cannot see which process asked for the key when doing a decryption or signing.
+pinentry just pops ups and asks for a your passphrase.</p>
+<p>The user cannot see which process (maybe with PID and icon) wants to use the key for what reason.</p>
+<h1 id="use-tpm-2.0" tabindex="-1">5. Use TPM 2.0 <a class="header-anchor" href="#use-tpm-2.0" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>See <a href="https://gnupg.org/blog/20210315-using-tpm-with-gnupg-2.3.html" class="external-link" target="_blank">this guide</a> from the official gnupg.org page.</p>
 <p>Important: TPM only supports a specific set of algorithms for encryption and hashing.
 Make sure you use algorithms supported by your hardware.</p>
@@ -469,7 +490,7 @@ I can't understand why there need to be <code class="language-plain">keytocard</
 I do understand TPM is different from a smartcard and maybe offers more features, but it just would be nice to support the smartcard interface.
 On Windows for example, there is a thing like a <a href="https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-overview" class="external-link" target="_blank">TPM virtual smart card</a>.
 That's what I mean, but it should be part of TPM, in my opinion.</p>
-<h2 id="move-subkeys" tabindex="-1">4.1. Move subkeys <a class="header-anchor" href="#move-subkeys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="move-subkeys" tabindex="-1">5.1. Move subkeys <a class="header-anchor" href="#move-subkeys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
@@ -480,19 +501,19 @@ That's what I mean, but it should be part of TPM, in my opinion.</p>
 
     </div><p>You need to enter the original password of your gpg key and then you can choose the same (or different) password used by the TPM.
 Note the <code class="language-plain">></code> signs after ssb in the <code class="language-plain">gpg --list-secret-keys</code> output, which tells the key is now stored inside the TPM and cannot be accessed directly anymore.</p>
-<h2 id="test-signing" tabindex="-1">4.2. Test signing <a class="header-anchor" href="#test-signing" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="test-signing" tabindex="-1">5.2. Test signing <a class="header-anchor" href="#test-signing" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Make sure the subkey still works:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> Test <span class="token operator">></span> test.txt</span>
-<span class="highlight-line">gpg --clear-sign --local-user amausch@peacsolutions.eu <span class="token parameter variable">--output</span> test.txt.asc test.txt</span>
+<span class="highlight-line">gpg --clear-sign --local-user my@email.com <span class="token parameter variable">--output</span> test.txt.asc test.txt</span>
 <span class="highlight-line"><span class="token function">cat</span> test.txt.asc</span>
 <span class="highlight-line"><span class="token function">rm</span> test.txt test.txt.asc</span></code></pre>
 
     </div><p>You are now asked to enter the TPM password.</p>
-<h2 id="troubleshooting-sha-512" tabindex="-1">4.3. Troubleshooting SHA-512 <a class="header-anchor" href="#troubleshooting-sha-512" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="troubleshooting-sha-512" tabindex="-1">5.3. Troubleshooting SHA-512 <a class="header-anchor" href="#troubleshooting-sha-512" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>I had a problem connecting to my server via SSH after I moved the keys to the TPM.</p>
 <p>It took me some time to find the reason: SSH tried to do the signature with SHA-512, which is not supported by my TPM.</p>
 <div class="code-block">
@@ -534,7 +555,8 @@ Note the <code class="language-plain">></code> signs after ssb in the <code clas
 <span class="highlight-line">Mär 29 00:12:58 andreas-peac gpg-agent[1316]: smartcard signing failed: Kartenfehler</span>
 <span class="highlight-line">Mär 29 00:12:58 andreas-peac gpg-agent[1316]: ssh sign request failed: Kartenfehler &lt;Quelle nicht angegeben></span></code></pre>
 
-    </div><p>https://lists.archive.carbon60.com/gnupg/devel/91138</p>
+    </div><p>The important bits here are <code class="language-plain">TPM2_Sign failed with 469</code> and <code class="language-plain">structure is the wrong size</code>.
+See here: <a href="https://lists.archive.carbon60.com/gnupg/devel/91138" class="external-link" target="_blank">lists.archive.carbon60.com/gnupg/devel/91138</a></p>
 <p>Depending on the sshd_config, you might need to specify the algorithm.
 SHA-512 is not compatible with TPM2.0, so you might try this:</p>
 <div class="code-block">
@@ -554,7 +576,7 @@ SHA-512 is not compatible with TPM2.0, so you might try this:</p>
     </div><p>TODO</p>
 <p>Alternative? personal-digest-preferences in ~/.gnupg/gpg.conf
 https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
-<h2 id="use-tpm2-from-command-line" tabindex="-1">4.4. Use tpm2 from command line <a class="header-anchor" href="#use-tpm2-from-command-line" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="use-tpm2-from-command-line" tabindex="-1">5.4. Use tpm2 from command line <a class="header-anchor" href="#use-tpm2-from-command-line" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>To use TPM without GPG you can run <a href="https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa" class="external-link" target="_blank">this example</a>:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
@@ -574,7 +596,14 @@ https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
 <span class="highlight-line"><span class="token function">cat</span> test.decrypted.txt</span>
 <span class="highlight-line"><span class="token function">rm</span> test.txt test.txt.enc test.decrypted.txt public.pem primary.ctx key.pub key.priv</span></code></pre>
 
-    </div><h1 id="ssh-via-gpg" tabindex="-1">5. SSH via GPG <a class="header-anchor" href="#ssh-via-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><h1 id="gpg-agent-log" tabindex="-1">6. gpg-agent log <a class="header-anchor" href="#gpg-agent-log" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">systemctl <span class="token parameter variable">--user</span> status gpg-agent</span></code></pre>
+
+    </div><h1 id="ssh-via-gpg" tabindex="-1">7. SSH via GPG <a class="header-anchor" href="#ssh-via-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>GPG Key with usage flag <em>Authentication</em> is needed.</p>
 <p>Here is my setup for <code class="language-plain">gpg-agent</code> and the <code class="language-plain">fish</code> shell.</p>
 <div class="code-block">
@@ -595,7 +624,7 @@ https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
 <span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"set --export GPG_TTY (tty)"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span>
 <span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"gpg-connect-agent updatestartuptty /bye >/dev/null"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span></code></pre>
 
-    </div><h1 id="pass" tabindex="-1">6. pass <a class="header-anchor" href="#pass" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><h1 id="pass" tabindex="-1">8. pass <a class="header-anchor" href="#pass" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>pass automatically works with GPG, so all you need to do is set up the right key:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
@@ -603,7 +632,7 @@ https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line">pass init <span class="token punctuation">[</span>-p subfolder<span class="token punctuation">]</span> 1111111190ABCDEF1234567890ABCDEF11111111</span></code></pre>
 
-    </div><h2 id="passff-for-firefox" tabindex="-1">6.1. PassFF for Firefox <a class="header-anchor" href="#passff-for-firefox" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+    </div><h2 id="passff-for-firefox" tabindex="-1">8.1. PassFF for Firefox <a class="header-anchor" href="#passff-for-firefox" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>To automatically fill passwords in your browser, use this sweet extension:
 <a href="https://github.com/passff/passff" class="external-link" target="_blank">github.com/passff/passff</a></p>
 <p>Unfortunately, it requires a host service to run on your machine.
@@ -637,11 +666,11 @@ but I like the approach to specify the URL inside the data just better.</p>
 <span class="highlight-line"> 1 file changed, 2 insertions(+)</span>
 <span class="highlight-line"> create mode 100644 someservice.gpg</span></code></pre>
 
-    </div><h1 id="git%3A-sign-commits-ssh-vs.-gpg" tabindex="-1">7. git: Sign commits SSH vs. GPG <a class="header-anchor" href="#git%3A-sign-commits-ssh-vs.-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><h1 id="git%3A-sign-commits-ssh-vs.-gpg" tabindex="-1">9. git: Sign commits SSH vs. GPG <a class="header-anchor" href="#git%3A-sign-commits-ssh-vs.-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Since 2021 it is also possible to use SSH (and not just GPG) to sign commits.</p>
 <p>I like GPG better though: It can contain your uid (or multiple), a photo, sharing via keyservers is easier..</p>
 <p>Also, I'm not sure if common other tools like Thunderbird support signing via SSH key, so I want to have a GPG key anyway.</p>
-<h1 id="links" tabindex="-1">8. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="links" tabindex="-1">10. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>https://mikeross.xyz/create-gpg-key-pair-with-subkeys/
 https://wiki.archlinux.org/title/GnuPG#SSH_agent
 https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3
