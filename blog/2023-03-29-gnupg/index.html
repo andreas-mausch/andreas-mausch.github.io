@@ -611,7 +611,7 @@ https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
       <i class="icon icon-copy"></i>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> enable-ssh-support <span class="token operator">>></span> ~/.gnupg/gpg-agent.conf</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> 2D9D2A6748BBF5D548BCE4203B95F3633F442614 <span class="token operator">>></span> ~/.gnupg/sshcontrol</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token operator">&lt;</span>SSH-SUBKEY-KEYGRIP<span class="token operator">></span> <span class="token operator">>></span> ~/.gnupg/sshcontrol</span>
 <span class="highlight-line">gpg --export-ssh-key 1111111190ABCDEF1234567890ABCDEF11111111</span></code></pre>
 
     </div><div class="code-block">
