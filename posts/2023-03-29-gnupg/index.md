@@ -416,7 +416,7 @@ Here is my setup for `gpg-agent` and the `fish` shell.
 
 ```bash
 echo enable-ssh-support >> ~/.gnupg/gpg-agent.conf
-echo 2D9D2A6748BBF5D548BCE4203B95F3633F442614 >> ~/.gnupg/sshcontrol
+echo <SSH-SUBKEY-KEYGRIP> >> ~/.gnupg/sshcontrol
 gpg --export-ssh-key 1111111190ABCDEF1234567890ABCDEF11111111
 ```
 
