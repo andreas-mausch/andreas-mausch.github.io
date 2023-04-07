@@ -4,9 +4,10 @@ date: 2023-03-29T19:00:00+02:00
 tags: ['gpg', 'tpm', 'ssh', 'security']
 toc: true
 draft: true
+thumbnail: gnupg.jpg
 ---
 
-TODO: Add cool-retro-term screenshot
+{% image "gnupg.jpg" %}
 
 When I work with Git, I use SSH keys for authentication with GitHub, GitLab etc.
 Same goes for SSH connections for terminal connections to servers.
