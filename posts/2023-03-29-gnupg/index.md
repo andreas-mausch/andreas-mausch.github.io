@@ -490,6 +490,8 @@ Domains might change, and to support multiple domains, you
 This specific problem is [not solved](https://github.com/passff/passff/issues/466) for passff either,
 but I like the approach to specify the URL inside the data just better.
 
+Make sure to enable the configuration option `Index URL fields on startup`.
+
 Installation and example usage of passff:
 
 ```bash
@@ -521,6 +523,37 @@ Since 2021 it is also possible to use SSH (and not just GPG) to sign commits.
 I like GPG better though: It can contain your uid (or multiple), a photo, sharing via keyservers is easier..
 
 Also, I'm not sure if common other tools like Thunderbird support signing via SSH key, so I want to have a GPG key anyway.
+
+# E-Mails
+
+I'd love to use OpenPGP signing with Thunderbird.
+I don't really care about encryption here, but signing would be nice.
+
+However, I wasn't able to connect Thunderbird to my GPG-managed TPM key.
+
+Previous to Thunderbird 78 there was a plugin named Enigmail, which worked great in combination with GnuPG.
+Since then, Thunderbird decided to not use GnuPG any longer "to avoid licensing issues" [source](https://support.mozilla.org/en-US/kb/openpgp-thunderbird-howto-and-faq#w_does-openpgp-in-thunderbird-78-look-and-work-exactly-like-enigmail).
+
+They chose to integrate OpenPGP directly into the program (so no additional plugin needed -> yay),
+but their library RNP does not support SmartCards at all, and also no TPM (boo!).
+To me it is not understandable how you strip an important feature like that from a working extension
+without replacement.
+
+Sooo....Thunderbird added a hidden feature *allow_external_gnupg* which uses the GPGME library to access the GnuPG keys.
+See their [guide here](https://wiki.mozilla.org/Thunderbird:OpenPGP:Smartcards).
+
+I tried to use it and failed, and in general it seemed not user-friendly to me yet.
+Duplicating the public keys in another keychain is bad enough, you can only configure one Key-ID, there is no check the Key-ID you enter is valid
+and the error message I got when signing a message was only visible in the Error Console.
+
+It complained that `GPGME.allDependenciesLoaded()` returned false, however I had the `gpgme` package installed on my machine.
+
+```shell-session
+$ ls -lah /usr/lib/libgpgme.so
+lrwxrwxrwx 1 root root 19 20. Mär 14:58 /usr/lib/libgpgme.so -> libgpgme.so.11.28.0*
+```
+
+Maybe in an incompatible version, because I have updated gpg manually..? I don't know, and I didn't investigate further.
 
 # Links
 
