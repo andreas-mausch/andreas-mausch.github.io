@@ -551,6 +551,16 @@ It complained that `GPGME.allDependenciesLoaded()` returned false, however I had
 ```shell-session
 $ ls -lah /usr/lib/libgpgme.so
 lrwxrwxrwx 1 root root 19 20. Mär 14:58 /usr/lib/libgpgme.so -> libgpgme.so.11.28.0*
+
+$ gpgme-tool
+OK GPGME-Tool 1.19.0 ready
+KEYLIST
+D <?xml version="1.0" encoding="UTF-8" standalone="yes"?>%0A
+D <gpgme>%0A
+D   <keylist>%0A
+D     <key>%0A
+D       <revoked value="0x0" />%0A
+D       <expired value="0x0" />%0A
 ```
 
 Maybe in an incompatible version, because I have updated gpg manually..? I don't know, and I didn't investigate further.
