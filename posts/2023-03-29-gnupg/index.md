@@ -1,9 +1,8 @@
 ---
 title: "GnuPG for everything"
 date: 2023-03-29T19:00:00+02:00
-tags: ['gpg', 'tpm', 'ssh', 'security']
+tags: ['gpg', 'openpgp', 'keyserver', 'tpm', 'pass', 'ssh', 'security', 'signing', 'encryption']
 toc: true
-draft: true
 thumbnail: gnupg.jpg
 ---
 
@@ -145,7 +144,7 @@ Revoke certificate generation is not possible in batch mode. :/
 This is the command I used to generate my small photo, which is just under 6.144 bytes.
 
 ```bash
-magick convert -auto-orient -strip -gravity center -crop 240:288 +repage -resize "240x288" -gaussian-blur 0.05 -sampling-factor 4:2:0 -interlace JPEG -colorspace YUV -quality 52 input.jpg gpg.jpg
+magick convert -auto-orient -strip -gaussian-blur 0.05 -gravity center -crop 240:288 +repage -resize "240x288" -sampling-factor 4:2:0 -interlace JPEG -colorspace YUV -quality 52 input.jpg gpg.jpg
 ```
 
 Verify the sampling factor via `identify`:
@@ -169,6 +168,10 @@ If you are happy with the result, add the jpg to your key via:
 ```bash
 gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 addphoto save
 ```
+
+Here is my photo, a 6.109 bytes file:
+
+{% image "me.jpg" %}
 
 ## Generate Subkeys
 
@@ -198,6 +201,8 @@ gpg --output subkeys-only.secret.asc --armor --export-secret-subkeys --export-op
 
 # Validate:
 gpg --show-keys primary-with-subkeys.public.asc
+gpg --list-packets primary-with-subkeys.public.asc
+pgpdump primary-with-subkeys.public.asc
 ```
 
 > Subkeys are bound to the primary key and exported together with it when calling gpg --export or gpg --send-keys. Same applies to signatures and user ID packages.
@@ -239,6 +244,20 @@ Just set the trust level to *ultimate (5)*.
 gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 trust quit
 ```
 
+## Optional: Publish key to keyserver
+
+If you like, you can share your public key to others by uploading it on a keyserver, like [keyserver.ubuntu.com](https://keyserver.ubuntu.com)
+
+```bash
+gpg --send-keys 1111111190ABCDEF1234567890ABCDEF11111111
+```
+
+See my published key [here](https://keyserver.ubuntu.com/pks/lookup?search=6FB79D6D075A268571DE9E42C2C14B464D7B72E9&fingerprint=on&op=index):
+
+{% image "keyserver-ubuntu.png" %}
+
+[Download]({{ "andreas-mausch.public.asc" | relativeFile | url }})
+
 # Key ID: Short vs. Long vs. Keygrip vs. Fingerprint
 
 | Type         | Value                                              |
@@ -246,11 +265,12 @@ gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 trust quit
 | Fingerprint  | 7196 E081 94D5 3FCB FD15  D960 FA6C 71F9 A73D BE0B |
 | Long Key ID  |                                FA6C 71F9 A73D BE0B |
 | Short Key ID |                                          A73D BE0B |
+| Keygrip      | 69B7 D1FB F6F4 8ACA 5453  1CB7 7108 8109 C081 C081 |
 
 > Neither of these [long and short ID] should be used for key identification nowadays — it is possible to create keys with matching key ids (and this has been demonstrated with short key ids).
 > -- [https://unix.stackexchange.com/questions/576933/what-are-the-keyid-and-finguerprint-of-a-public-key-in-gpg-and-apt-key](https://unix.stackexchange.com/questions/576933/what-are-the-keyid-and-finguerprint-of-a-public-key-in-gpg-and-apt-key)
 
--> Always use the fingerprint
+-> **Always use the fingerprint for the Key ID**
 
 What is the Keygrip then?
 
@@ -266,11 +286,26 @@ Also, the keygrip has the same length as a fingerprint:
 
 Pff...confuse me more.
 gpg cli in my opinion should never display the short and long key ids if they are not to be trusted.
-And it should put a prefix/name if it outputs a (seemingly) random number to the user. But well.
+`--with-subkey-fingerprints` should be the default.
+And gpg should put a prefix/name if it outputs a (seemingly) random number to the user. But well.
 
 # Thoughts on multiple identities
 
-TODO
+I would love to only use a single identity for all purposes, because I am a single person.
+
+However, I do use a separate GPG key for personal and business usages.
+I might even split up my personal keys further, depending on how secret something should really be.
+
+The reason is (as someone on the internet pointed out): You need to expose your whole social network with GPG.
+You need to connect all your personal and business e-mail addresses to your UIDs, if you decide to use a single key.
+You cannot keep like a single e-mail-address private or disconnect it. It would need to be a UID in a different key then.
+
+It is by design.
+
+I would like to see a combined key which expresses "I am Andreas and I am using my personal laptop", which is pretty much
+the same as *please confirm your new device* messages from various services.
+My identity would still be *Andreas*, but I'd need a second secret to get access to some service.
+I'm not sure whether this is possible with GPG.
 
 # Thoughts on pinentry
 
@@ -293,6 +328,10 @@ I can't understand why there need to be `keytocard` and `keytotpm` commands, whe
 I do understand TPM is different from a smartcard and maybe offers more features, but it just would be nice to support the smartcard interface.
 On Windows for example, there is a thing like a [TPM virtual smart card](https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-overview).
 That's what I mean, but it should be part of TPM, in my opinion.
+
+Regarding the trustworthiness of TPM: I can't really tell, and there might be backdoors.
+I just like the concept that the private key is never accessible in the RAM of the computer.
+That's the main reason I prefer it over password-protected keys (without TPM), even though the latter might be more trustworthy.
 
 ## Move subkeys
 
@@ -371,17 +410,12 @@ SHA-512 is not compatible with TPM2.0, so you might try this:
 ssh -vvvv -o PubkeyAcceptedKeyTypes=rsa-sha2-256 nuc@nuc
 ```
 
-Or, alternatively you can set this option for all connections:
+Or, alternatively you can set this option for all connections (you might need to append the file):
 
-```bash
-echo "Host *" >> ~/.ssh/config
-echo "  PubkeyAcceptedKeyTypes rsa-sha2-256" >> ~/.ssh/config
+```{data-filename=~/.ssh/config}
+Host *
+  PubkeyAcceptedKeyTypes rsa-sha2-256
 ```
-
-TODO
-
-Alternative? personal-digest-preferences in ~/.gnupg/gpg.conf
-https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html
 
 ## Use tpm2 from command line
 
@@ -421,12 +455,12 @@ echo <SSH-SUBKEY-KEYGRIP> >> ~/.gnupg/sshcontrol
 gpg --export-ssh-key 1111111190ABCDEF1234567890ABCDEF11111111
 ```
 
-```bash
-echo "set --erase SSH_AGENT_PID" >> ~/.config/fish/conf.d/gpg-ssh.fish
-echo "set --erase SSH_AUTH_SOCK" >> ~/.config/fish/conf.d/gpg-ssh.fish
-echo "set --universal --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)" >> ~/.config/fish/conf.d/gpg-ssh.fish
-echo "set --export GPG_TTY (tty)" >> ~/.config/fish/conf.d/gpg-ssh.fish
-echo "gpg-connect-agent updatestartuptty /bye >/dev/null" >> ~/.config/fish/conf.d/gpg-ssh.fish
+```{data-filename=~/.config/fish/conf.d/gpg-ssh.fish}
+set --erase SSH_AGENT_PID
+set --erase SSH_AUTH_SOCK
+set --universal --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+set --export GPG_TTY (tty)" >> ~/.config/fish/conf.d/gpg-ssh.fish
+gpg-connect-agent updatestartuptty /bye >/dev/null
 ```
 
 # pass
@@ -474,6 +508,12 @@ url: someservice.com
  create mode 100644 someservice.gpg
 ```
 
+## pass-otp
+
+There is also the neat [pass-otp](https://archlinux.org/packages/community/any/pass-otp/) extension for pass, which can generate your 2FA numbers.
+However, I prefer to keep a real second factor with my Android phone and [Aegis](https://github.com/beemdevelopment/Aegis).
+I dislike the idea of having all secrets on the same device for a reason.
+
 # git: Sign commits SSH vs. GPG
 
 Since 2021 it is also possible to use SSH (and not just GPG) to sign commits.
@@ -484,8 +524,9 @@ Also, I'm not sure if common other tools like Thunderbird support signing via SS
 
 # Links
 
-https://mikeross.xyz/create-gpg-key-pair-with-subkeys/
-https://wiki.archlinux.org/title/GnuPG#SSH_agent
-https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3
-https://opensource.com/article/19/4/gpg-subkeys-ssh
-https://www.foxk.it/blog/gpg-ssh-agent-fish/
+- [https://wxcafe.net/posts/yubikey_for_everything/](https://wxcafe.net/posts/yubikey_for_everything/) (Post title was inspired by this)
+- [https://mikeross.xyz/create-gpg-key-pair-with-subkeys/](https://mikeross.xyz/create-gpg-key-pair-with-subkeys/)
+- [https://wiki.archlinux.org/title/GnuPG#SSH_agent](https://wiki.archlinux.org/title/GnuPG#SSH_agent)
+- [https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3](https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3)
+- [https://opensource.com/article/19/4/gpg-subkeys-ssh](https://opensource.com/article/19/4/gpg-subkeys-ssh)
+- [https://www.foxk.it/blog/gpg-ssh-agent-fish/](https://www.foxk.it/blog/gpg-ssh-agent-fish/)
