@@ -220,8 +220,9 @@ It can be used for both, printing (via CUPS) and scanning (via SANE).</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> hplip</span>
-<span class="highlight-line">hp-setup <span class="token parameter variable">-i</span></span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> cups hplip</span>
+<span class="highlight-line"><span class="token comment"># optional: paru -S hplip-plugin</span></span>
+<span class="highlight-line">hp-setup <span class="token parameter variable">--interactive</span></span></code></pre>
 
     </div><p>This will walk you through a CLI wizard, it will show all available devices and will add the selected one to CUPS:</p>
 <p><a href="/blog/2022-09-06-hp-officejet-250-mobile/linux/hp-setup.png" target="_blank"><img src="/images/hp-setup-OqDfjhtlQZ-300.jpeg" alt="undefined" width="300" height="404"></a></p>
