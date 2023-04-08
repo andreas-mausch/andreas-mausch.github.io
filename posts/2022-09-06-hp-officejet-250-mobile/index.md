@@ -106,8 +106,9 @@ Bus 003 Device 003: ID 03f0:e911 HP, Inc OfficeJet 250 Mobile Series
 ```
 
 ```bash
-sudo pacman -S hplip
-hp-setup -i
+sudo pacman -S cups hplip
+# optional: paru -S hplip-plugin
+hp-setup --interactive
 ```
 
 This will walk you through a CLI wizard, it will show all available devices and will add the selected one to CUPS:
