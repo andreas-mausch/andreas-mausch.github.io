@@ -46,13 +46,33 @@
   <ul class="tags">
     
         
+          <li><a href="/blog/tags/encryption">#encryption</a></li>
+        
+    
+        
           <li><a href="/blog/tags/gpg">#gpg</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/keyserver">#keyserver</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/openpgp">#openpgp</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/pass">#pass</a></li>
         
     
         
     
         
           <li><a href="/blog/tags/security">#security</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/signing">#signing</a></li>
         
     
         
@@ -119,6 +139,9 @@
 
                     <li><a href="#trust-the-key">1.7. Trust the key</a>
             		</li>
+
+                    <li><a href="#optional%3A-publish-key-to-keyserver">1.8. Optional: Publish key to keyserver</a>
+            		</li>
                 </ol>
             		</li>
 
@@ -160,6 +183,9 @@
                 <ol>
                     
                     <li><a href="#passff-for-firefox">8.1. PassFF for Firefox</a>
+            		</li>
+
+                    <li><a href="#pass-otp">8.2. pass-otp</a>
             		</li>
                 </ol>
             		</li>
@@ -310,7 +336,7 @@ Use the long key id as argument for <code class="language-plain">gen-revoke</cod
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">magick convert -auto-orient <span class="token parameter variable">-strip</span> <span class="token parameter variable">-gravity</span> center <span class="token parameter variable">-crop</span> <span class="token number">240</span>:288 +repage <span class="token parameter variable">-resize</span> <span class="token string">"240x288"</span> -gaussian-blur <span class="token number">0.05</span> -sampling-factor <span class="token number">4</span>:2:0 <span class="token parameter variable">-interlace</span> JPEG <span class="token parameter variable">-colorspace</span> YUV <span class="token parameter variable">-quality</span> <span class="token number">52</span> input.jpg gpg.jpg</span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">magick convert -auto-orient <span class="token parameter variable">-strip</span> -gaussian-blur <span class="token number">0.05</span> <span class="token parameter variable">-gravity</span> center <span class="token parameter variable">-crop</span> <span class="token number">240</span>:288 +repage <span class="token parameter variable">-resize</span> <span class="token string">"240x288"</span> -sampling-factor <span class="token number">4</span>:2:0 <span class="token parameter variable">-interlace</span> JPEG <span class="token parameter variable">-colorspace</span> YUV <span class="token parameter variable">-quality</span> <span class="token number">52</span> input.jpg gpg.jpg</span></code></pre>
 
     </div><p>Verify the sampling factor via <code class="language-plain">identify</code>:</p>
 <div class="code-block">
@@ -354,7 +380,9 @@ In my case, the output was just <code class="language-plain">2x2</code>.</p>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 addphoto save</span></code></pre>
 
-    </div><h2 id="generate-subkeys" tabindex="-1">1.3. Generate Subkeys <a class="header-anchor" href="#generate-subkeys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+    </div><p>Here is my photo, a 6.109 bytes file:</p>
+<img src="/blog/2023-03-29-gnupg/me.jpg" width="240" height="288" alt="undefined">
+<h2 id="generate-subkeys" tabindex="-1">1.3. Generate Subkeys <a class="header-anchor" href="#generate-subkeys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
@@ -383,7 +411,9 @@ so you need to have a backup of your keys!</p>
 <span class="highlight-line">gpg <span class="token parameter variable">--output</span> subkeys-only.secret.asc <span class="token parameter variable">--armor</span> --export-secret-subkeys --export-options export-backup 1111111190ABCDEF1234567890ABCDEF11111111</span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token comment"># Validate:</span></span>
-<span class="highlight-line">gpg --show-keys primary-with-subkeys.public.asc</span></code></pre>
+<span class="highlight-line">gpg --show-keys primary-with-subkeys.public.asc</span>
+<span class="highlight-line">gpg --list-packets primary-with-subkeys.public.asc</span>
+<span class="highlight-line">pgpdump primary-with-subkeys.public.asc</span></code></pre>
 
     </div><figure class="quote">
 <blockquote cite="https://security.stackexchange.com/questions/51474/one-public-key-contains-all-subkeys">
@@ -426,7 +456,18 @@ Just set the trust level to <em>ultimate (5)</em>.</p>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --edit-key 1111111190ABCDEF1234567890ABCDEF11111111 trust quit</span></code></pre>
 
-    </div><h1 id="key-id%3A-short-vs.-long-vs.-keygrip-vs.-fingerprint" tabindex="-1">2. Key ID: Short vs. Long vs. Keygrip vs. Fingerprint <a class="header-anchor" href="#key-id%3A-short-vs.-long-vs.-keygrip-vs.-fingerprint" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><h2 id="optional%3A-publish-key-to-keyserver" tabindex="-1">1.8. Optional: Publish key to keyserver <a class="header-anchor" href="#optional%3A-publish-key-to-keyserver" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>If you like, you can share your public key to others by uploading it on a keyserver, like <a href="https://keyserver.ubuntu.com" class="external-link" target="_blank">keyserver.ubuntu.com</a></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --send-keys 1111111190ABCDEF1234567890ABCDEF11111111</span></code></pre>
+
+    </div><p>See my published key <a href="https://keyserver.ubuntu.com/pks/lookup?search=6FB79D6D075A268571DE9E42C2C14B464D7B72E9&amp;fingerprint=on&amp;op=index" class="external-link" target="_blank">here</a>:</p>
+<img src="/blog/2023-03-29-gnupg/keyserver-ubuntu.png" width="1323" height="945" alt="undefined">
+<p><a href="/blog/2023-03-29-gnupg/andreas-mausch.public.asc">Download</a></p>
+<h1 id="key-id%3A-short-vs.-long-vs.-keygrip-vs.-fingerprint" tabindex="-1">2. Key ID: Short vs. Long vs. Keygrip vs. Fingerprint <a class="header-anchor" href="#key-id%3A-short-vs.-long-vs.-keygrip-vs.-fingerprint" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <table>
 <thead>
 <tr>
@@ -447,6 +488,10 @@ Just set the trust level to <em>ultimate (5)</em>.</p>
 <td>Short Key ID</td>
 <td style="text-align:right">A73D BE0B</td>
 </tr>
+<tr>
+<td>Keygrip</td>
+<td style="text-align:right">69B7 D1FB F6F4 8ACA 5453  1CB7 7108 8109 C081 C081</td>
+</tr>
 </tbody>
 </table>
 <figure class="quote">
@@ -455,7 +500,7 @@ Just set the trust level to <em>ultimate (5)</em>.</p>
 </blockquote>
 <figcaption class="quote-attribution"><a href="https://unix.stackexchange.com/questions/576933/what-are-the-keyid-and-finguerprint-of-a-public-key-in-gpg-and-apt-key" class="external-link" target="_blank">https://unix.stackexchange.com/questions/576933/what-are-the-keyid-and-finguerprint-of-a-public-key-in-gpg-and-apt-key</a></figcaption>
 </figure>
-<p>-&gt; Always use the fingerprint</p>
+<p>-&gt; <strong>Always use the fingerprint for the Key ID</strong></p>
 <p>What is the Keygrip then?</p>
 <figure class="quote">
 <blockquote cite="https://blog.djoproject.net/2020/05/03/main-differences-between-a-gnupg-fingerprint-a-ssh-fingerprint-and-a-keygrip/]">
@@ -473,9 +518,20 @@ Just set the trust level to <em>ultimate (5)</em>.</p>
 
     </div><p>Pff...confuse me more.
 gpg cli in my opinion should never display the short and long key ids if they are not to be trusted.
-And it should put a prefix/name if it outputs a (seemingly) random number to the user. But well.</p>
+<code class="language-plain">--with-subkey-fingerprints</code> should be the default.
+And gpg should put a prefix/name if it outputs a (seemingly) random number to the user. But well.</p>
 <h1 id="thoughts-on-multiple-identities" tabindex="-1">3. Thoughts on multiple identities <a class="header-anchor" href="#thoughts-on-multiple-identities" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<p>TODO</p>
+<p>I would love to only use a single identity for all purposes, because I am a single person.</p>
+<p>However, I do use a separate GPG key for personal and business usages.
+I might even split up my personal keys further, depending on how secret something should really be.</p>
+<p>The reason is (as someone on the internet pointed out): You need to expose your whole social network with GPG.
+You need to connect all your personal and business e-mail addresses to your UIDs, if you decide to use a single key.
+You cannot keep like a single e-mail-address private or disconnect it. It would need to be a UID in a different key then.</p>
+<p>It is by design.</p>
+<p>I would like to see a combined key which expresses &quot;I am Andreas and I am using my personal laptop&quot;, which is pretty much
+the same as <em>please confirm your new device</em> messages from various services.
+My identity would still be <em>Andreas</em>, but I'd need a second secret to get access to some service.
+I'm not sure whether this is possible with GPG.</p>
 <h1 id="thoughts-on-pinentry" tabindex="-1">4. Thoughts on pinentry <a class="header-anchor" href="#thoughts-on-pinentry" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I dislike you cannot see which process asked for the key when doing a decryption or signing.
 pinentry just pops ups and asks for a your passphrase.</p>
@@ -490,6 +546,9 @@ I can't understand why there need to be <code class="language-plain">keytocard</
 I do understand TPM is different from a smartcard and maybe offers more features, but it just would be nice to support the smartcard interface.
 On Windows for example, there is a thing like a <a href="https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-overview" class="external-link" target="_blank">TPM virtual smart card</a>.
 That's what I mean, but it should be part of TPM, in my opinion.</p>
+<p>Regarding the trustworthiness of TPM: I can't really tell, and there might be backdoors.
+I just like the concept that the private key is never accessible in the RAM of the computer.
+That's the main reason I prefer it over password-protected keys (without TPM), even though the latter might be more trustworthy.</p>
 <h2 id="move-subkeys" tabindex="-1">5.1. Move subkeys <a class="header-anchor" href="#move-subkeys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
@@ -565,18 +624,15 @@ SHA-512 is not compatible with TPM2.0, so you might try this:</p>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">ssh</span> <span class="token parameter variable">-vvvv</span> <span class="token parameter variable">-o</span> <span class="token assign-left variable">PubkeyAcceptedKeyTypes</span><span class="token operator">=</span>rsa-sha2-256 nuc@nuc</span></code></pre>
 
-    </div><p>Or, alternatively you can set this option for all connections:</p>
+    </div><p>Or, alternatively you can set this option for all connections (you might need to append the file):</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"Host *"</span> <span class="token operator">>></span> ~/.ssh/config</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"  PubkeyAcceptedKeyTypes rsa-sha2-256"</span> <span class="token operator">>></span> ~/.ssh/config</span></code></pre>
+    <pre class="language-plain"><code data-filename="~/.ssh/config" class="language-plain"><span class="highlight-line">Host *</span>
+<span class="highlight-line">  PubkeyAcceptedKeyTypes rsa-sha2-256</span></code></pre>
 
-    </div><p>TODO</p>
-<p>Alternative? personal-digest-preferences in ~/.gnupg/gpg.conf
-https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
-<h2 id="use-tpm2-from-command-line" tabindex="-1">5.4. Use tpm2 from command line <a class="header-anchor" href="#use-tpm2-from-command-line" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+    </div><h2 id="use-tpm2-from-command-line" tabindex="-1">5.4. Use tpm2 from command line <a class="header-anchor" href="#use-tpm2-from-command-line" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>To use TPM without GPG you can run <a href="https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa" class="external-link" target="_blank">this example</a>:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
@@ -618,11 +674,11 @@ https://r-pufky.github.io/docs/apps/gpg/usage/manjaro.html</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"set --erase SSH_AGENT_PID"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"set --erase SSH_AUTH_SOCK"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"set --universal --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"set --export GPG_TTY (tty)"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"gpg-connect-agent updatestartuptty /bye >/dev/null"</span> <span class="token operator">>></span> ~/.config/fish/conf.d/gpg-ssh.fish</span></code></pre>
+    <pre class="language-plain"><code data-filename="~/.config/fish/conf.d/gpg-ssh.fish" class="language-plain"><span class="highlight-line">set --erase SSH_AGENT_PID</span>
+<span class="highlight-line">set --erase SSH_AUTH_SOCK</span>
+<span class="highlight-line">set --universal --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)</span>
+<span class="highlight-line">set --export GPG_TTY (tty)" >> ~/.config/fish/conf.d/gpg-ssh.fish</span>
+<span class="highlight-line">gpg-connect-agent updatestartuptty /bye >/dev/null</span></code></pre>
 
     </div><h1 id="pass" tabindex="-1">8. pass <a class="header-anchor" href="#pass" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>pass automatically works with GPG, so all you need to do is set up the right key:</p>
@@ -666,16 +722,23 @@ but I like the approach to specify the URL inside the data just better.</p>
 <span class="highlight-line"> 1 file changed, 2 insertions(+)</span>
 <span class="highlight-line"> create mode 100644 someservice.gpg</span></code></pre>
 
-    </div><h1 id="git%3A-sign-commits-ssh-vs.-gpg" tabindex="-1">9. git: Sign commits SSH vs. GPG <a class="header-anchor" href="#git%3A-sign-commits-ssh-vs.-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><h2 id="pass-otp" tabindex="-1">8.2. pass-otp <a class="header-anchor" href="#pass-otp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>There is also the neat <a href="https://archlinux.org/packages/community/any/pass-otp/" class="external-link" target="_blank">pass-otp</a> extension for pass, which can generate your 2FA numbers.
+However, I prefer to keep a real second factor with my Android phone and <a href="https://github.com/beemdevelopment/Aegis" class="external-link" target="_blank">Aegis</a>.
+I dislike the idea of having all secrets on the same device for a reason.</p>
+<h1 id="git%3A-sign-commits-ssh-vs.-gpg" tabindex="-1">9. git: Sign commits SSH vs. GPG <a class="header-anchor" href="#git%3A-sign-commits-ssh-vs.-gpg" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Since 2021 it is also possible to use SSH (and not just GPG) to sign commits.</p>
 <p>I like GPG better though: It can contain your uid (or multiple), a photo, sharing via keyservers is easier..</p>
 <p>Also, I'm not sure if common other tools like Thunderbird support signing via SSH key, so I want to have a GPG key anyway.</p>
 <h1 id="links" tabindex="-1">10. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
-<p>https://mikeross.xyz/create-gpg-key-pair-with-subkeys/
-https://wiki.archlinux.org/title/GnuPG#SSH_agent
-https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3
-https://opensource.com/article/19/4/gpg-subkeys-ssh
-https://www.foxk.it/blog/gpg-ssh-agent-fish/</p>
+<ul>
+<li><a href="https://wxcafe.net/posts/yubikey_for_everything/" class="external-link" target="_blank">https://wxcafe.net/posts/yubikey_for_everything/</a> (Post title was inspired by this)</li>
+<li><a href="https://mikeross.xyz/create-gpg-key-pair-with-subkeys/" class="external-link" target="_blank">https://mikeross.xyz/create-gpg-key-pair-with-subkeys/</a></li>
+<li><a href="https://wiki.archlinux.org/title/GnuPG#SSH_agent" class="external-link" target="_blank">https://wiki.archlinux.org/title/GnuPG#SSH_agent</a></li>
+<li><a href="https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3" class="external-link" target="_blank">https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3</a></li>
+<li><a href="https://opensource.com/article/19/4/gpg-subkeys-ssh" class="external-link" target="_blank">https://opensource.com/article/19/4/gpg-subkeys-ssh</a></li>
+<li><a href="https://www.foxk.it/blog/gpg-ssh-agent-fish/" class="external-link" target="_blank">https://www.foxk.it/blog/gpg-ssh-agent-fish/</a></li>
+</ul>
 
 
 <script async src="/scripts/index.js"></script>

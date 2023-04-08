@@ -4,11 +4,29 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2023-02-27T19:00:00Z</updated>
+  <updated>2023-03-29T17:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>GnuPG for everything</title>
+    <link href="https://andreas-mausch.de/blog/2023-03-29-gnupg/"/>
+    <updated>2023-03-29T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2023-03-29-gnupg/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2023-03-29-gnupg/gnupg.jpg&quot; width=&quot;1280&quot; height=&quot;800&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;When I work with Git, I use SSH keys for authentication with GitHub, GitLab etc.
+Same goes for SSH connections for terminal connections to servers.&lt;/p&gt;
+&lt;p&gt;When I want to sign or encrypt my e-mails, I use GPG.
+I also use GPG indirectly when using &lt;a href=&quot;https://www.passwordstore.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;pass - The Standard Unix Password Manager&lt;/a&gt;.
+And you need GPG if you want to publish a package to Maven Central, for example.
+You can also use GPG to sign your git commits.&lt;/p&gt;
+&lt;p&gt;I barely used GPG in the past, but since I heard you can use the GPG key also for SSH connections,
+I thought that this would be a big improvement for me.
+I would only have to handle the single GPG key instead of having GPG and SSH simultaneously.&lt;/p&gt;
+&lt;p&gt;I have also used a Nitrokey in &lt;a href=&quot;https://andreas-mausch.de/blog/2021-02-23-nitrokey/&quot;&gt;the past&lt;/a&gt;, which can be used as a GPG smartcard.
+That means your keys wouldn&#39;t&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Keyboard layouts, laptops and programming</title>
     <link href="https://andreas-mausch.de/blog/2023-02-27-keyboard-layouts/"/>
