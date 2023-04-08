@@ -459,7 +459,7 @@ gpg --export-ssh-key 1111111190ABCDEF1234567890ABCDEF11111111
 set --erase SSH_AGENT_PID
 set --erase SSH_AUTH_SOCK
 set --universal --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-set --export GPG_TTY (tty)" >> ~/.config/fish/conf.d/gpg-ssh.fish
+set --export GPG_TTY (tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 ```
 
