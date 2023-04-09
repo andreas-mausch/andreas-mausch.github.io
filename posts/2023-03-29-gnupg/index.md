@@ -565,6 +565,12 @@ D       <expired value="0x0" />%0A
 
 Maybe in an incompatible version, because I have updated gpg manually..? I don't know, and I didn't investigate further.
 
+Update: After restarting my system and re-configuring the GPG key in Thunderbird I got it working.
+I needed to use the Long Key ID.
+I use multiple e-mail addresses, so I had to make sure to configure the right one (via *Manage identities...*):
+
+{% image "thunderbird-settings.png" %}
+
 # Links
 
 - [https://wxcafe.net/posts/yubikey_for_everything/](https://wxcafe.net/posts/yubikey_for_everything/) (Post title was inspired by this)
