@@ -571,6 +571,21 @@ I use multiple e-mail addresses, so I had to make sure to configure the right on
 
 {% image "thunderbird-settings.png" %}
 
+# Chat
+
+XMPP supports an experimental [extension](https://xmpp.org/extensions/xep-0373.html) for OpenPGP support.
+
+I've tried to use it with the Gajim client, which did not work well.
+
+The [OpenPGP plugin](https://dev.gajim.org/gajim/gajim-plugins/-/tree/master/openpgp)
+for Gajim tries to create a new key and fails.
+I wasn't able to re-use my existing key.
+
+{% image "gajim-openpgp-wizard-error.png" %}
+
+I did install `sudo pacman -S python-gpgme` beforehand and I was able to call gpgme in the python interpreter successfully
+(`gpg.Context().create_key('myname')`), so I don't know what went wrong here.
+
 # Links
 
 - [https://wxcafe.net/posts/yubikey_for_everything/](https://wxcafe.net/posts/yubikey_for_everything/) (Post title was inspired by this)
