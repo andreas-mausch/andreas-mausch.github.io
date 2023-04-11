@@ -196,7 +196,10 @@
                     <li><a href="#e-mails">10. E-Mails</a>
             		</li>
 
-                    <li><a href="#links">11. Links</a>
+                    <li><a href="#chat">11. Chat</a>
+            		</li>
+
+                    <li><a href="#links">12. Links</a>
             		</li>
                 </ol>
             </nav>
@@ -772,7 +775,16 @@ and the error message I got when signing a message was only visible in the Error
 I needed to use the Long Key ID.
 I use multiple e-mail addresses, so I had to make sure to configure the right one (via <em>Manage identities...</em>):</p>
 <img src="/blog/2023-03-29-gnupg/thunderbird-settings.png" width="1547" height="1077" alt="undefined">
-<h1 id="links" tabindex="-1">11. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="chat" tabindex="-1">11. Chat <a class="header-anchor" href="#chat" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>XMPP supports an experimental <a href="https://xmpp.org/extensions/xep-0373.html" class="external-link" target="_blank">extension</a> for OpenPGP support.</p>
+<p>I've tried to use it with the Gajim client, which did not work well.</p>
+<p>The <a href="https://dev.gajim.org/gajim/gajim-plugins/-/tree/master/openpgp" class="external-link" target="_blank">OpenPGP plugin</a>
+for Gajim tries to create a new key and fails.
+I wasn't able to re-use my existing key.</p>
+<img src="/blog/2023-03-29-gnupg/gajim-openpgp-wizard-error.png" width="1497" height="878" alt="undefined">
+<p>I did install <code class="language-plain">sudo pacman -S python-gpgme</code> beforehand and I was able to call gpgme in the python interpreter successfully
+(<code class="language-plain">gpg.Context().create_key('myname')</code>), so I don't know what went wrong here.</p>
+<h1 id="links" tabindex="-1">12. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <ul>
 <li><a href="https://wxcafe.net/posts/yubikey_for_everything/" class="external-link" target="_blank">https://wxcafe.net/posts/yubikey_for_everything/</a> (Post title was inspired by this)</li>
 <li><a href="https://mikeross.xyz/create-gpg-key-pair-with-subkeys/" class="external-link" target="_blank">https://mikeross.xyz/create-gpg-key-pair-with-subkeys/</a></li>
