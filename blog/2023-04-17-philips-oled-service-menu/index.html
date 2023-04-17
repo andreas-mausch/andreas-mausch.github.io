@@ -1,0 +1,109 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philips OLED hidden Service Menu</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Philips OLED hidden Service Menu</h1>
+<div>
+  <time class="postlist-date" datetime="2023-04-17T20:00:00.000+00:00">Apr 17, 2023</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/menu">#menu</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/oled">#oled</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/philips">#philips</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/pixel%20shifting">#pixel shifting</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/tv">#tv</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>I have bought a <strong>Philips 48OLED707/12</strong> for my homeoffice setup.</p>
+<p>It is a great TV / monitor, but you might not like it's OLED protection settings.
+The screen saver comes on automatically and there is no way to disable it,
+you are forced to power it off for ~10min minimum after a long session..</p>
+<p>..but the worst for me was the pixel shifting.
+Even in Gaming / PC mode I noticed the screen is not fully displayed.
+This is especially noticable when you look at the corners of the menu bars.</p>
+<h1 id="disable-pixel-shifting" tabindex="-1">1. Disable Pixel Shifting <a class="header-anchor" href="#disable-pixel-shifting" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've searched the internet for a solution and indeed there is a (temporary) one.
+But wow, it is hidden:</p>
+<p>You need to press <strong>Home -&gt; 1999 -&gt; Back Button</strong> and you are presented with this service menu:</p>
+<img src="/blog/2023-04-17-philips-oled-service-menu/service-menu.jpg" width="1920" height="1080" alt="undefined">
+<p>I have no idea what all of these settings mean, but one menu item is called <em>OLED IMAGESHIFT</em>.</p>
+<img src="/blog/2023-04-17-philips-oled-service-menu/oled-imageshift-disabled.jpg" width="1920" height="1080" alt="undefined">
+<p>You can change its value by pressing <em>Right</em>.
+The changed value (= FALSE) wasn't immediately visible in the menu (only after re-opening the menu),
+but the value itself changed.
+I immediately noticed that the screen corrected itself and pixel shifting was indeed disabled. Hooray.</p>
+<img src="/blog/2023-04-17-philips-oled-service-menu/test-card.jpg" width="1920" height="1080" alt="undefined">
+<img src="/blog/2023-04-17-philips-oled-service-menu/corner-view.jpg" width="1280" height="720" alt="undefined">
+<p>This setting is not permanent though, so you might need to repeat the steps above from time to time.</p>
+<h1 id="another-secret-service-menu%3F" tabindex="-1">2. Another secret service menu? <a class="header-anchor" href="#another-secret-service-menu%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>There is also a second menu. It wasn't very helpful to me, but for the sake of completeness:
+You can press <strong>0,6,2,5,9,6 OK</strong> when connected to another display via HDMI.
+It will bring up this screen:</p>
+<img src="/blog/2023-04-17-philips-oled-service-menu/second-secret-menu-warning.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2023-04-17-philips-oled-service-menu/second-secret-menu.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2023-04-17-philips-oled-service-menu/second-secret-menu-events-log.jpg" width="1280" height="720" alt="undefined">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>

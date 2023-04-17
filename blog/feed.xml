@@ -4,11 +4,25 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2023-03-29T17:00:00Z</updated>
+  <updated>2023-04-17T20:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Philips OLED hidden Service Menu</title>
+    <link href="https://andreas-mausch.de/blog/2023-04-17-philips-oled-service-menu/"/>
+    <updated>2023-04-17T20:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2023-04-17-philips-oled-service-menu/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I have bought a &lt;strong&gt;Philips 48OLED707/12&lt;/strong&gt; for my homeoffice setup.&lt;/p&gt;
+&lt;p&gt;It is a great TV / monitor, but you might not like it&#39;s OLED protection settings.
+The screen saver comes on automatically and there is no way to disable it,
+you are forced to power it off for ~10min minimum after a long session..&lt;/p&gt;
+&lt;p&gt;..but the worst for me was the pixel shifting.
+Even in Gaming / PC mode I noticed the screen is not fully displayed.
+This is especially noticable when you look at the corners of the menu bars.&lt;/p&gt;
+&lt;h1 id=&quot;disable-pixel-shifting&quot; tabindex=&quot;-1&quot;&gt;1. Disable Pixel Shifting &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2023-04-17-philips-oled-service-menu/#disable-pixel-shifting&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
   <entry>
     <title>GnuPG for everything</title>
     <link href="https://andreas-mausch.de/blog/2023-03-29-gnupg/"/>
