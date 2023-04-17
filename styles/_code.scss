@@ -1,4 +1,5 @@
 @use "_code-theme.scss";
+@import "_color-palette";
 
 .code-block {
   position: relative;
@@ -11,6 +12,9 @@ code[class*="language-"] {
 }
 
 .code-block > button {
+  background-color: $content-background-color-dark;
+  border: 1px solid $border-color-dark;
+  color: $text-color-dark;
   opacity: 0;
   transition: visibility 0.3s linear,opacity 0.3s linear;
   visibility: hidden;
@@ -24,7 +28,7 @@ code[class*="language-"] {
 }
 
 .code-block i.icon-check {
-  color: #2a7ae2;
+  color: $link-color-dark;
 }
 
 pre[class*="language-"] {
@@ -36,7 +40,7 @@ code[class*="language-"] {
 }
 
 code[data-filename]::before {
-  color: #000;
+  color: $text-color-dark;
   content: attr(data-filename);
   display: block;
   user-select: none;
@@ -61,4 +65,20 @@ code[class*="language-"] .highlight-line::before {
   position: absolute;
   right: 0.5em;
   top: 0.5em;
+}
+
+@media (prefers-color-scheme: light) {
+  code[data-filename]::before {
+    color: $text-color-light;
+  }
+
+  .code-block > button {
+    background-color: $content-background-color-light;
+    border-color: $border-color-light;
+    color: $text-color-light;
+  }
+
+  .code-block i.icon-check {
+    color: $link-color-light;
+  }
 }

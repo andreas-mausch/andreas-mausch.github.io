@@ -1,0 +1,18 @@
+@use "sass:color";
+
+$background-color-light: #ececec;
+$background-color-dark: #424242;
+
+$content-background-color-light: color.scale($background-color-light, $lightness: 20%);
+$content-background-color-dark: color.scale($background-color-dark, $lightness: -10%);
+
+$text-color-light: #000;
+$text-color-dark: #eee;
+
+$highlight-color: #ff8700;
+
+$link-color-light: #2a7ae2;
+$link-color-dark: color.scale($link-color-light, $lightness: 50%);
+
+$border-color-light: color.scale($background-color-light, $lightness: -30%);
+$border-color-dark: color.scale($background-color-dark, $lightness: 30%);

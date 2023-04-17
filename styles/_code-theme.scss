@@ -1,12 +1,13 @@
 @use "sass:color";
+@import "_color-palette";
 
-$primary-color: rgb(255, 135, 0);
-$secondary-color: #2a7ae2;
+$primary-color: $highlight-color;
+$secondary-color: $link-color-dark;
 
 code[class*="language-"],
 pre[class*="language-"] {
   background: none;
-  color: #000;
+  color: $text-color-dark;
   hyphens: none;
   line-height: 1.5;
   tab-size: 4;
@@ -27,7 +28,7 @@ pre[class*="language-"] {
 
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
-  background: #ececec;
+  background: $background-color-dark;
 }
 
 /* Inline code */
@@ -41,11 +42,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #858585;
+  color: #acacac;
 }
 
 .token.punctuation {
-  color: color.scale($secondary-color, $lightness: -60%);
+  color: color.scale($secondary-color, $lightness: 60%);
 }
 
 .namespace {
@@ -65,7 +66,7 @@ pre[class*="language-"] {
 
 .token.boolean,
 .token.number {
-  color: color.scale($secondary-color, $lightness: -30%);
+  color: color.scale($secondary-color, $lightness: 30%);
 }
 
 .token.selector,
@@ -73,7 +74,7 @@ pre[class*="language-"] {
 .token.string,
 .token.char,
 .token.builtin {
-  color: color.scale($primary-color, $lightness: -50%);
+  color: color.scale($primary-color, $lightness: 50%);
 }
 
 .token.inserted {
@@ -93,11 +94,11 @@ pre[class*="language-"] {
 .token.attr-value,
 .token.function,
 .token.class-name {
-  color: color.scale($primary-color, $lightness: -20%);
+  color: color.scale($primary-color, $lightness: 20%);
 }
 
 .token.keyword {
-  color: color.scale($primary-color, $lightness: -40%);
+  color: color.scale($primary-color, $lightness: 40%);
 }
 
 .token.regex,
@@ -116,4 +117,63 @@ pre[class*="language-"] {
 
 .token.entity {
   cursor: help;
+}
+
+@media (prefers-color-scheme: light) {
+
+  $secondary-color: $link-color-light;
+
+  code[class*="language-"],
+  pre[class*="language-"] {
+    color: $text-color-light;
+  }
+
+  :not(pre)>code[class*="language-"],
+  pre[class*="language-"] {
+    background: $background-color-light;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #858585;
+  }
+
+  .token.punctuation {
+    color: color.scale($secondary-color, $lightness: -60%);
+  }
+
+  .token.boolean,
+  .token.number {
+    color: color.scale($secondary-color, $lightness: -30%);
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin {
+    color: color.scale($primary-color, $lightness: -50%);
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string,
+  .token.variable {
+    color: $secondary-color;
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.function,
+  .token.class-name {
+    color: color.scale($primary-color, $lightness: -20%);
+  }
+
+  .token.keyword {
+    color: color.scale($primary-color, $lightness: -40%);
+  }
 }

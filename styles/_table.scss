@@ -1,3 +1,6 @@
+@use "sass:color";
+@import "_color-palette";
+
 table {
   border-collapse: collapse;
   display: block;
@@ -7,26 +10,49 @@ table {
 
 table td,
 table th {
-  border: 1px solid #ddd;
+  border: 1px solid $border-color-dark;
   padding: 8px;
 }
 
 table tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: $background-color-dark;
 }
 
 table tr:nth-child(odd) {
-  background-color: #dde4e8;
+  background-color: color.scale($background-color-dark, $lightness: 10%);
 }
 
 table tr:hover {
-  background-color: #fff;
+  background-color: $content-background-color-dark;
 }
 
 table th {
-  background-color: #fff;
-  color: rgb(255, 135, 0);
+  background-color: $content-background-color-dark;
+  color: $highlight-color;
   padding-bottom: 12px;
   padding-top: 12px;
   text-align: left;
+}
+
+@media (prefers-color-scheme: light) {
+  table td,
+  table th {
+    border-color: $border-color-light;
+  }
+
+  table tr:nth-child(even) {
+    background-color: $background-color-light;
+  }
+
+  table tr:nth-child(odd) {
+    background-color: color.scale($background-color-light, $lightness: -5%);
+  }
+
+  table tr:hover {
+    background-color: $content-background-color-light;
+  }
+
+  table th {
+    background-color: $content-background-color-light;
+  }
 }

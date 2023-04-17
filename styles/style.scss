@@ -1,9 +1,11 @@
 @use "@fontsource/raleway/scss/mixins" as OpenSans;
+@use "sass:color";
 @use "img-comparison-slider/dist/styles.css";
 @use "_code.scss";
 @use "_image-carousel.scss";
 @use "_image-comparison-slider.scss";
 @use "_table.scss";
+@import "_color-palette";
 
 @include OpenSans.fontFace(
   $weight: 400,
@@ -11,10 +13,6 @@
   $fontDir: "fontsource"
 );
 
-$background-color: #ececec;
-$content-background-color: #fcfcfc;
-$highlight-color: rgb(255, 135, 0);
-$link-color: #2a7ae2;
 $spacing-unit: 30px;
 
 html,
@@ -24,7 +22,8 @@ body {
 }
 
 body {
-  background-color: $background-color;
+  background-color: $background-color-dark;
+  color: $text-color-dark;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
   line-height: 1.5;
@@ -64,7 +63,7 @@ li {
 }
 
 body > .content {
-  background-color: $content-background-color;
+  background-color: $content-background-color-dark;
   padding: 16px 8px;
 }
 
@@ -80,7 +79,7 @@ video {
 }
 
 a {
-  color: $link-color;
+  color: $link-color-dark;
   text-decoration: underline;
   text-decoration-color: transparent;
   transition: color 1s ease,
@@ -208,7 +207,7 @@ a {
 }
 
 .toc {
-  border: 1px solid #a2a9b1;
+  border: 1px solid $border-color-dark;
   font-size: 11pt;
   margin-bottom: calc($spacing-unit / 2);
   padding: 7px;
@@ -226,6 +225,7 @@ a {
   background-size: contain;
   content: "";
   display: inline-block;
+  filter: invert(100%);
   height: 11px;
   margin-left: 4px;
   width: 11px;
@@ -246,6 +246,7 @@ h3:hover .header-anchor,
 h4:hover .header-anchor,
 h5:hover .header-anchor,
 h6:hover .header-anchor {
+  filter: invert(100%);
   visibility: visible;
 }
 
@@ -255,7 +256,7 @@ h6:hover .header-anchor {
 }
 
 kbd {
-  border: 1px solid #000;
+  border: 1px solid $text-color-dark;
   border-radius: 2px;
   padding: 2px;
 }
@@ -265,7 +266,7 @@ kbd {
 }
 
 blockquote {
-  background-color: $background-color;
+  background-color: $background-color-dark;
   border-radius: 0.5em;
   font-family: Lucida Sans Typewriter, Lucida Console, monaco, Bitstream Vera Sans Mono, monospace;
   font-size: 11pt;
@@ -323,7 +324,7 @@ figcaption {
 
   &,
   &:visited {
-    color: #424242;
+    color: color.scale($text-color-dark, $lightness: 20%);
   }
 }
 
@@ -335,7 +336,7 @@ $site-nav-width: 38px;
 $site-nav-spacing: calc($site-nav-width / 4);
 
 .site-nav-items {
-  background-color: $background-color;
+  background-color: $background-color-dark;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -373,7 +374,7 @@ $site-nav-spacing: calc($site-nav-width / 4);
 .nav-button,
 .nav-button::before,
 .nav-button::after {
-  background-color: #000;
+  background-color: $text-color-dark;
   border-radius: 2px;
   display: block;
   height: 3px;
@@ -413,6 +414,46 @@ $site-nav-spacing: calc($site-nav-width / 4);
 
 .icon {
   vertical-align: middle;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: $background-color-light;
+    color: $text-color-light;
+  }
+
+  body > .content {
+    background-color: $content-background-color-light;
+  }
+
+  a {
+    color: $link-color-light;
+  }
+
+  .site-header a {
+    &,
+    &:visited {
+      color: color.scale($text-color-light, $lightness: 30%);
+    }
+  }
+
+  .nav-button,
+  .nav-button::before,
+  .nav-button::after {
+    background-color: $text-color-light;
+  }
+
+  .site-nav-items {
+    background-color: $background-color-light;
+  }
+
+  .toc {
+    border-color: $border-color-light;
+  }
+
+  blockquote {
+    background-color: $background-color-light;
+  }
 }
 
 @media only screen and (min-width: 641px) {
