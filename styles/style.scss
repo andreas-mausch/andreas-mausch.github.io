@@ -451,6 +451,10 @@ $site-nav-spacing: calc($site-nav-width / 4);
     border-color: $border-color-light;
   }
 
+  .external-link::after {
+    filter: none;
+  }
+
   blockquote {
     background-color: $background-color-light;
   }
