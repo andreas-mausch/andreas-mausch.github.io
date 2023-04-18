@@ -3,8 +3,8 @@
 $background-color-light: #ececec;
 $background-color-dark: #424242;
 
-$content-background-color-light: color.scale($background-color-light, $lightness: 20%);
-$content-background-color-dark: color.scale($background-color-dark, $lightness: -10%);
+$content-background-color-light: color.scale($background-color-light, $lightness: 85%);
+$content-background-color-dark: color.scale($background-color-dark, $lightness: -50%);
 
 $text-color-light: #000;
 $text-color-dark: #eee;
