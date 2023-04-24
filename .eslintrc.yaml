@@ -31,6 +31,7 @@ rules:
     - argsIgnorePattern: ^_
       varsIgnorePattern: ^_
       caughtErrorsIgnorePattern: ^_
+ignorePatterns: [ "!.eleventy.js", "_site" ]
 overrides:
   - files: [".eleventy.js", "eleventy/*.js" ]
     env:

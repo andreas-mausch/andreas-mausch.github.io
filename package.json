@@ -6,7 +6,7 @@
     "build": "ELEVENTY_ENV=production eleventy",
     "generate:font": "mkdirp ./_site/styles/icons/ && iconism --output ./_site/styles/icons/ --types ttf,woff2 --assets css --prefix icon --debug ./icon-font.json",
     "lint": "npm run lint:scripts && npm run lint:scss",
-    "lint:scripts": "eslint --ignore-pattern !.eleventy.js ./.eleventy.js ./eleventy/**/*.js ./scripts/**/*.ts",
+    "lint:scripts": "eslint .",
     "lint:scss": "stylelint ./styles/**/*.scss",
     "check:types": "tsc",
     "check:links": "linkinator --skip=linkedin.com,github.com --recurse --timeout 3000 --verbosity error ./_site/",
