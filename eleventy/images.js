@@ -86,7 +86,7 @@ function carousel(srcs) {
     throw new Error("srcs is undefined or empty")
   }
 
-  let slider = "<div class=\"swiffy-slider slider-indicators-sm slider-indicators-dark slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain\">"
+  let slider = "<div class=\"swiffy-slider slider-indicators-sm slider-indicators-outside slider-indicators-round slider-indicators-highlight slider-nav-visible slider-nav-touch slider-nav-dark slider-nav-chevron slider-item-ratio-contain\">"
   slider += "<ul class=\"slider-container\">"
   for (const thumbnail of srcs.map(src => clickableThumbnail(src, "Slider image", this.context.environments.page))) {
     slider += `<li>${thumbnail}</li>`
