@@ -1,0 +1,95 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmable LED fan</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Programmable LED fan</h1>
+<div>
+  <time class="postlist-date" datetime="2023-05-15T17:00:00.000+00:00">May 15, 2023</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/fan">#fan</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/led">#led</a></li>
+        
+    
+        
+    
+  </ul>
+</div>
+
+
+
+<img src="/blog/2023-05-15-led-fan/led-fan-animation.webp" width="720" height="404" alt="undefined">
+<p>The fan came with a small CD-ROM for a Windows software to program the LEDs.</p>
+<p>However, I quickly found a project on GitHub to do the same on Linux and MacOS:</p>
+<p><a href="https://github.com/fergofrog/microwave_usb_fan" class="external-link" target="_blank">https://github.com/fergofrog/microwave_usb_fan</a></p>
+<p>The examples work great.
+You can upload multiple 144x11px images which are shown in sequence, and you can add a (simple) predefined animation to it.</p>
+<p>One thing I noticed: You cannot address all of the available circular space.
+See this example file:</p>
+<img src="/blog/2023-05-15-led-fan/borders.png" width="144" height="11" alt="undefined">
+<p>This leads to the result from the thumbnail:</p>
+<img src="/blog/2023-05-15-led-fan/borders-on-fan.jpg" width="1280" height="720" alt="undefined">
+<p>As you can see, a small portion remains black.</p>
+<p>Some more example files:</p>
+<img src="/blog/2023-05-15-led-fan/hello.png" width="144" height="11" alt="undefined">
+<img src="/blog/2023-05-15-led-fan/smiley.png" width="144" height="11" alt="undefined">
+<img src="/blog/2023-05-15-led-fan/table-flip.png" width="144" height="11" alt="undefined">
+<p>To generate the table flipper I have used this command:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">magick convert <span class="token parameter variable">-size</span> 144x11 <span class="token parameter variable">-background</span> black <span class="token parameter variable">-gravity</span> center +antialias <span class="token parameter variable">-font</span> <span class="token string">"Source-Han-Sans-CN-Bold"</span> <span class="token parameter variable">-pointsize</span> <span class="token number">9</span> <span class="token parameter variable">-fill</span> red label:<span class="token string">"(ノ ゜Д゜)ノ ︵ ┻━┻"</span> PNG24:image.png</span></code></pre>
+
+    </div><img src="/blog/2023-05-15-led-fan/smiley-on-fan.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2023-05-15-led-fan/full-setup.jpg" width="1280" height="720" alt="undefined">
+<img src="/blog/2023-05-15-led-fan/fan-still.jpg" width="405" height="720" alt="undefined">
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>

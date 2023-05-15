@@ -4,11 +4,30 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2023-04-17T20:00:00Z</updated>
+  <updated>2023-05-15T17:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Programmable LED fan</title>
+    <link href="https://andreas-mausch.de/blog/2023-05-15-led-fan/"/>
+    <updated>2023-05-15T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2023-05-15-led-fan/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2023-05-15-led-fan/led-fan-animation.webp&quot; width=&quot;720&quot; height=&quot;404&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;The fan came with a small CD-ROM for a Windows software to program the LEDs.&lt;/p&gt;
+&lt;p&gt;However, I quickly found a project on GitHub to do the same on Linux and MacOS:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/fergofrog/microwave_usb_fan&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/fergofrog/microwave_usb_fan&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The examples work great.
+You can upload multiple 144x11px images which are shown in sequence, and you can add a (simple) predefined animation to it.&lt;/p&gt;
+&lt;p&gt;One thing I noticed: You cannot address all of the available circular space.
+See this example file:&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2023-05-15-led-fan/borders.png&quot; width=&quot;144&quot; height=&quot;11&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;This leads to the result from the thumbnail:&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2023-05-15-led-fan/borders-on-fan.jpg&quot; width=&quot;1280&quot; height=&quot;720&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;As you can see, a small portion remains black.&lt;/p&gt;
+&lt;p&gt;Some more exampl&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Philips OLED hidden Service Menu</title>
     <link href="https://andreas-mausch.de/blog/2023-04-17-philips-oled-service-menu/"/>
