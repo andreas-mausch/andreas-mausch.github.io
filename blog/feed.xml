@@ -4,11 +4,28 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2023-05-15T17:00:00Z</updated>
+  <updated>2023-08-14T12:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Bluetooth Speaker with 16x16 Display (Divoom Ditoo Pro)</title>
+    <link href="https://andreas-mausch.de/blog/2023-08-14-divoom-ditoo-pro/"/>
+    <updated>2023-08-14T12:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2023-08-14-divoom-ditoo-pro/</id>
+    <content xml:lang="en" type="html">&lt;img src=&quot;https://andreas-mausch.de/blog/2023-08-14-divoom-ditoo-pro/ditoo-pro-playstation-symbols.jpg&quot; width=&quot;721&quot; height=&quot;980&quot; alt=&quot;undefined&quot; /&gt;
+&lt;p&gt;I&#39;ve received a gift! It&#39;s a Divoom Ditoo Pro.&lt;/p&gt;
+&lt;p&gt;It&#39;s a bluetooth speaker with some keys and extras, and it looks fantastic.&lt;/p&gt;
+&lt;p&gt;However, I quickly discovered you need to create an Divoom account to use the app.
+You can enter anything you want, I did not receive any code via e-mail.
+I still really dislike the need for the account in the first place.&lt;/p&gt;
+&lt;p&gt;The only connection I made to the device was via bluetooth, so I thought it should be possible to create
+an open-source app which offers the basic features.&lt;/p&gt;
+&lt;p&gt;I looked around on GitHub and found there are similar devices from the same company, but I couldn&#39;t find exactly what
+I was looking for: Sending gifs via bluetooth without the need of the official app.&lt;/p&gt;
+&lt;h1 id=&quot;capture-bluetooth-network-traffic-on-samsung-smartphone&quot; tabindex=&quot;-1&quot;&gt;1. Capture Bluetooth network traffic on Samsung smartphone &lt;&lt;/h1&gt;</content>
+  </entry>
   <entry>
     <title>Programmable LED fan</title>
     <link href="https://andreas-mausch.de/blog/2023-05-15-led-fan/"/>

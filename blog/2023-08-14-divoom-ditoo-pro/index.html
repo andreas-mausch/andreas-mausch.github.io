@@ -1,0 +1,234 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Speaker with 16x16 Display (Divoom Ditoo Pro)</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Bluetooth Speaker with 16x16 Display (Divoom Ditoo Pro)</h1>
+<div>
+  <time class="postlist-date" datetime="2023-08-14T12:00:00.000+00:00">Aug 14, 2023</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/animations">#animations</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/hacking">#hacking</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/led">#led</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/pixel%20art">#pixel art</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/reverse%20engineering">#reverse engineering</a></li>
+        
+    
+  </ul>
+</div>
+
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#capture-bluetooth-network-traffic-on-samsung-smartphone">1. Capture Bluetooth network traffic on Samsung smartphone</a>
+            
+                <ol>
+                    
+                    <li><a href="#enable-bluetooth-hci-snoop-log">1.1. Enable Bluetooth HCI Snoop Log</a>
+            		</li>
+
+                    <li><a href="#get-the-bluetooth-log">1.2. Get the Bluetooth log</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#analyse-the-bluetooth-log-via-wireshark">2. Analyse the Bluetooth log via Wireshark</a>
+            		</li>
+
+                    <li><a href="#existing-github-projects-for-divoom">3. Existing GitHub projects for Divoom</a>
+            		</li>
+
+                    <li><a href="#analyse-the-.apk">4. Analyse the .apk</a>
+            		</li>
+
+                    <li><a href="#send-the-first-self-constructed-message-to-the-ditoo-pro">5. Send the first self-constructed message to the Ditoo Pro</a>
+            		</li>
+
+                    <li><a href="#the-message-structure">6. The message structure</a>
+            		</li>
+
+                    <li><a href="#send-a-gif-animation">7. Send a gif animation</a>
+            
+                <ol>
+                    
+                    <li><a href="#decode-the-image-format">7.1. Decode the image format</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#project-with-all-my-code">8. Project with all my code</a>
+            		</li>
+
+                    <li><a href="#more-to-come">9. More to come</a>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
+
+
+<img src="/blog/2023-08-14-divoom-ditoo-pro/ditoo-pro-playstation-symbols.jpg" width="721" height="980" alt="undefined">
+<p>I've received a gift! It's a Divoom Ditoo Pro.</p>
+<p>It's a bluetooth speaker with some keys and extras, and it looks fantastic.</p>
+<p>However, I quickly discovered you need to create an Divoom account to use the app.
+You can enter anything you want, I did not receive any code via e-mail.
+I still really dislike the need for the account in the first place.</p>
+<p>The only connection I made to the device was via bluetooth, so I thought it should be possible to create
+an open-source app which offers the basic features.</p>
+<p>I looked around on GitHub and found there are similar devices from the same company, but I couldn't find exactly what
+I was looking for: Sending gifs via bluetooth without the need of the official app.</p>
+<h1 id="capture-bluetooth-network-traffic-on-samsung-smartphone" tabindex="-1">1. Capture Bluetooth network traffic on Samsung smartphone <a class="header-anchor" href="#capture-bluetooth-network-traffic-on-samsung-smartphone" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>First, I wanted to record what secret data the proprietary app sends and receives.
+I was happy the whole transfer was made via bluetooth, and WiFi was not necessary
+(the app also offers it, but I haven't tried it).</p>
+<h2 id="enable-bluetooth-hci-snoop-log" tabindex="-1">1.1. Enable Bluetooth HCI Snoop Log <a class="header-anchor" href="#enable-bluetooth-hci-snoop-log" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Enable the developer settings and enable the option to log bluetooth traffic.</p>
+<p>Note: I had to restart my device afterwards to make it work.</p>
+<p><a href="/blog/2023-08-14-divoom-ditoo-pro/android-developer-settings.png" target="_blank"><img src="/images/android-developer-settings-N47UpeevfL-300.jpeg" alt="undefined" width="300" height="633"></a></p>
+<h2 id="get-the-bluetooth-log" tabindex="-1">1.2. Get the Bluetooth log <a class="header-anchor" href="#get-the-bluetooth-log" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Now, I started the official app, did some settings, changed the image and so on.
+When I thought I gathered enough information, I then had to <a href="https://stackoverflow.com/questions/50639978/where-is-bluetooth-hci-log-of-samsung-s8-android-8-0" class="external-link" target="_blank">get the bluetooth log file</a>.</p>
+<p>I think this is now special to Samsung and there is no general way for it on Android, so it might be different on your device.</p>
+<p>I dealt the phone number <code class="language-plain">*#9900#</code> to enter the service mode menu.
+Then, I selected <em>Run dumpstate/logcat</em>. It took some minutes to finish.
+Next, I selected <em>Copy to sdcard(include CP Ramdump)</em>.
+And finally, there was a file <code class="language-plain">/sdcard/logs/bluetooth/btsnoop_hci_202308131606.cfa</code> which I copied on my PC via adb.</p>
+<p><a href="/blog/2023-08-14-divoom-ditoo-pro/android-samsung-service-mode.png" target="_blank"><img src="/images/android-samsung-service-mode-DRrc10vXCS-300.jpeg" alt="undefined" width="300" height="633"></a></p>
+<h1 id="analyse-the-bluetooth-log-via-wireshark" tabindex="-1">2. Analyse the Bluetooth log via Wireshark <a class="header-anchor" href="#analyse-the-bluetooth-log-via-wireshark" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>This .cfa file you can now open in Wireshark (or, if you also like the terminal: with Termshark).
+There was a lot of stuff going on. Some of what seemed familiar (like A2DP), but also something new.</p>
+<p>I didn't know an audio device can also handle a serial connection next to it, the Serial Port Profile (SPP).
+I still don't know what limitations it has, but it seems to be a pretty straight-forward pipe in both directions.</p>
+<p>I quickly discovered I need to the set the filter to <em>btspp</em> (see <a href="https://www.wireshark.org/docs/dfref/b/btspp.html" class="external-link" target="_blank">here</a>)
+to get the messages I am interested in.</p>
+<img src="/blog/2023-08-14-divoom-ditoo-pro/termshark.png" width="1874" height="1010" alt="undefined">
+<h1 id="existing-github-projects-for-divoom" tabindex="-1">3. Existing GitHub projects for Divoom <a class="header-anchor" href="#existing-github-projects-for-divoom" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Of course I wasn't the first person to look closer at the communication of these devices.
+And as already mentioned, there are several similar devices. Here is a bunch of links which I found to be helpful:</p>
+<ul>
+<li><a href="https://github.com/RomRider/node-divoom-timebox-evo" class="external-link" target="_blank">https://github.com/RomRider/node-divoom-timebox-evo</a><br>
+(especially <a href="https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md" class="external-link" target="_blank">https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md</a>)</li>
+<li><a href="https://github.com/eelcocramer/node-bluetooth-serial-port" class="external-link" target="_blank">https://github.com/eelcocramer/node-bluetooth-serial-port</a></li>
+<li><a href="https://github.com/redphx/apixoo" class="external-link" target="_blank">https://github.com/redphx/apixoo</a></li>
+</ul>
+<h1 id="analyse-the-.apk" tabindex="-1">4. Analyse the .apk <a class="header-anchor" href="#analyse-the-.apk" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I downloaded the <em>Divoom pixel art editor_3.6.40.apk</em> file and opened it in the tool <em>JADX-GUI</em>.
+It offers some help for deobfuscation and after some time I found an enum with all the commands available via SPP.</p>
+<img src="/blog/2023-08-14-divoom-ditoo-pro/jadx-gui.png" width="1916" height="1080" alt="undefined">
+<p><strong>TOOO</strong></p>
+<h1 id="send-the-first-self-constructed-message-to-the-ditoo-pro" tabindex="-1">5. Send the first self-constructed message to the Ditoo Pro <a class="header-anchor" href="#send-the-first-self-constructed-message-to-the-ditoo-pro" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>My goal was to send the simplest possible message to the Ditoo to just see if it receives it and also to make sure
+there are not extra security measures like a device authentication, certificates or something similar.</p>
+<p>I failed to find a convenient tool to replay the bluetooth messages from a Linux machine.
+I only found an <a href="https://unix.stackexchange.com/questions/92255/how-do-i-connect-and-send-data-to-a-bluetooth-serial-port-on-linux" class="external-link" target="_blank">entry for sdptool</a>,
+which wasn't convenient at all (and the method described might be outdated anyway), so I went with Node.js instead.</p>
+<p>In the traffic capture file was a command to enable and disable an alarm and I thought that would be a good start.</p>
+<p>I spotted it fairly easily, by combining what I saw in the .apk, the length of the messages and two messages which only differed in one byte:
+One of them was 00, the other one 01, which made me confident it was the enable/disable alarm message.</p>
+<p>So I copied the bytes from the capture (see the termshark screenshot above), used the (very easy to use) library <code class="language-plain">bluetooth-serial-port</code>
+and tried this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token keyword">import</span> <span class="token punctuation">{</span> BluetoothSerialPort <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"bluetooth-serial-port"</span><span class="token punctuation">;</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token keyword">const</span> port <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BluetoothSerialPort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">port<span class="token punctuation">.</span><span class="token function">findSerialPortChannel</span><span class="token punctuation">(</span><span class="token string">"11:22:33:44:55:66"</span><span class="token punctuation">,</span> <span class="token parameter">channel</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"found serial port channel:"</span><span class="token punctuation">,</span> channel<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line">  port<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">"11:22:33:44:55:66"</span><span class="token punctuation">,</span> channel<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"connected"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    port<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"010d00430000142e000200000028bc0002"</span><span class="token punctuation">,</span> <span class="token string">"hex"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> bytesWritten</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Sent command to disable alarm"</span><span class="token punctuation">,</span> err<span class="token punctuation">,</span> bytesWritten<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line">  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"cannot connect"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line">  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"found nothing"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>
+
+    </div><p>Replace the MAC address and boom, it worked on the first try. The Ditoo showed a screen with a sign an alarm was disabled.</p>
+<p>So a milestone was reached:
+Now I am able to communicate with the Ditoo and send whatever commands I like to.</p>
+<h1 id="the-message-structure" tabindex="-1">6. The message structure <a class="header-anchor" href="#the-message-structure" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><strong>TODO</strong></p>
+<h1 id="send-a-gif-animation" tabindex="-1">7. Send a gif animation <a class="header-anchor" href="#send-a-gif-animation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><strong>TODO</strong></p>
+<h2 id="decode-the-image-format" tabindex="-1">7.1. Decode the image format <a class="header-anchor" href="#decode-the-image-format" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p><strong>TODO</strong></p>
+<h1 id="project-with-all-my-code" tabindex="-1">8. Project with all my code <a class="header-anchor" href="#project-with-all-my-code" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I have uploaded my code to GitHub:
+<a href="https://github.com/andreas-mausch/divoom-ditoo-pro-controller" class="external-link" target="_blank">https://github.com/andreas-mausch/divoom-ditoo-pro-controller</a>.</p>
+<h1 id="more-to-come" tabindex="-1">9. More to come <a class="header-anchor" href="#more-to-come" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I would like to implement an alternative app, which doesn't require an account and offers basic features like setting a new image.
+I looked briefly at possible technologies for that.</p>
+<p>I have used Ionic in the past, which was a good experience for me.</p>
+<p>I now consider Flutter and NativeScript.</p>
+<p>I would like to use Vue.js, but I also want to have native UI elements.
+NativeScript has a medium reputation and people on Reddit prefer Flutter or React Native all day long.
+But since this is a new, small project for me I am willing to experiment here to see what is so bad about NativeScript.
+The concept just looks right to me.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
