@@ -1,7 +1,7 @@
 ---
 title: Cast your screen to a Chromecast without Chrome
 date: 2022-02-19T17:00:00+01:00
-tags: ['screen casting', 'chromecast', 'avahi', 'mdns', 'tv']
+tags: ['screen casting', 'chromecast', 'avahi', 'mdns', 'tv', 'hacking', 'reverse engineering']
 thumbnail: chromecast-tv-loading.png
 ---
 
