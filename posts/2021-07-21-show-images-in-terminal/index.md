@@ -39,3 +39,17 @@ timg already supports it.
 
 There is no release of xfce4-terminal yet, but all issues in the milestone 1.1.0 [are completed](https://gitlab.xfce.org/apps/xfce4-terminal/-/milestones/2#tab-issues),
 including the [sixel one](https://gitlab.xfce.org/apps/xfce4-terminal/-/issues/76).
+
+On Manjaro, I had to install [vte3-git](https://aur.archlinux.org/packages/vte3-git) (which comes with sixel support)
+and [xfce4-terminal-git](https://aur.archlinux.org/packages/xfce4-terminal-git) from AUR.
+And of course I had to update my [timg](https://aur.archlinux.org/packages/timg).
+
+I'm sure this will be the defacto-standard in no time.
+
+I now like to call timg like this:
+
+```bash
+timg --pixelation=sixel --grid=2 image.png
+```
+
+{% image "timg-sixel.png" %}
