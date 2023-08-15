@@ -74,6 +74,8 @@ And as already mentioned, there are several similar devices. Here is a bunch of 
 - [https://github.com/redphx/apixoo](https://github.com/redphx/apixoo)
 - [https://estebon.mx/?p=202](https://estebon.mx/?p=202)
   Teardown of a similar model
+- [https://github.com/virtualabs/pixoo-client](https://github.com/virtualabs/pixoo-client)  
+  Python implementation which supports converting .gif -> Divoom format
 
 # Analyse the .apk
 
