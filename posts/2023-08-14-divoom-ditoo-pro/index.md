@@ -72,6 +72,8 @@ And as already mentioned, there are several similar devices. Here is a bunch of 
   (especially [https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md](https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md))
 - [https://github.com/eelcocramer/node-bluetooth-serial-port](https://github.com/eelcocramer/node-bluetooth-serial-port)
 - [https://github.com/redphx/apixoo](https://github.com/redphx/apixoo)
+- [https://estebon.mx/?p=202](https://estebon.mx/?p=202)
+  Teardown of a similar model
 
 # Analyse the .apk
 
