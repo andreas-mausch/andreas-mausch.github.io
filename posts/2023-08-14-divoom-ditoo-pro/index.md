@@ -131,7 +131,49 @@ Replace the MAC address and boom, it worked on the first try. The Ditoo showed a
 So a milestone was reached:
 Now I am able to communicate with the Ditoo and send whatever commands I like to.
 
-# The message structure
+# The image file format
+
+I call the file format *divoom16* from here on.
+I only cover 16x16 animations here.
+
+I have colored the sections of the frame in this screenshot (in dhex):
+
+{% image "image-in-hex.png" %}
+
+See also the very detailed description here:
+[https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md](https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md)
+
+Each frame (FRAME_DATA) consists of:
+`AA LLLL TTTT RR NN COLOR_DATA PIXEL_DATA`
+
+- `AA`: Frame Start
+- `LLLL`: FRAME_DATA length in bytes
+- `TTTT`: Time of the frame in ms
+- `RR`: He describes it as *Reset Palette*, but I think it rather says whether to re-use the palette from the previous frame
+- `NN`: Number of Colors in the frame's palette
+- `COLOR_DATA`: 3 bytes for each color, one for R, G, B
+- `PIXEL_DATA`: See below
+
+The colors of the image in the screenshot are:
+
+<pre>
+Color [000]: #000000 <span style="color: #000000">████</span>
+Color [001]: #9b9b9b <span style="color: #9b9b9b">████</span>
+Color [002]: #36055e <span style="color: #36055e">████</span>
+Color [003]: #926dc4 <span style="color: #926dc4">████</span>
+Color [004]: #e0c3c3 <span style="color: #e0c3c3">████</span>
+Color [005]: #8f00ff <span style="color: #8f00ff">████</span>
+Color [006]: #cc8989 <span style="color: #cc8989">████</span>
+Color [007]: #a13d3d <span style="color: #a13d3d">████</span>
+</pre>
+
+The pixel data format differs, depending on the number of colors in the image.
+Each pixel uses log2(colors) bits to reference to a color of the palette.
+
+For example an image with 8 colors (like in the screenshot above) uses 3 bits per pixel.
+An image with 12 colors would use 4 bits per pixel instead, and a 256 color image uses 8 bits per pixel.
+
+# The network protocol
 
 **TODO**
 
