@@ -99,22 +99,25 @@
                     <li><a href="#send-the-first-self-constructed-message-to-the-ditoo-pro">5. Send the first self-constructed message to the Ditoo Pro</a>
             		</li>
 
-                    <li><a href="#the-message-structure">6. The message structure</a>
+                    <li><a href="#the-image-file-format">6. The image file format</a>
             		</li>
 
-                    <li><a href="#send-a-gif-animation">7. Send a gif animation</a>
+                    <li><a href="#the-network-protocol">7. The network protocol</a>
+            		</li>
+
+                    <li><a href="#send-a-gif-animation">8. Send a gif animation</a>
             
                 <ol>
                     
-                    <li><a href="#decode-the-image-format">7.1. Decode the image format</a>
+                    <li><a href="#decode-the-image-format">8.1. Decode the image format</a>
             		</li>
                 </ol>
             		</li>
 
-                    <li><a href="#project-with-all-my-code">8. Project with all my code</a>
+                    <li><a href="#project-with-all-my-code">9. Project with all my code</a>
             		</li>
 
-                    <li><a href="#more-to-come">9. More to come</a>
+                    <li><a href="#more-to-come">10. More to come</a>
             		</li>
                 </ol>
             </nav>
@@ -213,16 +216,51 @@ and tried this:</p>
     </div><p>Replace the MAC address and boom, it worked on the first try. The Ditoo showed a screen with a sign an alarm was disabled.</p>
 <p>So a milestone was reached:
 Now I am able to communicate with the Ditoo and send whatever commands I like to.</p>
-<h1 id="the-message-structure" tabindex="-1">6. The message structure <a class="header-anchor" href="#the-message-structure" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="the-image-file-format" tabindex="-1">6. The image file format <a class="header-anchor" href="#the-image-file-format" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I call the file format <em>divoom16</em> from here on.
+I only cover 16x16 animations here.</p>
+<p>Let's take this example image (which I have converted to a .gif so we can view it in the browser).</p>
+<img src="/blog/2023-08-14-divoom-ditoo-pro/witch.gif" width="256" height="256" style="image-rendering: pixelated" alt="Animation of a witch">
+<p>I have colored the sections of the original frame bytes in this screenshot (in dhex):</p>
+<img src="/blog/2023-08-14-divoom-ditoo-pro/image-in-hex.png" width="654" height="520" alt="undefined">
+<p>See also the very detailed description here:
+<a href="https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md" class="external-link" target="_blank">https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md</a></p>
+<p>Each frame (FRAME_DATA) consists of:
+<code class="language-plain">AA LLLL TTTT RR NN COLOR_DATA PIXEL_DATA</code></p>
+<ul>
+<li><code class="language-plain">AA</code>: Frame Start</li>
+<li><code class="language-plain">LLLL</code>: FRAME_DATA length in bytes</li>
+<li><code class="language-plain">TTTT</code>: Time of the frame in ms</li>
+<li><code class="language-plain">RR</code>: He describes it as <em>Reset Palette</em>, but I think it rather says whether to re-use the palette from the previous frame</li>
+<li><code class="language-plain">NN</code>: Number of Colors in the frame's palette</li>
+<li><code class="language-plain">COLOR_DATA</code>: 3 bytes for each color, one for R, G, B</li>
+<li><code class="language-plain">PIXEL_DATA</code>: See below</li>
+</ul>
+<p>The colors of the image in the screenshot are:</p>
+<pre>
+Color [000]: #000000 <span style="color: #000000">████</span>
+Color [001]: #9b9b9b <span style="color: #9b9b9b">████</span>
+Color [002]: #36055e <span style="color: #36055e">████</span>
+Color [003]: #926dc4 <span style="color: #926dc4">████</span>
+Color [004]: #e0c3c3 <span style="color: #e0c3c3">████</span>
+Color [005]: #8f00ff <span style="color: #8f00ff">████</span>
+Color [006]: #cc8989 <span style="color: #cc8989">████</span>
+Color [007]: #a13d3d <span style="color: #a13d3d">████</span>
+</pre>
+<p>The pixel data format differs, depending on the number of colors in the image.
+Each pixel uses log2(colors) bits to reference to a color of the palette.</p>
+<p>For example an image with 8 colors (like in the screenshot above) uses 3 bits per pixel.
+An image with 12 colors would use 4 bits per pixel instead, and a 256 color image uses 8 bits per pixel.</p>
+<h1 id="the-network-protocol" tabindex="-1">7. The network protocol <a class="header-anchor" href="#the-network-protocol" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p><strong>TODO</strong></p>
-<h1 id="send-a-gif-animation" tabindex="-1">7. Send a gif animation <a class="header-anchor" href="#send-a-gif-animation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="send-a-gif-animation" tabindex="-1">8. Send a gif animation <a class="header-anchor" href="#send-a-gif-animation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p><strong>TODO</strong></p>
-<h2 id="decode-the-image-format" tabindex="-1">7.1. Decode the image format <a class="header-anchor" href="#decode-the-image-format" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h2 id="decode-the-image-format" tabindex="-1">8.1. Decode the image format <a class="header-anchor" href="#decode-the-image-format" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p><strong>TODO</strong></p>
-<h1 id="project-with-all-my-code" tabindex="-1">8. Project with all my code <a class="header-anchor" href="#project-with-all-my-code" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="project-with-all-my-code" tabindex="-1">9. Project with all my code <a class="header-anchor" href="#project-with-all-my-code" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I have uploaded my code to GitHub:
 <a href="https://github.com/andreas-mausch/divoom-ditoo-pro-controller" class="external-link" target="_blank">https://github.com/andreas-mausch/divoom-ditoo-pro-controller</a>.</p>
-<h1 id="more-to-come" tabindex="-1">9. More to come <a class="header-anchor" href="#more-to-come" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="more-to-come" tabindex="-1">10. More to come <a class="header-anchor" href="#more-to-come" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I would like to implement an alternative app, which doesn't require an account and offers basic features like setting a new image.
 I looked briefly at possible technologies for that.</p>
 <p>I have used Ionic in the past, which was a good experience for me.</p>
