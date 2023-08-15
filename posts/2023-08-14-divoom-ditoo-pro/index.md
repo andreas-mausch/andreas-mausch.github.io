@@ -136,7 +136,11 @@ Now I am able to communicate with the Ditoo and send whatever commands I like to
 I call the file format *divoom16* from here on.
 I only cover 16x16 animations here.
 
-I have colored the sections of the frame in this screenshot (in dhex):
+Let's take this example image (which I have converted to a .gif so we can view it in the browser).
+
+<img src="{% image-url 'witch.gif' %}" width="256" height="256" style="image-rendering: pixelated" alt="Animation of a witch">
+
+I have colored the sections of the original frame bytes in this screenshot (in dhex):
 
 {% image "image-in-hex.png" %}
 
