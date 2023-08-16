@@ -78,6 +78,7 @@ And as already mentioned, there are several similar devices. Here is a bunch of 
   Python implementation which supports converting .gif -> Divoom format
 - [https://github.com/MattIPv4/divoom-control](https://github.com/MattIPv4/divoom-control)  
   A little script/CLI for controlling Divoom devices (I wish I had found this earlier)
+- [https://forum.fhem.de/index.php?topic=81593.0](https://forum.fhem.de/index.php?topic=81593.0)
 
 # Analyse the .apk
 
