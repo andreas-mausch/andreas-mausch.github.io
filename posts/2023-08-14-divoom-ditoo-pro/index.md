@@ -1,7 +1,7 @@
 ---
 title: "Bluetooth Speaker with 16x16 Display (Divoom Ditoo Pro)"
 date: 2023-08-14T14:00:00+02:00
-tags: ['hacking', 'reverse engineering', 'led', 'animations', 'pixel art']
+tags: ['hacking', 'reverse engineering', 'led', 'animations', 'pixel art', 'toys']
 thumbnail: ditoo-pro-playstation-symbols.jpg
 toc: true
 ---

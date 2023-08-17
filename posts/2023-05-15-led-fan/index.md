@@ -1,7 +1,7 @@
 ---
 title: "Programmable LED fan"
 date: 2023-05-15T19:00:00+02:00
-tags: ['fan', 'led']
+tags: ['fan', 'led', 'toys']
 thumbnail: borders-on-fan.jpg
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Tizen on Samsung Gear S3
 date: 2020-06-22T14:00:00+02:00
-tags: ['tizen', 'samsung', 'gear-s3', 'software-development', 'typescript']
+tags: ['tizen', 'samsung', 'gear-s3', 'software-development', 'typescript', 'toys']
 thumbnail: DSC_3608_.jpg
 toc: true
 ---

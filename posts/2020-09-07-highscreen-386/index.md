@@ -1,7 +1,7 @@
 ---
 title: "Nostalgia: Highscreen 386"
 date: 2020-09-07T19:00:00+02:00
-tags: ['nostalgia', 'highscreen', '386', 'msdos', 'lpt']
+tags: ['nostalgia', 'highscreen', '386', 'msdos', 'lpt', 'toys']
 thumbnail: 20200813_202113-ausgeschaltet.jpg
 toc: true
 ---

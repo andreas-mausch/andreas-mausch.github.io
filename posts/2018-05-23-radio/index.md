@@ -1,7 +1,7 @@
 ---
 title: Radio
 date: 2018-05-23T23:00:00+02:00
-tags: ['radio', 'hackrf-one', 'sdr', 'limesdr', 'rtl-sdr', 'gqrx', 'gsm', 'gr-gsm', 'wireshark', 'gps', 'gnss-sdr']
+tags: ['radio', 'hackrf-one', 'sdr', 'limesdr', 'rtl-sdr', 'gqrx', 'gsm', 'gr-gsm', 'wireshark', 'gps', 'gnss-sdr', 'toys']
 thumbnail: notebook.jpg
 ---
 
