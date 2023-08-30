@@ -27,9 +27,9 @@ As you can see, the aspect ration is off for tiv, and I had to adjust the height
 It seems to use the whole width by default and ignores the height, while timg
 detects both, width and height, correctly.
 
-Edit (2023-08-14):
+# Checkout sixel!
 
-Checkout sixel!
+(Edit 2023-08-14)
 
 [https://www.arewesixelyet.com/#xfce-terminal](https://www.arewesixelyet.com/#xfce-terminal)
 
@@ -53,3 +53,6 @@ timg --pixelation=sixel --grid=2 image.png
 ```
 
 {% image "timg-sixel.png" %}
+
+Update 2023-08-30: Since last week, tmux now also supports sixel:
+[https://github.com/tmux/tmux/commit/dfbc6b1888c110cf0ade66f20188c57757ee1298](https://github.com/tmux/tmux/commit/dfbc6b1888c110cf0ade66f20188c57757ee1298)
