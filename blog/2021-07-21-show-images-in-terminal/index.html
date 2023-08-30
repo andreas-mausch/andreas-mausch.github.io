@@ -85,8 +85,8 @@ for this purpose, but now I've switched to <code class="language-plain">timg</co
 <p>As you can see, the aspect ration is off for tiv, and I had to adjust the height.
 It seems to use the whole width by default and ignores the height, while timg
 detects both, width and height, correctly.</p>
-<p>Edit (2023-08-14):</p>
-<p>Checkout sixel!</p>
+<h1 id="checkout-sixel!" tabindex="-1">1. Checkout sixel! <a class="header-anchor" href="#checkout-sixel!" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>(Edit 2023-08-14)</p>
 <p><a href="https://www.arewesixelyet.com/#xfce-terminal" class="external-link" target="_blank">https://www.arewesixelyet.com/#xfce-terminal</a></p>
 <p>Since last week, xfce4-terminal supports the sixel format <a href="https://gitlab.xfce.org/apps/xfce4-terminal/-/commit/493a7a54b437df9419847b29fe94eae671816c09" class="external-link" target="_blank">link</a>.
 With it, you will finally be able to draw pixel-perfect images on the terminal.
@@ -105,6 +105,8 @@ And of course I had to update my <a href="https://aur.archlinux.org/packages/tim
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line">timg <span class="token parameter variable">--pixelation</span><span class="token operator">=</span>sixel <span class="token parameter variable">--grid</span><span class="token operator">=</span><span class="token number">2</span> image.png</span></code></pre>
 
     </div><img src="/blog/2021-07-21-show-images-in-terminal/timg-sixel.png" width="1442" height="794" alt="undefined">
+<p>Update 2023-08-30: Since last week, tmux now also supports sixel:
+<a href="https://github.com/tmux/tmux/commit/dfbc6b1888c110cf0ade66f20188c57757ee1298" class="external-link" target="_blank">https://github.com/tmux/tmux/commit/dfbc6b1888c110cf0ade66f20188c57757ee1298</a></p>
 
 
 <script async src="/scripts/index.js"></script>
