@@ -154,6 +154,8 @@ Btw: Here is how you can check your current timezone:
 ```bash
 date +"%Z %z"
 # Outputs 'CEST +0200' on my system
+TZ=America/Havana date +"%Z %z"
+# Outputs 'CDT -0400'
 ```
 
 # The other way round: Set exif timestamp to mtime
