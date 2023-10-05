@@ -14,9 +14,14 @@ I use a Intel NUC for being my 24/7 server.
 Previously I have used a DC53427HYE (8 GB RAM, 120 GB SSD), and I now upgrade it to an D54250WYK (still old), but with 16 GB RAM and 500 GB SSD.
 I found two old cores are more than enough for my needs.
 
+Geekbench 5: [672 / 1317](https://browser.geekbench.com/v5/cpu/21803927)
+
 I've bought it on eBay for 127 EUR.
 
 {{ "nuc-front.jpg nuc-back.jpg nuc-bottom.jpg" | split: " " | carousel }}
+
+Update (2023-10): If I could choose today, I would buy either a Raspberry Pi 5 (let's see how well it runs with passive cooling, that would be great),
+or a Firebat T8 from China (with an Intel N100, which has ~100% more CPU power than the 4250U at 6W TDP (vs. 15W)!).
 
 # Reset the BIOS password
 
