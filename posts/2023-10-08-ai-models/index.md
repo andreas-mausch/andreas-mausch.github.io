@@ -17,7 +17,7 @@ UIs:
 
 Best models:
 
-- https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF: Runs very fast on Mac M1 via text-generation-webui
+- TheBloke/Mistral-7B-OpenOrca-GGUF: Runs very fast on Mac M1 via text-generation-webui
 - wizardlm-13b-v1.1-superhot-8k.ggmlv3.q4_0.bin (GPT4All): very good, supports LocalDocs
 - Mistral (ollama): https://github.com/jmorganca/ollama, very fast and good on Mac M1, supports local files with some coding
 - WizardLM-Uncensored-7B (serge): On Intel NUC
@@ -43,3 +43,11 @@ With audio/music generation included.
 BLIP2: Requires a short python code
 
 Best model: Salesforce/blip2-opt-2.7b
+
+# Glossary
+
+https://www.reddit.com/r/LargeLanguageModels/comments/13jvi7r/whats_the_difference_between_ggml_and_gptq_models/
+
+- GPQT: best for CUDA
+- GGML: best for CPU, but can also offload some layers on the GPU
+- GGUP: Newer version of GGML, replacing it
