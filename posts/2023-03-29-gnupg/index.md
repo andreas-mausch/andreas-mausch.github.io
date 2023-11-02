@@ -323,6 +323,13 @@ Make sure you use algorithms supported by your hardware.
 
 TPM 2.0 gurantees RSA-2048 and SHA-256 will work.
 
+Make sure to add yourself to the *tss* group:
+
+```bash
+sudo pacman -S tpm2-tools
+sudo usermod -aG tss $USER
+```
+
 One thing I'd like to see is TPM with a smartcard interface.
 I can't understand why there need to be `keytocard` and `keytotpm` commands, when they are essentially doing the same thing.
 I do understand TPM is different from a smartcard and maybe offers more features, but it just would be nice to support the smartcard interface.
