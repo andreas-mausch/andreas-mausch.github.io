@@ -547,7 +547,15 @@ pinentry just pops ups and asks for a your passphrase.</p>
 <p>Important: TPM only supports a specific set of algorithms for encryption and hashing.
 Make sure you use algorithms supported by your hardware.</p>
 <p>TPM 2.0 gurantees RSA-2048 and SHA-256 will work.</p>
-<p>One thing I'd like to see is TPM with a smartcard interface.
+<p>Make sure to add yourself to the <em>tss</em> group:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> tpm2-tools</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-aG</span> tss <span class="token environment constant">$USER</span></span></code></pre>
+
+    </div><p>One thing I'd like to see is TPM with a smartcard interface.
 I can't understand why there need to be <code class="language-plain">keytocard</code> and <code class="language-plain">keytotpm</code> commands, when they are essentially doing the same thing.
 I do understand TPM is different from a smartcard and maybe offers more features, but it just would be nice to support the smartcard interface.
 On Windows for example, there is a thing like a <a href="https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-overview" class="external-link" target="_blank">TPM virtual smart card</a>.
