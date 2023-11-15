@@ -349,6 +349,7 @@ virsh list --all
 virsh net-list --all
 # Create a new network
 virsh net-define virsh-my-network.xml
+virsh net-dumpxml default
 virsh net-start my-network
 # Show all clients in a network
 virsh net-dhcp-leases my-network
