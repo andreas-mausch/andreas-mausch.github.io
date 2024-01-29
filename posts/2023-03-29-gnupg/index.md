@@ -218,6 +218,66 @@ pgpdump primary-with-subkeys.public.asc
 
 Please note that the exported files will still be password protected by the same password as the original key.
 
+### Paperkey backup
+
+A paperkey is a method to keep an offline, non-electronic backup of your identity.
+You can either print is as text or as a QR code.
+
+Unfortunately there is no widespread way to save your private key as mnemonic to make the whole process easier.
+Something like BIP39 for Bitcoin.
+
+Maybe this project [mnemonikey](https://github.com/kklash/mnemonikey) is promoising in this regard.
+I haven't tried it yet though.
+
+#### Text paperkey
+
+```bash
+gpg --export-secret-key 1111111190ABCDEF1234567890ABCDEF11111111 | paperkey > paperkey.txt
+```
+
+#### QR code paperkey
+
+##### Generate QR code paperkey
+
+```bash
+gpg --export-secret-key 1111111190ABCDEF1234567890ABCDEF11111111 | paperkey --output-type raw | qrencode --8bit --output secret-key.qr.png
+```
+
+It is possible to increase the error correction level to maximum with the --level H option.
+This provides a lost data restoration rate of about 30% at the cost of reduced capacity.
+Should the secret key not fit in the QR code, the lower Q and M error correction levels
+are also available and give restoration rates of about 25% and 15% respectively.
+The default error correction level is L which allows restoration of about 7% of lost data.
+
+##### Big private keys
+
+qrencode might fail with `Failed to encode the input data: Input data too large`.
+If the files are too big, you can split them into multiple parts in order to generate multiple QR codes.
+
+```bash
+gpg --export-secret-key 1111111190ABCDEF1234567890ABCDEF11111111 | paperkey --output-type raw > paper.key
+split -n 2 -d paper.key paper.key-part-
+qrencode --8bit --level H --read-from paper.key-part-00 --output secret-key.qr.level-h.part-00.png
+qrencode --8bit --level H --read-from paper.key-part-01 --output secret-key.qr.level-h.part-01.png
+```
+
+##### Re-import QR code paperkey on a different machine
+
+Make sure to have the public key available on that machine, as it is not part of the QR code, only the secret parts are.
+
+The public key must be in gpg format (and not an armored asc file).
+
+```bash
+zbarimg -1 --raw -q -Sbinary secret-key.qr.png | paperkey --pubring paperkey.public.gpg | gpg --import
+```
+
+If no or the wrong public key is used, you might see this error message:
+
+```
+Error: unable to parse OpenPGP packets (is this armored data?)
+Unable to find secret key packet
+```
+
 ## Delete private key
 
 Please, make sure you have a working backup before executing this.
