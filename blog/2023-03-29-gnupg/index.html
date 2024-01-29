@@ -128,6 +128,30 @@
 
                     <li><a href="#backup-to-file">1.4.2. Backup to file</a>
             		</li>
+
+                    <li><a href="#paperkey-backup">1.4.3. Paperkey backup</a>
+            
+                <ol>
+                    
+                    <li><a href="#text-paperkey">1.4.3.1. Text paperkey</a>
+            		</li>
+
+                    <li><a href="#qr-code-paperkey">1.4.3.2. QR code paperkey</a>
+            
+                <ol>
+                    
+                    <li><a href="#generate-qr-code-paperkey">1.4.3.2.1. Generate QR code paperkey</a>
+            		</li>
+
+                    <li><a href="#big-private-keys">1.4.3.2.2. Big private keys</a>
+            		</li>
+
+                    <li><a href="#re-import-qr-code-paperkey-on-a-different-machine">1.4.3.2.3. Re-import QR code paperkey on a different machine</a>
+            		</li>
+                </ol>
+            		</li>
+                </ol>
+            		</li>
                 </ol>
             		</li>
 
@@ -433,7 +457,63 @@ and can make sure nobody gets access to the plain key files, you can reset your 
 <figcaption class="quote-attribution"><a href="https://security.stackexchange.com/questions/51474/one-public-key-contains-all-subkeys" class="external-link" target="_blank">One public key contains all subkeys?</a></figcaption>
 </figure>
 <p>Please note that the exported files will still be password protected by the same password as the original key.</p>
-<h2 id="delete-private-key" tabindex="-1">1.5. Delete private key <a class="header-anchor" href="#delete-private-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h3 id="paperkey-backup" tabindex="-1">1.4.3. Paperkey backup <a class="header-anchor" href="#paperkey-backup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>A paperkey is a method to keep an offline, non-electronic backup of your identity.
+You can either print is as text or as a QR code.</p>
+<p>Unfortunately there is no widespread way to save your private key as mnemonic to make the whole process easier.
+Something like BIP39 for Bitcoin.</p>
+<p>Maybe this project <a href="https://github.com/kklash/mnemonikey" class="external-link" target="_blank">mnemonikey</a> is promoising in this regard.
+I haven't tried it yet though.</p>
+<h4 id="text-paperkey" tabindex="-1">1.4.3.1. Text paperkey <a class="header-anchor" href="#text-paperkey" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h4>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --export-secret-key 1111111190ABCDEF1234567890ABCDEF11111111 <span class="token operator">|</span> paperkey <span class="token operator">></span> paperkey.txt</span></code></pre>
+
+    </div><h4 id="qr-code-paperkey" tabindex="-1">1.4.3.2. QR code paperkey <a class="header-anchor" href="#qr-code-paperkey" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h4>
+<h5 id="generate-qr-code-paperkey" tabindex="-1">1.4.3.2.1. Generate QR code paperkey <a class="header-anchor" href="#generate-qr-code-paperkey" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h5>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --export-secret-key 1111111190ABCDEF1234567890ABCDEF11111111 <span class="token operator">|</span> paperkey --output-type raw <span class="token operator">|</span> qrencode <span class="token parameter variable">--8bit</span> <span class="token parameter variable">--output</span> secret-key.qr.png</span></code></pre>
+
+    </div><p>It is possible to increase the error correction level to maximum with the --level H option.
+This provides a lost data restoration rate of about 30% at the cost of reduced capacity.
+Should the secret key not fit in the QR code, the lower Q and M error correction levels
+are also available and give restoration rates of about 25% and 15% respectively.
+The default error correction level is L which allows restoration of about 7% of lost data.</p>
+<h5 id="big-private-keys" tabindex="-1">1.4.3.2.2. Big private keys <a class="header-anchor" href="#big-private-keys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h5>
+<p>qrencode might fail with <code class="language-plain">Failed to encode the input data: Input data too large</code>.
+If the files are too big, you can split them into multiple parts in order to generate multiple QR codes.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --export-secret-key 1111111190ABCDEF1234567890ABCDEF11111111 <span class="token operator">|</span> paperkey --output-type raw <span class="token operator">></span> paper.key</span>
+<span class="highlight-line"><span class="token function">split</span> <span class="token parameter variable">-n</span> <span class="token number">2</span> <span class="token parameter variable">-d</span> paper.key paper.key-part-</span>
+<span class="highlight-line">qrencode <span class="token parameter variable">--8bit</span> <span class="token parameter variable">--level</span> H --read-from paper.key-part-00 <span class="token parameter variable">--output</span> secret-key.qr.level-h.part-00.png</span>
+<span class="highlight-line">qrencode <span class="token parameter variable">--8bit</span> <span class="token parameter variable">--level</span> H --read-from paper.key-part-01 <span class="token parameter variable">--output</span> secret-key.qr.level-h.part-01.png</span></code></pre>
+
+    </div><h5 id="re-import-qr-code-paperkey-on-a-different-machine" tabindex="-1">1.4.3.2.3. Re-import QR code paperkey on a different machine <a class="header-anchor" href="#re-import-qr-code-paperkey-on-a-different-machine" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h5>
+<p>Make sure to have the public key available on that machine, as it is not part of the QR code, only the secret parts are.</p>
+<p>The public key must be in gpg format (and not an armored asc file).</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">zbarimg <span class="token parameter variable">-1</span> <span class="token parameter variable">--raw</span> <span class="token parameter variable">-q</span> <span class="token parameter variable">-Sbinary</span> secret-key.qr.png <span class="token operator">|</span> paperkey <span class="token parameter variable">--pubring</span> paperkey.public.gpg <span class="token operator">|</span> gpg <span class="token parameter variable">--import</span></span></code></pre>
+
+    </div><p>If no or the wrong public key is used, you might see this error message:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">Error: unable to parse OpenPGP packets (is this armored data?)</span>
+<span class="highlight-line">Unable to find secret key packet</span></code></pre>
+
+    </div><h2 id="delete-private-key" tabindex="-1">1.5. Delete private key <a class="header-anchor" href="#delete-private-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Please, make sure you have a working backup before executing this.</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
