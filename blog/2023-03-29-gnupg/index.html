@@ -281,6 +281,7 @@ Thank you, ImperatorStorm.</p>
 <p>We will generate one key for each usage flag of GPG.
 Usage flags are: cert, encrypt, sign and auth.</p>
 <p>Our primary key will only have the cert flag, and we will have one subkey for each other flag.</p>
+<p>You can of course decide you want to do this differently, like having just one primary key with all the flags and no subkeys to have a simpler process.</p>
 <h3 id="using-a-config-file" tabindex="-1">1.2.1. Using a config file <a class="header-anchor" href="#using-a-config-file" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>I recommend to use the method below, but for completeness, here is an alternative:</p>
 <div class="code-block">
@@ -400,7 +401,11 @@ In my case, the output was just <code class="language-plain">2x2</code>.</p>
     </div><h2 id="backup-all-your-keys" tabindex="-1">1.4. Backup all your keys <a class="header-anchor" href="#backup-all-your-keys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>This is very important. In the following steps, we are going to delete all keys from GPG,
 so you need to have a backup of your keys!</p>
+<p>Please be aware you should take precautions during this step to make sure your keys don't get stolen.
+For example disable network connections, bluetooth etc. and use a strong password.</p>
 <h3 id="reset-password-(optional)" tabindex="-1">1.4.1. Reset password (optional) <a class="header-anchor" href="#reset-password-(optional)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>I case you do not want to use a strong password (for example when you fear you might forget it)
+and can make sure nobody gets access to the plain key files, you can reset your password from your key like this:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
@@ -427,6 +432,7 @@ so you need to have a backup of your keys!</p>
 </blockquote>
 <figcaption class="quote-attribution"><a href="https://security.stackexchange.com/questions/51474/one-public-key-contains-all-subkeys" class="external-link" target="_blank">One public key contains all subkeys?</a></figcaption>
 </figure>
+<p>Please note that the exported files will still be password protected by the same password as the original key.</p>
 <h2 id="delete-private-key" tabindex="-1">1.5. Delete private key <a class="header-anchor" href="#delete-private-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Please, make sure you have a working backup before executing this.</p>
 <div class="code-block">
