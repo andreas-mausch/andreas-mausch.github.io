@@ -88,6 +88,8 @@ Usage flags are: cert, encrypt, sign and auth.
 
 Our primary key will only have the cert flag, and we will have one subkey for each other flag.
 
+You can of course decide you want to do this differently, like having just one primary key with all the flags and no subkeys to have a simpler process.
+
 ### Using a config file
 
 I recommend to use the method below, but for completeness, here is an alternative:
@@ -186,7 +188,13 @@ gpg --batch --quick-add-key 1111111190ABCDEF1234567890ABCDEF11111111 rsa2048 aut
 This is very important. In the following steps, we are going to delete all keys from GPG,
 so you need to have a backup of your keys!
 
+Please be aware you should take precautions during this step to make sure your keys don't get stolen.
+For example disable network connections, bluetooth etc. and use a strong password.
+
 ### Reset password (optional)
+
+I case you do not want to use a strong password (for example when you fear you might forget it)
+and can make sure nobody gets access to the plain key files, you can reset your password from your key like this:
 
 ```bash
 gpg --change-passphrase 1111111190ABCDEF1234567890ABCDEF11111111
@@ -207,6 +215,8 @@ pgpdump primary-with-subkeys.public.asc
 
 > Subkeys are bound to the primary key and exported together with it when calling gpg --export or gpg --send-keys. Same applies to signatures and user ID packages.
 > -- [One public key contains all subkeys?](https://security.stackexchange.com/questions/51474/one-public-key-contains-all-subkeys)
+
+Please note that the exported files will still be password protected by the same password as the original key.
 
 ## Delete private key
 
