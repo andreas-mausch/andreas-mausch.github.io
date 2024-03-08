@@ -56,3 +56,11 @@ timg --pixelation=sixel --grid=2 image.png
 
 Update 2023-08-30: Since last week, tmux now also supports sixel:
 [https://github.com/tmux/tmux/commit/dfbc6b1888c110cf0ade66f20188c57757ee1298](https://github.com/tmux/tmux/commit/dfbc6b1888c110cf0ade66f20188c57757ee1298)
+
+# viu
+
+I've replaced `timg` by [viu](https://github.com/atanunq/viu) on my machine.
+It is written in Rust and comes with (experimental) sixel support.
+
+Unfortunately, sixel is still not integrated into vte3, so you would still need to build it yourself. :(
+See here: [https://gitlab.gnome.org/GNOME/vte/-/issues/253](https://gitlab.gnome.org/GNOME/vte/-/issues/253)
