@@ -139,7 +139,7 @@ I tried both, and I was very happy to see wireless worked on first try.
 Save scan as .jpg:
 
 ```bash
-scanimage --device-name "hpaio:/usb/OfficeJet_250_Mobile_Series?serial=TH" --progress --format tiff --mode Color --resolution 300 | magick convert - -resize 50% -quality 75 image.jpg
+scanimage --device-name "hpaio:/usb/OfficeJet_250_Mobile_Series?serial=TH" --progress --format tiff --mode Color --resolution 300dpi -l 0mm -t 0mm -x 210mm -y 297mm | magick convert - -resize "1920x1920>" -quality 75 image.jpg
 ```
 
 Just replace the `device-name` by the one with the IP address and you can scan without a wire.
