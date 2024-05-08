@@ -229,7 +229,14 @@ It can be used for both, printing (via CUPS) and scanning (via SANE).</p>
 <p>To validate the installation was correct, you can call <code class="language-plain">hp-info</code>.
 It will output lots of information about your device.</p>
 <p>If everything worked correctly, you can now just select the printer in your favorite app.</p>
-<h2 id="scanning-on-linux" tabindex="-1">4.2. Scanning on Linux <a class="header-anchor" href="#scanning-on-linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>To list all printers, run this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">lpstat <span class="token parameter variable">-t</span></span></code></pre>
+
+    </div><h2 id="scanning-on-linux" tabindex="-1">4.2. Scanning on Linux <a class="header-anchor" href="#scanning-on-linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>You can use <code class="language-plain">scanimage</code> to scan a page.</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
