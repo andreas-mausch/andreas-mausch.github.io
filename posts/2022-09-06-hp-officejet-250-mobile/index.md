@@ -126,6 +126,12 @@ To list all printers, run this:
 lpstat -t
 ```
 
+In case your printer gets disabled (for example when it was in sleep mode), run this to re-enable it again:
+
+```bash
+lpadmin -p OfficeJet_250_Mobile -E
+```
+
 ## Scanning on Linux
 
 You can use `scanimage` to scan a page.
