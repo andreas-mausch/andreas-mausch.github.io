@@ -120,6 +120,12 @@ It will output lots of information about your device.
 
 If everything worked correctly, you can now just select the printer in your favorite app.
 
+To list all printers, run this:
+
+```bash
+lpstat -t
+```
+
 ## Scanning on Linux
 
 You can use `scanimage` to scan a page.
