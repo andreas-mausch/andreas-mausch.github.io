@@ -1,4 +1,4 @@
-@use "@fontsource/raleway/scss/mixins" as OpenSans;
+@use "@fontsource/raleway/scss/mixins" as Raleway;
 @use "sass:color";
 @use "img-comparison-slider/dist/styles.css";
 @use "_code.scss";
@@ -7,10 +7,11 @@
 @use "_table.scss";
 @import "_color-palette";
 
-@include OpenSans.fontFace(
-  $weight: 400,
-  $display: fallback,
-  $fontDir: "fontsource"
+// See here:
+// https://fontsource.org/docs/getting-started/faces-mixin
+@include Raleway.faces(
+  $directory: "fontsource",
+  $weights: (400)
 );
 
 $spacing-unit: 30px;
