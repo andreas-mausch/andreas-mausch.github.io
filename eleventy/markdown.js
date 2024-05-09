@@ -9,6 +9,7 @@ const taskCheckbox = require("markdown-it-task-checkbox")
 const lineNumbers = require("./markdown-it-prism-line-numbers")
 const hierarchy = require("./markdown-it-hierarchy")
 const copyToClipboard = require("./markdown-it-prism-copy-to-clipboard")
+const plantUml = require("markdown-it-plantuml-ex2")
 
 const markdown = markdownIt({
   html: true
@@ -35,6 +36,7 @@ const markdown = markdownIt({
     highlightInlineCode: true
   })
   .use(taskCheckbox)
+  .use(plantUml)
 
 markdown.options.highlight = lineNumbers(markdown.options.highlight)
 markdown.renderer.rules.fence = copyToClipboard(markdown.renderer.rules.fence)

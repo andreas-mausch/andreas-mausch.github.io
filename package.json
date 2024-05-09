@@ -42,6 +42,7 @@
     "markdown-it-attrs": "4.1.6",
     "markdown-it-external-links": "0.0.6",
     "markdown-it-footnote": "4.0.0",
+    "markdown-it-plantuml-ex2": "1.0.1",
     "markdown-it-prism": "2.3.0",
     "markdown-it-task-checkbox": "1.0.6",
     "mkdirp": "3.0.1",
