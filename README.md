@@ -100,3 +100,13 @@ It does this checks when a git commit is triggered.
 
 You can bypass the checks by passing `--no-verify` to git commit.
 See [here](https://github.com/observing/pre-commit).
+
+## Update base
+
+```bash
+git remote add base git@github.com:andreas-mausch/eleventy-sample.git
+git remote -v
+git fetch base
+git branch -a
+git merge base/main
+```
