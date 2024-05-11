@@ -48,6 +48,7 @@
     "mkdirp": "3.0.1",
     "postcss": "8.4.38",
     "pre-commit": "1.2.2",
+    "qrcode": "1.5.3",
     "rimraf": "5.0.5",
     "stylelint": "15.4.0",
     "stylelint-config-sass-guidelines": "10.0.0",
