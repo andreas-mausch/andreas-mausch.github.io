@@ -59,4 +59,4 @@ https://www.reddit.com/r/LargeLanguageModels/comments/13jvi7r/whats_the_differen
 
 - GPQT: best for CUDA
 - GGML: best for CPU, but can also offload some layers on the GPU
-- GGUP: Newer version of GGML, replacing it
+- GGUF: Newer version of GGML, replacing it
