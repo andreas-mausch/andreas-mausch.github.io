@@ -1,0 +1,387 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>NAS</h1>
+<div>
+  <time class="postlist-date" datetime="2024-06-15T12:30:00.000+00:00">Jun 15, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/mini%20pc">#mini pc</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/server">#server</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/sftp">#sftp</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/sshfs">#sshfs</a></li>
+        
+    
+  </ul>
+</div>
+
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#my-requirements">1. My requirements</a>
+            
+                <ol>
+                    
+                    <li><a href="#buy-a-ready-to-use-nas%3F">1.1. Buy a Ready-to-use NAS?</a>
+            		</li>
+
+                    <li><a href="#hdd-vs-ssd">1.2. HDD vs SSD</a>
+            		</li>
+
+                    <li><a href="#truenas%2C-openmediavault%3F">1.3. TrueNas, OpenMediaVault?</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#the-hardware">2. The hardware</a>
+            		</li>
+
+                    <li><a href="#the-software">3. The software</a>
+            
+                <ol>
+                    
+                    <li><a href="#linux">3.1. Linux</a>
+            		</li>
+
+                    <li><a href="#raid-setup-with-mdadm">3.2. RAID setup with mdadm</a>
+            
+                <ol>
+                    
+                    <li><a href="#partition-disks">3.2.1. Partition disks</a>
+            		</li>
+
+                    <li><a href="#check-alignment">3.2.2. Check alignment</a>
+            		</li>
+
+                    <li><a href="#mdadm-setup">3.2.3. mdadm setup</a>
+            		</li>
+
+                    <li><a href="#setup-raid-after-boot">3.2.4. Setup raid after boot</a>
+            		</li>
+
+                    <li><a href="#mount-filesystem-after-boot">3.2.5. Mount filesystem after boot</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#file-server-protocol%3A-sshfs-%2F-sftp">3.3. File server protocol: sshfs / sftp</a>
+            
+                <ol>
+                    
+                    <li><a href="#persist-(on-demand-%2F-manual)-mount-in-fstab">3.3.1. Persist (on demand / manual) mount in fstab</a>
+            		</li>
+
+                    <li><a href="#thunar-connection">3.3.2. Thunar connection</a>
+            		</li>
+
+                    <li><a href="#automatically-set-gpg-agent-for-systemd">3.3.3. Automatically set gpg agent for systemd</a>
+            		</li>
+                </ol>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#thoughts-about-encryption">4. Thoughts about encryption</a>
+            		</li>
+
+                    <li><a href="#conclusion">5. Conclusion</a>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
+
+
+<p>I don't like cloud providers very much for hosting my data, for privacy reasons.</p>
+<p>I do have <a href="https://koofr.eu/" class="external-link" target="_blank">koofr</a> and use it's WebDAV interface
+in combination with <a href="https://rclone.org/" class="external-link" target="_blank">rclone</a> to encrypt everything.
+That works well. I still hesitate to upload some private data there.</p>
+<p>But for my local data, I used to only have a single hard disk,
+which I backed up manually from time to time (like once every two years..).</p>
+<p>I had been thinking about setting up a private NAS (Network Attached Storage) for some time,
+but never did it.</p>
+<p>Until now.
+Here is what I did to set it up.</p>
+<h1 id="my-requirements" tabindex="-1">1. My requirements <a class="header-anchor" href="#my-requirements" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="buy-a-ready-to-use-nas%3F" tabindex="-1">1.1. Buy a Ready-to-use NAS? <a class="header-anchor" href="#buy-a-ready-to-use-nas%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>There are some companies which provide easy-to-use solutions like
+Synology, Western Digital or Terramaster.</p>
+<p>I'm not sure about all of them, but most provide their own software which you have to use with their systems.
+I didn't want to be dependent on their software but rather use a plain Linux system to maybe
+be more flexible in the future.</p>
+<h2 id="hdd-vs-ssd" tabindex="-1">1.2. HDD vs SSD <a class="header-anchor" href="#hdd-vs-ssd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>To keep a small form factor and low power consumption, I though about HDD vs. SSD.
+Since there are no large 2.5 inch HDDs, the choice was between</p>
+<ul>
+<li>3.5 inch HDD</li>
+<li>2.5 inch SSD</li>
+<li>m.2 SSD</li>
+</ul>
+<p>There are pros and cons for each, mainly regarding the disk capacity,
+but I ended up with a m.2 system.
+I happened to find a nice mini PC which met exactly my criteria.</p>
+<h2 id="truenas%2C-openmediavault%3F" tabindex="-1">1.3. TrueNas, OpenMediaVault? <a class="header-anchor" href="#truenas%2C-openmediavault%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Then there was the question to either use a software like TrueNAS or OpenMediaVault,
+or instead use a plain Linux with some manually installed server software.</p>
+<p>I'm still not 100% sure about this one, but I've started with plain Linux
+because I don't need things like a web view / browser access to my files.</p>
+<p>I am happy with some direct file access protocol which can be nicely integrated into my file browser.</p>
+<h1 id="the-hardware" tabindex="-1">2. The hardware <a class="header-anchor" href="#the-hardware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I found a Morefine S500+ Mini PC with a AMD 5300U processor <a href="https://de.aliexpress.com/item/1005003335073708.html" class="external-link" target="_blank">on AliExpress</a>
+for about 220 EUR.
+There are not too many mini PCs which offer two full 2280 m.2 slots, but this one does.
+Additionally, it takes a 2.5 inch SSD, which I will use for the operating system.</p>
+<p>There were more powerful CPU options, but I've decided to take the lowest performance one<br>
+to keep power consumption low, and it will be overdimensioned anyway for a simple task like a file server.</p>
+<p>So I put in 16 GB DDR4 RAM, a 512 GB 2.5 inch SSD for the operating system and
+two 4 TB m.2 2280 SSDs for my data.</p>
+<h1 id="the-software" tabindex="-1">3. The software <a class="header-anchor" href="#the-software" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="linux" tabindex="-1">3.1. Linux <a class="header-anchor" href="#linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I use Debian as distribution.</p>
+<p>I set up <code class="language-plain">sudo</code>, <code class="language-plain">ssh</code>, <code class="language-plain">lm-sensors</code>, <code class="language-plain">parted</code>, <code class="language-plain">ncdu</code>, <code class="language-plain">rsync</code>.. nothing special.
+I also made sure the server time is synchronized via NTP.</p>
+<h2 id="raid-setup-with-mdadm" tabindex="-1">3.2. RAID setup with mdadm <a class="header-anchor" href="#raid-setup-with-mdadm" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Since I used to only have a single HDD for my data, there was always the risk of a disk failure
+to lose all my data.
+To avoid that risk in future, I set up the two disks as a RAID 1, which mirrors the data to both drives.
+So if one drive fails for whatever reason, I still have a working disk remaining.</p>
+<p>I never set up a RAID in Linux so far.
+There were BIOS options to set up a hardware RAID, but the internet says a software
+raid with <code class="language-plain">mdadm</code> on Linux is reliable and pretty common.</p>
+<h3 id="partition-disks" tabindex="-1">3.2.1. Partition disks <a class="header-anchor" href="#partition-disks" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>I use two SSDs from different manufacturers and they have a slight difference in size,
+so I partitoned the disks to have partitions of exactly the same size.</p>
+<p><code class="language-plain">sudo fdisk /dev/nvme1n1</code>:</p>
+<ul>
+<li><code class="language-plain">g</code> for a GPT partition table (required for 4 TB)</li>
+<li><code class="language-plain">n</code> for new partition</li>
+<li>accept default start sector (<code class="language-plain">2048</code>)</li>
+<li>For last sector / end, enter <code class="language-plain">+3700G</code>, which will end up in 7759462400 sectors size</li>
+<li><code class="language-plain">w</code> for write to disk</li>
+</ul>
+<h3 id="check-alignment" tabindex="-1">3.2.2. Check alignment <a class="header-anchor" href="#check-alignment" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>Make sure the size aligns with the sector size of the disks, which is typically 512 bytes,
+but can be 4 KB in some cases.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">parted</span> /dev/nvme1n1</span>
+<span class="highlight-line">align-check opt <span class="token number">1</span></span></code></pre>
+
+    </div><h3 id="mdadm-setup" tabindex="-1">3.2.3. mdadm setup <a class="header-anchor" href="#mdadm-setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mdadm</span> <span class="token parameter variable">--create</span> <span class="token parameter variable">--verbose</span> /dev/md0 <span class="token parameter variable">--level</span><span class="token operator">=</span><span class="token number">1</span> --raid-devices<span class="token operator">=</span><span class="token number">2</span> /dev/nvme0n1p1 /dev/nvme1n1p1</span>
+<span class="highlight-line"><span class="token function">sudo</span> mkfs.ext4 <span class="token parameter variable">-m</span> <span class="token number">1</span> <span class="token parameter variable">-L</span> storage /dev/md0</span>
+<span class="highlight-line"><span class="token function">cat</span> /proc/mdstat</span></code></pre>
+
+    </div><p><code class="language-plain">-m</code>: reserved blocks percentage</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">nas@nas ~> cat /proc/mdstat</span>
+<span class="highlight-line">Personalities : [raid1] [linear] [multipath] [raid0] [raid6] [raid5] [raid4] [raid10] </span>
+<span class="highlight-line">md0 : active raid1 nvme1n1p1[1] nvme0n1p1[0]</span>
+<span class="highlight-line">      3879599104 blocks super 1.2 [2/2] [UU]</span>
+<span class="highlight-line">      [>....................]  resync =  0.2% (8377600/3879599104) finish=304.1min speed=212128K/sec</span>
+<span class="highlight-line">      bitmap: 29/29 pages [116KB], 65536KB chunk</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">unused devices: &lt;none></span></code></pre>
+
+    </div><p>After creating the RAID it immediately starts to sync.
+This takes some time, but you can still perform write actions like setting up the file system.</p>
+<p>There was a choice here again: ext4 vs. ZFS vs. XFS.
+I only used ext4 so far and decided to use it.</p>
+<h3 id="setup-raid-after-boot" tabindex="-1">3.2.4. Setup raid after boot <a class="header-anchor" href="#setup-raid-after-boot" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mdadm</span> <span class="token parameter variable">--detail</span> <span class="token parameter variable">--scan</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> <span class="token parameter variable">--append</span> /etc/mdadm/mdadm.conf</span>
+<span class="highlight-line"><span class="token function">sudo</span> update-initramfs <span class="token parameter variable">-u</span></span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/mdadm/mdadm.conf" class="language-plain"><span class="highlight-line">ARRAY /dev/md0 metadata=1.2 name=nas:0 UUID=12345678:90abcdef:12345678:90abcdef</span></code></pre>
+
+    </div><h3 id="mount-filesystem-after-boot" tabindex="-1">3.2.5. Mount filesystem after boot <a class="header-anchor" href="#mount-filesystem-after-boot" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /mnt/nas</span>
+<span class="highlight-line"><span class="token function">sudo</span> blkid /dev/md0</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">'UUID=12345678-90ab-cdef-1234-567890abcdef /mnt/nas ext4 defaults 0 0'</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> <span class="token parameter variable">--append</span> /etc/fstab</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">reboot</span></span></code></pre>
+
+    </div><h2 id="file-server-protocol%3A-sshfs-%2F-sftp" tabindex="-1">3.3. File server protocol: sshfs / sftp <a class="header-anchor" href="#file-server-protocol%3A-sshfs-%2F-sftp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>For the file server protocol you can use SMB, WebDAV or: sshfs.</p>
+<p>It uses sftp under the hood and therefore is easy to set up.
+I don't even care about multi-user authentication, but that would be possible, too.</p>
+<p>On the server, you don't need to install anything extra beside the SSH server with SFTP enabled.
+On the client, you need the <code class="language-plain">sshfs</code> package and can run these commands:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">sshfs nas@nas:/mnt/nas /mnt/nas</span>
+<span class="highlight-line"><span class="token comment"># To unmount:</span></span>
+<span class="highlight-line">fusermount3 <span class="token parameter variable">-u</span> /mnt/nas</span></code></pre>
+
+    </div><h3 id="persist-(on-demand-%2F-manual)-mount-in-fstab" tabindex="-1">3.3.1. Persist (on demand / manual) mount in fstab <a class="header-anchor" href="#persist-(on-demand-%2F-manual)-mount-in-fstab" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>Edit the <code class="language-plain">/etc/fstab</code> file:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code filename="/etc/fstab" class="language-plain"><span class="highlight-line">sshfs#nas@nas:/mnt/nas                    /mnt/nas       fuse    noauto,defaults,user,_netdev,comment=x-gvfs-show 0 0</span></code></pre>
+
+    </div><p>To mount and unmount:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">mount</span> /mnt/nas</span>
+<span class="highlight-line">fusermount3 <span class="token parameter variable">-u</span> /mnt/nas</span></code></pre>
+
+    </div><h3 id="thunar-connection" tabindex="-1">3.3.2. Thunar connection <a class="header-anchor" href="#thunar-connection" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>I use Thunar as file browser and wanted to use the drive in it.
+The drive shows up in Thunar, but there is one problem:
+Mounting it results in 'Connection reset by peer', which indicates a missing/wrong SSH key?
+TPM input box doesn't show up.</p>
+<p>This might be https://gitlab.gnome.org/GNOME/gnome-session/-/issues/66 or https://gitlab.gnome.org/GNOME/gvfs/-/issues/719</p>
+<p>The reason was: The gpg agent was set up for the fish shell, but not for systemd.
+XFCE still started the normal SSH agent and this one was used by Thunar.</p>
+<p>Links:</p>
+<ul>
+<li>https://gitlab.gnome.org/GNOME/gnome-session/-/issues/66</li>
+<li>https://gitlab.gnome.org/GNOME/gvfs/-/issues/719</li>
+<li>https://debianforum.de/forum/viewtopic.php?t=168258</li>
+</ul>
+<h3 id="automatically-set-gpg-agent-for-systemd" tabindex="-1">3.3.3. Automatically set gpg agent for systemd <a class="header-anchor" href="#automatically-set-gpg-agent-for-systemd" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>So I needed some extra configuration to correctly set <code class="language-plain">SSH_AUTH_SOCK</code> for systemd:</p>
+<p>https://gist.github.com/ansemjo/b9337e330cd7dd7b6d2dd36c6400fc1b</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">systemctl <span class="token parameter variable">--user</span> disable gcr-ssh-agent.socket</span>
+<span class="highlight-line">systemctl <span class="token parameter variable">--user</span> disable gcr-ssh-agent.service</span>
+<span class="highlight-line"><span class="token function">sudo</span> systemctl <span class="token parameter variable">--global</span> disable <span class="token parameter variable">--now</span> gcr-ssh-agent.socket</span></code></pre>
+
+    </div><p>Important: Disable the default SSH agent started by XFCE.
+It would also try to set the environment variable <code class="language-plain">SSH_AUTH_SOCK</code>.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">xfconf-query <span class="token parameter variable">-c</span> xfce4-session <span class="token parameter variable">-p</span> /startup/ssh-agent/enabled <span class="token parameter variable">-n</span> <span class="token parameter variable">-t</span> bool <span class="token parameter variable">-s</span> <span class="token boolean">false</span></span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> use-standard-socket <span class="token operator">>></span> ~/.gnupg/gpg-agent.conf</span></code></pre>
+
+    </div><p>Now setup this small service to set the required environment variables:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-ini"><code filename="~/.config/systemd/user/ssh-auth-sock.service" class="language-ini"><span class="highlight-line"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span></span>
+<span class="highlight-line"><span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">Set SSH_AUTH_SOCK to GnuPG agent</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span></span>
+<span class="highlight-line"><span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">oneshot</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># disable gnome-keyring-ssh</span></span>
+<span class="highlight-line"><span class="token comment"># ExecStartPre=/bin/bash -c 'cat /etc/xdg/autostart/gnome-keyring-ssh.desktop \</span></span>
+<span class="highlight-line"><span class="token comment">#  &lt;(echo "Hidden=true") > %h/.config/autostart/gnome-keyring-ssh.desktop'</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># set environment</span></span>
+<span class="highlight-line"><span class="token key attr-name">ExecStart</span><span class="token punctuation">=</span><span class="token value attr-value">/usr/bin/bash -c 'systemctl --user set-environment \</span></span>
+<span class="highlight-line">  <span class="token key attr-name">SSH_AUTH_SOCK</span><span class="token punctuation">=</span><span class="token value attr-value">$(gpgconf --list-dirs agent-ssh-socket) \</span></span>
+<span class="highlight-line">  <span class="token key attr-name">GSM_SKIP_SSH_AGENT_WORKAROUND</span><span class="token punctuation">=</span><span class="token value attr-value">"true"'</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># See the below link for why we need GSM_SKIP_SSH_AGENT_WORKAROUND:</span></span>
+<span class="highlight-line"><span class="token comment"># https://git.gnome.org/browse/gnome-session/tree/gnome-session/main.c?h=3.24.0#n419</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span></span>
+<span class="highlight-line"><span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">default.target</span></span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">systemctl <span class="token parameter variable">--user</span> <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> ssh-auth-sock.service</span></code></pre>
+
+    </div><h1 id="thoughts-about-encryption" tabindex="-1">4. Thoughts about encryption <a class="header-anchor" href="#thoughts-about-encryption" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I've decided to not encrypt the partitions,
+because otherwise unattended restarts can be a problem (they'd require a password or some TPM magic).</p>
+<p>Instead, I encrypt important files manually with OpenPGP.</p>
+<h1 id="conclusion" tabindex="-1">5. Conclusion <a class="header-anchor" href="#conclusion" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I am very happy with my setup now.</p>
+<p>Power consumption is alright with ~6 W on idle.</p>
+<p>I need to get used to a bit less transfer speed, but I enjoy being able
+to access my files without plugging any cable and also be safe that a disk failure
+would still cost money, but wouldn't lose me any data.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>

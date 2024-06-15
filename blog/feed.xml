@@ -4,11 +4,28 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2023-08-14T12:00:00Z</updated>
+  <updated>2024-06-15T12:30:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>NAS</title>
+    <link href="https://andreas-mausch.de/blog/2024-06-15-nas/"/>
+    <updated>2024-06-15T12:30:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-06-15-nas/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I don&#39;t like cloud providers very much for hosting my data, for privacy reasons.&lt;/p&gt;
+&lt;p&gt;I do have &lt;a href=&quot;https://koofr.eu/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;koofr&lt;/a&gt; and use it&#39;s WebDAV interface
+in combination with &lt;a href=&quot;https://rclone.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;rclone&lt;/a&gt; to encrypt everything.
+That works well. I still hesitate to upload some private data there.&lt;/p&gt;
+&lt;p&gt;But for my local data, I used to only have a single hard disk,
+which I backed up manually from time to time (like once every two years..).&lt;/p&gt;
+&lt;p&gt;I had been thinking about setting up a private NAS (Network Attached Storage) for some time,
+but never did it.&lt;/p&gt;
+&lt;p&gt;Until now.
+Here is what I did to set it up.&lt;/p&gt;
+&lt;h1 id=&quot;my-requirements&quot; tabindex=&quot;-1&quot;&gt;1. My requirements &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2024-06-15-nas/#my-requirements&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
   <entry>
     <title>Bluetooth Speaker with 16x16 Display (Divoom Ditoo Pro)</title>
     <link href="https://andreas-mausch.de/blog/2023-08-14-divoom-ditoo-pro/"/>
