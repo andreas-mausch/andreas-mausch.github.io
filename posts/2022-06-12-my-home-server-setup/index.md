@@ -1,7 +1,7 @@
 ---
 title: My home server setup (Intel NUC)
 date: 2022-06-12T18:00:00+02:00
-tags: ['server', 'docker', 'nginx', 'caddy', 'gitlab', 'nextcloud', 'gitea', 'portainer', 'intel nuc']
+tags: ['server', 'docker', 'nginx', 'caddy', 'gitlab', 'nextcloud', 'gitea', 'portainer', 'intel nuc', 'mini pc']
 thumbnail: nuc-front.jpg
 ---
 
