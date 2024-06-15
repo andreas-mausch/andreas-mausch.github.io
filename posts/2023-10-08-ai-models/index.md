@@ -2,8 +2,7 @@
 title: "AI models"
 date: 2023-10-08T23:00:00+02:00
 tags: []
-toc: true
-draft: true
+thumbnail: havanna-object-detection.jpg
 ---
 
 # Text generation
@@ -22,13 +21,11 @@ Best models:
 - Mistral (ollama): https://github.com/jmorganca/ollama, very fast and good on Mac M1, supports local files with some coding
 - WizardLM-Uncensored-7B (serge): On Intel NUC
 
+GitHub project: [https://github.com/andreas-mausch/dockerize-ollama-mistral-7b-openorca](https://github.com/andreas-mausch/dockerize-ollama-mistral-7b-openorca)
+
 # Image generation
 
 https://github.com/AUTOMATIC1111/stable-diffusion-webui
-
-Best models:
-
-?
 
 # Text-to-Speech
 
@@ -38,11 +35,23 @@ Best model: Bark
 
 With audio/music generation included.
 
+# Speech-to-text
+
+GitHub project: [https://github.com/andreas-mausch/dockerize-whisper](https://github.com/andreas-mausch/dockerize-whisper)
+
 # Image Captioning
 
 BLIP2: Requires a short python code
 
-Best model: Salesforce/blip2-opt-2.7b
+Model: Salesforce/blip2-opt-2.7b
+
+GitHub project: [https://github.com/andreas-mausch/dockerize-clip-interrogator](https://github.com/andreas-mausch/dockerize-clip-interrogator)
+
+# Image object detection and classification
+
+GitHub project: [https://github.com/andreas-mausch/dockerize-detr-resnet-50](https://github.com/andreas-mausch/dockerize-detr-resnet-50)
+
+{% image "havanna-object-detection.jpg" %}
 
 # Glossary
 
