@@ -2,6 +2,7 @@
 title: NAS
 date: 2024-06-15T14:30:00+02:00
 tags: ['server', 'sftp', 'sshfs', 'mini pc']
+thumbnail: morefine-s500-plus-5300u.jpg
 toc: true
 ---
 
@@ -64,8 +65,17 @@ Additionally, it takes a 2.5 inch SSD, which I will use for the operating system
 There were more powerful CPU options, but I've decided to take the lowest performance one\
 to keep power consumption low, and it will be overdimensioned anyway for a simple task like a file server.
 
-So I put in 16 GB DDR4 RAM, a 512 GB 2.5 inch SSD for the operating system and
+So I put in 64 GB DDR4 SODIMM RAM, a 512 GB 2.5 inch SSD for the operating system and
 two 4 TB m.2 2280 SSDs for my data.
+
+The second SSD needs to be installed from the bottom, where the screws were hidden
+under the rubber feet.
+
+{% image "morefine-s500-plus-5300u.jpg" %}
+
+{% image "case-opened.jpg" %}
+
+{% image "size-comparison-vs-intel-nuc-D54250WYK.jpg" %}
 
 # The software
 
