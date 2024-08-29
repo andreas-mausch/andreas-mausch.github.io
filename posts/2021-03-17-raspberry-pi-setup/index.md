@@ -99,7 +99,7 @@ Taken from [plembo](https://gist.github.com/plembo/c4920016312f058209f5765cb9a3a
 
 ## Mount and edit ld.so.preload
 
-Mount via `kpartx`, see above.
+Mount the `.img` file via `kpartx` to modify it, see above.
 
 ```bash
 sudo nano /mnt/etc/ld.so.preload
