@@ -112,7 +112,14 @@ So we have the choice of either making our normal exchanges all of this type, or
 rather have only a single place for this exception.</p>
 <p>And the <code class="language-plain">retry-error-exchange</code> cannot be the exchange to be <code class="language-plain">x-delay-message</code>, because
 at this point the message doesn't have the <code class="language-plain">x-delay</code> header yet.</p>
-<h1 id="rabbitmq-delay-plugin" tabindex="-1">3. RabbitMQ Delay Plugin <a class="header-anchor" href="#rabbitmq-delay-plugin" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="error-handling" tabindex="-1">3. Error handling <a class="header-anchor" href="#error-handling" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>So we have covered the case something goes wrong inside our consumer.</p>
+<p>In case there is a problem in the consumers of the <code class="language-plain">retry-error-queue</code> or the <code class="language-plain">retry-delay-queue</code> themselves,
+we define a dead letter exchange for them as well, and it is also the <code class="language-plain">retry-dead-letter-exchange</code>.</p>
+<p>Now we keep all non-consumable messages for analysis:
+even if all retries failed and even if there was a processing problem inside
+the retry handlers.</p>
+<h1 id="rabbitmq-delay-plugin" tabindex="-1">4. RabbitMQ Delay Plugin <a class="header-anchor" href="#rabbitmq-delay-plugin" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>One more downside to this solution:
 We cannot just use the basic RabbitMQ docker image anymore, because we need to have
 the <a href="https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/" class="external-link" target="_blank">delayed-message-exchange</a> enabled.</p>
