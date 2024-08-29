@@ -37,7 +37,7 @@ const markdown = markdownIt({
     highlightInlineCode: true
   })
   .use(taskCheckbox)
-  .use(plantUml)
+  .use(plantUml, { plantumlPath: "plantuml.jar" })
 
 markdown.options.highlight = lineNumbers(markdown.options.highlight)
 markdown.renderer.rules.fence = copyToClipboard(lineNumbersStart(markdown.renderer.rules.fence))
