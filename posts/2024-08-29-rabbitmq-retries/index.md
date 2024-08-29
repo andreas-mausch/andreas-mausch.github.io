@@ -115,6 +115,17 @@ rather have only a single place for this exception.
 And the `retry-error-exchange` cannot be the exchange to be `x-delay-message`, because
 at this point the message doesn't have the `x-delay` header yet.
 
+# Error handling
+
+So we have covered the case something goes wrong inside our consumer.
+
+In case there is a problem in the consumers of the `retry-error-queue` or the `retry-delay-queue` themselves,
+we define a dead letter exchange for them as well, and it is also the `retry-dead-letter-exchange`.
+
+Now we keep all non-consumable messages for analysis:
+even if all retries failed and even if there was a processing problem inside
+the retry handlers.
+
 # RabbitMQ Delay Plugin
 
 One more downside to this solution:
