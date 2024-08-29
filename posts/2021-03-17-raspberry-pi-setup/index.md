@@ -2,6 +2,16 @@
 title: Raspberry Pi Headless Setup
 date: 2021-03-17T19:00:00+01:00
 tags: ['raspberrypi', 'headless', 'ssh', 'wifi']
+toc: true
+---
+
+# Headless setup
+
+**This guide is outdated and Raspbian 12 Bookworm setups won't work.**
+I will write a new guide soon.
+
+The *Backup* and *QEMU* sections below should still work (I hope).
+
 ---
 
 I've done this a couple of times already so I thought I should write it down.
@@ -9,24 +19,30 @@ I've done this a couple of times already so I thought I should write it down.
 How to setup the Raspberry Pi with [Pi OS](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
 for ssh and wifi.
 
-# Flash
+## Flash
 
 Flash the OS to the sd card.
-My favorite tool for this is [Balana Etcher](https://www.balena.io/etcher/).
+~~My favorite tool for this is [Balana Etcher](https://www.balena.io/etcher/).~~
 
-# Mount
+I like to use `xzcat` in combination with `dd`:
 
-After the flash is complete, mount the sd card.
+```bash
+xzcat 2024-03-15-raspios-bookworm-armhf-lite.img.xz | sudo dd of=/dev/mmcbzz0 bs=1M oflag=sync status=progress
+```
+
+## Mount
+
+After the flash is complete, mount the sd card to apply modifications.
 I will use */tmp/sdcard/* as mounting point in this example.
 
-# SSH
+## SSH
 
 ```bash
 cd /tmp/sdcard/boot/
 touch ssh
 ```
 
-# WiFi
+## WiFi
 
 Create this file:
 
@@ -42,11 +58,11 @@ network={
 }
 ```
 
-# Hostname
+## Hostname
 
 Edit */tmp/sdcard/rootfs/etc/hostname* to change the hostname.
 
-# After first boot
+## After first boot
 
 Change your password (run this on the pi):
 
