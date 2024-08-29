@@ -1,0 +1,133 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RabbitMQ: Automatic retries with increasing delay</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>RabbitMQ: Automatic retries with increasing delay</h1>
+<div>
+  <time class="postlist-date" datetime="2024-08-29T17:30:00.000+00:00">Aug 29, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/delay">#delay</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/devops">#devops</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/message-queue">#message-queue</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/rabbitmq">#rabbitmq</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/retries">#retries</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>I have finally implemented a solution to automatic retries for
+a RabbitMQ message queue.
+I have pointed out the problem of retrying failed messages with a delay in a
+<a href="/blog/2022-02-24-rabbitmq-cli-dead-letter-exchange-and-quorum-queue/">previous post</a>.</p>
+<p>I am still sad there is no ready-to-use solution and you have to write code yourself
+to make this work, but well. At least it is a solution.</p>
+<p>The concept is heavily inspired by
+<a href="https://devcorner.digitalpress.blog/rabbitmq-retries-the-new-full-story/" class="external-link" target="_blank">https://devcorner.digitalpress.blog/rabbitmq-retries-the-new-full-story/</a>.</p>
+<p style="border: 2px dashed red">Failed to render plantumlEx<span>Error: Command failed: java -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Dplantuml.include.path=:/home/runner/.markdown-it-plantuml-ex -jar /home/runner/work/andreas-mausch.github.io/andreas-mausch.github.io/node_modules/markdown-it-plantuml-ex2/lib/plantuml.jar -pipe -tsvg -charset UTF-8
+ERROR
+20
+Function not found System_Boundary
+Some diagram description contains errors
+</span></p><h1 id="breakdown" tabindex="-1">1. Breakdown <a class="header-anchor" href="#breakdown" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>So we have a bunch of extra exchanges and queues for this approach.</p>
+<p>The main difference to Cyril's solution is that we don't re-send the message to a queue directly,
+but rather to it's original exchange with it's routing key.</p>
+<p>One good thing though is: We can use this retry-block for as my queues as we like.
+It doesn't have to be repeated for each queue. Phew.</p>
+<p>So we can set up a number of retries in our code, each having a delay time.
+When a message still couldn't be delivered after the last delay, it
+is finally sent to the <code class="language-plain">retry-dead-letter-exchange</code>.
+There, an admin can look regulary which messages had problems to be consumed.</p>
+<p>In the example code the retry delays are:</p>
+<ul>
+<li>5 seconds</li>
+<li>2 minutes</li>
+<li>30 minutes</li>
+<li>6 hours</li>
+<li>2 days</li>
+</ul>
+<p>My example also covers the case of having a quorum queue, and here it is a bit disappointing:
+Even though you can still use the retry mechanism via <code class="language-plain">x-delivery-limit</code>, the retries will
+still be <strong>immediate</strong>.
+If you want to have increasing delay here as well, you must skip the automatic quorum queue
+mechanism by setting <code class="language-plain">requeue=False</code> in case of an error, so the dead-letter-exchange
+(<code class="language-plain">retry-error-exchange</code>) will be used instead.</p>
+<h1 id="why-do-we-need-a-delay-exchange%3F" tabindex="-1">2. Why do we need a delay exchange? <a class="header-anchor" href="#why-do-we-need-a-delay-exchange%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>First, I was surprised we need that second exchange in the retry-block.
+Why not just have a single one?</p>
+<p>The reason is: In order for <code class="language-plain">x-delay</code> to work, we need an exchange of the type <code class="language-plain">x-delayed-message</code>.
+So we have the choice of either making our normal exchanges all of this type, or
+rather have only a single place for this exception.</p>
+<p>And the <code class="language-plain">retry-error-exchange</code> cannot be the exchange to be <code class="language-plain">x-delay-message</code>, because
+at this point the message doesn't have the <code class="language-plain">x-delay</code> header yet.</p>
+<h1 id="rabbitmq-delay-plugin" tabindex="-1">3. RabbitMQ Delay Plugin <a class="header-anchor" href="#rabbitmq-delay-plugin" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>One more downside to this solution:
+We cannot just use the basic RabbitMQ docker image anymore, because we need to have
+the <a href="https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/" class="external-link" target="_blank">delayed-message-exchange</a> enabled.</p>
+<p>See <a href="https://www.rabbitmq.com/blog/2015/04/16/scheduling-messages-with-rabbitmq" class="external-link" target="_blank">Scheduling Messages with RabbitMQ</a>.</p>
+<p>I use <code class="language-plain">heidiks/rabbitmq-delayed-message-exchange:3.13.3-management</code> for now, but we'll
+see how well this is maintained over time.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
