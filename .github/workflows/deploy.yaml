@@ -23,6 +23,9 @@ jobs:
           npm run check:types
           npm run build
 
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v2
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
