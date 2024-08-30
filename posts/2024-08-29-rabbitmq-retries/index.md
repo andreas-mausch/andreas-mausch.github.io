@@ -2,7 +2,7 @@
 title: "RabbitMQ: Automatic retries with increasing delay"
 date: 2024-08-29T19:30:00+02:00
 tags: ['rabbitmq', 'devops', 'retries', 'delay', 'message-queue']
-draft: true
+thumbnail: rabbitmq-retry-with-delay.png
 ---
 
 I have finally implemented a solution to automatic retries for
@@ -12,6 +12,9 @@ I have pointed out the problem of retrying failed messages with a delay in a
 
 I am still sad there is no ready-to-use solution and you have to write code yourself
 to make this work, but well. At least it is a solution.
+
+You can find an example project in python here:
+[https://github.com/andreas-mausch/rabbitmq-with-retry-and-delay](https://github.com/andreas-mausch/rabbitmq-with-retry-and-delay)
 
 The concept is heavily inspired by
 [https://devcorner.digitalpress.blog/rabbitmq-retries-the-new-full-story/](https://devcorner.digitalpress.blog/rabbitmq-retries-the-new-full-story/).
@@ -102,6 +105,8 @@ still be **immediate**.
 If you want to have increasing delay here as well, you must skip the automatic quorum queue
 mechanism by setting `requeue=False` in case of an error, so the dead-letter-exchange
 (`retry-error-exchange`) will be used instead.
+
+{% image "rabbitmq-retry-with-delay.png" %}
 
 # Why do we need a delay exchange?
 
