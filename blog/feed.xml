@@ -4,11 +4,28 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-06-15T12:30:00Z</updated>
+  <updated>2024-08-29T17:30:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>RabbitMQ: Automatic retries with increasing delay</title>
+    <link href="https://andreas-mausch.de/blog/2024-08-29-rabbitmq-retries/"/>
+    <updated>2024-08-29T17:30:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-08-29-rabbitmq-retries/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I have finally implemented a solution to automatic retries for
+a RabbitMQ message queue.
+I have pointed out the problem of retrying failed messages with a delay in a
+&lt;a href=&quot;https://andreas-mausch.de/blog/2022-02-24-rabbitmq-cli-dead-letter-exchange-and-quorum-queue/&quot;&gt;previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I am still sad there is no ready-to-use solution and you have to write code yourself
+to make this work, but well. At least it is a solution.&lt;/p&gt;
+&lt;p&gt;You can find an example project in python here:
+&lt;a href=&quot;https://github.com/andreas-mausch/rabbitmq-with-retry-and-delay&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://github.com/andreas-mausch/rabbitmq-with-retry-and-delay&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The concept is heavily inspired by
+&lt;a href=&quot;https://devcorner.digitalpress.blog/rabbitmq-retries-the-new-full-story/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://devcorner.digitalpress.blog/rabbitmq-retries-the-new-full-story/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>NAS</title>
     <link href="https://andreas-mausch.de/blog/2024-06-15-nas/"/>
