@@ -173,6 +173,10 @@ a {
   margin: 0;
 }
 
+.postlist-item.postlist-item-draft {
+  background-color: color.scale($highlight-color, $lightness: -30%);
+}
+
 .postlist-item-content {
   display: flex;
   flex-direction: column;
@@ -291,19 +295,6 @@ figcaption {
 
 figcaption {
   font-style: italic;
-}
-
-.github-link {
-  display: flex;
-}
-
-.github-link span {
-  align-self: center;
-  margin-right: 10px;
-}
-
-.github-link img {
-  width: 50px;
 }
 
 .site-header {
