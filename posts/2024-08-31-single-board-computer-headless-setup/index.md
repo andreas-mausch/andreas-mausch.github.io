@@ -140,6 +140,9 @@ This whole setup process is a huge hack, and so much more complicated than befor
 
 # Armbian
 
+For Orange Pi Zero 2W and Radax Zero 3W I like to use Armbian,
+because they provide recent Debian images.
+
 Tested with Armbian 24.8.1:
 Things are so much easier here.
 
