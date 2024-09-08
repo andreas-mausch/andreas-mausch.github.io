@@ -98,6 +98,18 @@
             		</li>
 
                     <li><a href="#version-12-(bookworm)">1.2. Version 12 (bookworm)</a>
+            
+                <ol>
+                    
+                    <li><a href="#wtf%3F">1.2.1. WTF?</a>
+            		</li>
+
+                    <li><a href="#set-up-a-new-installation">1.2.2. Set up a new installation</a>
+            		</li>
+
+                    <li><a href="#other-files-than-firstrun.sh">1.2.3. Other files than firstrun.sh</a>
+            		</li>
+                </ol>
             		</li>
                 </ol>
             		</li>
@@ -109,6 +121,10 @@
   </aside>
 
 
+<p>I still like to set up my SPCs headless.
+This way, I don't need to connect a monitor and keyboard.
+I simply prepare the SD card on my laptop, plug it into the target and it connects to my network,
+allowing me to SSH into it.</p>
 <p>Since my <a href="/blog/2021-03-17-raspberry-pi-setup/">old post</a> is outdated,
 here is an updated guide on how to set up an operating system for a single-board computer
 like a Raspberry Pi, Orange Pi or Radax.</p>
@@ -121,6 +137,9 @@ like a Raspberry Pi, Orange Pi or Radax.</p>
 
     </div><p>and the card is mounted into <code class="language-plain">/mnt/sdcard/</code>.</p>
 <h1 id="raspberry-pi-os-%2F-rasbian" tabindex="-1">1. Raspberry Pi OS / Rasbian <a class="header-anchor" href="#raspberry-pi-os-%2F-rasbian" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>You can of course use the official <a href="https://github.com/raspberrypi/rpi-imager" class="external-link" target="_blank">rpi-imager</a>
+or <a href="https://github.com/gitbls/sdm" class="external-link" target="_blank">sdm</a>, which both are great programs.</p>
+<p>I prefer to do the setup manually though to see what changes on the filesystem.</p>
 <h2 id="version-11-(bullseye)" tabindex="-1">1.1. Version 11 (bullseye) <a class="header-anchor" href="#version-11-(bullseye)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>Tested with <code class="language-plain">2024-07-04-raspios-bullseye-armhf-lite.img.xz</code>.</p>
 <h3 id="ssh" tabindex="-1">1.1.1. SSH <a class="header-anchor" href="#ssh" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
@@ -128,8 +147,7 @@ like a Raspberry Pi, Orange Pi or Radax.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">cd</span> /mnt/sdcard/bootfs/</span>
-<span class="highlight-line"><span class="token function">touch</span> <span class="token function">ssh</span></span></code></pre>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">touch</span> /mnt/sdcard/bootfs/ssh</span></code></pre>
 
     </div><h3 id="wifi" tabindex="-1">1.1.2. WiFi <a class="header-anchor" href="#wifi" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <p>Create this file:</p>
@@ -149,8 +167,15 @@ like a Raspberry Pi, Orange Pi or Radax.</p>
 
     </div><p>Change your country, the SSID and the password (psk).</p>
 <h3 id="hostname" tabindex="-1">1.1.3. Hostname <a class="header-anchor" href="#hostname" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
-<p>Edit <em>/mnt/sdcard/rootfs/etc/hostname</em> to change the hostname.</p>
-<h3 id="user" tabindex="-1">1.1.4. User <a class="header-anchor" href="#user" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>Edit the hostname in these files:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">nano</span> /mnt/sdcard/rootfs/etc/hostname</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">nano</span> /mnt/sdcard/rootfs/etc/hosts</span></code></pre>
+
+    </div><h3 id="user" tabindex="-1">1.1.4. User <a class="header-anchor" href="#user" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
@@ -166,6 +191,47 @@ like a Raspberry Pi, Orange Pi or Radax.</p>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">'mypassword'</span> <span class="token operator">|</span> openssl <span class="token function">passwd</span> <span class="token parameter variable">-6</span> <span class="token parameter variable">-stdin</span></span></code></pre>
 
     </div><h2 id="version-12-(bookworm)" tabindex="-1">1.2. Version 12 (bookworm) <a class="header-anchor" href="#version-12-(bookworm)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<h3 id="wtf%3F" tabindex="-1">1.2.1. WTF? <a class="header-anchor" href="#wtf%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>Things get a bit complicated here and on my first installation I
+reluctantly went to use the official <a href="https://github.com/raspberrypi/rpi-imager" class="external-link" target="_blank">Raspberry Pi Imager</a>. :(</p>
+<p>But now I finally found how to prepare the sd card without it by
+<a href="https://zansara.substack.com/p/2024-01-06-raspberrypi-headless-bookworm-wifi-config" class="external-link" target="_blank">this great article</a>,
+which reverse-engineered the Imager.</p>
+<p>The imager sets up a <code class="language-plain">firstrun.sh</code> script and modifies the <code class="language-plain">cmdline.txt</code> to run it on first boot.
+After that, the script deletes itself and removes itself also from <code class="language-plain">cmdline.txt</code> again.</p>
+<p>The key program used is <a href="https://github.com/RPi-Distro/raspberrypi-sys-mods" class="external-link" target="_blank">raspberrypi-sys-mods</a>.</p>
+<p>What I stumbled across during my reasearch, but things that were <strong>not</strong> useful for Raspberry Pi OS:</p>
+<ul>
+<li>cloud-init?
+I guess it is only used by Ubuntu</li>
+<li>netplan?
+This one is used by Armbian actually, see below</li>
+<li><code class="language-plain">custom.toml</code>
+Didn't work for me.</li>
+</ul>
+<h3 id="set-up-a-new-installation" tabindex="-1">1.2.2. Set up a new installation <a class="header-anchor" href="#set-up-a-new-installation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>I have copied the original <code class="language-plain">firstrun.sh</code> the imager created with my settings
+and tried to generalize it, in order to only have a simple <code class="language-plain">firstrun.env</code> file,
+which would be the only file to be changed for a new installation.</p>
+<p>So here are my steps:</p>
+<ol>
+<li>Copy my modified <code class="language-plain">firstrun.sh</code> and <code class="language-plain">firstrun.env</code> to <code class="language-plain">/mnt/sdcard/bootfs/</code>.</li>
+<li>Make changes to <code class="language-plain">firstrun.env</code> to match your desired config.</li>
+<li>Modify <code class="language-plain">/mnt/sdcard/bootfs/cmdline.txt</code> and append this to the only long single line:
+<code class="language-plain">cfg80211.ieee80211_regdom=DE systemd.run=/boot/firstrun.sh systemd.run_success_action=reboot systemd.unit=kernel-command-line.target</code><br>
+This references the <code class="language-plain">firstrun.sh</code> to be run at first boot.</li>
+<li>Change the region code in <code class="language-plain">cmdline.txt</code> to match your country.</li>
+</ol>
+<h3 id="other-files-than-firstrun.sh" tabindex="-1">1.2.3. Other files than firstrun.sh <a class="header-anchor" href="#other-files-than-firstrun.sh" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>My goal was to have a firstrun.env with all the related environment variables,
+and only this files needs to be changed for future installations.
+The <code class="language-plain">firstrun.sh</code> should remain untouched.</p>
+<p>This was problematic, <a href="https://github.com/raspberrypi/rpi-imager/issues/554" class="external-link" target="_blank">because</a> there
+is an <a href="https://github.com/RPi-Distro/raspberrypi-sys-mods/blob/a7d769745962126abd7c727e9a7d4238fe3fb2c2/initramfs-tools/scripts/local-bottom/imager_fixup" class="external-link" target="_blank">imager_fixup</a>
+which makes changes to the file on the first boot.
+What a hack, and it took me some hours to debug. :(</p>
+<p>So what you could expect at <code class="language-plain">/boot/*</code> is in reality mounted during the boot process at <code class="language-plain">/boot/firmware/*</code>.</p>
+<p>This whole setup process is a huge hack, and so much more complicated than before with bullseye.</p>
 <h1 id="armbian" tabindex="-1">2. Armbian <a class="header-anchor" href="#armbian" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 
 
