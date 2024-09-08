@@ -114,8 +114,10 @@ which would be the only file to be changed for a new installation.
 
 So here are my steps:
 
-1. Copy my modified `firstrun.sh` and `firstrun.env` to `/mnt/sdcard/bootfs/`.
+1. Copy my modified [firstrun.sh]({{ "raspberry-pi/bookworm/firstrun.sh" | relativeFile | url }}) and [firstrun.env]({{ "raspberry-pi/bookworm/firstrun.env" | relativeFile | url }}) to `/mnt/sdcard/bootfs/`.
 2. Make changes to `firstrun.env` to match your desired config.
+   Note: `MY_USER_PASSWORD` is optional.
+   I usually SSH via key into the machines and skip the password.
 3. Modify `/mnt/sdcard/bootfs/cmdline.txt` and append this to the only long single line:
    `cfg80211.ieee80211_regdom=DE systemd.run=/boot/firstrun.sh systemd.run_success_action=reboot systemd.unit=kernel-command-line.target`  
    This references the `firstrun.sh` to be run at first boot.
@@ -137,3 +139,50 @@ So what you could expect at `/boot/*` is in reality mounted during the boot proc
 This whole setup process is a huge hack, and so much more complicated than before with bullseye.
 
 # Armbian
+
+Tested with Armbian 24.8.1:
+Things are so much easier here.
+
+Here is the setup:
+
+```bash
+sudo cp .not_logged_in_yet /mnt/sdcard/root/
+```
+
+The file should have existed there already, but should have been empty.
+
+Download my example file: [.not_logged_in_yet]({{ "armbian/.not_logged_in_yet" | relativeFile | url }})
+
+## Hostname
+
+The file above does **not** cover the hostname.
+
+Same as for bullseye:
+Edit `/mnt/sdcard/etc/hosts` and `/mnt/sdcard/etc/hostname`.
+
+## Note on DHCP
+
+Important: You must set `PRESET_NET_USE_STATIC` to `0` explicitly.
+If you skip this config entry, DHCP is not enabled.
+See here:
+[https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L54](https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L54)
+
+## Why in /root/ user folder?
+
+What's confusing to me:
+I would have guessed that `/root/.not_logged_in_yet` is only executed after the first login via root.
+That means WiFi settings would be obsolete here, because you could never login before the network connection is made.
+However, some script somewhere writes a `/etc/netplan/*.yaml` file, if WiFi entries are found in `.not_logged_in_yet`.
+Magic.
+
+(Seems to happen around here
+[https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L119](https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L119))
+
+## What cost me time
+
+All of this is not required:
+
+- `FR_net_wifi_ssid`
+- `armbian_first_run.txt`
+- WiFi setup via `netplan`
+  This is still an alternative, but will be set up automatically via the `.not_logged_in_yet` file.
