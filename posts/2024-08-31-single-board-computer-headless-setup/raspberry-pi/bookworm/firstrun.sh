@@ -2,7 +2,9 @@
 
 set +e
 
-source firstrun.env
+source /boot/firmware/firstrun.env
+
+echo "Setting hostname to ${MY_HOSTNAME}.." >> /var/log/firstrun.log
 
 CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
 if [ -f /usr/lib/raspberrypi-sys-mods/imager_custom ]; then
@@ -11,6 +13,9 @@ else
    echo "${MY_HOSTNAME}" >/etc/hostname
    sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t${MY_HOSTNAME}/g" /etc/hosts
 fi
+
+echo "Setting up SSH with key ${MY_SSH_KEY}.." >> /var/log/firstrun.log
+
 FIRSTUSER=`getent passwd 1000 | cut -d: -f1`
 FIRSTUSERHOME=`getent passwd 1000 | cut -d: -f6`
 if [ -f /usr/lib/raspberrypi-sys-mods/imager_custom ]; then
@@ -27,6 +32,9 @@ else
    fi
    systemctl enable ssh
 fi
+
+echo "Setting up user ${MY_USER_NAME}.." >> /var/log/firstrun.log
+
 if [ -f /usr/lib/userconf-pi/userconf ]; then
    if [ -n "${MY_USER_PASSWORD}" ]; then
       /usr/lib/userconf-pi/userconf "${MY_USER_NAME}" "${MY_USER_PASSWORD}"
@@ -52,6 +60,9 @@ else
       fi
    fi
 fi
+
+echo "Setting up wifi ${MY_WIFI_SSID}.." >> /var/log/firstrun.log
+
 if [ -f /usr/lib/raspberrypi-sys-mods/imager_custom ]; then
    /usr/lib/raspberrypi-sys-mods/imager_custom set_wlan "${MY_WIFI_SSID}" "${MY_WIFI_PASSWORD}" "${MY_WIFI_COUNTRY}"
 else
@@ -73,6 +84,9 @@ WPAEOF
        echo 0 > $filename
    done
 fi
+
+echo "Setting up keyboard layout ${MY_KEYBOARD_LAYOUT} and timezone ${MY_TIMEZONE}.." >> /var/log/firstrun.log
+
 if [ -f /usr/lib/raspberrypi-sys-mods/imager_custom ]; then
    /usr/lib/raspberrypi-sys-mods/imager_custom set_keymap "${MY_KEYBOARD_LAYOUT}"
    /usr/lib/raspberrypi-sys-mods/imager_custom set_timezone "${MY_TIMEZONE}"
@@ -89,6 +103,10 @@ XKBOPTIONS=""
 KBEOF
    dpkg-reconfigure -f noninteractive keyboard-configuration
 fi
+
+echo "Done. Cleaning up files.." >> /var/log/firstrun.log
+
 rm -f /boot/firstrun.sh
+rm -f /boot/firmware/firstrun.env
 sed -i 's| systemd.run.*||g' /boot/cmdline.txt
 exit 0
