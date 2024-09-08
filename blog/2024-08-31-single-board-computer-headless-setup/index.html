@@ -115,6 +115,21 @@
             		</li>
 
                     <li><a href="#armbian">2. Armbian</a>
+            
+                <ol>
+                    
+                    <li><a href="#hostname-1">2.1. Hostname</a>
+            		</li>
+
+                    <li><a href="#note-on-dhcp">2.2. Note on DHCP</a>
+            		</li>
+
+                    <li><a href="#why-in-%2Froot%2F-user-folder%3F">2.3. Why in /root/ user folder?</a>
+            		</li>
+
+                    <li><a href="#what-cost-me-time">2.4. What cost me time</a>
+            		</li>
+                </ol>
             		</li>
                 </ol>
             </nav>
@@ -215,8 +230,10 @@ and tried to generalize it, in order to only have a simple <code class="language
 which would be the only file to be changed for a new installation.</p>
 <p>So here are my steps:</p>
 <ol>
-<li>Copy my modified <code class="language-plain">firstrun.sh</code> and <code class="language-plain">firstrun.env</code> to <code class="language-plain">/mnt/sdcard/bootfs/</code>.</li>
-<li>Make changes to <code class="language-plain">firstrun.env</code> to match your desired config.</li>
+<li>Copy my modified <a href="/blog/2024-08-31-single-board-computer-headless-setup/raspberry-pi/bookworm/firstrun.sh">firstrun.sh</a> and <a href="/blog/2024-08-31-single-board-computer-headless-setup/raspberry-pi/bookworm/firstrun.env">firstrun.env</a> to <code class="language-plain">/mnt/sdcard/bootfs/</code>.</li>
+<li>Make changes to <code class="language-plain">firstrun.env</code> to match your desired config.
+Note: <code class="language-plain">MY_USER_PASSWORD</code> is optional.
+I usually SSH via key into the machines and skip the password.</li>
 <li>Modify <code class="language-plain">/mnt/sdcard/bootfs/cmdline.txt</code> and append this to the only long single line:
 <code class="language-plain">cfg80211.ieee80211_regdom=DE systemd.run=/boot/firstrun.sh systemd.run_success_action=reboot systemd.unit=kernel-command-line.target</code><br>
 This references the <code class="language-plain">firstrun.sh</code> to be run at first boot.</li>
@@ -233,6 +250,42 @@ What a hack, and it took me some hours to debug. :(</p>
 <p>So what you could expect at <code class="language-plain">/boot/*</code> is in reality mounted during the boot process at <code class="language-plain">/boot/firmware/*</code>.</p>
 <p>This whole setup process is a huge hack, and so much more complicated than before with bullseye.</p>
 <h1 id="armbian" tabindex="-1">2. Armbian <a class="header-anchor" href="#armbian" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Tested with Armbian 24.8.1:
+Things are so much easier here.</p>
+<p>Here is the setup:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">cp</span> .not_logged_in_yet /mnt/sdcard/root/</span></code></pre>
+
+    </div><p>The file should have existed there already, but should have been empty.</p>
+<p>Download my example file: <a href="/blog/2024-08-31-single-board-computer-headless-setup/armbian/.not_logged_in_yet">.not_logged_in_yet</a></p>
+<h2 id="hostname-1" tabindex="-1">2.1. Hostname <a class="header-anchor" href="#hostname-1" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>The file above does <strong>not</strong> cover the hostname.</p>
+<p>Same as for bullseye:
+Edit <code class="language-plain">/mnt/sdcard/etc/hosts</code> and <code class="language-plain">/mnt/sdcard/etc/hostname</code>.</p>
+<h2 id="note-on-dhcp" tabindex="-1">2.2. Note on DHCP <a class="header-anchor" href="#note-on-dhcp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Important: You must set <code class="language-plain">PRESET_NET_USE_STATIC</code> to <code class="language-plain">0</code> explicitly.
+If you skip this config entry, DHCP is not enabled.
+See here:
+<a href="https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L54" class="external-link" target="_blank">https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L54</a></p>
+<h2 id="why-in-%2Froot%2F-user-folder%3F" tabindex="-1">2.3. Why in /root/ user folder? <a class="header-anchor" href="#why-in-%2Froot%2F-user-folder%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>What's confusing to me:
+I would have guessed that <code class="language-plain">/root/.not_logged_in_yet</code> is only executed after the first login via root.
+That means WiFi settings would be obsolete here, because you could never login before the network connection is made.
+However, some script somewhere writes a <code class="language-plain">/etc/netplan/*.yaml</code> file, if WiFi entries are found in <code class="language-plain">.not_logged_in_yet</code>.
+Magic.</p>
+<p>(Seems to happen around here
+<a href="https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L119" class="external-link" target="_blank">https://github.com/armbian/build/blob/d16f710e7eabdfd9b1911aa6cc7648c25d038208/packages/bsp/common/usr/lib/armbian/armbian-firstlogin#L119</a>)</p>
+<h2 id="what-cost-me-time" tabindex="-1">2.4. What cost me time <a class="header-anchor" href="#what-cost-me-time" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>All of this is not required:</p>
+<ul>
+<li><code class="language-plain">FR_net_wifi_ssid</code></li>
+<li><code class="language-plain">armbian_first_run.txt</code></li>
+<li>WiFi setup via <code class="language-plain">netplan</code>
+This is still an alternative, but will be set up automatically via the <code class="language-plain">.not_logged_in_yet</code> file.</li>
+</ul>
 
 
 <script async src="/scripts/index.js"></script>
