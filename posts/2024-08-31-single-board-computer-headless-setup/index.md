@@ -3,7 +3,6 @@ title: "Single-Board Computers: Headless Setup for Raspberry Pi, Orange Pi, Rada
 date: 2024-08-31T19:30:00+02:00
 tags: ['raspberrypi', 'orangepi', 'radax', 'rasbian', 'armbian']
 toc: true
-draft: true
 ---
 
 I still like to set up my SPCs headless.
