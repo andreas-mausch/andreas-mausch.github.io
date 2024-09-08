@@ -4,11 +4,30 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-08-29T17:30:00Z</updated>
+  <updated>2024-08-31T17:30:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Single-Board Computers: Headless Setup for Raspberry Pi, Orange Pi, Radax</title>
+    <link href="https://andreas-mausch.de/blog/2024-08-31-single-board-computer-headless-setup/"/>
+    <updated>2024-08-31T17:30:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-08-31-single-board-computer-headless-setup/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I still like to set up my SPCs headless.
+This way, I don&#39;t need to connect a monitor and keyboard.
+I simply prepare the SD card on my laptop, plug it into the target and it connects to my network,
+allowing me to SSH into it.&lt;/p&gt;
+&lt;p&gt;Since my &lt;a href=&quot;https://andreas-mausch.de/blog/2021-03-17-raspberry-pi-setup/&quot;&gt;old post&lt;/a&gt; is outdated,
+here is an updated guide on how to set up an operating system for a single-board computer
+like a Raspberry Pi, Orange Pi or Radax.&lt;/p&gt;
+&lt;p&gt;In all cases, it is assumed you have flashed the image to a sd card, like this:&lt;/p&gt;
+&lt;div class=&quot;code-block&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;
+      &lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;
+    &lt;/button&gt;
+    &lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;xzcat ./2024-07-04-raspios-bookworm-armhf-lite.img.xz &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;dd&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;of&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+  </entry>
   <entry>
     <title>RabbitMQ: Automatic retries with increasing delay</title>
     <link href="https://andreas-mausch.de/blog/2024-08-29-rabbitmq-retries/"/>
