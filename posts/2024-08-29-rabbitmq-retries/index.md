@@ -2,7 +2,7 @@
 title: "RabbitMQ: Automatic retries with increasing delay"
 date: 2024-08-29T19:30:00+02:00
 tags: ['rabbitmq', 'devops', 'retries', 'delay', 'message-queue']
-thumbnail: rabbitmq-retry-with-delay.png
+thumbnail: plantuml.svg
 ---
 
 I have finally implemented a solution to automatic retries for
