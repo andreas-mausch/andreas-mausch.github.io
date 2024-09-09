@@ -145,7 +145,7 @@ because they provide recent Debian images.
 Tested with Armbian 24.8.1:
 Things are so much easier here.
 
-Here is the setup:
+## General setup via .not_logged_in_yet
 
 ```bash
 sudo cp .not_logged_in_yet /mnt/sdcard/root/
@@ -155,23 +155,29 @@ The file should have existed there already, but should have been empty.
 
 Download my example file: [.not_logged_in_yet]({{ "armbian/.not_logged_in_yet" | relativeFile | url }})
 
-## Hostname
+It covers WiFi, locale, timezone, root password and user creation.
+
+It does not cover hostname, ssh key authentication, and sudo without password, see below.
+
+## Extra setup
+
+### Hostname
 
 The file above does **not** cover the hostname.
 
 Same as for bullseye:
 Edit `/mnt/sdcard/etc/hosts` and `/mnt/sdcard/etc/hostname`.
 
-## SSH key
+### SSH key
 
 ```bash
 sudo install -o 1000 -d /mnt/sdcard/home/me/
 sudo install -o 1000 -m 700 -d /mnt/sdcard/home/me/.ssh/
 echo 'ssh-rsa AAAAB3... openpgp:0x01234567' | sudo install -o 1000 -m 600 /dev/stdin /mnt/sdcard/home/me/.ssh/authorized_keys
-echo 'PasswordAuthentication no' | tee --append /mnt/sdcard/etc/ssh/sshd_config
+echo 'PasswordAuthentication no' | sudo tee --append /mnt/sdcard/etc/ssh/sshd_config
 ```
 
-## sudo without password
+### sudo without password
 
 ```bash
 echo '%sudo  ALL=(ALL) NOPASSWD: ALL' | sudo tee /mnt/sdcard/etc/sudoers.d/010_sudo-nopasswd
