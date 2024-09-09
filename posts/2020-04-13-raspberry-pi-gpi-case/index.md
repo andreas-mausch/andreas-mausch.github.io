@@ -1,7 +1,7 @@
 ---
 title: Retroflag GPi Case with a Raspberry Pi Zero W
 date: 2020-04-13T23:00:00+02:00
-tags: ['raspberrypi', 'retroflag', 'gpi-case', 'retropie', 'dos', 'gameboy', 'playstation', 'toys']
+tags: ['single board computer', 'raspberrypi', 'retroflag', 'gpi-case', 'retropie', 'dos', 'gameboy', 'playstation', 'toys']
 thumbnail: games/omf2097.jpg
 ---
 

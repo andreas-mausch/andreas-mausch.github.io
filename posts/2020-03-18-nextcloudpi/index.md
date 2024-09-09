@@ -1,7 +1,7 @@
 ---
 title: NextCloudPi with Wi-Fi Hotspot
 date: 2020-03-18T02:30:00+01:00
-tags: ['nextcloud', 'linux', 'raspberrypi', 'wifi', 'hotspot']
+tags: ['nextcloud', 'linux', 'single board computer', 'raspberrypi', 'wifi', 'hotspot']
 thumbnail: ssh-password.png
 ---
 

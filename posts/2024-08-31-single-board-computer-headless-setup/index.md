@@ -1,7 +1,7 @@
 ---
 title: "Single-Board Computers: Headless Setup for Raspberry Pi, Orange Pi, Radax"
 date: 2024-08-31T19:30:00+02:00
-tags: ['raspberrypi', 'orangepi', 'radax', 'rasbian', 'armbian']
+tags: ['single board computer', 'raspberrypi', 'orangepi', 'radax', 'rasbian', 'armbian']
 toc: true
 ---
 

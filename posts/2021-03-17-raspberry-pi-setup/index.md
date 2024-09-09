@@ -1,7 +1,7 @@
 ---
 title: Raspberry Pi Headless Setup
 date: 2021-03-17T19:00:00+01:00
-tags: ['raspberrypi', 'headless', 'ssh', 'wifi']
+tags: ['single board computer', 'raspberrypi', 'headless', 'ssh', 'wifi']
 toc: true
 ---
 

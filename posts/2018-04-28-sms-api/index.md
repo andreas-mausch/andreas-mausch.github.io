@@ -1,7 +1,7 @@
 ---
 title: Self-made SMS receiver API
 date: 2018-04-28T18:00:00+02:00
-tags: ['sms', 'python', 'surfstick', 'raspberrypi']
+tags: ['sms', 'python', 'surfstick', 'raspberrypi', 'single board computer']
 thumbnail: setup.jpg
 ---
 
