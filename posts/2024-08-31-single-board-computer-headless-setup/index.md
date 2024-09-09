@@ -162,6 +162,21 @@ The file above does **not** cover the hostname.
 Same as for bullseye:
 Edit `/mnt/sdcard/etc/hosts` and `/mnt/sdcard/etc/hostname`.
 
+## SSH key
+
+```bash
+sudo install -o 1000 -d /mnt/sdcard/home/me/
+sudo install -o 1000 -m 700 -d /mnt/sdcard/home/me/.ssh/
+echo 'ssh-rsa AAAAB3... openpgp:0x01234567' | sudo install -o 1000 -m 600 /dev/stdin /mnt/sdcard/home/me/.ssh/authorized_keys
+echo 'PasswordAuthentication no' | tee --append /mnt/sdcard/etc/ssh/sshd_config
+```
+
+## sudo without password
+
+```bash
+echo '%sudo  ALL=(ALL) NOPASSWD: ALL' | sudo tee /mnt/sdcard/etc/sudoers.d/010_sudo-nopasswd
+```
+
 ## Note on DHCP
 
 Important: You must set `PRESET_NET_USE_STATIC` to `0` explicitly.
