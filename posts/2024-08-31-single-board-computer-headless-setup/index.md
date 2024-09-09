@@ -124,8 +124,8 @@ So here are my steps:
 
 ### Other files than firstrun.sh
 
-My goal was to have a firstrun.env with all the related environment variables,
-and only this files needs to be changed for future installations.
+My goal was to have a `firstrun.env` with all the related environment variables,
+and only this file needs to be changed for future installations.
 The `firstrun.sh` should remain untouched.
 
 This was problematic, [because](https://github.com/raspberrypi/rpi-imager/issues/554) there
