@@ -209,3 +209,43 @@ All of this is not required:
 - `armbian_first_run.txt`
 - WiFi setup via `netplan`
   This is still an alternative, but will be set up automatically via the `.not_logged_in_yet` file.
+
+# DietPi
+
+I have tried the image `DietPi_RadxaZERO3-ARMv8-Bookworm.img.xz` from 2024-09-13.
+There is a extra config parition.
+It is described here:
+[https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation](https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation)
+
+Edit the `dietpi.txt` and `dietpi-wifi.txt` to your needs.
+
+Hostname, locale, timezone, and ssh key authentication is all covered.
+I couldn't find a setting in the config file for passwordless sudo, but it was activated automatically.
+
+For my personal settings, I have changed:
+
+- `AUTO_SETUP_KEYBOARD_LAYOUT`
+- `AUTO_SETUP_TIMEZONE`
+- `AUTO_SETUP_NET_WIFI_ENABLED`
+- `AUTO_SETUP_NET_WIFI_COUNTRY_CODE`
+- `AUTO_SETUP_HEADLESS`
+- `AUTO_SETUP_SSH_PUBKEY`
+- `SURVEY_OPTED_IN`
+- `SOFTWARE_DISABLE_SSH_PASSWORD_LOGINS`
+
+Everything worked on first try.
+However, I dislike that the real setup script is started when you boot up the
+SBC for the first time and login as root.
+
+WHen I tried to login directly using the `dietpi` user, I got a warning.
+
+In the script which runs on first login as `root`, you are asked several questions,
+which can be answered during a UI. Then the system is updated and settings are applied.
+
+That's exactly what I'd like to avoid in a headless setup.
+If I had to do it for like 20 installs, that would be boring and repetitive.
+
+The extra tools for installing software might be neat for beginners, but I don't really need them.
+
+Even though the headless installation was best documented out of the
+three operating systems I have tested, I will stick with Armbian.
