@@ -29,6 +29,8 @@ or [sdm](https://github.com/gitbls/sdm), which both are great programs.
 
 I prefer to do the setup manually though to see what changes on the filesystem.
 
+General hint: `cat /sys/firmware/devicetree/base/model` shows you which model you have.
+
 ## Version 11 (bullseye)
 
 Tested with `2024-07-04-raspios-bullseye-armhf-lite.img.xz`.
