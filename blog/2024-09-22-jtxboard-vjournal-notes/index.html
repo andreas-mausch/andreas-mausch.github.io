@@ -1,0 +1,160 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jtxBoard: Notes and Journals on Nextcloud</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>jtxBoard: Notes and Journals on Nextcloud</h1>
+<div>
+  <time class="postlist-date" datetime="2024-09-22T16:00:00.000+00:00">Sep 22, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/caldav">#caldav</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/nextcloud">#nextcloud</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/selfhosted">#selfhosted</a></li>
+        
+    
+  </ul>
+</div>
+
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#intro">1. Intro</a>
+            		</li>
+
+                    <li><a href="#difference-between-journal-and-note-entry">2. Difference between Journal and Note entry</a>
+            		</li>
+
+                    <li><a href="#convert-calendar">3. Convert calendar</a>
+            		</li>
+
+                    <li><a href="#desktop-client">4. Desktop client</a>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
+
+
+<h1 id="intro" tabindex="-1">1. Intro <a class="header-anchor" href="#intro" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>On my self-hosted Nextcloud instance I used to use <a href="https://apps.nextcloud.com/apps/notes" class="external-link" target="_blank">Nextcloud Notes</a>
+and the <a href="https://f-droid.org/de/packages/it.niedermann.owncloud.notes/" class="external-link" target="_blank">Android app</a> to sync my notes.</p>
+<p>But since I discovered <a href="https://jtx.techbee.at/" class="external-link" target="_blank">jtxBoard</a>, I always wanted to make the switch:
+jtxBoard uses the VJOURNAL entry in CalDAV calendars to sync journals and notes.</p>
+<p>This is great, because it follows a standard protocol (iCalendar / RFC-5545), which could be used by a lot of programs,
+and is independent from what the Nextcloud devs will do in future.</p>
+<p>However, there are not a lot of clients which support VJOURNAL unfortunately, but more on that later.</p>
+<p>When I tried jtxBoard on my phone for the first time, I discovered my existing calendars couldn't be used
+immediately.
+That's because calendars in iCalendar can be set up for different purposes:</p>
+<ul>
+<li>Calendar</li>
+<li>Tasks</li>
+<li>Journal</li>
+</ul>
+<p>By default, Nextcloud only enables the Calendar and optionally the Tasks feature for it's calendars.
+To make it work with journals, you need to create a new iCalendar in DAVx5, enable all features and then sync it to Nextcloud.</p>
+<img src="/blog/2024-09-22-jtxboard-vjournal-notes/DAVx5.jpg" width="485" height="1024" alt="undefined">
+<p>Since it is not possible to add a feature after creation (at least I don't know a way), there are some extra
+steps in order to keep all your existing entries.</p>
+<h1 id="difference-between-journal-and-note-entry" tabindex="-1">2. Difference between Journal and Note entry <a class="header-anchor" href="#difference-between-journal-and-note-entry" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Both are stored as VJOURNAL entry in your iCalendar, with their only difference is
+journal entries do have a date entry, while notes do not.</p>
+<h1 id="convert-calendar" tabindex="-1">3. Convert calendar <a class="header-anchor" href="#convert-calendar" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ol>
+<li>Backup your existing calendar</li>
+</ol>
+<p>Follow this guide:</p>
+<p>https://makesmart.net/blog/read/nextcloud-backup-kontakte-und-kalender-sichern</p>
+<p>Edit calendar, then you can select <em>Export</em> to download the .ics file.
+This already includes the tasks!</p>
+<ol start="2">
+<li>Delete your calendar in nextcloud</li>
+</ol>
+<p>Be careful here and make sure you have a complete backup.
+This step also deletes the related tasks list, even though that's not clear from the web interface.</p>
+<ol start="3">
+<li>Create a new calendar</li>
+</ol>
+<p>Important: Do it on the phone in DAVx5.
+This way, you can select to create Calendar/Tasks and also Journal.
+Which is important to make it work with jtxBoard.</p>
+<ol start="4">
+<li>Import .ics file</li>
+</ol>
+<p>In Nextcloud, under <em>Calendar -&gt; Settings</em> there is an import button.
+After selecting the .ics file, you can choose the calendar to import to.</p>
+<p>For me, I have seen a lot of failed requests (HTTP 500) in the network tab.
+I had to re-import the .ics several times until all entries have been imported correctly.
+Not sure what the issue was, maybe some kind of rate-limiting.</p>
+<ol start="5">
+<li>Change the default..</li>
+</ol>
+<p>.. calendar and todo list in Nextcloud to create new entries there.</p>
+<img src="/blog/2024-09-22-jtxboard-vjournal-notes/jtxBoard-collections.jpg" width="485" height="1024" alt="undefined">
+<img src="/blog/2024-09-22-jtxboard-vjournal-notes/jtxBoard-notes.jpg" width="485" height="1024" alt="undefined">
+<h1 id="desktop-client" tabindex="-1">4. Desktop client <a class="header-anchor" href="#desktop-client" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>While syncing calendar entries and todos works with most clients,
+unfortunately, there seems to be no good gui client for Linux out there yet which supports journals. :(</p>
+<p>But I do have hope it will find some adoption soon.</p>
+<p>See here:
+<a href="https://github.com/TechbeeAT/jtxBoard/discussions/542" class="external-link" target="_blank">jtxBoard GitHub Issue: What is the best desktop client?</a></p>
+<p>and Thunderbird integration request here:
+<a href="https://connect.mozilla.org/t5/ideas/support-vjournal-in-thunderbird/idi-p/46295" class="external-link" target="_blank">Support VJOURNAL in Thunderbird</a></p>
+<p>Joplin will not support VJOURNAL:
+<a href="https://discourse.joplinapp.org/t/to-dos-sync-with-caldav-server/3677" class="external-link" target="_blank">To-Dos - sync with CalDAV-Server</a></p>
+<p>KOrganizer and Evolution support journals I think, but I haven't tried them.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
