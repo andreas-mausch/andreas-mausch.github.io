@@ -496,13 +496,24 @@ Host *
 
 ## Use tpm2 from command line
 
-To use TPM without GPG you can run [this example](https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa):
+Test supported algorithms:
+
+```bash
+# List supported algorithms:
+tpm2_getcap algorithms
+
+# Test specific algorithm
+tpm2_testparms rsa2048
+tpm2_testparms rsa4096
+```
+
+To use TPM without GPG you can run [this example](https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa).
 
 ```bash
 openssl genrsa -out private.pem 2048
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
-tpm2_createprimary -C e -c primary.ctx
-tpm2_import -C primary.ctx -G rsa -i private.pem -u key.pub -r key.priv
+tpm2_createprimary --hierarchy=e --key-algorithm=rsa2048 --key-context=primary.ctx
+tpm2_import -C primary.ctx -G rsa -i private.pem -u key.pub -r key.priv # e stands for TPM_RH_ENDORSEMENT
 rm private.pem
 
 echo "This is the secret" > test.txt
@@ -513,6 +524,14 @@ tpm2_rsadecrypt -c key.ctx -o test.decrypted.txt test.txt.enc
 cat test.decrypted.txt
 rm test.txt test.txt.enc test.decrypted.txt public.pem primary.ctx key.pub key.priv
 ```
+
+My TPM2 does not support RSA with 4096-bits keys.
+I get the same error as described [here](https://github.com/tpm2-software/tpm2-tools/issues/1909).
+
+Which is a pity, because tools like forgejo [require at least 3072 bits](https://codeberg.org/Codeberg/Community/issues/1576).
+
+> German Federal Office for Information Security requests in its technical guideline BSI TR-02102-1 RSA Keylength not shorter than 3000bits starting 2024, in the year 2023 3000bits as a recommendation.
+> -- [https://github.com/go-gitea/gitea/pull/26604](https://github.com/go-gitea/gitea/pull/26604)
 
 # gpg-agent log
 
