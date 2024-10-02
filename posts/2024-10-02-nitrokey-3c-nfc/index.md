@@ -1,7 +1,8 @@
 ---
 title: "Nitrokey 3C NFC: WebAuthn and OpenPGP"
 date: 2024-10-02T19:00:00+02:00
-tags: ['nitrokey', 'encryption', 'gpg', 'openpgp', 'privacy', 'security', 'fido2', 'webauthn']
+tags: ['nitrokey', 'encryption', 'gpg', 'openpgp', 'privacy', 'security', 'fido2', 'webauthn', 'totp']
+toc: true
 ---
 
 Some time has passed since my [last post]({% link-post "2021-02-23-nitrokey" %}) about the Nitrokey.
@@ -171,3 +172,60 @@ otherwise I would see an error message.
 For the more privacy-focused browsers like Mull or Fennec it did not work however,
 and for Mull they state [WebAuthn is not supported](https://github.com/Divested-Mobile/Mull-Fenix/issues/89),
 because of *Google Play Services and proprietary blobs*.
+
+## List Nitrokey FIDO2 / WebAuthn resident credentials
+
+While the commands in nitropy are in the `nitropy fido2` category,
+they also work with a Nitrokey 3C NFC.
+
+In order to use FIDO2, you need to set an initial PIN of your choice:
+
+```bash
+nitropy fido2 set-pin
+```
+
+Note: After setting the PIN, you also need to provide it
+on you devices.
+
+Next, you can list all credentials:
+
+```bash
+nitropy fido2 list-credentials
+```
+
+If no PIN has been set here, you will see the critial error message:
+`Please set a pin in order to manage credentials`
+
+If the command worked, you will see all you credentials and also a
+guess how much storage is left:
+`There is an estimated amount of 10 credential slots left`
+
+# TOTP
+
+TOTP and passwords have a different PIN on the Nitrokey.
+Set it via:
+
+```bash
+nitropy nk3 secrets set-pin
+```
+
+Go to [https://totp.danhersam.com/](https://totp.danhersam.com/) to generate a test TOTP.
+Add it via:
+
+```bash
+nitropy nk3 secrets add-otp --kind TOTP [--hash SHA1 --touch-button --protect-with-pin] testtotp JBSWY3DPEHPK3PXP
+```
+
+SHA1 still seems to be the default for TOTP, even though SHA256 is supported by the Nitrokey as well.
+
+You need to provide the secret directly on the command line.
+This is bad practice and there is already an issue for it:
+[https://github.com/Nitrokey/pynitrokey/issues/401](https://github.com/Nitrokey/pynitrokey/issues/401)
+
+Now, you can retrieve a code anytime by using this command:
+
+```bash
+nitropy nk3 secrets get-otp testtotp
+```
+
+I couldn't find a good documentation on this, so I just thought I write the commands down here in my blog.
