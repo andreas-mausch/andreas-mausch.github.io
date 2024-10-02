@@ -76,12 +76,74 @@
         
     
         
+          <li><a href="/blog/tags/totp">#totp</a></li>
+        
+    
+        
           <li><a href="/blog/tags/webauthn">#webauthn</a></li>
         
     
   </ul>
 </div>
 
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#openpgp-and-nitropy">1. OpenPGP and nitropy</a>
+            
+                <ol>
+                    
+                    <li><a href="#install-required-packages">1.1. Install required packages</a>
+            		</li>
+
+                    <li><a href="#general-commands">1.2. General commands</a>
+            		</li>
+
+                    <li><a href="#firmware-update">1.3. Firmware update</a>
+            		</li>
+
+                    <li><a href="#enable-the-secure-element">1.4. Enable the secure element</a>
+            		</li>
+
+                    <li><a href="#generate-test-secret-key-and-move-it-to-the-nitrokey">1.5. Generate test secret key and move it to the Nitrokey</a>
+            		</li>
+
+                    <li><a href="#testing-a-signature">1.6. Testing a signature</a>
+            		</li>
+
+                    <li><a href="#android-support-via-openkeychain">1.7. Android support via OpenKeychain</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#webauthn-and-passkeys">2. WebAuthn and Passkeys</a>
+            
+                <ol>
+                    
+                    <li><a href="#webauthn%3A-resident-vs.-non-resident-(a.k.a-discoverable-credentials)">2.1. WebAuthn: Resident vs. non-resident (a.k.a Discoverable credentials)</a>
+            		</li>
+
+                    <li><a href="#my-preference">2.2. My preference</a>
+            		</li>
+
+                    <li><a href="#test-webauthn">2.3. Test WebAuthn</a>
+            		</li>
+
+                    <li><a href="#webauthn-and-android">2.4. WebAuthn and Android</a>
+            		</li>
+
+                    <li><a href="#list-nitrokey-fido2-%2F-webauthn-resident-credentials">2.5. List Nitrokey FIDO2 / WebAuthn resident credentials</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#totp">3. TOTP</a>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
 
 
 <p>Some time has passed since my <a href="/blog/2021-02-23-nitrokey/">last post</a> about the Nitrokey.</p>
@@ -224,6 +286,59 @@ otherwise I would see an error message.</p>
 <p>For the more privacy-focused browsers like Mull or Fennec it did not work however,
 and for Mull they state <a href="https://github.com/Divested-Mobile/Mull-Fenix/issues/89" class="external-link" target="_blank">WebAuthn is not supported</a>,
 because of <em>Google Play Services and proprietary blobs</em>.</p>
+<h2 id="list-nitrokey-fido2-%2F-webauthn-resident-credentials" tabindex="-1">2.5. List Nitrokey FIDO2 / WebAuthn resident credentials <a class="header-anchor" href="#list-nitrokey-fido2-%2F-webauthn-resident-credentials" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>While the commands in nitropy are in the <code class="language-plain">nitropy fido2</code> category,
+they also work with a Nitrokey 3C NFC.</p>
+<p>In order to use FIDO2, you need to set an initial PIN of your choice:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy fido2 set-pin</span></code></pre>
+
+    </div><p>Note: After setting the PIN, you also need to provide it
+on you devices.</p>
+<p>Next, you can list all credentials:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy fido2 list-credentials</span></code></pre>
+
+    </div><p>If no PIN has been set here, you will see the critial error message:
+<code class="language-plain">Please set a pin in order to manage credentials</code></p>
+<p>If the command worked, you will see all you credentials and also a
+guess how much storage is left:
+<code class="language-plain">There is an estimated amount of 10 credential slots left</code></p>
+<h1 id="totp" tabindex="-1">3. TOTP <a class="header-anchor" href="#totp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>TOTP and passwords have a different PIN on the Nitrokey.
+Set it via:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy nk3 secrets set-pin</span></code></pre>
+
+    </div><p>Go to <a href="https://totp.danhersam.com/" class="external-link" target="_blank">https://totp.danhersam.com/</a> to generate a test TOTP.
+Add it via:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy nk3 secrets add-otp <span class="token parameter variable">--kind</span> TOTP <span class="token punctuation">[</span>--hash SHA1 --touch-button --protect-with-pin<span class="token punctuation">]</span> testtotp JBSWY3DPEHPK3PXP</span></code></pre>
+
+    </div><p>SHA1 still seems to be the default for TOTP, even though SHA256 is supported by the Nitrokey as well.</p>
+<p>You need to provide the secret directly on the command line.
+This is bad practice and there is already an issue for it:
+<a href="https://github.com/Nitrokey/pynitrokey/issues/401" class="external-link" target="_blank">https://github.com/Nitrokey/pynitrokey/issues/401</a></p>
+<p>Now, you can retrieve a code anytime by using this command:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy nk3 secrets get-otp testtotp</span></code></pre>
+
+    </div><p>I couldn't find a good documentation on this, so I just thought I write the commands down here in my blog.</p>
 
 
 <script async src="/scripts/index.js"></script>
