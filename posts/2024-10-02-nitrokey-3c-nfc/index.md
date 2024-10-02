@@ -150,6 +150,9 @@ or another way to access a service in case the device gets lost or stolen.
 This website is great for testing WebAuthn:
 [https://webauthn.io/](https://webauthn.io/).
 
+A more detailed website with JSON debug output is
+[https://webauthn.me/debugger](https://webauthn.me/debugger).
+
 ## WebAuthn and Android
 
 I successfully tested the Nitrokey with NFC and the Firefox browser on the website above.
