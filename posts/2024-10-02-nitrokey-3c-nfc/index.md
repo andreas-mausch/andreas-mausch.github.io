@@ -32,6 +32,7 @@ Reboot afterwards.
 nitropy nk3 list
 nitropy nk3 status
 nitropy nk3 get-config opcard.use_se050_backend
+nitropy fido2 list-credentials
 ```
 
 ## Firmware update
@@ -128,7 +129,6 @@ require storage.
 Storage is limited so are the number of resident keys you can store on a device.
 
 Nitrokey does not publish how many keys can be stored.
-I don't know a way to list all stored resident keys on a Nitrokey.
 
 > The Nitrokey 3 currently is also restricted to 10 Passkeys
 > -- [https://support.nitrokey.com/t/how-many-passkeys-can-be-stored-on-a-nitrokey/5652/2](https://support.nitrokey.com/t/how-many-passkeys-can-be-stored-on-a-nitrokey/5652/2)
@@ -144,6 +144,15 @@ They are never shared, you can have unlimited of them on your device.
 
 The only thing you need to be careful about: You should have a second device
 or another way to access a service in case the device gets lost or stolen.
+
+Update: [Here](https://support.nitrokey.com/t/fixed-nk3-nitropy-fido2-ssh-resident-keys/5061/5)
+a Nitrokey employee states that:
+
+> Per default, FIDO2 credentials are non-discoverable. This means that the secret is stored on the server, not on the device (but encrypted with a key that is stored on the device). Only discoverable credentials (also called resident keys) are stored on the device and shown by list-credentials. These are typically used for password-less login, e. g. by Google or Microsoft.
+
+And links a great post about WebAuthn details and Nitrokey:
+
+[FIDO2, WebAuthn, Passkeys in 2022 and 2023](https://www.nitrokey.com/blog/2022/fido2-webauthn-passkeys-2022-and-2023)
 
 ## Test WebAuthn
 
