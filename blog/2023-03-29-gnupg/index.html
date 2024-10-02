@@ -733,15 +733,27 @@ SHA-512 is not compatible with TPM2.0, so you might try this:</p>
 <span class="highlight-line">  PubkeyAcceptedKeyTypes rsa-sha2-256</span></code></pre>
 
     </div><h2 id="use-tpm2-from-command-line" tabindex="-1">5.4. Use tpm2 from command line <a class="header-anchor" href="#use-tpm2-from-command-line" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
-<p>To use TPM without GPG you can run <a href="https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa" class="external-link" target="_blank">this example</a>:</p>
+<p>Test supported algorithms:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># List supported algorithms:</span></span>
+<span class="highlight-line">tpm2_getcap algorithms</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Test specific algorithm</span></span>
+<span class="highlight-line">tpm2_testparms rsa2048</span>
+<span class="highlight-line">tpm2_testparms rsa4096</span></code></pre>
+
+    </div><p>To use TPM without GPG you can run <a href="https://github.com/salrashid123/tpm2/tree/master/tpm_import_external_rsa" class="external-link" target="_blank">this example</a>.</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line">openssl genrsa <span class="token parameter variable">-out</span> private.pem <span class="token number">2048</span></span>
 <span class="highlight-line">openssl rsa <span class="token parameter variable">-in</span> private.pem <span class="token parameter variable">-outform</span> PEM <span class="token parameter variable">-pubout</span> <span class="token parameter variable">-out</span> public.pem</span>
-<span class="highlight-line">tpm2_createprimary <span class="token parameter variable">-C</span> e <span class="token parameter variable">-c</span> primary.ctx</span>
-<span class="highlight-line">tpm2_import <span class="token parameter variable">-C</span> primary.ctx <span class="token parameter variable">-G</span> rsa <span class="token parameter variable">-i</span> private.pem <span class="token parameter variable">-u</span> key.pub <span class="token parameter variable">-r</span> key.priv</span>
+<span class="highlight-line">tpm2_createprimary <span class="token parameter variable">--hierarchy</span><span class="token operator">=</span>e --key-algorithm<span class="token operator">=</span>rsa2048 --key-context<span class="token operator">=</span>primary.ctx</span>
+<span class="highlight-line">tpm2_import <span class="token parameter variable">-C</span> primary.ctx <span class="token parameter variable">-G</span> rsa <span class="token parameter variable">-i</span> private.pem <span class="token parameter variable">-u</span> key.pub <span class="token parameter variable">-r</span> key.priv <span class="token comment"># e stands for TPM_RH_ENDORSEMENT</span></span>
 <span class="highlight-line"><span class="token function">rm</span> private.pem</span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"This is the secret"</span> <span class="token operator">></span> test.txt</span>
@@ -752,7 +764,16 @@ SHA-512 is not compatible with TPM2.0, so you might try this:</p>
 <span class="highlight-line"><span class="token function">cat</span> test.decrypted.txt</span>
 <span class="highlight-line"><span class="token function">rm</span> test.txt test.txt.enc test.decrypted.txt public.pem primary.ctx key.pub key.priv</span></code></pre>
 
-    </div><h1 id="gpg-agent-log" tabindex="-1">6. gpg-agent log <a class="header-anchor" href="#gpg-agent-log" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><p>My TPM2 does not support RSA with 4096-bits keys.
+I get the same error as described <a href="https://github.com/tpm2-software/tpm2-tools/issues/1909" class="external-link" target="_blank">here</a>.</p>
+<p>Which is a pity, because tools like forgejo <a href="https://codeberg.org/Codeberg/Community/issues/1576" class="external-link" target="_blank">require at least 3072 bits</a>.</p>
+<figure class="quote">
+<blockquote cite="https://github.com/go-gitea/gitea/pull/26604]">
+<p>German Federal Office for Information Security requests in its technical guideline BSI TR-02102-1 RSA Keylength not shorter than 3000bits starting 2024, in the year 2023 3000bits as a recommendation.</p>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://github.com/go-gitea/gitea/pull/26604" class="external-link" target="_blank">https://github.com/go-gitea/gitea/pull/26604</a></figcaption>
+</figure>
+<h1 id="gpg-agent-log" tabindex="-1">6. gpg-agent log <a class="header-anchor" href="#gpg-agent-log" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
