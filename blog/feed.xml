@@ -4,11 +4,23 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-09-22T16:00:00Z</updated>
+  <updated>2024-10-02T17:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Nitrokey 3C NFC: WebAuthn and OpenPGP</title>
+    <link href="https://andreas-mausch.de/blog/2024-10-02-nitrokey-3c-nfc/"/>
+    <updated>2024-10-02T17:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-10-02-nitrokey-3c-nfc/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Some time has passed since my &lt;a href=&quot;https://andreas-mausch.de/blog/2021-02-23-nitrokey/&quot;&gt;last post&lt;/a&gt; about the Nitrokey.&lt;/p&gt;
+&lt;p&gt;I do own the newer model Nitrokey 3C NFC and want to share my experience with it,
+especially in regards of OpenPGP (which I &lt;a href=&quot;https://andreas-mausch.de/blog/2023-03-29-gnupg/&quot;&gt;use heavily&lt;/a&gt;)
+and WebAuthn, which I&#39;d like to use more in the future.&lt;/p&gt;
+&lt;h1 id=&quot;openpgp-and-nitropy&quot; tabindex=&quot;-1&quot;&gt;1. OpenPGP and nitropy &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2024-10-02-nitrokey-3c-nfc/#openpgp-and-nitropy&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>jtxBoard: Notes and Journals on Nextcloud</title>
     <link href="https://andreas-mausch.de/blog/2024-09-22-jtxboard-vjournal-notes/"/>

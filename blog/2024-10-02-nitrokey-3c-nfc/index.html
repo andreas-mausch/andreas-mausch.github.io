@@ -1,0 +1,224 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitrokey 3C NFC: WebAuthn and OpenPGP</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Nitrokey 3C NFC: WebAuthn and OpenPGP</h1>
+<div>
+  <time class="postlist-date" datetime="2024-10-02T17:00:00.000+00:00">Oct 2, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/encryption">#encryption</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/fido2">#fido2</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/gpg">#gpg</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/nitrokey">#nitrokey</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/openpgp">#openpgp</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/privacy">#privacy</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/security">#security</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/webauthn">#webauthn</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>Some time has passed since my <a href="/blog/2021-02-23-nitrokey/">last post</a> about the Nitrokey.</p>
+<p>I do own the newer model Nitrokey 3C NFC and want to share my experience with it,
+especially in regards of OpenPGP (which I <a href="/blog/2023-03-29-gnupg/">use heavily</a>)
+and WebAuthn, which I'd like to use more in the future.</p>
+<h1 id="openpgp-and-nitropy" tabindex="-1">1. OpenPGP and nitropy <a class="header-anchor" href="#openpgp-and-nitropy" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p><code class="language-plain">nitropy</code> is a utility to control your Nitrokey.</p>
+<h2 id="install-required-packages" tabindex="-1">1.1. Install required packages <a class="header-anchor" href="#install-required-packages" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>Check their <a href="https://docs.nitrokey.com/nitrokey3/linux/nitropy" class="external-link" target="_blank">official documentation</a> please,
+but here are some commands which I have used.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> python-pynitrokey</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">wget</span> --directory-prefix<span class="token operator">=</span>/etc/udev/rules.d/ https://raw.githubusercontent.com/Nitrokey/nitrokey-udev-rules/main/41-nitrokey.rules</span></code></pre>
+
+    </div><p>Reboot afterwards.</p>
+<h2 id="general-commands" tabindex="-1">1.2. General commands <a class="header-anchor" href="#general-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy nk3 list</span>
+<span class="highlight-line">nitropy nk3 status</span>
+<span class="highlight-line">nitropy nk3 get-config opcard.use_se050_backend</span></code></pre>
+
+    </div><h2 id="firmware-update" tabindex="-1">1.3. Firmware update <a class="header-anchor" href="#firmware-update" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy nk3 update</span>
+<span class="highlight-line"><span class="token comment"># Optional:</span></span>
+<span class="highlight-line">nitropy nk3 factory-reset</span></code></pre>
+
+    </div><p>Be careful of course, a factory reset will delete everything on the device.</p>
+<p>The current firmware at the time of writing is <code class="language-plain">1.7.2</code>.</p>
+<h2 id="enable-the-secure-element" tabindex="-1">1.4. Enable the secure element <a class="header-anchor" href="#enable-the-secure-element" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>By default, the secure element is <strong>not</strong> used to store your OpenPGP private key.
+Instead, it is stored (unencrypted?) in the flash memory of the controller.</p>
+<p>Make sure you use the secure element by doing this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nitropy nk3 set-config opcard.use_se050_backend <span class="token boolean">true</span></span></code></pre>
+
+    </div><p>See <a href="https://docs.nitrokey.com/nitrokey3/faq" class="external-link" target="_blank">their FAQ</a>.</p>
+<h2 id="generate-test-secret-key-and-move-it-to-the-nitrokey" tabindex="-1">1.5. Generate test secret key and move it to the Nitrokey <a class="header-anchor" href="#generate-test-secret-key-and-move-it-to-the-nitrokey" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg --quick-generate-key <span class="token string">"My Name (MyComment) &lt;my@email.com>"</span> rsa4096 cert,sign,auth,encrypt 30d</span>
+<span class="highlight-line">gpg --list-secret-keys --keyid-format long --with-keygrip --with-subkey-fingerprints</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">gpg --card-status</span>
+<span class="highlight-line">gpg --edit-key my@email.com keytocard</span></code></pre>
+
+    </div><h2 id="testing-a-signature" tabindex="-1">1.6. Testing a signature <a class="header-anchor" href="#testing-a-signature" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token builtin class-name">test</span> <span class="token operator">|</span> gpg --clear-sign --local-user my@email.com</span></code></pre>
+
+    </div><p>You should be prompted to insert the GPG card, if the Nitrokey is not already connected.
+Then, you will be prompted to enter the user PIN (default: 123456).
+The signature will be printed to the stdout on success.</p>
+<p>You won't be able to sign messages without the Nitrokey now.</p>
+<h2 id="android-support-via-openkeychain" tabindex="-1">1.7. Android support via OpenKeychain <a class="header-anchor" href="#android-support-via-openkeychain" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p><a href="https://github.com/open-keychain/open-keychain" class="external-link" target="_blank">OpenKeychain</a> is a great app to handle OpenPGP credentials on Android.</p>
+<p>Their <a href="https://github.com/open-keychain/open-keychain/wiki/Security-Tokens" class="external-link" target="_blank">list of supported hardware tokens</a>
+does not include my Nitrokey model, and there is an <a href="https://github.com/open-keychain/open-keychain/issues/2840" class="external-link" target="_blank">open issue</a> for it.</p>
+<p>What used to work and does not work any longer is NFC support,
+see <a href="https://github.com/Nitrokey/nitrokey-3-firmware/issues/270#issuecomment-1568152589" class="external-link" target="_blank">here</a>:</p>
+<blockquote>
+<p>NK3A worked with OpenKeychain over NFC on alpha versions 1.3.0 when I tested it in March. I decided to try the same on 1.4.0, and it doesn't connect durin encryption, it says that I removed the token too early, although this is not the case. At the same time, a red light is on on the token.</p>
+</blockquote>
+<blockquote>
+<p>The NFC chip gives not enough power for the additional storage and secure element use.</p>
+</blockquote>
+<p>This is really, really sad and it seems like a closed-source Yubikey is your only option if you want to have
+OpenPGP via NFC on your Android phone. :(</p>
+<p>I can at least use my Nitrokey via NFC on Android for WebAuthn,
+which brings us to the next topic.</p>
+<h1 id="webauthn-and-passkeys" tabindex="-1">2. WebAuthn and Passkeys <a class="header-anchor" href="#webauthn-and-passkeys" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I don't fully understand passkeys yet.
+What I do know: WebAuthn Keys stay on a device and are never shared.
+I do like that approach.</p>
+<p>Passkeys however are synced in the cloud to grant multi-device access.
+This made me think.
+ChatGPT told me the keys are indeed sent over the internet, but are end-to-end encrypted.
+See the <a href="chatgpt.txt">full chat</a>.
+I don't even understand why you would encrypt a key with another key. Inception.</p>
+<p>I am oldschool in this regard:
+No matter how secure that process might be, I don't like the idea to share a private key
+over the internet.</p>
+<h2 id="webauthn%3A-resident-vs.-non-resident-(a.k.a-discoverable-credentials)" tabindex="-1">2.1. WebAuthn: Resident vs. non-resident (a.k.a Discoverable credentials) <a class="header-anchor" href="#webauthn%3A-resident-vs.-non-resident-(a.k.a-discoverable-credentials)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>In both cases, the private key stays on the Nitrokey.</p>
+<p>Resident keys can be used for username-less authentication.
+User details like an ID, username or similar is stored together with a
+relying party ID and the whole private key on the Nitrokey and therefore
+require storage.
+Storage is limited so are the number of resident keys you can store on a device.</p>
+<p>Nitrokey does not publish how many keys can be stored.
+I don't know a way to list all stored resident keys on a Nitrokey.</p>
+<figure class="quote">
+<blockquote cite="https://support.nitrokey.com/t/how-many-passkeys-can-be-stored-on-a-nitrokey/5652/2]">
+<p>The Nitrokey 3 currently is also restricted to 10 Passkeys</p>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://support.nitrokey.com/t/how-many-passkeys-can-be-stored-on-a-nitrokey/5652/2" class="external-link" target="_blank">https://support.nitrokey.com/t/how-many-passkeys-can-be-stored-on-a-nitrokey/5652/2</a></figcaption>
+</figure>
+<p>For non-resident credentials, you can store an unlimited amount.
+They are not persisted, but I guess somehow derived from a single private key on the device.
+Not sure about that, though.</p>
+<h2 id="my-preference" tabindex="-1">2.2. My preference <a class="header-anchor" href="#my-preference" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I prefer non-resident credentials.
+They are never shared, you can have unlimited of them on your device.</p>
+<p>The only thing you need to be careful about: You should have a second device
+or another way to access a service in case the device gets lost or stolen.</p>
+<h2 id="test-webauthn" tabindex="-1">2.3. Test WebAuthn <a class="header-anchor" href="#test-webauthn" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>This website is great for testing WebAuthn:
+<a href="https://webauthn.io/" class="external-link" target="_blank">https://webauthn.io/</a>.</p>
+<h2 id="webauthn-and-android" tabindex="-1">2.4. WebAuthn and Android <a class="header-anchor" href="#webauthn-and-android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I successfully tested the Nitrokey with NFC and the Firefox browser on the website above.
+I just had to change the option <em>User Verification</em> to <em>Discouraged</em>,
+otherwise I would see an error message.</p>
+<p>For the more privacy-focused browsers like Mull or Fennec it did not work however,
+and for Mull they state <a href="https://github.com/Divested-Mobile/Mull-Fenix/issues/89" class="external-link" target="_blank">WebAuthn is not supported</a>,
+because of <em>Google Play Services and proprietary blobs</em>.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
