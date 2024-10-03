@@ -1,0 +1,186 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keychron K9 Pro QMK/VIA</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Keychron K9 Pro QMK/VIA</h1>
+<div>
+  <time class="postlist-date" datetime="2024-10-03T19:00:00.000+00:00">Oct 3, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/firmware">#firmware</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/fn%2Bleft">#fn+left</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/mechanical%20keyboard">#mechanical keyboard</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/qmk">#qmk</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/via">#via</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/vial">#vial</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>I have bought a <em>Keychron K9 Pro</em> some months ago (I still love my <a href="/blog/2023-02-27-keyboard-layouts/">K8 TKL</a> though).</p>
+<p>I like it a lot, and one reason to buy it was it's open-source firmware <em>Quantum Mechanical Keyboard</em>.
+Check their <a href="https://qmk.fm/" class="external-link" target="_blank">website</a> or <a href="https://github.com/qmk/qmk_firmware" class="external-link" target="_blank">repo</a>.</p>
+<p>The mappings for all keys can be redefined to your preferences via <a href="https://www.caniusevia.com/" class="external-link" target="_blank">VIA</a>,
+which is very handy on a 60% keyboard where you will need to have combos for some inputs.</p>
+<p>Today I tried to compile the firmware QMK myself, and tried to follow the instructions from Keychron.</p>
+<h1 id="the-(outdated)-repository" tabindex="-1">1. The (outdated) repository <a class="header-anchor" href="#the-(outdated)-repository" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The first thing I have noticed: Their link from the product page goes to
+<a href="https://github.com/Keychron/qmk_firmware/tree/bluetooth_playground/keyboards/keychron/k9_pro" class="external-link" target="_blank">https://github.com/Keychron/qmk_firmware/tree/bluetooth_playground/keyboards/keychron/k9_pro</a></p>
+<p>Neither is that the official QMK repo, nor is it on a <code class="language-plain">master</code> branch,
+but rather on the one named <code class="language-plain">bluetooth_playground</code>.
+This is a production keyboard, I don't think the firmware should be on something called playground..</p>
+<p>Then I discovered a binary file <code class="language-plain">firmware/keychron_k9_pro_ansi_rgb_via.bin</code> and I was a bit shocked,
+because I feared this would be a blob and no real open-source.
+However, we will find out that we will be able to build this .bin file ourselves.</p>
+<p>The last change in this directory was made over one year ago, and it is
+4716 commits behind the official QMK repo, which is disappointing.
+Especially, since <a href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/keychron" class="external-link" target="_blank">some Keychron keyboards</a>
+are merged into the official repo already.</p>
+<p><a href="https://github.com/Keychron/qmk_firmware/issues/145" class="external-link" target="_blank">When will the bluetooth_playground branch be merged into master and in the main QMK repo?</a></p>
+<h1 id="building-the-firmware" tabindex="-1">2. Building the firmware <a class="header-anchor" href="#building-the-firmware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The instructions are like <em>just call make</em>, and it didn't work for me in the first runs.
+But I finally figured it out and here is how:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">cd</span> /tmp/</span>
+<span class="highlight-line"><span class="token comment"># I have used 613719b66db811d4795c87eb5efb99f4fe7eed97</span></span>
+<span class="highlight-line"><span class="token function">git</span> clone https://github.com/Keychron/qmk_firmware.git</span>
+<span class="highlight-line"><span class="token builtin class-name">cd</span> qmk_firmware/</span>
+<span class="highlight-line"><span class="token function">git</span> checkout bluetooth_playground</span>
+<span class="highlight-line"><span class="token function">git</span> submodule init</span>
+<span class="highlight-line"><span class="token function">git</span> submodule update</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># The exact version of the image I have used is:</span></span>
+<span class="highlight-line"><span class="token comment"># qmkfm/qmk_cli@sha256:d8ebfab96c46d3ab948dd4e87be8a976095bd31268700021a74716cbd6e5b4c1</span></span>
+<span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-u</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> <span class="token parameter variable">-u</span><span class="token variable">)</span></span><span class="token builtin class-name">:</span><span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> <span class="token parameter variable">-g</span><span class="token variable">)</span></span> <span class="token parameter variable">--workdir</span> /home/keychron <span class="token parameter variable">-e</span> <span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span>/home/keychron <span class="token parameter variable">--volume</span> .:/home/keychron qmkfm/qmk_cli <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">'pip3 install -r requirements.txt &amp;&amp; make keychron/k9_pro/ansi/rgb:default'</span></span>
+<span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-u</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> <span class="token parameter variable">-u</span><span class="token variable">)</span></span><span class="token builtin class-name">:</span><span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> <span class="token parameter variable">-g</span><span class="token variable">)</span></span> <span class="token parameter variable">--workdir</span> /home/keychron <span class="token parameter variable">-e</span> <span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span>/home/keychron <span class="token parameter variable">--volume</span> .:/home/keychron qmkfm/qmk_cli <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">'pip3 install -r requirements.txt &amp;&amp; make keychron/k9_pro/ansi/rgb:via'</span></span></code></pre>
+
+    </div><p>This will build you two .bin files, which then can be flashed to your keyboard.</p>
+<h1 id="flashing-the-firmware" tabindex="-1">3. Flashing the firmware <a class="header-anchor" href="#flashing-the-firmware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Be careful here, I haven't tried it yet.
+Flashing is always risky, so be careful.</p>
+<h2 id="using-qmk-toolbox" tabindex="-1">3.1. using QMK Toolbox <a class="header-anchor" href="#using-qmk-toolbox" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I haven't done this yet, but here are some instructions:</p>
+<figure class="quote">
+<blockquote cite="https://keychron.ca/pages/how-to-factory-reset-and-flash-firmware-for-your-k9-pro-keyboard]">
+<p>Factory Reset: Press fn1 + J + Z for 4 seconds until all the backlight flashes.</p>
+<ol>
+<li>Download the K9 Pro firmware <a href="https://cdn.shopify.com/s/files/1/0059/0630/1017/files/k9_pro_ansi_rgb_v1.00.bin?v=1682588151" class="external-link" target="_blank">below</a>.</li>
+<li>Download the QMK Toolbox <a href="https://github.com/qmk/qmk_toolbox/releases" class="external-link" target="_blank">link</a></li>
+<li>Unplug the power cable from the keyboard.</li>
+<li>Open the QMK Toolbox.</li>
+<li>Remove the space bar keycap to find the reset button on the left side of the space bar switch on the PCB.</li>
+<li>Slide the switch toggle on the side of the keyboard to &quot;Off&quot; and connect the USB cable. Hold down the &quot;Reset&quot; button under the space bar, and then slide the toggle to &quot;Cable&quot;.</li>
+<li>The keyboard will enter into DFU mode. Then, the QMK Toolbox will display in yellow words &quot;***DFU device connected&quot;.</li>
+<li>Click &quot;Open&quot; on the top right and choose the K9 Pro firmware. Then, click &quot;Flash&quot; to start flashing the firmware (Note: Do NOT unplug the power cable while flashing).</li>
+<li>Wait a few seconds until you see the content below, it means the keyboard has flashed successfully.</li>
+<li>Factory reset the keyboard again by press fn1 + J + Z for 4 seconds until all the backlight flashes.</li>
+</ol>
+<p>If VIA can't pair with your K9 Pro after flashed the firmware, you may follow these steps:</p>
+<ol>
+<li>Reconnect the power cable with your keyboard.</li>
+<li>Download the Keychron K9 Pro keymap JSON file if you haven't.</li>
+<li>Open online VIA and turn on &quot;Show Design tab&quot; on &quot;Settings&quot; tab.</li>
+<li>Click on &quot;Design&quot; tab, then click on &quot;Confirm&quot;.</li>
+<li>Drag the JSON file into the “Design” tab on the VIA.</li>
+<li>A window will pop out after you drag the JSON file, please click on &quot;Keychron K9 Pro&quot; and then click on &quot;Connect&quot;.</li>
+<li>You should see the keyboard's keymap on the Configure tab now.</li>
+</ol>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://keychron.ca/pages/how-to-factory-reset-and-flash-firmware-for-your-k9-pro-keyboard" class="external-link" target="_blank">https://keychron.ca/pages/how-to-factory-reset-and-flash-firmware-for-your-k9-pro-keyboard</a></figcaption>
+</figure>
+<p>They link to QMK Toolbox 0.2.2, but you might try a more recent version.</p>
+<h2 id="using-qmk-cli" tabindex="-1">3.2. using QMK CLI <a class="header-anchor" href="#using-qmk-cli" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">qmk flash <span class="token parameter variable">-kb</span> <span class="token operator">&lt;</span>my_keyboard<span class="token operator">></span> <span class="token parameter variable">-km</span> <span class="token operator">&lt;</span>my_keymap<span class="token operator">></span></span></code></pre>
+
+    </div><p><a href="https://docs.qmk.fm/newbs_flashing#flash-your-keyboard-from-the-command-line" class="external-link" target="_blank">QMK: Flash your Keyboard from the Command Line</a></p>
+<h2 id="some-warning-from-reddit" tabindex="-1">3.3. Some warning from reddit <a class="header-anchor" href="#some-warning-from-reddit" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<figure class="quote">
+<blockquote cite="https://www.reddit.com/r/Keychron/comments/17oea9c/flashing_qmk_firmware_to_k_line/]">
+<p>I've read countless threads on Reddit on using custom QMK builds with various K* Pro models. Pretty much every attempt seems to have ended in a compromise of some sort, e.g. VIA support breaking. This post outlines the most credible steps I've found so far: https://www.reddit.com/r/Keychron/comments/13a587z/comment/jybchiz/
+The key part missing from other reports is to use a VIA V3 compatible JSON config found on this open PR https://github.com/the-via/keyboards/pull/1885/files (or https://github.com/adophoxia/adophoxia-keyboards/tree/keychron-v3-update-k_pro-q_pro/v3/keychron)</p>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://www.reddit.com/r/Keychron/comments/17oea9c/flashing_qmk_firmware_to_k_line/" class="external-link" target="_blank">https://www.reddit.com/r/Keychron/comments/17oea9c/flashing_qmk_firmware_to_k_line/</a></figcaption>
+</figure>
+<h1 id="what-about-vial%3F" tabindex="-1">4. What about Vial? <a class="header-anchor" href="#what-about-vial%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<figure class="quote">
+<blockquote cite="https://github.com/vial-kb]">
+<p>Vial is an open-source cross-platform GUI and a QMK fork for configuring your keyboard in real time.</p>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://github.com/vial-kb" class="external-link" target="_blank">https://github.com/vial-kb</a></figcaption>
+</figure>
+<p>I haven't tried it yet.
+I might be a good alternative.</p>
+<p>I've heard it is from a time when VIA wasn't open-sourced yet.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>

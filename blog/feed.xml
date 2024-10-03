@@ -4,11 +4,24 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-10-02T17:00:00Z</updated>
+  <updated>2024-10-03T19:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Keychron K9 Pro QMK/VIA</title>
+    <link href="https://andreas-mausch.de/blog/2024-10-03-keychron-k9-pro/"/>
+    <updated>2024-10-03T19:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-10-03-keychron-k9-pro/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I have bought a &lt;em&gt;Keychron K9 Pro&lt;/em&gt; some months ago (I still love my &lt;a href=&quot;https://andreas-mausch.de/blog/2023-02-27-keyboard-layouts/&quot;&gt;K8 TKL&lt;/a&gt; though).&lt;/p&gt;
+&lt;p&gt;I like it a lot, and one reason to buy it was it&#39;s open-source firmware &lt;em&gt;Quantum Mechanical Keyboard&lt;/em&gt;.
+Check their &lt;a href=&quot;https://qmk.fm/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;website&lt;/a&gt; or &lt;a href=&quot;https://github.com/qmk/qmk_firmware&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The mappings for all keys can be redefined to your preferences via &lt;a href=&quot;https://www.caniusevia.com/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;VIA&lt;/a&gt;,
+which is very handy on a 60% keyboard where you will need to have combos for some inputs.&lt;/p&gt;
+&lt;p&gt;Today I tried to compile the firmware QMK myself, and tried to follow the instructions from Keychron.&lt;/p&gt;
+&lt;h1 id=&quot;the-(outdated)-repository&quot; tabindex=&quot;-1&quot;&gt;1. The (outdated) repository &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2024-10-03-keychron-k9-pro/#the-(outdated)-repository&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
   <entry>
     <title>Nitrokey 3C NFC: WebAuthn and OpenPGP</title>
     <link href="https://andreas-mausch.de/blog/2024-10-02-nitrokey-3c-nfc/"/>
