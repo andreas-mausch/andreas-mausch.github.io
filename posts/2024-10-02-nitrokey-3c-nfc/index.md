@@ -200,6 +200,21 @@ If the command worked, you will see all you credentials and also a
 guess how much storage is left:
 `There is an estimated amount of 10 credential slots left`
 
+Another way to manage the key is to use the `fido2-token` cli command:
+
+```bash
+sudo pacman -S libfido2
+
+# List devices
+fido2-token -L
+
+# Print information about a device
+fido2-token -I /dev/hidraw2
+
+# Print resident credential metadata
+fido2-token -I -c /dev/hidraw2
+```
+
 # TOTP
 
 TOTP and passwords have a different PIN on the Nitrokey.
