@@ -59,8 +59,12 @@ Update 2023-08-30: Since last week, tmux now also supports sixel:
 
 # viu
 
-I've replaced `timg` by [viu](https://github.com/atanunq/viu) on my machine.
+~~I've replaced `timg` by [viu](https://github.com/atanunq/viu) on my machine.~~
 It is written in Rust and comes with (experimental) sixel support.
 
 Unfortunately, sixel is still not integrated into vte3, so you would still need to build it yourself. :(
 See here: [https://gitlab.gnome.org/GNOME/vte/-/issues/253](https://gitlab.gnome.org/GNOME/vte/-/issues/253)
+
+Update:
+viu does not support exif orientation for .jpg images, so I am back to timg.
+Together with the `rio` terminal, it supports sixel as well.
