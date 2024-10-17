@@ -95,3 +95,8 @@ Joplin will not support VJOURNAL:
 [To-Dos - sync with CalDAV-Server](https://discourse.joplinapp.org/t/to-dos-sync-with-caldav-server/3677)
 
 KOrganizer and Evolution support journals I think, but I haven't tried them.
+
+# Deleting old calendar entries
+
+To cleanup the calendar to not keep data of all times in the cloud, I will try this tool:
+[github.com/flozz/calcleaner](https://github.com/flozz/calcleaner)
