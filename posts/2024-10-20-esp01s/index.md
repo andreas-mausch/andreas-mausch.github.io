@@ -3,7 +3,6 @@ title: "ESP-01S programming in Rust"
 date: 2024-10-20T15:00:00+01:00
 tags: ['arduino', 'embedded', 'rust', 'gcc', 'esp8266']
 toc: true
-draft: true
 ---
 
 Today I've spent some hours trying to figure out if I could
@@ -209,11 +208,17 @@ Press CTRL+A followed by CTRL+X to exit picocom.
 # A hello-world in Rust
 
 I found a project which does exactly what I am trying to achieve:
-[blinky-esp8266-rust](https://github.com/coenraadhuman/blinky-esp8266-rust/)
+[coenraadhuman/blinky-esp8266-rust](https://github.com/coenraadhuman/blinky-esp8266-rust/)
 
 However, it is a bit dated and uses a `esprs/espflash` docker image,
 which is also dated.
 I prefer to run the compilation without docker on my machine.
+
+So here is my version of it:
+
+[andreas-mausch/blinky-esp8266-rust](https://github.com/andreas-mausch/blinky-esp8266-rust)
+
+You can find instructions how to build it in the README.
 
 ## Make sure you use the right Rust toolchain
 
@@ -227,5 +232,3 @@ This file will set the right toolchain for your project:
 [toolchain]
 channel = "esp"
 ```
-
-TODO continue
