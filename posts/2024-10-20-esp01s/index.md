@@ -3,7 +3,10 @@ title: "ESP-01S programming in Rust"
 date: 2024-10-20T15:00:00+01:00
 tags: ['arduino', 'embedded', 'rust', 'gcc', 'esp8266']
 toc: true
+thumbnail: esp-01s.jpg
 ---
+
+{% image "esp-01s.jpg" %}
 
 Today I've spent some hours trying to figure out if I could
 write programs for the ESP-01S SoC with the ESP8266 microcontroller
