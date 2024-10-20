@@ -1,0 +1,351 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP-01S programming in Rust</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>ESP-01S programming in Rust</h1>
+<div>
+  <time class="postlist-date" datetime="2024-10-20T14:00:00.000+00:00">Oct 20, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/arduino">#arduino</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/embedded">#embedded</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/esp8266">#esp8266</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/gcc">#gcc</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/rust">#rust</a></li>
+        
+    
+  </ul>
+</div>
+
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#tools-and-requirements">1. Tools and requirements</a>
+            
+                <ol>
+                    
+                    <li><a href="#add-udev-rule-to-grant-access-to-the-usb-serial-device">1.1. Add udev rule to grant access to the USB serial device</a>
+            		</li>
+
+                    <li><a href="#install-c-toolchain.">1.2. Install C toolchain.</a>
+            		</li>
+
+                    <li><a href="#install-rust-toolchain-using-espup">1.3. Install Rust toolchain using espup</a>
+            		</li>
+
+                    <li><a href="#esptool">1.4. esptool</a>
+            		</li>
+
+                    <li><a href="#cargo-espflash">1.5. cargo-espflash</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#flashing-the-original-at-firmware">2. Flashing the original AT firmware</a>
+            		</li>
+
+                    <li><a href="#testing-the-serial-connection-with-at-commands">3. Testing the serial connection with AT-commands</a>
+            		</li>
+
+                    <li><a href="#a-hello-world-in-rust">4. A hello-world in Rust</a>
+            
+                <ol>
+                    
+                    <li><a href="#make-sure-you-use-the-right-rust-toolchain">4.1. Make sure you use the right Rust toolchain</a>
+            		</li>
+                </ol>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
+
+
+<p>Today I've spent some hours trying to figure out if I could
+write programs for the ESP-01S SoC with the ESP8266 microcontroller
+using my favorite programming language Rust.</p>
+<p>Long story short: I finally got it working, but the API is limited under Rust.</p>
+<p>As always, all my example CLI commands are executed on Manjaro Linux.</p>
+<h1 id="tools-and-requirements" tabindex="-1">1. Tools and requirements <a class="header-anchor" href="#tools-and-requirements" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="add-udev-rule-to-grant-access-to-the-usb-serial-device" tabindex="-1">1.1. Add udev rule to grant access to the USB serial device <a class="header-anchor" href="#add-udev-rule-to-grant-access-to-the-usb-serial-device" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I use the <em>Wishiot ESP-01S</em>, which has a nice switch to flip
+between PROG (flash mode) and UART (run the program mode).</p>
+<p>By default, only root can access the serial port of the device.
+To change that, I did this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data="filename=/etc/udev/rules.d/60-esp01.rules" class="language-plain"><span class="highlight-line">SUBSYSTEMS=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", GROUP="plugdev", MODE="0666"</span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> udevadm control --reload-rules</span>
+<span class="highlight-line"><span class="token function">sudo</span> udevadm trigger</span></code></pre>
+
+    </div><p>Verify access:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">ls</span> <span class="token parameter variable">-lah</span> /dev/ttyUSB1</span>
+<span class="highlight-line"><span class="token function">cat</span> /dev/ttyUSB1</span></code></pre>
+
+    </div><h2 id="install-c-toolchain." tabindex="-1">1.2. Install C toolchain. <a class="header-anchor" href="#install-c-toolchain." aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<figure class="quote">
+<blockquote cite="https://www.reddit.com/r/rust/comments/tfpjgm/i_have_an_esp8266_and_i_want_to_learn_how_to/">
+<p>The ESP8266 is a custom architecture known as Xtensa that was created
+for the ESP line of chips. There is no current upstream support in LLVM
+for this architecture and as such no upstream rust support.</p>
+</blockquote>
+<figcaption class="quote-attribution">https://www.reddit.com/r/rust/comments/tfpjgm/i_have_an_esp8266_and_i_want_to_learn_how_to/</figcaption>
+</figure>
+<p><a href="https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/linux-setup.html" class="external-link" target="_blank">Standard Setup of Toolchain for Linux</a></p>
+<p>You can install this package:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">paru <span class="token parameter variable">-S</span> xtensa-lx106-elf-gcc-bin</span></code></pre>
+
+    </div><p>It will install <code class="language-plain">gcc</code>, <code class="language-plain">gdb</code>, <code class="language-plain">ld</code> and so on inside <code class="language-plain">/opt/xtensa-lx106-elf-gcc/bin</code>.</p>
+<h2 id="install-rust-toolchain-using-espup" tabindex="-1">1.3. Install Rust toolchain using espup <a class="header-anchor" href="#install-rust-toolchain-using-espup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>We will also need to have the Rust tools like <code class="language-plain">rustc</code>, <code class="language-plain">cargo</code>, etc. in a version which supports the ESP-01S.</p>
+<p>Now this was tricky, mainly due to a bug(?) that caused the Rust target not being included in the toolchain:</p>
+<p><a href="https://github.com/esp-rs/rust/issues/237" class="external-link" target="_blank">Support for xtensa-esp8266-none-elf removed in 1.81</a></p>
+<p>It took me hours to figure that out, also because Rust cross-compiling is something new to me.
+I've tried a lot of different approaches and none of them worked, until I found the issue above.</p>
+<p>They even state in <a href="https://github.com/esp-rs/espup/issues/191#issuecomment-1443322779" class="external-link" target="_blank">this issue</a> that:</p>
+<figure class="quote">
+<blockquote cite="https://github.com/esp-rs/espup/issues/191">
+<p>Support for Rust in ESP8266 is limited, and I don't think
+we should add support for it in espup.
+I would recommend you to switch to any of the ESP32s.</p>
+</blockquote>
+<figcaption class="quote-attribution">https://github.com/esp-rs/espup/issues/191</figcaption>
+</figure>
+<p>It still works however, but you need to select a version which brings
+support for the <code class="language-plain">xtensa-esp8266-none-elf</code> target.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> espup</span>
+<span class="highlight-line">espup <span class="token function">install</span> --toolchain-version <span class="token number">1.80</span>.0.0</span>
+<span class="highlight-line"><span class="token builtin class-name">source</span> ~/export-esp.sh</span></code></pre>
+
+    </div><h2 id="esptool" tabindex="-1">1.4. esptool <a class="header-anchor" href="#esptool" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>After compilation, the final program is flashed to the chip over the serial port.
+For that, we need a program.</p>
+<p>The official tool from the vendor to flash the chip is <code class="language-plain">esptool</code>:
+<a href="https://github.com/espressif/esptool" class="external-link" target="_blank">https://github.com/espressif/esptool</a></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> esptool</span></code></pre>
+
+    </div><h2 id="cargo-espflash" tabindex="-1">1.5. cargo-espflash <a class="header-anchor" href="#cargo-espflash" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>An alternative to <code class="language-plain">esptool</code> is the nice cargo extension here:
+<a href="https://github.com/esp-rs/espflash" class="external-link" target="_blank">cargo-espflash</a></p>
+<p>The recent version doesn't <a href="https://github.com/esp-rs/espflash/issues/519" class="external-link" target="_blank">support the ESP8266 any more</a>,
+which is a bit sad.</p>
+<p>So make sure to install the latest 2.x version like this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">cargo</span> <span class="token function">install</span> cargo-espflash@2.1.0 <span class="token parameter variable">--locked</span></span></code></pre>
+
+    </div><p>For me, this failed due to an unmaintained third-party crate named <code class="language-plain">minimal-lexical</code>,
+which is not compatible with the latest version of Rust:
+<a href="https://github.com/esp-rs/espflash/issues/690" class="external-link" target="_blank">Error when installing 2.1.0 for ESP8266 support</a></p>
+<p>So I used the binary pre-compiled version of it:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> cargo-binstall</span>
+<span class="highlight-line"><span class="token function">cargo</span> binstall cargo-espflash@2.1.0</span></code></pre>
+
+    </div><h1 id="flashing-the-original-at-firmware" tabindex="-1">2. Flashing the original AT firmware <a class="header-anchor" href="#flashing-the-original-at-firmware" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>In case something went wrong you might want to
+return to the original state of the chip.</p>
+<p>To do that, you can flash the official firmware back to it.</p>
+<p>It was tricky to do that, because there is no easy download.
+The memory on the SoC is limited to firmwares with a maximum size of 1 MB,
+and the latest official firmware is bigger than that.</p>
+<figure class="quote">
+<blockquote cite="https://www.esp8266.com/viewtopic.php?p=93214]">
+<p>AT 1.7.5 (SDK 3.0.5) has a 512 kB version (requires a 1 MB flash). esp-01S have 1 MB flash a.f.a.i.k.
+AT 2 1MB version is not published. I have a build. but AT 1.7.5 is a better option.</p>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://www.esp8266.com/viewtopic.php?p=93214" class="external-link" target="_blank">https://www.esp8266.com/viewtopic.php?p=93214</a></figcaption>
+</figure>
+<p>According to this official page, the 2.2.0.0 firmware has a 1 MB version:</p>
+<blockquote>
+<p>release/v2.2.0.0_esp8266 branch and download esp8285-1MB-at under the Artifacts
+https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/AT_Binary_Lists/ESP8266_AT_binaries.html</p>
+</blockquote>
+<p>The action I found <a href="https://github.com/espressif/esp-at/actions/runs/9807419826" class="external-link" target="_blank">here</a> indeed has a
+<code class="language-plain">esp8285-1MB-at</code> artifact, however, it is expired.</p>
+<p>Here is an extensive article about it, which also contains a link
+to a pre-built binary, which we will also use:</p>
+<p><a href="https://www.sigmdel.ca/michel/ha/esp8266/ESP01_AT_Firmware_en.html" class="external-link" target="_blank">https://www.sigmdel.ca/michel/ha/esp8266/ESP01_AT_Firmware_en.html</a></p>
+<p><a href="https://github.com/sigmdel/other_releases/raw/refs/heads/main/espat_esp01.zip" class="external-link" target="_blank">Direct link to the firmware binary</a></p>
+<p>He names the risks of using it like this:</p>
+<figure class="quote">
+<blockquote cite="https://www.sigmdel.ca/michel/ha/esp8266/ESP01_AT_Firmware_en.html]">
+<p>Not everyone has a GitHub account, and without it, it will be difficult
+to get the latest esp8285-1MB-at.zip. Consequently, I have made the modified
+binary espat_esp01.bin available from my account in the other_releases repository.
+Understand that this is really only for those that want to try ESP8266-AT on an ESP-01S.
+The file, created on September 5, 2023, will not be updated as new versions of ESP-AT
+are made available, so that it will soon be necessary to use the procedure described
+above to get an up-to-date version of the firmware.</p>
+</blockquote>
+<figcaption class="quote-attribution"><a href="https://www.sigmdel.ca/michel/ha/esp8266/ESP01_AT_Firmware_en.html" class="external-link" target="_blank">https://www.sigmdel.ca/michel/ha/esp8266/ESP01_AT_Firmware_en.html</a></figcaption>
+</figure>
+<p>For me that version is enough for testing around, and it worked perfectly. Thank you, Michel.</p>
+<p>Here is the command I used for flashing:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">esptool.py <span class="token parameter variable">-p</span> /dev/ttyUSB1 <span class="token parameter variable">-b</span> <span class="token number">115200</span> write_flash <span class="token parameter variable">-e</span> <span class="token parameter variable">-fm</span> qio <span class="token parameter variable">-ff</span> 40m <span class="token parameter variable">-fs</span> 1MB <span class="token number">0</span> espat_esp01.bin</span></code></pre>
+
+    </div><p>There is more detail about the memory addresses, and which parts belong where.
+I don't know anything about it yet, but I also found this command, but haven't used it:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/512+512/user1.1024.new.2.bin 0xfc000 esp_init_data_default_v08.bin 0x7e000 blank.bin 0xfe000 blank.bin</span></code></pre>
+
+    </div><p>We will later see cargo also flashes the <code class="language-plain">0x01000</code> area.</p>
+<h1 id="testing-the-serial-connection-with-at-commands" tabindex="-1">3. Testing the serial connection with AT-commands <a class="header-anchor" href="#testing-the-serial-connection-with-at-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>You can execute commands on the AT-firmware to see if your connection is set up properly.
+This is not completely new to me, I've seen this kind of commands on modems before.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> <span class="token function">screen</span> picocom</span>
+<span class="highlight-line">picocom /dev/ttyUSB1 <span class="token parameter variable">--baud</span> <span class="token number">115200</span> <span class="token parameter variable">--omap</span> crcrlf</span></code></pre>
+
+    </div><p>This will open a pipe and you can type in commands.</p>
+<p>Here are some commands:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AT</td>
+<td>Test AT startup (just returns OK)</td>
+</tr>
+<tr>
+<td>AT+CMD</td>
+<td>List all AT commands and types supported in current firmware</td>
+</tr>
+<tr>
+<td>AT+RST</td>
+<td>Restart module</td>
+</tr>
+<tr>
+<td>AT+GMR</td>
+<td>View version info</td>
+</tr>
+<tr>
+<td>AT+RESTORE</td>
+<td>Factory Reset</td>
+</tr>
+</tbody>
+</table>
+<p>And here is the full list:
+<a href="https://www.espressif.com/sites/default/files/4a-esp8266_at_instruction_set_en_v1.5.4_0.pdf" class="external-link" target="_blank">https://www.espressif.com/sites/default/files/4a-esp8266_at_instruction_set_en_v1.5.4_0.pdf</a></p>
+<p>Press CTRL+A followed by CTRL+X to exit picocom.</p>
+<h1 id="a-hello-world-in-rust" tabindex="-1">4. A hello-world in Rust <a class="header-anchor" href="#a-hello-world-in-rust" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I found a project which does exactly what I am trying to achieve:
+<a href="https://github.com/coenraadhuman/blinky-esp8266-rust/" class="external-link" target="_blank">blinky-esp8266-rust</a></p>
+<p>However, it is a bit dated and uses a <code class="language-plain">esprs/espflash</code> docker image,
+which is also dated.
+I prefer to run the compilation without docker on my machine.</p>
+<h2 id="make-sure-you-use-the-right-rust-toolchain" tabindex="-1">4.1. Make sure you use the right Rust toolchain <a class="header-anchor" href="#make-sure-you-use-the-right-rust-toolchain" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>You need to use the <code class="language-plain">esp</code> toolchain, otherwise it won't compile.</p>
+<p>Check with <code class="language-plain">rustup toolchain list</code>.</p>
+<p>This file will set the right toolchain for your project:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data="filename=./rust-toolchain.toml" class="language-plain"><span class="highlight-line">[toolchain]</span>
+<span class="highlight-line">channel = "esp"</span></code></pre>
+
+    </div><p>TODO continue</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
