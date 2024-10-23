@@ -1,0 +1,205 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minikube, a local Kubernetes</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>minikube, a local Kubernetes</h1>
+<div>
+  <time class="postlist-date" datetime="2024-10-23T18:00:00.000+00:00">Oct 23, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/k3s">#k3s</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/kubernetes">#kubernetes</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/libvirt">#libvirt</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/microk8s">#microk8s</a></li>
+        
+    
+        
+    
+  </ul>
+</div>
+
+
+
+<p>I want to share my short experience with minikube:
+<a href="https://minikube.sigs.k8s.io/docs/" class="external-link" target="_blank">https://minikube.sigs.k8s.io/docs/</a></p>
+<p>I had a look at K3s and MicroK8s also, and I prefer minikube:</p>
+<blockquote>
+<p>Minikube is the closest to an official mini distribution for local testing and development, it is run by the same foundation as K8s.</p>
+<p>K3s is a project by Rancher, it is compliant but it’s completely up to them what is or isn’t included.</p>
+<p>Microk8s is a spin on what minikube tries to do and is run and maintained by Canonical (the Ubuntu people).</p>
+</blockquote>
+<blockquote>
+<p>Fully agree. Also please note that microk8s is being distributed using the proprietary snapcraft store, which could be a concern.</p>
+</blockquote>
+<p><a href="https://www.reddit.com/r/kubernetes/comments/be0415/k3s_minikube_or_microk8s/" class="external-link" target="_blank">https://www.reddit.com/r/kubernetes/comments/be0415/k3s_minikube_or_microk8s/</a></p>
+<h1 id="driver-support" tabindex="-1">1. Driver support <a class="header-anchor" href="#driver-support" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>minikube supports <a href="https://minikube.sigs.k8s.io/docs/drivers/" class="external-link" target="_blank">different drivers</a>,
+one of them is KVM2 which works on libvirt.</p>
+<p>So it starts it's own virtual machine, and everything runs inside it.</p>
+<p>This is great, because <a href="/blog/2022-11-28-virtual-machines-virtualbox-libvirt-qemu-vagrant/">I like to use libvirt</a>.
+And other people can use their favorite virtual machines tool, like VirtualBox.</p>
+<p>It also makes cleaning up super easy, because your main system remains untouched.</p>
+<h1 id="installation" tabindex="-1">2. Installation <a class="header-anchor" href="#installation" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> minikube kubectl</span>
+<span class="highlight-line">virt-host-validate</span></code></pre>
+
+    </div><h1 id="set-driver-to-libvirt" tabindex="-1">3. Set driver to libvirt <a class="header-anchor" href="#set-driver-to-libvirt" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">minikube config get driver <span class="token comment"># should be not configured yet</span></span>
+<span class="highlight-line">minikube config <span class="token builtin class-name">set</span> driver kvm2</span></code></pre>
+
+    </div><h1 id="simple-setup" tabindex="-1">4. Simple setup <a class="header-anchor" href="#simple-setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>All of the commands from the good documentation worked out-of-the-box.
+No struggle at all (which is not always the case for the tech projects I have tried).</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">minikube start</span>
+<span class="highlight-line">minikube dashboard</span>
+<span class="highlight-line">kubectl config view</span>
+<span class="highlight-line">kubectl get namespaces</span></code></pre>
+
+    </div><h1 id="run-your-own-service" tabindex="-1">5. Run your own service <a class="header-anchor" href="#run-your-own-service" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># Run single container/pod</span></span>
+<span class="highlight-line">kubectl run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">--restart</span><span class="token operator">=</span>Never <span class="token parameter variable">--image</span> alpine tmp -- <span class="token function">sh</span></span>
+<span class="highlight-line"><span class="token comment"># Single-command deployment</span></span>
+<span class="highlight-line">kubectl create deployment hello-node <span class="token parameter variable">--image</span><span class="token operator">=</span>registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port<span class="token operator">=</span><span class="token number">8080</span></span>
+<span class="highlight-line"><span class="token comment"># Create deployment from file</span></span>
+<span class="highlight-line">kubectl create <span class="token parameter variable">-f</span> ./hello-world.yaml</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Opens the Service URL in the browser</span></span>
+<span class="highlight-line">minikube <span class="token function">service</span> hello-world</span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-yaml"><code data-filename="hello-world.yaml" class="language-yaml"><span class="highlight-line"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1</span>
+<span class="highlight-line"><span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment</span>
+<span class="highlight-line"><span class="token key atrule">metadata</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">  <span class="token key atrule">name</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world<span class="token punctuation">-</span>deployment</span>
+<span class="highlight-line">  <span class="token key atrule">labels</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token key atrule">app</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world</span>
+<span class="highlight-line"><span class="token key atrule">spec</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">  <span class="token key atrule">selector</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token key atrule">app</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world</span>
+<span class="highlight-line">  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">2</span></span>
+<span class="highlight-line">  <span class="token key atrule">template</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token key atrule">metadata</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token key atrule">labels</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">        <span class="token key atrule">app</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world</span>
+<span class="highlight-line">    <span class="token key atrule">spec</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token key atrule">containers</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world</span>
+<span class="highlight-line">        <span class="token key atrule">image</span><span class="token punctuation">:</span> bhargavshah86/kube<span class="token punctuation">-</span>test<span class="token punctuation">:</span>v0.1</span>
+<span class="highlight-line">        <span class="token key atrule">ports</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span></span>
+<span class="highlight-line">        <span class="token key atrule">resources</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">          <span class="token key atrule">limits</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">            <span class="token key atrule">memory</span><span class="token punctuation">:</span> 256Mi</span>
+<span class="highlight-line">            <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token string">"250m"</span></span>
+<span class="highlight-line">          <span class="token key atrule">requests</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">            <span class="token key atrule">memory</span><span class="token punctuation">:</span> 128Mi</span>
+<span class="highlight-line">            <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token string">"80m"</span></span>
+<span class="highlight-line"><span class="token punctuation">---</span></span>
+<span class="highlight-line"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1</span>
+<span class="highlight-line"><span class="token key atrule">kind</span><span class="token punctuation">:</span> Service</span>
+<span class="highlight-line"><span class="token key atrule">metadata</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">  <span class="token key atrule">name</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world</span>
+<span class="highlight-line"><span class="token key atrule">spec</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">  <span class="token key atrule">selector</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token key atrule">app</span><span class="token punctuation">:</span> hello<span class="token punctuation">-</span>world</span>
+<span class="highlight-line">  <span class="token key atrule">ports</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token punctuation">-</span> <span class="token key atrule">protocol</span><span class="token punctuation">:</span> TCP</span>
+<span class="highlight-line">      <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">80</span></span>
+<span class="highlight-line">      <span class="token key atrule">targetPort</span><span class="token punctuation">:</span> <span class="token number">80</span></span>
+<span class="highlight-line">      <span class="token key atrule">nodePort</span><span class="token punctuation">:</span> <span class="token number">30081</span>   </span>
+<span class="highlight-line">  <span class="token key atrule">type</span><span class="token punctuation">:</span> NodePort</span></code></pre>
+
+    </div><h1 id="some-kubectl-commands" tabindex="-1">6. Some kubectl commands <a class="header-anchor" href="#some-kubectl-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">kubectl get deployments</span>
+<span class="highlight-line">kubectl get events</span>
+<span class="highlight-line">kubectl get pods,services</span>
+<span class="highlight-line">kubectl logs <span class="token operator">&lt;</span>pod-name<span class="token operator">></span></span></code></pre>
+
+    </div><h1 id="cleanup" tabindex="-1">7. Cleanup <a class="header-anchor" href="#cleanup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">kubectl delete <span class="token parameter variable">-f</span> ./hello-world.yaml</span>
+<span class="highlight-line">minikube stop</span>
+<span class="highlight-line">minikube delete</span></code></pre>
+
+    </div>
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>

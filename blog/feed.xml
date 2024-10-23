@@ -4,11 +4,29 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-10-20T14:00:00Z</updated>
+  <updated>2024-10-23T18:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>minikube, a local Kubernetes</title>
+    <link href="https://andreas-mausch.de/blog/2024-10-23-minikube/"/>
+    <updated>2024-10-23T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-10-23-minikube/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I want to share my short experience with minikube:
+&lt;a href=&quot;https://minikube.sigs.k8s.io/docs/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://minikube.sigs.k8s.io/docs/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I had a look at K3s and MicroK8s also, and I prefer minikube:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Minikube is the closest to an official mini distribution for local testing and development, it is run by the same foundation as K8s.&lt;/p&gt;
+&lt;p&gt;K3s is a project by Rancher, it is compliant but it’s completely up to them what is or isn’t included.&lt;/p&gt;
+&lt;p&gt;Microk8s is a spin on what minikube tries to do and is run and maintained by Canonical (the Ubuntu people).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fully agree. Also please note that microk8s is being distributed using the proprietary snapcraft store, which could be a concern.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.reddit.com/r/kubernetes/comments/be0415/k3s_minikube_or_microk8s/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://www.reddit.com/r/kubernetes/comments/be0415/k3s_minikube_o&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>ESP-01S programming in Rust</title>
     <link href="https://andreas-mausch.de/blog/2024-10-20-esp01s/"/>
