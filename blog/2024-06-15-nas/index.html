@@ -297,7 +297,7 @@ On the client, you need the <code class="language-plain">sshfs</code> package an
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-plain"><code filename="/etc/fstab" class="language-plain"><span class="highlight-line">sshfs#nas@nas:/mnt/nas                    /mnt/nas       fuse    noauto,defaults,user,_netdev,comment=x-gvfs-show 0 0</span></code></pre>
+    <pre class="language-plain"><code data-filename="/etc/fstab" class="language-plain"><span class="highlight-line">sshfs#nas@nas:/mnt/nas                    /mnt/nas       fuse    noauto,defaults,user,_netdev,comment=x-gvfs-show 0 0</span></code></pre>
 
     </div><p>To mount and unmount:</p>
 <div class="code-block">
@@ -346,7 +346,7 @@ It would also try to set the environment variable <code class="language-plain">S
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-ini"><code filename="~/.config/systemd/user/ssh-auth-sock.service" class="language-ini"><span class="highlight-line"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span></span>
+    <pre class="language-ini"><code data-filename="~/.config/systemd/user/ssh-auth-sock.service" class="language-ini"><span class="highlight-line"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span></span>
 <span class="highlight-line"><span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">Set SSH_AUTH_SOCK to GnuPG agent</span></span>
 <span class="highlight-line"></span>
 <span class="highlight-line"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span></span>
