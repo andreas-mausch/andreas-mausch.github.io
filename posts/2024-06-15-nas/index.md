@@ -187,7 +187,7 @@ fusermount3 -u /mnt/nas
 
 Edit the `/etc/fstab` file:
 
-```{filename=/etc/fstab}
+```{data-filename=/etc/fstab}
 sshfs#nas@nas:/mnt/nas                    /mnt/nas       fuse    noauto,defaults,user,_netdev,comment=x-gvfs-show 0 0
 ```
 
@@ -237,7 +237,7 @@ echo use-standard-socket >> ~/.gnupg/gpg-agent.conf
 
 Now setup this small service to set the required environment variables:
 
-```ini{filename=~/.config/systemd/user/ssh-auth-sock.service}
+```ini{data-filename=~/.config/systemd/user/ssh-auth-sock.service}
 [Unit]
 Description=Set SSH_AUTH_SOCK to GnuPG agent
 
