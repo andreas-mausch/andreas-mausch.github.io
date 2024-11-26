@@ -4,11 +4,23 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-10-23T18:00:00Z</updated>
+  <updated>2024-11-10T18:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Waveshare 7.3inch ACeP 7-Color E-Paper</title>
+    <link href="https://andreas-mausch.de/blog/2024-11-10-waveshare-photoframe-epaper/"/>
+    <updated>2024-11-10T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2024-11-10-waveshare-photoframe-epaper/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I have bought a digitial photo frame with an e-Ink Display.&lt;/p&gt;
+&lt;p&gt;It works really well, but copying new images is a bit hacky
+and colors look a bit pale due to the display technology.&lt;/p&gt;
+&lt;img src=&quot;https://andreas-mausch.de/blog/2024-11-10-waveshare-photoframe-epaper/madeira-optimized.jpg&quot; width=&quot;1280&quot; height=&quot;930&quot; alt=&quot;undefined&quot; /&gt;
+&lt;h1 id=&quot;specs&quot; tabindex=&quot;-1&quot;&gt;1. Specs &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2024-11-10-waveshare-photoframe-epaper/#specs&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.waveshare.com/wiki/PhotoPainter&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Link&lt;/a&gt;&lt;/&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>minikube, a local Kubernetes</title>
     <link href="https://andreas-mausch.de/blog/2024-10-23-minikube/"/>
