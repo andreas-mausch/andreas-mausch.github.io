@@ -105,7 +105,9 @@ It almost looked like a monochrome version (tbh, the photo was also taken in bad
 {% image "madeira-on-frame.jpg" %}
 
 Here is how it looked after +30% contrast and 100% saturation,
-which in my opinion looks really good:
+which in my opinion looks really shit on PC, but really good on the frame:
+
+{% image "madeira.800x480.png" %}
 
 {% image "madeira-optimized.jpg" %}
 
