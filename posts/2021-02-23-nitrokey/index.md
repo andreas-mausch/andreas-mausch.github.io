@@ -140,11 +140,16 @@ It should now ask you for your PIN (default: 123456), and the NitroKey is querie
 On a new computer, run `gpg --card-edit`, then enter `fetch` and `quit` to import
 the reference to the secret key on the NitroKey.
 
-Note: The public key must be known to gpg at this point. It is [not possible](https://stackoverflow.com/a/46735922)
+Note: The public key must be known to gpg at this point. It is ~~[not possible](https://stackoverflow.com/a/46735922)~~
 to just import the public key from the NitroKey itself, because some information is missing.
 
 If your public key is not on some server, please see the steps below how to export your key.
 Afterwards, you can run `gpg --import file`.
+
+Update: Apperently, it is indeed possible to recover the public key.
+See this post:
+
+[Recovering lost GPG public keys from your YubiKey](https://www.nicksherlock.com/2021/08/recovering-lost-gpg-public-keys-from-your-yubikey/)
 
 # Exporting keys with gpg
 
