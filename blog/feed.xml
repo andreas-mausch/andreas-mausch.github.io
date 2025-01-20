@@ -4,11 +4,32 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2024-11-10T18:00:00Z</updated>
+  <updated>2025-01-17T18:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>LUKS container encryption</title>
+    <link href="https://andreas-mausch.de/blog/2025-01-17-luks-container-encryption/"/>
+    <updated>2025-01-17T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2025-01-17-luks-container-encryption/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;While looking for a good way to encrypt my private data,
+I&#39;ve tested several options:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GnuPG: Still my favorite for single files,
+because I can use my main master key without having any additional secrets.&lt;/li&gt;
+&lt;li&gt;Tomb and gocryptfs look like a viable options, but requires an additional key&lt;/li&gt;
+&lt;li&gt;VeraCrypt I haven&#39;t tested yet, but it is very popular&lt;/li&gt;
+&lt;li&gt;eCryptfs: I have used it in the past, but due to
+&lt;a href=&quot;https://andreas-mausch.de/blog/2020-08-19-ecryptfs/&quot;&gt;a limitation in filepath length&lt;/a&gt;
+I discourage anyone to use it.&lt;/li&gt;
+&lt;li&gt;EncFS has several security issues still open for several years now&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But now I have tried &lt;strong&gt;LUKS&lt;/strong&gt; for container encryption for the first time
+and want to share the commands I have used.&lt;/p&gt;
+&lt;h1 id=&quot;first-approach%3A-using-a-key-file&quot; tabindex=&quot;-1&quot;&gt;1. First approach: Using a key file &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2025-01-17-luks-container-encryption/#first-approach%3A-using-a-key-file&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
   <entry>
     <title>Waveshare 7.3inch ACeP 7-Color E-Paper</title>
     <link href="https://andreas-mausch.de/blog/2024-11-10-waveshare-photoframe-epaper/"/>

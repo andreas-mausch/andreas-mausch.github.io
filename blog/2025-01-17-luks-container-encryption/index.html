@@ -1,0 +1,218 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUKS container encryption</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>LUKS container encryption</h1>
+<div>
+  <time class="postlist-date" datetime="2025-01-17T18:00:00.000+00:00">Jan 17, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/encryption">#encryption</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/security">#security</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>While looking for a good way to encrypt my private data,
+I've tested several options:</p>
+<ul>
+<li>GnuPG: Still my favorite for single files,
+because I can use my main master key without having any additional secrets.</li>
+<li>Tomb and gocryptfs look like a viable options, but requires an additional key</li>
+<li>VeraCrypt I haven't tested yet, but it is very popular</li>
+<li>eCryptfs: I have used it in the past, but due to
+<a href="/blog/2020-08-19-ecryptfs/">a limitation in filepath length</a>
+I discourage anyone to use it.</li>
+<li>EncFS has several security issues still open for several years now</li>
+</ul>
+<p>But now I have tried <strong>LUKS</strong> for container encryption for the first time
+and want to share the commands I have used.</p>
+<h1 id="first-approach%3A-using-a-key-file" tabindex="-1">1. First approach: Using a key file <a class="header-anchor" href="#first-approach%3A-using-a-key-file" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="create-the-key-file" tabindex="-1">1.1. Create the key file <a class="header-anchor" href="#create-the-key-file" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>We will have a key file and only the key file.
+It is encrypted via GnuPG and we won't have any passphrase to protect it.
+We assume the GPG-Key is well-protected itself.</p>
+<p>In other tutorials on the internet the LUKS key is written in plain text to the filesystem.
+We will avoid that here, but rather encrypt it on-the-fly via GPG.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/random <span class="token assign-left variable">bs</span><span class="token operator">=</span><span class="token number">512</span> <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">8</span> <span class="token operator">|</span> gpg <span class="token parameter variable">--encrypt</span> <span class="token parameter variable">--sign</span> <span class="token parameter variable">--recipient</span> 1111111190ABCDEF1234567890ABCDEF11111111 <span class="token parameter variable">--output</span> ./cryptkey.gpg</span></code></pre>
+
+    </div><h2 id="create-the-encrypted-file-container" tabindex="-1">1.2. Create the encrypted file container <a class="header-anchor" href="#create-the-encrypted-file-container" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/urandom <span class="token assign-left variable">of</span><span class="token operator">=</span>./luks-container.img <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">1024</span> <span class="token assign-left variable">iflag</span><span class="token operator">=</span>fullblock</span>
+<span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup <span class="token parameter variable">-c</span> aes-xts-plain64 <span class="token parameter variable">-s</span> <span class="token number">512</span> <span class="token parameter variable">-h</span> sha512 <span class="token parameter variable">-y</span> --key-file<span class="token operator">=</span>- luksFormat ./luks-container.img</span></code></pre>
+
+    </div><p><code class="language-plain">luksAddKey</code> was not needed, which I like. I have seen it in several other examples in the internet.
+In general, you can use it to have multiple passphrases or key files, which all can be used to
+decrypt the master key.</p>
+<p>Now, mount the container and create the initial filesystem:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup --key-file<span class="token operator">=</span>- luksOpen ./luks-container.img my_container</span>
+<span class="highlight-line"><span class="token function">sudo</span> mkfs.ext4 /dev/mapper/my_container</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mkdir</span> /mnt/luks-container</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> ext4 /dev/mapper/my_container /mnt/luks-container/</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">umount</span> /mnt/luks-container</span>
+<span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksClose my_container</span></code></pre>
+
+    </div><h2 id="common-usage" tabindex="-1">1.3. Common usage <a class="header-anchor" href="#common-usage" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>The container is now ready to be used.</p>
+<p>On some systems, it might be enough to just call <code class="language-plain">luksOpen</code> and your file manager will offer you an option to mount.
+Then, you can skip the mount commands on CLI.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup --key-file<span class="token operator">=</span>- luksOpen ./luks-container.img my_container</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> ext4 /dev/mapper/my_container /mnt/luks-container/</span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">umount</span> /mnt/luks-container</span>
+<span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksClose my_container</span></code></pre>
+
+    </div><h1 id="second-(and-preferred)-approach%3A-using-a-detached-header" tabindex="-1">2. Second (and preferred) approach: Using a detached header <a class="header-anchor" href="#second-(and-preferred)-approach%3A-using-a-detached-header" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>LUKS offers an option to not store the header at the beginning of the container file,
+but rather in a separate file.
+This has the benefit that the container file will just look like random data,
+and contains no hints of LUKS being used.</p>
+<p>The header contains multiple key slots, and each one contains the master key encrypted
+with your key data, which is either a passphrase or a key file.
+So, without the header, you won't be able to decrypt the container.</p>
+<p>I had some thoughts on it and I'm still not sure whether this is a good idea,
+but I like to store the header GPG-encrypted in my <a href="https://www.passwordstore.org/" class="external-link" target="_blank">password store</a>
+and then have an empty passphrase.</p>
+<p>That way, only my GPG key is needed to access the container, which I like very much.
+However, mosts sites discourage having an empty passphrase.
+I think it's not that relevant here, when your master key inside the header is encrypted via GPG.</p>
+<p>Here are the commands I have used with this approach:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/urandom <span class="token assign-left variable">of</span><span class="token operator">=</span>./luks-container-without-header.img <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">1024</span> <span class="token assign-left variable">iflag</span><span class="token operator">=</span>fullblock</span>
+<span class="highlight-line"><span class="token comment"># Use empty passphrase on `luksFormat`.</span></span>
+<span class="highlight-line"><span class="token comment"># We will store the detached header in a secure place instead.</span></span>
+<span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksFormat ./luks-container-without-header.img <span class="token parameter variable">--header</span><span class="token operator">=</span>detached-header.bin</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">''</span> <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup luksOpen ./luks-container-without-header.img my_container <span class="token parameter variable">--header</span><span class="token operator">=</span>detached-header.bin</span>
+<span class="highlight-line"><span class="token function">sudo</span> mkfs.ext4 /dev/mapper/my_container</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mkdir</span> /mnt/luks-container</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> ext4 /dev/mapper/my_container /mnt/luks-container/</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">umount</span> /mnt/luks-container</span>
+<span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksClose my_container</span></code></pre>
+
+    </div><p>Some debugging commands:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksDump ./detached-header.bin</span>
+<span class="highlight-line"><span class="token function">sudo</span> dmsetup <span class="token function">ls</span> <span class="token parameter variable">--target</span> crypt</span>
+<span class="highlight-line"><span class="token function">sudo</span> dmsetup info <span class="token parameter variable">-C</span></span></code></pre>
+
+    </div><p>The default detached header file size was 16 MB in my case.
+You can reduce it by using these options on <code class="language-plain">luksFormat</code>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksFormat <span class="token parameter variable">--type</span> luks2 --luks2-metadata-size<span class="token operator">=</span>16k --luks2-keyslots-size<span class="token operator">=</span>256k ./luks-container-without-header.img <span class="token parameter variable">--header</span><span class="token operator">=</span>detached-header.bin</span></code></pre>
+
+    </div><p>Please note this will reduce the number of keyslots to just one,
+so you won't be able to add addtional keyslots afterwards.</p>
+<p>You can also set the option <code class="language-plain">--align-payload</code> to <code class="language-plain">0</code> or <code class="language-plain">1</code>,
+but I am not sure if this has any effect when you use detached headers.</p>
+<h1 id="provide-a-volume-master-key%3F" tabindex="-1">3. Provide a volume master key? <a class="header-anchor" href="#provide-a-volume-master-key%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>There also seems to be a way to directly provide a volume master key with the flag <code class="language-plain">--volume-key-file</code>.
+By default, LUKS generates a master key for you and then encrypts it with your passphrase.</p>
+<p>But in case you don't trust how that master key is generated, you might want to provide your own.
+I haven't tested this, though.</p>
+<h1 id="mount-via-fstab%3F" tabindex="-1">4. Mount via fstab? <a class="header-anchor" href="#mount-via-fstab%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I'd love to have integration into my file manager, Thunar, so I would
+only need to click on an icon to decrypt the container and show the files,
+without the need to struggle with CLI commands.</p>
+<p>However, my try was <strong>not successful</strong>.</p>
+<p>I couldn't manage to mount the container file via <code class="language-plain">/etc/fstab</code> and <code class="language-plain">/etc/crypttab</code>,
+because the crypttab file requires an entry like this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="/etc/crypttab" class="language-plain"><span class="highlight-line">my_container_fstab /opt/luks-container.img header=/opt/detached-header.bin luks</span></code></pre>
+
+    </div><p>So the header is expected as a file, but in my dream it would be stored in <code class="language-plain">pass</code>.
+But then we would need to call a command in cryptsetup, rather than passing a file, and that, unfortunately, is not offered by <code class="language-plain">luksOpen</code>.</p>
+<h1 id="links" tabindex="-1">5. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<ul>
+<li><a href="https://www.privacy-handbuch.de/handbuch_37h3.htm" class="external-link" target="_blank">https://www.privacy-handbuch.de/handbuch_37h3.htm</a></li>
+<li><a href="https://wiki.archlinux.org/title/Dm-crypt/Encrypting_a_non-root_file_system#File_container" class="external-link" target="_blank">https://wiki.archlinux.org/title/Dm-crypt/Encrypting_a_non-root_file_system#File_container</a></li>
+<li><a href="https://wiki.ubuntuusers.de/LUKS/Containerdatei/" class="external-link" target="_blank">https://wiki.ubuntuusers.de/LUKS/Containerdatei/</a></li>
+<li><a href="https://cryptsetup-team.pages.debian.net/cryptsetup/README.gnupg.html" class="external-link" target="_blank">https://cryptsetup-team.pages.debian.net/cryptsetup/README.gnupg.html</a></li>
+<li><a href="https://cryptsetup-team.pages.debian.net/cryptsetup/README.gnupg-sc.html" class="external-link" target="_blank">https://cryptsetup-team.pages.debian.net/cryptsetup/README.gnupg-sc.html</a></li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
