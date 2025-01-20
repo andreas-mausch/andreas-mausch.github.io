@@ -48,7 +48,7 @@ decrypt the master key.
 Now, mount the container and create the initial filesystem:
 
 ```bash
-gpg --decrypt ./cryptkey.gpg | sudo cryptsetup --key-file=- luksOpen ./luks-container.img my_container
+gpg --decrypt ./cryptkey.gpg | sudo cryptsetup --key-file=- open --type=luks ./luks-container.img my_container
 sudo mkfs.ext4 /dev/mapper/my_container
 sudo mkdir /mnt/luks-container
 sudo mount -t ext4 /dev/mapper/my_container /mnt/luks-container/
@@ -61,11 +61,11 @@ sudo cryptsetup luksClose my_container
 
 The container is now ready to be used.
 
-On some systems, it might be enough to just call `luksOpen` and your file manager will offer you an option to mount.
+On some systems, it might be enough to just call `cryptsetup open` and your file manager will offer you an option to mount.
 Then, you can skip the mount commands on CLI.
 
 ```bash
-gpg --decrypt ./cryptkey.gpg | sudo cryptsetup --key-file=- luksOpen ./luks-container.img my_container
+gpg --decrypt ./cryptkey.gpg | sudo cryptsetup --key-file=- open --type=luks ./luks-container.img my_container
 sudo mount -t ext4 /dev/mapper/my_container /mnt/luks-container/
 ```
 
@@ -100,7 +100,7 @@ dd if=/dev/urandom of=./luks-container-without-header.img bs=1M count=1024 iflag
 # Use empty passphrase on `luksFormat`.
 # We will store the detached header in a secure place instead.
 sudo cryptsetup luksFormat ./luks-container-without-header.img --header=detached-header.bin
-echo '' | sudo cryptsetup luksOpen ./luks-container-without-header.img my_container --header=detached-header.bin
+echo '' | sudo cryptsetup open --type=luks ./luks-container-without-header.img my_container --header=detached-header.bin
 sudo mkfs.ext4 /dev/mapper/my_container
 sudo mkdir /mnt/luks-container
 sudo mount -t ext4 /dev/mapper/my_container /mnt/luks-container/
@@ -154,7 +154,7 @@ my_container_fstab /opt/luks-container.img header=/opt/detached-header.bin luks
 ```
 
 So the header is expected as a file, but in my dream it would be stored in `pass`.
-But then we would need to call a command in cryptsetup, rather than passing a file, and that, unfortunately, is not offered by `luksOpen`.
+But then we would need to call a command in cryptsetup, rather than passing a file, and that, unfortunately, is not offered by `cryptsetup open`.
 
 # Links
 
