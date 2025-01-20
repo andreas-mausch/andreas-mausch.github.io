@@ -103,7 +103,7 @@ decrypt the master key.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup --key-file<span class="token operator">=</span>- luksOpen ./luks-container.img my_container</span>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup --key-file<span class="token operator">=</span>- <span class="token function">open</span> <span class="token parameter variable">--type</span><span class="token operator">=</span>luks ./luks-container.img my_container</span>
 <span class="highlight-line"><span class="token function">sudo</span> mkfs.ext4 /dev/mapper/my_container</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mkdir</span> /mnt/luks-container</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> ext4 /dev/mapper/my_container /mnt/luks-container/</span>
@@ -113,13 +113,13 @@ decrypt the master key.</p>
 
     </div><h2 id="common-usage" tabindex="-1">1.3. Common usage <a class="header-anchor" href="#common-usage" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>The container is now ready to be used.</p>
-<p>On some systems, it might be enough to just call <code class="language-plain">luksOpen</code> and your file manager will offer you an option to mount.
+<p>On some systems, it might be enough to just call <code class="language-plain">cryptsetup open</code> and your file manager will offer you an option to mount.
 Then, you can skip the mount commands on CLI.</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup --key-file<span class="token operator">=</span>- luksOpen ./luks-container.img my_container</span>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">gpg <span class="token parameter variable">--decrypt</span> ./cryptkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup --key-file<span class="token operator">=</span>- <span class="token function">open</span> <span class="token parameter variable">--type</span><span class="token operator">=</span>luks ./luks-container.img my_container</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> ext4 /dev/mapper/my_container /mnt/luks-container/</span></code></pre>
 
     </div><div class="code-block">
@@ -152,7 +152,7 @@ I think it's not that relevant here, when your master key inside the header is e
 <span class="highlight-line"><span class="token comment"># Use empty passphrase on `luksFormat`.</span></span>
 <span class="highlight-line"><span class="token comment"># We will store the detached header in a secure place instead.</span></span>
 <span class="highlight-line"><span class="token function">sudo</span> cryptsetup luksFormat ./luks-container-without-header.img <span class="token parameter variable">--header</span><span class="token operator">=</span>detached-header.bin</span>
-<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">''</span> <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup luksOpen ./luks-container-without-header.img my_container <span class="token parameter variable">--header</span><span class="token operator">=</span>detached-header.bin</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">''</span> <span class="token operator">|</span> <span class="token function">sudo</span> cryptsetup <span class="token function">open</span> <span class="token parameter variable">--type</span><span class="token operator">=</span>luks ./luks-container-without-header.img my_container <span class="token parameter variable">--header</span><span class="token operator">=</span>detached-header.bin</span>
 <span class="highlight-line"><span class="token function">sudo</span> mkfs.ext4 /dev/mapper/my_container</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mkdir</span> /mnt/luks-container</span>
 <span class="highlight-line"><span class="token function">sudo</span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> ext4 /dev/mapper/my_container /mnt/luks-container/</span>
@@ -200,7 +200,7 @@ because the crypttab file requires an entry like this:</p>
     <pre class="language-plain"><code data-filename="/etc/crypttab" class="language-plain"><span class="highlight-line">my_container_fstab /opt/luks-container.img header=/opt/detached-header.bin luks</span></code></pre>
 
     </div><p>So the header is expected as a file, but in my dream it would be stored in <code class="language-plain">pass</code>.
-But then we would need to call a command in cryptsetup, rather than passing a file, and that, unfortunately, is not offered by <code class="language-plain">luksOpen</code>.</p>
+But then we would need to call a command in cryptsetup, rather than passing a file, and that, unfortunately, is not offered by <code class="language-plain">cryptsetup open</code>.</p>
 <h1 id="links" tabindex="-1">5. Links <a class="header-anchor" href="#links" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <ul>
 <li><a href="https://www.privacy-handbuch.de/handbuch_37h3.htm" class="external-link" target="_blank">https://www.privacy-handbuch.de/handbuch_37h3.htm</a></li>
