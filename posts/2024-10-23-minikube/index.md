@@ -2,6 +2,7 @@
 title: "minikube, a local Kubernetes"
 date: 2024-10-23T19:00:00+01:00
 tags: ['kubernetes', 'libvirt', 'k3s', 'microk8s']
+thumbnail: minikube.svg
 ---
 
 I want to share my short experience with minikube:
