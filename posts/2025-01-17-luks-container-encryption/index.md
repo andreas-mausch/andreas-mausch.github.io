@@ -2,6 +2,7 @@
 title: "LUKS container encryption"
 date: 2025-01-17T19:00:00+01:00
 tags: ['encryption', 'security']
+thumbnail: luks-encryption.png
 ---
 
 While looking for a good way to encrypt my private data,
