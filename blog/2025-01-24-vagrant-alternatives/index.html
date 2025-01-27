@@ -151,14 +151,14 @@ support it is not a solution to me.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-plain"><code data-filename="./my-box.yaml" class="language-plain"><span class="highlight-line">arch: x86_64</span>
-<span class="highlight-line">cpus: 2</span>
-<span class="highlight-line">memory: 4GiB</span>
-<span class="highlight-line">disk: 20GiB</span>
-<span class="highlight-line">images:</span>
-<span class="highlight-line">  - location: "https://cloud-images.ubuntu.com/releases/24.04/release-20240821/ubuntu-24.04-server-cloudimg-amd64.img"</span>
-<span class="highlight-line">    arch: "x86_64"</span>
-<span class="highlight-line">    digest: "sha256:0e25ca6ee9f08ec5d4f9910054b66ae7163c6152e81a3e67689d89bd6e4dfa69"</span></code></pre>
+    <pre class="language-yaml"><code data-filename="./my-box.yaml" class="language-yaml"><span class="highlight-line"><span class="token key atrule">arch</span><span class="token punctuation">:</span> x86_64</span>
+<span class="highlight-line"><span class="token key atrule">cpus</span><span class="token punctuation">:</span> <span class="token number">2</span></span>
+<span class="highlight-line"><span class="token key atrule">memory</span><span class="token punctuation">:</span> 4GiB</span>
+<span class="highlight-line"><span class="token key atrule">disk</span><span class="token punctuation">:</span> 20GiB</span>
+<span class="highlight-line"><span class="token key atrule">images</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">  <span class="token punctuation">-</span> <span class="token key atrule">location</span><span class="token punctuation">:</span> <span class="token string">"https://cloud-images.ubuntu.com/releases/24.04/release-20240821/ubuntu-24.04-server-cloudimg-amd64.img"</span></span>
+<span class="highlight-line">    <span class="token key atrule">arch</span><span class="token punctuation">:</span> <span class="token string">"x86_64"</span></span>
+<span class="highlight-line">    <span class="token key atrule">digest</span><span class="token punctuation">:</span> <span class="token string">"sha256:0e25ca6ee9f08ec5d4f9910054b66ae7163c6152e81a3e67689d89bd6e4dfa69"</span></span></code></pre>
 
     </div><h2 id="multipass" tabindex="-1">2.2. multipass <a class="header-anchor" href="#multipass" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <p>I don't like it.</p>
