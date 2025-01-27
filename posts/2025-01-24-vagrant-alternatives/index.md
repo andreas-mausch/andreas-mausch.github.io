@@ -100,7 +100,7 @@ limactl stop my-box
 limactl remove my-box
 ```
 
-```{data-filename=./my-box.yaml}
+```yaml{data-filename=./my-box.yaml}
 arch: x86_64
 cpus: 2
 memory: 4GiB
