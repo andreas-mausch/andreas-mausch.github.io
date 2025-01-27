@@ -16,6 +16,11 @@ module.exports = post => {
         return ""
       }
     }
+
+    // Do not convert .svg to .jpg to maintain transparency
+    if (post.data.thumbnail?.endsWith(".svg")) {
+      return imageShortcodes.imageShortcode(filename, "Post thumbnail", post)
+    }
     return imageShortcodes.thumbnail(filename, "Post thumbnail", post)
   }
 }

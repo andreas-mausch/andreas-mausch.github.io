@@ -69,8 +69,8 @@ function clickableThumbnail(src, alt, page = this.page) {
   return `<a href="${largestImageUrl}" target="_blank">${img}</a>`
 }
 
-function imageShortcode(src, alt) {
-  const image = findImage(src, this.page)
+function imageShortcode(src, alt, page = this.page) {
+  const image = findImage(src, page)
   return `<img src="${image.url}" width="${image.width}" height="${image.height}" alt="${alt}">`
 }
 
