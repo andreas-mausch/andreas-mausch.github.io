@@ -136,20 +136,20 @@ module.exports = function markdownItHexView(md, options = {}) {
   const closeMarker = options.closeMarker || "```"
   const closeChar = closeMarker.charCodeAt(0)
 
-  function buildFromBase64(slf, content, highlights) {
+  function buildFromBase64(content, caption, highlights) {
     const rawData = atob(remove_whitespace(content))
     highlights = highlights ? highlights.replace(/([#\w]+)/g, "\"$1\"") : ""
     highlights = JSON.parse(`[${highlights}]`)
 
     const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>")
-    const table = buildHexView(dom.window.document, rawData, "Test caption", 16, true, 1, 8, highlights)
+    const table = buildHexView(dom.window.document, rawData, caption, 16, true, 1, 8, highlights)
 
     return table.outerHTML
   }
 
-  function render(tokens, idx, _options, _env, slf) {
+  function render(tokens, idx, _options, _env, _slf) {
     const { content, attributes } = tokens[idx]
-    return buildFromBase64(slf, content, attributes["data-highlights"])
+    return buildFromBase64(content, attributes["caption"], attributes["highlights"])
   }
 
   function hexView(state, startLine, endLine, silent) {
