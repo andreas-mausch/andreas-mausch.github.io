@@ -143,7 +143,9 @@ Let's take this example image (which I have converted to a .gif so we can view i
 
 I have colored the sections of the original frame bytes in this screenshot (in dhex):
 
-{% image "image-in-hex.png" %}
+```hexview{caption=witch.divoom16 highlights=[0,0,#DD0000,BeginningOfFrame],[1,2,#AA0077,SizeOfFrame],[3,4,#AA7700,DurationInMs],[5,5,#7700AA,ReusePalette],[6,6,#AAAA00,ColorCount],[7,30,#BBFFCC,ColorDataRGB],[31,126,#BBDDFF,PixelData],[127,127,#DD0000,BeginningOfFrame],[128,129,#AA0077,SizeOfFrame],[130,131,#AA7700,DurationInMs],[132,132,#7700AA,ReusePalette],[133,133,#AAAA00,ColorCount],[134,229,#BBDDFF,PixelData],[230,230,#DD0000,BeginningOfFrame],[231,232,#AA0077,SizeOfFrame],[233,234,#AA7700,DurationInMs],[235,235,#7700AA,ReusePalette],[236,236,#AAAA00,ColorCount],[237,271,#BBDDFF,PixelData]}
+{{ "witch.divoom16" | fileBase64 | slice: 0, 363 }}
+```
 
 See also the very detailed description here:
 [https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md](https://github.com/RomRider/node-divoom-timebox-evo/blob/master/PROTOCOL.md)
