@@ -41,6 +41,11 @@ table th {
   td {
     padding: 4px;
   }
+
+  td:hover {
+    filter: invert(100%) hue-rotate(170deg) brightness(150%);
+    backdrop-filter: invert(20%);
+  }
 }
 
 @media (prefers-color-scheme: light) {

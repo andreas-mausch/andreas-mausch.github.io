@@ -1,4 +1,5 @@
 const { JSDOM } = require("jsdom")
+const contrast = require("get-contrast")
 
 var HEX = "0123456789ABCDEF"
 
@@ -18,6 +19,17 @@ function dec_to_hex8(dec) {
     str += dec2_to_hex((dec >> (i * 8)) & 255)
   }
   return str
+}
+
+function getTextColorForBackground(backgroundColor) {
+  const blackTextColor = "#000000"
+  const whiteTextColor = "#ffffff"
+
+  const blackContrast = contrast.ratio(backgroundColor, blackTextColor)
+  const whiteContrast = contrast.ratio(backgroundColor, whiteTextColor)
+
+  // Return black or white text based on the highest contrast ratio
+  return blackContrast > whiteContrast ? blackTextColor : whiteTextColor
 }
 
 function buildHexView(document, rawData, caption, step, showLineNums, wordSize, rowBreak, highlights) {
@@ -43,6 +55,7 @@ function buildHexView(document, rawData, caption, step, showLineNums, wordSize, 
 
         lastCell.classList.add("hexview-code-hi", "hexview-border-middle")
         lastCell.style.backgroundColor = highlights[idx][2]
+        lastCell.style.color = getTextColorForBackground(highlights[idx][2])
         lastCell.title = highlights[idx][3]
       } else {
         lastCell.classList.add("hexview-code")
@@ -119,13 +132,14 @@ function buildHexView(document, rawData, caption, step, showLineNums, wordSize, 
 }
 
 module.exports = function markdownItHexView(md, options = {}) {
-  const regex = /^```hexview\{([^}]*)\}/
+  const regex = /^```hexview(\{([^}]*)\})?/
   const closeMarker = options.closeMarker || "```"
   const closeChar = closeMarker.charCodeAt(0)
 
   function buildFromBase64(slf, content, highlights) {
     const rawData = atob(remove_whitespace(content))
-    highlights = JSON.parse(`[${highlights.replace(/([#\w]+)/g, "\"$1\"")}]`)
+    highlights = highlights ? highlights.replace(/([#\w]+)/g, "\"$1\"") : ""
+    highlights = JSON.parse(`[${highlights}]`)
 
     const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>")
     const table = buildHexView(dom.window.document, rawData, "Test caption", 16, true, 1, 8, highlights)
@@ -135,12 +149,7 @@ module.exports = function markdownItHexView(md, options = {}) {
 
   function render(tokens, idx, _options, _env, slf) {
     const { content, attributes } = tokens[idx]
-    try {
-      return buildFromBase64(slf, content, attributes["data-highlights"])
-    }
-    catch (error) {
-      return `<p style="border: 2px dashed red">Failed to render hexView<span>${md.utils.escapeHtml(error.toString())}</span></p>`
-    }
+    return buildFromBase64(slf, content, attributes["data-highlights"])
   }
 
   function hexView(state, startLine, endLine, silent) {
@@ -219,8 +228,8 @@ module.exports = function markdownItHexView(md, options = {}) {
       .slice(startLine + 1, nextLine)
       .join("\n")
 
-    const token = state.push("hexView", "fence", 0)
-    const attributes = match[1].trim()
+    const token = state.push("hexview", "fence", 0)
+    const attributes = match[2]?.trim()
     token.attributes = attributes ? Object.fromEntries(attributes.split(" ").map(attr => attr.split("="))) : []
     token.content = contents
 
@@ -229,9 +238,9 @@ module.exports = function markdownItHexView(md, options = {}) {
     return true
   }
 
-  md.block.ruler.before("fence", "hexView", hexView, {
+  md.block.ruler.before("fence", "hexview", hexView, {
     alt: ["paragraph", "reference", "blockquote", "list"]
   })
 
-  md.renderer.rules.hexView = render
+  md.renderer.rules.hexview = render
 }
