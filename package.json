@@ -38,6 +38,7 @@
     "eslint": "8.56.0",
     "glob": "10.3.14",
     "iconism": "1.2.3",
+    "jsdom": "26.0.0",
     "linkinator": "6.0.4",
     "markdown-it": "14.1.0",
     "markdown-it-anchor": "8.6.7",

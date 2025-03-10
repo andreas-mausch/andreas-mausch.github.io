@@ -11,6 +11,7 @@ const lineNumbersStart = require("./markdown-it-prism-line-numbers-start")
 const hierarchy = require("./markdown-it-hierarchy")
 const copyToClipboard = require("./markdown-it-prism-copy-to-clipboard")
 const plantUml = require("markdown-it-plantuml-ex2")
+const hexView = require("./markdown-it-hexview")
 
 const markdown = markdownIt({
   html: true
@@ -38,6 +39,7 @@ const markdown = markdownIt({
   })
   .use(taskCheckbox)
   .use(plantUml, { plantumlPath: "plantuml.jar" })
+  .use(hexView)
 
 markdown.options.highlight = lineNumbers(markdown.options.highlight)
 markdown.renderer.rules.fence = copyToClipboard(lineNumbersStart(markdown.renderer.rules.fence))
