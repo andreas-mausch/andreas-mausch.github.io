@@ -1,0 +1,141 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Swarm: Wait for deployment</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Docker Swarm: Wait for deployment</h1>
+<div>
+  <time class="postlist-date" datetime="2025-03-12T18:00:00.000+00:00">Mar 12, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/containerization">#containerization</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/docker">#docker</a></li>
+        
+    
+        
+    
+  </ul>
+</div>
+
+
+
+<p>I love Docker Compose files for their simplicity
+and use them a lot to start local services.</p>
+<p>However, when using them in a Docker Swarm, you always need to take precautions
+to validate a deployment was successful.</p>
+<p>If a health check failed or the image could not be pulled, the <code class="language-plain">docker stack deploy</code>
+command just finished without any error message, because the real
+deployment was done asynchronously after the command already exited and returned to the shell.</p>
+<p>Today I just found out it is finally possible to wait for the result of the deployment
+by using the <code class="language-plain">--detach=false</code> mode.
+The command will block until the state of the swarm is stable again.</p>
+<p>This is so good.
+It allows automatic scripts to check whether the deployment was successful or not,
+without any self-written scripts checking the stdout of <code class="language-plain">docker service ps</code> commands.</p>
+<p>The <a href="https://github.com/docker/cli/pull/4258" class="external-link" target="_blank">pull request</a> was merged in March 2024 (<a href="https://github.com/docker/cli/issues/373" class="external-link" target="_blank">link to issue</a>).
+Make sure to use a Docker version &gt;= 26.</p>
+<h1 id="example-with-keycloak" tabindex="-1">1. Example with Keycloak <a class="header-anchor" href="#example-with-keycloak" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>For example let's have a service, in this case a Keycloak:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-yaml"><code data-filename="docker-compose.yaml" class="language-yaml"><span class="highlight-line"><span class="token key atrule">services</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">  <span class="token key atrule">idp</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">    <span class="token key atrule">image</span><span class="token punctuation">:</span> quay.io/keycloak/keycloak<span class="token punctuation">:</span>26.1.3</span>
+<span class="highlight-line">    <span class="token key atrule">command</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token punctuation">-</span> start<span class="token punctuation">-</span>dev</span>
+<span class="highlight-line">    <span class="token key atrule">environment</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token key atrule">KEYCLOAK_ADMIN</span><span class="token punctuation">:</span> admin</span>
+<span class="highlight-line">      <span class="token key atrule">KEYCLOAK_ADMIN_PASSWORD</span><span class="token punctuation">:</span> admin</span>
+<span class="highlight-line">      <span class="token key atrule">DB_VENDOR</span><span class="token punctuation">:</span> h2</span>
+<span class="highlight-line">      <span class="token key atrule">KC_HEALTH_ENABLED</span><span class="token punctuation">:</span> <span class="token string">"true"</span></span>
+<span class="highlight-line">    <span class="token key atrule">ports</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token punctuation">-</span> <span class="token string">"8080:8080"</span></span>
+<span class="highlight-line">    <span class="token key atrule">healthcheck</span><span class="token punctuation">:</span></span>
+<span class="highlight-line">      <span class="token key atrule">test</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"CMD-SHELL"</span><span class="token punctuation">,</span> <span class="token string">"exec 3&lt;>/dev/tcp/localhost/9000 &amp;&amp; echo -e 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&amp;3 &amp;&amp; cat &lt;&amp;3 | grep -q '200 OK'"</span><span class="token punctuation">]</span></span>
+<span class="highlight-line">      <span class="token key atrule">start_period</span><span class="token punctuation">:</span> 10s</span>
+<span class="highlight-line">      <span class="token key atrule">interval</span><span class="token punctuation">:</span> 5s</span>
+<span class="highlight-line">      <span class="token key atrule">retries</span><span class="token punctuation">:</span> <span class="token number">12</span></span>
+<span class="highlight-line">      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> 5s</span></code></pre>
+
+    </div><p>Test the <code class="language-plain">docker-compose.yaml</code> without Docker Swarm:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> compose up</span>
+<span class="highlight-line"><span class="token function">docker</span> compose <span class="token function">rm</span> <span class="token parameter variable">--volumes</span></span></code></pre>
+
+    </div><p>Now run the following commands and notice the <code class="language-plain">--detach</code>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> stack deploy <span class="token parameter variable">--detach</span><span class="token operator">=</span>false --compose-file docker-compose.yaml teststack</span>
+<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ls</span> <span class="token operator">|</span> <span class="token function">grep</span> teststack</span>
+<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ps</span> teststack_idp <span class="token parameter variable">--filter</span><span class="token operator">=</span><span class="token string">'desired-state=running'</span></span>
+<span class="highlight-line"><span class="token function">docker</span> stack <span class="token function">rm</span> <span class="token parameter variable">--detach</span><span class="token operator">=</span>false teststack</span></code></pre>
+
+    </div><p>You must be connected to a swarm in order to run <code class="language-plain">docker stack</code> commands.</p>
+<p>Some more commands for debugging:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> stack services teststack <span class="token parameter variable">--format</span> <span class="token string">''</span></span>
+<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ls</span> <span class="token operator">|</span> <span class="token function">grep</span> teststack</span>
+<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ps</span> teststack_idp <span class="token parameter variable">--filter</span><span class="token operator">=</span><span class="token string">'desired-state=running'</span> <span class="token parameter variable">--format</span> <span class="token string">''</span></span>
+<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> update <span class="token parameter variable">--image</span> redis:7.4.1 teststack_idp <span class="token parameter variable">--args</span><span class="token operator">=</span><span class="token string">''</span> --health-cmd<span class="token operator">=</span>true</span>
+<span class="highlight-line">teststack_idp</span></code></pre>
+
+    </div><p>Note: <code class="language-plain">docker service update</code> has <code class="language-plain">--detach=false</code> by default, so you do not need to specify it here.
+Second note: <code class="language-plain">--args</code> is the docker command. Don't know why they use a different wording here.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>

@@ -4,11 +4,31 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2025-01-24T18:00:00Z</updated>
+  <updated>2025-03-12T18:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Docker Swarm: Wait for deployment</title>
+    <link href="https://andreas-mausch.de/blog/2025-03-12-docker-swarm-blocking/"/>
+    <updated>2025-03-12T18:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2025-03-12-docker-swarm-blocking/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I love Docker Compose files for their simplicity
+and use them a lot to start local services.&lt;/p&gt;
+&lt;p&gt;However, when using them in a Docker Swarm, you always need to take precautions
+to validate a deployment was successful.&lt;/p&gt;
+&lt;p&gt;If a health check failed or the image could not be pulled, the &lt;code class=&quot;language-plain&quot;&gt;docker stack deploy&lt;/code&gt;
+command just finished without any error message, because the real
+deployment was done asynchronously after the command already exited and returned to the shell.&lt;/p&gt;
+&lt;p&gt;Today I just found out it is finally possible to wait for the result of the deployment
+by using the &lt;code class=&quot;language-plain&quot;&gt;--detach=false&lt;/code&gt; mode.
+The command will block until the state of the swarm is stable again.&lt;/p&gt;
+&lt;p&gt;This is so good.
+It allows automatic scripts to check whether the deployment was successful or not,
+without any self-written scripts checking the stdout of &lt;code class=&quot;language-plain&quot;&gt;docker service ps&lt;/code&gt; commands.&lt;/p&gt;
+&lt;p&gt;The &lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Vagrant alternative needed</title>
     <link href="https://andreas-mausch.de/blog/2025-01-24-vagrant-alternatives/"/>
