@@ -45,7 +45,7 @@ touch /mnt/sdcard/bootfs/ssh
 
 Create this file:
 
-```conf{data-filename=/mnt/sdcard/bootfs/wpa_supplicant.conf}
+```ini{data-filename=/mnt/sdcard/bootfs/wpa_supplicant.conf}
 country=US
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
