@@ -25,6 +25,9 @@ without any self-written scripts checking the stdout of `docker service ps` comm
 The [pull request](https://github.com/docker/cli/pull/4258) was merged in March 2024 ([link to issue](https://github.com/docker/cli/issues/373)).
 Make sure to use a Docker version >= 26.
 
+[Ansible](https://docs.ansible.com/) also
+[supports the flag](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_stack_module.html#parameter-detach).
+
 # Example with Keycloak
 
 For example let's have a service, in this case a Keycloak:
