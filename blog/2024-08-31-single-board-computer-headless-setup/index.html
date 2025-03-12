@@ -193,14 +193,14 @@ or <a href="https://github.com/gitbls/sdm" class="external-link" target="_blank"
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-plain"><code data-filename="/mnt/sdcard/bootfs/wpa_supplicant.conf" class="language-plain"><span class="highlight-line">country=US</span>
-<span class="highlight-line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span>
-<span class="highlight-line">update_config=1</span>
+    <pre class="language-ini"><code data-filename="/mnt/sdcard/bootfs/wpa_supplicant.conf" class="language-ini"><span class="highlight-line"><span class="token key attr-name">country</span><span class="token punctuation">=</span><span class="token value attr-value">US</span></span>
+<span class="highlight-line"><span class="token key attr-name">ctrl_interface</span><span class="token punctuation">=</span><span class="token value attr-value">DIR=/var/run/wpa_supplicant GROUP=netdev</span></span>
+<span class="highlight-line"><span class="token key attr-name">update_config</span><span class="token punctuation">=</span><span class="token value attr-value">1</span></span>
 <span class="highlight-line"></span>
-<span class="highlight-line">network={</span>
-<span class="highlight-line">    ssid="your_real_wifi_ssid"</span>
-<span class="highlight-line">    psk="your_real_password"</span>
-<span class="highlight-line">    key_mgmt=WPA-PSK</span>
+<span class="highlight-line"><span class="token key attr-name">network</span><span class="token punctuation">=</span><span class="token value attr-value">{</span></span>
+<span class="highlight-line">    <span class="token key attr-name">ssid</span><span class="token punctuation">=</span><span class="token value attr-value">"<span class="token inner-value">your_real_wifi_ssid</span>"</span></span>
+<span class="highlight-line">    <span class="token key attr-name">psk</span><span class="token punctuation">=</span><span class="token value attr-value">"<span class="token inner-value">your_real_password</span>"</span></span>
+<span class="highlight-line">    <span class="token key attr-name">key_mgmt</span><span class="token punctuation">=</span><span class="token value attr-value">WPA-PSK</span></span>
 <span class="highlight-line">}</span></code></pre>
 
     </div><p>Change your country, the SSID and the password (psk).</p>
