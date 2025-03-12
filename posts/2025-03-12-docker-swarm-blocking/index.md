@@ -2,6 +2,7 @@
 title: "Docker Swarm: Wait for deployment"
 date: 2025-03-12T19:00:00+01:00
 tags: ['docker', 'containerization']
+thumbnail: docker.svg
 ---
 
 I love Docker Compose files for their simplicity
