@@ -34,17 +34,24 @@ table th {
   text-align: left;
 }
 
-.hexview-table {
-  font-size: 87.5%;
+.hexview {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
-  td {
-    padding: 4px;
+  table {
+    font-size: 87.5%;
+
+    td {
+      padding: 4px;
+    }
+
+    td:hover {
+      filter: invert(100%) hue-rotate(170deg) brightness(150%);
+      backdrop-filter: invert(20%);
+    }
   }
 
-  td:hover {
-    filter: invert(100%) hue-rotate(170deg) brightness(150%);
-    backdrop-filter: invert(20%);
+  ul {
+    list-style-type: none;
   }
 }
 

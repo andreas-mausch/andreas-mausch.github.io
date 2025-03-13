@@ -32,10 +32,12 @@ function getTextColorForBackground(backgroundColor) {
   return blackContrast > whiteContrast ? blackTextColor : whiteTextColor
 }
 
-function buildHexView(document, rawData, caption, step, showLineNums, wordSize, rowBreak, highlights) {
+function buildHexView(document, rawData, caption, step, showLineNums, wordSize, rowBreak, highlights, legend) {
+  const hexview = document.createElement("div")
+  hexview.classList.add("hexview")
+
   var table = document.createElement("table")
-  table.classList.add("hexview-table")
-  table.classList.add("hexview")
+  hexview.appendChild(table)
 
   var offset = 0
 
@@ -128,7 +130,27 @@ function buildHexView(document, rawData, caption, step, showLineNums, wordSize, 
     row.appendChild(textCell)
   }
 
-  return table
+  if (legend) {
+    const legend = document.createElement("ul")
+    highlights
+      .filter((object1, index, self) =>
+        // Remove duplicates, if a color is referenced more than once
+        self.findIndex(object2 => (object1[2] === object2[2])) === index
+      )
+      .forEach(highlight => {
+        const legendEntry = document.createElement("li")
+        const span = document.createElement("span")
+        span.style.color = highlight[2]
+        span.style["font-weight"] = "bold"
+        span.textContent = "████"
+        legendEntry.appendChild(span)
+        legendEntry.appendChild(document.createTextNode(": " + highlight[3]))
+        legend.appendChild(legendEntry)
+      })
+    hexview.appendChild(legend)
+  }
+
+  return hexview
 }
 
 module.exports = function markdownItHexView(md, options = {}) {
@@ -136,20 +158,20 @@ module.exports = function markdownItHexView(md, options = {}) {
   const closeMarker = options.closeMarker || "```"
   const closeChar = closeMarker.charCodeAt(0)
 
-  function buildFromBase64(content, caption, highlights) {
+  function buildFromBase64(content, caption, highlights, legend) {
     const rawData = atob(remove_whitespace(content))
     highlights = highlights ? highlights.replace(/([#\w]+)/g, "\"$1\"") : ""
     highlights = JSON.parse(`[${highlights}]`)
 
     const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>")
-    const table = buildHexView(dom.window.document, rawData, caption, 16, true, 1, 8, highlights)
+    const table = buildHexView(dom.window.document, rawData, caption, 16, true, 1, 8, highlights, legend)
 
     return table.outerHTML
   }
 
   function render(tokens, idx, _options, _env, _slf) {
     const { content, attributes } = tokens[idx]
-    return buildFromBase64(content, attributes["caption"], attributes["highlights"])
+    return buildFromBase64(content, attributes["caption"], attributes["highlights"], attributes["legend"])
   }
 
   function hexView(state, startLine, endLine, silent) {
