@@ -74,13 +74,13 @@ You must be connected to a swarm in order to run `docker stack` commands.
 
 Some more commands for debugging:
 
-```bash
+```bash{% raw %}
 docker stack services teststack --format '{{.Name}}'
 docker service ls | grep teststack
 docker service ps teststack_idp --filter='desired-state=running' --format '{{.CurrentState}}'
 docker service update --image redis:7.4.1 teststack_idp --args='' --health-cmd=true
 teststack_idp
-```
+{% endraw %}```
 
 Note: `docker service update` has `--detach=false` by default, so you do not need to specify it here.
 Second note: `--args` is the docker command. Don't know why they use a different wording here.
