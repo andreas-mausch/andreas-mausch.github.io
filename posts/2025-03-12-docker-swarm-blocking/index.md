@@ -65,7 +65,7 @@ Now run the following commands and notice the `--detach`:
 
 ```bash
 docker stack deploy --detach=false --compose-file docker-compose.yaml teststack
-docker service ls | grep teststack
+docker stack services teststack
 docker service ps teststack_idp --filter='desired-state=running'
 docker stack rm --detach=false teststack
 ```
@@ -75,8 +75,8 @@ You must be connected to a swarm in order to run `docker stack` commands.
 Some more commands for debugging:
 
 ```bash{% raw %}
+docker stack services teststack
 docker stack services teststack --format '{{.Name}}'
-docker service ls | grep teststack
 docker service ps teststack_idp --filter='desired-state=running' --format '{{.CurrentState}}'
 docker service update --image redis:7.4.1 teststack_idp --args='' --health-cmd=true
 teststack_idp
