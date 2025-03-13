@@ -126,9 +126,9 @@ Make sure to use a Docker version &gt;= 26.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> stack services teststack <span class="token parameter variable">--format</span> <span class="token string">''</span></span>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> stack services teststack <span class="token parameter variable">--format</span> <span class="token string">'{{.Name}}'</span></span>
 <span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ls</span> <span class="token operator">|</span> <span class="token function">grep</span> teststack</span>
-<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ps</span> teststack_idp <span class="token parameter variable">--filter</span><span class="token operator">=</span><span class="token string">'desired-state=running'</span> <span class="token parameter variable">--format</span> <span class="token string">''</span></span>
+<span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> <span class="token function">ps</span> teststack_idp <span class="token parameter variable">--filter</span><span class="token operator">=</span><span class="token string">'desired-state=running'</span> <span class="token parameter variable">--format</span> <span class="token string">'{{.CurrentState}}'</span></span>
 <span class="highlight-line"><span class="token function">docker</span> <span class="token function">service</span> update <span class="token parameter variable">--image</span> redis:7.4.1 teststack_idp <span class="token parameter variable">--args</span><span class="token operator">=</span><span class="token string">''</span> --health-cmd<span class="token operator">=</span>true</span>
 <span class="highlight-line">teststack_idp</span></code></pre>
 
