@@ -40,8 +40,8 @@ services:
     command:
       - start-dev
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       DB_VENDOR: h2
       KC_HEALTH_ENABLED: "true"
     ports:
