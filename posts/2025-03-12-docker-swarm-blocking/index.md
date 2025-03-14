@@ -31,6 +31,8 @@ Make sure to use a Docker version >= 26.
 
 # Example with Keycloak
 
+{% asciinema "recording.cast" %}
+
 For example let's have a service, in this case a Keycloak:
 
 ```yaml{data-filename=docker-compose.yaml}
