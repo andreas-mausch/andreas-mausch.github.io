@@ -4,18 +4,11 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2025-03-14T18:00:00Z</updated>
+  <updated>2025-03-12T18:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
-  <entry>
-    <title>asciinema</title>
-    <link href="https://andreas-mausch.de/blog/2025-03-14-asciinema/"/>
-    <updated>2025-03-14T18:00:00Z</updated>
-    <id>https://andreas-mausch.de/blog/2025-03-14-asciinema/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; width=&quot;800&quot; height=&quot;521.04&quot;&gt;&lt;rect width=&quot;800&quot; height=&quot;521.04&quot; fill=&quot;#282D35&quot; rx=&quot;0&quot; ry=&quot;0&quot;&gt;&lt;/rect&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; width=&quot;800&quot; height=&quot;521.04&quot; viewBox=&quot;0 0 80 52.104&quot;&gt;&lt;style data-emotion-css=&quot;vcbksx&quot;&gt;@-webkit-keyframes animation-ymco7y{0%{-webkit-transform:translateX(0);-ms-transform:translateX(0);transform:translateX(0)}.19%{-webkit-transform:translateX(-80px);-ms-transform:translateX(-80px);transform:translateX(-80px)}.22%{-webkit-transform:translateX(-320px);-ms-transform:translateX(-320px);transform:translateX(-320px)}2.5%{-webkit-transform:translateX(-480px);-ms-transform:translateX(-480px);transform:translateX(-480px)}2.94%{-webkit-transform:translateX(-560px);-ms-transform:translateX(-560px);transform:translateX(-560px)}3.34%{-webkit-transform:translateX(-640px);-ms-transform:translateX(-640px);transform:translateX(-640px)}3.75%{-webki&lt;/style&gt;&lt;/svg&gt;&lt;/svg&gt;&lt;/p&gt;</content>
-  </entry>
   <entry>
     <title>Docker Swarm: Wait for deployment</title>
     <link href="https://andreas-mausch.de/blog/2025-03-12-docker-swarm-blocking/"/>
