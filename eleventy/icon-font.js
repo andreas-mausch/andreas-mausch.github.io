@@ -1,7 +1,7 @@
-const iconism = require("iconism")
-const { mkdirp } = require("mkdirp")
+import iconism from "iconism"
+import { mkdirp } from "mkdirp"
 
-module.exports = (eleventyConfig, _options = {}) => {
+export default (eleventyConfig, _options = {}) => {
   eleventyConfig.on("eleventy.before", async () => {
     const output = "./_site/styles/icons/"
     mkdirp.sync(output)

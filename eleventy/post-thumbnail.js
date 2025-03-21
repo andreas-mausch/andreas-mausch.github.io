@@ -1,15 +1,15 @@
-const fs = require("fs")
-const imageShortcodes = require("./images")
+import { existsSync } from "fs"
+import { imageShortcode, relativeFile, thumbnail } from "./images.js"
 
-module.exports = post => {
+export default post => {
   if (post.inputPath) {
     if (!post.inputPath.endsWith("/index.md")) {
       return ""
     }
 
     const filename = post.data.thumbnail || "thumbnail.jpg"
-    const thumbnailPath = imageShortcodes.relativeFile(filename, post)
-    if (!fs.existsSync(thumbnailPath)) {
+    const thumbnailPath = relativeFile(filename, post)
+    if (!existsSync(thumbnailPath)) {
       if (post.data.thumbnail) {
         throw new Error(`Thumbnail defined but not found: ${post.data.thumbnail} (${thumbnailPath})`)
       } else {
@@ -19,8 +19,8 @@ module.exports = post => {
 
     // Do not convert .svg to .jpg to maintain transparency
     if (post.data.thumbnail?.endsWith(".svg")) {
-      return imageShortcodes.imageShortcode(filename, "Post thumbnail", post)
+      return imageShortcode(filename, "Post thumbnail", post)
     }
-    return imageShortcodes.thumbnail(filename, "Post thumbnail", post)
+    return thumbnail(filename, "Post thumbnail", post)
   }
 }

@@ -1,5 +1,5 @@
-@use "_code-theme.scss";
-@import "_color-palette";
+@use "code-theme";
+@use "color-palette";
 
 .code-block {
   position: relative;
@@ -12,9 +12,9 @@ code[class*="language-"] {
 }
 
 .code-block > button {
-  background-color: $content-background-color-dark;
-  border: 1px solid $border-color-dark;
-  color: $text-color-dark;
+  background-color: color-palette.$content-background-color-dark;
+  border: 1px solid color-palette.$border-color-dark;
+  color: color-palette.$text-color-dark;
   opacity: 0;
   transition: visibility 0.3s linear,opacity 0.3s linear;
   visibility: hidden;
@@ -28,7 +28,7 @@ code[class*="language-"] {
 }
 
 .code-block i.icon-check {
-  color: $link-color-dark;
+  color: color-palette.$link-color-dark;
 }
 
 pre[class*="language-"] {
@@ -40,7 +40,7 @@ code[class*="language-"] {
 }
 
 code[data-filename]::before {
-  color: $text-color-dark;
+  color: color-palette.$text-color-dark;
   content: attr(data-filename);
   display: block;
   user-select: none;
@@ -69,16 +69,16 @@ code[class*="language-"] .highlight-line::before {
 
 @media (prefers-color-scheme: light) {
   code[data-filename]::before {
-    color: $text-color-light;
+    color: color-palette.$text-color-light;
   }
 
   .code-block > button {
-    background-color: $content-background-color-light;
-    border-color: $border-color-light;
-    color: $text-color-light;
+    background-color: color-palette.$content-background-color-light;
+    border-color: color-palette.$border-color-light;
+    color: color-palette.$text-color-light;
   }
 
   .code-block i.icon-check {
-    color: $link-color-light;
+    color: color-palette.$link-color-light;
   }
 }

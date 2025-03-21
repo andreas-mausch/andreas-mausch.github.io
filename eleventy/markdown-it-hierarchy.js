@@ -12,7 +12,7 @@
 // - In the 'text' rule if we find the matching token the token is modified to append the hierarchy text,
 //   the token is rendered and the output stored, and the token restoreds
 
-let generateHierarchicalText = function (accumulator, level) {
+const generateHierarchicalText = function (accumulator, level) {
   let value = ""
 
   for (let header in accumulator) {
@@ -26,7 +26,7 @@ let generateHierarchicalText = function (accumulator, level) {
   return `${value} `
 }
 
-let hierarchy = function (md, _opts) {
+export default function (md, _opts) {
   // Store the previous rules so we can call the previous rules. This allows
   // us to insert ourselves without disrupting other plugins that are also
   // attaching to the same rules
@@ -92,5 +92,3 @@ let hierarchy = function (md, _opts) {
     return returnValue
   }
 }
-
-module.exports = hierarchy

@@ -1,12 +1,14 @@
-const glob = require("glob")
-const path = require("path")
+import { sync } from "glob"
+import { parse } from "path"
 
-module.exports = {
-  glob: function (pattern) {
-    const directory = path.parse(this.context.environments.page.inputPath).dir
-    return glob.sync(pattern, {
-      cwd: directory,
-      nonull: false
-    })
-  }
+const glob = function (pattern) {
+  const directory = parse(this.context.environments.page.inputPath).dir
+  return sync(pattern, {
+    cwd: directory,
+    nonull: false
+  })
+}
+
+export {
+  glob
 }

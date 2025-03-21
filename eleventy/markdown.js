@@ -1,17 +1,18 @@
-const markdownIt = require("markdown-it")
-const anchor = require("markdown-it-anchor")
-const attribution = require("markdown-it-attribution")
-const attrs = require("markdown-it-attrs")
-const externalLinks = require("markdown-it-external-links")
-const footnote = require("markdown-it-footnote")
-const prism = require("markdown-it-prism")
-const taskCheckbox = require("markdown-it-task-checkbox")
-const lineNumbers = require("./markdown-it-prism-line-numbers")
-const lineNumbersStart = require("./markdown-it-prism-line-numbers-start")
-const hierarchy = require("./markdown-it-hierarchy")
-const copyToClipboard = require("./markdown-it-prism-copy-to-clipboard")
-const plantUml = require("markdown-it-plantuml-ex2")
-const hexView = require("./markdown-it-hexview")
+import markdownIt from "markdown-it"
+import anchor from "markdown-it-anchor"
+import attribution from "markdown-it-attribution"
+import attrs from "markdown-it-attrs"
+import externalLinks from "markdown-it-external-links"
+import footnote from "markdown-it-footnote"
+import plantUml from "markdown-it-plantuml-ex2"
+import prism from "markdown-it-prism"
+import taskCheckbox from "markdown-it-task-checkbox"
+
+import lineNumbers from "./markdown-it-prism-line-numbers.js"
+import lineNumbersStart from "./markdown-it-prism-line-numbers-start.js"
+import hierarchy from "./markdown-it-hierarchy.js"
+import copyToClipboard from "./markdown-it-prism-copy-to-clipboard.js"
+import hexView from "./markdown-it-hexview.js"
 
 const markdown = markdownIt({
   html: true
@@ -44,4 +45,4 @@ const markdown = markdownIt({
 markdown.options.highlight = lineNumbers(markdown.options.highlight)
 markdown.renderer.rules.fence = copyToClipboard(lineNumbersStart(markdown.renderer.rules.fence))
 
-module.exports = markdown
+export default markdown

@@ -1,13 +1,13 @@
 @use "sass:color";
-@import "_color-palette";
+@use "color-palette";
 
-$primary-color: $highlight-color;
-$secondary-color: $link-color-dark;
+$primary-color: color-palette.$highlight-color;
+$secondary-color: color-palette.$link-color-dark;
 
 code[class*="language-"],
 pre[class*="language-"] {
   background: none;
-  color: $text-color-dark;
+  color: color-palette.$text-color-dark;
   hyphens: none;
   line-height: 1.5;
   tab-size: 4;
@@ -28,7 +28,7 @@ pre[class*="language-"] {
 
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
-  background: $background-color-dark;
+  background: color-palette.$background-color-dark;
 }
 
 /* Inline code */
@@ -121,16 +121,16 @@ pre[class*="language-"] {
 
 @media (prefers-color-scheme: light) {
 
-  $secondary-color: $link-color-light;
+  $secondary-color: color-palette.$link-color-light;
 
   code[class*="language-"],
   pre[class*="language-"] {
-    color: $text-color-light;
+    color: color-palette.$text-color-light;
   }
 
   :not(pre)>code[class*="language-"],
   pre[class*="language-"] {
-    background: $background-color-light;
+    background: color-palette.$background-color-light;
   }
 
   .token.comment,

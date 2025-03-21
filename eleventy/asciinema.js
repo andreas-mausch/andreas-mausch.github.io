@@ -1,11 +1,11 @@
-const fs = require("fs")
-const { render } = require("svg-term")
-const { optimize } = require("svgo")
+import fs from "fs"
+import { render } from "svg-term"
+import { optimize } from "svgo"
 
-const imageShortcodes = require("./images")
+import { relativeFile } from"./images.js"
 
-module.exports = function (src) {
-  const file = imageShortcodes.relativeFile(src, this.page)
+export default function (src) {
+  const file = relativeFile(src, this.page)
   if (!fs.existsSync(file)) {
     throw new Error(`asciinema file not found: ${file}`)
   }

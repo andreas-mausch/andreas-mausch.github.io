@@ -1,14 +1,14 @@
-const esbuild = require("esbuild")
-const path = require("path")
+import { build } from "esbuild"
+import { parse, resolve } from "path"
 
 const isProduction = () => process.env.ELEVENTY_ENV === "production"
 
-module.exports = (eleventyConfig, _options = {}) => {
+export default (eleventyConfig, _options = {}) => {
   eleventyConfig.addTemplateFormats("ts")
   eleventyConfig.addExtension("ts", {
     outputFileExtension: "js",
     compile: async (_content, inputPath) => {
-      const parsed = path.parse(inputPath)
+      const parsed = parse(inputPath)
       if (parsed.name.startsWith("_")) {
         return
       }
@@ -17,8 +17,8 @@ module.exports = (eleventyConfig, _options = {}) => {
       }
 
       return async _data => {
-        const compiled = await esbuild.build({
-          entryPoints: [path.join(__dirname, "..", inputPath)],
+        const compiled = await build({
+          entryPoints: [resolve(inputPath)],
           bundle: true,
           minify: isProduction(),
           sourcemap: !isProduction(),

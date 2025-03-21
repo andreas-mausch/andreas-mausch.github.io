@@ -1,6 +1,6 @@
-const getPathPrefix = require("./path-prefix")
+import getPathPrefix from "./path-prefix.js"
 
-module.exports = _liquidEngine => ({
+export default _liquidEngine => ({
   parse: function (tagToken, _remainingTokens) {
     this.linkToPost = tagToken.args
   },

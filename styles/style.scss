@@ -1,11 +1,13 @@
 @use "@fontsource/raleway/scss/mixins" as Raleway;
 @use "sass:color";
 @use "img-comparison-slider/dist/styles.css";
-@use "_code.scss";
-@use "_image-carousel.scss";
-@use "_image-comparison-slider.scss";
-@use "_table.scss";
-@import "_color-palette";
+@use "color-palette";
+@use "code";
+@use "image-carousel";
+@use "image-comparison-slider";
+@use "table";
+@use "large";
+@use "print";
 
 // See here:
 // https://fontsource.org/docs/getting-started/faces-mixin
@@ -23,8 +25,8 @@ body {
 }
 
 body {
-  background-color: $background-color-dark;
-  color: $text-color-dark;
+  background-color: color-palette.$background-color-dark;
+  color: color-palette.$text-color-dark;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
   line-height: 1.5;
@@ -45,7 +47,7 @@ dd,
 ol,
 ul,
 figure {
-  margin: 0 0 calc($spacing-unit / 2) 0;
+  margin: 0 0 calc($spacing-unit / 2);
   overflow-wrap: break-word;
   padding: 0;
 }
@@ -64,7 +66,7 @@ li {
 }
 
 body > .content {
-  background-color: $content-background-color-dark;
+  background-color: color-palette.$content-background-color-dark;
   padding: 16px 8px;
 }
 
@@ -86,14 +88,14 @@ svg {
 }
 
 a {
-  color: $link-color-dark;
+  color: color-palette.$link-color-dark;
   text-decoration: underline;
   text-decoration-color: transparent;
   transition: color 1s ease,
     text-decoration-color 1s ease;
 
   &:hover {
-    color: $highlight-color;
+    color: color-palette.$highlight-color;
     text-decoration-color: initial;
   }
 }
@@ -174,7 +176,7 @@ a {
 }
 
 .postlist-item.postlist-item-draft {
-  background-color: color.scale($highlight-color, $lightness: -30%);
+  background-color: color.scale(color-palette.$highlight-color, $lightness: -30%);
 }
 
 .postlist-item-content {
@@ -219,7 +221,7 @@ a {
 }
 
 .toc {
-  border: 1px solid $border-color-dark;
+  border: 1px solid color-palette.$border-color-dark;
   font-size: 11pt;
   margin-bottom: calc($spacing-unit / 2);
   padding: 7px;
@@ -268,7 +270,7 @@ h6:hover .header-anchor {
 }
 
 kbd {
-  border: 1px solid $text-color-dark;
+  border: 1px solid color-palette.$text-color-dark;
   border-radius: 2px;
   padding: 2px;
 }
@@ -278,7 +280,7 @@ kbd {
 }
 
 blockquote {
-  background-color: $background-color-dark;
+  background-color: color-palette.$background-color-dark;
   border-radius: 0.5em;
   font-family: Lucida Sans Typewriter, Lucida Console, monaco, Bitstream Vera Sans Mono, monospace;
   font-size: 11pt;
@@ -299,7 +301,7 @@ figcaption {
 }
 
 .site-header {
-  border-bottom: 1px solid $highlight-color;
+  border-bottom: 1px solid color-palette.$highlight-color;
   padding: 4px;
 }
 
@@ -323,7 +325,7 @@ figcaption {
 
   &,
   &:visited {
-    color: color.scale($text-color-dark, $lightness: 20%);
+    color: color.scale(color-palette.$text-color-dark, $lightness: 20%);
   }
 }
 
@@ -335,7 +337,7 @@ $site-nav-width: 38px;
 $site-nav-spacing: calc($site-nav-width / 4);
 
 .site-nav-items {
-  background-color: $background-color-dark;
+  background-color: color-palette.$background-color-dark;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -373,7 +375,7 @@ $site-nav-spacing: calc($site-nav-width / 4);
 .nav-button,
 .nav-button::before,
 .nav-button::after {
-  background-color: $text-color-dark;
+  background-color: color-palette.$text-color-dark;
   border-radius: 2px;
   display: block;
   height: 3px;
@@ -417,37 +419,37 @@ $site-nav-spacing: calc($site-nav-width / 4);
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: $background-color-light;
-    color: $text-color-light;
+    background-color: color-palette.$background-color-light;
+    color: color-palette.$text-color-light;
   }
 
   body > .content {
-    background-color: $content-background-color-light;
+    background-color: color-palette.$content-background-color-light;
   }
 
   a {
-    color: $link-color-light;
+    color: color-palette.$link-color-light;
   }
 
   .site-header a {
     &,
     &:visited {
-      color: color.scale($text-color-light, $lightness: 30%);
+      color: color.scale(color-palette.$text-color-light, $lightness: 30%);
     }
   }
 
   .nav-button,
   .nav-button::before,
   .nav-button::after {
-    background-color: $text-color-light;
+    background-color: color-palette.$text-color-light;
   }
 
   .site-nav-items {
-    background-color: $background-color-light;
+    background-color: color-palette.$background-color-light;
   }
 
   .toc {
-    border-color: $border-color-light;
+    border-color: color-palette.$border-color-light;
   }
 
   .external-link::after {
@@ -455,18 +457,14 @@ $site-nav-spacing: calc($site-nav-width / 4);
   }
 
   blockquote {
-    background-color: $background-color-light;
+    background-color: color-palette.$background-color-light;
   }
 
-  .swiffy-slider.slider-indicators > *, .swiffy-slider .slider-indicators > * {
+  .swiffy-slider.slider-indicators > *,
+  .swiffy-slider .slider-indicators > * {
     filter: invert(1);
   }
 }
 
-@media only screen and (min-width: 641px) {
-  @import "_large";
-}
-
-@media only print {
-  @import "_print";
-}
+@include large.large(color-palette.$highlight-color);
+@include print.print;

@@ -1,4 +1,4 @@
-module.exports = originalFence => {
+export default originalFence => {
   return (tokens, idx, options, env, self) => {
     const previousHtml = originalFence(tokens, idx, options, env, self)
     return `<div class="code-block">

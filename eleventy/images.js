@@ -1,7 +1,8 @@
-const image = require("@11ty/eleventy-img")
-const imageSize = require("image-size")
-const getPathPrefix = require("./path-prefix")
-const path = require("path")
+import image from "@11ty/eleventy-img"
+import { imageSize } from "image-size"
+import * as path from "path"
+
+import getPathPrefix from "./path-prefix.js"
 
 const thumbnailWidth = 300
 
@@ -131,7 +132,7 @@ function comparison(beforeName, afterName, page = this.page) {
   return comparison
 }
 
-module.exports = {
+export {
   relativeFile,
   relativeFileFilter,
   thumbnail,

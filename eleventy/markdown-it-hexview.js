@@ -1,5 +1,5 @@
-const { JSDOM } = require("jsdom")
-const contrast = require("get-contrast")
+import { JSDOM } from "jsdom"
+import { ratio } from "get-contrast"
 
 var HEX = "0123456789ABCDEF"
 
@@ -25,8 +25,8 @@ function getTextColorForBackground(backgroundColor) {
   const blackTextColor = "#000000"
   const whiteTextColor = "#ffffff"
 
-  const blackContrast = contrast.ratio(backgroundColor, blackTextColor)
-  const whiteContrast = contrast.ratio(backgroundColor, whiteTextColor)
+  const blackContrast = ratio(backgroundColor, blackTextColor)
+  const whiteContrast = ratio(backgroundColor, whiteTextColor)
 
   // Return black or white text based on the highest contrast ratio
   return blackContrast > whiteContrast ? blackTextColor : whiteTextColor
@@ -153,7 +153,7 @@ function buildHexView(document, rawData, caption, step, showLineNums, wordSize, 
   return hexview
 }
 
-module.exports = function markdownItHexView(md, options = {}) {
+export default function markdownItHexView(md, options = {}) {
   const regex = /^```hexview(\{([^}]*)\})?/
   const closeMarker = options.closeMarker || "```"
   const closeChar = closeMarker.charCodeAt(0)

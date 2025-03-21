@@ -1,5 +1,5 @@
 @use "sass:color";
-@import "_color-palette";
+@use "color-palette";
 
 table {
   border-collapse: collapse;
@@ -10,25 +10,25 @@ table {
 
 table td,
 table th {
-  border: 1px solid $border-color-dark;
+  border: 1px solid color-palette.$border-color-dark;
   padding: 8px;
 }
 
 table tr:nth-child(even) {
-  background-color: $background-color-dark;
+  background-color: color-palette.$background-color-dark;
 }
 
 table tr:nth-child(odd) {
-  background-color: color.scale($background-color-dark, $lightness: 10%);
+  background-color: color.scale(color-palette.$background-color-dark, $lightness: 10%);
 }
 
 table tr:hover {
-  background-color: $content-background-color-dark;
+  background-color: color-palette.$content-background-color-dark;
 }
 
 table th {
-  background-color: $content-background-color-dark;
-  color: $highlight-color;
+  background-color: color-palette.$content-background-color-dark;
+  color: color-palette.$highlight-color;
   padding-bottom: 12px;
   padding-top: 12px;
   text-align: left;
@@ -58,22 +58,22 @@ table th {
 @media (prefers-color-scheme: light) {
   table td,
   table th {
-    border-color: $border-color-light;
+    border-color: color-palette.$border-color-light;
   }
 
   table tr:nth-child(even) {
-    background-color: $background-color-light;
+    background-color: color-palette.$background-color-light;
   }
 
   table tr:nth-child(odd) {
-    background-color: color.scale($background-color-light, $lightness: -5%);
+    background-color: color.scale(color-palette.$background-color-light, $lightness: -5%);
   }
 
   table tr:hover {
-    background-color: $content-background-color-light;
+    background-color: color-palette.$content-background-color-light;
   }
 
   table th {
-    background-color: $content-background-color-light;
+    background-color: color-palette.$content-background-color-light;
   }
 }

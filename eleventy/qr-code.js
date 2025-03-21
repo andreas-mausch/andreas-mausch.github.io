@@ -1,6 +1,6 @@
-var qrcode = require("qrcode")
+import QRCode from "qrcode"
 
-module.exports = async input => {
-  const dataUrl = await qrcode.toDataURL(input)
+export default async input => {
+  const dataUrl = await QRCode.toDataURL(input)
   return `<img src="${dataUrl}" alt="Generated QR code">`
 }
