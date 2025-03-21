@@ -12,7 +12,7 @@
     "check:types": "tsc",
     "check:links": "linkinator --skip=linkedin.com,github.com --recurse --timeout 3000 --verbosity error ./_site/",
     "clean": "rimraf ./_site/",
-    "postinstall": "download https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-1.2024.6.jar --out . --filename plantuml.jar"
+    "postinstall": "download https://github.com/plantuml/plantuml/releases/download/v1.2025.2/plantuml-1.2025.2.jar --out . --filename plantuml.jar"
   },
   "license": "MIT",
   "dependencies": {

@@ -25,7 +25,7 @@ The concept is heavily inspired by
 !include <material/common>
 !include <material/file_send>
 
-skinparam handwritten true
+!option handwritten true
 
 HIDE_STEREOTYPE()
 
