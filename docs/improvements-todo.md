@@ -1,1 +1,0 @@
-- Cache output for generated thumbnails and asciinema
