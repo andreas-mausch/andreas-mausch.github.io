@@ -1,5 +1,6 @@
 @use "sass:color";
-@use "pkg:@fontsource/raleway/scss/mixins" as Raleway;
+@use "pkg:@fontsource-utils/scss" as fontsource;
+@use "pkg:@fontsource-variable/raleway/scss" as Raleway;
 @use "pkg:img-comparison-slider/dist/styles.css";
 @use "color-palette";
 @use "code";
@@ -11,9 +12,11 @@
 
 // See here:
 // https://fontsource.org/docs/getting-started/faces-mixin
-@include Raleway.faces(
+@include fontsource.faces(
+  $metadata: Raleway.$metadata,
   $directory: "fontsource",
-  $weights: (400)
+  $weights: 400,
+  $subsets: latin
 );
 
 $spacing-unit: 30px;
@@ -27,7 +30,7 @@ body {
 body {
   background-color: color-palette.$background-color-dark;
   color: color-palette.$text-color-dark;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Raleway Variable", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
   line-height: 1.5;
 }
