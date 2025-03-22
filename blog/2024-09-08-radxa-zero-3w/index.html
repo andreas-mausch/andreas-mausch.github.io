@@ -1,0 +1,194 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>Radxa Zero 3W</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Radxa Zero 3W</h1>
+<div>
+  <time class="postlist-date" datetime="2024-09-08T12:00:00.000+00:00">Sep 8, 2024</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/armbian">#armbian</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/radxa">#radxa</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/single%20board%20computer">#single board computer</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>I have found an alternative to the Raspberry Pi Zero and decided to try it.
+It is available up to 8 GB of RAM, which is great.</p>
+<p>It allows you to run a small, decent web app together with a RabbitMQ and a small PostgreSQL / MongoDB database.</p>
+<p>I like the Zero the most of all Pis because of it's power efficiency and power draw on idle.</p>
+<h1 id="flashing-the-image-(armbian)" tabindex="-1">1. Flashing the image (Armbian) <a class="header-anchor" href="#flashing-the-image-(armbian)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">xzcat ./Armbian_24.8.1_Radxa-zero3_bookworm_vendor_6.1.75.img.xz <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">dd</span> <span class="token assign-left variable">of</span><span class="token operator">=</span>/dev/mmcblk0 <span class="token assign-left variable">bs</span><span class="token operator">=</span>8M <span class="token assign-left variable">oflag</span><span class="token operator">=</span>sync <span class="token assign-left variable">status</span><span class="token operator">=</span>progress</span></code></pre>
+
+    </div><p>Follow the <a href="/blog/2024-08-31-single-board-computer-headless-setup/">post here</a>
+to do a full headless setup.</p>
+<h1 id="insert-the-sd-card-into-the-zero" tabindex="-1">2. Insert the SD card into the Zero <a class="header-anchor" href="#insert-the-sd-card-into-the-zero" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Correct direction: Insert the card so it's text description shows to the <strong>outside</strong> (away from the board).</p>
+<p>TODO Insert image</p>
+<h1 id="wifi-speed" tabindex="-1">3. WiFi speed <a class="header-anchor" href="#wifi-speed" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>To me, it seemed a bit slow, about 1 MB/s.</p>
+<p>I have not further tested it, so I am not sure if a missing antenna is the problem or
+my internet connection. But for the latter I think it shouldn't be the problem here.</p>
+<h1 id="stop-flashing-led" tabindex="-1">4. Stop flashing LED <a class="header-anchor" href="#stop-flashing-led" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>By default, the LED shows a <code class="language-plain">heartbeat</code> pattern if everything is ok.
+For a first test it is useful, but despite that I find it distracting,
+so here is how you can change it:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># Show all possible values</span></span>
+<span class="highlight-line"><span class="token function">cat</span> /sys/class/leds/board-led/trigger</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># Examples how to change it</span></span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> none <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /sys/class/leds/board-led/trigger</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> default-on <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /sys/class/leds/board-led/trigger</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> timer <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /sys/class/leds/board-led/trigger</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> heartbeat <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /sys/class/leds/board-led/trigger</span></code></pre>
+
+    </div><p>I couldn't lower the (very high) brightness, though.
+The only available values are 0 and 1.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">cat</span> /sys/class/leds/board-led/brightness</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token number">0</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /sys/class/leds/board-led/brightness</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /sys/class/leds/board-led/brightness</span></code></pre>
+
+    </div><h1 id="temperature" tabindex="-1">5. Temperature <a class="header-anchor" href="#temperature" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> lm-sensors</span>
+<span class="highlight-line"><span class="token function">sudo</span> sensors</span></code></pre>
+
+    </div><p>Temperature in idle was like 55ºC on a hot summer day, which was quite high in my opinion.</p>
+<p>100% load on 1 core: 66ºC
+100% load on all 4 cores: 85ºC (is this a limit configured somewhere?)</p>
+<p>I guess the limit is configured here:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> /sys/class/thermal/thermal_zone0/trip_point_1_temp</span></span></span>
+<span class="highlight-line"><span class="token output">85000</span></code></pre>
+
+    </div><p>https://chatgpt.com/c/66dc7283-2768-8004-8ee4-067cf4d970e1</p>
+<p>Compare to Raspberry Pi:
+https://picockpit.com/raspberry-pi/does-the-raspberry-pi-zero-2-require-a-heatsink/
+https://andrejacobs.org/b24/electronics/raspberry-pi-zero-2-w-temperature-and-power-consumption/</p>
+<h1 id="install-docker" tabindex="-1">6. Install Docker <a class="header-anchor" href="#install-docker" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>This link helped:
+<a href="https://gist.github.com/serafdev/2914392a6c0a3650cd4b047909544ce7" class="external-link" target="_blank">https://gist.github.com/serafdev/2914392a6c0a3650cd4b047909544ce7</a></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="token operator">|</span> <span class="token function">sudo</span> gpg <span class="token parameter variable">--dearmor</span> <span class="token parameter variable">-o</span> /etc/apt/keyrings/docker.gpg</span>
+<span class="highlight-line"><span class="token builtin class-name">echo</span> <span class="token string">"deb [arch=<span class="token variable"><span class="token variable">$(</span>dpkg --print-architecture<span class="token variable">)</span></span> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian <span class="token variable"><span class="token variable">$(</span>lsb_release <span class="token parameter variable">-cs</span><span class="token variable">)</span></span> stable"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/docker.list <span class="token operator">></span> /dev/null</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> update</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> docker-ce docker-ce-cli containerd.io docker-compose-plugin</span>
+<span class="highlight-line"><span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-aG</span> <span class="token function">docker</span> <span class="token environment constant">$USER</span></span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">-p</span> <span class="token number">8080</span>:80 nginx</span></code></pre>
+
+    </div><p>Now you can hit <a href="http://radxa:8080/" class="external-link" target="_blank">http://radxa:8080/</a> and a nginx page should show up.</p>
+<h1 id="benchmark" tabindex="-1">7. Benchmark <a class="header-anchor" href="#benchmark" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">--network</span> none e7db/geekbench:5</span></code></pre>
+
+    </div><p>The first run (on the 1 GB model) crashed in <em>Multi-Core / Running Camera</em>, most likely due to out-of-memory.</p>
+<p>So I tried to re-run it on the 8 GB model.
+It went through, but I couldn't find a way to see the results without uploading them to the server.</p>
+<p>I've tried this, but the CLI geekbench in this docker image doesn't have the options shown
+<a href="http://support.primatelabs.com/kb/geekbench/geekbench-5-pro-command-line-tool" class="external-link" target="_blank">here</a>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">--network</span> none <span class="token parameter variable">-v</span> .:/opt/my-geekbench e7db/geekbench:5 --no-upload --export-csv <span class="token parameter variable">--save</span> /opt/my-geekbench/result.csv</span></code></pre>
+
+    </div><p>So I ended up enabling network, so it can upload the results to the geekbench server.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> e7db/geekbench:5</span></code></pre>
+
+    </div><p>Result: https://browser.geekbench.com/v5/cpu/22846472</p>
+<p>Single-Core Score: 147
+Multi-Core Score: 430</p>
+<h1 id="emmc" tabindex="-1">8. eMMC <a class="header-anchor" href="#emmc" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>TODO</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
