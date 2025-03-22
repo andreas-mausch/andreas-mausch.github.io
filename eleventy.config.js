@@ -2,6 +2,7 @@ import autoprefixer from "autoprefixer"
 import directoryOutputPlugin from "@11ty/eleventy-plugin-directory-output"
 import rss from "@11ty/eleventy-plugin-rss"
 import eleventySass from "eleventy-sass"
+import { NodePackageImporter } from "sass"
 import emoji from "eleventy-plugin-emoji"
 import katex from "katex"
 import postcss from "postcss"
@@ -96,7 +97,7 @@ export default function (eleventyConfig) {
     sass: {
       style: "compressed",
       sourceMap: false,
-      loadPaths: ["node_modules"]
+      importers: [new NodePackageImporter()]
     },
     postcss: postcss([autoprefixer])
   })

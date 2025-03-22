@@ -1,5 +1,3 @@
-import getPathPrefix from "./path-prefix.js"
-
 export default _liquidEngine => ({
   parse: function (tagToken, _remainingTokens) {
     this.linkToPost = tagToken.args
@@ -12,6 +10,6 @@ export default _liquidEngine => ({
       throw new Error(`link-post: Post not found ${linkToPost}`)
     }
 
-    return `${getPathPrefix()}${post.url}`
+    return post.url
   }
 })

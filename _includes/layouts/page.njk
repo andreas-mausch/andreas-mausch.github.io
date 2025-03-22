@@ -9,17 +9,17 @@ title: andreas-mausch.de
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="{{ eleventy.generator }}">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ "/styles/style.css" | url }}"/>
-    <link rel="stylesheet" href="{{ "/styles/icons/iconism.css" | url }}"/>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
     {% if extraStyles and "katex" in extraStyles %}
-      <link rel="stylesheet" href="{{ "/styles/katex.css" | url }}"/>
+      <link rel="stylesheet" href="/styles/katex.css"/>
     {% endif %}
-    <link rel="icon" type="image/svg+xml" href="{{ "/favicon.svg" | url }}" sizes="any"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
   </head>
   <body>
     <header class="site-header">
       <div class="site-header-content">
-        <a class="site-title" href="{{ "/" | url }}">Andreas Mausch</a>
+        <a class="site-title" href="/">Andreas Mausch</a>
         <nav class="site-nav">
           <a href="#" class="menu-icon">
             <svg
@@ -40,7 +40,7 @@ title: andreas-mausch.de
             <div class="nav-button"></div>
           </label>
           <ol class="site-nav-items">
-            <a class="page-link" href="{{ "/" | url }}"><li class="page-link-home">Home</li></a>
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a>
             {%- for post in collections.navigationPages -%}
               <a class="page-link" href="{{ post.url }}"><li>{{ post.data.title }}</li></a>
             {%- endfor -%}

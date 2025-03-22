@@ -2,15 +2,13 @@ import image from "@11ty/eleventy-img"
 import { imageSize } from "image-size"
 import * as path from "path"
 
-import getPathPrefix from "./path-prefix.js"
-
 const thumbnailWidth = 300
 
 const imageMetadata = src => {
   const options = {
     widths: [thumbnailWidth],
     formats: ["jpeg"],
-    urlPath: `${getPathPrefix()}/images/`,
+    urlPath: "/images/",
     outputDir: "./_site/images/",
     filenameFormat: function (hash, src, width, format, _options) {
       const { name } = path.parse(src)
@@ -46,7 +44,7 @@ function findImage(src, page = this.page) {
   return {
     width: dimensions.width,
     height: dimensions.height,
-    url: `${getPathPrefix()}${path.join(page.url, src)}`
+    url: `${path.join(page.url, src)}`
   }
 }
 
@@ -76,7 +74,7 @@ function imageShortcode(src, alt, page = this.page) {
 }
 
 function videoShortcode(src, type, attributes = "autoplay muted loop") {
-  const url = `${getPathPrefix()}${path.join(this.page.url, src)}`
+  const url = `${path.join(this.page.url, src)}`
   return `<video preload="auto" ${attributes}>
     <source src="${url}" type="${type}"></source>
   </video>`

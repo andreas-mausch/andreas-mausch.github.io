@@ -1,6 +1,6 @@
-@use "@fontsource/raleway/scss/mixins" as Raleway;
 @use "sass:color";
-@use "img-comparison-slider/dist/styles.css";
+@use "pkg:@fontsource/raleway/scss/mixins" as Raleway;
+@use "pkg:img-comparison-slider/dist/styles.css";
 @use "color-palette";
 @use "code";
 @use "image-carousel";
