@@ -4,11 +4,24 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2025-03-12T18:00:00Z</updated>
+  <updated>2025-03-22T09:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>Eleventy: Upgrade from v2 to v3</title>
+    <link href="https://andreas-mausch.de/blog/2025-03-22-eleventy-upgrade-v2-to-v3/"/>
+    <updated>2025-03-22T09:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2025-03-22-eleventy-upgrade-v2-to-v3/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;I made a bigger update to the blog system I use on this website, &lt;a href=&quot;https://www.11ty.dev/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Eleventy&lt;/a&gt;.
+See my previous post about &lt;a href=&quot;https://andreas-mausch.de/blog/2022-08-11-migrate-blog-from-jekyll-to-eleventy/&quot;&gt;setting Eleventy up&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;My base repository for the setup is here:
+&lt;a href=&quot;https://github.com/andreas-mausch/eleventy-sample&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;base repository&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Eleventy offers an &lt;a href=&quot;https://www.11ty.dev/docs/plugins/upgrade-help/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;Upgrade Helper Tool&lt;/a&gt; which I tried to use.
+Here is how it went.&lt;/p&gt;
+&lt;h1 id=&quot;problem-installing-eleventy-upgrade-help&quot; tabindex=&quot;-1&quot;&gt;1. Problem installing eleventy-upgrade-help &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2025-03-22-eleventy-upgrade-v2-to-v3/#problem-installing-eleventy-upgrade-help&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;</content>
+  </entry>
   <entry>
     <title>Docker Swarm: Wait for deployment</title>
     <link href="https://andreas-mausch.de/blog/2025-03-12-docker-swarm-blocking/"/>

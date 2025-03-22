@@ -1,0 +1,369 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>Eleventy: Upgrade from v2 to v3</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Eleventy: Upgrade from v2 to v3</h1>
+<div>
+  <time class="postlist-date" datetime="2025-03-22T09:00:00.000+00:00">Mar 22, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/blog">#blog</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/eleventy">#eleventy</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/maintenance">#maintenance</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/website">#website</a></li>
+        
+    
+  </ul>
+</div>
+
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#problem-installing-eleventy-upgrade-help">1. Problem installing eleventy-upgrade-help</a>
+            		</li>
+
+                    <li><a href="#.%2Fsrc%2Ftemplaterender-is-not-defined-by-%22exports%22">2. ./src/TemplateRender is not defined by "exports"</a>
+            		</li>
+
+                    <li><a href="#output-from-the-upgrade-helper">3. Output from the Upgrade Helper</a>
+            
+                <ol>
+                    
+                    <li><a href="#permalink-warning">3.1. permalink warning</a>
+            		</li>
+
+                    <li><a href="#js-yaml-warning">3.2. js-yaml warning</a>
+            		</li>
+
+                    <li><a href="#meta-generator-tag-warning">3.3. meta generator tag warning</a>
+            		</li>
+
+                    <li><a href="#deprecated-sass-rules">3.4. Deprecated sass rules</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#upgrade-successful%2C-done%3F">4. Upgrade successful, done?</a>
+            
+                <ol>
+                    
+                    <li><a href="#convert-config-to-new-module-format">4.1. Convert config to new module format</a>
+            		</li>
+
+                    <li><a href="#2-high-severity-vulnerabilities">4.2. 2 high severity vulnerabilities</a>
+            		</li>
+
+                    <li><a href="#fontsource%3A-replace-old-style-mixin">4.3. Fontsource: Replace old-style mixin</a>
+            		</li>
+
+                    <li><a href="#sass-nodepackageimporter">4.4. sass NodePackageImporter</a>
+            		</li>
+
+                    <li><a href="#eleventy-pathprefix-issues">4.5. Eleventy PathPrefix issues</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#summary">5. Summary</a>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
+
+
+<p>I made a bigger update to the blog system I use on this website, <a href="https://www.11ty.dev/" class="external-link" target="_blank">Eleventy</a>.
+See my previous post about <a href="/blog/2022-08-11-migrate-blog-from-jekyll-to-eleventy/">setting Eleventy up</a>.</p>
+<p>My base repository for the setup is here:
+<a href="https://github.com/andreas-mausch/eleventy-sample" class="external-link" target="_blank">base repository</a></p>
+<p>Eleventy offers an <a href="https://www.11ty.dev/docs/plugins/upgrade-help/" class="external-link" target="_blank">Upgrade Helper Tool</a> which I tried to use.
+Here is how it went.</p>
+<h1 id="problem-installing-eleventy-upgrade-help" tabindex="-1">1. Problem installing eleventy-upgrade-help <a class="header-anchor" href="#problem-installing-eleventy-upgrade-help" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>However, when trying to install it, it failed:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">npm</span> <span class="token function">install</span> @11ty/eleventy@3</span></span></span>
+<span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">npm</span> <span class="token function">install</span> @11ty/eleventy-upgrade-help@3</span></span></span>
+<span class="highlight-line"><span class="token output">npm error code ERESOLVE</span>
+<span class="highlight-line">npm error ERESOLVE could not resolve</span>
+<span class="highlight-line">npm error</span>
+<span class="highlight-line">npm error While resolving: eleventy-sass@2.2.4</span>
+<span class="highlight-line">npm error Found: @11ty/eleventy@3.0.0</span>
+<span class="highlight-line">npm error node_modules/@11ty/eleventy</span>
+<span class="highlight-line">npm error   dev @11ty/eleventy@"3.0.0" from the root project</span>
+<span class="highlight-line">npm error</span>
+<span class="highlight-line">npm error Could not resolve dependency:</span>
+<span class="highlight-line">npm error peer @11ty/eleventy@"^1.0.0 || ^2.0.0-canary.12 || ^2.0.0-beta.1" from eleventy-sass@2.2.4</span>
+<span class="highlight-line">npm error node_modules/eleventy-sass</span>
+<span class="highlight-line">npm error   dev eleventy-sass@"2.2.4" from the root project</span>
+<span class="highlight-line">npm error</span>
+<span class="highlight-line">npm error Conflicting peer dependency: @11ty/eleventy@2.0.1</span>
+<span class="highlight-line">npm error node_modules/@11ty/eleventy</span>
+<span class="highlight-line">npm error   peer @11ty/eleventy@"^1.0.0 || ^2.0.0-canary.12 || ^2.0.0-beta.1" from eleventy-sass@2.2.4</span>
+<span class="highlight-line">npm error   node_modules/eleventy-sass</span>
+<span class="highlight-line">npm error     dev eleventy-sass@"2.2.4" from the root project</span>
+<span class="highlight-line">npm error</span>
+<span class="highlight-line">npm error Fix the upstream dependency conflict, or retry</span>
+<span class="highlight-line">npm error this command with --force or --legacy-peer-deps</span>
+<span class="highlight-line">npm error to accept an incorrect (and potentially broken) dependency resolution.</span>
+<span class="highlight-line">npm error</span>
+<span class="highlight-line">npm error</span>
+<span class="highlight-line">npm error For a full report see:</span>
+<span class="highlight-line">npm error /home/neonew/.npm/_logs/2025-03-19T14_08_35_121Z-eresolve-report.txt</span>
+<span class="highlight-line">npm error A complete log of this run can be found in: /home/neonew/.npm/_logs/2025-03-19T14_08_35_121Z-debug-0.log</span></code></pre>
+
+    </div><p>This workaround worked:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">npm</span> <span class="token function">install</span> --legacy-peer-deps @11ty/eleventy-upgrade-help@3</span></code></pre>
+
+    </div><h1 id=".%2Fsrc%2Ftemplaterender-is-not-defined-by-%22exports%22" tabindex="-1">2. ./src/TemplateRender is not defined by &quot;exports&quot; <a class="header-anchor" href="#.%2Fsrc%2Ftemplaterender-is-not-defined-by-%22exports%22" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>After that, I tried to run <code class="language-plain">npm run build</code>, which should show me the output of the helper plugin
+with suggestions what to change. However, this error was presented to me instead:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">npm</span> run build</span></span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token output">> eleventy-sample@1.0.0 build</span>
+<span class="highlight-line">> ELEVENTY_ENV=production eleventy</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">[11ty] Eleventy Error (CLI):</span>
+<span class="highlight-line">[11ty] 1. Error in your Eleventy config file '.eleventy.js'. (via EleventyConfigError)</span>
+<span class="highlight-line">[11ty] 2. Package subpath './src/TemplateRender' is not defined by "exports" in /home/neonew/Documents/coding/eleventy-sample/node_modules/@11ty/eleventy/package.json</span>
+<span class="highlight-line">[11ty] </span>
+<span class="highlight-line">[11ty] Original error stack trace: Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './src/TemplateRender' is not defined by "exports" in /home/neonew/Documents/coding/eleventy-sample/node_modules/@11ty/eleventy/package.json</span>
+<span class="highlight-line">[11ty]     at exportsNotFound (node:internal/modules/esm/resolve:314:10)</span>
+<span class="highlight-line">[11ty]     at packageExportsResolve (node:internal/modules/esm/resolve:661:9)</span>
+<span class="highlight-line">[11ty]     at resolveExports (node:internal/modules/cjs/loader:661:36)</span>
+<span class="highlight-line">[11ty]     at Function._findPath (node:internal/modules/cjs/loader:753:31)</span>
+<span class="highlight-line">[11ty]     at Function._resolveFilename (node:internal/modules/cjs/loader:1391:27)</span>
+<span class="highlight-line">[11ty]     at defaultResolveImpl (node:internal/modules/cjs/loader:1061:19)</span>
+<span class="highlight-line">[11ty]     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1066:22)</span>
+<span class="highlight-line">[11ty]     at Function._load (node:internal/modules/cjs/loader:1215:37)</span>
+<span class="highlight-line">[11ty]     at TracingChannel.traceSync (node:diagnostics_channel:322:14)</span>
+<span class="highlight-line">[11ty]     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)</span></code></pre>
+
+    </div><p>I found that the <code class="language-plain">eleventy-sass</code> plugin I use was the reason, and there is a
+<a href="https://github.com/kentaroi/eleventy-sass/issues/30" class="external-link" target="_blank">GitHub issue</a> for my problem.</p>
+<p>So I upgraded to the beta version, which is compatible with Eleventy v3. It solved the issue.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">npm</span> <span class="token function">install</span> --save-dev eleventy-sass@3.0.0-beta.0</span></code></pre>
+
+    </div><h1 id="output-from-the-upgrade-helper" tabindex="-1">3. Output from the Upgrade Helper <a class="header-anchor" href="#output-from-the-upgrade-helper" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The helper then ran successfully and showed me several NOTICEs and WARNINGs.</p>
+<h2 id="permalink-warning" tabindex="-1">3.1. permalink warning <a class="header-anchor" href="#permalink-warning" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">WARNING: You will likely want to add a `compileOptions.permalink` option for the ts Custom Template Language</span></code></pre>
+
+    </div><blockquote>
+<p>You will likely want to add a <code class="language-plain">compileOptions.permalink</code> option for the sass Custom Template Language. If you do not explicitly specify this behavior, we will no longer render permalink strings in sass syntax. The default for this option changed from <code class="language-plain">true</code> to &quot;raw&quot;. Docs: https://www.11ty.dev/docs/languages/custom/#compileoptions.permalink-to-override-permalink-compilation GitHub issue: https://github.com/11ty/eleventy/issues/2780</p>
+</blockquote>
+<p>I'm still not sure what that means.
+I have tested the <code class="language-plain">feed.xml</code> and footnote links, they both work.
+So I didn't change anything.</p>
+<h2 id="js-yaml-warning" tabindex="-1">3.2. js-yaml warning <a class="header-anchor" href="#js-yaml-warning" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">NOTICE: The `js-yaml` dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter.</span></code></pre>
+
+    </div><blockquote>
+<p>The <code class="language-plain">js-yaml</code> dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter. GitHub issue: https://github.com/11ty/eleventy/issues/2126 Most folks will be unaffected by this change but you can read the <code class="language-plain">js-yaml</code> migration guide: https://github.com/nodeca/js-yaml/blob/master/migrate_v3_to_v4.md</p>
+</blockquote>
+<p>I don't think I am affected by this. No Todo here neither.</p>
+<h2 id="meta-generator-tag-warning" tabindex="-1">3.3. meta generator tag warning <a class="header-anchor" href="#meta-generator-tag-warning" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">NOTICE: Your project has .html output files (×28) that don’t have a populated &lt;meta name="generator" content> tag.</span></code></pre>
+
+    </div><blockquote>
+<p>Your project has .html output files (×28) that don’t have a populated <meta name="generator" content> tag. It would be helpful to Eleventy if you added it (but isn’t required).</p>
+</blockquote>
+<p>Adding the generator tag to the <code class="language-plain">page.njk</code> fixed it.</p>
+<h2 id="deprecated-sass-rules" tabindex="-1">3.4. Deprecated sass rules <a class="header-anchor" href="#deprecated-sass-rules" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.</span></code></pre>
+
+    </div><p>I am not sure this is related to the Eleventy upgrade, but rather to sass in general.</p>
+<p>I have replaced all my occurrences of <code class="language-plain">@import</code> by <code class="language-plain">@mixin</code> and <code class="language-plain">@include</code>.</p>
+<h1 id="upgrade-successful%2C-done%3F" tabindex="-1">4. Upgrade successful, done? <a class="header-anchor" href="#upgrade-successful%2C-done%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now my build runs again without errors and I'm running Eleventy v3.
+Great.</p>
+<p>But Eleventy v3 also offers some new optional stuff which I have looked into.</p>
+<h2 id="convert-config-to-new-module-format" tabindex="-1">4.1. Convert config to new module format <a class="header-anchor" href="#convert-config-to-new-module-format" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p><code class="language-plain">.eleventy.js</code> was in CommonJS, and the new <code class="language-plain">eleventy.config.js</code> is in ESM format.
+Mostly <code class="language-plain">require</code> becomes <code class="language-plain">import</code> and the <code class="language-plain">exports</code> change a bit.</p>
+<p>I also used <code class="language-plain">__dirname</code> in <code class="language-plain">eleventy/typescript-esbuild.js</code>, which was replaced by <code class="language-plain">path.resolve()</code>.</p>
+<p>I like ESM a lot better and I think this is a great improvment.</p>
+<h2 id="2-high-severity-vulnerabilities" tabindex="-1">4.2. 2 high severity vulnerabilities <a class="header-anchor" href="#2-high-severity-vulnerabilities" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I still get a warning when running <code class="language-plain">npm install</code> about <code class="language-plain">2 high severity vulnerabilities</code>.</p>
+<p>This is not fixed because <code class="language-plain">pre-commit</code> has an outdated dependency:</p>
+<p><a href="https://github.com/observing/pre-commit/issues/167" class="external-link" target="_blank">Upgrade cross-spawn Dependency to Address Security Vulnerability (ReDoS)</a></p>
+<h2 id="fontsource%3A-replace-old-style-mixin" tabindex="-1">4.3. Fontsource: Replace old-style mixin <a class="header-anchor" href="#fontsource%3A-replace-old-style-mixin" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>First problem, I got a sass warning again:
+<strong>Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0</strong></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">npm</span> run build</span></span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token output">> andreas-mausch-de@1.0.0 build</span>
+<span class="highlight-line">> ELEVENTY_ENV=production eleventy</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">/home/neonew/Documents/coding/andreas-mausch.github.io/_site/styles/icons/iconism.ttf font file created!</span>
+<span class="highlight-line">/home/neonew/Documents/coding/andreas-mausch.github.io/_site/styles/icons/iconism.woff2 font file created!</span>
+<span class="highlight-line">/home/neonew/Documents/coding/andreas-mausch.github.io/_site/styles/icons/iconism.css css file created!</span>
+<span class="highlight-line">Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.</span>
+<span class="highlight-line">Use list.append instead.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">More info and automated migrator: https://sass-lang.com/d/import</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">    ╷</span>
+<span class="highlight-line">98  │                   $src: append(</span>
+<span class="highlight-line">    │ ┌───────────────────────^</span>
+<span class="highlight-line">99  │ │                   $src,</span>
+<span class="highlight-line">100 │ │                   url('#{$directory}/#{$variant}.#{$format}')</span>
+<span class="highlight-line">101 │ │                     format('#{$format}#{if($axis, '-variations', '')}'),</span>
+<span class="highlight-line">102 │ │                   comma</span>
+<span class="highlight-line">103 │ │                 );</span>
+<span class="highlight-line">    │ └─────────────────^</span>
+<span class="highlight-line">    ╵</span>
+<span class="highlight-line">    @fontsource/raleway/scss/mixins.scss 98:23  generator()</span>
+<span class="highlight-line">    @fontsource/raleway/scss/mixins.scss 167:3  faces()</span>
+<span class="highlight-line">    styles/style.scss 14:1                      root stylesheet</span>
+<span class="highlight-line"></span></code></pre>
+
+    </div><p>After upgrading fontsource to <code class="language-plain">5.2.5</code>, it gave a new warning:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">Warning: Importing mixins via the fontsource package is deprecated and will be removed in the next major release. Please use the @fontsource-utils/scss package instead.</span>
+<span class="highlight-line">    @fontsource/raleway/scss/mixins.scss 37:3   generator()</span>
+<span class="highlight-line">    @fontsource/raleway/scss/mixins.scss 168:3  faces()</span>
+<span class="highlight-line">    styles/style.scss 14:1                      root stylesheet</span></code></pre>
+
+    </div><p>I could fix it by using the new way of fontsource's mixins.
+I also switched to the variable font.</p>
+<p>See there documentation here:
+<a href="https://fontsource.org/docs/getting-started/faces-mixin" class="external-link" target="_blank">https://fontsource.org/docs/getting-started/faces-mixin</a></p>
+<h2 id="sass-nodepackageimporter" tabindex="-1">4.4. sass NodePackageImporter <a class="header-anchor" href="#sass-nodepackageimporter" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>I used to load scss from packages via the <code class="language-plain">loadPaths</code> option.
+A better way is to use the importer <code class="language-plain">NodePackageImporter</code> and prefix
+package imports via <code class="language-plain">@use "pkg:.."</code>.</p>
+<p>See here:
+<a href="https://sass-lang.com/documentation/at-rules/use/#pkg-ur-ls" class="external-link" target="_blank">https://sass-lang.com/documentation/at-rules/use/#pkg-ur-ls</a></p>
+<h2 id="eleventy-pathprefix-issues" tabindex="-1">4.5. Eleventy PathPrefix issues <a class="header-anchor" href="#eleventy-pathprefix-issues" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>After doing the change, my browser tried to find the css at
+<code class="language-plain">/eleventy-sample/eleventy-sample/styles/style.css</code>.</p>
+<p>So it duplicated the path prefix for some reason.
+Which is good, because previously I have implemented a workaround to get the path prefix right,
+and now I can get rid of that workaround.</p>
+<p>The templates become a bit easier to read, and I don't need the URL filter anymore:
+<a href="https://www.11ty.dev/docs/filters/url/" class="external-link" target="_blank">https://www.11ty.dev/docs/filters/url/</a></p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-diff"><code class="language-diff"><span class="highlight-line"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    &lt;link rel="stylesheet" href="{{ "/styles/style.css" | url }}" /></span>
+<span class="highlight-line"></span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    &lt;link rel="stylesheet" href="/styles/style.css" /></span></code></pre>
+
+    </div><p>Also, I don't need the ugly workaround using my custom
+<code class="language-plain">ELEVENTY_PATH_PREFIX</code> environment variable. I was used to prefix image urls.</p>
+<p>There is also the html <code class="language-plain">&lt;base></code> way to do this, but I don't use it (yet).</p>
+<p><a href="https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix" class="external-link" target="_blank">https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix</a></p>
+<p><a href="https://www.11ty.dev/docs/plugins/html-base/" class="external-link" target="_blank">https://www.11ty.dev/docs/plugins/html-base/</a></p>
+<h1 id="summary" tabindex="-1">5. Summary <a class="header-anchor" href="#summary" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>It is great Eleventy offers a helper tool to make upgrading a bit less painful.</p>
+<p>Also, two points of my previous list of cons were fixed, so things are moving in the right direction:</p>
+<blockquote>
+<ul>
+<li>👎 pathPrefix is ignored by the official plugin <a href="https://github.com/11ty/eleventy-img/issues/44" class="external-link" target="_blank">eleventy-img</a>
+and <a href="https://github.com/atomrc/eleventy-favicon/issues/8" class="external-link" target="_blank">eleventy-favicon</a>.</li>
+<li>👎 <code class="language-plain">.eleventy.js</code> must use the old-style <code class="language-plain">require()</code> instead of <code class="language-plain">import</code>. type: &quot;module&quot; is not supported:
+<a href="https://github.com/11ty/eleventy/issues/836" class="external-link" target="_blank">link</a></li>
+</ul>
+</blockquote>
+<p>What I wish for in the future is real typescript support for config file.
+Currently, you can move your <code class="language-plain">eleventy.config.js</code> to <code class="language-plain">.ts</code> and run it via <code class="language-plain">tsx</code>:
+<code class="language-plain">npx tsx ./node_modules/.bin/eleventy</code></p>
+<p><a href="https://www.11ty.dev/docs/languages/typescript/#using-a-type-script-configuration-file" class="external-link" target="_blank">https://www.11ty.dev/docs/languages/typescript/#using-a-type-script-configuration-file</a></p>
+<p>It would be great if <code class="language-plain">tsx</code> wouldn't be a requirement here, but instead Eleventy cares about it.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
