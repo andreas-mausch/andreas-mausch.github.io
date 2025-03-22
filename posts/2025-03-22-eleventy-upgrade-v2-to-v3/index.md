@@ -101,10 +101,8 @@ The helper then ran successfully and showed me several NOTICEs and WARNINGs.
 ## permalink warning
 
 ```
-WARNING: You will likely want to add a `compileOptions.permalink` option for the ts Custom Template Language
+WARNING: You will likely want to add a `compileOptions.permalink` option for the sass Custom Template Language. If you do not explicitly specify this behavior, we will no longer render permalink strings in sass syntax. The default for this option changed from `true` to "raw". Docs: https://www.11ty.dev/docs/languages/custom/#compileoptions.permalink-to-override-permalink-compilation GitHub issue: https://github.com/11ty/eleventy/issues/2780
 ```
-
-> You will likely want to add a `compileOptions.permalink` option for the sass Custom Template Language. If you do not explicitly specify this behavior, we will no longer render permalink strings in sass syntax. The default for this option changed from `true` to "raw". Docs: https://www.11ty.dev/docs/languages/custom/#compileoptions.permalink-to-override-permalink-compilation GitHub issue: https://github.com/11ty/eleventy/issues/2780
 
 I'm still not sure what that means.
 I have tested the `feed.xml` and footnote links, they both work.
@@ -113,20 +111,16 @@ So I didn't change anything.
 ## js-yaml warning
 
 ```
-NOTICE: The `js-yaml` dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter.
+NOTICE: The `js-yaml` dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter. GitHub issue: https://github.com/11ty/eleventy/issues/2126 Most folks will be unaffected by this change but you can read the `js-yaml` migration guide: https://github.com/nodeca/js-yaml/blob/master/migrate_v3_to_v4.md
 ```
-
-> The `js-yaml` dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter. GitHub issue: https://github.com/11ty/eleventy/issues/2126 Most folks will be unaffected by this change but you can read the `js-yaml` migration guide: https://github.com/nodeca/js-yaml/blob/master/migrate_v3_to_v4.md
 
 I don't think I am affected by this. No Todo here neither.
 
 ## meta generator tag warning
 
 ```
-NOTICE: Your project has .html output files (×28) that don’t have a populated <meta name="generator" content> tag.
+NOTICE: Your project has .html output files (×28) that don’t have a populated <meta name="generator" content> tag. It would be helpful to Eleventy if you added it (but isn’t required).
 ```
-
-> Your project has .html output files (×28) that don’t have a populated <meta name="generator" content> tag. It would be helpful to Eleventy if you added it (but isn’t required).
 
 Adding the generator tag to the `page.njk` fixed it.
 
