@@ -1,0 +1,161 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>Setting up my first eSIM via adapter on Linux</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Setting up my first eSIM via adapter on Linux</h1>
+<div>
+  <time class="postlist-date" datetime="2025-03-22T12:00:00.000+00:00">Mar 22, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/esim">#esim</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/internet%20access">#internet access</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/smartphone">#smartphone</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/travel">#travel</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>Most modern phones already support eSIM by their hardware.
+Older phones sometimes do not, and I wanted to use a Samsung S10e
+as my travel phone.</p>
+<p>It does not support eSIM, but there are adapter cards which are physical
+SIM cards you can install an eSIM profile on.
+Even multiple ones, if you like. But only one profile can be active at once.</p>
+<img src="/blog/2025-03-23-esim/eiotclub-esim.jpg" width="614" height="720" alt="EIOTCLUB eSIM">
+<p>In the manual is a link to a website with their software:</p>
+<p><a href="https://www.eiotclub.com/pages/eiotclub-esim-reader-guide" class="external-link" target="_blank">https://www.eiotclub.com/pages/eiotclub-esim-reader-guide</a></p>
+<img src="/blog/2025-03-23-esim/eiotclub-esim-reader.jpg" width="849" height="576" alt="EIOTCLUB eSIM Reader software">
+<p>I bought this without even knowing whether the software runs on Linux.
+After the download I found a hint to LPAC and it mentioned Linux in a file.</p>
+<p>So after looking it up I landed here:
+<a href="https://github.com/estkme-group/lpac" class="external-link" target="_blank">https://github.com/estkme-group/lpac</a></p>
+<p>LPAC means either <em>Lesbian Super PAC</em> or <em>C-based eUICC LPA</em>.</p>
+<p><strong>C-based eUICC LPA</strong>
+Aha!</p>
+<p>Glossary:</p>
+<ul>
+<li>eUICC: Embedded Universal Integrated Circuit Card
+The part which can store your eSIM profile. Usually built-in into a modern phone,
+or in our case in the eSIM adapter.</li>
+<li>LPA: Local Profile Assistant
+A software which can talk to the eUICC, to list and download eSIM profiles.</li>
+</ul>
+<p>So <code class="language-plain">lpac</code> is an open-source CLI LPA tool list and download profiles.
+Exactly what I was looking for.</p>
+<p>After some more searching, I also found an open-source GUI tool:
+<a href="https://github.com/creamlike1024/EasyLPAC" class="external-link" target="_blank">EasyLPAC</a></p>
+<img src="/blog/2025-03-23-esim/easylpac.png" width="1280" height="845" alt="easyLPAC">
+<p>It looks frighteningly similar to the tool provided by EIOTCLUB, doesn't it?</p>
+<h1 id="inserting-the-esim-adapter-card-into-the-usb-adapter" tabindex="-1">1. Inserting the eSIM adapter card into the USB adapter <a class="header-anchor" href="#inserting-the-esim-adapter-card-into-the-usb-adapter" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<img src="/blog/2025-03-23-esim/eiotclub-esim-opened.jpg" width="1280" height="720" alt="EIOTCLUB eSIM opened">
+<h1 id="using-the-cli-via-lpac" tabindex="-1">2. Using the CLI via lpac <a class="header-anchor" href="#using-the-cli-via-lpac" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Reference:
+<a href="https://github.com/estkme-group/lpac/blob/main/docs/USAGE.md" class="external-link" target="_blank">https://github.com/estkme-group/lpac/blob/main/docs/USAGE.md</a></p>
+<h2 id="view-information" tabindex="-1">2.1. View information <a class="header-anchor" href="#view-information" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">lpac chip info <span class="token operator">|</span> jq</span>
+<span class="highlight-line">lpac profile list <span class="token operator">|</span> jq</span></code></pre>
+
+    </div><h2 id="install-a-new-profile" tabindex="-1">2.2. Install a new profile <a class="header-anchor" href="#install-a-new-profile" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p><a href="https://wiki.soprani.ca/eSIM%20Adapter/lpac" class="external-link" target="_blank">https://wiki.soprani.ca/eSIM Adapter/lpac</a></p>
+<p>You need a QR-Code, which will give you a string in the format
+<code class="language-plain">LPA:1$example.tld$XX-YYYYYY-ZZZZZZZ</code>.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">lpac profile download <span class="token parameter variable">-s</span> example.tld <span class="token parameter variable">-m</span> <span class="token string">"XX-YYYYYY-ZZZZZZZ"</span></span>
+<span class="highlight-line">lpac profile <span class="token builtin class-name">enable</span> <span class="token punctuation">[</span>ICCID<span class="token punctuation">]</span></span>
+<span class="highlight-line">lpac profile nickname <span class="token punctuation">[</span>ICCID<span class="token punctuation">]</span> <span class="token string">"My new eSIM"</span></span></code></pre>
+
+    </div><blockquote>
+<p>If you get an error involving * SCardEstablishContext() * APDU <strong>driver</strong> init failed</p>
+<p>Try installing a possible missing dependency ccid. Also enable the systemd pcscd.socket with a command like
+<code class="language-plain">systemctl enable --now pcscd.socket</code></p>
+</blockquote>
+<h1 id="using-the-gui-via-easylpac" tabindex="-1">3. Using the GUI via EasyLPAC <a class="header-anchor" href="#using-the-gui-via-easylpac" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">paru <span class="token parameter variable">-S</span> easylpac</span></code></pre>
+
+    </div><p>This takes some time to build, be patient.</p>
+<p>The GUI is very self-explanatory.
+There is a <em>Download</em> button and you can choose to enter the code string manually,
+upload an image file with a QR code or scan it from your camera.</p>
+<p>Just make sure to select your eSIM adapter beforehand and then press the refresh button.</p>
+<p>Please note: eSIM profiles can only be downloaded once.
+If you remove it afterwards from the device, it is gone.
+If the download fails for some reason, you cannot retry it.
+Make sure you have a good internet connection before trying it.</p>
+<p>If you wish to transfer it to another device, it is sometimes possible, sometimes not,
+depending on your provider.</p>
+<h1 id="technical-details-about-esim" tabindex="-1">4. Technical details about eSIM <a class="header-anchor" href="#technical-details-about-esim" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Harald Welte did a deep technical talk about eSIM, which I enjoyed
+even though I only understood 1% of it:</p>
+<p><a href="https://www.youtube.com/watch?v=vms_beSPhfY" class="external-link" target="_blank">https://www.youtube.com/watch?v=vms_beSPhfY</a></p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
