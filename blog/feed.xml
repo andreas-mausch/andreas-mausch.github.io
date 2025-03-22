@@ -17,16 +17,16 @@
     <content xml:lang="en" type="html">&lt;p&gt;Most modern phones already support eSIM by their hardware.
 Older phones sometimes do not, and I wanted to use a Samsung S10e
 as my travel phone.&lt;/p&gt;
-&lt;p&gt;It does not support eSIM, but there are adapter cards which are physical
-SIM cards you can install an eSIM profile on.
-Even multiple ones, if you like. But only one profile can be active at once.&lt;/p&gt;
+&lt;p&gt;It does not support eSIM, but there are adapter cards available, which are physical
+SIM cards you can install an eSIM profile on.&lt;br /&gt;
+Even multiple ones, if you like. But only one profile can be active at the same time.&lt;/p&gt;
 &lt;img src=&quot;https://andreas-mausch.de/blog/2025-03-23-esim/eiotclub-esim.jpg&quot; width=&quot;614&quot; height=&quot;720&quot; alt=&quot;EIOTCLUB eSIM&quot; /&gt;
 &lt;p&gt;In the manual is a link to a website with their software:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.eiotclub.com/pages/eiotclub-esim-reader-guide&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;https://www.eiotclub.com/pages/eiotclub-esim-reader-guide&lt;/a&gt;&lt;/p&gt;
 &lt;img src=&quot;https://andreas-mausch.de/blog/2025-03-23-esim/eiotclub-esim-reader.jpg&quot; width=&quot;849&quot; height=&quot;576&quot; alt=&quot;EIOTCLUB eSIM Reader software&quot; /&gt;
 &lt;p&gt;I bought this without even knowing whether the software runs on Linux.
 After the download I found a hint to LPAC and it mentioned Linux in a file.&lt;/p&gt;
-&lt;p&gt;So after looking it up I landed&lt;/p&gt;</content>
+&lt;p&gt;So afte&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Eleventy: Upgrade from v2 to v3</title>
