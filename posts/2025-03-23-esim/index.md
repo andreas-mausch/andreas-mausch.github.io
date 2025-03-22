@@ -9,9 +9,9 @@ Most modern phones already support eSIM by their hardware.
 Older phones sometimes do not, and I wanted to use a Samsung S10e
 as my travel phone.
 
-It does not support eSIM, but there are adapter cards which are physical
-SIM cards you can install an eSIM profile on.
-Even multiple ones, if you like. But only one profile can be active at once.
+It does not support eSIM, but there are adapter cards available, which are physical
+SIM cards you can install an eSIM profile on.\
+Even multiple ones, if you like. But only one profile can be active at the same time.
 
 {% image "eiotclub-esim.jpg", "EIOTCLUB eSIM" %}
 
