@@ -217,12 +217,9 @@ with suggestions what to change. However, this error was presented to me instead
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">WARNING: You will likely want to add a `compileOptions.permalink` option for the ts Custom Template Language</span></code></pre>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">WARNING: You will likely want to add a `compileOptions.permalink` option for the sass Custom Template Language. If you do not explicitly specify this behavior, we will no longer render permalink strings in sass syntax. The default for this option changed from `true` to "raw". Docs: https://www.11ty.dev/docs/languages/custom/#compileoptions.permalink-to-override-permalink-compilation GitHub issue: https://github.com/11ty/eleventy/issues/2780</span></code></pre>
 
-    </div><blockquote>
-<p>You will likely want to add a <code class="language-plain">compileOptions.permalink</code> option for the sass Custom Template Language. If you do not explicitly specify this behavior, we will no longer render permalink strings in sass syntax. The default for this option changed from <code class="language-plain">true</code> to &quot;raw&quot;. Docs: https://www.11ty.dev/docs/languages/custom/#compileoptions.permalink-to-override-permalink-compilation GitHub issue: https://github.com/11ty/eleventy/issues/2780</p>
-</blockquote>
-<p>I'm still not sure what that means.
+    </div><p>I'm still not sure what that means.
 I have tested the <code class="language-plain">feed.xml</code> and footnote links, they both work.
 So I didn't change anything.</p>
 <h2 id="js-yaml-warning" tabindex="-1">3.2. js-yaml warning <a class="header-anchor" href="#js-yaml-warning" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
@@ -230,23 +227,17 @@ So I didn't change anything.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">NOTICE: The `js-yaml` dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter.</span></code></pre>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">NOTICE: The `js-yaml` dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter. GitHub issue: https://github.com/11ty/eleventy/issues/2126 Most folks will be unaffected by this change but you can read the `js-yaml` migration guide: https://github.com/nodeca/js-yaml/blob/master/migrate_v3_to_v4.md</span></code></pre>
 
-    </div><blockquote>
-<p>The <code class="language-plain">js-yaml</code> dependency was upgraded from v3 to v4 to improve error messaging when folks use tabs in their front matter. GitHub issue: https://github.com/11ty/eleventy/issues/2126 Most folks will be unaffected by this change but you can read the <code class="language-plain">js-yaml</code> migration guide: https://github.com/nodeca/js-yaml/blob/master/migrate_v3_to_v4.md</p>
-</blockquote>
-<p>I don't think I am affected by this. No Todo here neither.</p>
+    </div><p>I don't think I am affected by this. No Todo here neither.</p>
 <h2 id="meta-generator-tag-warning" tabindex="-1">3.3. meta generator tag warning <a class="header-anchor" href="#meta-generator-tag-warning" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">NOTICE: Your project has .html output files (×28) that don’t have a populated &lt;meta name="generator" content> tag.</span></code></pre>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">NOTICE: Your project has .html output files (×28) that don’t have a populated &lt;meta name="generator" content> tag. It would be helpful to Eleventy if you added it (but isn’t required).</span></code></pre>
 
-    </div><blockquote>
-<p>Your project has .html output files (×28) that don’t have a populated <meta name="generator" content> tag. It would be helpful to Eleventy if you added it (but isn’t required).</p>
-</blockquote>
-<p>Adding the generator tag to the <code class="language-plain">page.njk</code> fixed it.</p>
+    </div><p>Adding the generator tag to the <code class="language-plain">page.njk</code> fixed it.</p>
 <h2 id="deprecated-sass-rules" tabindex="-1">3.4. Deprecated sass rules <a class="header-anchor" href="#deprecated-sass-rules" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
