@@ -1,0 +1,273 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>Backup: 7z with error correction data using parchive</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Backup: 7z with error correction data using parchive</h1>
+<div>
+  <time class="postlist-date" datetime="2025-03-25T08:00:00.000+00:00">Mar 25, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/data%20corruption">#data corruption</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/fix%20files">#fix files</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/quickpar">#quickpar</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<p>Every few years I make a backup of my most important data files
+to a Blu-Ray M-disc.</p>
+<p>I've heard M-disc is only a marketing gag nowadays and doesn't
+really provide a better material for the data layer as it used to,
+but well, it can't hurt to still use it. Maybe I'm overpaying a bit.</p>
+<h1 id="archive-tool" tabindex="-1">1. archive tool <a class="header-anchor" href="#archive-tool" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I have written a shell script to re-compress videos, audio and images
+to reduce their size:</p>
+<p><a href="https://github.com/andreas-mausch/archive/" class="external-link" target="_blank">archive scripts</a></p>
+<p>It will take hours to run, because especially video encoding takes a lot of time.
+Your source files will remain untouched, all created files are stored in a new folder
+provided by the user.</p>
+<p>Please note the tool will skip any files it doesn't recognize, so
+verify all your important data is still there after running it.</p>
+<h1 id="7z-all-files" tabindex="-1">2. 7z all files <a class="header-anchor" href="#7z-all-files" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Next, I proceed to make a huge .7z file out of the folder.</p>
+<p>To do this, I run this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">7z a <span class="token parameter variable">-m0</span><span class="token operator">=</span>Copy <span class="token parameter variable">-mhe</span><span class="token operator">=</span>on <span class="token parameter variable">-p</span> output.7z *</span></code></pre>
+
+    </div><ul>
+<li>a: Add files</li>
+<li>m: Set Compression Method</li>
+<li>mhe: enables or disables archive header encryption (filenames)</li>
+<li>p: Set Password</li>
+</ul>
+<p>I disable compression here, because most my files are already compressed.
+But you might want to change that.</p>
+<p>The password is not shown here, you will be asked to enter it on stdin.</p>
+<h1 id="parchive-(par2)" tabindex="-1">3. parchive (par2) <a class="header-anchor" href="#parchive-(par2)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Now, 7z does not provide a mechanism for error correction.
+Unlike rar, where the format directly supports it.</p>
+<p>To achieve a similar result, I use a second tool to create recovery information.
+So in case a bit flips, I can still recover the whole archive.</p>
+<p>The package for Arch Linux (or Manjaro) is named <code class="language-plain">par2cmdline</code>.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> par2cmdline</span></code></pre>
+
+    </div><p>Now to create the recovery data, run this:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">par2 create <span class="token parameter variable">-m2048</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-r5</span> <span class="token parameter variable">-n1</span> output.par2 input.bin</span></code></pre>
+
+    </div><p>-m: Maximum Memory usage in Megabytes
+-v: Enable verbose mode
+-r: Recovery data in percent
+-n: Number of parity files to create</p>
+<p>For me, 5% is a reasonable amount for recovery data. You might want to change that, though.
+You can also create multiple partify files.
+However, I don't need it and I think it is mostly useful for internet file sharing,
+where bandwidth is limited and the user might not want to download the whole parity data,
+but parts of it would be sufficient to fix his data.</p>
+<p>The command will create two files: <code class="language-plain">output.par2</code> and <code class="language-plain">output.vol000+100.par2</code>,
+even though we told it to only create one.
+This is because <code class="language-plain">output.par2</code> is an index file which points to all following files.</p>
+<p>You can now verify your data is correct by running:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">par2 verify <span class="token parameter variable">-m2048</span> <span class="token parameter variable">-v</span> input.par2</span></code></pre>
+
+    </div><h1 id="full-example-with-test-data" tabindex="-1">4. Full example with test data <a class="header-anchor" href="#full-example-with-test-data" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="create-test-data-files" tabindex="-1">4.1. Create test data files <a class="header-anchor" href="#create-test-data-files" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token keyword">for</span> <span class="token for-or-select variable">run</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/urandom <span class="token assign-left variable">of</span><span class="token operator">=</span>./test-data-<span class="token variable">${run}</span>.bin <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">;</span> <span class="token keyword">done</span></span></code></pre>
+
+    </div><p>This will create six files of 128 MB size each.</p>
+<h2 id="7z-the-test-data" tabindex="-1">4.2. 7z the test data <a class="header-anchor" href="#7z-the-test-data" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">7z a <span class="token parameter variable">-m0</span><span class="token operator">=</span>Copy <span class="token parameter variable">-mhe</span><span class="token operator">=</span>on <span class="token parameter variable">-p</span> output.7z *</span></code></pre>
+
+    </div><p>The resulting <code class="language-plain">output.7z</code> will be 769 MB.</p>
+<h2 id="create-par2-data" tabindex="-1">4.3. Create par2 data <a class="header-anchor" href="#create-par2-data" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">par2 create <span class="token parameter variable">-m2048</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-r5</span> <span class="token parameter variable">-n1</span> output.par2 output.7z</span></code></pre>
+
+    </div><p>This will create the small index file <code class="language-plain">output.par2</code> (40 KB) and the bigger
+<code class="language-plain">output.vol000+100.par2</code> (39 MB).</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">par2 verify <span class="token parameter variable">-m2048</span> <span class="token parameter variable">-v</span> output.par2</span></code></pre>
+
+    </div><p>This should output <code class="language-plain">All files are correct, repair is not required.</code></p>
+<h2 id="corrupt-the-data-on-purpose" tabindex="-1">4.4. Corrupt the data on purpose <a class="header-anchor" href="#corrupt-the-data-on-purpose" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>We will now overwrite three bytes each at four positions in the 7z,
+and see if par2 can fix that afterwards.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token builtin class-name">printf</span> <span class="token string">'\xaa\xab\xac'</span> <span class="token operator">|</span> <span class="token function">dd</span> <span class="token assign-left variable">of</span><span class="token operator">=</span>output.7z <span class="token assign-left variable">bs</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">seek</span><span class="token operator">=</span><span class="token number">100</span> <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">3</span> <span class="token assign-left variable">conv</span><span class="token operator">=</span>notrunc</span>
+<span class="highlight-line"><span class="token builtin class-name">printf</span> <span class="token string">'\xba\xbb\xbc'</span> <span class="token operator">|</span> <span class="token function">dd</span> <span class="token assign-left variable">of</span><span class="token operator">=</span>output.7z <span class="token assign-left variable">bs</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">seek</span><span class="token operator">=</span><span class="token number">98342</span> <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">3</span> <span class="token assign-left variable">conv</span><span class="token operator">=</span>notrunc</span>
+<span class="highlight-line"><span class="token builtin class-name">printf</span> <span class="token string">'\xca\xcb\xcc'</span> <span class="token operator">|</span> <span class="token function">dd</span> <span class="token assign-left variable">of</span><span class="token operator">=</span>output.7z <span class="token assign-left variable">bs</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">seek</span><span class="token operator">=</span><span class="token number">34490130</span> <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">3</span> <span class="token assign-left variable">conv</span><span class="token operator">=</span>notrunc</span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">par2 verify <span class="token parameter variable">-m2048</span> <span class="token parameter variable">-v</span> output.par2</span></span></span>
+<span class="highlight-line"><span class="token output">Loading "output.par2".</span>
+<span class="highlight-line">Loaded 4 new packets</span>
+<span class="highlight-line">Loading "output.vol000+100.par2".</span>
+<span class="highlight-line">Loaded 100 new packets including 100 recovery blocks</span>
+<span class="highlight-line">Loading "output.par2".</span>
+<span class="highlight-line">No new packets found</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">There are 1 recoverable files and 0 other files.</span>
+<span class="highlight-line">The block size used was 402656 bytes.</span>
+<span class="highlight-line">There are a total of 2000 data blocks.</span>
+<span class="highlight-line">The total size of the data files is 805306754 bytes.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Verifying source files:</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Opening: "output.7z"</span>
+<span class="highlight-line">No data found between offset 0 and 402656</span>
+<span class="highlight-line">Scanning: 4.3%</span>
+<span class="highlight-line">No data found between offset 34225760 and 34628416</span>
+<span class="highlight-line">Target: "output.7z" - damaged. Found 1998 of 2000 data blocks.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Scanning extra files:</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Repair is required.</span>
+<span class="highlight-line">1 file(s) exist but are damaged.</span>
+<span class="highlight-line">You have 1998 out of 2000 data blocks available.</span>
+<span class="highlight-line">You have 100 recovery blocks available.</span>
+<span class="highlight-line">Repair is possible.</span>
+<span class="highlight-line">You have an excess of 98 recovery blocks.</span>
+<span class="highlight-line">2 recovery blocks will be used to repair.</span></code></pre>
+
+    </div><h2 id="fix-the-corruption" tabindex="-1">4.5. Fix the corruption <a class="header-anchor" href="#fix-the-corruption" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token output">par2 repair output.par2</span>
+<span class="highlight-line">Loading "output.par2".</span>
+<span class="highlight-line">Loaded 4 new packets</span>
+<span class="highlight-line">Loading "output.vol000+100.par2".</span>
+<span class="highlight-line">Loaded 100 new packets including 100 recovery blocks</span>
+<span class="highlight-line">Loading "output.par2".</span>
+<span class="highlight-line">No new packets found</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">There are 1 recoverable files and 0 other files.</span>
+<span class="highlight-line">The block size used was 402656 bytes.</span>
+<span class="highlight-line">There are a total of 2000 data blocks.</span>
+<span class="highlight-line">The total size of the data files is 805306754 bytes.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Verifying source files:</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Opening: "output.7z"</span>
+<span class="highlight-line">Target: "output.7z" - damaged. Found 1998 of 2000 data blocks.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Scanning extra files:</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Repair is required.</span>
+<span class="highlight-line">1 file(s) exist but are damaged.</span>
+<span class="highlight-line">You have 1998 out of 2000 data blocks available.</span>
+<span class="highlight-line">You have 100 recovery blocks available.</span>
+<span class="highlight-line">Repair is possible.</span>
+<span class="highlight-line">You have an excess of 98 recovery blocks.</span>
+<span class="highlight-line">2 recovery blocks will be used to repair.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Computing Reed Solomon matrix.</span>
+<span class="highlight-line">Constructing: done.</span>
+<span class="highlight-line">Solving: done.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Wrote 805306754 bytes to disk</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Verifying repaired files:</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Opening: "output.7z"</span>
+<span class="highlight-line">Target: "output.7z" - found.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">Repair complete.</span></code></pre>
+
+    </div><p>Now you could run <code class="language-plain">par2 verify</code> again and it should tell you again
+<code class="language-plain">All files are correct, repair is not required.</code>.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
