@@ -167,7 +167,7 @@ You have an excess of 98 recovery blocks.
 ## Fix the corruption
 
 ```shell-session
-par2 repair output.par2
+$ par2 repair output.par2
 Loading "output.par2".
 Loaded 4 new packets
 Loading "output.vol000+100.par2".
