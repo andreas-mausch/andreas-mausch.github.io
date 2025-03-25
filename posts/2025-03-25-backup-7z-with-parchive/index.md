@@ -121,7 +121,7 @@ This should output `All files are correct, repair is not required.`
 
 ## Corrupt the data on purpose
 
-We will now overwrite three bytes each at four positions in the 7z,
+We will now overwrite three bytes each at three positions in the 7z,
 and see if par2 can fix that afterwards.
 
 ```bash
