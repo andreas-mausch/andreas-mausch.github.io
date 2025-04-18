@@ -4,11 +4,34 @@
   <subtitle>Dev and personal blog</subtitle>
   <link href="https://andreas-mausch.de/blog/feed.xml" rel="self"/>
   <link href="https://andreas-mausch.de/blog/"/>
-  <updated>2025-03-25T08:00:00Z</updated>
+  <updated>2025-04-18T10:00:00Z</updated>
   <id>https://andreas-mausch.de/blog/</id>
   <author>
     <name>Andreas Mausch</name>
   </author>
+  <entry>
+    <title>OpenPGP: Deterministic Key Derivation via BIP39</title>
+    <link href="https://andreas-mausch.de/blog/2025-04-18-openpgp-deterministic-key-derivation/"/>
+    <updated>2025-04-18T10:00:00Z</updated>
+    <id>https://andreas-mausch.de/blog/2025-04-18-openpgp-deterministic-key-derivation/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Some of you might know BIP-39 from Bitcoin.
+It is used to generate multiple addresses from a base key,
+which is written as normal words.&lt;/p&gt;
+&lt;p&gt;Thus, it is easy to backup and store.&lt;/p&gt;
+&lt;p&gt;However, you can apply BIP-39 to represent any bits as a list of words.
+This is used by the following tool, which generates a private OpenPGP key for you
+based on a word list (also called seed phrase or mnemonic phrase) like:&lt;/p&gt;
+&lt;div class=&quot;code-block&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;copy-to-clipboard&quot;&gt;
+      &lt;i class=&quot;icon icon-copy&quot;&gt;&lt;/i&gt;
+    &lt;/button&gt;
+    &lt;pre class=&quot;language-plain&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;pitch angle zero rubber index domain nature undo engine scrub gate mosquito&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;/div&gt;&lt;p&gt;Actually I found two tools for it:
+One &lt;a href=&quot;https://github.com/Logicwax/gpg-hd&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;python tool&lt;/a&gt;, which I haven&#39;t tried,
+and one tool written in Rust:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Backup: 7z with error correction data using parchive</title>
     <link href="https://andreas-mausch.de/blog/2025-03-25-backup-7z-with-parchive/"/>

@@ -1,0 +1,202 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>OpenPGP: Deterministic Key Derivation via BIP39</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>OpenPGP: Deterministic Key Derivation via BIP39</h1>
+<div>
+  <time class="postlist-date" datetime="2025-04-18T10:00:00.000+00:00">Apr 18, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/gpg">#gpg</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/kdf">#kdf</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/openpgp">#openpgp</a></li>
+        
+    
+        
+    
+  </ul>
+</div>
+
+
+
+<p>Some of you might know BIP-39 from Bitcoin.
+It is used to generate multiple addresses from a base key,
+which is written as normal words.</p>
+<p>Thus, it is easy to backup and store.</p>
+<p>However, you can apply BIP-39 to represent any bits as a list of words.
+This is used by the following tool, which generates a private OpenPGP key for you
+based on a word list (also called seed phrase or mnemonic phrase) like:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">pitch angle zero rubber index domain nature undo engine scrub gate mosquito</span></code></pre>
+
+    </div><p>Actually I found two tools for it:
+One <a href="https://github.com/Logicwax/gpg-hd" class="external-link" target="_blank">python tool</a>, which I haven't tried,
+and one tool written in Rust:</p>
+<p><a href="https://github.com/jpdarago/bip39key" class="external-link" target="_blank">https://github.com/jpdarago/bip39key</a></p>
+<h1 id="benefits" tabindex="-1">1. Benefits <a class="header-anchor" href="#benefits" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Key backup is much easier.</p>
+<p>That's basically it, but it is a huge benefit compared to my big A4 prints
+of my RSA-2048 keys using <a href="https://www.jabberwocky.com/software/paperkey/" class="external-link" target="_blank">Paperkey</a>.</p>
+<h1 id="generate-a-seed-phrase" tabindex="-1">2. Generate a seed phrase <a class="header-anchor" href="#generate-a-seed-phrase" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>For testing purposes, you can try:
+<a href="https://iancoleman.io/bip39/" class="external-link" target="_blank">https://iancoleman.io/bip39/</a></p>
+<p>For production, you can use the same tool.
+Download it <a href="https://github.com/iancoleman/bip39/releases" class="external-link" target="_blank">here</a> and run it on your computer.</p>
+<p>Please note that for production keys I strongly recommend to generate them on an offline machine and protect them by a strong passphrase.</p>
+<p>The seed phrase used in this article is just an example and not my actual key. :)</p>
+<h1 id="generate-an-openpgp-key-from-the-seed-phrase" tabindex="-1">3. Generate an OpenPGP key from the seed phrase <a class="header-anchor" href="#generate-an-openpgp-key-from-the-seed-phrase" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">bip39key --user-id<span class="token operator">=</span><span class="token string">"TestUser &lt;testuser@email.com>"</span> <span class="token parameter variable">--format</span><span class="token operator">=</span>pgp <span class="token parameter variable">--armor</span> --output-filename<span class="token operator">=</span>key.pgp</span></span></span>
+<span class="highlight-line"><span class="token output">pitch angle zero rubber index domain nature undo engine scrub gate mosquito</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash"><span class="token function">cat</span> key.pgp</span></span></span>
+<span class="highlight-line"><span class="token output">-----BEGIN PGP PRIVATE KEY BLOCK-----</span>
+<span class="highlight-line">Version: GnuPG v2</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">xVgESV+rKRYJKwYBBAHaRw8BAQdA0fdM6JaAoITPpTWGnr/</span>
+<span class="highlight-line">iwaWvZIUJUY1Ezm9fTAifq+4AAP44vavWJmATuhpsVLxu4Z7FlkPLE5BKmd7FYaJ</span>
+<span class="highlight-line">Et5bzmxH+zR1UZXN0VXNlciA8dGVzdHVzZXJAZW1haWwuY29tPsJ/</span>
+<span class="highlight-line">BBMWCAAxBQJJX6spCRA+dbZr6H+dYBYhBOXCfCBgRZ21UcXr9T51tmvof51gAhsD</span>
+<span class="highlight-line">Ah4BAwUAeAAAnS8A/0xKfiZThoxFTopic40T/2B17w8eZ8RE4Y7PDBkl2OioAP49</span>
+<span class="highlight-line">2ek0iRNYsK/cZ6be1brUHHEbS0L6LX/</span>
+<span class="highlight-line">uaTzLcS+wDsddBElfqykSCisGAQQBl1UBBQEBB0COnyJnGIk4q+3xVOXcnY9EHyF</span>
+<span class="highlight-line">ihc03UWb3JxS7fqmbaQMBCAkAAP9eb2CaNUcf3kKNh6u+3sd3P3Dj5lioLpAB5Gj</span>
+<span class="highlight-line">lkhhxkBEtwnwEGBYIAC4FAklfqykJED51tmvof51gFiEE5cJ8IGBFnbVRxev1PnW</span>
+<span class="highlight-line">2a+h/nWACGwwDBQB4AABK/AEAljT/</span>
+<span class="highlight-line">icU2XdKYpiMSP3bXjf6j082K+9SCrQKlGwtKHgoA/</span>
+<span class="highlight-line">RYGEl4LVEx1Ouc37gqnb/1kFXX461JVICDwrD6V0n8J</span>
+<span class="highlight-line">=a1bk</span>
+<span class="highlight-line">-----END PGP PRIVATE KEY BLOCK-----</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"></span><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">sq inspect key.pgp</span></span></span>
+<span class="highlight-line"><span class="token output">key.pgp: Transferable Secret Key.</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">      Fingerprint: E5C27C2060459DB551C5EBF53E75B66BE87F9D60</span>
+<span class="highlight-line">  Public-key algo: EdDSA</span>
+<span class="highlight-line">  Public-key size: 256 bits</span>
+<span class="highlight-line">       Secret key: Unencrypted</span>
+<span class="highlight-line">    Creation time: 2009-01-03 18:15:05 UTC</span>
+<span class="highlight-line">        Key flags: certification, signing</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">           Subkey: 5CA1B2FDCEE8825C26417BAEFE3E1699CF296CD7</span>
+<span class="highlight-line">  Public-key algo: ECDH</span>
+<span class="highlight-line">  Public-key size: 256 bits</span>
+<span class="highlight-line">       Secret key: Unencrypted</span>
+<span class="highlight-line">    Creation time: 2009-01-03 18:15:05 UTC</span>
+<span class="highlight-line">        Key flags: transport encryption, data-at-rest encryption</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">           UserID: TestUser &lt;testuser@email.com></span></code></pre>
+
+    </div><h1 id="import-and-use-the-openpgp-key" tabindex="-1">4. Import and use the OpenPGP key <a class="header-anchor" href="#import-and-use-the-openpgp-key" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">$ <span class="token function">mkdir</span> /tmp/key</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ <span class="token assign-left variable">GNUPGHOME</span><span class="token operator">=</span>/tmp/key gpg <span class="token parameter variable">--import</span> ./key.pgp</span>
+<span class="highlight-line">gpg: key 4B898A6688554ED6: public key <span class="token string">"TestUser &lt;testuser@email.com>"</span> imported</span>
+<span class="highlight-line">gpg: key 3E75B66BE87F9D60: secret key imported</span>
+<span class="highlight-line">gpg: Total number processed: <span class="token number">1</span></span>
+<span class="highlight-line">gpg:              unchanged: <span class="token number">1</span></span>
+<span class="highlight-line">gpg:       secret keys read: <span class="token number">1</span></span>
+<span class="highlight-line">gpg:   secret keys imported: <span class="token number">1</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ <span class="token assign-left variable">GNUPGHOME</span><span class="token operator">=</span>/tmp/key gpg --list-secret-keys</span>
+<span class="highlight-line">/tmp/key/pubring.kbx</span>
+<span class="highlight-line">--------------------</span>
+<span class="highlight-line">sec   ed25519 <span class="token number">2009</span>-01-03 <span class="token punctuation">[</span>SC<span class="token punctuation">]</span></span>
+<span class="highlight-line">      E5C27C2060459DB551C5EBF53E75B66BE87F9D60</span>
+<span class="highlight-line">uid           <span class="token punctuation">[</span> unknown<span class="token punctuation">]</span> TestUser <span class="token operator">&lt;</span>testuser@email.com<span class="token operator">></span></span>
+<span class="highlight-line">ssb   cv25519 <span class="token number">2009</span>-01-03 <span class="token punctuation">[</span>E<span class="token punctuation">]</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line">$ <span class="token builtin class-name">echo</span> <span class="token builtin class-name">test</span> <span class="token operator">|</span> <span class="token assign-left variable">GNUPGHOME</span><span class="token operator">=</span>/tmp/key gpg --clear-sign --local-user<span class="token operator">=</span>TestUser</span>
+<span class="highlight-line">-----BEGIN PGP SIGNED MESSAGE-----</span>
+<span class="highlight-line">Hash: SHA512</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token builtin class-name">test</span></span>
+<span class="highlight-line">-----BEGIN PGP SIGNATURE-----</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">iIkEARYKADEWIQTlwnwgYEWdtVHF6/U+dbZr6H+dYAUCaAJ2SxMcdGVzdHVzZXJA</span>
+<span class="highlight-line">ZW1haWwuY29tAAoJED51tmvof51gAu0A+wYW/lHRxJA1+s3w9euZaufIZ5ovrM3X</span>
+<span class="highlight-line">/HQHWdT140U7AP9QindnT2tiWRcQzlb5WpIbDtX5Z33p88A+e+k8eFbkCg<span class="token operator">==</span></span>
+<span class="highlight-line"><span class="token operator">=</span>9XNM</span>
+<span class="highlight-line">-----END PGP SIGNATURE-----</span></code></pre>
+
+    </div><h1 id="some-notes" tabindex="-1">5. Some notes <a class="header-anchor" href="#some-notes" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The creation date is set autoomatically:</p>
+<blockquote>
+<p>The creation timestamp for the OpenPGP keys is set to the Bitcoin genesis block timestamp (1231006505 in seconds from Unix epoch). GPG considers this part of the key so it is important to keep it consistent. We use that timestamp because it's easy to retrieve, and it's not zero (which can trigger bad corner cases in GPG).</p>
+</blockquote>
+<p>You can override it via <code class="language-plain">--creation-timestamp</code>.
+I have asked the developer (jpdarago) to add an expiration date, and he responded and implemented the feature within hours:
+<a href="https://github.com/jpdarago/bip39key/issues/2" class="external-link" target="_blank">https://github.com/jpdarago/bip39key/issues/2</a>.
+You can (optionally) set it via <code class="language-plain">--expiration-timestamp</code>.</p>
+<p>You can also provide a passphrase either via <code class="language-plain">--passphrase</code> or <code class="language-plain">--pinentry</code>. I suggest the latter.</p>
+<blockquote>
+<p>When providing a passphrase, the tool will use it to generate the key together with the seed from the BIP39 mnemonic, and will also encrypt the resulting OpenPGP/OpenSSH keys with the provided passphrase.</p>
+</blockquote>
+<p>I have created two more issues, which are still open:</p>
+<ul>
+<li><a href="https://github.com/jpdarago/bip39key/issues/1" class="external-link" target="_blank">Add missing Key Usage: Authentication</a></li>
+<li><a href="https://github.com/jpdarago/bip39key/issues/3" class="external-link" target="_blank">Split passphrases (BIP39 vs. OpenPGP)</a></li>
+</ul>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
