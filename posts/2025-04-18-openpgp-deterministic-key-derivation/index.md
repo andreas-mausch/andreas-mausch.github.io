@@ -46,7 +46,7 @@ The seed phrase used in this article is just an example and not my actual key. :
 # Generate an OpenPGP key from the seed phrase
 
 ```shell-session
-$ bip39key --user-id="TestUser <testuser@email.com>" --format=pgp --armor --output-filename=key.pgp
+$ bip39key --user-id="TestUser <testuser@email.com>" --format=pgp --armor --use-concatenation --authorization-for-sign-key --output-filename=key.pgp
 pitch angle zero rubber index domain nature undo engine scrub gate mosquito
 
 $ cat key.pgp
