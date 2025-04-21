@@ -142,3 +142,9 @@ I have created two more issues, which are still open:
 
 - [Add missing Key Usage: Authentication](https://github.com/jpdarago/bip39key/issues/1)
 - [Split passphrases (BIP39 vs. OpenPGP)](https://github.com/jpdarago/bip39key/issues/3)
+
+As a workaround for the latter, I do this via `sequoia-pgp`:
+
+```bash
+bip39key --user-id="TestUser <testuser@email.com>" --format=pgp --armor --authorization-for-sign-key --use-concatenation | sq key password --cert-file - --output - > key.secured.pgp
+```
