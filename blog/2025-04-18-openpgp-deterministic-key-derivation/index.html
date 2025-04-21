@@ -193,7 +193,14 @@ You can (optionally) set it via <code class="language-plain">--expiration-timest
 <li><a href="https://github.com/jpdarago/bip39key/issues/1" class="external-link" target="_blank">Add missing Key Usage: Authentication</a></li>
 <li><a href="https://github.com/jpdarago/bip39key/issues/3" class="external-link" target="_blank">Split passphrases (BIP39 vs. OpenPGP)</a></li>
 </ul>
+<p>As a workaround for the latter, I do this via <code class="language-plain">sequoia-pgp</code>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">bip39key --user-id<span class="token operator">=</span><span class="token string">"TestUser &lt;testuser@email.com>"</span> <span class="token parameter variable">--format</span><span class="token operator">=</span>pgp <span class="token parameter variable">--armor</span> --authorization-for-sign-key --use-concatenation <span class="token operator">|</span> sq key password --cert-file - <span class="token parameter variable">--output</span> - <span class="token operator">></span> key.secured.pgp</span></code></pre>
 
+    </div>
 
 <script async src="/scripts/index.js"></script>
 
