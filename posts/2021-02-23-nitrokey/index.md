@@ -1,11 +1,11 @@
 ---
-title: NitroKey, encryption, gpg
+title: NitroKey Pro 2, encryption, gpg
 date: 2021-02-23T23:00:00+01:00
-tags: ['nitrokey', 'encryption', 'gpg', 'privacy', 'security']
+tags: ['nitrokey', 'encryption', 'gpg', 'openpgp', 'privacy', 'security']
 thumbnail: nitrokey-1.jpg
 ---
 
-I've used the following commands to get my NitroKey Pro running on Manjaro Linux.
+I've used the following commands to get my NitroKey Pro 2 running on Manjaro Linux.
 
 NitroKey is an alternative for the YubiKey, which is better known, cheaper, has more functionality...**BUT**:  
 The NitroKey's [hardware](https://github.com/Nitrokey/nitrokey-pro-hardware) and [firmware](https://github.com/Nitrokey/nitrokey-pro-firmware) are open source!
