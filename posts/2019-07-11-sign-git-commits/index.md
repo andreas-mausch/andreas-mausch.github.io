@@ -1,7 +1,7 @@
 ---
 title: Sign Git commits
 date: 2019-07-12T16:00:00+02:00
-tags: ['git', 'security', 'signing', 'certificates', 'gpg']
+tags: ['git', 'security', 'signing', 'certificates', 'gpg', 'openpgp']
 ---
 
 # Find signingkey
