@@ -653,11 +653,11 @@ I will write a new guide soon.&lt;/p&gt;
 &lt;h2 id=&quot;nikon-d5600&quot; tabindex=&quot;-1&quot;&gt;1.1. Nikon D5600 &lt;a class=&quot;header-anchor&quot; href=&quot;https://andreas-mausch.de/blog/2021-03-08-nikon-dslr-webcam/#nikon-d5600&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;</content>
   </entry>
   <entry>
-    <title>NitroKey, encryption, gpg</title>
+    <title>NitroKey Pro 2, encryption, gpg</title>
     <link href="https://andreas-mausch.de/blog/2021-02-23-nitrokey/"/>
     <updated>2021-02-23T22:00:00Z</updated>
     <id>https://andreas-mausch.de/blog/2021-02-23-nitrokey/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve used the following commands to get my NitroKey Pro running on Manjaro Linux.&lt;/p&gt;
+    <content xml:lang="en" type="html">&lt;p&gt;I&#39;ve used the following commands to get my NitroKey Pro 2 running on Manjaro Linux.&lt;/p&gt;
 &lt;p&gt;NitroKey is an alternative for the YubiKey, which is better known, cheaper, has more functionality...&lt;strong&gt;BUT&lt;/strong&gt;:&lt;br /&gt;
 The NitroKey&#39;s &lt;a href=&quot;https://github.com/Nitrokey/nitrokey-pro-hardware&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;hardware&lt;/a&gt; and &lt;a href=&quot;https://github.com/Nitrokey/nitrokey-pro-firmware&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;firmware&lt;/a&gt; are open source!&lt;/p&gt;
 &lt;p&gt;I use my NitroKey mainly for &lt;a href=&quot;https://www.passwordstore.org/&quot; class=&quot;external-link&quot; target=&quot;_blank&quot;&gt;pass&lt;/a&gt;, the &amp;quot;standard unix password manager&amp;quot;,
