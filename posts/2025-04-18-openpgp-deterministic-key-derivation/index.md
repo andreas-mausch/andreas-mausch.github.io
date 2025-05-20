@@ -125,7 +125,7 @@ ZW1haWwuY29tAAoJED51tmvof51gAu0A+wYW/lHRxJA1+s3w9euZaufIZ5ovrM3X
 
 # Some notes
 
-The creation date is set autoomatically:
+The creation date is set automatically:
 
 > The creation timestamp for the OpenPGP keys is set to the Bitcoin genesis block timestamp (1231006505 in seconds from Unix epoch). GPG considers this part of the key so it is important to keep it consistent. We use that timestamp because it's easy to retrieve, and it's not zero (which can trigger bad corner cases in GPG).
 
