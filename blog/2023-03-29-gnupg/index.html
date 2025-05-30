@@ -167,6 +167,9 @@
 
                     <li><a href="#optional%3A-publish-key-to-keyserver">1.8. Optional: Publish key to keyserver</a>
             		</li>
+
+                    <li><a href="#restore-public-key-from-hardware-key-(yubikey%2C-nitrokey)">1.9. Restore public key from hardware key (Yubikey, Nitrokey)</a>
+            		</li>
                 </ol>
             		</li>
 
@@ -560,6 +563,11 @@ Just set the trust level to <em>ultimate (5)</em>.</p>
     </div><p>See my published key <a href="https://keyserver.ubuntu.com/pks/lookup?search=6FB79D6D075A268571DE9E42C2C14B464D7B72E9&amp;fingerprint=on&amp;op=index" class="external-link" target="_blank">here</a>:</p>
 <img src="/blog/2023-03-29-gnupg/keyserver-ubuntu.png" width="1323" height="945" alt="undefined">
 <p><a href="/blog/2023-03-29-gnupg/andreas-mausch.public.asc">Download</a></p>
+<h2 id="restore-public-key-from-hardware-key-(yubikey%2C-nitrokey)" tabindex="-1">1.9. Restore public key from hardware key (Yubikey, Nitrokey) <a class="header-anchor" href="#restore-public-key-from-hardware-key-(yubikey%2C-nitrokey)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<p>You need to have the public key in order to use the hardware key,
+so follow this post in case you don't have access to it anymore:</p>
+<p><a href="https://www.nicksherlock.com/2021/08/recovering-lost-gpg-public-keys-from-your-yubikey/" class="external-link" target="_blank">Recovering lost GPG public keys from your YubiKey</a></p>
+<p>See also this post: <a href="/blog/2021-02-23-nitrokey/">NitroKey</a></p>
 <h1 id="key-id%3A-short-vs.-long-vs.-keygrip-vs.-fingerprint" tabindex="-1">2. Key ID: Short vs. Long vs. Keygrip vs. Fingerprint <a class="header-anchor" href="#key-id%3A-short-vs.-long-vs.-keygrip-vs.-fingerprint" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <table>
 <thead>
