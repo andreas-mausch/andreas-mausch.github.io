@@ -328,6 +328,15 @@ See my published key [here](https://keyserver.ubuntu.com/pks/lookup?search=6FB79
 
 [Download]({{ "andreas-mausch.public.asc" | relativeFile | url }})
 
+## Restore public key from hardware key (Yubikey, Nitrokey)
+
+You need to have the public key in order to use the hardware key,
+so follow this post in case you don't have access to it anymore:
+
+[Recovering lost GPG public keys from your YubiKey](https://www.nicksherlock.com/2021/08/recovering-lost-gpg-public-keys-from-your-yubikey/)
+
+See also this post: [NitroKey]({% link-post "2021-02-23-nitrokey" %})
+
 # Key ID: Short vs. Long vs. Keygrip vs. Fingerprint
 
 | Type         | Value                                              |
