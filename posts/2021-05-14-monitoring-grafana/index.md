@@ -245,3 +245,14 @@ A lot of things changed here, which made this update a bit of a hassle.
 - `enable_alertmanager_v2` is the default now
 - `max_transfer_retries` is removed
 - Ingester WAL now defaults to on [link](http://grafana.com/docs/loki/latest/setup/upgrade/#ingester-wal-now-defaults-to-on-and-chunk-transfers-are-disabled-by-default)
+
+# Grafana Alerting
+
+Grafana's modern alerting system was introduced in version 8.0 as an opt-in feature and
+became the default in version 9.0.
+Grafana 9.0 was released on June 14, 2022.
+
+Grafana Alerting replaces much of Alertmanager’s functionality,
+and you can drop Alertmanager if you're using Grafana 9.0+ with the unified alerting system.
+
+You still need Alertmanager if other services beside Grafana send alerts.
