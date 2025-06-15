@@ -230,3 +230,18 @@ sum by (container_label_com_docker_compose_service) (container_memory_usage_byte
 In case you use docker swarm, you can use *container_label_com_docker_swarm_service_name* instead of *container_label_com_docker_compose_service*.
 
 {% image "grafana-with-memory-usage.png" %}
+
+# Grafana Loki update: 2.2.1 -> 3.2.0
+
+A lot of things changed here, which made this update a bit of a hassle.
+
+- Schema update: v11 -> v13
+- `boltdb` replaced by `tsdb`
+- `enforce_metric_name` has been deprecated [link](https://github.com/grafana/loki/issues/12594)
+- retention is now done by compactor instead
+- `table_manager/retention_period` moved to `limits_config`
+- `chunk_store_config/max_look_back_period` moved to `limits_config/max_query_lookback`
+- `table_manager` is deprecated
+- `enable_alertmanager_v2` is the default now
+- `max_transfer_retries` is removed
+- Ingester WAL now defaults to on [link](http://grafana.com/docs/loki/latest/setup/upgrade/#ingester-wal-now-defaults-to-on-and-chunk-transfers-are-disabled-by-default)
