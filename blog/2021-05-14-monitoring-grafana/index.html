@@ -269,6 +269,20 @@ Data comes from cadvisor.</p>
 
     </div><p>In case you use docker swarm, you can use <em>container_label_com_docker_swarm_service_name</em> instead of <em>container_label_com_docker_compose_service</em>.</p>
 <img src="/blog/2021-05-14-monitoring-grafana/grafana-with-memory-usage.png" width="1550" height="885" alt="undefined">
+<h1 id="grafana-loki-update%3A-2.2.1--%3E-3.2.0" tabindex="-1">9. Grafana Loki update: 2.2.1 -&gt; 3.2.0 <a class="header-anchor" href="#grafana-loki-update%3A-2.2.1--%3E-3.2.0" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>A lot of things changed here, which made this update a bit of a hassle.</p>
+<ul>
+<li>Schema update: v11 -&gt; v13</li>
+<li><code class="language-plain">boltdb</code> replaced by <code class="language-plain">tsdb</code></li>
+<li><code class="language-plain">enforce_metric_name</code> has been deprecated <a href="https://github.com/grafana/loki/issues/12594" class="external-link" target="_blank">link</a></li>
+<li>retention is now done by compactor instead</li>
+<li><code class="language-plain">table_manager/retention_period</code> moved to <code class="language-plain">limits_config</code></li>
+<li><code class="language-plain">chunk_store_config/max_look_back_period</code> moved to <code class="language-plain">limits_config/max_query_lookback</code></li>
+<li><code class="language-plain">table_manager</code> is deprecated</li>
+<li><code class="language-plain">enable_alertmanager_v2</code> is the default now</li>
+<li><code class="language-plain">max_transfer_retries</code> is removed</li>
+<li>Ingester WAL now defaults to on <a href="http://grafana.com/docs/loki/latest/setup/upgrade/#ingester-wal-now-defaults-to-on-and-chunk-transfers-are-disabled-by-default" class="external-link" target="_blank">link</a></li>
+</ul>
 
 
 <script async src="/scripts/index.js"></script>
