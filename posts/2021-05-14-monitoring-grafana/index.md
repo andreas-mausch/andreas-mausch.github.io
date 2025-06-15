@@ -256,3 +256,16 @@ Grafana Alerting replaces much of Alertmanager’s functionality,
 and you can drop Alertmanager if you're using Grafana 9.0+ with the unified alerting system.
 
 You still need Alertmanager if other services beside Grafana send alerts.
+
+# Let Loki detect the log level
+
+In order to filter for only warnings or errors, you can use a new configuration
+to automatically detect the log level.
+
+For this, you need to enable `allow_structured_metadata` and `discover_log_levels`.
+Both are enabled by default on newer installations.
+
+Structured metadata requires schema v13 and the TSDB index type.
+
+In my experience, the detection was not 100% reliable, and some lines beginning with
+`WARN: something went wrong` would be detected as error.
