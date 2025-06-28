@@ -126,7 +126,7 @@ Update: New ChatGPT explanation:
 > while traditional resident credentials are local-only
 > and more typical in enterprise or security-conscious contexts.
 
-## WebAuthn: Resident vs. non-resident (a.k.a Discoverable credentials)
+## WebAuthn: Resident (a.k.a. discoverable) vs. non-resident credentials
 
 In both cases, the private key stays on the Nitrokey.
 
