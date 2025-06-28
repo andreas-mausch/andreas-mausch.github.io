@@ -119,6 +119,13 @@ I am oldschool in this regard:
 No matter how secure that process might be, I don't like the idea to share a private key
 over the internet.
 
+Update: New ChatGPT explanation:
+
+> All passkeys are residential credentials, but not all residential credentials are passkeys.
+> The key distinction is that passkeys are synced and consumer-friendly,
+> while traditional resident credentials are local-only
+> and more typical in enterprise or security-conscious contexts.
+
 ## WebAuthn: Resident vs. non-resident (a.k.a Discoverable credentials)
 
 In both cases, the private key stays on the Nitrokey.
