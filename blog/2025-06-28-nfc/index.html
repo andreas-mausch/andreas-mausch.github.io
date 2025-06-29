@@ -1,0 +1,696 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>Near-field communication (NFC): Tags, Smartcards, Javacards</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>Near-field communication (NFC): Tags, Smartcards, Javacards</h1>
+<div>
+  <time class="postlist-date" datetime="2025-06-18T15:20:00.000+00:00">Jun 18, 2025</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/javacard">#javacard</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/ndef">#ndef</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/nfc">#nfc</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/ntag216">#ntag216</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/openpgp">#openpgp</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/pcsc">#pcsc</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/smartcard">#smartcard</a></li>
+        
+    
+  </ul>
+</div>
+
+
+  <aside>
+    <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#nfc-tag-types-and-protocols">1. NFC tag types and protocols</a>
+            		</li>
+
+                    <li><a href="#ndef">2. NDEF</a>
+            		</li>
+
+                    <li><a href="#read-speed">3. Read speed</a>
+            		</li>
+
+                    <li><a href="#pc%2Fsc-and-apdu">4. PC/SC and APDU</a>
+            		</li>
+
+                    <li><a href="#tools-to-read-nfc-tags">5. Tools to read NFC tags</a>
+            
+                <ol>
+                    
+                    <li><a href="#linux">5.1. Linux</a>
+            
+                <ol>
+                    
+                    <li><a href="#pcsc-lite">5.1.1. pcsc-lite</a>
+            		</li>
+
+                    <li><a href="#nfc-tools">5.1.2. nfc-tools</a>
+            
+                <ol>
+                    
+                    <li><a href="#list-readers">5.1.2.1. List readers</a>
+            		</li>
+
+                    <li><a href="#reading-data">5.1.2.2. Reading data</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#pcsc-rust">5.1.3. pcsc-rust</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#android">5.2. Android</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#apdu-commands">6. APDU commands</a>
+            		</li>
+
+                    <li><a href="#java-cards">7. Java Cards</a>
+            		</li>
+
+                    <li><a href="#list-of-common-tags">8. List of common tags</a>
+            		</li>
+                </ol>
+            </nav>
+  </aside>
+
+
+<p>I tinkered with NFC tags the last couple of days and want to share what I learned.</p>
+<h1 id="nfc-tag-types-and-protocols" tabindex="-1">1. NFC tag types and protocols <a class="header-anchor" href="#nfc-tag-types-and-protocols" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>There are different kind of NFC tags from different vendors,
+which speak different protocols.</p>
+<p>I first bought the wrong type, because I thought every NFC tag would
+speak the same standardized protocol. So don't make my mistake.</p>
+<p>Most tags speak one of those:</p>
+<ul>
+<li>ISO 14443A - Type 2
+Very common, e.g. NTAG213/NTAG215/NTAG216,
+optimized for simple NDEF data (e.g. URLs, IDs, coupons)</li>
+<li>ISO 14443A - Type 4
+Ideal for authentication, payments, access control</li>
+<li>MIFARE Classic – Legacy (proprietary)
+Still found in older transit systems and access cards</li>
+<li>MIFARE Ultralight – Based on NFC Forum Type 2</li>
+<li>MIFARE DESFire – Based on ISO 14443A; used in secure applications</li>
+<li>ISO 7816: Smart card command set (APDU)
+Used in Type 4 tags, secure elements, ePassports, bank cards</li>
+</ul>
+<p>The simple tags like NTAG216 speak <code class="language-plain">ISO 14443A - Type 2</code>.</p>
+<p>The more advanced ones which offer encryption and/or smartcard-like
+features speak <code class="language-plain">ISO 14443A - Type 4</code>.</p>
+<h1 id="ndef" tabindex="-1">2. NDEF <a class="header-anchor" href="#ndef" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>If you ever see a simple NFC tag which opens a website or
+provides contact data (vCard), it usually uses the NFC Data Exchange Format (NDEF).</p>
+<p>Most of the tags which use NDEF are ISO 14443A - Type 2, like the NTAG213.</p>
+<h1 id="read-speed" tabindex="-1">3. Read speed <a class="header-anchor" href="#read-speed" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>In my experience, some tags need to be placed very accurately on the reader
+or the back of your phone and take some seconds to be recognized.
+Others are detected almost instantly, even when not touching the reader yet.</p>
+<p>In my experience it depended on the type of the tag and the amount of data which
+is transmitted. So a NTAG213 with 144 bytes is detected way faster and more
+reliable than a MIFARE DESFire EV3 with 8 KB.</p>
+<p>So from my preference, I like the smaller ones a lot, and if they are sufficient to
+your needs, I recommend them to you.</p>
+<h1 id="pc%2Fsc-and-apdu" tabindex="-1">4. PC/SC and APDU <a class="header-anchor" href="#pc%2Fsc-and-apdu" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>PC/SC (Personal Computer/Smart Card) is a standardized interface
+for software to talk to smart card readers.</p>
+<p>We can talk to our tags via APDU (Application Protocol Data Unit) commands.</p>
+<p>One note: Some NFC communication is more low-level than APDU, and cannot
+be easily captured or sent.</p>
+<h1 id="tools-to-read-nfc-tags" tabindex="-1">5. Tools to read NFC tags <a class="header-anchor" href="#tools-to-read-nfc-tags" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="linux" tabindex="-1">5.1. Linux <a class="header-anchor" href="#linux" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<ul>
+<li>https://github.com/nfc-tools/libnfc</li>
+<li>pcsc-lite</li>
+<li>pcsc-rust</li>
+</ul>
+<p>Problem with <code class="language-plain">libnfc</code>:
+<a href="https://github.com/nfc-tools/libnfc/issues/755" class="external-link" target="_blank">Cannot dump NTAG216: Empty ATQA (00 00) on NFC reader AK9567 #755</a></p>
+<p>My reader does not provide a special field (ATQA) to the PC which is transferred
+between the tag and the reader during the initial handshake.
+<code class="language-plain">libnfc</code> relies on that value though to detect the tag type, which then fails.
+I couldn't find a way to spoof that ATQA field neither, so I cannot use my reader with libnfc. :(</p>
+<h3 id="pcsc-lite" tabindex="-1">5.1.1. pcsc-lite <a class="header-anchor" href="#pcsc-lite" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>List readers:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">systemctl start pcscd.service</span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># List readers</span></span>
+<span class="highlight-line">pcsc_scan <span class="token parameter variable">-r</span></span>
+<span class="highlight-line"></span>
+<span class="highlight-line"><span class="token comment"># List cards</span></span>
+<span class="highlight-line">pcsc_scan <span class="token parameter variable">-c</span></span></code></pre>
+
+    </div><p>There is also <code class="language-plain">scriptor</code>, which is part of the pcsc-tools.
+It can send APDU commands directly to your reader.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">scriptor <span class="token parameter variable">-r</span> <span class="token string">'Alcor Link AK9567 [Contactless Card Reader] 01 00'</span></span></span></span>
+<span class="highlight-line"><span class="token output">Using given card reader: Alcor Link AK9567 [Contactless Card Reader] 01 00</span>
+<span class="highlight-line">Using T=1 protocol</span>
+<span class="highlight-line">Reading commands from STDIN</span>
+<span class="highlight-line">reset</span>
+<span class="highlight-line">> RESET</span>
+<span class="highlight-line">&lt; OK: 3B 8F 80 01 80 4F 0C A0 00 00 03 06 03 00 03 00 00 00 00 68</span>
+<span class="highlight-line">^C⏎</span></code></pre>
+
+    </div><p>See below for a list of APDU commands I have tried.</p>
+<h3 id="nfc-tools" tabindex="-1">5.1.2. nfc-tools <a class="header-anchor" href="#nfc-tools" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>Hardly documented, but you might want to set environment variables for more output
+and selecting the right device:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">LIBNFC_LOG_LEVEL=3</span>
+<span class="highlight-line">LIBNFC_DEVICE='pcsc:Alcor Link AK9567 [Contactless Card Reader] 01 00'</span></code></pre>
+
+    </div><h4 id="list-readers" tabindex="-1">5.1.2.1. List readers <a class="header-anchor" href="#list-readers" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h4>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">nfc-list <span class="token punctuation">[</span>-v<span class="token punctuation">]</span></span></code></pre>
+
+    </div><p>Example output:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">nfc-scan-device <span class="token parameter variable">-v</span></span></span></span>
+<span class="highlight-line"><span class="token output">nfc-scan-device uses libnfc 1.8.0</span>
+<span class="highlight-line">2 NFC device(s) found:</span>
+<span class="highlight-line">- Alcor Link AK9567 00 00:</span>
+<span class="highlight-line">    pcsc:Alcor Link AK9567 00 00</span>
+<span class="highlight-line">Generic (MLM�U)</span>
+<span class="highlight-line">- Alcor Link AK9567 [Contactless Card Reader] 01 00:</span>
+<span class="highlight-line">    pcsc:Alcor Link AK9567 [Contactless Card Reader] 01 00</span>
+<span class="highlight-line">Generic (�\LM�U)</span></code></pre>
+
+    </div><div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">nfc-list</span></span></span>
+<span class="highlight-line"><span class="token output">nfc-list uses libnfc 1.8.0</span>
+<span class="highlight-line">NFC device: Alcor Link AK9567 00 00 opened</span>
+<span class="highlight-line">NFC device: Alcor Link AK9567 [Contactless Card Reader] 01 00 opened</span>
+<span class="highlight-line">1 ISO14443A passive target(s) found:</span>
+<span class="highlight-line">ISO/IEC 14443A (106 kbps) target:</span>
+<span class="highlight-line">    ATQA (SENS_RES): 00  00</span>
+<span class="highlight-line">       UID (NFCID1): 04  89  b1  8a  90  6b  81</span>
+<span class="highlight-line">      SAK (SEL_RES): 20</span>
+<span class="highlight-line">                ATS: 75  77  81  02  80  4f  0c  a0  00  00  03  06  03  00  03  00  00  00  00</span></code></pre>
+
+    </div><h4 id="reading-data" tabindex="-1">5.1.2.2. Reading data <a class="header-anchor" href="#reading-data" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h4>
+<p>As mentioned, this fails with <code class="language-plain">nfc-tools</code> and my reader.</p>
+<p>They tell nfc-tools which kind of tag is scanned.
+If it is not available, the <code class="language-plain">nfc-mfultralight r</code> command fails,
+because it says the tag is not a <em>MIFARE Ultralight card</em>.</p>
+<p>I have used a NTAG216 for testing this.</p>
+<p>However, I later found a way to read single blocks
+using APDU directly. Please see below.</p>
+<h3 id="pcsc-rust" tabindex="-1">5.1.3. pcsc-rust <a class="header-anchor" href="#pcsc-rust" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>A neat tool written in Rust to communicate with PC/SC.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">./target/debug/examples/readme</span></span></span>
+<span class="highlight-line"><span class="token output">Using reader: "Alcor Link AK9567 [Contactless Card Reader] 01 00"</span>
+<span class="highlight-line">Sending APDU: [0, 164, 4, 0, 10, 160, 0, 0, 0, 98, 3, 1, 12, 6, 1]</span>
+<span class="highlight-line">APDU response: [106, 130]</span></code></pre>
+
+    </div><p>I have not tried anything further than the provided example.</p>
+<h2 id="android" tabindex="-1">5.2. Android <a class="header-anchor" href="#android" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<ul>
+<li><a href="https://f-droid.org/packages/im.nfc.nfsee/" class="external-link" target="_blank">NFSee - NFC Card Helper</a></li>
+<li><a href="https://github.com/ikarus23/MifareClassicTool" class="external-link" target="_blank">MIFARE Classic Tool</a>
+only works with Mifare Classic, not other Mifare products (Ultralight for example)</li>
+<li>Non-free: <a href="https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&amp;hl=en" class="external-link" target="_blank">NFC Tools</a>
+the best I have tried. They also provide a Desktop variant.</li>
+</ul>
+<h1 id="apdu-commands" tabindex="-1">6. APDU commands <a class="header-anchor" href="#apdu-commands" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Some commands are specific to your reader and may not work or
+even destroy your tag, so please use at your own risk.</p>
+<ul>
+<li><code class="language-plain">FF CA 00 00 00</code>
+Read serial number (UID)</li>
+<li><code class="language-plain">FF B0 00 01 10</code>
+Read block 01</li>
+<li><code class="language-plain">FF D6 00 06 10 01 02 03 04</code>
+Write block 06</li>
+</ul>
+<p>Get available memory: <code class="language-plain">FF B0 00 03 04</code>
+This reads the <code class="language-plain">CC</code> (Capability Container) block.
+It describes how the memory of the tag is structured and how it should be accessed.
+On Type 2 tags (like NTAG213), it’s at bytes 12–15 (block 3).
+On Type 4 tags, it's inside a special EF (Elementary File) called <code class="language-plain">EF.CC</code>.</p>
+<p>The response looks like this <code class="language-plain">E1 10 6D 00 90 00</code>.
+In this case 0x6D * 8 = 876 bytes user memory (this is NTAG216).</p>
+<blockquote>
+<p>This follows the ISO/IEC 7816-4 standard for APDUs.
+FF: Class byte – proprietary class (non-ISO standard), often used for vendor-specific commands (commonly for memory cards, contactless cards, etc.)
+B0: Instruction – typically B0 means Read Binary</p>
+</blockquote>
+<p>Example call with request and response:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-shell-session"><code class="language-shell-session"><span class="highlight-line"><span class="token command"><span class="token shell-symbol important">$</span> <span class="token bash language-bash">scriptor <span class="token parameter variable">-r</span> <span class="token string">'Alcor Link AK9567 [Contactless Card Reader] 01 00'</span></span></span></span>
+<span class="highlight-line"><span class="token output">Using given card reader: Alcor Link AK9567 [Contactless Card Reader] 01 00</span>
+<span class="highlight-line">Using T=1 protocol</span>
+<span class="highlight-line">Reading commands from STDIN</span>
+<span class="highlight-line">reset</span>
+<span class="highlight-line">> RESET</span>
+<span class="highlight-line">&lt; OK: 3B 8F 80 01 80 4F 0C A0 00 00 03 06 03 00 03 00 00 00 00 68</span>
+<span class="highlight-line">FF CA 00 00 00</span>
+<span class="highlight-line">> FF CA 00 00 00</span>
+<span class="highlight-line">&lt; 04 BD 0F 8A CD 11 90 90 00 : Normal processing.</span></code></pre>
+
+    </div><h1 id="java-cards" tabindex="-1">7. Java Cards <a class="header-anchor" href="#java-cards" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Java cards or the Java Card OpenPlatform (JCOP) are very interesting.</p>
+<p>They provide smart card functionality and can store a key in a secret way,
+so the key cannot be extracted from the card.</p>
+<p>You can install special Java Card applets onto the chip.
+Examples are:</p>
+<ul>
+<li><a href="https://github.com/github-af/SmartPGP" class="external-link" target="_blank">SmartPGP</a>
+an OpenPGP card, compatible with GnuPG (gpg)</li>
+<li><a href="https://github.com/OpenJavaCard/openjavacard-ndef" class="external-link" target="_blank">openjavacard-ndef</a></li>
+<li><a href="https://github.com/Toporin/SatoChipApplet" class="external-link" target="_blank">Satochip</a>
+a crypto-currency hardware wallet with full BIP32/BIP39 support</li>
+</ul>
+<p>Especially the SmartPGP applet is really cool in my opinion,
+as it allows to use a PGP key in combination with Android and OpenKeychain via NFC.</p>
+<p>I also own a Nitrokey 3C NFC, and it's not possible there, because the
+secure element cannot be powered via NFC.
+The Java Card however, it magically can. I'm not sure why, maybe it is more power efficient.</p>
+<p>While most Java Cards come in the form of SIM cards with dual interface (physical or NFC),
+there is one cool project called <a href="https://store.nfcring.com/products/omni.html" class="external-link" target="_blank">OMNI Ring</a>,
+which is a full Java Card (unfortunately only version 3.0.1) in the form factor of a ring.
+It is sold out though. :(</p>
+<h1 id="list-of-common-tags" tabindex="-1">8. List of common tags <a class="header-anchor" href="#list-of-common-tags" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Here is a list of common tags
+(mostly ChatGPT, not verified).</p>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Model</th>
+<th>User Memory (Bytes)</th>
+<th>ISO Standard(s)</th>
+<th>NFC Type</th>
+<th>Encryption</th>
+<th>Password Protection</th>
+<th>Secure Messaging</th>
+<th>Tamper Detection</th>
+<th>Energy Harvesting</th>
+<th>Fast Read</th>
+<th>Applications / Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NXP</td>
+<td>NTAG213</td>
+<td>144</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>None</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>NFC Forum compliant</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>NTAG215</td>
+<td>504</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>None</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>Used in Amiibo</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>NTAG216</td>
+<td>888</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>None</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>High capacity</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>NTAG424 DNA</td>
+<td>256</td>
+<td>ISO 14443 Type A</td>
+<td>Type 4</td>
+<td>AES-128</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>Secure authentication, URL mirroring</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE Classic 1K</td>
+<td>1024</td>
+<td>ISO 14443 Type A</td>
+<td>Proprietary</td>
+<td>CRYPTO1 (weak)</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>16 sectors, legacy access</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE Classic 4K</td>
+<td>4096</td>
+<td>ISO 14443 Type A</td>
+<td>Proprietary</td>
+<td>CRYPTO1 (weak)</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>40 sectors, large memory</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE DESFire EV1</td>
+<td>2K / 4K / 8K</td>
+<td>ISO 14443 Type A</td>
+<td>Type 4</td>
+<td>AES/3DES</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Enterprise-grade, multi-application</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE DESFire EV3</td>
+<td>2K / 4K / 8K</td>
+<td>ISO 14443 Type A</td>
+<td>Type 4</td>
+<td>AES</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>Enhanced security, random IDs</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE Plus EV1</td>
+<td>2K / 4K</td>
+<td>ISO 14443 Type A</td>
+<td>Type 4</td>
+<td>AES-128</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Upgrade path from Classic, AES-secured access</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE Plus S / X</td>
+<td>2K / 4K</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2 / 4 (SL1/SL3)</td>
+<td>AES-128 (SL3 only)</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Less features than EV1-Version, Upgradeable to AES-secured access in SL3</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE Ultralight C</td>
+<td>192</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>3DES</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Low-cost ticketing</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>MIFARE Ultralight EV1</td>
+<td>48 / 128</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>AES-128</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>Improved Ultralight version, secure tickets</td>
+</tr>
+<tr>
+<td>STMicroelectronics</td>
+<td>ST25TA02K</td>
+<td>256</td>
+<td>ISO 14443 Type A</td>
+<td>Type 4</td>
+<td>None</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>Tamper detection</td>
+</tr>
+<tr>
+<td>STMicroelectronics</td>
+<td>ST25TV02K</td>
+<td>256</td>
+<td>ISO 15693</td>
+<td>Type 5</td>
+<td>None</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>Long range</td>
+</tr>
+<tr>
+<td>STMicroelectronics</td>
+<td>ST25DV04K</td>
+<td>4096 (EEPROM)</td>
+<td>ISO 15693 + I²C</td>
+<td>Dual (Type 5 + I²C)</td>
+<td>None</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>Mailbox, fast transfer</td>
+</tr>
+<tr>
+<td>Sony</td>
+<td>FeliCa Lite-S</td>
+<td>224</td>
+<td>FeliCa (Proprietary)</td>
+<td>Type 3</td>
+<td>AES MAC (auth only)</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Lightweight auth, IDm</td>
+</tr>
+<tr>
+<td>Sony</td>
+<td>FeliCa RC-S620</td>
+<td>1024</td>
+<td>FeliCa (Proprietary)</td>
+<td>Type 3</td>
+<td>Proprietary</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>Transit card use (e.g., Suica)</td>
+</tr>
+<tr>
+<td>Infineon</td>
+<td>my-d move</td>
+<td>320</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>None</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Basic protection</td>
+</tr>
+<tr>
+<td>Infineon</td>
+<td>my-d proximity</td>
+<td>1024</td>
+<td>ISO 14443 Type A</td>
+<td>Type 2</td>
+<td>Proprietary</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Multiple apps/security levels</td>
+</tr>
+<tr>
+<td>Broadcom (Legacy)</td>
+<td>Topaz 512</td>
+<td>64</td>
+<td>ISO 14443 Type A</td>
+<td>Type 1</td>
+<td>None</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>Simple, low-cost, now obsolete</td>
+</tr>
+<tr>
+<td>NXP</td>
+<td>JCOP4 J3R180</td>
+<td>180 KB</td>
+<td>JavaCard 3.0.5 Classic, ISO 7816, ISO 14443 A, GlobalPlatform 2.x, EMV</td>
+<td>Contact + Contactless (dual)</td>
+<td>AES‑256 / 3DES / RSA‑4096 / ECC‑521</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>Secure OS, multi‑app, EMV, eID, ePassport, digital signature</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Secure Messaging: Includes features like random UID, mutual authentication, etc.</li>
+<li>Tamper Detection: Built-in mechanism for detecting physical tampering.</li>
+<li>Energy Harvesting: Can power small external circuitry from the reader's field.</li>
+<li>Fast Read: Optimized for reading multiple blocks quickly.</li>
+</ul>
+<p>The Nitrokey 3C NFC is a <strong>MIFARE Plus</strong>.</p>
+
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
