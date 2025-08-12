@@ -121,11 +121,14 @@ Exactly what I was looking for.</p>
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
-    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">lpac profile download <span class="token parameter variable">-s</span> example.tld <span class="token parameter variable">-m</span> <span class="token string">"XX-YYYYYY-ZZZZZZZ"</span></span>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">lpac profile download <span class="token parameter variable">-s</span> example.tld <span class="token parameter variable">-m</span> <span class="token string">"XX-YYYYYY-ZZZZZZZ"</span> <span class="token punctuation">[</span>-c <span class="token number">123456</span><span class="token punctuation">]</span></span>
 <span class="highlight-line">lpac profile <span class="token builtin class-name">enable</span> <span class="token punctuation">[</span>ICCID<span class="token punctuation">]</span></span>
 <span class="highlight-line">lpac profile nickname <span class="token punctuation">[</span>ICCID<span class="token punctuation">]</span> <span class="token string">"My new eSIM"</span></span></code></pre>
 
-    </div><blockquote>
+    </div><p><code class="language-plain">-c</code> is the confirmation code given by your provider.
+If your provider gave you one, you must use it, otherwise the download will fail.
+If you don't have one, skip this parameter.</p>
+<blockquote>
 <p>If you get an error involving * SCardEstablishContext() * APDU <strong>driver</strong> init failed</p>
 <p>Try installing a possible missing dependency ccid. Also enable the systemd pcscd.socket with a command like
 <code class="language-plain">systemctl enable --now pcscd.socket</code></p>
