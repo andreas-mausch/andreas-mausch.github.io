@@ -74,10 +74,14 @@ You need a QR-Code, which will give you a string in the format
 `LPA:1$example.tld$XX-YYYYYY-ZZZZZZZ`.
 
 ```bash
-lpac profile download -s example.tld -m "XX-YYYYYY-ZZZZZZZ"
+lpac profile download -s example.tld -m "XX-YYYYYY-ZZZZZZZ" [-c 123456]
 lpac profile enable [ICCID]
 lpac profile nickname [ICCID] "My new eSIM"
 ```
+
+`-c` is the confirmation code given by your provider.
+If your provider gave you one, you must use it, otherwise the download will fail.
+If you don't have one, skip this parameter.
 
 > If you get an error involving * SCardEstablishContext() * APDU **driver** init failed
 > 
