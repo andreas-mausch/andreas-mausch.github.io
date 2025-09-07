@@ -2,6 +2,7 @@
 title: "Near-field communication (NFC): Tags, Smartcards, Javacards"
 date: 2025-06-18T17:20:00+02:00
 tags: ["nfc", "openpgp", "smartcard", "javacard", "ntag216", "ndef", "pcsc"]
+thumbnail: thumbnail.jpg
 toc: true
 ---
 
