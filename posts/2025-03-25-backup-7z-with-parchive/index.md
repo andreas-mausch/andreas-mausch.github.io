@@ -2,7 +2,10 @@
 title: "Backup: 7z with error correction data using parchive"
 date: 2025-03-25T15:00:00+07:00
 tags: ['quickpar', 'data corruption', 'fix files']
+thumbnail: broken-file.jpg
 ---
+
+{% image "broken-file.jpg", "Broken file" %}
 
 Every few years I make a backup of my most important data files
 to a Blu-Ray M-disc.
