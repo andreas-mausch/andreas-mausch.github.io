@@ -2,6 +2,7 @@
 title: "OpenPGP: Deterministic Key Derivation via BIP39"
 date: 2025-04-18T17:00:00+07:00
 tags: ['gpg', 'openpgp', 'kdf']
+thumbnail: thumbnail.jpg
 ---
 
 Some of you might know BIP-39 from Bitcoin.
