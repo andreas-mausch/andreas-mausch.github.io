@@ -197,6 +197,26 @@ No struggle at all (which is not always the case for the tech projects I have tr
 <span class="highlight-line">minikube stop</span>
 <span class="highlight-line">minikube delete</span></code></pre>
 
+    </div><h1 id="update%3A-kind" tabindex="-1">8. Update: kind <a class="header-anchor" href="#update%3A-kind" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>kind is another neat alternative to do local kubernetes deployments.</p>
+<p>It is more lightweight. Compared to <code class="language-plain">kubectl</code>, it doesn't start
+a virtual machine, but runs on docker.</p>
+<p>Some Kubernetes functionality is missing though,
+like load-balancing network.</p>
+<p>This is by design.
+kind is intended for testing, not replicating a full-blown production environment locally.</p>
+<p>You can just call <code class="language-plain">kubectl</code> commands after creating the cluster.</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">kind create cluster</span>
+<span class="highlight-line">kubectl config view</span>
+<span class="highlight-line">kubectl create <span class="token parameter variable">-f</span> ./hello-world.yaml</span>
+<span class="highlight-line">kubectl get deployments,pods,services</span>
+<span class="highlight-line">kubectl port-forward service/hello-world <span class="token number">9009</span>:80</span>
+<span class="highlight-line">kind delete cluster</span></code></pre>
+
     </div>
 
 <script async src="/scripts/index.js"></script>
