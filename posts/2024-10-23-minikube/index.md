@@ -133,3 +133,27 @@ kubectl delete -f ./hello-world.yaml
 minikube stop
 minikube delete
 ```
+
+# Update: kind
+
+kind is another neat alternative to do local kubernetes deployments.
+
+It is more lightweight. Compared to `kubectl`, it doesn't start
+a virtual machine, but runs on docker.
+
+Some Kubernetes functionality is missing though,
+like load-balancing network.
+
+This is by design.
+kind is intended for testing, not replicating a full-blown production environment locally.
+
+You can just call `kubectl` commands after creating the cluster.
+
+```bash
+kind create cluster
+kubectl config view
+kubectl create -f ./hello-world.yaml
+kubectl get deployments,pods,services
+kubectl port-forward service/hello-world 9009:80
+kind delete cluster
+```
