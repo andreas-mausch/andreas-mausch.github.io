@@ -20,6 +20,11 @@
     "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/github.svg"
   },
   {
+    "name": "key",
+    "unicode": "\uf084",
+    "path": "./node_modules/@fortawesome/fontawesome-free/svgs/solid/key.svg"
+  },
+  {
     "name": "linkedin",
     "unicode": "\uf0e1",
     "path": "./node_modules/@fortawesome/fontawesome-free/svgs/brands/linkedin.svg"

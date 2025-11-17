@@ -25,6 +25,7 @@ const showDrafts = process.env.ELEVENTY_ENV === "development"
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.svg")
+  eleventyConfig.addPassthroughCopy("openpgp.asc")
   eleventyConfig.addPassthroughCopy("images")
   eleventyConfig.addPassthroughCopy({ "node_modules/katex/dist/fonts": "styles/fonts" })
   eleventyConfig.addPassthroughCopy({ "node_modules/@fontsource-variable/raleway/files": "styles/fontsource" })
