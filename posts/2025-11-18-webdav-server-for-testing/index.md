@@ -12,7 +12,7 @@ I needed a simple WebDAV file server for testing and want to share what I found.
 ## rclone
 
 ```bash
-docker run --rm -p 8080:8080 -v /data:/data rclone/rclone:1.71.2 serve webdav /data --addr :8080 --user username --pass password
+docker run --rm -p 8080:8080 -v ./data:/data -e RCLONE_USER=username -e RCLONE_PASS=password rclone/rclone:1.71.2 serve webdav /data --addr :8080 --baseurl '/webdav'
 ```
 
 ## bytemark
@@ -20,7 +20,7 @@ docker run --rm -p 8080:8080 -v /data:/data rclone/rclone:1.71.2 serve webdav /d
 Caution: This image is 7 years old.
 
 ```bash
-docker run --rm -v /data:/var/lib/dav -e AUTH_TYPE=Digest -e USERNAME=username -e PASSWORD=password --publish 8080:80 -d bytemark/webdav:2.4
+docker run --rm -v ./data:/var/lib/dav -e AUTH_TYPE=Digest -e USERNAME=username -e PASSWORD=password --publish 8080:80 -d bytemark/webdav:2.4
 ```
 
 ## Caddy
@@ -70,7 +70,7 @@ webdav /webdav/* {
 ```
 
 ```bash
-docker run --rm -p 8080:80 -v ./Caddyfile:/etc/Caddyfile:ro -v /data:/data caddy-webdav
+docker run --rm -p 8080:80 -v ./Caddyfile:/etc/Caddyfile:ro -v ./data:/data caddy-webdav
 ```
 
 ### Generate bcrypt password hash
