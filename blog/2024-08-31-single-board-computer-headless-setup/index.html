@@ -334,7 +334,7 @@ This is still an alternative, but will be set up automatically via the <code cla
 </ul>
 <h1 id="dietpi" tabindex="-1">3. DietPi <a class="header-anchor" href="#dietpi" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I have tried the image <code class="language-plain">DietPi_RadxaZERO3-ARMv8-Bookworm.img.xz</code> from 2024-09-13.
-There is a extra config parition.
+There is an extra config partition.
 It is described here:
 <a href="https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation" class="external-link" target="_blank">https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation</a></p>
 <p>Edit the <code class="language-plain">dietpi.txt</code> and <code class="language-plain">dietpi-wifi.txt</code> to your needs.</p>
@@ -354,11 +354,11 @@ I couldn't find a setting in the config file for passwordless sudo, but it was a
 <p>Everything worked on first try.
 However, I dislike that the real setup script is started when you boot up the
 SBC for the first time and login as root.</p>
-<p>WHen I tried to login directly using the <code class="language-plain">dietpi</code> user, I got a warning.</p>
+<p>When I tried to login directly using the <code class="language-plain">dietpi</code> user, I got a warning.</p>
 <p>In the script which runs on first login as <code class="language-plain">root</code>, you are asked several questions,
 which can be answered during a UI. Then the system is updated and settings are applied.</p>
 <p>That's exactly what I'd like to avoid in a headless setup.
-If I had to do it for like 20 installs, that would be boring and repetitive.</p>
+If I had to do it for like 20 installs, that would be time-consuming, boring and repetitive.</p>
 <p>The extra tools for installing software might be neat for beginners, but I don't really need them.</p>
 <p>Even though the headless installation was best documented out of the
 three operating systems I have tested, I will stick with Armbian.</p>
