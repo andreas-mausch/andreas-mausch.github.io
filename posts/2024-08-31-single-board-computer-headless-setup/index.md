@@ -215,7 +215,7 @@ All of this is not required:
 # DietPi
 
 I have tried the image `DietPi_RadxaZERO3-ARMv8-Bookworm.img.xz` from 2024-09-13.
-There is a extra config parition.
+There is an extra config partition.
 It is described here:
 [https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation](https://dietpi.com/docs/usage/#how-to-do-an-automatic-base-installation-at-first-boot-dietpi-automation)
 
@@ -239,13 +239,13 @@ Everything worked on first try.
 However, I dislike that the real setup script is started when you boot up the
 SBC for the first time and login as root.
 
-WHen I tried to login directly using the `dietpi` user, I got a warning.
+When I tried to login directly using the `dietpi` user, I got a warning.
 
 In the script which runs on first login as `root`, you are asked several questions,
 which can be answered during a UI. Then the system is updated and settings are applied.
 
 That's exactly what I'd like to avoid in a headless setup.
-If I had to do it for like 20 installs, that would be boring and repetitive.
+If I had to do it for like 20 installs, that would be time-consuming, boring and repetitive.
 
 The extra tools for installing software might be neat for beginners, but I don't really need them.
 
