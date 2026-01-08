@@ -75,11 +75,37 @@ docker run --rm -p 8080:80 -v ./Caddyfile:/etc/Caddyfile:ro -v ./data:/data cadd
 
 ### Generate bcrypt password hash
 
+The password is saved in form of a bcrypt hash.
+openssl doesn't support generating bcrypt hashes, unfortunately.
+
+I found [bcrypt-tool](https://github.com/shoenig/bcrypt-tool),
+which does not accept the password from stdin. :/
+
+And there is `htpasswd` from the apache package.
+But this will also install the whole apache server. :/
+
+However, you can run this docker image to just generate the bcrypt password:
+
 ```bash
 docker run -it --rm --network=none --entrypoint=htpasswd sineverba/htpasswd:1.5.0 -nBC 10 username
 ```
 
+- `-n`: Display the results on standard output rather than updating a file.
+- `-B`: Force the use of BCrypt encryption for passwords.
+- `-C`: Set the computing cost factor for BCrypt (logarithmic scale, typical values 5-12).
+        Higher values increase security but require more CPU time for hashing.
+
 # Connect to WebDAV via cadaver
+
+## Quick test with curl
+
+```bash
+curl -v --user user:password http://localhost:8080/webdav
+```
+
+This should return some XML.
+
+## Real WebDAV
 
 ```bash
 cadaver http://localhost:8080/webdav
@@ -87,11 +113,38 @@ cadaver http://localhost:8080/webdav
 
 Run commands like `ls`, `put file.txt` and so on to test functionality.
 
+# Use rsync with our server
+
+## Obscure password
+
+```bash
+cat /dev/stdin | rclone obscure -
+```
+
+## Test connection by listing files
+
+```bash
+rclone ls ":webdav,user='user',pass='VZTiy804LCdIyjE_VLCvuczpeaMnsHQR',url='http://localhost:8080/webdav':"
+```
+
+## Sync a local folder
+
+```bash
+rclone sync . ":webdav,user='user',pass='VZTiy804LCdIyjE_VLCvuczpeaMnsHQR',url='http://localhost:8080/webdav':"
+```
+
 # Security
 
 Please note this is just an example.
 In the real world, you should never use BasicAuth over plain HTTP.
 BasicAuth is only secure over an encrypted connection like HTTPS.
+
+For Caddy: it runs as the root user inside the docker container.
+This is not so good, but not part of this test.
+Best solution would be if the official image would change that.
+
+See here:
+[Run as unprivileged user](https://github.com/mholt/caddy-webdav/issues/17)
 
 # Suggestion
 
