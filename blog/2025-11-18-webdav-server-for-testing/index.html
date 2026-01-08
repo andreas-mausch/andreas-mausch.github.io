@@ -133,13 +133,35 @@ but might give you some more flexibility in exchange.</p>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-p</span> <span class="token number">8080</span>:80 <span class="token parameter variable">-v</span> ./Caddyfile:/etc/Caddyfile:ro <span class="token parameter variable">-v</span> ./data:/data caddy-webdav</span></code></pre>
 
     </div><h3 id="generate-bcrypt-password-hash" tabindex="-1">1.3.3. Generate bcrypt password hash <a class="header-anchor" href="#generate-bcrypt-password-hash" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h3>
+<p>The password is saved in form of a bcrypt hash.
+openssl doesn't support generating bcrypt hashes, unfortunately.</p>
+<p>I found <a href="https://github.com/shoenig/bcrypt-tool" class="external-link" target="_blank">bcrypt-tool</a>,
+which does not accept the password from stdin. :/</p>
+<p>And there is <code class="language-plain">htpasswd</code> from the apache package.
+But this will also install the whole apache server. :/</p>
+<p>However, you can run this docker image to just generate the bcrypt password:</p>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--rm</span> <span class="token parameter variable">--network</span><span class="token operator">=</span>none <span class="token parameter variable">--entrypoint</span><span class="token operator">=</span>htpasswd sineverba/htpasswd:1.5.0 <span class="token parameter variable">-nBC</span> <span class="token number">10</span> username</span></code></pre>
 
-    </div><h1 id="connect-to-webdav-via-cadaver" tabindex="-1">2. Connect to WebDAV via cadaver <a class="header-anchor" href="#connect-to-webdav-via-cadaver" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+    </div><ul>
+<li><code class="language-plain">-n</code>: Display the results on standard output rather than updating a file.</li>
+<li><code class="language-plain">-B</code>: Force the use of BCrypt encryption for passwords.</li>
+<li><code class="language-plain">-C</code>: Set the computing cost factor for BCrypt (logarithmic scale, typical values 5-12).
+Higher values increase security but require more CPU time for hashing.</li>
+</ul>
+<h1 id="connect-to-webdav-via-cadaver" tabindex="-1">2. Connect to WebDAV via cadaver <a class="header-anchor" href="#connect-to-webdav-via-cadaver" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="quick-test-with-curl" tabindex="-1">2.1. Quick test with curl <a class="header-anchor" href="#quick-test-with-curl" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">curl</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">--user</span> user:password http://localhost:8080/webdav</span></code></pre>
+
+    </div><p>This should return some XML.</p>
+<h2 id="real-webdav" tabindex="-1">2.2. Real WebDAV <a class="header-anchor" href="#real-webdav" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
@@ -147,11 +169,38 @@ but might give you some more flexibility in exchange.</p>
     <pre class="language-bash"><code class="language-bash"><span class="highlight-line">cadaver http://localhost:8080/webdav</span></code></pre>
 
     </div><p>Run commands like <code class="language-plain">ls</code>, <code class="language-plain">put file.txt</code> and so on to test functionality.</p>
-<h1 id="security" tabindex="-1">3. Security <a class="header-anchor" href="#security" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="use-rsync-with-our-server" tabindex="-1">3. Use rsync with our server <a class="header-anchor" href="#use-rsync-with-our-server" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h2 id="obscure-password" tabindex="-1">3.1. Obscure password <a class="header-anchor" href="#obscure-password" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">cat</span> /dev/stdin <span class="token operator">|</span> rclone obscure -</span></code></pre>
+
+    </div><h2 id="test-connection-by-listing-files" tabindex="-1">3.2. Test connection by listing files <a class="header-anchor" href="#test-connection-by-listing-files" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">rclone <span class="token function">ls</span> <span class="token string">":webdav,user='user',pass='VZTiy804LCdIyjE_VLCvuczpeaMnsHQR',url='http://localhost:8080/webdav':"</span></span></code></pre>
+
+    </div><h2 id="sync-a-local-folder" tabindex="-1">3.3. Sync a local folder <a class="header-anchor" href="#sync-a-local-folder" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h2>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line">rclone <span class="token function">sync</span> <span class="token builtin class-name">.</span> <span class="token string">":webdav,user='user',pass='VZTiy804LCdIyjE_VLCvuczpeaMnsHQR',url='http://localhost:8080/webdav':"</span></span></code></pre>
+
+    </div><h1 id="security" tabindex="-1">4. Security <a class="header-anchor" href="#security" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Please note this is just an example.
 In the real world, you should never use BasicAuth over plain HTTP.
 BasicAuth is only secure over an encrypted connection like HTTPS.</p>
-<h1 id="suggestion" tabindex="-1">4. Suggestion <a class="header-anchor" href="#suggestion" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>For Caddy: it runs as the root user inside the docker container.
+This is not so good, but not part of this test.
+Best solution would be if the official image would change that.</p>
+<p>See here:
+<a href="https://github.com/mholt/caddy-webdav/issues/17" class="external-link" target="_blank">Run as unprivileged user</a></p>
+<h1 id="suggestion" tabindex="-1">5. Suggestion <a class="header-anchor" href="#suggestion" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I suggest to use the rclone variant if you just want to quickly spin up a WebDAV server.
 rclone itself is well maintained, and the <code class="language-plain">docker run</code> command doesn't require any further
 configuration files.</p>
