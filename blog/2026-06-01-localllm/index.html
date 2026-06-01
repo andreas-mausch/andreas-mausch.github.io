@@ -1,0 +1,230 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>LocalLLM: Running Qwen3.6-35B-A3B on an RTX 4070 Ti</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>LocalLLM: Running Qwen3.6-35B-A3B on an RTX 4070 Ti</h1>
+<div>
+  <time class="postlist-date" datetime="2026-06-01T20:00:00.000+00:00">Jun 1, 2026</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/ai">#ai</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/llama.cpp">#llama.cpp</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/LM%20Studio">#LM Studio</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/ollama">#ollama</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/omlx">#omlx</a></li>
+        
+    
+        
+    
+  </ul>
+</div>
+
+
+
+<h1 id="tl%3Bdr" tabindex="-1">1. tl;dr <a class="header-anchor" href="#tl%3Bdr" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>See the final command at the end.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>AMD Ryzen 5950X</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>NVIDIA RTX 4070 Ti, 12 GB VRAM</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>64 GB DDR4 @ 2800 MHz</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>Qwen3.6-35B-A3B</td>
+</tr>
+<tr>
+<td>Quantization</td>
+<td>IQ4_XS</td>
+</tr>
+<tr>
+<td>Prompt processing</td>
+<td>~800 tokens/second</td>
+</tr>
+<tr>
+<td><strong>Token generation</strong></td>
+<td>~60 tokens/second</td>
+</tr>
+</tbody>
+</table>
+<h1 id="so-far%2C-my-setup" tabindex="-1">2. So far, my setup <a class="header-anchor" href="#so-far%2C-my-setup" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I have experimented with local AI in 2023,
+focusing on local execution, keeping all data private,
+and not sending anything out to providers like OpenAI.</p>
+<p><a href="https://github.com/stars/andreas-mausch/lists/ai" class="external-link" target="_blank">https://github.com/stars/andreas-mausch/lists/ai</a></p>
+<ul>
+<li>text-generation: <a href="https://github.com/andreas-mausch/dockerize-ollama-mistral-7b-openorca" class="external-link" target="_blank">https://github.com/andreas-mausch/dockerize-ollama-mistral-7b-openorca</a></li>
+<li>image-to-text: <a href="https://github.com/andreas-mausch/dockerize-clip-interrogator" class="external-link" target="_blank">https://github.com/andreas-mausch/dockerize-clip-interrogator</a></li>
+<li>speech-to-text: <a href="https://github.com/andreas-mausch/dockerize-whisper" class="external-link" target="_blank">https://github.com/andreas-mausch/dockerize-whisper</a></li>
+<li>object-detection: <a href="https://github.com/andreas-mausch/dockerize-detr-resnet-50" class="external-link" target="_blank">https://github.com/andreas-mausch/dockerize-detr-resnet-50</a></li>
+</ul>
+<p>Now, a big step has been made with the new <em>Mixture-of-Experts</em> models,
+and I was interested again to run it locally.</p>
+<p>My gaming rig is not high-end, but it turned out to be decent enough to run
+Qwen3.6 locally at very reasonable speed and quality.</p>
+<h1 id="lm-studio" tabindex="-1">3. LM Studio <a class="header-anchor" href="#lm-studio" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Because initially I didn't want to spend too much time
+on this topic, I went with the easy, but non-FOSS solution
+LM Studio.
+And I have to say, it is really easy to use.</p>
+<p>I just didn't know which models are the best currently,
+so I did a little research and looked up the most popular ones.</p>
+<p>I remember from the last experiments that anything above 9B parameters
+wouldn't run well, so I started with these.</p>
+<p>But eventually, I found Qwen3.6 and the internet was full of praise for it.</p>
+<p>I learned that Qwen3.6-27B is the better model (despite the lower number 27B &lt; 35B),
+but I couldn't fit it into my VRAM, and it ran painfully slow on my CPU.</p>
+<p>So I tried Qwen3.6-35B-A3B, and even the first try was really good.
+I was impressed by the quality, and I could get around 20-25 tokens/second,
+which is just enough to enjoy the experience in opencode.</p>
+<p>I was a bit overwhelmed by all the settings and fine-tunings you can do.</p>
+<p>When I did a bit too much playing with the settings, my model became unstable
+and crashed or consumed all VRAM and became incredibly slow.</p>
+<p>That's when I switched to llama.cpp, and that's what I recommend to anyone
+who is familiar with the command line.</p>
+<h1 id="mlx" tabindex="-1">4. MLX <a class="header-anchor" href="#mlx" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>For Mac users: There are MLX model variants, which are generated specifically
+for Apple Silicon processors and are a bit faster than the GGUF variants.</p>
+<p>Try them out.
+I found them to be unstable in my setup with LM Studio (the models crashed from time to time),
+but that might be on me and they are ~30% faster.</p>
+<p>I also tried to use <a href="https://omlx.ai/" class="external-link" target="_blank">oMLX</a>, which is an alternative to LM Studio to run MLX models.
+I didn't like the Web UI at all, though.
+However, it was more stable.
+And many people on the internet recommend it, so you might try it out.</p>
+<h1 id="llama.cpp" tabindex="-1">5. llama.cpp <a class="header-anchor" href="#llama.cpp" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>llama.cpp is a bit more technical, but ran super stable for me.</p>
+<p>Installation:
+Download from here:
+<a href="https://github.com/ggml-org/llama.cpp/releases" class="external-link" target="_blank">https://github.com/ggml-org/llama.cpp/releases</a></p>
+<p>Important: To make CUDA work, you need two downloads.
+At the time of writing, it was <code class="language-plain">cudart-llama-bin-win-cuda-13.3-x64.zip</code> and <code class="language-plain">llama-b9460-bin-win-cuda-13.3-x64.zip</code>.
+Extract both into the same directory. I used <code class="language-plain">C:\Program Files\llama.cpp</code>.
+This is for a setup with NVIDIA/CUDA of course, so your setup might vary here.
+Oh, and while I mostly run Linux, my gaming rig is on Windows. So is the example here.</p>
+<p>After some time, I understood some of the settings and found a setup which I enjoy
+very much and would like to share with you.
+I ended up getting around 60 tokens/second generation speed.</p>
+<p>The most difficult part was:</p>
+<ol>
+<li>to understand that the router has to run on the GPU to get a good performance</li>
+<li>that the CPU is strong enough to run some of the experts,
+and that this will save you a lot of VRAM.</li>
+</ol>
+<p>The exact model I use is <code class="language-plain">Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS</code>.</p>
+<p>IQ4_XS quants are decent enough for me, and quite fast.</p>
+<p>I found that 24 experts (out of 40 maximum) on the CPU would give me best results,
+in terms of VRAM usage and speed.
+I just checked the VRAM usage in the Windows task manager, and just after loading the model,
+I see around 10 out of 12 GB used. When it went above 11.5 GB, the model either
+became painfully slow, or crashed.</p>
+<p>For the context length: A higher value requires more VRAM, but a value &lt;64k
+wouldn't make working with opencode any fun.
+As the context grows, the model becomes slower. And if it's getting close to the limit,
+opencode has to compact the whole conversation, which takes a long time and sometimes
+opencode forgets to continue after that.</p>
+<p>I found 128k (= <code class="language-plain">131072</code>) to be the sweet spot for me.</p>
+<p>Also, sometimes the model has to re-evaluate the whole context.
+I'm not exactly sure whether I did something wrong with the cache settings,
+or whether it's normal.
+But when it happens, it takes quite a bit of time until the model responds to you at all
+(for example: 100k context at 800 tokens/second prompt processing = 125 seconds).</p>
+<p>Unsloth has a great website with howtos for a lot of models:
+<a href="https://unsloth.ai/docs/models/qwen3.6" class="external-link" target="_blank">Qwen3.6 - How to Run Locally</a></p>
+<h1 id="multi-token-prediction-(mtp)" tabindex="-1">6. Multi Token Prediction (MTP) <a class="header-anchor" href="#multi-token-prediction-(mtp)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I only tested MTP briefly.
+It wasn't much faster for me and uses more VRAM.</p>
+<p>I think it's better for bigger models like the 27B.</p>
+<h1 id="experience-in-opencode" tabindex="-1">7. Experience in opencode <a class="header-anchor" href="#experience-in-opencode" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Cloud models are still far superior to everything I run on my own machine.
+They are faster and produce better results.</p>
+<p>But still, compared to my tests with LLMs three years ago, the gap is closing.</p>
+<p>And it feels great to run this all on your own devices and not lose privacy.</p>
+<p>For the quality: My model loops from time to time, and I have to stop it manually.
+This is annoying, especially because it takes so much more time to get a good answer
+to your problem and it spams your context.</p>
+<p>I found it easier to give exact, small tasks to the AI, instead of one big task.
+It requires more work on my part, because now I have to think and decide again
+what's the best way to split up a problem into chunks.
+But then again, I usually have a very specific idea of how my result should look.</p>
+<h1 id="final-command" tabindex="-1">8. Final command <a class="header-anchor" href="#final-command" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code data-filename="qwen.cmd" class="language-plain"><span class="highlight-line">set model="C:\Users\neonew\.lmstudio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf"</span>
+<span class="highlight-line">"C:\Program Files\llama.cpp\llama-server.exe" --model %model% --flash-attn on --ctx-size 131072 --threads 16 --mmap --ubatch-size 1024 --batch-size 1024 --n-cpu-moe 24 --n-gpu-layers all --cache-type-k q8_0 --cache-type-v q8_0 --kv-unified --temperature 0.5 --top-k 20 --top-p 0.95 --min-p 0.00 --host 0.0.0.0 --port 1235 --parallel 1 --api-key api-key</span></code></pre>
+
+    </div>
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
