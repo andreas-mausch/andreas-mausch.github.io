@@ -9,10 +9,10 @@ import prism from "markdown-it-prism"
 import taskCheckbox from "markdown-it-task-checkbox"
 
 import lineNumbers from "./markdown-it-prism-line-numbers.js"
-import lineNumbersStart from "./markdown-it-prism-line-numbers-start.js"
 import hierarchy from "./markdown-it-hierarchy.js"
 import copyToClipboard from "./markdown-it-prism-copy-to-clipboard.js"
 import hexView from "./markdown-it-hexview.js"
+import mermaid from "./markdown-it-mermaid.js"
 
 const markdown = markdownIt({
   html: true
@@ -41,8 +41,9 @@ const markdown = markdownIt({
   .use(taskCheckbox)
   .use(plantUml, { plantumlPath: "plantuml.jar" })
   .use(hexView)
+  .use(mermaid)
+  .use(lineNumbers)
+  .use(copyToClipboard)
 
-markdown.options.highlight = lineNumbers(markdown.options.highlight)
-markdown.renderer.rules.fence = copyToClipboard(lineNumbersStart(markdown.renderer.rules.fence))
 
 export default markdown
