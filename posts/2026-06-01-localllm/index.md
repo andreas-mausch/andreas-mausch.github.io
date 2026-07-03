@@ -132,6 +132,19 @@ But when it happens, it takes quite a bit of time until the model responds to yo
 Unsloth has a great website with howtos for a lot of models:
 [Qwen3.6 - How to Run Locally](https://unsloth.ai/docs/models/qwen3.6)
 
+# llama-ui
+
+llama.cpp comes with a web UI, which offers basic features,
+but lacks skills like webfetch.
+
+I still like to use it for a basic, quick chat.
+
+To disable thinking/reasoning mode, you can enter this under `Settings -> Developer`:
+
+```json
+{"chat_template_kwargs": {"enable_thinking": false}}
+```
+
 # Multi Token Prediction (MTP)
 
 I only tested MTP briefly.
