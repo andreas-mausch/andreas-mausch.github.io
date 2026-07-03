@@ -174,5 +174,26 @@ But then again, I usually have a very specific idea of how my result should look
 
 ```bat{data-filename=qwen.cmd}
 set model="C:\Users\neonew\.lmstudio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf"
-"C:\Program Files\llama.cpp\llama-server.exe" --model %model% --flash-attn on --ctx-size 131072 --threads 16 --mmap --ubatch-size 1024 --batch-size 1024 --n-cpu-moe 24 --n-gpu-layers all --cache-type-k q8_0 --cache-type-v q8_0 --kv-unified --temperature 0.5 --top-k 20 --top-p 0.95 --min-p 0.00 --host 0.0.0.0 --port 1235 --parallel 1 --api-key api-key
+
+"C:\Program Files\llama.cpp\llama-server.exe" ^
+  --model %model% ^
+  --flash-attn on ^
+  --ctx-size 131072 ^
+  --threads 16 ^
+  --mmap ^
+  --ubatch-size 1024 ^
+  --batch-size 1024 ^
+  --n-cpu-moe 24 ^
+  --n-gpu-layers all ^
+  --cache-type-k q8_0 ^
+  --cache-type-v q8_0 ^
+  --kv-unified ^
+  --temperature 0.5 ^
+  --top-k 20 ^
+  --top-p 0.95 ^
+  --min-p 0.00 ^
+  --host 0.0.0.0 ^
+  --port 1235 ^
+  --parallel 1 ^
+  --api-key api-key
 ```
