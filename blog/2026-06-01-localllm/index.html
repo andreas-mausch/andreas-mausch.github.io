@@ -197,11 +197,22 @@ But when it happens, it takes quite a bit of time until the model responds to yo
 (for example: 100k context at 800 tokens/second prompt processing = 125 seconds).</p>
 <p>Unsloth has a great website with howtos for a lot of models:
 <a href="https://unsloth.ai/docs/models/qwen3.6" class="external-link" target="_blank">Qwen3.6 - How to Run Locally</a></p>
-<h1 id="multi-token-prediction-(mtp)" tabindex="-1">6. Multi Token Prediction (MTP) <a class="header-anchor" href="#multi-token-prediction-(mtp)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="llama-ui" tabindex="-1">6. llama-ui <a class="header-anchor" href="#llama-ui" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>llama.cpp comes with a web UI, which offers basic features,
+but lacks skills like webfetch.</p>
+<p>I still like to use it for a basic, quick chat.</p>
+<p>To disable thinking/reasoning mode, you can enter this under <code class="language-plain">Settings -> Developer</code>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-json"><code class="language-json"><span class="highlight-line"><span class="token punctuation">{</span><span class="token property">"chat_template_kwargs"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">"enable_thinking"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span></code></pre>
+
+    </div><h1 id="multi-token-prediction-(mtp)" tabindex="-1">7. Multi Token Prediction (MTP) <a class="header-anchor" href="#multi-token-prediction-(mtp)" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>I only tested MTP briefly.
 It wasn't much faster for me and uses more VRAM.</p>
 <p>I think it's better for bigger models like the 27B.</p>
-<h1 id="experience-in-opencode" tabindex="-1">7. Experience in opencode <a class="header-anchor" href="#experience-in-opencode" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="experience-in-opencode" tabindex="-1">8. Experience in opencode <a class="header-anchor" href="#experience-in-opencode" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Cloud models are still far superior to everything I run on my own machine.
 They are faster and produce better results.</p>
 <p>But still, compared to my tests with LLMs three years ago, the gap is closing.</p>
@@ -213,13 +224,69 @@ to your problem and it spams your context.</p>
 It requires more work on my part, because now I have to think and decide again
 what's the best way to split up a problem into chunks.
 But then again, I usually have a very specific idea of how my result should look.</p>
-<h1 id="final-command" tabindex="-1">8. Final command <a class="header-anchor" href="#final-command" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>To enable vision mode (image recognition), put this block under <code class="language-plain">provider.models</code>:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-json"><code class="language-json"><span class="highlight-line">  <span class="token property">"provider"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">    <span class="token property">"llama.cpp"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"llama.cpp"</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">      <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">        <span class="token property">"baseURL"</span><span class="token operator">:</span> <span class="token string">"http://192.168.1.111:1235/v1"</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">        <span class="token property">"apiKey"</span><span class="token operator">:</span> <span class="token string">"&lt;YOUR_API_KEY>"</span></span>
+<span class="highlight-line">      <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">      <span class="token property">"models"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">        <span class="token property">"Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">          <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Qwen3.6-35B-A3B"</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">          <span class="token property">"limit"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">            <span class="token property">"context"</span><span class="token operator">:</span> <span class="token number">131072</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">            <span class="token property">"output"</span><span class="token operator">:</span> <span class="token number">8000</span></span>
+<span class="highlight-line">          <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">          <span class="token property">"modalities"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="highlight-line">            <span class="token property">"input"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="highlight-line">              <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">              <span class="token string">"image"</span></span>
+<span class="highlight-line">            <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="highlight-line">            <span class="token property">"output"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="highlight-line">              <span class="token string">"text"</span></span>
+<span class="highlight-line">            <span class="token punctuation">]</span></span>
+<span class="highlight-line">          <span class="token punctuation">}</span></span>
+<span class="highlight-line">        <span class="token punctuation">}</span></span>
+<span class="highlight-line">      <span class="token punctuation">}</span></span>
+<span class="highlight-line">    <span class="token punctuation">}</span></span>
+<span class="highlight-line">  <span class="token punctuation">}</span></span></code></pre>
+
+    </div><h1 id="final-command" tabindex="-1">9. Final command <a class="header-anchor" href="#final-command" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <div class="code-block">
     <button type="button" class="copy-to-clipboard">
       <i class="icon icon-copy"></i>
     </button>
     <pre class="language-plain"><code data-filename="qwen.cmd" class="language-plain"><span class="highlight-line">set model="C:\Users\neonew\.lmstudio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf"</span>
-<span class="highlight-line">"C:\Program Files\llama.cpp\llama-server.exe" --model %model% --flash-attn on --ctx-size 131072 --threads 16 --mmap --ubatch-size 1024 --batch-size 1024 --n-cpu-moe 24 --n-gpu-layers all --cache-type-k q8_0 --cache-type-v q8_0 --kv-unified --temperature 0.5 --top-k 20 --top-p 0.95 --min-p 0.00 --host 0.0.0.0 --port 1235 --parallel 1 --api-key api-key</span></code></pre>
+<span class="highlight-line">set mmproj="C:\Users\neonew\.lmstudio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\mmproj-Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"</span>
+<span class="highlight-line"></span>
+<span class="highlight-line">"C:\Program Files\llama.cpp\llama-server.exe" ^</span>
+<span class="highlight-line">  --model %model% ^</span>
+<span class="highlight-line">  --mmproj %mmproj% ^</span>
+<span class="highlight-line">  --flash-attn on ^</span>
+<span class="highlight-line">  --ctx-size 131072 ^</span>
+<span class="highlight-line">  --threads 16 ^</span>
+<span class="highlight-line">  --mmap ^</span>
+<span class="highlight-line">  --ubatch-size 1024 ^</span>
+<span class="highlight-line">  --batch-size 1024 ^</span>
+<span class="highlight-line">  --n-cpu-moe 24 ^</span>
+<span class="highlight-line">  --n-gpu-layers all ^</span>
+<span class="highlight-line">  --cache-type-k q8_0 ^</span>
+<span class="highlight-line">  --cache-type-v q8_0 ^</span>
+<span class="highlight-line">  --kv-unified ^</span>
+<span class="highlight-line">  --temperature 0.5 ^</span>
+<span class="highlight-line">  --top-k 20 ^</span>
+<span class="highlight-line">  --top-p 0.95 ^</span>
+<span class="highlight-line">  --min-p 0.00 ^</span>
+<span class="highlight-line">  --host 0.0.0.0 ^</span>
+<span class="highlight-line">  --port 1235 ^</span>
+<span class="highlight-line">  --parallel 1 ^</span>
+<span class="highlight-line">  --api-key api-key</span></code></pre>
 
     </div>
 
