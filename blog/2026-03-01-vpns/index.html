@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Eleventy v3.0.0">
-    <title>VPNs on OpenWrt: Wireguard vs. IKEv2/IPSec vs. OpenVPN TAP mode</title>
+    <title>VPNs on OpenWrt: WireGuard vs. IKEv2/IPSec vs. OpenVPN TAP mode</title>
     <link rel="stylesheet" href="/styles/style.css"/>
     <link rel="stylesheet" href="/styles/icons/iconism.css"/>
     
@@ -41,7 +41,7 @@
     </header>
     <div class="content">
       
-<h1>VPNs on OpenWrt: Wireguard vs. IKEv2/IPSec vs. OpenVPN TAP mode</h1>
+<h1>VPNs on OpenWrt: WireGuard vs. IKEv2/IPSec vs. OpenVPN TAP mode</h1>
 <div>
   <time class="postlist-date" datetime="2026-03-01T13:00:00.000+00:00">Mar 1, 2026</time>
   <ul class="tags">
@@ -72,37 +72,39 @@ and access everything on it the same way as I
 would be in my local WiFi.</p>
 <h1 id="why-three-different-vpn-protocols%3F" tabindex="-1">2. Why three different VPN protocols? <a class="header-anchor" href="#why-three-different-vpn-protocols%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <ul>
-<li>Wireguard: Best modern protocol</li>
+<li>WireGuard: Best modern protocol</li>
 <li>IKEv2/IPSec: Client is integrated into stock Android</li>
-<li>OpenVPN TAP mode: The only real VPN on OSI Layer 2 (Ethernet)</li>
+<li>OpenVPN TAP mode: The only VPN in this list which works on OSI Layer 2 (Ethernet)</li>
 </ul>
-<h1 id="why-is-layer-2-important%3F" tabindex="-1">3. Why is Layer 2 important? <a class="header-anchor" href="#why-is-layer-2-important%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<h1 id="when-do-you-need-a-layer-2-network%3F" tabindex="-1">3. When do you need a Layer 2 network? <a class="header-anchor" href="#when-do-you-need-a-layer-2-network%3F" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Most VPNs work on Layer 3, but Layer 2 can be useful if:</p>
 <ul>
-<li>You just want to be a client in your own network the same
-way if you'd connect via WiFi at home.</li>
+<li>You just want to be a client in your own network the same way as
+if you were connected to your home Wi-Fi.</li>
 <li>You want to use the real DHCP and NTP servers on the network.</li>
-<li>You want to use network broadcasts, for example via <code class="language-plain">avahi</code>.</li>
+<li>You want to use network broadcasts, for example via <code class="language-plain">avahi</code> or <code class="language-plain">WOL</code>.</li>
 </ul>
-<p>For example, on a local network your DHCP server could propagate
-a default NTP server to use to all clients.</p>
-<p>The only protocol I've found which can work on Layer 2 is
+<p>The only protocol I've found that supports Layer 2 bridging is
 OpenVPN in TAP mode.
-However, Android doesn't support to connect to it.</p>
-<p>IKEv2/IPSec supports a NTP attribute (I think), which
-can propagate an NTP server to use to a client. But it needs to
-be configured manually, in addition to the manual IP setup.</p>
-<p>Wireguard doesn't offer a way to set an NTP server just for one network,
+However, Android doesn't support connecting to it.</p>
+<p>On a local network, your DHCP server could propagate
+a default NTP server to use to all clients.</p>
+<p>WireGuard doesn't offer a way to set an NTP server just for one network,
 neither does NetworkManager.</p>
-<p>So you lose some functionality with Wireguard and IKEv2/IPSec,
-compared to being on the real network.</p>
+<p>So you lose some functionality with WireGuard and IKEv2/IPSec,
+compared to being directly connected to your home network.</p>
+<p>I think for most people in most cases, you do not need Layer 2.
+If all you need is access to your home servers, NAS, SSH, or web interfaces,
+a Layer 3 VPN such as WireGuard is usually sufficient.</p>
+<p>But be aware that a VPN connection might lack features you would
+have if you were connected to your WiFi directly.</p>
 <h1 id="feature-matrix" tabindex="-1">4. Feature matrix <a class="header-anchor" href="#feature-matrix" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>What VPN is missing, compared to a local connection:</p>
 <table>
 <thead>
 <tr>
 <th>Feature</th>
-<th>Wireguard</th>
+<th>WireGuard</th>
 <th>IKEv2/IPSec</th>
 <th>OpenVPN TAP</th>
 </tr>
@@ -144,26 +146,32 @@ compared to being on the real network.</p>
 <td>No</td>
 <td>Yes</td>
 </tr>
+<tr>
+<td>Wake-on-LAN (WOL)</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
 </tbody>
 </table>
 <h1 id="issues-of-openvpn-in-tap-mode" tabindex="-1">5. Issues of OpenVPN in TAP mode <a class="header-anchor" href="#issues-of-openvpn-in-tap-mode" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>If you look at the matrix above, you could think:
 <em>Well, I just go with OpenVPN TAP then.</em></p>
-<p>However, OpenVPN TAP has it's own problems:</p>
+<p>However, OpenVPN TAP has its own problems:</p>
 <ul>
 <li>As mentioned, Android cannot be used as a client.</li>
-<li>In my tests, and I did quite a lot, I wasn't able to set up
-the DHCP query automatically after a connection was established.
+<li>In my tests, and I did quite a lot, I wasn't able to obtain a DHCP lease
+automatically after a connection was established.
 I always have to call <code class="language-plain">dhclient</code> manually after the <code class="language-plain">openvpn</code> CLI tool.</li>
-<li>NetworkManager on Linux has problems to connect to OpenVPN TAP.</li>
+<li>NetworkManager on Linux has trouble connecting to OpenVPN TAP networks.</li>
 </ul>
-<p>It is way more convenient to connect via Wireguard,
-that I will only use OpenVPN TAP as a fallback solution in case
-I need one of the features in the list.
-For daily use cases Wireguard is usually sufficient to me.</p>
+<p>Since WireGuard is much more convenient, I will only use OpenVPN TAP
+as a fallback solution when I need one of the Layer 2 features listed above.</p>
+<p>For daily use cases WireGuard is usually sufficient for me.</p>
 <h1 id="blocked-connections" tabindex="-1">6. Blocked connections <a class="header-anchor" href="#blocked-connections" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
 <p>Some networks or providers block VPN connections.</p>
-<p>All of the mentioned protocols can be detected and blocked.</p>
+<p>All of these protocols can be identified and blocked by
+sufficiently restrictive networks.</p>
 <p>OpenVPN has a TLS mode, which should be indistinguishable
 from HTTPS traffic, especially if your server operates on port 443,
 but it still can be detected, because the packet structure, sizes and timings
@@ -174,7 +182,7 @@ differ from a browser HTTPS connection.</p>
 <p>I found it <em>very</em> complicated to set up all of the protocols.</p>
 <p>I found no easy, simple way to really connect to your home
 like a local WiFi connection would.</p>
-<p>I will use <strong>Wireguard</strong> as my main protocol, and occasionally use
+<p>I will use <strong>WireGuard</strong> as my main protocol, and occasionally use
 <strong>OpenVPN in TAP mode</strong> when I want to use my WiFi's DHCP, DNS, NTP or
 when I want to send broadcasts on Layer 2, for example for avahi.</p>
 
