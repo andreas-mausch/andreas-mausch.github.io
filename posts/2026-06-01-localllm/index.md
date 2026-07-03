@@ -170,13 +170,47 @@ It requires more work on my part, because now I have to think and decide again
 what's the best way to split up a problem into chunks.
 But then again, I usually have a very specific idea of how my result should look.
 
+To enable vision mode (image recognition), put this block under `provider.models`:
+
+```json
+  "provider": {
+    "llama.cpp": {
+      "name": "llama.cpp",
+      "options": {
+        "baseURL": "http://192.168.1.111:1235/v1",
+        "apiKey": "<YOUR_API_KEY>"
+      },
+      "models": {
+        "Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf": {
+          "name": "Qwen3.6-35B-A3B",
+          "limit": {
+            "context": 131072,
+            "output": 8000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    }
+  }
+```
+
 # Final command
 
 ```bat{data-filename=qwen.cmd}
 set model="C:\Users\neonew\.lmstudio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf"
+set mmproj="C:\Users\neonew\.lmstudio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\mmproj-Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
 
 "C:\Program Files\llama.cpp\llama-server.exe" ^
   --model %model% ^
+  --mmproj %mmproj% ^
   --flash-attn on ^
   --ctx-size 131072 ^
   --threads 16 ^
