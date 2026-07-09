@@ -152,32 +152,20 @@ It wasn't much faster for me and uses more VRAM.
 
 I think it's better for bigger models like the 27B.
 
-# Experience in opencode
+# Vision mode
 
-Cloud models are still far superior to everything I run on my own machine.
-They are faster and produce better results.
+To enable vision mode (image recognition), you need to do two things:
 
-But still, compared to my tests with LLMs three years ago, the gap is closing.
+1. Pass `--mmproj` to llama.cpp.
+   It takes a little more VRAM, but is required for vision.
+2. Put this block under `provider.models` in your `opencode.json`:
 
-And it feels great to run this all on your own devices and not lose privacy.
-
-For the quality: My model loops from time to time, and I have to stop it manually.
-This is annoying, especially because it takes so much more time to get a good answer
-to your problem and it spams your context.
-
-I found it easier to give exact, small tasks to the AI, instead of one big task.
-It requires more work on my part, because now I have to think and decide again
-what's the best way to split up a problem into chunks.
-But then again, I usually have a very specific idea of how my result should look.
-
-To enable vision mode (image recognition), put this block under `provider.models`:
-
-```json
+```json{data-filename=~/.config/opencode/opencode.json}
   "provider": {
     "llama.cpp": {
       "name": "llama.cpp",
       "options": {
-        "baseURL": "http://192.168.1.111:1235/v1",
+        "baseURL": "http://192.168.1.123:1235/v1",
         "apiKey": "<YOUR_API_KEY>"
       },
       "models": {
@@ -201,6 +189,24 @@ To enable vision mode (image recognition), put this block under `provider.models
     }
   }
 ```
+
+# Experience in opencode
+
+Cloud models are still far superior to everything I run on my own machine.
+They are faster and produce better results.
+
+But still, compared to my tests with LLMs three years ago, the gap is closing.
+
+And it feels great to run this all on your own devices and not lose privacy.
+
+For the quality: My model loops from time to time, and I have to stop it manually.
+This is annoying, especially because it takes so much more time to get a good answer
+to your problem and it spams your context.
+
+I found it easier to give exact, small tasks to the AI, instead of one big task.
+It requires more work on my part, because now I have to think and decide again
+what's the best way to split up a problem into chunks.
+But then again, I usually have a very specific idea of how my result should look.
 
 # Final command
 
