@@ -53,7 +53,7 @@ wouldn't run well, so I started with these.
 But eventually, I found Qwen3.6 and the internet was full of praise for it.
 
 I learned that Qwen3.6-27B is the better model (despite the lower number 27B < 35B),
-but I couldn't fit it into my VRAM, and it ran painfully slow on my CPU.
+but I couldn't fit it into my VRAM, and it ran painfully slow on my CPU (about 5 token/sec with Q3 quants).
 
 So I tried Qwen3.6-35B-A3B, and even the first try was really good.
 I was impressed by the quality, and I could get around 20-25 tokens/second,
