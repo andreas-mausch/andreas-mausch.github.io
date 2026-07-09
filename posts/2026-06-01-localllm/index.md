@@ -109,11 +109,21 @@ The exact model I use is `Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS`
 
 IQ4_XS quants are decent enough for me, and quite fast.
 
-I found that 24 experts (out of 40 maximum) on the CPU would give me best results,
+The model has 40 experts (I don't know how to get the info, but the internet said so),
+and I found that 24 experts the CPU would give me best results,
 in terms of VRAM usage and speed.
 I just checked the VRAM usage in the Windows task manager, and just after loading the model,
 I see around 10 out of 12 GB used. When it went above 11.5 GB, the model either
 became painfully slow, or crashed.
+
+You can adjust this setting by playing around with the `--n-cpu-moe` parameter.
+It is a trade-off between VRAM usage and speed.
+
+If you run out of VRAM, you need to increase the number, which puts more experts on the CPU.
+But it will make the model run slower.
+
+So put it as low as possible, until your VRAM is full. I just left a little buffer like 500 MB,
+because the usage will grow a little when your context grows.
 
 For the context length: A higher value requires more VRAM, but a value <64k
 wouldn't make working with opencode any fun.
