@@ -200,6 +200,14 @@ To enable vision mode (image recognition), you need to do two things:
   }
 ```
 
+The vision mode is absolutely astonishing to me.
+
+I already found my previous tests with CLIP/BLIP to give decent results:
+<https://github.com/andreas-mausch/dockerize-clip-interrogator>
+
+But now with Qwen the results are so much better.
+I will rework my tools to add descriptions and tags to my images' exif data using this model.
+
 # Experience in opencode
 
 Cloud models are still far superior to everything I run on my own machine.
