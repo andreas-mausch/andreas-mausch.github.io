@@ -45,6 +45,10 @@ even available anymore.
 I also considered getting a Macbook Pro with an M5 Ultra and 128 GB, but Apple just raised
 the prices from ~6.000 EUR to 7.800 EUR, so that was no option anymore.
 
+I was also eyeing the GPD Win 5, but you could not order it in Germany with 128 GB.
+And there was the Bosgame M5 mini PC, available for 2.500 EUR,
+but for the small price difference I found a laptop the more attractive option.
+
 # The model: Qwen3.8-Flash-Next-125B-A6B
 
 The interesting part is not the hardware alone, it is the model generation.
@@ -108,7 +112,7 @@ This matters a lot for agentic coding:
 every tool call sends the whole conversation back to the model,
 so a large part of your wall-clock time is spent re-processing the context.
 At 200 tokens/second, a 100k context means an 8-minute stall.
-At 900 tokens/second, the same re-evaluation takes under two minutes —
+At 900 tokens/second, the same re-evaluation takes under two minutes,
 and with caching, only the incremental part has to be processed on most turns.
 
 With 256k context and 8k max output tokens, there is plenty of room
@@ -140,7 +144,7 @@ What changed compared to my June setup:
 # Not perfect yet: amdgpu crashes
 
 To be honest: from time to time, the amdgpu driver crashed on me.
-I don't know yet what triggers it — I have not found a reliable reproduction.
+I don't know yet what triggers it. I have not found a reliable reproduction.
 But Linux managed to recover the driver every time,
 so I lost a running generation, not the machine.
 
@@ -164,8 +168,16 @@ and prompt processing from ~900 to ~500 tokens/second.
 
 So if you benchmark a Strix Halo laptop and get disappointing numbers,
 check the power profile first. Mine is a laptop, not a desktop replacement
-that runs at full tilt all the time — and that is fine,
+that runs at full tilt all the time, and that is fine,
 but you should know it when comparing tok/s figures from the internet.
+
+# Not only for AI: a do-it-yourself Steam Machine
+
+Strix Halo makes a fine gaming machine, too.
+In my experience many games run well on the 8060S at 1080p,
+and it competes well with Valve's new Steam Machine.
+With one machine you can switch between a gaming session
+and serving a local AI model: that beats two boxes under my desk.
 
 # Outlook: audio, image, and video
 
