@@ -106,8 +106,10 @@ Then [halogen](https://github.com/peonist-ai/halogen-flash-server) came along,
 and its prefill was blistering, but it is closed source.
 gufo was the compromise I had been waiting for:
 fast like halogen, but open source.
-It advertises ~1.600 tokens/second prefill for this model on Strix Halo
-(the README listed 1.628,52 tok/s at the time of writing).
+It advertises ~1.600 tokens/second prefill for this model on Strix Halo.
+The [benchmarks](https://github.com/gufo-org/gufo/blob/main/docs/models/qwen3.8-flash-next/BENCHMARKS.md)
+go into more detail than the numbers in this post,
+with results per context length, and they match well what I see day to day.
 My real-world numbers are lower than that benchmark,
 but still 4-5x above apepojken's fork on the same machine:
 
