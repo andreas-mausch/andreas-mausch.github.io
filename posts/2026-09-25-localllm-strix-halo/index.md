@@ -97,16 +97,24 @@ Two features are worth noting:
   I find the image recognition genuinely strong:
   far beyond the CLIP/BLIP models I used in 2023.
 
-The reason I switched from llama.cpp to gufo was prompt processing speed.
-Gufo advertises ~1.600 tokens/second prefill for this model on Strix Halo
+I switched engines more than once to get here.
+When the model launched, llama.cpp did not support it at all,
+so I used [a llama.cpp fork](https://github.com/apepojken/llama.cpp) by apepojken
+that added support plus some RDNA 3.5 kernel work.
+It served me well, but prompt processing stayed slow.
+Then [halogen](https://github.com/peonist-ai/halogen-flash-server) came along,
+and its prefill was blistering, but it is closed source.
+gufo was the compromise I had been waiting for:
+fast like halogen, but open source.
+It advertises ~1.600 tokens/second prefill for this model on Strix Halo
 (the README listed 1.628,52 tok/s at the time of writing).
 My real-world numbers are lower than that benchmark,
-but still 4-5x above llama.cpp on the same machine:
+but still 4-5x above apepojken's fork on the same machine:
 
-| Prompt processing | llama.cpp  | gufo       |
-|-------------------|------------|------------|
-| Battery           | ~100 tok/s | ~500 tok/s |
-| Plugged in        | ~200 tok/s | ~900 tok/s |
+| Prompt processing | apepojken's fork | gufo       |
+| ----------------- | ---------------- | ---------- |
+| Battery           | ~100 tok/s       | ~500 tok/s |
+| Plugged in        | ~200 tok/s       | ~900 tok/s |
 
 This matters a lot for agentic coding:
 every tool call sends the whole conversation back to the model,
