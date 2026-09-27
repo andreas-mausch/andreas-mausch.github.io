@@ -97,26 +97,26 @@ Two features are worth noting:
   I find the image recognition genuinely strong:
   far beyond the CLIP/BLIP models I used in 2023.
 
-I switched engines more than once to get here.
-When the model launched, llama.cpp did not support it at all,
-so I used [a llama.cpp fork](https://github.com/apepojken/llama.cpp) by apepojken
-that added support plus some RDNA 3.5 kernel work.
-It served me well, but prompt processing stayed slow.
-Then [halogen](https://github.com/peonist-ai/halogen-flash-server) came along,
-and its prefill was blistering, but it is closed source.
-gufo was the compromise I had been waiting for:
-fast like halogen, but open source.
-It advertises ~1.600 tokens/second prefill for this model on Strix Halo.
+I switched engines more than once to get here, and every switch was about one
+number: prompt processing. In the order I tried them:
+
+| Engine | License | Technology | Prefill (tok/s) | Token generation (tok/s) | Comment |
+| ------ | ------- | ---------- | --------------- | ------------------------ | ------- |
+| [llama.cpp](https://github.com/ggml-org/llama.cpp) | MIT | Vulkan, ROCm | – | – | did not support the model at all when it launched |
+| [apepojken](https://github.com/apepojken/llama.cpp) | MIT | Vulkan | Plugged-in: 200<br>Battery: 100 | Plugged-in: 40 | the llama.cpp fork that made the model runnable at all, with RDNA 3.5 kernel work; stable, but prefill stayed slow |
+| [pwilkin](https://github.com/pwilkin/strix-halo) | MIT | ROCm (custom ROCr and HIP) | README: 1.180 | README: 27 | the first stack that was open source *and* fast at prefill; but you bring the ROCm yourself, on a pinned llama.cpp branch, so the setup is a project of its own |
+| [halogen](https://github.com/peonist-ai/halogen-flash-server) | proprietary | ROCm (own kernels) | README: 1.424 | README: 46 | blistering, every kernel written for this one GPU and this one model family; but a binary container under an EULA |
+| [gufo](https://github.com/gufo-org/gufo) | MIT | ROCm (HIP) | README: [1.600](https://github.com/gufo-org/gufo/blob/main/docs/models/qwen3.8-flash-next/BENCHMARKS.md)<br>Plugged-in: 900<br>Battery: 500 | README: 32<br>Plugged-in: 35<br>Battery: 20 | fast like halogen, open source, and it carries its ROCm inside a single Docker image: this is where I settled |
+
+My numbers are all at 64k context, plugged in, on the Balanced power profile at
+50 W TDP. The README rows are the authors' own benchmarks at whatever prompt
+length they chose, so read them as a ballpark next to my 64k figures rather
+than as a shoot-out.
+apepojken's fork is still a little ahead on token generation, but for agents
+the prefill is the half you wait for: 4-5x there is what made me stop looking.
 The [benchmarks](https://github.com/gufo-org/gufo/blob/main/docs/models/qwen3.8-flash-next/BENCHMARKS.md)
 go into more detail than the numbers in this post,
 with results per context length, and they match well what I see day to day.
-My real-world numbers are lower than that benchmark,
-but still 4-5x above apepojken's fork on the same machine:
-
-| Prompt processing | apepojken's fork | gufo       |
-| ----------------- | ---------------- | ---------- |
-| Battery           | ~100 tok/s       | ~500 tok/s |
-| Plugged in        | ~200 tok/s       | ~900 tok/s |
 
 This matters a lot for agentic coding:
 every tool call sends the whole conversation back to the model,
@@ -170,11 +170,6 @@ Performance depends heavily on two things:
 
 1. Whether the laptop is plugged in.
 2. Which power profile is active.
-
-Plugged in, on the normal profile, I get around 35 tokens/second on average,
-and I have seen 40 in the best case.
-On battery, in the same profile, generation drops to around 20 tokens/second,
-and prompt processing from ~900 to ~500 tokens/second.
 
 So if you benchmark a Strix Halo laptop and get disappointing numbers,
 check the power profile first. Mine is a laptop, not a desktop replacement
