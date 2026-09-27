@@ -1,0 +1,332 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Eleventy v3.0.0">
+    <title>LocalLLM: Running Qwen3.8-Flash-Next on Strix Halo (Asus ProArt PX13)</title>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/icons/iconism.css"/>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-content">
+        <a class="site-title" href="/">Andreas Mausch</a>
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewbox="0 0 16 16"
+              width="100%"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5">
+              <path d="m2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
+            </svg>
+          </a>
+          <input id="nav-toggle" type="checkbox"/>
+          <label class="nav-button-container" for="nav-toggle">
+            <div class="nav-button"></div>
+          </label>
+          <ol class="site-nav-items">
+            <a class="page-link" href="/"><li class="page-link-home">Home</li></a><a class="page-link" href="/whatsapp-viewer/"><li>WhatsApp Viewer</li></a><a class="page-link" href="/blog/"><li>Blog</li></a></ol>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      
+<h1>LocalLLM: Running Qwen3.8-Flash-Next on Strix Halo (Asus ProArt PX13)</h1>
+<div>
+  <time class="postlist-date" datetime="2026-09-25T20:00:00.000+00:00">Sep 25, 2026</time>
+  <ul class="tags">
+    
+        
+          <li><a href="/blog/tags/ai">#ai</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/gufo">#gufo</a></li>
+        
+    
+        
+          <li><a href="/blog/tags/llama.cpp">#llama.cpp</a></li>
+        
+    
+        
+    
+        
+          <li><a href="/blog/tags/Strix%20Halo">#Strix Halo</a></li>
+        
+    
+  </ul>
+</div>
+
+
+
+<h1 id="tl%3Bdr" tabindex="-1">1. tl;dr <a class="header-anchor" href="#tl%3Bdr" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>See the final command at the end.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Laptop</td>
+<td>Asus ProArt PX13 (Strix Halo)</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>AMD Ryzen AI MAX+ 395, 16 cores</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>Radeon 8060S iGPU</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>128 GB unified memory</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>CachyOS, Linux 7.2.7</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>Qwen3.8-Flash-Next-125B-A6B</td>
+</tr>
+<tr>
+<td>Quantization</td>
+<td>UD-Q4_K_XL</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>256k</td>
+</tr>
+<tr>
+<td>Prompt processing</td>
+<td>~900 tokens/second (AC) / ~500 (battery)</td>
+</tr>
+<tr>
+<td><strong>Token generation</strong></td>
+<td>~35 tokens/second (AC) / ~20 (battery)</td>
+</tr>
+</tbody>
+</table>
+<p>In <a href="/blog/2026-06-01-localllm/">my previous post</a>, I ran a 35B Mixture-of-Experts
+model on a 12 GB GPU, carefully moving experts to the CPU until the VRAM was full.
+This time, there is no VRAM juggling at all:
+a 125B model just fits into 128 GB of unified memory, and it is fast enough
+to actually enjoy working with it.</p>
+<h1 id="why-strix-halo" tabindex="-1">2. Why Strix Halo <a class="header-anchor" href="#why-strix-halo" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The story so far: in 2023 I <a href="https://github.com/stars/andreas-mausch/lists/ai" class="external-link" target="_blank">experimented with local AI</a>,
+in June 2026 I ran <a href="/blog/2026-06-01-localllm/">Qwen3.6-35B-A3B on an RTX 4070 Ti</a>,
+and both times the bottleneck was memory: either VRAM or bandwidth.</p>
+<p>AMD's Strix Halo (Ryzen AI Max) is the first mainstream chip that removes this
+bottleneck: an iGPU with up to 128 GB of <em>unified</em> memory.
+No more splitting experts between CPU and GPU, no more quantizing down
+because the model doesn't fit. You just load the model and it's there.</p>
+<p>So I got one: an Asus ProArt PX13 with 128 GB RAM, running CachyOS on Linux 7.2.7.
+I paid 3.000 EUR for it (open box), regular price was 3.600 EUR and now it is not
+even available anymore.</p>
+<p>I also considered getting a Macbook Pro with an M5 Ultra and 128 GB, but Apple just raised
+the prices from ~6.000 EUR to 7.800 EUR, so that was no option anymore.</p>
+<p>I was also eyeing the GPD Win 5, but you could not order it in Germany with 128 GB.
+And there was the Bosgame M5 mini PC, available for 2.500 EUR,
+but for the small price difference I found a laptop the more attractive option.</p>
+<h1 id="the-model%3A-qwen3.8-flash-next-125b-a6b" tabindex="-1">3. The model: Qwen3.8-Flash-Next-125B-A6B <a class="header-anchor" href="#the-model%3A-qwen3.8-flash-next-125b-a6b" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>The interesting part is not the hardware alone, it is the model generation.
+Qwen3.8-Flash-Next is a Mixture-of-Experts model with 125B total parameters,
+but only ~6B active parameters per token.</p>
+<p>This combination suits Strix Halo well:</p>
+<ul>
+<li>125B parameters at Q4 quantization need roughly 75-80 GB.
+No consumer GPU fits that today. 128 GB of unified memory do.</li>
+<li>Because only ~6B parameters are active per token,
+generation speed is limited by what you read per token, not what you store.
+That is manageable even on integrated graphics.</li>
+</ul>
+<p>I use the Unsloth Dynamic quantization <code class="language-plain">UD-Q4_K_XL</code>,
+which comes as four GGUF shards:</p>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-plain"><code class="language-plain"><span class="highlight-line">Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf</span></code></pre>
+
+    </div><p>It fits nicely into the 128 GB together with the 256k context,
+the MTP model and the vision projector,
+and in my usage the quality is good enough to not think about quantization at all.</p>
+<h1 id="serving-with-gufo-in-docker" tabindex="-1">4. Serving with gufo in Docker <a class="header-anchor" href="#serving-with-gufo-in-docker" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>I serve the model with <a href="https://github.com/gufo-org/gufo" class="external-link" target="_blank">gufo</a>,
+a local inference engine specifically optimized for Strix Halo,
+in Docker. It provides an OpenAI-compatible API that I use from opencode.
+The container talks to the AMD GPU via <code class="language-plain">/dev/kfd</code> and <code class="language-plain">/dev/dri</code>:</p>
+<p>Two features are worth noting:</p>
+<ul>
+<li><strong>Speculative decoding via MTP</strong> (<code class="language-plain">--speculative mtp</code>):
+the model ships a small &quot;multi-token-prediction&quot; head
+(I run it as a shared-expert variant in Q8_0).
+On the 35B in June this was not worth the VRAM, but here it is:
+gufo's <a href="https://github.com/gufo-org/gufo/blob/main/docs/models/qwen3.8-flash-next/BENCHMARKS.md" class="external-link" target="_blank">benchmarks</a>
+show ~26 tokens/second autoregressive vs. ~32 on mixed text and up to ~60 on repetitive text,
+which matches what I see on my machine.</li>
+<li><strong>Vision</strong> (<code class="language-plain">--mmproj</code>):
+passing a multimodal projector lets the model see images,
+which opencode uses.
+I use the BF16 projector, because BF16 is preferred on modern hardware.
+I find the image recognition genuinely strong:
+far beyond the CLIP/BLIP models I used in 2023.</li>
+</ul>
+<p>I switched engines more than once to get here.
+When the model launched, llama.cpp did not support it at all,
+so I used <a href="https://github.com/apepojken/llama.cpp" class="external-link" target="_blank">a llama.cpp fork</a> by apepojken
+that added support plus some RDNA 3.5 kernel work.
+It served me well, but prompt processing stayed slow.
+Then <a href="https://github.com/peonist-ai/halogen-flash-server" class="external-link" target="_blank">halogen</a> came along,
+and its prefill was blistering, but it is closed source.
+gufo was the compromise I had been waiting for:
+fast like halogen, but open source.
+It advertises ~1.600 tokens/second prefill for this model on Strix Halo
+(the README listed 1.628,52 tok/s at the time of writing).
+My real-world numbers are lower than that benchmark,
+but still 4-5x above apepojken's fork on the same machine:</p>
+<table>
+<thead>
+<tr>
+<th>Prompt processing</th>
+<th>apepojken's fork</th>
+<th>gufo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery</td>
+<td>~100 tok/s</td>
+<td>~500 tok/s</td>
+</tr>
+<tr>
+<td>Plugged in</td>
+<td>~200 tok/s</td>
+<td>~900 tok/s</td>
+</tr>
+</tbody>
+</table>
+<p>This matters a lot for agentic coding:
+every tool call sends the whole conversation back to the model,
+so a large part of your wall-clock time is spent re-processing the context.
+At 200 tokens/second, a 100k context means an 8-minute stall.
+At 900 tokens/second, the same re-evaluation takes under two minutes,
+and with caching, only the incremental part has to be processed on most turns.</p>
+<p>With 256k context and 8k max output tokens, there is plenty of room
+for real coding sessions without constant compaction.</p>
+<h1 id="experience-in-opencode" tabindex="-1">5. Experience in opencode <a class="header-anchor" href="#experience-in-opencode" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>This is where the &quot;models got MUCH stronger&quot; part comes in.</p>
+<p>Last time, my honest conclusion was:
+cloud models are still far superior, the model loops from time to time,
+give it small tasks only.</p>
+<p>This time, it is just fun.</p>
+<p>I handed it a mid-sized Maven project, and it built it autonomously:
+reading build errors, narrowing down the cause, fixing, rebuilding, repeat.
+It found the critical points on its own, without me explaining
+Maven's usual traps.</p>
+<p>What changed compared to my June setup:</p>
+<ul>
+<li><strong>Quality</strong>: fewer loops, fewer dead ends, better first guesses.</li>
+<li><strong>Autonomy</strong>: I can hand it a bigger task and walk away.</li>
+<li><strong>Speed</strong>: ~35 tokens/second generation is not the 60 of my desktop rig,
+but the 5x faster prompt processing, 256k context and the stronger model
+make the <em>workflow</em> feel faster, not slower.</li>
+</ul>
+<h1 id="not-perfect-yet%3A-amdgpu-crashes" tabindex="-1">6. Not perfect yet: amdgpu crashes <a class="header-anchor" href="#not-perfect-yet%3A-amdgpu-crashes" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>To be honest: from time to time, the amdgpu driver crashed on me.
+I don't know yet what triggers it. I have not found a reliable reproduction.
+But Linux managed to recover the driver every time,
+so I lost a running generation, not the machine.</p>
+<p>This is the kind of rough edge you should expect when running
+an iGPU at sustained full load on Linux. It did not stop me from enjoying the setup,
+but if you want a turn-key experience, be aware of it.</p>
+<!-- TODO: if you find the cause later, update this section. -->
+<h1 id="power-profiles-matter" tabindex="-1">7. Power profiles matter <a class="header-anchor" href="#power-profiles-matter" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Performance depends heavily on two things:</p>
+<ol>
+<li>Whether the laptop is plugged in.</li>
+<li>Which power profile is active.</li>
+</ol>
+<p>Plugged in, on the normal profile, I get around 35 tokens/second on average,
+and I have seen 40 in the best case.
+On battery, in the same profile, generation drops to around 20 tokens/second,
+and prompt processing from ~900 to ~500 tokens/second.</p>
+<p>So if you benchmark a Strix Halo laptop and get disappointing numbers,
+check the power profile first. Mine is a laptop, not a desktop replacement
+that runs at full tilt all the time, and that is fine,
+but you should know it when comparing tok/s figures from the internet.</p>
+<h1 id="not-only-for-ai%3A-a-do-it-yourself-steam-machine" tabindex="-1">8. Not only for AI: a do-it-yourself Steam Machine <a class="header-anchor" href="#not-only-for-ai%3A-a-do-it-yourself-steam-machine" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Strix Halo makes a fine gaming machine, too.
+In my experience many games run well on the 8060S at 1080p,
+and it competes well with Valve's new Steam Machine.
+With one machine you can switch between a gaming session
+and serving a local AI model: that beats two boxes under my desk.</p>
+<h1 id="outlook%3A-audio%2C-image%2C-and-video" tabindex="-1">9. Outlook: audio, image, and video <a class="header-anchor" href="#outlook%3A-audio%2C-image%2C-and-video" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>What also appeals to me about gufo is the direction:
+it wants to be a one-stop shop for local AI on this hardware.
+Its model table already includes speech recognition (Qwen3-ASR)
+and text-to-speech (Qwen3-TTS),
+while image generation (Qwen-Image) and video generation (MiniMax H3)
+are listed as in progress.</p>
+<p>I recently played around with MiniMax H3 on my desktop and was impressed
+by what it produced.
+If it runs on the PX13 through the same tool one day,
+I would have text, audio, image, and video generation in one place,
+on my own hardware.</p>
+<p>As far as I can tell, the video support today is text-to-video;
+image-to-video driven by an additional text description
+does not seem to be there yet. Something to watch.</p>
+<h1 id="comparison-to-the-cloud" tabindex="-1">10. Comparison to the cloud <a class="header-anchor" href="#comparison-to-the-cloud" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<p>Cloud models are still ahead, but honestly:
+for daily coding work, the gap no longer feels like a gap.
+The model builds my Maven project, finds the real issues, and does not
+need me to babysit it through every step.</p>
+<p>And it runs entirely on my machine, on my desk, on battery,
+with no prompt ever leaving the laptop.</p>
+<p>Three years after my first local experiments, that used to be a compromise.
+Now it is just a preference.</p>
+<h1 id="final-command" tabindex="-1">11. Final command <a class="header-anchor" href="#final-command" aria-hidden="true"><svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a></h1>
+<div class="code-block">
+    <button type="button" class="copy-to-clipboard">
+      <i class="icon icon-copy"></i>
+    </button>
+    <pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--user</span> <span class="token number">1000</span>:1000 <span class="token punctuation">\</span></span>
+<span class="highlight-line">  --group-add render <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--device</span> /dev/kfd <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--device</span> /dev/dri <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--ulimit</span> <span class="token assign-left variable">memlock</span><span class="token operator">=</span>-1 <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">-p</span> <span class="token number">8080</span>:8080 <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">-v</span> /srv/llama/models/Qwen3.8-Flash-Next-125B-A6B:/models/:ro <span class="token punctuation">\</span></span>
+<span class="highlight-line">  ghcr.io/gufo-org/toolboxes/gufo-runtime:20260924T104050 <span class="token punctuation">\</span></span>
+<span class="highlight-line">  gufo serve llm <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--model</span> /models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--speculative</span> mtp <span class="token punctuation">\</span></span>
+<span class="highlight-line">  --mtp-model /models/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--mmproj</span> /models/mmproj-BF16.gguf <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--context</span> <span class="token number">262144</span> <span class="token punctuation">\</span></span>
+<span class="highlight-line">  --max-tokens <span class="token number">8192</span> <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--host</span> <span class="token number">0.0</span>.0.0 <span class="token punctuation">\</span></span>
+<span class="highlight-line">  <span class="token parameter variable">--port</span> <span class="token number">8080</span></span></code></pre>
+
+    </div>
+
+<script async src="/scripts/index.js"></script>
+
+    </div>
+  </body>
+</html>
